@@ -71,11 +71,12 @@ int WindowApp::Update()
     UpdateWindow(Window::hWnd);
     MSG msg{};
     while (msg.message != WM_QUIT) {
-        InputBufferUpdate::Instance().KeyUpdate();
 
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
             TranslateMessage(&msg);
             DispatchMessage(&msg);
+
+            InputBufferUpdate::Instance().KeyUpdate();
         }
     }
     return static_cast<int>(msg.wParam);
