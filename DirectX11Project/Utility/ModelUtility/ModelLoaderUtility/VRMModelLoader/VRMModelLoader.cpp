@@ -4,7 +4,7 @@
 #include <DirectXTex.h>
 
 #include "../../../Plugin/StreamReader.h"
-#include "../../ModelDataBase/ModelDataBase.h"
+#include "../../../../GameSystemBase/DataBase/ModelDataBase/ModelDataBase.h"
 
 using namespace DirectX;
 using namespace std;

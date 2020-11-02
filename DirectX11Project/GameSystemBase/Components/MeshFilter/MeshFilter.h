@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../Base/Component/Component.h"
-#include "../../../Utility/ModelUtility/ModelDataBase/ModelDataBase.h"
+#include "../../DataBase/ModelDataBase/ModelDataBase.h"
 
 class MeshFilter : public Component {
 public:
