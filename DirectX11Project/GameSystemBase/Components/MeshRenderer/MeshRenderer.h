@@ -1,5 +1,4 @@
-#ifndef MESH_RENDERER_H_
-#define MESH_RENDERER_H_
+#pragma once
 
 #include <DirectXMath.h>
 #include <iostream>
@@ -31,5 +30,3 @@ private:
 	std::weak_ptr<Transform> m_Transform;
 	std::weak_ptr<Camera> m_Camera;
 };
-
-#endif

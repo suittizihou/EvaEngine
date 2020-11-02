@@ -1,5 +1,4 @@
-#ifndef GAME_OBJECT_H_
-#define GAME_OBJECT_H_
+#pragma once
 
 #include "GameObjectBase.h"
 #include "../../Manager/ComponentManager/ComponentManager.h"
@@ -64,5 +63,3 @@ private:
 	std::string m_Name{};
 	UINT m_GameObjectID{};
 };
-
-#endif

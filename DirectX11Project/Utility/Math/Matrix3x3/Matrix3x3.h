@@ -1,5 +1,4 @@
-#ifndef MATRIX_3X3_H_
-#define MATRIX_3X3_H_
+#pragma once
 
 // ostream‚ÌæséŒ¾
 #include <iosfwd>
@@ -43,5 +42,3 @@ Vector2 operator * (const Vector2& lhs, const Matrix3x3 rhs);
 
 // s—ñ‚Ìo—Í
 std::ostream& operator << (std::ostream& out, const Matrix3x3& rhs);
-
-#endif

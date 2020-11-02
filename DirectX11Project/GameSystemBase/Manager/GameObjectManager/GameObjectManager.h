@@ -1,5 +1,4 @@
-#ifndef GAME_OBJECT_MANAGER_H_
-#define GAME_OBJECT_MANAGER_H_
+#pragma once
 
 #include <list>
 #include <memory>
@@ -43,5 +42,3 @@ private:
 	std::map <SceneType,	// Tag 
 		std::shared_ptr<GameObjectDataBase>> m_GameObjectList;
 };
-
-#endif

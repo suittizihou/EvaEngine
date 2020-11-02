@@ -1,5 +1,4 @@
-#ifndef QUATERNION_H_
-#define QUATERNION_H_
+#pragma once
 
 #include "../Vector3/Vector3.h"
 #include <string>
@@ -99,5 +98,3 @@ Quaternion operator / (Quaternion lhs, float s);
 Vector3 operator * (const Quaternion& rotation, const Vector3& point);
 bool operator == (const Quaternion& lhs, const Quaternion& rhs);
 bool operator != (const Quaternion& lhs, const Quaternion& rhs);
-
-#endif

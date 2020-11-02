@@ -1,6 +1,6 @@
 #include "ModelLoader.h"
 #include "../../../StringAssist/StringAssist.h"
-#include "../../ModelDataBase/ModelDataBase.h"
+#include "../../../../GameSystemBase/DataBase/ModelDataBase/ModelDataBase.h"
 
 int ModelLoader::Load(const std::string& fileName)
 {

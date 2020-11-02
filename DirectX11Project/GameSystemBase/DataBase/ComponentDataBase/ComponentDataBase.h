@@ -1,5 +1,4 @@
-#ifndef COMPONENT_DATA_BASE_H_
-#define COMPONENT_DATA_BASE_H_
+#pragma once
 
 #include <string>
 #include <list>
@@ -180,5 +179,3 @@ private:
 
 	UINT m_ComponentID{};
 };
-
-#endif

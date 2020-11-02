@@ -1,5 +1,4 @@
-#ifndef VECTOR2_H_
-#define VECTOR2_H_
+#pragma once
 
 #include <string>
 
@@ -100,5 +99,3 @@ Vector2 operator / (const Vector2& lhs, float rhs);
 
 bool operator == (const Vector2& lhs, const Vector2& rhs);
 bool operator != (const Vector2& lhs, const Vector2& rhs);
-
-#endif

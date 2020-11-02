@@ -4,17 +4,17 @@
 class Shader {
 public:
 	// 頂点シェーダーをセット
-	void SetVertexShader(const std::string& filePath, const std::string& entryPoint = "vsMain");
+	void SetVertexShader(const int shaderHandle);
 	// ピクセルシェーダーをセット
-	void SetPixelShader(const std::string& filePath, const std::string& entryPoint = "psMain");
+	void SetPixelShader(const int shaderHandle);
 	// ジオメトリシェーダーをセット
-	void SetGeometryShader(const std::string& filePath, const std::string& entryPoint = "gsMain");
+	void SetGeometryShader(const int shaderHandle);
 	// コンピュートシェーダーをセット
-	void SetComputeShader(const std::string& filePath, const std::string& entryPoint = "csMain");
+	void SetComputeShader(const int shaderHandle);
 	// ハルシェーダーをセット
-	void SetHullShader(const std::string& filePath, const std::string& entryPoint = "hsMain");
+	void SetHullShader(const int shaderHandle);
 	// ドメインシェーダーをセット
-	void SetDomainShader(const std::string& filePath, const std::string& entryPoint = "dsMain");
+	void SetDomainShader(const int shaderHandle);
 
 	// シェーダーをコンテキストにセット
 	void SetShader(D3DContext context);

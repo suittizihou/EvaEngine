@@ -1,10 +1,7 @@
-#ifndef SCENE_TYPE_H_
-#define SCENE_TYPE_H_
+#pragma once
 
 enum class SceneType {
 	None,
 	GameTitle,
 	GamePlay,
 };
-
-#endif

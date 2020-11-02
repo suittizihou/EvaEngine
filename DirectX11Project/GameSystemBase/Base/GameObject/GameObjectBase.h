@@ -1,5 +1,4 @@
-#ifndef I_GAME_OBJECT_H_
-#define I_GAME_OBJECT_H_
+#pragma once
 
 #include <memory>
 #include "../GameJobs/GameJobs.h"
@@ -25,5 +24,3 @@ public:
 	// ƒ^ƒO‚ð•Ô‚·
 	virtual std::string GetTag() const = 0;
 };
-
-#endif

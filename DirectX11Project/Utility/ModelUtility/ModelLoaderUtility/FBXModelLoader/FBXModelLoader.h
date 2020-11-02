@@ -1,5 +1,4 @@
-#ifndef FBX_MODEL_LOADER_H_
-#define FBX_MODEL_LOADER_H_
+#pragma once
 
 #include <map>
 #include "../../ModelData/ModelData.h"
@@ -25,5 +24,3 @@ public:
 private:
 	ModelData::Model m_Model{};
 };
-
-#endif

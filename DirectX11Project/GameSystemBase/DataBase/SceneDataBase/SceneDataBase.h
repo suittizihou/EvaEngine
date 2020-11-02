@@ -1,5 +1,4 @@
-#ifndef SCENE_DATA_BASE_H_
-#define SCENE_DATA_BASE_H_
+#pragma once
 
 #include "../../Base/Scene/Scene.h"
 
@@ -50,5 +49,3 @@ private:
 	std::weak_ptr<Scene> m_CurrentScene;
 	std::map<SceneType, std::shared_ptr<Scene>> m_Scenes;
 };
-
-#endif

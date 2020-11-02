@@ -1,5 +1,4 @@
-#ifndef MODEL_DATA_H_
-#define MODEL_DATA_H_
+#pragma once
 
 #include <d3d11.h>
 #include <DirectXMath.h>
@@ -65,5 +64,3 @@ public:
 		std::map<std::string, std::vector<Material>> materials;
 	};
 };
-
-#endif

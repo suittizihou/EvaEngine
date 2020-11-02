@@ -1,5 +1,4 @@
-#ifndef CAMERA_H_
-#define CAMERA_H_
+#pragma once
 
 #include "../../../App/DirectX11App/DirectX11App.h"
 #include <DirectXMath.h>
@@ -39,5 +38,3 @@ private:
 	float m_Far{};
 	float m_Fov{};
 };
-
-#endif

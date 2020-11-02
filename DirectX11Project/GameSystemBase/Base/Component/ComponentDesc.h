@@ -1,5 +1,4 @@
-#ifndef COMPONENT_DESC_H_
-#define COMPONENT_DESC_H_
+#pragma once
 
 #include "../GameObject/GameObjectBase.h"
 
@@ -9,5 +8,3 @@ typedef struct ComponentDesc {
 	size_t hashCode;
 	UINT componentID;
 } ComponentDesc;
-
-#endif

@@ -177,6 +177,7 @@
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoader\ModelLoader.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.cpp" />
+    <ClCompile Include="Utility\ResourceLoad\ResourceLoad.cpp" />
     <ClCompile Include="Utility\ShaderCompiler\ShaderCompiler.cpp" />
     <ClCompile Include="Utility\Shader\Shader.cpp" />
   </ItemGroup>
@@ -208,6 +209,7 @@
     <ClInclude Include="Utility\Input\Input.h" />
     <ClInclude Include="Utility\Input\InputBufferUpdate\InputBufferUpdate.h" />
     <ClInclude Include="Utility\Input\KeyCode.h" />
+    <ClInclude Include="Utility\Material\Material.h" />
     <ClInclude Include="Utility\Math\Mathf\Mathf.h" />
     <ClInclude Include="Utility\Math\Matrix3x3\Matrix3x3.h" />
     <ClInclude Include="Utility\Math\Matrix4x4\Matrix4x4.h" />
@@ -219,6 +221,7 @@
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.h" />
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoader\ModelLoader.h" />
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.h" />
+    <ClInclude Include="Utility\ResourceLoad\ResourceLoad.h" />
     <ClInclude Include="Utility\ShaderCompiler\ShaderCompiler.h" />
     <ClInclude Include="Utility\Shader\Shader.h" />
     <ClInclude Include="Utility\StringAssist\StringAssist.h" />

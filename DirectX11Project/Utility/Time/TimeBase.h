@@ -1,5 +1,4 @@
-#ifndef TIME_BASE_H_
-#define TIME_BASE_H_
+#pragma once
 
 static class TimeBase {
 public:
@@ -7,5 +6,3 @@ public:
 };
 
 float TimeBase::m_DeltaTime{};
-
-#endif

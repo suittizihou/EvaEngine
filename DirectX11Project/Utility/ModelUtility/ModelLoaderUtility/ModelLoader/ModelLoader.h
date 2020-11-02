@@ -1,5 +1,4 @@
-#ifndef MODEL_LOADER_H_
-#define MODEL_LOADER_H_
+#pragma once
 
 #include <d3d11.h>
 #include <iostream>
@@ -22,5 +21,3 @@ public:
 
 	int Load(const std::string& fileName);
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef MESH_FILTER_H_
-#define MESH_FILTER_H_
+#pragma once
 
 #include "../../Base/Component/Component.h"
 #include "../../../Utility/ModelUtility/ModelDataBase/ModelDataBase.h"
@@ -18,5 +17,3 @@ public:
 private:
 	ModelData::Model m_Model{};
 };
-
-#endif

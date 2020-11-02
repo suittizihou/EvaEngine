@@ -1,5 +1,4 @@
-#ifndef GAME_OBJECT_DATA_BASE_H_
-#define GAME_OBJECT_DATA_BASE_H_
+#pragma once
 
 #include <list>
 #include <memory>
@@ -27,5 +26,3 @@ private:
 		std::list<std::shared_ptr<GameObject>>> m_GameObjectList;
 
 };
-
-#endif

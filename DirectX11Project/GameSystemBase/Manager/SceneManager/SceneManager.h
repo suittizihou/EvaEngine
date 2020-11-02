@@ -1,5 +1,4 @@
-#ifndef SCENE_MANAGER_H_
-#define SCENE_MANAGER_H_
+#pragma once
 
 #include "../../Base/Scene/Scene.h"
 
@@ -15,5 +14,3 @@ public:
 	static void LoadScene(const UINT& sceneType);
 	static SceneType GetCurrentScene();
 };
-
-#endif

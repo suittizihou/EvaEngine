@@ -1,5 +1,5 @@
 #include "ModelDataBase.h"
-#include "../ModelLoaderUtility/VRMModelLoader/VRMModelLoader.h"
+#include "../../../Utility/ModelUtility/ModelLoaderUtility/VRMModelLoader/VRMModelLoader.h"
 
 int ModelDataBase::AddModelData(const ModelData::Model& model)
 {
@@ -8,12 +8,12 @@ int ModelDataBase::AddModelData(const ModelData::Model& model)
     return modelCount - 1;
 }
 
-ModelData::Model ModelDataBase::GetModel(const int& modelHandle)
+ModelData::Model ModelDataBase::GetModel(const int modelHandle)
 {
     return LoadModelDataMemory(m_Model[modelHandle]);
 }
 
-void ModelDataBase::DeleteModel(const int& modelHandle)
+void ModelDataBase::DeleteModel(const int modelHandle)
 {
     m_Model.erase(modelHandle);
 }

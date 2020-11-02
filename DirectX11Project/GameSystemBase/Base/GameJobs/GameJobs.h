@@ -1,5 +1,4 @@
-#ifndef GAME_JOBS_H_
-#define GAME_JOBS_H_
+#pragma once
 
 #include <wrl/client.h>
 #include <functional>
@@ -34,4 +33,3 @@ private:
 	GameJobs (const GameJobs&);
 	void operator=(const GameJobs& obj);
 };
-#endif

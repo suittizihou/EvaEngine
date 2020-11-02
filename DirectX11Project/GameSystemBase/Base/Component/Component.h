@@ -1,5 +1,4 @@
-#ifndef COMPONENT_BASE_H_
-#define COMPONENT_BASE_H_
+#pragma once
 
 #include <memory>
 
@@ -69,5 +68,3 @@ private:
 	bool m_CanMultiAttach{ true };
 	bool m_CanRemove{ true };
 };
-
-#endif

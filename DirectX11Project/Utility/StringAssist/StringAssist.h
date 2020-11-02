@@ -1,5 +1,4 @@
-#ifndef STRING_ASSIST_H_
-#define STRING_ASSIST_H_
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -30,5 +29,3 @@ public:
 		return result;
 	}
 };
-
-#endif

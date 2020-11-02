@@ -1,5 +1,4 @@
-#ifndef TRANSFORM_H_
-#define TRANSFORM_H_
+#pragma once
 
 #include "../../../GameSystemBase/Base/Component/Component.h"
 #include "../../../Utility/Math/Vector3/Vector3.h"
@@ -136,4 +135,3 @@ private:
 	// 子のトランスフォーム
 	std::list<Transform*> children_;
 };
-#endif

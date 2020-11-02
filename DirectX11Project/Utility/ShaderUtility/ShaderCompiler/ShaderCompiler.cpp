@@ -3,8 +3,8 @@
 #include "ShaderCompiler.h"
 #include <Windows.h>
 #include <locale>
-#include "../../App/DirectX11App/DirectX11App.h"
-#include "../../System/DebugLog/DebugLog.h"
+#include "../../../App/DirectX11App/DirectX11App.h"
+#include "../../../System/DebugLog/DebugLog.h"
 
 VertexShader ShaderCompiler::CreateVertexShader(const std::string& fileName, const std::string& entrypath, bool error)
 {
@@ -13,7 +13,7 @@ VertexShader ShaderCompiler::CreateVertexShader(const std::string& fileName, con
 
     HRESULT hr = ShaderErrorCheck(fileName, entrypath, "vs_5_0", &blob, error);
 
-    hr = DirectX11App::m_Device->CreateVertexShader(blob->GetBufferPointer(), blob->GetBufferSize(), NULL, &shader);
+    hr = DirectX11App::g_Device->CreateVertexShader(blob->GetBufferPointer(), blob->GetBufferSize(), NULL, &shader);
     if (FAILED(hr)) {
         DebugLog::LogError("VertexShader Create Failed.");
         return nullptr;
@@ -29,7 +29,7 @@ PixelShader ShaderCompiler::CreatePixelShader(const std::string& fileName, const
 
     HRESULT hr = ShaderErrorCheck(fileName, entrypath, "ps_5_0", &blob, error);
 
-    hr = DirectX11App::m_Device->CreatePixelShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
+    hr = DirectX11App::g_Device->CreatePixelShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
     if (FAILED(hr)) {
         DebugLog::LogError("PixelShader Create Failed.");
         return nullptr;
@@ -45,7 +45,7 @@ GeometryShader ShaderCompiler::CreateGeometryShader(const std::string& fileName,
 
     HRESULT hr = ShaderErrorCheck(fileName, entrypath, "gs_5_0", &blob, error);
 
-    hr = DirectX11App::m_Device->CreateGeometryShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
+    hr = DirectX11App::g_Device->CreateGeometryShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
     if (FAILED(hr)) {
         DebugLog::LogError("GeometryShader Create Failed.");
         return nullptr;
@@ -61,7 +61,7 @@ ComputeShader ShaderCompiler::CreateComputeShader(const std::string& fileName, c
 
     HRESULT hr = ShaderErrorCheck(fileName, entrypath, "cs_5_0", &blob, error);
 
-    hr = DirectX11App::m_Device->CreateComputeShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
+    hr = DirectX11App::g_Device->CreateComputeShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
     if (FAILED(hr)) {
         DebugLog::LogError("ComputeShader Create Failed.");
         return nullptr;
@@ -77,7 +77,7 @@ HullShader ShaderCompiler::CreateHullShader(const std::string& fileName, const s
 
     HRESULT hr = ShaderErrorCheck(fileName, entrypath, "hs_5_0", &blob, error);
 
-    hr = DirectX11App::m_Device->CreateHullShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
+    hr = DirectX11App::g_Device->CreateHullShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
     if (FAILED(hr)) {
         DebugLog::LogError("HullShader Create Failed.");
         return nullptr;
@@ -93,7 +93,7 @@ DomainShader ShaderCompiler::CreateDomainShader(const std::string& fileName, con
 
     HRESULT hr = ShaderErrorCheck(fileName, entrypath, "ds_5_0", &blob, error);
 
-    hr = DirectX11App::m_Device->CreateDomainShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
+    hr = DirectX11App::g_Device->CreateDomainShader(blob->GetBufferPointer(), blob->GetBufferSize(), nullptr, &shader);
     if (FAILED(hr)) {
         DebugLog::LogError("DomainShader Create Failed.");
         return nullptr;
@@ -109,7 +109,7 @@ InputLayout ShaderCompiler::CreateInputLayout(D3D11_INPUT_ELEMENT_DESC* layout, 
 
     HRESULT hr = InputLayoutErrorCheck(fileName, entryPath, "vs_5_0", &blob);
     
-    hr = DirectX11App::m_Device->CreateInputLayout(layout, elemNum, blob->GetBufferPointer(), blob->GetBufferSize(), &vertexLayout);
+    hr = DirectX11App::g_Device->CreateInputLayout(layout, elemNum, blob->GetBufferPointer(), blob->GetBufferSize(), &vertexLayout);
 
     return vertexLayout;
 }

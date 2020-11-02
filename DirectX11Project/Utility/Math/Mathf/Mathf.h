@@ -1,5 +1,4 @@
-#ifndef MATHF_H_
-#define MATHF_H_
+#pragma once
 
 #include <cmath>
 #include <limits>
@@ -50,5 +49,3 @@ public:
 		return (a >= b) ? b : a;
 	}
 };
-
-#endif

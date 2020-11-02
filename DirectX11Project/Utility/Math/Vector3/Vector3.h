@@ -1,6 +1,4 @@
-
-#ifndef VECTOR3_H_
-#define VECTOR3_H_
+#pragma once
 
 #undef min
 #undef max
@@ -118,5 +116,3 @@ Vector3 operator / (const Vector3& lhs, float rhs);
 
 bool operator == (const Vector3& lhs, const Vector3& rhs);
 bool operator != (const Vector3& lhs, const Vector3& rhs);
-
-#endif

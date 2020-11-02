@@ -2,11 +2,13 @@
 #include "../../Setting/Window/Window.h"
 #include "../../System/DebugLog/DebugLog.h"
 
-D3DDevice DirectX11App::m_Device{ nullptr };
-D3DContext DirectX11App::m_Context{ nullptr };
-SwapChain DirectX11App::m_SwapChain{ nullptr };
-Texture2D DirectX11App::m_BuckBufferTexture{ nullptr };
-RenderTargetView DirectX11App::m_RenderTargetView{ nullptr };
+#include <DirectXMath.h>
+
+D3DDevice DirectX11App::g_Device{ nullptr };
+D3DContext DirectX11App::g_Context{ nullptr };
+SwapChain DirectX11App::g_SwapChain{ nullptr };
+Texture2D DirectX11App::g_BuckBufferTexture{ nullptr };
+RenderTargetView DirectX11App::g_RenderTargetView{ nullptr };
 Microsoft::WRL::ComPtr<IDXGIAdapter> DirectX11App::m_Adapter{ nullptr };
 
 
@@ -125,21 +127,21 @@ HRESULT DirectX11App::DirectXInit()
 	// DirectX11デバイスとスワップチェイン作成
 	hr = D3D11CreateDeviceAndSwapChain(m_Adapter.Get(), D3D_DRIVER_TYPE_UNKNOWN, NULL,
 		cdev_flags, featureLevels, 1, D3D11_SDK_VERSION, &sd,
-		&m_SwapChain, &m_Device, NULL, &m_Context);
+		&g_SwapChain, &g_Device, NULL, &g_Context);
 	if (FAILED(hr)) {
 		DebugLog::LogError("Swap Chain Create Failed.");
 		return hr;
 	}
 
 	// スワップチェインに用意されたバッファ(2Dテクスチャ)を取得
-	hr = m_SwapChain->GetBuffer(0, IID_PPV_ARGS(&m_BuckBufferTexture));
+	hr = g_SwapChain->GetBuffer(0, IID_PPV_ARGS(&g_BuckBufferTexture));
 	if (FAILED(hr)) {
 		DebugLog::LogError("Buffer Texture Get Failed.");
 		return hr;
 	}
 
 	// レンダーターゲットView作成
-	hr = m_Device->CreateRenderTargetView(m_BuckBufferTexture.Get(), NULL, &m_RenderTargetView);
+	hr = g_Device->CreateRenderTargetView(g_BuckBufferTexture.Get(), NULL, &g_RenderTargetView);
 	if (FAILED(hr)) {
 		DebugLog::LogError("Render Target View Create Failed.");
 		return hr;

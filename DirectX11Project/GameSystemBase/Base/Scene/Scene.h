@@ -1,5 +1,4 @@
-#ifndef SCENE_H_
-#define SCENE_H_
+#pragma once
 
 #include "../../Manager/ComponentManager/ComponentManager.h"
 #include "../../Manager/GameObjectManager/GameObjectManager.h"
@@ -30,5 +29,3 @@ public:
 protected:
 	SceneType m_SceneType{};
 };
-
-#endif

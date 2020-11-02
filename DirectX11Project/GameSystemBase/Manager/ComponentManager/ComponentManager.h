@@ -1,5 +1,4 @@
-#ifndef COMPONENT_MANAGER_H_
-#define COMPONENT_MANAGER_H_
+#pragma once
 
 #include <string>
 #include <list>
@@ -74,5 +73,3 @@ private:
 
 	UINT m_ComponentID{};
 };
-
-#endif

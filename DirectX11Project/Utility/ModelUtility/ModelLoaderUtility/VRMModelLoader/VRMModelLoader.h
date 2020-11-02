@@ -1,5 +1,4 @@
-#ifndef VRM_LOADER_H_
-#define VRM_LOADER_H_
+#pragma once
 
 #include <DirectXMath.h>
 #include <GLTFSDK/GLTF.h>
@@ -33,5 +32,3 @@ private:
 	ModelData::Model m_Model{};
 
 };
-
-#endif

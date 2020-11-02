@@ -1,5 +1,4 @@
-#ifndef MONO_BEHAVIOUR_H_
-#define MONO_BEHAVIOUR_H_
+#pragma once
 
 #include "../../Base/Component/Component.h"
 #include "../../../Utility/Input/Input.h"
@@ -22,5 +21,3 @@ public:
 private:
 	std::weak_ptr<Transform> m_Transform;
 };
-
-#endif
