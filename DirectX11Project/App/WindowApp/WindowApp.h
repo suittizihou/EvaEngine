@@ -1,7 +1,8 @@
 #pragma once
+#include <Windows.h>
 
 class WindowApp {
 public:
-	static bool Init();
+	static HRESULT Init();
 	static int Update();
 };

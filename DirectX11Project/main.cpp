@@ -19,11 +19,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
     _CrtMemCheckpoint(&s1);
 #endif
 
-    Window::hInstance = hInstance;
-    Window::nCmdShow = nCmdShow;
+    Window::g_hInstance = hInstance;
+    Window::g_nCmdShow = nCmdShow;
 
     // ウィンドウの初期化
-    if (!WindowApp::Init()) {
+    if (FAILED(WindowApp::Init())) {
         DebugLog::LogError("Window Initialize Failed.");
         return -1;
     }

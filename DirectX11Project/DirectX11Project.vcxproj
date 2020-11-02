@@ -177,6 +177,8 @@
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoader\ModelLoader.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.cpp" />
+    <ClCompile Include="Utility\ShaderCompiler\ShaderCompiler.cpp" />
+    <ClCompile Include="Utility\Shader\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\DirectX11App\DirectX11App.h" />
@@ -217,12 +219,36 @@
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.h" />
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoader\ModelLoader.h" />
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.h" />
+    <ClInclude Include="Utility\ShaderCompiler\ShaderCompiler.h" />
+    <ClInclude Include="Utility\Shader\Shader.h" />
     <ClInclude Include="Utility\StringAssist\StringAssist.h" />
     <ClInclude Include="Utility\Time\Time.h" />
     <ClInclude Include="Utility\Time\TimeBase.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shader\PixelShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">psMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">psMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">psMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">psMain</EntryPointName>
+    </FxCompile>
+    <FxCompile Include="Shader\VertexShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">vsMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">vsMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">vsMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">vsMain</EntryPointName>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

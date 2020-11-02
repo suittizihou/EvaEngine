@@ -3,14 +3,22 @@
 
 class DirectX11App {
 public:
-	static bool Init();
+	static HRESULT Init();
 	static int Update();
 
-public:
-	D3DDevice m_Device{};
-	D3DContext m_Context{};
-	SwapChain m_SwapChain{};
-	Texture2D m_Texture2D{};
-	RenderTargetView m_RenderTargetView{};
+private:
+	// ハードウェアのチェック(つよつよGPUを見つけてそのGPUを使うようにする)
+	static HRESULT HardWareCheck();
+	// DirectXの初期化
+	static HRESULT DirectXInit();
 
+public:
+	static D3DDevice m_Device;
+	static D3DContext m_Context;
+	static SwapChain m_SwapChain;
+	static Texture2D m_BuckBufferTexture;
+	static RenderTargetView m_RenderTargetView;
+
+private:
+	static Microsoft::WRL::ComPtr<IDXGIAdapter> m_Adapter;
 };

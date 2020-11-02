@@ -49,7 +49,7 @@ Camera::Camera(
 	m_Far(far_),
 	m_Fov(fov)
 {
-	GetClientRect(Window::hWnd, &m_Rect);
+	GetClientRect(Window::g_hWnd, &m_Rect);
 	m_Viewport = D3D11_VIEWPORT{ 0.0f, 0.0f, float(m_Rect.right - m_Rect.left), float(m_Rect.bottom - m_Rect.top) };
 
 	m_ProjectionMatrix = XMMatrixPerspectiveFovLH(XMConvertToRadians(m_Fov),
