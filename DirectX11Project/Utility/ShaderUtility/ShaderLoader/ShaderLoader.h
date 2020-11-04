@@ -17,15 +17,15 @@ public:
 	}
 
 	// 頂点シェーダーの読み込み
-	int VertexShaderLoad(const std::string & fileName, const std::string& entryPoint);
+	int VertexShaderLoad(const std::string & fileName, const std::string& entryPoint = "vsMain");
 	// ピクセルシェーダーの読み込み
-	int PixelShaderLoad(const std::string & fileName, const std::string& entryPoint);
+	int PixelShaderLoad(const std::string & fileName, const std::string& entryPoint = "psMain");
 	// ジオメトリシェーダーの読み込み
-	int GeometryShaderLoad(const std::string & fileName, const std::string& entryPoint);
+	int GeometryShaderLoad(const std::string & fileName, const std::string& entryPoint = "gsMain");
 	// コンピュートシェーダーの読み込み
-	int ComputeShaderLoad(const std::string & fileName, const std::string& entryPoint);
+	int ComputeShaderLoad(const std::string & fileName, const std::string& entryPoint = "csMain");
 	// ハルシェーダーの読み込み
-	int HullShaderLoad(const std::string & fileName, const std::string& entryPoint);
+	int HullShaderLoad(const std::string & fileName, const std::string& entryPoint = "hsMain");
 	// ドメインシェーダーの読み込み
-	int DomainShaderLoad(const std::string & fileName, const std::string& entryPoint);
+	int DomainShaderLoad(const std::string & fileName, const std::string& entryPoint = "dsMain");
 };

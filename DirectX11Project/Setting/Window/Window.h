@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include <string>
 
 struct D3D11_VIEWPORT;
 
@@ -9,6 +10,8 @@ public:
 	static D3D11_VIEWPORT GetViewport();
 
 public:
+	// ウィンドウ名
+	static const std::string g_WindowName;
 	// ウィンドウの左端
 	static UINT g_WindowLeft;
 	// ウィンドウの右端

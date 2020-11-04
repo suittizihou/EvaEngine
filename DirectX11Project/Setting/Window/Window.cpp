@@ -1,6 +1,7 @@
 #include "Window.h"
 #include <d3d11.h>
 
+const std::string Window::g_WindowName{ "DirectX11Project" };
 UINT Window::g_WindowLeft{ 0 };
 UINT Window::g_WindowRight{ 640 };
 UINT Window::g_WindowTop{ 0 };

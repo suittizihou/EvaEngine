@@ -4,11 +4,13 @@
 #include <Windows.h>
 #include <locale>
 #include "../../../App/DirectX11App/DirectX11App.h"
-#include "../../../System/DebugLog/DebugLog.h"
 
-VertexShader ShaderCompiler::CreateVertexShader(const std::string& fileName, const std::string& entrypath, bool error)
+#include <d3dcompiler.h>
+#pragma comment(lib, "d3dcompiler.lib")
+
+ID3D11VertexShader* ShaderCompiler::CreateVertexShader(const std::string& fileName, const std::string& entrypath, bool error)
 {
-    VertexShader shader{ nullptr };
+    ID3D11VertexShader* shader{ nullptr };
     D3DBlob blob{ nullptr };
 
     HRESULT hr = ShaderErrorCheck(fileName, entrypath, "vs_5_0", &blob, error);
@@ -22,9 +24,9 @@ VertexShader ShaderCompiler::CreateVertexShader(const std::string& fileName, con
     return shader;
 }
 
-PixelShader ShaderCompiler::CreatePixelShader(const std::string& fileName, const std::string& entrypath, bool error)
+ID3D11PixelShader* ShaderCompiler::CreatePixelShader(const std::string& fileName, const std::string& entrypath, bool error)
 {
-    PixelShader shader{ nullptr };
+    ID3D11PixelShader* shader{ nullptr };
     D3DBlob blob{ nullptr };
 
     HRESULT hr = ShaderErrorCheck(fileName, entrypath, "ps_5_0", &blob, error);
@@ -38,9 +40,9 @@ PixelShader ShaderCompiler::CreatePixelShader(const std::string& fileName, const
     return shader;
 }
 
-GeometryShader ShaderCompiler::CreateGeometryShader(const std::string& fileName, const std::string& entrypath, bool error)
+ID3D11GeometryShader* ShaderCompiler::CreateGeometryShader(const std::string& fileName, const std::string& entrypath, bool error)
 {
-    GeometryShader shader{ nullptr };
+    ID3D11GeometryShader* shader{ nullptr };
     D3DBlob blob{ nullptr };
 
     HRESULT hr = ShaderErrorCheck(fileName, entrypath, "gs_5_0", &blob, error);
@@ -54,9 +56,9 @@ GeometryShader ShaderCompiler::CreateGeometryShader(const std::string& fileName,
     return shader;
 }
 
-ComputeShader ShaderCompiler::CreateComputeShader(const std::string& fileName, const std::string& entrypath, bool error)
+ID3D11ComputeShader* ShaderCompiler::CreateComputeShader(const std::string& fileName, const std::string& entrypath, bool error)
 {
-    ComputeShader shader{ nullptr };
+    ID3D11ComputeShader* shader{ nullptr };
     D3DBlob blob{ nullptr };
 
     HRESULT hr = ShaderErrorCheck(fileName, entrypath, "cs_5_0", &blob, error);
@@ -70,9 +72,9 @@ ComputeShader ShaderCompiler::CreateComputeShader(const std::string& fileName, c
     return shader;
 }
 
-HullShader ShaderCompiler::CreateHullShader(const std::string& fileName, const std::string& entrypath, bool error)
+ID3D11HullShader* ShaderCompiler::CreateHullShader(const std::string& fileName, const std::string& entrypath, bool error)
 {
-    HullShader shader{ nullptr };
+    ID3D11HullShader* shader{ nullptr };
     D3DBlob blob{ nullptr };
 
     HRESULT hr = ShaderErrorCheck(fileName, entrypath, "hs_5_0", &blob, error);
@@ -86,9 +88,9 @@ HullShader ShaderCompiler::CreateHullShader(const std::string& fileName, const s
     return shader;
 }
 
-DomainShader ShaderCompiler::CreateDomainShader(const std::string& fileName, const std::string& entrypath, bool error)
+ID3D11DomainShader* ShaderCompiler::CreateDomainShader(const std::string& fileName, const std::string& entrypath, bool error)
 {
-    DomainShader shader{ nullptr };
+    ID3D11DomainShader* shader{ nullptr };
     D3DBlob blob{ nullptr };
 
     HRESULT hr = ShaderErrorCheck(fileName, entrypath, "ds_5_0", &blob, error);
@@ -102,14 +104,18 @@ DomainShader ShaderCompiler::CreateDomainShader(const std::string& fileName, con
     return shader;
 }
 
-InputLayout ShaderCompiler::CreateInputLayout(D3D11_INPUT_ELEMENT_DESC* layout, UINT elemNum, const std::string& fileName, const std::string& entryPath)
+ID3D11InputLayout* ShaderCompiler::CreateInputLayout(D3D11_INPUT_ELEMENT_DESC* layout, UINT elemNum, const std::string& fileName, const std::string& entryPath)
 {
-    InputLayout vertexLayout;
+    ID3D11InputLayout* vertexLayout;
     D3DBlob blob{ nullptr };
 
     HRESULT hr = InputLayoutErrorCheck(fileName, entryPath, "vs_5_0", &blob);
     
     hr = DirectX11App::g_Device->CreateInputLayout(layout, elemNum, blob->GetBufferPointer(), blob->GetBufferSize(), &vertexLayout);
+    if (FAILED(hr)) {
+        DebugLog::LogError("Input Layout Create Failed.");
+        return nullptr;
+    }
 
     return vertexLayout;
 }

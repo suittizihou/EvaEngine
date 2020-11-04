@@ -30,27 +30,27 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -162,11 +162,13 @@
     <ClCompile Include="GameSystemBase\DataBase\SceneDataBase\SceneDataBase.cpp" />
     <ClCompile Include="GameSystemBase\DataBase\ShaderDataBase\ShaderDataBase.cpp" />
     <ClCompile Include="GameSystemBase\Manager\ComponentManager\ComponentManager.cpp" />
+    <ClCompile Include="GameSystemBase\Manager\DrawManager\DrawManager.cpp" />
     <ClCompile Include="GameSystemBase\Manager\GameObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="GameSystemBase\Manager\SceneManager\SceneManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Setting\Window\Window.cpp" />
     <ClCompile Include="System\DebugLog\DebugLog.cpp" />
+    <ClCompile Include="Utility\BufferCreate\BufferCreate.cpp" />
     <ClCompile Include="Utility\Input\Input.cpp" />
     <ClCompile Include="Utility\Input\InputBufferUpdate\InputBufferUpdate.cpp" />
     <ClCompile Include="Utility\Math\Matrix3x3\Matrix3x3.cpp" />
@@ -205,10 +207,12 @@
     <ClInclude Include="GameSystemBase\DataBase\SceneDataBase\SceneDataBase.h" />
     <ClInclude Include="GameSystemBase\DataBase\ShaderDataBase\ShaderDataBase.h" />
     <ClInclude Include="GameSystemBase\Manager\ComponentManager\ComponentManager.h" />
+    <ClInclude Include="GameSystemBase\Manager\DrawManager\DrawManager.h" />
     <ClInclude Include="GameSystemBase\Manager\GameObjectManager\GameObjectManager.h" />
     <ClInclude Include="GameSystemBase\Manager\SceneManager\SceneManager.h" />
     <ClInclude Include="Setting\Window\Window.h" />
     <ClInclude Include="System\DebugLog\DebugLog.h" />
+    <ClInclude Include="Utility\BufferCreate\BufferCreate.h" />
     <ClInclude Include="Utility\Input\Input.h" />
     <ClInclude Include="Utility\Input\InputBufferUpdate\InputBufferUpdate.h" />
     <ClInclude Include="Utility\Input\KeyCode.h" />

@@ -5,20 +5,20 @@
 class ShaderCompiler {
 public:
 	// 頂点シェーダーのコンパイル
-	static VertexShader CreateVertexShader(const std::string& fileName, const std::string& entrypath = "vsMain", bool error = true);
+	static ID3D11VertexShader* CreateVertexShader(const std::string& fileName, const std::string& entrypath = "vsMain", bool error = true);
 	// ピクセルシェーダーのコンパイル
-	static PixelShader CreatePixelShader(const std::string& fileName, const std::string& entrypath = "psMain", bool error = true);
+	static ID3D11PixelShader* CreatePixelShader(const std::string& fileName, const std::string& entrypath = "psMain", bool error = true);
 	// ジオメトリシェーダーのコンパイル
-	static GeometryShader CreateGeometryShader(const std::string& fileName, const std::string& entrypath = "gsMain", bool error = true);
+	static ID3D11GeometryShader* CreateGeometryShader(const std::string& fileName, const std::string& entrypath = "gsMain", bool error = true);
 	// コンピュートシェーダーのコンパイル
-	static ComputeShader CreateComputeShader(const std::string& fileName, const std::string& entrypath = "gsMain", bool error = true);
+	static ID3D11ComputeShader* CreateComputeShader(const std::string& fileName, const std::string& entrypath = "gsMain", bool error = true);
 	// ハルシェーダーのコンパイル
-	static HullShader CreateHullShader(const std::string& fileName, const std::string& entrypath = "hsMain", bool error = true);
+	static ID3D11HullShader* CreateHullShader(const std::string& fileName, const std::string& entrypath = "hsMain", bool error = true);
 	// ドメインシェーダーのコンパイル
-	static DomainShader CreateDomainShader(const std::string& fileName, const std::string& entrypath = "dsMain", bool error = true);
+	static ID3D11DomainShader* CreateDomainShader(const std::string& fileName, const std::string& entrypath = "dsMain", bool error = true);
 
 	// セマンティクスのセットなどをするインプットレイアウトを作成
-	static InputLayout CreateInputLayout(D3D11_INPUT_ELEMENT_DESC* layout, UINT elemNum, const std::string& fileName, const std::string& entryPath);
+	static ID3D11InputLayout* CreateInputLayout(D3D11_INPUT_ELEMENT_DESC* layout, UINT elemNum, const std::string& fileName, const std::string& entryPath);
 
 private:
 	// シェーダーのエラーチェック

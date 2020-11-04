@@ -120,12 +120,12 @@ bool FBXModelLoader::CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh)
     // 法線リストの取得
     mesh->GetPolygonVertexNormals(normals);
 
-    // 法線設定
-    for (int i = 0; i < normals.Size(); i++) {
-        m_Model.meshes[node_name][0].m_Vertices[i].normal.x = (float)-normals[i][0];
-        m_Model.meshes[node_name][0].m_Vertices[i].normal.y = (float)normals[i][1];
-        m_Model.meshes[node_name][0].m_Vertices[i].normal.z = (float)normals[i][2];
-    }
+    //// 法線設定
+    //for (int i = 0; i < normals.Size(); i++) {
+    //    m_Model.meshes[node_name][0].m_Vertices[i].normal.x = (float)-normals[i][0];
+    //    m_Model.meshes[node_name][0].m_Vertices[i].normal.y = (float)normals[i][1];
+    //    m_Model.meshes[node_name][0].m_Vertices[i].normal.z = (float)normals[i][2];
+    //}
 
     // ポリゴン数の取得
     int polygon_count = mesh->GetPolygonCount();

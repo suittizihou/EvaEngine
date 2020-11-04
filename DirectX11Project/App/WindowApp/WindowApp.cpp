@@ -1,26 +1,31 @@
 #include "WindowApp.h"
 #include <wrl.h>
 #include "../../Setting/Window/Window.h"
-#include "../../System/DebugLog/DebugLog.h"
 #include "../../Utility/Input/InputBufferUpdate/InputBufferUpdate.h"
 #include "../../Utility/Input/Input.h"
 #include "../DirectX11App/DirectX11App.h"
+#include "../../Utility/ModelUtility/ModelData/ModelData.h"
+#include "../../Utility/BufferCreate/BufferCreate.h"
+#include "../../GameSystemBase/Manager/DrawManager/DrawManager.h"
+#include "../../Utility/Material/Material.h"
+#include "../../Utility/ShaderUtility/Shader/Shader.h"
+#include "../../Utility/ResourceLoad/ResourceLoad.h"
+#include "../../GameSystemBase/DataBase/ShaderDataBase/ShaderDataBase.h"
+
+#include <vector>
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
-    PAINTSTRUCT ps;
-    HDC hdc;
-    switch (msg)
-    {
-    case WM_PAINT:
-        hdc = BeginPaint(hWnd, &ps);
-        EndPaint(hWnd, &ps);
-        break;
-
-    case WM_DESTROY:
+    
+    switch (msg) {
+    case WM_CLOSE:
         PostQuitMessage(0);
-        return 0;
+        break;
+    default:
+        return DefWindowProc(hWnd, msg, wp, lp);
+        break;
     }
-    return DefWindowProc(hWnd, msg, wp, lp);
+
+    return 0;
 }
 
 HRESULT WindowApp::Init()
@@ -37,56 +42,143 @@ HRESULT WindowApp::Init()
         return hr;
     }
 
-    WNDCLASSEX wc{};
-    wc.cbSize = sizeof(wc);
-    wc.style = CS_HREDRAW | CS_VREDRAW;
-    wc.lpfnWndProc = WndProc;
-    wc.hInstance = Window::g_hInstance;
-    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wc.lpszClassName = L"HelloDirectX12";
+    WNDCLASSEX wc {
+        sizeof(WNDCLASSEX),
+        CS_HREDRAW | CS_VREDRAW,
+        WndProc,
+        0L,
+        0L,
+        GetModuleHandle(NULL),
+        NULL,
+        LoadCursor(NULL, IDC_ARROW),
+        NULL,
+        NULL,
+        Window::g_WindowName.c_str(),
+        NULL
+    };
+
     if (!RegisterClassEx(&wc)) {
         DebugLog::LogError("WNDCLASSEX Initialize Failed.");
         return hr;
     }
 
-    DWORD dwStyle = WS_OVERLAPPEDWINDOW & ~WS_SIZEBOX;
     RECT rect = { 0,0, static_cast<LONG>(Window::g_WindowRight), static_cast<LONG>(Window::g_WindowBottom) };
-    AdjustWindowRect(&rect, dwStyle, FALSE);
 
     // ウィンドウを生成
-    Window::g_hWnd = CreateWindow(wc.lpszClassName, L"DirectX11App",
-        dwStyle,
-        CW_USEDEFAULT, CW_USEDEFAULT,
-        Window::g_WindowRight - Window::g_WindowLeft, Window::g_WindowBottom - Window::g_WindowTop,
-        nullptr,
-        nullptr,
-        wc.hInstance,
-        nullptr
+    Window::g_hWnd = CreateWindow(
+        Window::g_WindowName.c_str(),
+        Window::g_WindowName.c_str(),
+        (WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME) | WS_VISIBLE,
+        CW_USEDEFAULT,
+        0,
+        Window::g_WindowRight - Window::g_WindowLeft, 
+        Window::g_WindowBottom - Window::g_WindowTop,
+        NULL,
+        NULL,
+        GetModuleHandle(NULL),
+        NULL
     );
 
-    ShowWindow(Window::g_hWnd, Window::g_nCmdShow);
+    if (!Window::g_hWnd) {
+        DebugLog::LogError("Window Create Failed.");
+        return E_FAIL;
+    }
+
+    RECT window_rect{};
+    RECT client_rect{};
+
+    GetWindowRect(Window::g_hWnd, &window_rect);
+    GetClientRect(Window::g_hWnd, &client_rect);
+
+    int frame_size_x = (window_rect.right - window_rect.left) - (client_rect.right - client_rect.left);
+    int frame_size_y = (window_rect.bottom - window_rect.top) - (client_rect.bottom - client_rect.top);
+
+    SetWindowPos(
+        Window::g_hWnd, 
+        NULL, 
+        CW_USEDEFAULT, 
+        0, 
+        frame_size_x + static_cast<int>(Window::GetViewport().Width), 
+        frame_size_y + static_cast<int>(Window::GetViewport().Height), 
+        SWP_NOMOVE);
+
+    ShowWindow(Window::g_hWnd, SW_SHOW);
+    UpdateWindow(Window::g_hWnd);
 
     return hr;
 }
 
 int WindowApp::Update()
 {
-    UpdateWindow(Window::g_hWnd);
 
     if (FAILED(DirectX11App::Init())) {
         DebugLog::LogError("DirectX Initialize Failed.");
         return -1;
     }
 
+    ResourceLoad resources{};
+    resources.Load();
+
+    Material material{};
+    material.g_Shader.SetVertexShader(0);
+    material.g_Shader.SetPixelShader(0);
+
+    std::vector<ModelData::VertexData> vertexs =
+    {
+        { DirectX::XMFLOAT3(-0.5f,-0.5f, 0.0f), DirectX::XMFLOAT4(1,0,0,1) },   // 赤
+        { DirectX::XMFLOAT3( 0.5f,-0.5f, 0.0f), DirectX::XMFLOAT4(0,1,0,1) },   // 緑
+        { DirectX::XMFLOAT3( 0.5f, 0.5f, 0.0f), DirectX::XMFLOAT4(0,0,1,1) },   // 青
+        { DirectX::XMFLOAT3(-0.5f, 0.5f, 0.0f), DirectX::XMFLOAT4(0,0,0,1) }    // 黒
+    };
+
+    VertexBuffer vb{ nullptr };
+    vb.Attach(BufferCreate::CreateVertexBuffer(vertexs.data(), static_cast<UINT>(vertexs.size())));
+
+    D3D11_INPUT_ELEMENT_DESC elem[] = {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "TEXCOORD", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0}
+    };
+
+    InputLayout inputLayout{ nullptr };
+    inputLayout.Attach(ShaderCompiler::CreateInputLayout(elem, 2, "Shader/VertexShader.hlsl", "vsMain"));
+
+    // インデックス情報の設定
+    std::vector<UINT> idxs = { 0, 3, 2, 0, 2, 1 };
+    IndexBuffer ib{ nullptr };
+    ib.Attach(BufferCreate::CreateIndexBuffer(idxs.data(), static_cast<UINT>(idxs.size())));
+
     MSG msg{};
     while (msg.message != WM_QUIT) {
 
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
 
+            if (msg.message == WM_QUIT) {
+                break;
+            }
+            else {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+        }
+        else {
             InputBufferUpdate::Instance().KeyUpdate();
+            DirectX11App::Update();
+
+            DrawManager::DrawBegin();
+
+            DrawManager::SetInputLayout(inputLayout.Get());
+            DrawManager::SetVertexBuffer(vb.Get(), sizeof(ModelData::VertexData));
+            DrawManager::SetIndexBuffer(ib.Get());
+            DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+            DrawManager::SetShader(material);
+            DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_RenderTargetView.GetAddressOf(), DirectX11App::g_DepthStencilView.Get());
+
+            DrawManager::DrawIndexed(static_cast<UINT>(idxs.size()));
+
+            DrawManager::DrawEnd();
         }
     }
+
+
     return static_cast<int>(msg.wParam);
 }

@@ -3,42 +3,60 @@
 
 void Shader::SetVertexShader(const int shaderHandle)
 {
-	m_VertexShader.Attach(ShaderDataBase::Instance().GetVertexShader(shaderHandle).Get());
+	m_VertexShader.Attach(ShaderDataBase::Instance().GetVertexShader(shaderHandle));
 }
 
 void Shader::SetPixelShader(const int shaderHandle)
 {
-	m_PixelShader.Attach(ShaderDataBase::Instance().GetPixelShader(shaderHandle).Get());
+	m_PixelShader.Attach(ShaderDataBase::Instance().GetPixelShader(shaderHandle));
 }
 
 void Shader::SetGeometryShader(const int shaderHandle)
 {
-	m_GeometryShader.Attach(ShaderDataBase::Instance().GetGeometryShader(shaderHandle).Get());
+	m_GeometryShader.Attach(ShaderDataBase::Instance().GetGeometryShader(shaderHandle));
 }
 
 void Shader::SetComputeShader(const int shaderHandle)
 {
-	m_ComputeShader.Attach(ShaderDataBase::Instance().GetComputeShader(shaderHandle).Get());
-	
+	m_ComputeShader.Attach(ShaderDataBase::Instance().GetComputeShader(shaderHandle));
 }
 
 void Shader::SetHullShader(const int shaderHandle)
 {
-	m_HullShader.Attach(ShaderDataBase::Instance().GetHullShader(shaderHandle).Get());
+	m_HullShader.Attach(ShaderDataBase::Instance().GetHullShader(shaderHandle));
 }
 
 void Shader::SetDomainShader(const int shaderHandle)
 {
-	m_DomainShader.Attach(ShaderDataBase::Instance().GetDomainShader(shaderHandle).Get());
+	m_DomainShader.Attach(ShaderDataBase::Instance().GetDomainShader(shaderHandle));
 }
 
-void Shader::SetShader(D3DContext context)
+VertexShader Shader::GetVertexShader()
 {
-	// それぞれ nullptr でない場合シェーダーをセットする
-	if (m_VertexShader != nullptr) context->VSSetShader(m_VertexShader.Get(), nullptr, 0);
-	if (m_HullShader != nullptr) context->HSSetShader(m_HullShader.Get(), nullptr, 0);
-	if (m_DomainShader != nullptr) context->DSSetShader(m_DomainShader.Get(), nullptr, 0);
-	if (m_GeometryShader != nullptr) context->GSSetShader(m_GeometryShader.Get(), nullptr, 0);
-	if (m_ComputeShader != nullptr) context->CSSetShader(m_ComputeShader.Get(), nullptr, 0);
-	if (m_PixelShader != nullptr) context->PSSetShader(m_PixelShader.Get(), nullptr, 0);
+	return m_VertexShader;
+}
+
+PixelShader Shader::GetPixelShader()
+{
+	return m_PixelShader;
+}
+
+GeometryShader Shader::GetGeometryShader()
+{
+	return m_GeometryShader;
+}
+
+ComputeShader Shader::GetComputeShader()
+{
+	return m_ComputeShader;
+}
+
+HullShader Shader::GetHullShader()
+{
+	return m_HullShader;
+}
+
+DomainShader Shader::GetDomainShader()
+{
+	return m_DomainShader;
 }

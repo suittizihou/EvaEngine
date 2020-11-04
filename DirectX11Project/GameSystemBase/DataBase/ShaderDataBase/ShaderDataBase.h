@@ -17,30 +17,30 @@ public:
 	}
 
 	// 頂点シェーダーの追加
-	int AddVertexShader(const VertexShader& vertexShader);
+	int AddVertexShader(ID3D11VertexShader* vertexShader);
 	// ピクセルシェーダーの追加
-	int AddPixelShader(const PixelShader& pixelShader);
+	int AddPixelShader(ID3D11PixelShader* pixelShader);
 	// ジオメトリシェーダーの追加
-	int AddGeometryShader(const GeometryShader& geometryShader);
+	int AddGeometryShader(ID3D11GeometryShader* geometryShader);
 	// コンピュートシェーダーの追加
-	int AddComputeShader(const ComputeShader& computeShader);
+	int AddComputeShader(ID3D11ComputeShader* computeShader);
 	// ハルシェーダーの追加
-	int AddHullShader(const HullShader& hullShader);
+	int AddHullShader(ID3D11HullShader* hullShader);
 	// ドメインシェーダーの追加
-	int AddDomainShader(const DomainShader& domainShader);
+	int AddDomainShader(ID3D11DomainShader* domainShader);
 
 	// 頂点シェーダーの取得
-	VertexShader GetVertexShader(const int shaderHandle);
+	ID3D11VertexShader* GetVertexShader(const int shaderHandle);
 	// ピクセルシェーダーの取得
-	PixelShader GetPixelShader(const int shaderHandle);
+	ID3D11PixelShader* GetPixelShader(const int shaderHandle);
 	// ジオメトリシェーダーの取得
-	GeometryShader GetGeometryShader(const int shaderHandle);
+	ID3D11GeometryShader* GetGeometryShader(const int shaderHandle);
 	// コンピュートシェーダーの取得
-	ComputeShader GetComputeShader(const int shaderHandle);
+	ID3D11ComputeShader* GetComputeShader(const int shaderHandle);
 	// ハルシェーダーの取得
-	HullShader GetHullShader(const int shaderHandle);
+	ID3D11HullShader* GetHullShader(const int shaderHandle);
 	// ドメインシェーダーの取得
-	DomainShader GetDomainShader(const int shaderHandle);
+	ID3D11DomainShader* GetDomainShader(const int shaderHandle);
 
 
 	// 頂点シェーダーの削除
@@ -55,6 +55,9 @@ public:
 	void DeleteHullShader(const int shaderHandle);
 	// ドメインシェーダーの削除
 	void DeleteDomainShader(const int shaderHandle);
+
+	// シェーダーリソースの解放
+	//void Relese();
 
 private:
 	// 頂点シェーダーのハンドル
@@ -71,15 +74,15 @@ private:
 	int m_DomainShaderCount{ 0 };
 	
 	// コンパイル済み頂点シェーダー
-	std::map<int, VertexShader> m_VertexShaders{};
+	std::map<int, ID3D11VertexShader*> m_VertexShaders{};
 	// コンパイル済みピクセルシェーダー
-	std::map<int, PixelShader> m_PixelShaders{};
+	std::map<int, ID3D11PixelShader*> m_PixelShaders{};
 	// コンパイル済みジオメトリシェーダー
-	std::map<int, GeometryShader> m_GeometryShaders{};
+	std::map<int, ID3D11GeometryShader*> m_GeometryShaders{};
 	// コンパイル済みコンピュートシェーダー
-	std::map<int, ComputeShader> m_ComputeShaders{};
+	std::map<int, ID3D11ComputeShader*> m_ComputeShaders{};
 	// コンパイル済みハルシェーダー
-	std::map<int, HullShader> m_HullShaders{};
+	std::map<int, ID3D11HullShader*> m_HullShaders{};
 	// コンパイル済みドメインシェーダー
-	std::map<int, DomainShader> m_DomainShaders{};
+	std::map<int, ID3D11DomainShader*> m_DomainShaders{};
 };

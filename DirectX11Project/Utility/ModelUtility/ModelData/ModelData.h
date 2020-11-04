@@ -18,8 +18,9 @@ public:
 
 	struct VertexData {
 		DirectX::XMFLOAT3 position;		// 座標(x, y, z)
-		DirectX::XMFLOAT3 normal;		// 法線
-		DirectX::XMFLOAT2 texture;	// テクスチャ座標(u, v)
+		DirectX::XMFLOAT4 color;		// 頂点カラー
+		//DirectX::XMFLOAT3 normal;		// 法線
+		//DirectX::XMFLOAT2 texture;		// テクスチャ座標(u, v)
 	};
 
 	struct ShaderParameters {

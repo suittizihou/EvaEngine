@@ -69,20 +69,20 @@ void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std
             auto vertNrm = reader->ReadBinaryData<float>(doc, accNrm);
             auto vertUV = reader->ReadBinaryData<float>(doc, accUV);
 
-            auto vertexCount = accPos.count;
-            for (uint32_t i = 0; i < vertexCount; ++i)
-            {
-                // 頂点データの構築
-                int vid0 = 3 * i, vid1 = 3 * i + 1, vid2 = 3 * i + 2;
-                int tid0 = 2 * i, tid1 = 2 * i + 1;
-                mesh.m_Vertices.emplace_back(
-                    ModelData::VertexData{
-                      XMFLOAT3(vertPos[vid0], vertPos[vid1],vertPos[vid2]),
-                      XMFLOAT3(vertNrm[vid0], vertNrm[vid1],vertNrm[vid2]),
-                      XMFLOAT2(vertUV[tid0],vertUV[tid1])
-                    }
-                );
-            }
+            //auto vertexCount = accPos.count;
+            //for (uint32_t i = 0; i < vertexCount; ++i)
+            //{
+            //    // 頂点データの構築
+            //    int vid0 = 3 * i, vid1 = 3 * i + 1, vid2 = 3 * i + 2;
+            //    int tid0 = 2 * i, tid1 = 2 * i + 1;
+            //    mesh.m_Vertices.emplace_back(
+            //        ModelData::VertexData{
+            //          XMFLOAT3(vertPos[vid0], vertPos[vid1],vertPos[vid2]),
+            //          XMFLOAT3(vertNrm[vid0], vertNrm[vid1],vertNrm[vid2]),
+            //          XMFLOAT2(vertUV[tid0],vertUV[tid1])
+            //        }
+            //    );
+            //}
 
             // インデックスデータ
             mesh.m_Indices = reader->ReadBinaryData<uint32_t>(doc, accIndex);

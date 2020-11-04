@@ -12,7 +12,7 @@
 #define NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
 #endif
 
-int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
+int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
 #if _DEBUG
     // メモリリーク検出(特定の範囲を検出するためのもの)
     _CrtMemState s1;
