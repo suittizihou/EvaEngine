@@ -52,8 +52,12 @@ void DrawManager::Draw(const My3DLib::ModelData::Model& model)
 	UINT strides = sizeof(My3DLib::VertexData);
 	UINT offset = 0;
 
+	// ポリゴンの種類
+	DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	// シェーダーのセット
 	DrawManager::SetShader(material);
+	// レンダーターゲットの設定
+	DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_RenderTargetView.GetAddressOf(), DirectX11App::g_DepthStencilView.Get());
 
 	for (const auto& meshs : model.meshes) {
 		for (auto mesh : meshs.second) {
@@ -63,13 +67,9 @@ void DrawManager::Draw(const My3DLib::ModelData::Model& model)
 			DirectX11App::g_Context->IASetVertexBuffers(0, 1, mesh.GetVertexBuffer(), &strides, &offset);
 			// インデックスバッファの設定
 			DirectX11App::g_Context->IASetIndexBuffer(mesh.GetIndexBuffer(), DXGI_FORMAT_R32_UINT, 0);
-			// ポリゴンの種類
-			DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-			// レンダーターゲットの設定
-			DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_RenderTargetView.GetAddressOf(), DirectX11App::g_DepthStencilView.Get());
 
 			// ポリゴン描画
-			DirectX11App::g_Context->DrawIndexed(static_cast<UINT>(mesh.GetVertices().size()), 0, 0);
+			DirectX11App::g_Context->DrawIndexed(static_cast<UINT>(mesh.GetIndices().size()), 0, 0);
 		}
 	}
 }

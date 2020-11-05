@@ -28,8 +28,8 @@ namespace My3DLib {
 		void SetVertices(std::vector<DirectX::XMFLOAT3> vertices, bool isCreateIndices = false);
 		void SetVertices(std::vector<My3DLib::VertexData> vertices, bool isCreateIndices = false);
 		void SetVertexBuffer(ID3D11Buffer* vertexBuffer);
-		// 頂点を使用する順番の作成(インデックスバッファ)
-		void CreateIndices();
+		//// 頂点を使用する順番の作成(インデックスバッファ)
+		//void CreateIndices();
 		// 頂点を使用する順番の設定(インデックスバッファ)
 		void SetIndices(std::vector<unsigned int> indices);
 		void SetIndexBuffer(ID3D11Buffer* indexBuffer);

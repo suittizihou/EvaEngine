@@ -1,11 +1,11 @@
 #include "BufferCreate.h"
 #include "../Mesh/Mesh.h"
 
-bool BufferCreate::SetVertexBuffer(std::map<std::string, std::vector<My3DLib::Mesh>> meshMap) {
+bool BufferCreate::SetVertexBuffer(std::map<std::string, std::vector<My3DLib::Mesh>>& meshMap) {
 
     UINT strides = sizeof(My3DLib::VertexData);
-	for (const auto& meshs : meshMap) {
-		for (auto mesh : meshs.second) {
+	for (auto& meshs : meshMap) {
+		for (auto& mesh : meshs.second) {
 			// 頂点バッファの作成
             // 頂点バッファとはシステムメモリ外、すなわちGPU側にあるメモリに頂点データを配置するためのもの
 			D3D11_BUFFER_DESC bufferDesc{};
@@ -30,10 +30,10 @@ bool BufferCreate::SetVertexBuffer(std::map<std::string, std::vector<My3DLib::Me
 	return true;
 }
 
-bool BufferCreate::SetIndexBuffer(std::map<std::string, std::vector<My3DLib::Mesh>> meshMap)
+bool BufferCreate::SetIndexBuffer(std::map<std::string, std::vector<My3DLib::Mesh>>& meshMap)
 {
-    for (const auto& meshs : meshMap) {
-        for (auto mesh : meshs.second) {
+    for (auto& meshs : meshMap) {
+        for (auto& mesh : meshs.second) {
             // インデックスバッファの作成
             // インデックスバッファとは、頂点重複分の無駄を省くためのもの
             D3D11_BUFFER_DESC bufferDesc{};

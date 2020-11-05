@@ -134,7 +134,10 @@ int WindowApp::Update()
         { DirectX::XMFLOAT3(-0.5f, 0.5f, 0.0f), DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0,0,0,1), DirectX::XMFLOAT2() }    // 黒
     };
     My3DLib::Mesh mesh{};
+    // 頂点情報をセット
     mesh.SetVertices(vertexs, true);
+    // 頂点を使う順番をセット
+    mesh.SetIndices({0, 3, 2, 0, 2, 1});
     model.meshes[""].push_back(mesh);
 
     // 頂点バッファーの設定

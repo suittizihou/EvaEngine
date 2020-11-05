@@ -41,8 +41,8 @@ void Mesh::SetVertices(std::vector<DirectX::XMFLOAT3> vertices, bool isCreateInd
 {
 	m_Vertices = vertices;
 
-	// インデックスバッファの作成をするならする
-	if (isCreateIndices) CreateIndices();
+	//// インデックスバッファの作成をするならする
+	//if (isCreateIndices) CreateIndices();
 
 	// 法線情報の数を頂点数と同じにする
 	m_Normals.resize(vertices.size());
@@ -60,8 +60,8 @@ void Mesh::SetVertices(std::vector<My3DLib::VertexData> vertices, bool isCreateI
 		m_UVs.push_back(vertex.uv);
 	}
 
-	// インデックスバッファの作成をするならする
-	if (isCreateIndices) CreateIndices();
+	//// インデックスバッファの作成をするならする
+	//if (isCreateIndices) CreateIndices();
 }
 
 void My3DLib::Mesh::SetVertexBuffer(ID3D11Buffer* vertexBuffer)
@@ -69,16 +69,16 @@ void My3DLib::Mesh::SetVertexBuffer(ID3D11Buffer* vertexBuffer)
 	m_VertexBuffer.Attach(vertexBuffer);
 }
 
-void My3DLib::Mesh::CreateIndices()
-{
-	int polyCount = static_cast<UINT>(m_Vertices.size()) / 3;
-	// ポリゴンの数だけ連番で保存
-	for (int i = 0; i < polyCount; i++) {
-		m_Indices.push_back(i * 3 + 2);
-		m_Indices.push_back(i * 3 + 1);
-		m_Indices.push_back(i * 3);
-	}
-}
+//void My3DLib::Mesh::CreateIndices()
+//{
+//	int polyCount = static_cast<UINT>(m_Vertices.size()) / 3;
+//	// ポリゴンの数だけ連番で保存
+//	for (int i = 0; i < polyCount; i++) {
+//		m_Indices.push_back(i * 3 + 2);
+//		m_Indices.push_back(i * 3 + 1);
+//		m_Indices.push_back(i * 3);
+//	}
+//}
 
 void Mesh::SetIndices(std::vector<unsigned int> indices)
 {
