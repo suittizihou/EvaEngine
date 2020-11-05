@@ -1,8 +1,11 @@
 #include "PixelShader.hlsl"
 
-struct VS_INPUT {
-	float3 Pos : POSITION;
-	float4 Col : TEXCOORD;
+struct VS_INPUT
+{
+    float3 Pos : POSITION;
+    float3 Normal : NORMAL;
+    float4 Col : COLOR;
+    float2 UV : TEXCOORD;
 };
 
 PS_INPUT vsMain(VS_INPUT pos) {

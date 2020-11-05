@@ -30,7 +30,7 @@ void MeshRenderer::Draw(
 	using namespace Microsoft::glTF;
 
 	// 各行列のセット.
-	ModelData::ShaderParameters constantBuffer{};
+	My3DLib::ShaderParameters constantBuffer{};
 
 	Matrix4x4 matrix = m_Transform.lock()->local_to_world_matrix();
 	XMMATRIX worldMatrix
@@ -55,14 +55,14 @@ void MeshRenderer::Draw(
 
 		for (auto& mesh : meshs.second) {
 
-			UINT strides{ sizeof(ModelData::VertexData) };
-			// 頂点・インデックスバッファ・プリミティブタイプのセット
-			command->IASetVertexBuffers(0, 1, &mesh.m_VertexBuffer, &strides, 0U);
-			command->IASetIndexBuffer(mesh.m_IndexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
-			command->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+			UINT strides{ sizeof(My3DLib::VertexData) };
+			//// 頂点・インデックスバッファ・プリミティブタイプのセット
+			//command->IASetVertexBuffers(0, 1, &mesh.m_VertexBuffer, &strides, 0U);
+			//command->IASetIndexBuffer(mesh.m_IndexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
+			//command->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-			// このメッシュを描画
-			command->DrawIndexed(mesh.indexCount, 0, 0);
+			//// このメッシュを描画
+			//command->DrawIndexed(mesh.indexCount, 0, 0);
 		}
 	}	
 }

@@ -24,7 +24,7 @@ public:
 		const ModelApp& modelApp) override;
 
 private:
-	ModelData::Model m_Model{};
+	My3DLib::ModelData::Model m_Model{};
 	ConstantBuffer m_ConstantBuffer{};
 	std::weak_ptr<MeshFilter> m_MeshFilter;
 	std::weak_ptr<Transform> m_Transform;

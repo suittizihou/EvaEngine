@@ -12,8 +12,8 @@ public:
 	
 	~MeshFilter() = default;
 
-	ModelData::Model GetModel() { return m_Model; }
+	My3DLib::ModelData::Model GetModel() { return m_Model; }
 
 private:
-	ModelData::Model m_Model{};
+	My3DLib::ModelData::Model m_Model{};
 };

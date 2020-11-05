@@ -21,19 +21,6 @@ namespace My3DLib {
 		ModelData() = default;
 		~ModelData() = default;
 
-		struct VertexData {
-			DirectX::XMFLOAT3 position;		// 座標(x, y, z)
-			DirectX::XMFLOAT4 color;		// 頂点カラー
-			//DirectX::XMFLOAT3 normal;		// 法線
-			//DirectX::XMFLOAT2 texture;		// テクスチャ座標(u, v)
-		};
-
-		struct ShaderParameters {
-			DirectX::XMFLOAT4X4 mtxWorld;
-			DirectX::XMFLOAT4X4 mtxView;
-			DirectX::XMFLOAT4X4 mtxProj;
-		};
-
 		struct BufferObject {
 			ComPtr<ID3D11Buffer> buffer;
 			union {
@@ -48,8 +35,8 @@ namespace My3DLib {
 		//};
 
 		struct Model {
-			std::map<std::string, std::vector<Mesh>> meshes;
-			std::map<std::string, std::vector<Material>> materials;
+			std::map<std::string, std::vector<My3DLib::Mesh>> meshes;
+			std::map<std::string, std::vector<My3DLib::Material>> materials;
 		};
 	};
 }

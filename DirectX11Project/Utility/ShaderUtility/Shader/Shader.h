@@ -3,6 +3,8 @@
 
 class Shader {
 public:
+	Shader() = default;
+
 	// 頂点シェーダーをセット
 	void SetVertexShader(const int shaderHandle);
 	// ピクセルシェーダーをセット
@@ -17,25 +19,25 @@ public:
 	void SetDomainShader(const int shaderHandle);
 
 	// 頂点シェーダーの取得
-	VertexShader GetVertexShader();
+	ID3D11VertexShader* GetVertexShader();
 	// ピクセルシェーダーの取得
-	PixelShader GetPixelShader();
+	ID3D11PixelShader* GetPixelShader();
 	// ジオメトリシェーダーの取得
-	GeometryShader GetGeometryShader();
+	ID3D11GeometryShader* GetGeometryShader();
 	// コンピュートシェーダーの取得
-	ComputeShader GetComputeShader();
+	ID3D11ComputeShader* GetComputeShader();
 	// ハルシェーダーの取得
-	HullShader GetHullShader();
+	ID3D11HullShader* GetHullShader();
 	// ドメインシェーダーの取得
-	DomainShader GetDomainShader();
+	ID3D11DomainShader* GetDomainShader();
 
 private:
-	VertexShader m_VertexShader{ nullptr };
-	PixelShader m_PixelShader{ nullptr };
-	GeometryShader m_GeometryShader{ nullptr };
-	ComputeShader m_ComputeShader{ nullptr };
-	HullShader m_HullShader{ nullptr };
-	DomainShader m_DomainShader{ nullptr };
+	ID3D11VertexShader* m_VertexShader{ nullptr };
+	ID3D11PixelShader* m_PixelShader{ nullptr };
+	ID3D11GeometryShader* m_GeometryShader{ nullptr };
+	ID3D11ComputeShader* m_ComputeShader{ nullptr };
+	ID3D11HullShader* m_HullShader{ nullptr };
+	ID3D11DomainShader* m_DomainShader{ nullptr };
 
 	InputLayout m_InputLayout{ nullptr };
 };

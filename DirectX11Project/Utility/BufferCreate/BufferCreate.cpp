@@ -3,13 +3,14 @@
 
 bool BufferCreate::SetVertexBuffer(std::map<std::string, std::vector<My3DLib::Mesh>> meshMap) {
 
+    UINT strides = sizeof(My3DLib::VertexData);
 	for (const auto& meshs : meshMap) {
 		for (auto mesh : meshs.second) {
 			// 頂点バッファの作成
             // 頂点バッファとはシステムメモリ外、すなわちGPU側にあるメモリに頂点データを配置するためのもの
 			D3D11_BUFFER_DESC bufferDesc{};
 			ZeroMemory(&bufferDesc, sizeof(bufferDesc));
-			bufferDesc.ByteWidth = sizeof(My3DLib::ModelData::VertexData) * mesh.GetVertices().size();
+			bufferDesc.ByteWidth = strides * static_cast<UINT>(mesh.GetVertices().size());
 			bufferDesc.Usage = D3D11_USAGE_DEFAULT;
 			bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 
@@ -37,7 +38,7 @@ bool BufferCreate::SetIndexBuffer(std::map<std::string, std::vector<My3DLib::Mes
             // インデックスバッファとは、頂点重複分の無駄を省くためのもの
             D3D11_BUFFER_DESC bufferDesc{};
             ZeroMemory(&bufferDesc, sizeof(bufferDesc));
-            bufferDesc.ByteWidth = (sizeof(UINT)) * mesh.GetIndices().size();
+            bufferDesc.ByteWidth = (sizeof(UINT)) * static_cast<UINT>(mesh.GetIndices().size());
             bufferDesc.Usage = D3D11_USAGE_DEFAULT;
             bufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
             //bufferDesc.CPUAccessFlags = 0;

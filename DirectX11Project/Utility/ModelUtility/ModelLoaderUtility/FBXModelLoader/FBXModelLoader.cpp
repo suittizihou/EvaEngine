@@ -7,14 +7,14 @@
 #include "../../../Mesh/Mesh.h"
 #include "../../../Material/Material.h"
 
-ModelData::Model FBXModelLoader::LoadFbxFile(const char* fileName)
+My3DLib::ModelData::Model FBXModelLoader::LoadFbxFile(const char* fileName)
 {
     // FbxManager作成
     FbxManager* fbx_manager = fbxsdk::FbxManager::Create();
     if (fbx_manager == nullptr)
     {
         std::runtime_error("FbxManagerの作成に失敗しました");
-        return ModelData::Model();
+        return My3DLib::ModelData::Model();
     }
 
     // FbxImporter作成
@@ -22,7 +22,7 @@ ModelData::Model FBXModelLoader::LoadFbxFile(const char* fileName)
     if (fbx_importer == nullptr) {
         fbx_manager->Destroy();
         std::runtime_error("FbxImporterの作成に失敗しました");
-        return ModelData::Model();
+        return My3DLib::ModelData::Model();
     }
 
     // FbxSceneを生成
@@ -31,7 +31,7 @@ ModelData::Model FBXModelLoader::LoadFbxFile(const char* fileName)
         fbx_importer->Destroy();
         fbx_manager->Destroy();
         std::runtime_error("FbxSceneの作成に失敗しました");
-        return ModelData::Model();
+        return My3DLib::ModelData::Model();
     }
 
     //// IOSettingを生成
@@ -104,12 +104,12 @@ bool FBXModelLoader::CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh)
     // 頂点座標の数の取得
     int polygon_vertex_count = mesh->GetPolygonVertexCount();
 
-    std::vector<Vector3> vertexs;
+    std::vector<DirectX::XMFLOAT3> vertexs;
     // GetPolygonVertexCount => 頂点数
     for (int i = 0; i < polygon_vertex_count; i++) {
         // インデックスバッファから頂点番号を取得
         int index = indices[i];
-        Vector3 vertex{};
+        DirectX::XMFLOAT3 vertex{};
         // 頂点座標リストから座標を取得する
         vertex.x = (float)-vertices[index][0];
         vertex.y = (float)vertices[index][1];
@@ -127,7 +127,7 @@ bool FBXModelLoader::CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh)
 
     // 法線設定
     for (int i = 0; i < normals.Size(); i++) {
-        m_Model.meshes[node_name][0].SetNormal(i, Vector3((float)normals[i][0], (float)normals[i][1], (float)normals[i][0]));
+        m_Model.meshes[node_name][0].SetNormal(i, DirectX::XMFLOAT3((float)normals[i][0], (float)normals[i][1], (float)normals[i][0]));
     }
 
     // ポリゴン数の取得

@@ -30,11 +30,11 @@ My3DLib::ModelData::Model VRMModelLoader::LoadModel(const std::string fileName)
     return m_Model;
 }
 
-ModelData::Model VRMModelLoader::MakeModelDataMemory(const ModelData::Model& model)
+My3DLib::ModelData::Model VRMModelLoader::MakeModelDataMemory(const My3DLib::ModelData::Model& model)
 {
 
 
-    ModelData::Model tempModel = model;
+    My3DLib::ModelData::Model tempModel = model;
     MakeModelGeometry(tempModel);
     MakeModelMaterial(tempModel);
     //ModelApp::Instance().CreateConstantBuffer(tempModel);
@@ -49,7 +49,7 @@ void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std
     {
         for (const auto& meshPrimitive : mesh.primitives)
         {
-            Mesh mesh{};
+            My3DLib::Mesh mesh{};
 
             // 頂点位置情報アクセッサの取得
             auto& idPos = meshPrimitive.GetAttributeAccessorId(ACCESSOR_POSITION);
@@ -85,16 +85,16 @@ void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std
             //}
 
             // インデックスデータ
-            mesh.m_Indices = reader->ReadBinaryData<uint32_t>(doc, accIndex);
+            mesh.SetIndices(reader->ReadBinaryData<uint32_t>(doc, accIndex));
             // マテリアルIDを登録
-            mesh.m_MaterialIndex = int(doc.materials.GetIndex(meshPrimitive.materialId));
+            mesh.SetMaterialID(int(doc.materials.GetIndex(meshPrimitive.materialId)));
 
             m_Model.meshes[""].push_back(mesh);
         }
     }
 }
 
-void VRMModelLoader::MakeModelGeometry(ModelData::Model& model)
+void VRMModelLoader::MakeModelGeometry(My3DLib::ModelData::Model& model)
 {
     //for (auto& meshs : model.meshes) {
     //    for (auto& mesh : meshs.second) {
@@ -136,15 +136,15 @@ void VRMModelLoader::LoadModelMaterial(const Microsoft::glTF::Document& doc, std
         auto imageBufferView = doc.bufferViews.Get(image.bufferViewId);
         auto imageData = reader->ReadBinaryData<char>(doc, imageBufferView);
 
-        ModelData::Material material{};
-        material.m_ImageData = imageData;
-        material.m_AlphaMode = m.alphaMode;
+        My3DLib::Material material{};
+        material.g_ImageData = imageData;
+        material.g_AlphaMode = m.alphaMode;
 
         m_Model.materials[""].push_back(material);
     }
 }
 
-void VRMModelLoader::MakeModelMaterial(ModelData::Model& model)
+void VRMModelLoader::MakeModelMaterial(My3DLib::ModelData::Model& model)
 {
     //int textureIndex = 0;
 

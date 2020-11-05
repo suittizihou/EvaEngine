@@ -127,31 +127,30 @@ int WindowApp::Update()
     material.g_Shader.SetPixelShader(0);
     model.materials[""].push_back(material);
 
-    std::vector<My3DLib::ModelData::VertexData> vertexs =
+    std::vector<My3DLib::VertexData> vertexs =
     {
-        { DirectX::XMFLOAT3(-0.5f,-0.5f, 0.0f), DirectX::XMFLOAT4(1,0,0,1) },   // 赤
-        { DirectX::XMFLOAT3( 0.5f,-0.5f, 0.0f), DirectX::XMFLOAT4(0,1,0,1) },   // 緑
-        { DirectX::XMFLOAT3( 0.5f, 0.5f, 0.0f), DirectX::XMFLOAT4(0,0,1,1) },   // 青
-        { DirectX::XMFLOAT3(-0.5f, 0.5f, 0.0f), DirectX::XMFLOAT4(0,0,0,1) }    // 黒
+        { DirectX::XMFLOAT3(-0.5f,-0.5f, 0.0f), DirectX::XMFLOAT3(), DirectX::XMFLOAT4(1,0,0,1), DirectX::XMFLOAT2() },   // 赤
+        { DirectX::XMFLOAT3(0.5f,-0.5f, 0.0f),  DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0,1,0,1), DirectX::XMFLOAT2() },   // 緑
+        { DirectX::XMFLOAT3(0.5f, 0.5f, 0.0f),  DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0,0,1,1), DirectX::XMFLOAT2() },   // 青
+        { DirectX::XMFLOAT3(-0.5f, 0.5f, 0.0f), DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0,0,0,1), DirectX::XMFLOAT2() }    // 黒
     };
     My3DLib::Mesh mesh{};
-    mesh.SetVertices(vertexs);
+    mesh.SetVertices(vertexs, true);
     model.meshes[""].push_back(mesh);
-    
+
+    // 頂点バッファーの設定
     BufferCreate::SetVertexBuffer(model.meshes);
+    // インデックスバッファーの設定
+    BufferCreate::SetIndexBuffer(model.meshes);
 
     D3D11_INPUT_ELEMENT_DESC elem[] = {
-        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-        { "TEXCOORD", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0}
+        { "POSITION",   0, DXGI_FORMAT_R32G32B32_FLOAT,     0,  0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "NORMAL",     0, DXGI_FORMAT_R32G32B32_FLOAT,     0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
+        { "COLOR",      0, DXGI_FORMAT_R32G32B32A32_FLOAT,  0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
+        { "TEXCOORD",   0, DXGI_FORMAT_R32G32_FLOAT,        0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0}
     };
 
-    InputLayout inputLayout{ nullptr };
-    inputLayout.Attach(ShaderCompiler::CreateInputLayout(elem, 2, "Shader/VertexShader.hlsl", "vsMain"));
-
-    // インデックス情報の設定
-    std::vector<UINT> idxs = { 0, 3, 2, 0, 2, 1 };
-    IndexBuffer ib{ nullptr };
-    ib.Attach(BufferCreate::SetIndexBuffer(idxs.data(), static_cast<UINT>(idxs.size())));
+    DrawManager::SetInputLayout(ShaderCompiler::CreateInputLayout(elem, 4, "Shader/VertexShader.hlsl", "vsMain"));
 
     MSG msg{};
     while (msg.message != WM_QUIT) {
@@ -172,19 +171,11 @@ int WindowApp::Update()
 
             DrawManager::DrawBegin();
 
-            DrawManager::SetInputLayout(inputLayout.Get());
-            DrawManager::SetVertexBuffer(vb.Get(), sizeof(ModelData::VertexData));
-            DrawManager::SetIndexBuffer(ib.Get());
-            DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-            DrawManager::SetShader(material);
-            DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_RenderTargetView.GetAddressOf(), DirectX11App::g_DepthStencilView.Get());
-
-            DrawManager::DrawIndexed(static_cast<UINT>(idxs.size()));
+            DrawManager::Draw(model);
 
             DrawManager::DrawEnd();
         }
     }
-
 
     return static_cast<int>(msg.wParam);
 }
