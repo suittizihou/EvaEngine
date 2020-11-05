@@ -13,11 +13,11 @@ int ModelLoader::Load(const std::string& fileName)
     ModelData::Model model;
     
     if (modelType == "fbx") {
-        FBXModelLoader m_FbxModelLoader;
+        FBXModelLoader m_FbxModelLoader{};
         model = m_FbxModelLoader.LoadFbxFile(fileName.c_str());
     }
     else if (modelType == "vrm") {
-        VRMModelLoader m_VrmModelLoader;
+        VRMModelLoader m_VrmModelLoader{};
         model = m_VrmModelLoader.LoadModel(fileName.c_str());
     }
 

@@ -7,7 +7,7 @@
 #include "../../Utility/ModelUtility/ModelData/ModelData.h"
 #include "../../Utility/BufferCreate/BufferCreate.h"
 #include "../../GameSystemBase/Manager/DrawManager/DrawManager.h"
-#include "../../Utility/Material/Material.h"
+//#include "../../Utility/Material/Material.h"
 #include "../../Utility/ShaderUtility/Shader/Shader.h"
 #include "../../Utility/ResourceLoad/ResourceLoad.h"
 #include "../../GameSystemBase/DataBase/ShaderDataBase/ShaderDataBase.h"
@@ -119,20 +119,26 @@ int WindowApp::Update()
     ResourceLoad resources{};
     resources.Load();
 
-    Material material{};
+    My3DLib::ModelData::Model model{};
+
+
+    My3DLib::Material material{};
     material.g_Shader.SetVertexShader(0);
     material.g_Shader.SetPixelShader(0);
+    model.materials[""].push_back(material);
 
-    std::vector<ModelData::VertexData> vertexs =
+    std::vector<My3DLib::ModelData::VertexData> vertexs =
     {
         { DirectX::XMFLOAT3(-0.5f,-0.5f, 0.0f), DirectX::XMFLOAT4(1,0,0,1) },   // 赤
         { DirectX::XMFLOAT3( 0.5f,-0.5f, 0.0f), DirectX::XMFLOAT4(0,1,0,1) },   // 緑
         { DirectX::XMFLOAT3( 0.5f, 0.5f, 0.0f), DirectX::XMFLOAT4(0,0,1,1) },   // 青
         { DirectX::XMFLOAT3(-0.5f, 0.5f, 0.0f), DirectX::XMFLOAT4(0,0,0,1) }    // 黒
     };
-
-    VertexBuffer vb{ nullptr };
-    vb.Attach(BufferCreate::CreateVertexBuffer(vertexs.data(), static_cast<UINT>(vertexs.size())));
+    My3DLib::Mesh mesh{};
+    mesh.SetVertices(vertexs);
+    model.meshes[""].push_back(mesh);
+    
+    BufferCreate::SetVertexBuffer(model.meshes);
 
     D3D11_INPUT_ELEMENT_DESC elem[] = {
         { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
@@ -145,7 +151,7 @@ int WindowApp::Update()
     // インデックス情報の設定
     std::vector<UINT> idxs = { 0, 3, 2, 0, 2, 1 };
     IndexBuffer ib{ nullptr };
-    ib.Attach(BufferCreate::CreateIndexBuffer(idxs.data(), static_cast<UINT>(idxs.size())));
+    ib.Attach(BufferCreate::SetIndexBuffer(idxs.data(), static_cast<UINT>(idxs.size())));
 
     MSG msg{};
     while (msg.message != WM_QUIT) {

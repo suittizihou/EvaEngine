@@ -177,6 +177,7 @@
     <ClCompile Include="Utility\Math\Vector2\Vector2.cpp" />
     <ClCompile Include="Utility\Math\Vector3\Vector3.cpp" />
     <ClCompile Include="GameSystemBase\DataBase\ModelDataBase\ModelDataBase.cpp" />
+    <ClCompile Include="Utility\Mesh\Mesh.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoader\ModelLoader.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="Utility\Math\Vector2\Vector2.h" />
     <ClInclude Include="Utility\Math\Vector3\Vector3.h" />
     <ClInclude Include="GameSystemBase\DataBase\ModelDataBase\ModelDataBase.h" />
+    <ClInclude Include="Utility\Mesh\Mesh.h" />
     <ClInclude Include="Utility\ModelUtility\ModelData\ModelData.h" />
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.h" />
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoader\ModelLoader.h" />

@@ -9,7 +9,7 @@
 using namespace DirectX;
 using namespace std;
 
-ModelData::Model VRMModelLoader::LoadModel(const std::string fileName)
+My3DLib::ModelData::Model VRMModelLoader::LoadModel(const std::string fileName)
 {
     // モデルデータの読み込み
     auto modelFilePath = experimental::filesystem::path(fileName);
@@ -49,7 +49,7 @@ void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std
     {
         for (const auto& meshPrimitive : mesh.primitives)
         {
-            ModelData::ModelMesh mesh;
+            Mesh mesh{};
 
             // 頂点位置情報アクセッサの取得
             auto& idPos = meshPrimitive.GetAttributeAccessorId(ACCESSOR_POSITION);

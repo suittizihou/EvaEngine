@@ -4,6 +4,9 @@
 
 #include "FBXModelLoader.h"
 
+#include "../../../Mesh/Mesh.h"
+#include "../../../Material/Material.h"
+
 ModelData::Model FBXModelLoader::LoadFbxFile(const char* fileName)
 {
     // FbxManager作成
@@ -95,47 +98,51 @@ void FBXModelLoader::FindMeshNode(fbxsdk::FbxNode* node, std::map<std::string, f
 bool FBXModelLoader::CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh)
 {
     // 頂点バッファの取得
-    FbxVector4* vertices = mesh->GetControlPoints();
+    fbxsdk::FbxVector4* vertices = mesh->GetControlPoints();
     // インデックスバッファの取得
     int* indices = mesh->GetPolygonVertices();
     // 頂点座標の数の取得
     int polygon_vertex_count = mesh->GetPolygonVertexCount();
 
+    std::vector<Vector3> vertexs;
     // GetPolygonVertexCount => 頂点数
     for (int i = 0; i < polygon_vertex_count; i++) {
-        ModelData::VertexData vertex;
         // インデックスバッファから頂点番号を取得
         int index = indices[i];
-
+        Vector3 vertex{};
         // 頂点座標リストから座標を取得する
-        vertex.position.x = (float)-vertices[index][0];
-        vertex.position.y = (float)vertices[index][1];
-        vertex.position.z = (float)vertices[index][2];
+        vertex.x = (float)-vertices[index][0];
+        vertex.y = (float)vertices[index][1];
+        vertex.z = (float)vertices[index][2];
 
         // 追加
-        m_Model.meshes[node_name][0].m_Vertices.push_back(vertex);
+        vertexs.push_back(vertex);
     }
+    // 頂点情報のセット
+    m_Model.meshes[node_name][0].SetVertices(vertexs);
 
-    fbxsdk::FbxArray<FbxVector4> normals;
+    fbxsdk::FbxArray<fbxsdk::FbxVector4> normals;
     // 法線リストの取得
     mesh->GetPolygonVertexNormals(normals);
 
-    //// 法線設定
-    //for (int i = 0; i < normals.Size(); i++) {
-    //    m_Model.meshes[node_name][0].m_Vertices[i].normal.x = (float)-normals[i][0];
-    //    m_Model.meshes[node_name][0].m_Vertices[i].normal.y = (float)normals[i][1];
-    //    m_Model.meshes[node_name][0].m_Vertices[i].normal.z = (float)normals[i][2];
-    //}
+    // 法線設定
+    for (int i = 0; i < normals.Size(); i++) {
+        m_Model.meshes[node_name][0].SetNormal(i, Vector3((float)normals[i][0], (float)normals[i][1], (float)normals[i][0]));
+    }
 
     // ポリゴン数の取得
     int polygon_count = mesh->GetPolygonCount();
 
+    std::vector<unsigned int> tempIndices;
     // ポリゴンの数だけ連番として保存する
     for (int i = 0; i < polygon_count; i++) {
-        m_Model.meshes[node_name][0].m_Indices.push_back(i * 3 + 2);
-        m_Model.meshes[node_name][0].m_Indices.push_back(i * 3 + 1);
-        m_Model.meshes[node_name][0].m_Indices.push_back(i * 3);
+        tempIndices.push_back(i * 3 + 2);
+        tempIndices.push_back(i * 3 + 1);
+        tempIndices.push_back(i * 3);
     }
+
+    // 頂点を使用する順番を保持
+    m_Model.meshes[node_name][0].SetIndices(tempIndices);
 
     return true;
 }
