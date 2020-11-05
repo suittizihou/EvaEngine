@@ -108,35 +108,35 @@ void ShaderDataBase::DeleteDomainShader(const int shaderHandle)
     m_DomainShaders.erase(shaderHandle);
 }
 
-//void ShaderDataBase::Relese()
-//{
-//    // 頂点シェーダーの解放
-//    for (const auto& shader : m_VertexShaders) {
-//        shader.second->Release();
-//    }
-//
-//    // ピクセルシェーダーの解放
-//    for (const auto& shader : m_PixelShaders) {
-//        shader.second->Release();
-//    }
-//
-//    // ジオメトリシェーダーの解放
-//    for (const auto& shader : m_GeometryShaders) {
-//        shader.second->Release();
-//    }
-//
-//    // コンピュートシェーダーの解放
-//    for (const auto& shader : m_ComputeShaders) {
-//        shader.second->Release();
-//    }
-//
-//    // ハルシェーダーの解放
-//    for (const auto& shader : m_HullShaders) {
-//        shader.second->Release();
-//    }
-//
-//    // ドメインシェーダーの解放
-//    for (const auto& shader : m_DomainShaders) {
-//        shader.second->Release();
-//    }
-//}
+void ShaderDataBase::DeleteAllShader()
+{
+	// 頂点シェーダーの解放
+	for (const auto& shader : m_VertexShaders) {
+		shader.second->Release();
+	}
+
+	// ピクセルシェーダーの解放
+	for (const auto& shader : m_PixelShaders) {
+		shader.second->Release();
+	}
+
+	// ジオメトリシェーダーの解放
+	for (const auto& shader : m_GeometryShaders) {
+		shader.second->Release();
+	}
+
+	// コンピュートシェーダーの解放
+	for (const auto& shader : m_ComputeShaders) {
+		shader.second->Release();
+	}
+
+	// ハルシェーダーの解放
+	for (const auto& shader : m_HullShaders) {
+		shader.second->Release();
+	}
+
+	// ドメインシェーダーの解放
+	for (const auto& shader : m_DomainShaders) {
+		shader.second->Release();
+	}
+}

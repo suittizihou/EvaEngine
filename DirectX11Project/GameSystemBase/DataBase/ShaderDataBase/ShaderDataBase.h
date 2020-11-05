@@ -8,7 +8,7 @@ private:
 	ShaderDataBase() = default;
 	ShaderDataBase(const ShaderDataBase&);
 	ShaderDataBase operator=(const ShaderDataBase&);
-	~ShaderDataBase() = default;
+	~ShaderDataBase() { DeleteAllShader(); };
 
 public:
 	static ShaderDataBase& Instance() {
@@ -56,8 +56,8 @@ public:
 	// ドメインシェーダーの削除
 	void DeleteDomainShader(const int shaderHandle);
 
-	// シェーダーリソースの解放
-	//void Relese();
+	// 全シェーダーリソースの解放
+	void DeleteAllShader();
 
 private:
 	// 頂点シェーダーのハンドル

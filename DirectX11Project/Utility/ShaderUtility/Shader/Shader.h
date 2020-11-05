@@ -38,6 +38,4 @@ private:
 	ID3D11ComputeShader* m_ComputeShader{ nullptr };
 	ID3D11HullShader* m_HullShader{ nullptr };
 	ID3D11DomainShader* m_DomainShader{ nullptr };
-
-	InputLayout m_InputLayout{ nullptr };
 };

@@ -49,7 +49,6 @@ void DrawManager::Draw(const My3DLib::ModelData::Model& model)
 	material.g_Shader.SetVertexShader(0);
 	material.g_Shader.SetPixelShader(0);
 
-
 	UINT strides = sizeof(My3DLib::VertexData);
 	UINT offset = 0;
 

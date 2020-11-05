@@ -121,7 +121,6 @@ int WindowApp::Update()
 
     My3DLib::ModelData::Model model{};
 
-
     My3DLib::Material material{};
     material.g_Shader.SetVertexShader(0);
     material.g_Shader.SetPixelShader(0);
@@ -176,6 +175,9 @@ int WindowApp::Update()
             DrawManager::DrawEnd();
         }
     }
+
+    // 全シェーダーのリソースを解放
+    ShaderDataBase::Instance().DeleteAllShader();
 
     return static_cast<int>(msg.wParam);
 }

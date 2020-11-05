@@ -15,8 +15,6 @@
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
 #if _DEBUG
     // メモリリーク検出
-    //_CrtMemState s1;
-    //_CrtMemCheckpoint(&s1);
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
@@ -31,10 +29,6 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance
     }
 
     int result = WindowApp::Update();
-
-//#if _DEBUG
-//    _CrtMemDumpAllObjectsSince(&s1);
-//#endif
 
     // メッセージループ
     return result;
