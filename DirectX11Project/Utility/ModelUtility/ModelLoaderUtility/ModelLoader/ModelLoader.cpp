@@ -10,7 +10,7 @@ int ModelLoader::Load(const std::string& fileName)
 
     std::string modelType = fileSplit[fileSplit.size() - 1];
 
-    My3DLib::ModelData::Model model;
+    My3DLib::Model model{};
     
     if (modelType == "fbx") {
         FBXModelLoader m_FbxModelLoader{};

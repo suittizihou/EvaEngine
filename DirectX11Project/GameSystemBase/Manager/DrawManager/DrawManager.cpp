@@ -43,7 +43,7 @@ void DrawManager::DrawBegin()
 		0);												// ステンシルクリア値
 }
 
-void DrawManager::Draw(const My3DLib::ModelData::Model& model)
+void DrawManager::Draw(const My3DLib::Model& model)
 {
 	My3DLib::Material material{};
 	material.g_Shader.SetVertexShader(0);

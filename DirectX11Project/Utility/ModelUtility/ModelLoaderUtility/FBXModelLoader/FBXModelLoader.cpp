@@ -7,14 +7,14 @@
 #include "../../../Mesh/Mesh.h"
 #include "../../../Material/Material.h"
 
-My3DLib::ModelData::Model FBXModelLoader::LoadFbxFile(const char* fileName)
+My3DLib::Model FBXModelLoader::LoadFbxFile(const char* fileName)
 {
     // FbxManagerì¬
     FbxManager* fbx_manager = fbxsdk::FbxManager::Create();
     if (fbx_manager == nullptr)
     {
         std::runtime_error("FbxManager‚Ìì¬‚ÉŽ¸”s‚µ‚Ü‚µ‚½");
-        return My3DLib::ModelData::Model();
+        return My3DLib::Model();
     }
 
     // FbxImporterì¬
@@ -22,7 +22,7 @@ My3DLib::ModelData::Model FBXModelLoader::LoadFbxFile(const char* fileName)
     if (fbx_importer == nullptr) {
         fbx_manager->Destroy();
         std::runtime_error("FbxImporter‚Ìì¬‚ÉŽ¸”s‚µ‚Ü‚µ‚½");
-        return My3DLib::ModelData::Model();
+        return My3DLib::Model();
     }
 
     // FbxScene‚ð¶¬
@@ -31,7 +31,7 @@ My3DLib::ModelData::Model FBXModelLoader::LoadFbxFile(const char* fileName)
         fbx_importer->Destroy();
         fbx_manager->Destroy();
         std::runtime_error("FbxScene‚Ìì¬‚ÉŽ¸”s‚µ‚Ü‚µ‚½");
-        return My3DLib::ModelData::Model();
+        return My3DLib::Model();
     }
 
     //// IOSetting‚ð¶¬
@@ -41,7 +41,7 @@ My3DLib::ModelData::Model FBXModelLoader::LoadFbxFile(const char* fileName)
     //    importer->Destroy();
     //    scene->Destroy();
     //    std::runtime_error("FbxIOSettings‚Ìì¬‚ÉŽ¸”s‚µ‚Ü‚µ‚½");
-    //    return ModelData::Model();
+    //    return Model();
     //}
     //manager->SetIOSettings(ioSettings);
 

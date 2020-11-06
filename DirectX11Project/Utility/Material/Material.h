@@ -2,7 +2,7 @@
 
 #include <GLTFSDK/GLTF.h>
 #include "../ShaderUtility/Shader/Shader.h"
-#include "../../../Utility/ModelUtility/ModelData/ShaderParameters.h"
+#include "../ModelUtility/ModelData/ShaderParameters.h"
 
 namespace My3DLib {
 	class Material {

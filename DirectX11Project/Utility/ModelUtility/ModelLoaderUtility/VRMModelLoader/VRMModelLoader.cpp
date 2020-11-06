@@ -5,11 +5,12 @@
 
 #include "../../../Plugin/StreamReader.h"
 #include "../../../../GameSystemBase/DataBase/ModelDataBase/ModelDataBase.h"
+#include "../../../BufferCreate/BufferCreate.h"
 
 using namespace DirectX;
 using namespace std;
 
-My3DLib::ModelData::Model VRMModelLoader::LoadModel(const std::string fileName)
+My3DLib::Model VRMModelLoader::LoadModel(const std::string fileName)
 {
     // モデルデータの読み込み
     auto modelFilePath = experimental::filesystem::path(fileName);
@@ -30,11 +31,9 @@ My3DLib::ModelData::Model VRMModelLoader::LoadModel(const std::string fileName)
     return m_Model;
 }
 
-My3DLib::ModelData::Model VRMModelLoader::MakeModelDataMemory(const My3DLib::ModelData::Model& model)
+My3DLib::Model VRMModelLoader::MakeModelDataMemory(const My3DLib::Model& model)
 {
-
-
-    My3DLib::ModelData::Model tempModel = model;
+    My3DLib::Model tempModel = model;
     MakeModelGeometry(tempModel);
     MakeModelMaterial(tempModel);
     //ModelApp::Instance().CreateConstantBuffer(tempModel);
@@ -57,6 +56,9 @@ void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std
             // 法線情報アクセッサの取得
             auto& idNrm = meshPrimitive.GetAttributeAccessorId(ACCESSOR_NORMAL);
             auto& accNrm = doc.accessors.Get(idNrm);
+            // 頂点のカラーアクセッサの取得
+            auto& idColor = meshPrimitive.GetAttributeAccessorId(ACCESSOR_COLOR_0);
+            auto& accColor = doc.accessors.Get(idColor);
             // テクスチャ座標情報アクセッサの取得
             auto& idUV = meshPrimitive.GetAttributeAccessorId(ACCESSOR_TEXCOORD_0);
             auto& accUV = doc.accessors.Get(idUV);
@@ -67,22 +69,25 @@ void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std
             // アクセッサからデータ列を取得
             auto vertPos = reader->ReadBinaryData<float>(doc, accPos);
             auto vertNrm = reader->ReadBinaryData<float>(doc, accNrm);
+            auto vertColor = reader->ReadBinaryData<float>(doc, accColor);
             auto vertUV = reader->ReadBinaryData<float>(doc, accUV);
 
-            //auto vertexCount = accPos.count;
-            //for (uint32_t i = 0; i < vertexCount; ++i)
-            //{
-            //    // 頂点データの構築
-            //    int vid0 = 3 * i, vid1 = 3 * i + 1, vid2 = 3 * i + 2;
-            //    int tid0 = 2 * i, tid1 = 2 * i + 1;
-            //    mesh.m_Vertices.emplace_back(
-            //        ModelData::VertexData{
-            //          XMFLOAT3(vertPos[vid0], vertPos[vid1],vertPos[vid2]),
-            //          XMFLOAT3(vertNrm[vid0], vertNrm[vid1],vertNrm[vid2]),
-            //          XMFLOAT2(vertUV[tid0],vertUV[tid1])
-            //        }
-            //    );
-            //}
+            auto vertexCount = accPos.count;
+            std::vector<My3DLib::VertexData> vertices;
+            for (uint32_t i = 0; i < vertexCount; ++i)
+            {
+                // 頂点データの構築
+                int vid0 = 3 * i, vid1 = 3 * i + 1, vid2 = 3 * i + 2, vid3 = 3 * i + 3;
+                int tid0 = 2 * i, tid1 = 2 * i + 1;
+                vertices.emplace_back(
+                    My3DLib::VertexData{
+                      XMFLOAT3(vertPos[vid0], vertPos[vid1],vertPos[vid2]),
+                      XMFLOAT3(vertNrm[vid0], vertNrm[vid1],vertNrm[vid2]),
+                      XMFLOAT4(vertColor[vid0], vertColor[vid1],vertColor[vid2], vertColor[vid3]),
+                      XMFLOAT2(vertUV[tid0],vertUV[tid1])
+                    }
+                );
+            }
 
             // インデックスデータ
             mesh.SetIndices(reader->ReadBinaryData<uint32_t>(doc, accIndex));
@@ -94,32 +99,21 @@ void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std
     }
 }
 
-void VRMModelLoader::MakeModelGeometry(My3DLib::ModelData::Model& model)
+void VRMModelLoader::MakeModelGeometry(My3DLib::Model& model)
 {
-    //for (auto& meshs : model.meshes) {
-    //    for (auto& mesh : meshs.second) {
-    //        auto vbSize = UINT(sizeof(ModelData::VertexData) * mesh.m_Vertices.size());
-    //        auto ibSize = UINT(sizeof(uint32_t) * mesh.m_Indices.size());
-    //        auto vb = ModelApp::Instance().CreateBuffer(vbSize, mesh.m_Vertices.data());
-    //        D3D12_VERTEX_BUFFER_VIEW vbView;
-    //        vbView.BufferLocation = vb->GetGPUVirtualAddress();
-    //        vbView.SizeInBytes = vbSize;
-    //        vbView.StrideInBytes = sizeof(ModelData::VertexData);
-    //        mesh.m_VertexBuffer.buffer = vb;
-    //        mesh.m_VertexBuffer.vertexView = vbView;
+    for (auto& meshs : model.meshes) {
+        for (auto& mesh : meshs.second) {
+            // 頂点バッファの作成とセット
+            auto vertexBufferSize = UINT(sizeof(My3DLib::VertexData) * mesh.GetVertices().size());
+            auto vertexBuffer = BufferCreate::CreateVertexBuffer(vertexBufferSize, mesh.GetVertices());
+            mesh.SetVertexBuffer(vertexBuffer);
 
-    //        auto ib = ModelApp::Instance().CreateBuffer(ibSize, mesh.m_Indices.data());
-    //        D3D12_INDEX_BUFFER_VIEW ibView;
-    //        ibView.BufferLocation = ib->GetGPUVirtualAddress();
-    //        ibView.Format = DXGI_FORMAT_R32_UINT;
-    //        ibView.SizeInBytes = ibSize;
-    //        mesh.m_IndexBuffer.buffer = ib;
-    //        mesh.m_IndexBuffer.indexView = ibView;
-
-    //        mesh.vertexCount = UINT(mesh.m_Vertices.size());
-    //        mesh.indexCount = UINT(mesh.m_Indices.size());
-    //    }
-    //}
+            // インデックスバッファの作成とセット
+            auto indexBufferSize = UINT(sizeof(uint32_t) * mesh.GetIndices().size());
+            auto indexBuffer = BufferCreate::CreateIndexBuffer(indexBufferSize, mesh.GetIndices());
+            mesh.SetIndexBuffer(indexBuffer);
+        }
+    }
 }
 
 void VRMModelLoader::LoadModelMaterial(const Microsoft::glTF::Document& doc, std::shared_ptr<Microsoft::glTF::GLTFResourceReader> reader)
@@ -144,7 +138,7 @@ void VRMModelLoader::LoadModelMaterial(const Microsoft::glTF::Document& doc, std
     }
 }
 
-void VRMModelLoader::MakeModelMaterial(My3DLib::ModelData::Model& model)
+void VRMModelLoader::MakeModelMaterial(My3DLib::Model& model)
 {
     //int textureIndex = 0;
 

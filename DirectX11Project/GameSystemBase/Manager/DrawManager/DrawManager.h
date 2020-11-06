@@ -8,7 +8,7 @@ public:
 	// •`‰æŠJn
 	static void DrawBegin();
 	// •`‰æ
-	static void Draw(const My3DLib::ModelData::Model& model);
+	static void Draw(const My3DLib::Model& model);
 	// •`‰æI—¹
 	static void DrawEnd();
 

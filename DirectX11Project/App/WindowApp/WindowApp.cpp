@@ -7,10 +7,10 @@
 #include "../../Utility/ModelUtility/ModelData/ModelData.h"
 #include "../../Utility/BufferCreate/BufferCreate.h"
 #include "../../GameSystemBase/Manager/DrawManager/DrawManager.h"
-//#include "../../Utility/Material/Material.h"
 #include "../../Utility/ShaderUtility/Shader/Shader.h"
 #include "../../Utility/ResourceLoad/ResourceLoad.h"
 #include "../../GameSystemBase/DataBase/ShaderDataBase/ShaderDataBase.h"
+#include "../../GameSystemBase/DataBase/ModelDataBase/ModelDataBase.h"
 
 #include <vector>
 
@@ -119,12 +119,7 @@ int WindowApp::Update()
     ResourceLoad resources{};
     resources.Load();
 
-    My3DLib::ModelData::Model model{};
-
-    My3DLib::Material material{};
-    material.g_Shader.SetVertexShader(0);
-    material.g_Shader.SetPixelShader(0);
-    model.materials[""].push_back(material);
+    My3DLib::Model model{ /*ModelDataBase::Instance().GetModel(0)*/ };
 
     std::vector<My3DLib::VertexData> vertexs =
     {
@@ -135,7 +130,7 @@ int WindowApp::Update()
     };
     My3DLib::Mesh mesh{};
     // 頂点情報をセット
-    mesh.SetVertices(vertexs, true);
+    mesh.SetVertices(vertexs);
     // 頂点を使う順番をセット
     mesh.SetIndices({0, 3, 2, 0, 2, 1});
     model.meshes[""].push_back(mesh);
