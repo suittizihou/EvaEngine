@@ -7,7 +7,7 @@
 #include "../../../Mesh/Mesh.h"
 #include "../../../Material/Material.h"
 
-My3DLib::Model FBXModelLoader::LoadFbxFile(const char* fileName)
+My3DLib::Model FBXModelLoader::LoadModel(const char* fileName)
 {
     // FbxManager作成
     FbxManager* fbx_manager = fbxsdk::FbxManager::Create();
@@ -93,14 +93,23 @@ bool FBXModelLoader::CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh)
     // 頂点座標の数の取得
     int polygon_vertex_count = mesh->GetPolygonVertexCount();
     
-    My3DLib::Mesh tempMesh{ polygon_vertex_count };
+    std::vector<My3DLib::VertexData> vertexData{};
 
     // GetPolygonVertexCount => 頂点数
     for (int i = 0; i < polygon_vertex_count; ++i) {
         // インデックスバッファから頂点番号を取得
         int index = indices[i];
+        My3DLib::VertexData vertex{};
+        vertex.position.x = (float)-vertices[index][0];
+        vertex.position.y = (float)vertices[index][1];
+        vertex.position.z = (float)vertices[index][2];
+
         // 頂点座標リストから座標を取得する
-        tempMesh.SetVertexPos(i, (float)-vertices[index][0], (float)vertices[index][1], (float)vertices[index][2]);
+        vertexData.push_back(vertex);
+    }
+
+    for (int i = 0; i < vertexData.size(); ++i) {
+        vertexData[i].color = DirectX::XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
     fbxsdk::FbxArray<fbxsdk::FbxVector4> normals;
@@ -110,7 +119,7 @@ bool FBXModelLoader::CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh)
     // 法線設定
     for (int i = 0; i < normals.Size(); ++i) {
         // 頂点法線リストから法線を取得する
-        tempMesh.SetVertexNormal(i, (float)-normals[i][0], (float)normals[i][1], (float)normals[i][2]);
+        vertexData[i].normal = DirectX::XMFLOAT3((float)-normals[i][0], (float)normals[i][1], (float)normals[i][2]);
     }
 
     // ポリゴン数の取得
@@ -123,6 +132,9 @@ bool FBXModelLoader::CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh)
         tempIndices.push_back(i * 3 + 1);
         tempIndices.push_back(i * 3);
     }
+
+    My3DLib::Mesh tempMesh{};
+    tempMesh.SetVertexData(vertexData);
     // インデックスバッファをセット
     tempMesh.SetIndices(tempIndices);
 

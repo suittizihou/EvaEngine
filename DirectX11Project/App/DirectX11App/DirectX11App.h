@@ -17,6 +17,8 @@ private:
 	static HRESULT HardWareCheck();
 	// デバイスとスワップチェインの作成
 	static HRESULT CreateDeviceAndSwapChain();
+	// ラスタライザの作成
+	static HRESULT CreateRasterizerState();
 	// レンダーターゲットの作成
 	static HRESULT CreateRenderTargetView();
 	// 深度ステンシルビューの作成

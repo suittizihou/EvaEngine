@@ -17,7 +17,7 @@ public:
 	FBXModelLoader() = default;
 	~FBXModelLoader() = default;
 
-	My3DLib::Model LoadFbxFile(const char* fileName);
+	My3DLib::Model LoadModel(const char* fileName);
 	void FindMeshNode(fbxsdk::FbxNode* node, std::map<std::string, fbxsdk::FbxNode*>& list);
 	bool CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh);
 

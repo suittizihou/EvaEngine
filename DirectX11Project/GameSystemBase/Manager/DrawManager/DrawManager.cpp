@@ -69,24 +69,24 @@ void DrawManager::Draw(const My3DLib::Model& model)
 			// インデックスバッファの設定
 			DirectX11App::g_Context->IASetIndexBuffer(mesh.GetIndexBuffer(), DXGI_FORMAT_R32_UINT, 0);
 
-			//// ワールド行列の設定
-			//DirectX::XMMATRIX world_matrix;
-			//DirectX::XMMATRIX translate = DirectX::XMMatrixTranslation(pos.x, pos.y, pos.z);
-			//DirectX::XMMATRIX rotate_x = DirectX::XMMatrixRotationX(DirectX::XMConvertToRadians(degree.x));
-			//DirectX::XMMATRIX rotate_y = DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(degree.y));
-			//DirectX::XMMATRIX rotate_z = DirectX::XMMatrixRotationZ(DirectX::XMConvertToRadians(degree.z));
-			//DirectX::XMMATRIX scale_mat = DirectX::XMMatrixScaling(scale.x, scale.y, scale.z);
-			//world_matrix = scale_mat * rotate_x * rotate_y * rotate_z * translate;
+			// ワールド行列の設定
+			DirectX::XMMATRIX world_matrix;
+			DirectX::XMMATRIX translate = DirectX::XMMatrixTranslation(pos.x, pos.y, pos.z);
+			DirectX::XMMATRIX rotate_x = DirectX::XMMatrixRotationX(DirectX::XMConvertToRadians(degree.x));
+			DirectX::XMMATRIX rotate_y = DirectX::XMMatrixRotationY(DirectX::XMConvertToRadians(degree.y));
+			DirectX::XMMATRIX rotate_z = DirectX::XMMatrixRotationZ(DirectX::XMConvertToRadians(degree.z));
+			DirectX::XMMATRIX scale_mat = DirectX::XMMatrixScaling(scale.x, scale.y, scale.z);
+			world_matrix = scale_mat * rotate_x * rotate_y * rotate_z * translate;
 
-			//// ワールド行列を定数バッファに設定
-			//DirectX::XMStoreFloat4x4(&DirectX11App::g_ConstantBufferData.world, DirectX::XMMatrixTranspose(world_matrix));
-			//// 定数バッファの更新
-			//DirectX11App::g_Context->UpdateSubresource(DirectX11App::g_ConstantBuffer.Get(), 0, NULL, &DirectX11App::g_ConstantBufferData, 0, 0);
+			// ワールド行列を定数バッファに設定
+			DirectX::XMStoreFloat4x4(&DirectX11App::g_ConstantBufferData.world, DirectX::XMMatrixTranspose(world_matrix));
+			// 定数バッファの更新
+			DirectX11App::g_Context->UpdateSubresource(DirectX11App::g_ConstantBuffer.Get(), 0, NULL, &DirectX11App::g_ConstantBufferData, 0, 0);
 
-			//ID3D11Buffer* buffer = DirectX11App::g_ConstantBuffer.Get();
-			//// コンテキストに定数バッファを設定
-			//DirectX11App::g_Context->VSSetConstantBuffers(0, 1, &buffer);
-			//DirectX11App::g_Context->PSSetConstantBuffers(0, 1, &buffer);
+			ID3D11Buffer* buffer = DirectX11App::g_ConstantBuffer.Get();
+			// コンテキストに定数バッファを設定
+			DirectX11App::g_Context->VSSetConstantBuffers(0, 1, &buffer);
+			DirectX11App::g_Context->PSSetConstantBuffers(0, 1, &buffer);
 
 			// ポリゴン描画
 			DirectX11App::g_Context->DrawIndexed(static_cast<UINT>(mesh.GetIndices().size()), 0, 0);
