@@ -10,6 +10,8 @@
 namespace fbxsdk {
 	class FbxNode;
 	class FbxMesh;
+	class FbxSurfaceMaterial;
+	class FbxFileTexture;
 }
 
 class FBXModelLoader {
@@ -18,6 +20,8 @@ public:
 	~FBXModelLoader() = default;
 
 	My3DLib::Model LoadModel(const char* fileName);
+	void LoadMaterial(fbxsdk::FbxSurfaceMaterial* material);
+	bool LoadTexture(fbxsdk::FbxFileTexture* texture, std::string& keyword);
 	void FindMeshNode(fbxsdk::FbxNode* node, std::map<std::string, fbxsdk::FbxNode*>& list);
 	bool CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh);
 

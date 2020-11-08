@@ -223,7 +223,7 @@ HRESULT DirectX11App::CreateRasterizerState()
 
 	D3D11_RASTERIZER_DESC rasterizerDesc{};
 	ZeroMemory(&rasterizerDesc, sizeof(D3D11_RASTERIZER_DESC));
-	rasterizerDesc.FillMode = D3D11_FILL_WIREFRAME;
+	rasterizerDesc.FillMode = D3D11_FILL_SOLID;
 	rasterizerDesc.CullMode = D3D11_CULL_BACK;
 
 	hr = DirectX11App::g_Device->CreateRasterizerState(&rasterizerDesc, &rasterizerState);

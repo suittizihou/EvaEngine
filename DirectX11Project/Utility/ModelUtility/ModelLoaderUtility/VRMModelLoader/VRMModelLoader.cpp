@@ -56,9 +56,9 @@ void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std
             // 法線情報アクセッサの取得
             auto& idNrm = meshPrimitive.GetAttributeAccessorId(ACCESSOR_NORMAL);
             auto& accNrm = doc.accessors.Get(idNrm);
-            // 頂点のカラーアクセッサの取得
-            auto& idColor = meshPrimitive.GetAttributeAccessorId(ACCESSOR_COLOR_0);
-            auto& accColor = doc.accessors.Get(idColor);
+            //// 頂点のカラーアクセッサの取得
+            //auto& idColor = meshPrimitive.GetAttributeAccessorId(ACCESSOR_COLOR_0);
+            //auto& accColor = doc.accessors.Get(idColor);
             // テクスチャ座標情報アクセッサの取得
             auto& idUV = meshPrimitive.GetAttributeAccessorId(ACCESSOR_TEXCOORD_0);
             auto& accUV = doc.accessors.Get(idUV);
@@ -69,7 +69,7 @@ void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std
             // アクセッサからデータ列を取得
             auto vertPos = reader->ReadBinaryData<float>(doc, accPos);
             auto vertNrm = reader->ReadBinaryData<float>(doc, accNrm);
-            auto vertColor = reader->ReadBinaryData<float>(doc, accColor);
+            //auto vertColor = reader->ReadBinaryData<float>(doc, accColor);
             auto vertUV = reader->ReadBinaryData<float>(doc, accUV);
 
             auto vertexCount = accPos.count;
@@ -83,13 +83,15 @@ void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std
                     My3DLib::VertexData{
                       XMFLOAT3(vertPos[vid0], vertPos[vid1],vertPos[vid2]),
                       XMFLOAT3(vertNrm[vid0], vertNrm[vid1],vertNrm[vid2]),
-                      XMFLOAT4(vertColor[vid0], vertColor[vid1],vertColor[vid2], vertColor[vid3]),
+                      XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
                       XMFLOAT2(vertUV[tid0],vertUV[tid1])
                     }
                 );
             }
 
-            // インデックスデータ
+            // 頂点データをセット
+            mesh.SetVertexData(vertices);
+            // インデックスデータをセット
             mesh.SetIndices(reader->ReadBinaryData<uint32_t>(doc, accIndex));
             // マテリアルIDを登録
             mesh.SetMaterialID(int(doc.materials.GetIndex(meshPrimitive.materialId)));

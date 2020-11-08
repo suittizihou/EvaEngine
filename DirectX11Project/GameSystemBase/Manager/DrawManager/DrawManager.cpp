@@ -27,7 +27,7 @@ void DrawManager::DrawBegin()
 	DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// 指定色で画面クリア
-	float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	float clearColor[4] = { 1.0f, 1.0f, 0.8f, 1.0f };
 
 	// RenderTargetViewのクリア
 	DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_RenderTargetView.Get(), clearColor);
@@ -39,6 +39,10 @@ void DrawManager::DrawBegin()
 		1.0f,											// 深度クリア値
 		0);												// ステンシルクリア値
 }
+
+Vector3 pos = Vector3(0.0f, 0.0f, 0.0f);
+Vector3 degree = Vector3(0.0f, 180.0f, 0.0f);
+Vector3 scale = Vector3(1.0f, 1.0f, 1.0f);
 
 void DrawManager::Draw(const My3DLib::Model& model)
 {
@@ -56,9 +60,7 @@ void DrawManager::Draw(const My3DLib::Model& model)
 	UINT strides = sizeof(My3DLib::VertexData);
 	UINT offset = 0;
 
-	Vector3 pos = Vector3(0.0f, 0.0f, 0.0f);
-	Vector3 degree = Vector3(0.0f, 180.0f, 0.0f);
-	Vector3 scale = Vector3(1.0f, 1.0f, 1.0f);
+	degree.y += 0.01f;
 
 	for (const auto& meshs : model.meshes) {
 		for (auto mesh : meshs.second) {
@@ -83,10 +85,9 @@ void DrawManager::Draw(const My3DLib::Model& model)
 			// 定数バッファの更新
 			DirectX11App::g_Context->UpdateSubresource(DirectX11App::g_ConstantBuffer.Get(), 0, NULL, &DirectX11App::g_ConstantBufferData, 0, 0);
 
-			ID3D11Buffer* buffer = DirectX11App::g_ConstantBuffer.Get();
 			// コンテキストに定数バッファを設定
-			DirectX11App::g_Context->VSSetConstantBuffers(0, 1, &buffer);
-			DirectX11App::g_Context->PSSetConstantBuffers(0, 1, &buffer);
+			DirectX11App::g_Context->VSSetConstantBuffers(0, 1, DirectX11App::g_ConstantBuffer.GetAddressOf());
+			DirectX11App::g_Context->PSSetConstantBuffers(0, 1, DirectX11App::g_ConstantBuffer.GetAddressOf());
 
 			// ポリゴン描画
 			DirectX11App::g_Context->DrawIndexed(static_cast<UINT>(mesh.GetIndices().size()), 0, 0);
@@ -97,6 +98,11 @@ void DrawManager::Draw(const My3DLib::Model& model)
 void DrawManager::DrawEnd()
 {
 	DirectX11App::g_SwapChain->Present(0, 0);
+}
+
+void DrawManager::SetMaterial(const My3DLib::Material& material)
+{
+	DirectX11App::g_ConstantBufferData.materialDiffuse = DirectX::XMFLOAT4();
 }
 
 void DrawManager::SetInputLayout(ID3D11InputLayout* inputLayout)

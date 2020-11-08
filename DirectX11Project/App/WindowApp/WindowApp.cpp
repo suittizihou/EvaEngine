@@ -123,16 +123,16 @@ int WindowApp::Update()
 
     //std::vector<My3DLib::VertexData> vertexs =
     //{
-    //    { DirectX::XMFLOAT3(-0.5f,-0.5f, 0.0f), DirectX::XMFLOAT3(), DirectX::XMFLOAT4(1,0,0,1), DirectX::XMFLOAT2() },   // 赤
-    //    { DirectX::XMFLOAT3(0.5f,-0.5f, 0.0f),  DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0,1,0,1), DirectX::XMFLOAT2() },   // 緑
-    //    { DirectX::XMFLOAT3(0.5f, 0.5f, 0.0f),  DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0,0,1,1), DirectX::XMFLOAT2() },   // 青
-    //    { DirectX::XMFLOAT3(-0.5f, 0.5f, 0.0f), DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0,0,0,1), DirectX::XMFLOAT2() }    // 黒
+    //    { DirectX::XMFLOAT3(-0.5f,-0.5f, 0.0f), DirectX::XMFLOAT3(0.0f, 0.0f, 1.0f), DirectX::XMFLOAT4(1,0,0,1), DirectX::XMFLOAT2() },   // 赤
+    //    { DirectX::XMFLOAT3(0.5f,-0.5f, 0.0f),  DirectX::XMFLOAT3(0.0f, 0.0f, 1.0f), DirectX::XMFLOAT4(0,1,0,1), DirectX::XMFLOAT2() },   // 緑
+    //    { DirectX::XMFLOAT3(0.5f, 0.5f, 0.0f),  DirectX::XMFLOAT3(0.0f, 0.0f, 1.0f), DirectX::XMFLOAT4(0,0,1,1), DirectX::XMFLOAT2() },   // 青
+    //    { DirectX::XMFLOAT3(-0.5f, 0.5f, 0.0f), DirectX::XMFLOAT3(0.0f, 0.0f, 1.0f), DirectX::XMFLOAT4(0,0,0,1), DirectX::XMFLOAT2() }    // 黒
     //};
     //My3DLib::Mesh mesh{};
     //// 頂点情報をセット
     //mesh.SetVertexData(vertexs);
     //// 頂点を使う順番をセット
-    //mesh.SetIndices({ 0, 3, 2, 0, 2, 1 });
+    //mesh.SetIndices({ 0, 1, 2, 0, 2, 3 });
     //model.meshes[""].push_back(mesh);
 
     D3D11_INPUT_ELEMENT_DESC elem[] = {

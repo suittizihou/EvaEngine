@@ -38,6 +38,8 @@ VS_OUT vsMain(VS_INPUT input) {
 	// ビュー座標 * プロジェクション座標変換行列
     output.pos = mul(output.pos, Projection);
 
+    // 頂点色を指定
+    output.col = input.col;
 	// Texture指定
     output.uv = input.uv;
 

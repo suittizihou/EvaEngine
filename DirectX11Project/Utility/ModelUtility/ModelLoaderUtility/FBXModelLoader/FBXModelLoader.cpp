@@ -43,6 +43,11 @@ My3DLib::Model FBXModelLoader::LoadModel(const char* fileName)
     // ポリゴンを三角形にする
     converter.Triangulate(fbx_scene, true);
 
+    int materialNum = fbx_scene->GetSrcObjectCount<FbxSurfaceMaterial>();
+    for (int i = 0; i < materialNum; ++i) {
+        LoadMaterial(fbx_scene->GetSrcObject<FbxSurfaceMaterial>(i));
+    }
+
     std::map<std::string, FbxNode*> mesh_node_list;
     // メッシュNodeを探す
     FindMeshNode(fbx_scene->GetRootNode(), mesh_node_list);
@@ -63,9 +68,92 @@ My3DLib::Model FBXModelLoader::LoadModel(const char* fileName)
     return m_Model;
 }
 
+void FBXModelLoader::LoadMaterial(fbxsdk::FbxSurfaceMaterial* material)
+{
+    My3DLib::Material tempMaterial{};
+
+    enum class MaterialOrder {
+        Ambient,
+        Diffuse,
+        Specular,
+        MaxOrder
+    };
+
+    FbxDouble3 colors[(int)MaterialOrder::MaxOrder];
+    FbxDouble factors[(int)MaterialOrder::MaxOrder];
+    FbxProperty prop = material->FindProperty(FbxSurfaceMaterial::sAmbient);
+    if (material->GetClassId().Is(FbxSurfaceLambert::ClassId)) {
+        const char* elementCheckList[] = {
+            FbxSurfaceMaterial::sAmbient,
+            FbxSurfaceMaterial::sDiffuse
+        };
+
+        const char* factorCheckList[] = {
+            FbxSurfaceMaterial::sAmbientFactor,
+            FbxSurfaceMaterial::sDiffuseFactor
+        };
+
+        for (int i = 0; i < 2; ++i) {
+            prop = material->FindProperty(elementCheckList[i]);
+            if (prop.IsValid()) {
+                colors[i] = prop.Get<FbxDouble3>();
+            }
+            else {
+                colors[i] = FbxDouble3(1.0f, 1.0f, 1.0f);
+            }
+
+            prop = material->FindProperty(factorCheckList[i]);
+            if (prop.IsValid()) {
+                factors[i] = prop.Get<FbxDouble>();
+            }
+            else {
+                factors[i] = 1.0f;
+            }
+        }
+    }
+
+    FbxDouble3 color = colors[(int)MaterialOrder::Ambient];
+    FbxDouble factor = factors[(int)MaterialOrder::Ambient];
+    tempMaterial.ambient = DirectX::XMFLOAT4((float)color[0], (float)color[1], (float)color[2], (float)factor);
+
+    color = colors[(int)MaterialOrder::Diffuse];
+    factor = factors[(int)MaterialOrder::Diffuse];
+    tempMaterial.diffuse = DirectX::XMFLOAT4((float)color[0], (float)color[1], (float)color[2], (float)factor);
+
+    m_Model.materials[material->GetName()].push_back(tempMaterial);
+
+    // テクスチャ読み込み
+    // Diffuseプロパティを取得
+    prop = material->FindProperty(FbxSurfaceMaterial::sDiffuse);
+    FbxFileTexture* texture = nullptr;
+    std::string keyword;
+    int textureNum = prop.GetSrcObjectCount<FbxFileTexture>();
+    if (textureNum > 0) {
+        // propからFbxFileTextureを取得
+        texture = prop.GetSrcObject<FbxFileTexture>(0);
+    }
+    else {
+        // FbxLaveredTextureからFbxFileTextureを取得
+        int layerNum = prop.GetSrcObjectCount<FbxLayeredTexture>();
+        if (layerNum > 0) {
+            texture = prop.GetSrcObject<FbxFileTexture>(0);
+        }
+    }
+
+    if (texture != nullptr &&
+        LoadTexture(texture, keyword)) {
+        // 読み込んだテクスチャとマテリアルの関係を保持
+
+    }
+}
+
+bool FBXModelLoader::LoadTexture(fbxsdk::FbxFileTexture* texture, std::string& keyword)
+{
+    return false;
+}
+
 void FBXModelLoader::FindMeshNode(fbxsdk::FbxNode* node, std::map<std::string, fbxsdk::FbxNode*>& list)
 {
-    std::string name = node->GetName();
     for (int i = 0; i < node->GetNodeAttributeCount(); i++)
     {
         FbxNodeAttribute* attribute = node->GetNodeAttributeByIndex(i);

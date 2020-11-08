@@ -207,6 +207,7 @@
     <ClInclude Include="GameSystemBase\DataBase\GameObjectDataBase\GameObjectDataBase.h" />
     <ClInclude Include="GameSystemBase\DataBase\SceneDataBase\SceneDataBase.h" />
     <ClInclude Include="GameSystemBase\DataBase\ShaderDataBase\ShaderDataBase.h" />
+    <ClInclude Include="GameSystemBase\DataBase\TextureDataBase\TextureDataBase.h" />
     <ClInclude Include="GameSystemBase\Manager\ComponentManager\ComponentManager.h" />
     <ClInclude Include="GameSystemBase\Manager\DrawManager\DrawManager.h" />
     <ClInclude Include="GameSystemBase\Manager\GameObjectManager\GameObjectManager.h" />

@@ -12,6 +12,8 @@ public:
 	// 描画終了
 	static void DrawEnd();
 
+	// マテリアルの設定
+	static void SetMaterial(const My3DLib::Material& material);
 	// インプットレイアウトの設定
 	static void SetInputLayout(ID3D11InputLayout* inputLayout);
 
