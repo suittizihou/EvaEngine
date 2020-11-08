@@ -226,6 +226,7 @@
     <ClInclude Include="Utility\Math\Vector3\Vector3.h" />
     <ClInclude Include="GameSystemBase\DataBase\ModelDataBase\ModelDataBase.h" />
     <ClInclude Include="Utility\Mesh\Mesh.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelData\ConstantBufferData.h" />
     <ClInclude Include="Utility\ModelUtility\ModelData\ModelData.h" />
     <ClInclude Include="Utility\ModelUtility\ModelData\ShaderParameters.h" />
     <ClInclude Include="Utility\ModelUtility\ModelData\VertexData.h" />

@@ -119,34 +119,30 @@ int WindowApp::Update()
     ResourceLoad resources{};
     resources.Load();
 
-    My3DLib::Model model{ /*ModelDataBase::Instance().GetModel(0)*/ };
+    My3DLib::Model model{ ModelDataBase::Instance().GetModel(0) };
 
-    std::vector<My3DLib::VertexData> vertexs =
-    {
-        { DirectX::XMFLOAT3(-0.5f,-0.5f, 0.0f), DirectX::XMFLOAT3(), DirectX::XMFLOAT4(1,0,0,1), DirectX::XMFLOAT2() },   // 赤
-        { DirectX::XMFLOAT3(0.5f,-0.5f, 0.0f),  DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0,1,0,1), DirectX::XMFLOAT2() },   // 緑
-        { DirectX::XMFLOAT3(0.5f, 0.5f, 0.0f),  DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0,0,1,1), DirectX::XMFLOAT2() },   // 青
-        { DirectX::XMFLOAT3(-0.5f, 0.5f, 0.0f), DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0,0,0,1), DirectX::XMFLOAT2() }    // 黒
-    };
-    My3DLib::Mesh mesh{};
-    // 頂点情報をセット
-    mesh.SetVertices(vertexs);
-    // 頂点を使う順番をセット
-    mesh.SetIndices({0, 3, 2, 0, 2, 1});
-    model.meshes[""].push_back(mesh);
-
-    // 頂点バッファーの設定
-    BufferCreate::SetVertexBuffer(model.meshes);
-    // インデックスバッファーの設定
-    BufferCreate::SetIndexBuffer(model.meshes);
+    //std::vector<My3DLib::VertexData> vertexs =
+    //{
+    //    { DirectX::XMFLOAT3(-0.5f,-0.5f, 0.0f), DirectX::XMFLOAT3(), DirectX::XMFLOAT4(1,0,0,1), DirectX::XMFLOAT2() },   // 赤
+    //    { DirectX::XMFLOAT3(0.5f,-0.5f, 0.0f),  DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0,1,0,1), DirectX::XMFLOAT2() },   // 緑
+    //    { DirectX::XMFLOAT3(0.5f, 0.5f, 0.0f),  DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0,0,1,1), DirectX::XMFLOAT2() },   // 青
+    //    { DirectX::XMFLOAT3(-0.5f, 0.5f, 0.0f), DirectX::XMFLOAT3(), DirectX::XMFLOAT4(0,0,0,1), DirectX::XMFLOAT2() }    // 黒
+    //};
+    //My3DLib::Mesh mesh{};
+    //// 頂点情報をセット
+    //mesh.SetVertexData(vertexs);
+    //// 頂点を使う順番をセット
+    //mesh.SetIndices({ 0, 3, 2, 0, 2, 1 });
+    //model.meshes[""].push_back(mesh);
 
     D3D11_INPUT_ELEMENT_DESC elem[] = {
-        { "POSITION",   0, DXGI_FORMAT_R32G32B32_FLOAT,     0,  0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-        { "NORMAL",     0, DXGI_FORMAT_R32G32B32_FLOAT,     0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
-        { "COLOR",      0, DXGI_FORMAT_R32G32B32A32_FLOAT,  0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
-        { "TEXCOORD",   0, DXGI_FORMAT_R32G32_FLOAT,        0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0}
+    { "POSITION",   0, DXGI_FORMAT_R32G32B32_FLOAT,     0,  0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+    { "NORMAL",     0, DXGI_FORMAT_R32G32B32_FLOAT,     0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
+    { "COLOR",      0, DXGI_FORMAT_R32G32B32A32_FLOAT,  0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
+    { "TEXCOORD",   0, DXGI_FORMAT_R32G32_FLOAT,        0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0}
     };
 
+    // 頂点レイアウトのセット
     DrawManager::SetInputLayout(ShaderCompiler::CreateInputLayout(elem, 4, "Shader/VertexShader.hlsl", "vsMain"));
 
     MSG msg{};

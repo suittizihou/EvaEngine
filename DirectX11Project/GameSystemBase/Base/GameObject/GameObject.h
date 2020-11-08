@@ -8,10 +8,10 @@ class Transform;
 class GameObject final : public GameObjectBase {
 public:
 	GameObject(
-		const SceneType& sceneType,
-		const UINT& gameObjectID,
-		const std::string& tag,
-		const std::string& name) :
+		const SceneType& sceneType = SceneType::None,
+		const UINT& gameObjectID = 0,
+		const std::string& tag = "",
+		const std::string& name = "") :
 		GameObjectBase(sceneType),
 		m_GameObjectID(gameObjectID),
 		m_Tag(tag),

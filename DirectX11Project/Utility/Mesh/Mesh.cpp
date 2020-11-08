@@ -1,10 +1,91 @@
 #include "Mesh.h"
+#include "../BufferCreate/BufferCreate.h"
+#include <cmath>
 
 using namespace My3DLib;
 
-std::vector<DirectX::XMFLOAT3> Mesh::GetVertices()
+My3DLib::Mesh::Mesh(int vertexSize)
 {
-	return m_Vertices;
+	m_Vertexs.resize(vertexSize);
+}
+
+void My3DLib::Mesh::SetVertexNum(int vertexSize)
+{
+	m_Vertexs.resize(vertexSize);
+}
+
+void Mesh::SetVertexData(std::vector<My3DLib::VertexData> vertexDatas, bool isCreateIndices) {
+	
+	m_Vertexs = vertexDatas;
+
+	// 頂点バッファを作成してセット
+	m_VertexBuffer.Attach(BufferCreate::CreateVertexBuffer(m_Vertexs, sizeof(My3DLib::VertexData)));
+	
+	// インデックスバッファの作成をするならする
+	if (isCreateIndices) {
+		m_Indices = CreateIndices(m_Vertexs);
+		m_IndexBuffer.Attach(BufferCreate::CreateIndexBuffer(m_Indices, sizeof(UINT)));
+	}
+}
+
+void My3DLib::Mesh::SetVertexPos(int vertexNum, float x, float y, float z)
+{
+	m_Vertexs[vertexNum].position = DirectX::XMFLOAT3(x, y, z);
+}
+
+void My3DLib::Mesh::SetVertexNormal(int vertexNum, float x, float y, float z)
+{
+	m_Vertexs[vertexNum].normal = DirectX::XMFLOAT3(x, y, z);
+}
+
+void My3DLib::Mesh::SetVertexColor(int vertexNum, float r, float g, float b, float a)
+{
+	m_Vertexs[vertexNum].color = DirectX::XMFLOAT4(r, g, b, a);
+}
+
+void My3DLib::Mesh::SetVertexUV(int vertexNum, float u, float v)
+{
+	m_Vertexs[vertexNum].uv = DirectX::XMFLOAT2(u, v);
+}
+
+void My3DLib::Mesh::SetVertexBuffer(ID3D11Buffer* vertexBuffer)
+{
+	m_VertexBuffer.Attach(vertexBuffer);
+}
+
+std::vector<UINT> My3DLib::Mesh::CreateIndices(const std::vector<My3DLib::VertexData>& vertexDatas)
+{
+	std::vector<UINT> indices;
+	int polyCount = static_cast<int>(std::ceil(static_cast<float>(vertexDatas.size()) / 3.0f));
+	// ポリゴンの数だけ連番で保存
+	for (int i = 0; i < polyCount; i++) {
+		indices.push_back(i * 3 + 2);
+		indices.push_back(i * 3 + 1);
+		indices.push_back(i * 3);
+	}
+
+	return indices;
+}
+
+void Mesh::SetIndices(std::vector<unsigned int> indices)
+{
+	m_Indices = indices;
+	m_IndexBuffer.Attach(BufferCreate::CreateIndexBuffer(m_Indices, sizeof(UINT)));
+}
+
+void My3DLib::Mesh::SetIndexBuffer(ID3D11Buffer* indexBuffer)
+{
+	m_IndexBuffer.Attach(indexBuffer);
+}
+
+void My3DLib::Mesh::SetMaterialID(UINT materialID)
+{
+	m_MaterialID = materialID;
+}
+
+std::vector<My3DLib::VertexData> Mesh::GetVertexData()
+{
+	return m_Vertexs;
 }
 
 ID3D11Buffer* const* My3DLib::Mesh::GetVertexBuffer()
@@ -22,90 +103,7 @@ ID3D11Buffer* My3DLib::Mesh::GetIndexBuffer()
 	return m_IndexBuffer.Get();
 }
 
-std::vector<DirectX::XMFLOAT3> Mesh::GetNormal()
-{
-	return m_Normals;
-}
-
-std::vector<DirectX::XMFLOAT2> Mesh::GetUV()
-{
-	return m_UVs;
-}
-
-int My3DLib::Mesh::GetMaterialID()
+UINT My3DLib::Mesh::GetMaterial()
 {
 	return m_MaterialID;
-}
-
-void Mesh::SetVertices(std::vector<DirectX::XMFLOAT3> vertices, bool isCreateIndices)
-{
-	m_Vertices = vertices;
-
-	//// インデックスバッファの作成をするならする
-	//if (isCreateIndices) CreateIndices();
-
-	// 法線情報の数を頂点数と同じにする
-	m_Normals.resize(vertices.size());
-	// 頂点カラー情報の数を頂点数と同じにする
-	m_Color.resize(vertices.size());
-	// UV座標の数を頂点数と同じにする
-	m_UVs.resize(vertices.size());
-}
-
-void Mesh::SetVertices(std::vector<My3DLib::VertexData> vertices, bool isCreateIndices) {
-	for (const auto& vertex : vertices) {
-		m_Vertices.push_back(vertex.position);
-		m_Normals.push_back(vertex.normal);
-		m_Color.push_back(vertex.color);
-		m_UVs.push_back(vertex.uv);
-	}
-
-	//// インデックスバッファの作成をするならする
-	//if (isCreateIndices) CreateIndices();
-}
-
-void My3DLib::Mesh::SetVertexBuffer(ID3D11Buffer* vertexBuffer)
-{
-	m_VertexBuffer.Attach(vertexBuffer);
-}
-
-//void My3DLib::Mesh::CreateIndices()
-//{
-//	int polyCount = static_cast<UINT>(m_Vertices.size()) / 3;
-//	// ポリゴンの数だけ連番で保存
-//	for (int i = 0; i < polyCount; i++) {
-//		m_Indices.push_back(i * 3 + 2);
-//		m_Indices.push_back(i * 3 + 1);
-//		m_Indices.push_back(i * 3);
-//	}
-//}
-
-void Mesh::SetIndices(std::vector<unsigned int> indices)
-{
-	m_Indices = indices;
-}
-
-void My3DLib::Mesh::SetIndexBuffer(ID3D11Buffer* indexBuffer)
-{
-	m_IndexBuffer.Attach(indexBuffer);
-}
-
-void Mesh::SetNormals(std::vector<DirectX::XMFLOAT3> normals)
-{
-	m_Normals = normals;
-}
-
-void Mesh::SetNormal(int vertexNum, DirectX::XMFLOAT3 normal)
-{
-	m_Normals[vertexNum] = normal;
-}
-
-void Mesh::SetUV(std::vector<DirectX::XMFLOAT2> uvs)
-{
-	m_UVs = uvs;
-}
-
-void My3DLib::Mesh::SetMaterialID(int materialID)
-{
-	m_MaterialID = materialID;
 }

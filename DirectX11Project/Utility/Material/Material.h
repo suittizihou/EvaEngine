@@ -14,6 +14,5 @@ namespace My3DLib {
 
 	private:
 		InputLayout m_InputLayout{ nullptr };
-		ConstantBuffer m_ConstantBuffer{ nullptr };
 	};
 }

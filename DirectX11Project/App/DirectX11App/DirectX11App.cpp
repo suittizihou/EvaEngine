@@ -1,5 +1,10 @@
 #include "DirectX11App.h"
 #include "../../Setting/Window/Window.h"
+#include "../../Utility/BufferCreate/BufferCreate.h"
+
+#include "../../GameSystemBase/Base/GameObject/GameObject.h"
+#include "../../GameSystemBase/Components/Transform/Transform.h"
+#include "../../GameSystemBase/Components/Camera/Camera.h"
 
 #include <DirectXMath.h>
 
@@ -8,6 +13,8 @@ D3DContext DirectX11App::g_Context{ nullptr };
 SwapChain DirectX11App::g_SwapChain{ nullptr };
 RenderTargetView DirectX11App::g_RenderTargetView{ nullptr };
 DepthStencilView DirectX11App::g_DepthStencilView{ nullptr };
+ConstantBuffer DirectX11App::g_ConstantBuffer{ nullptr };
+My3DLib::ConstantBufferData DirectX11App::g_ConstantBufferData{};
 
 IDXGIAdapter* DirectX11App::m_Adapter{ nullptr };
 
@@ -38,6 +45,43 @@ HRESULT DirectX11App::Init()
 		DebugLog::LogError("Depth Stencil View Create Failed.");
 		return hr;
 	}
+
+	hr = CreateConstantBuffer();
+	if (FAILED(hr)) {
+		DebugLog::LogError("Constant Buffer Create Failed.");
+		return hr;
+	}
+
+	//GameObject gameObject{};
+	//ComponentDesc componentDesc{};
+	//ZeroMemory(&componentDesc, sizeof(ComponentDesc));
+	//gameObject.AddComponent<Transform>();
+	//SetConstantBuffer(gameObject.AddComponent<Camera>(Window::GetViewport(), 0.3f, 1000.0f, 60.0f));
+
+	//	// Viewマトリクス設定
+	//DirectX::XMVECTOR eye = DirectX::XMVectorSet(0.0f, 2.0f, -5.0f, 0.0f);
+	//DirectX::XMVECTOR focus = DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+	//DirectX::XMVECTOR up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+	//DirectX::XMMATRIX view_matrix = DirectX::XMMatrixLookAtLH(eye, focus, up);
+
+	//// プロジェクションマトリクス設定
+	//float    fov = DirectX::XMConvertToRadians(45.0f);
+	//float    aspect = (float)(Window::GetViewport().Width) / (Window::GetViewport().Height);
+	//float    nearZ = 0.1f;
+	//float    farZ = 1000.0f;
+	//DirectX::XMMATRIX proj_matrix = DirectX::XMMatrixPerspectiveFovLH(fov, aspect, nearZ, farZ);
+
+	//// ライトの設定
+	//DirectX::XMVECTOR light = DirectX::XMVector3Normalize(DirectX::XMVectorSet(0.0f, 0.5f, -1.0f, 0.0f));
+
+	//DirectX::XMStoreFloat4x4(&DirectX11App::g_ConstantBufferData.view, XMMatrixTranspose(view_matrix));
+	//DirectX::XMStoreFloat4x4(&DirectX11App::g_ConstantBufferData.projection, XMMatrixTranspose(proj_matrix));
+	//DirectX::XMStoreFloat4(&DirectX11App::g_ConstantBufferData.lightVector, light);
+	//DirectX::XMStoreFloat4(&DirectX11App::g_ConstantBufferData.cameraPos, eye);
+
+	//// ライトのカラー設定
+	//DirectX11App::g_ConstantBufferData.lightColor = DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1);
+
 
 	// ビューポートのセットアップ
 	g_Context->RSSetViewports(1, &Window::GetViewport());
@@ -238,4 +282,29 @@ HRESULT DirectX11App::CreateDepthAndStencilView()
 	//g_DepthStencilView.Attach(view);
 
 	return hr;
+}
+
+HRESULT DirectX11App::CreateConstantBuffer()
+{
+	g_ConstantBuffer = BufferCreate::CreateConstantBuffer();
+	if (g_ConstantBuffer == nullptr) {
+		return E_FAIL;
+	}
+	return S_OK;
+}
+
+void DirectX11App::SetConstantBuffer(const std::weak_ptr<Camera>& camera)
+{
+	DirectX::XMVECTOR light = DirectX::XMVector3Normalize(DirectX::XMVectorSet(0.0f, 0.5f, -1.0f, 0.0f));
+
+	DirectX::XMStoreFloat4x4(&g_ConstantBufferData.view, DirectX::XMMatrixTranspose(camera.lock()->GetViewMatrix()));
+	DirectX::XMStoreFloat4x4(&g_ConstantBufferData.projection, DirectX::XMMatrixTranspose(camera.lock()->GetProjectionMatrix()));
+	DirectX::XMStoreFloat4(&g_ConstantBufferData.lightVector, light);
+	DirectX::XMStoreFloat4(&g_ConstantBufferData.cameraPos, 
+		DirectX::XMVectorSet(
+		camera.lock()->GetTransform().lock()->position().x,
+		camera.lock()->GetTransform().lock()->position().y,
+		camera.lock()->GetTransform().lock()->position().z,
+		0.0f));
+	g_ConstantBufferData.lightColor = DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 }

@@ -10,7 +10,8 @@ int ModelDataBase::AddModelData(const My3DLib::Model& model)
 
 My3DLib::Model ModelDataBase::GetModel(const int modelHandle)
 {
-    return LoadModelDataMemory(m_Models[modelHandle]);
+    //return LoadModelDataMemory(m_Models[modelHandle]);
+    return m_Models[modelHandle];
 }
 
 void ModelDataBase::DeleteModel(const int modelHandle)

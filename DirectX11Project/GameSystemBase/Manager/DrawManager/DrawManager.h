@@ -17,7 +17,8 @@ public:
 
 private:
 	// シェーダーのセット
-	static void SetShader(const My3DLib::Material& material);
+	static void SetShader(Shader& shader);
+	static void SetShader(My3DLib::Material& material);
 	
 private:
 	static InputLayout m_InputLayout;

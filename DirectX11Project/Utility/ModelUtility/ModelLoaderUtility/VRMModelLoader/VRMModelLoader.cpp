@@ -101,16 +101,16 @@ void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std
 
 void VRMModelLoader::MakeModelGeometry(My3DLib::Model& model)
 {
+    size_t vertexBufferSize = sizeof(My3DLib::VertexData);
     for (auto& meshs : model.meshes) {
         for (auto& mesh : meshs.second) {
             // 頂点バッファの作成とセット
-            auto vertexBufferSize = UINT(sizeof(My3DLib::VertexData) * mesh.GetVertices().size());
-            auto vertexBuffer = BufferCreate::CreateVertexBuffer(vertexBufferSize, mesh.GetVertices());
+            auto vertexBuffer = BufferCreate::CreateVertexBuffer(mesh.GetVertexData(), vertexBufferSize);
             mesh.SetVertexBuffer(vertexBuffer);
 
             // インデックスバッファの作成とセット
             auto indexBufferSize = UINT(sizeof(uint32_t) * mesh.GetIndices().size());
-            auto indexBuffer = BufferCreate::CreateIndexBuffer(indexBufferSize, mesh.GetIndices());
+            auto indexBuffer = BufferCreate::CreateIndexBuffer(mesh.GetIndices(), indexBufferSize);
             mesh.SetIndexBuffer(indexBuffer);
         }
     }
