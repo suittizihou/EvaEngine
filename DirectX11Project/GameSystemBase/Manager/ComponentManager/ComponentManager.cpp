@@ -8,20 +8,19 @@ void ComponentManager::FixedUpdate(const SceneType& sceneType)
 
 void ComponentManager::Update(const SceneType& sceneType)
 {
-	m_ComponentList[sceneType]->FixedUpdate();
+	m_ComponentList[sceneType]->Update();
 }
 
 void ComponentManager::LateUpdate(const SceneType& sceneType)
 {
-	m_ComponentList[sceneType]->Update();
+	m_ComponentList[sceneType]->LateUpdate();
 }
 
 void ComponentManager::Draw(
 	const SceneType& sceneType, 
-	const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command,
-	const ModelApp& modelApp)
+	const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
 {
-	m_ComponentList[sceneType]->Draw(command, modelApp);
+	m_ComponentList[sceneType]->Draw(command);
 }
 
 void ComponentManager::AddComponentDataBase(const SceneType& sceneType)

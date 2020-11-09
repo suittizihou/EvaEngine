@@ -225,9 +225,9 @@ Quaternion Quaternion::euler(const Vector3& euler)
 	float s1 = std::sin(v.x * 0.5f);
 	float s2 = std::sin(v.y * 0.5f);
 	float s3 = std::sin(v.z * 0.5f);
-	float x = s1 * c2 * c3 + c1 * s2 * s3;
-	float y = c1 * s2 * c3 - s1 * c2 * c3;
-	float z = c1 * c2 * s3 + s1 * s2 * c3;
+	float x = s1 * c2 * c3 - c1 * s2 * s3;
+	float y = c1 * s2 * c3 + s1 * c2 * s3;
+	float z = c1 * c2 * s3 - s1 * s2 * c3;
 	float w = c1 * c2 * c3 + s1 * s2 * s3;
 	return Quaternion(x, y, z, w);
 }

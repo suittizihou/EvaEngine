@@ -101,7 +101,12 @@ void Transform::look_at(const Vector3& target, const Vector3& world_up)
 
 void Transform::rotate(const Vector3& eulers, Space relative_to)
 {
-	Quaternion euler_rot = Quaternion::euler(eulers.x, eulers.y, eulers.z);
+	rotate(eulers.x, eulers.y, eulers.z, relative_to);
+}
+
+void Transform::rotate(float x, float y, float z, Space relative_to)
+{
+	Quaternion euler_rot = Quaternion::euler(x, y, z);
 	if (relative_to == Space::Self) {
 		local_rotation(local_rotation_ * euler_rot);
 	}

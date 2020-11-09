@@ -2,19 +2,25 @@
 #include "../GameObject/GameObject.h"
 
 Component::Component(
-	const ComponentDesc& componentDesc,
 	const UINT& functionMask,
 	const bool canMultiAttach,
 	const bool canRemove) :
-	GameJobs(componentDesc.sceneType),
-	m_GameObject(std::static_pointer_cast<GameObject>(componentDesc.gameObject.lock())),
-	m_HashCode(componentDesc.hashCode),
-	m_ComponentID(componentDesc.componentID),
+	GameJobs(),
 	m_FunctionMask(functionMask),
 	m_CanMultiAttach(canMultiAttach),
-	m_CanRemove(canRemove),
-	m_Transform(m_GameObject.lock()->GetTransform())
+	m_CanRemove(canRemove)
 {
+
+}
+
+void Component::SetComponentDesc(const ComponentDesc& componentDesc)
+{
+	SetSceneType(componentDesc.sceneType);
+	m_GameObject = std::static_pointer_cast<GameObject>(componentDesc.gameObject.lock());
+	m_HashCode = componentDesc.hashCode;
+	m_ComponentID = componentDesc.componentID;
+
+	m_Transform = m_GameObject.lock()->GetTransform();
 }
 
 std::weak_ptr<GameObject> Component::GetGameObject() const

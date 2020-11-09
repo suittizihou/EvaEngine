@@ -11,18 +11,17 @@
 
 #include "../Scene/SceneType.h"
 
-class ModelApp;
 class GameObject;
 
 class GameJobs {
 public:
-	GameJobs(const SceneType& sceneType) :
-	m_SceneType(sceneType)
-	{};
+	GameJobs() {};
 	virtual ~GameJobs() = default;
 
 	std::weak_ptr<GameObject> AddGameObject();
 
+	// 所属するシーンを設定
+	void SetSceneType(const SceneType& sceneType);
 	// 所属するシーンを返す
 	SceneType GetSceneType();
 

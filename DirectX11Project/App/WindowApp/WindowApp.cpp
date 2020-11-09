@@ -12,6 +12,8 @@
 #include "../../GameSystemBase/DataBase/ShaderDataBase/ShaderDataBase.h"
 #include "../../GameSystemBase/DataBase/ModelDataBase/ModelDataBase.h"
 
+#include "../GameApp/GameApp.h"
+
 #include <vector>
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
@@ -119,31 +121,11 @@ int WindowApp::Update()
     ResourceLoad resources{};
     resources.Load();
 
-    My3DLib::Model model{ ModelDataBase::Instance().GetModel(0) };
+    DrawManager::Init();
 
-    //std::vector<My3DLib::VertexData> vertexs =
-    //{
-    //    { DirectX::XMFLOAT3(-0.5f,-0.5f, 0.0f), DirectX::XMFLOAT3(0.0f, 0.0f, 1.0f), DirectX::XMFLOAT4(1,0,0,1), DirectX::XMFLOAT2() },   // 赤
-    //    { DirectX::XMFLOAT3(0.5f,-0.5f, 0.0f),  DirectX::XMFLOAT3(0.0f, 0.0f, 1.0f), DirectX::XMFLOAT4(0,1,0,1), DirectX::XMFLOAT2() },   // 緑
-    //    { DirectX::XMFLOAT3(0.5f, 0.5f, 0.0f),  DirectX::XMFLOAT3(0.0f, 0.0f, 1.0f), DirectX::XMFLOAT4(0,0,1,1), DirectX::XMFLOAT2() },   // 青
-    //    { DirectX::XMFLOAT3(-0.5f, 0.5f, 0.0f), DirectX::XMFLOAT3(0.0f, 0.0f, 1.0f), DirectX::XMFLOAT4(0,0,0,1), DirectX::XMFLOAT2() }    // 黒
-    //};
-    //My3DLib::Mesh mesh{};
-    //// 頂点情報をセット
-    //mesh.SetVertexData(vertexs);
-    //// 頂点を使う順番をセット
-    //mesh.SetIndices({ 0, 1, 2, 0, 2, 3 });
-    //model.meshes[""].push_back(mesh);
+    GameApp gameApp{};
 
-    D3D11_INPUT_ELEMENT_DESC elem[] = {
-    { "POSITION",   0, DXGI_FORMAT_R32G32B32_FLOAT,     0,  0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-    { "NORMAL",     0, DXGI_FORMAT_R32G32B32_FLOAT,     0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
-    { "COLOR",      0, DXGI_FORMAT_R32G32B32A32_FLOAT,  0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
-    { "TEXCOORD",   0, DXGI_FORMAT_R32G32_FLOAT,        0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0}
-    };
-
-    // 頂点レイアウトのセット
-    DrawManager::SetInputLayout(ShaderCompiler::CreateInputLayout(elem, 4, "Shader/VertexShader.hlsl", "vsMain"));
+    gameApp.Init();
 
     MSG msg{};
     while (msg.message != WM_QUIT) {
@@ -160,18 +142,12 @@ int WindowApp::Update()
         }
         else {
             InputBufferUpdate::Instance().KeyUpdate();
-            DirectX11App::Update();
 
-            DrawManager::DrawBegin();
+            gameApp.Update();
 
-            DrawManager::Draw(model);
-
-            DrawManager::DrawEnd();
+            gameApp.Draw(DirectX11App::g_Context);
         }
     }
-
-    // 全シェーダーのリソースを解放
-    ShaderDataBase::Instance().DeleteAllShader();
 
     return static_cast<int>(msg.wParam);
 }

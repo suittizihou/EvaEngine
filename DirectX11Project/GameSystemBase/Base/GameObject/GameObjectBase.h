@@ -7,8 +7,10 @@
 class GameObjectBase : public GameJobs, public std::enable_shared_from_this<GameObjectBase> {
 public:
 	GameObjectBase(const SceneType& sceneType) :
-		GameJobs(sceneType)
-	{};
+		GameJobs()
+	{
+		SetSceneType(sceneType);
+	};
 	virtual ~GameObjectBase() = default;
 
 	// ‰Šú‰»ˆ—

@@ -22,7 +22,8 @@ public:
 		componentDesc.gameObject = gameObject;
 		componentDesc.hashCode = typeid(T).hash_code();
 		componentDesc.componentID = m_ComponentID;
-		std::shared_ptr<T> component_temp = std::make_shared<T>(componentDesc, args...);
+		std::shared_ptr<T> component_temp = std::make_shared<T>(args...);
+		component_temp->SetComponentDesc(componentDesc);
 
 		// 複数アタッチできないコンポーネントの場合
 		if (!component_temp->GetCanMultiAttach()) {
@@ -37,13 +38,13 @@ public:
 
 		// コンポーネントを追加(関数なども登録)
 		AddComponent(gameObject, component_temp);
+		// コンポーネントIDをインクリメント
+		m_ComponentID += 1;
 
 		// コンポーネントの初期関数を呼ぶ
 		component_temp->Awake();
 		component_temp->Start();
 
-		// コンポーネントIDをインクリメント
-		m_ComponentID += 1;
 
 		// 参照を返す
 		return component_temp;
@@ -118,8 +119,7 @@ public:
 	void LateUpdate();
 	// Draw関数を回す
 	void Draw(
-		const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command,
-		const ModelApp& modelApp) const;
+		const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) const;
 
 private:
 	template<class T>
@@ -141,8 +141,8 @@ private:
 		}
 		// Draw関数の登録
 		if (component->GetFunctionMask() & FunctionMask::DRAW) {
-			m_DrawFunctionList[gameObject.lock()->GetObjectID()][m_ComponentID] = [=](const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command, const ModelApp& modelApp)
-				->void { return component->Draw(command, modelApp); };
+			m_DrawFunctionList[gameObject.lock()->GetObjectID()][m_ComponentID] = [=](const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
+				->void { return component->Draw(command); };
 		}
 		// コンポーネントの登録
 		m_ComponentList[gameObject.lock()->GetObjectID()].push_back(component);
@@ -172,7 +172,7 @@ private:
 	// Draw関数のリスト
 	std::map<UINT,		// GameObjectID
 		std::map<UINT,	// ComponentID
-		std::function<void(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>&, const ModelApp&)>>> m_DrawFunctionList;
+		std::function<void(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>&)>>> m_DrawFunctionList;
 
 	// 削除予定のハッシュキュー
 	std::queue<std::map<UINT, size_t>> m_RemoveHashQueue;

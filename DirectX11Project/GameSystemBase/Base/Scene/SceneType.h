@@ -3,5 +3,5 @@
 enum class SceneType {
 	None,
 	GameTitle,
-	GamePlay,
+	GameMain,
 };

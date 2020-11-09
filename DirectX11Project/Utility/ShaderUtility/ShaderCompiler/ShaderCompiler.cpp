@@ -104,7 +104,7 @@ ID3D11DomainShader* ShaderCompiler::CreateDomainShader(const std::string& fileNa
     return shader;
 }
 
-ID3D11InputLayout* ShaderCompiler::CreateInputLayout(D3D11_INPUT_ELEMENT_DESC* layout, UINT elemNum, const std::string& fileName, const std::string& entryPath)
+ID3D11InputLayout* ShaderCompiler::CreateVertexLayout(D3D11_INPUT_ELEMENT_DESC* layout, UINT elemNum, const std::string& fileName, const std::string& entryPath)
 {
     ID3D11InputLayout* vertexLayout;
     D3DBlob blob{ nullptr };

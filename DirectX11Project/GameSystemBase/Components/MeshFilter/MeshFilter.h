@@ -5,8 +5,8 @@
 
 class MeshFilter : public Component {
 public:
-	MeshFilter(const ComponentDesc& componentDesc, const int& modelHandle)
-		:Component(componentDesc, 0U, false),
+	MeshFilter(const int& modelHandle)
+		:Component(0U, false),
 		m_Model(ModelDataBase::Instance().GetModel(modelHandle))
 	{}
 	

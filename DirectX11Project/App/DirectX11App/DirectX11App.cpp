@@ -95,11 +95,6 @@ HRESULT DirectX11App::Init()
 	return hr;
 }
 
-int DirectX11App::Update()
-{
-	return 0;
-}
-
 HRESULT DirectX11App::HardWareCheck()
 {
 	IDXGIFactory* factory{ nullptr };

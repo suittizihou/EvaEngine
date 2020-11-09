@@ -63,8 +63,7 @@ public:
 	// Draw関数を回す
 	void Draw(
 		const SceneType& sceneType,
-		const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command,
-		const ModelApp& modelApp);
+		const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
 
 private:
 	// コンポーネントのリスト(firstはオブジェクトID)

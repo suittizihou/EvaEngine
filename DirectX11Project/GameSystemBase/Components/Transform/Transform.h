@@ -15,8 +15,8 @@ public:
 		World   // ワールド座標系
 	};
 	// コンストラクタ
-	Transform(const ComponentDesc& componentDesc) :
-		Component(componentDesc, 0U, false, false) {};
+	Transform() :
+		Component(0U, false, false) {};
 	// デストラクタ
 	~Transform();
 	// ワールド空間の Transform の青軸を取得
@@ -54,6 +54,7 @@ public:
 	void look_at(const Vector3& target, const Vector3& world_up = Vector3{ 0.0f, 1.0f, 0.0f });
 	// Z 軸でeulers.z 度回転、X軸で euler.x 度回転、Y軸でeulers.y 度回転します(順番は説明した順)
 	void rotate(const Vector3& eulers, Space relative_to = Space::Self);
+	void rotate(float x, float y, float z, Space relative_to = Space::Self);
 	// axis 軸の周りに angle 度、回転します
 	void rotate(const Vector3& axis, float angle, Space relative_to = Space::Self);
 	// ワールド座標の point を中心とした軸(axis)で angle 度回転させます

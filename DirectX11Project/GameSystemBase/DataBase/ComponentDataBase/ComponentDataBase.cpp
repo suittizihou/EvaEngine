@@ -30,12 +30,12 @@ void ComponentDataBase::LateUpdate()
 	}
 }
 
-void ComponentDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command, const ModelApp& modelApp) const
+void ComponentDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) const
 {
 	auto tempFunc = m_DrawFunctionList;
 	for (const auto& components : tempFunc) {
 		for (const auto& drawFunc : components.second) {
-			drawFunc.second(command, modelApp);
+			drawFunc.second(command);
 		}
 	}
 }

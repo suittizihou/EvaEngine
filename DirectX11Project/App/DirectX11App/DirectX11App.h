@@ -10,7 +10,6 @@ class DirectX11App {
 public:
 	// DirectXの初期化
 	static HRESULT Init();
-	static int Update();
 
 private:
 	// ハードウェアのチェック(つよつよGPUを見つけてそのGPUを使うようにする)

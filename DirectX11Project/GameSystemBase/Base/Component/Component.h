@@ -11,8 +11,8 @@ class Transform;
 // 使用する関数を示すビットフラグ
 namespace FunctionMask {
 	const UINT NONE				(0 << 0);
-	const UINT AWAKE				(1 << 0);
-	const UINT START				(1 << 1);
+	//const UINT AWAKE				(1 << 0);
+	//const UINT START				(1 << 1);
 	const UINT FIXED_UPDATE	(1 << 2);
 	const UINT UPDATE			(1 << 3);
 	const UINT LATE_UPDATE	(1 << 4);
@@ -22,7 +22,6 @@ namespace FunctionMask {
 class Component : public GameJobs {
 public:
 	Component(
-		const ComponentDesc& componentDesc, 
 		const UINT& functionMask,
 		const bool canMultiAttach = true,
 		const bool canRemove = true);
@@ -40,9 +39,10 @@ public:
 	// Updateの後に呼ばれる
 	virtual void LateUpdate() {}
 	// 上記全ての処理が終わったタイミングで呼ばれる
-	virtual void Draw(
-		const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command,
-		const ModelApp& modelApp) {}
+	virtual void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) {}
+
+	// コンポーネントに必要なデータを設定
+	void SetComponentDesc(const ComponentDesc& componentDesc);
 
 	// このコンポーネントに紐づいているオブジェクトを返す
 	std::weak_ptr<GameObject> GetGameObject() const;

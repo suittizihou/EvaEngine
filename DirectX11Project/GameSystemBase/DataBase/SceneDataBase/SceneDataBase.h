@@ -40,12 +40,15 @@ public:
 
 	// シーンのタスクシステムを回す
 	void Initialize();
+	void FixedUpdate();
 	void Update();
-	void Draw();
+	void LateUpdate();
+	void RemoveComponent();
+	void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
 
 private:
-	SceneType m_CurrentSceneType;
-	SceneType m_PreviousSceneType;
+	SceneType m_CurrentSceneType{};
+	SceneType m_PreviousSceneType{};
 	std::weak_ptr<Scene> m_CurrentScene;
 	std::map<SceneType, std::shared_ptr<Scene>> m_Scenes;
 };

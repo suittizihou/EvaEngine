@@ -4,7 +4,7 @@
 
 void SceneDataBase::LoadScene(const SceneType& sceneType)
 {
-    m_CurrentSceneType = sceneType;    
+    m_CurrentSceneType = sceneType;
 }
 
 void SceneDataBase::LoadScene(const UINT& sceneType)
@@ -42,12 +42,27 @@ void SceneDataBase::Initialize()
     m_CurrentScene.lock()->Initialize();
 }
 
+void SceneDataBase::FixedUpdate()
+{
+    m_CurrentScene.lock()->FixedUpdate();
+}
+
 void SceneDataBase::Update()
 {
     m_CurrentScene.lock()->Update();
 }
 
-void SceneDataBase::Draw()
+void SceneDataBase::LateUpdate()
 {
-    m_CurrentScene.lock()->Draw();
+    m_CurrentScene.lock()->LateUpdate();
+}
+
+void SceneDataBase::RemoveComponent()
+{
+    m_CurrentScene.lock()->RemoveComponent();
+}
+
+void SceneDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
+{
+    m_CurrentScene.lock()->Draw(command);
 }

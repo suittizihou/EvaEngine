@@ -17,8 +17,8 @@ public:
 	// ドメインシェーダーのコンパイル
 	static ID3D11DomainShader* CreateDomainShader(const std::string& fileName, const std::string& entrypath = "dsMain", bool error = true);
 
-	// セマンティクスのセットなどをするインプットレイアウトを作成
-	static ID3D11InputLayout* CreateInputLayout(D3D11_INPUT_ELEMENT_DESC* layout, UINT elemNum, const std::string& fileName, const std::string& entryPath);
+	// セマンティクスのセットなどをする頂点レイアウトを作成
+	static ID3D11InputLayout* CreateVertexLayout(D3D11_INPUT_ELEMENT_DESC* layout, UINT elemNum, const std::string& fileName, const std::string& entryPath);
 
 private:
 	// シェーダーのエラーチェック

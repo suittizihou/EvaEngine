@@ -148,7 +148,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App\DirectX11App\DirectX11App.cpp" />
+    <ClCompile Include="App\GameApp\GameApp.cpp" />
     <ClCompile Include="App\WindowApp\WindowApp.cpp" />
+    <ClCompile Include="Editor\ImGUI\imgui.cpp" />
+    <ClCompile Include="Editor\ImGUI\imgui_draw.cpp" />
+    <ClCompile Include="Editor\ImGUI\imgui_impl_dx11.cpp" />
+    <ClCompile Include="Editor\ImGUI\imgui_impl_win32.cpp" />
+    <ClCompile Include="Editor\ImGUI\imgui_widgets.cpp" />
     <ClCompile Include="GameSystemBase\Base\Component\Component.cpp" />
     <ClCompile Include="GameSystemBase\Base\GameJobs\GameJobs.cpp" />
     <ClCompile Include="GameSystemBase\Base\GameObject\GameObject.cpp" />
@@ -165,6 +171,11 @@
     <ClCompile Include="GameSystemBase\Manager\DrawManager\DrawManager.cpp" />
     <ClCompile Include="GameSystemBase\Manager\GameObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="GameSystemBase\Manager\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="Game\Scene\GameMain\GameMain.cpp" />
+    <ClCompile Include="Game\Scene\GameTitle\GameTitle.cpp" />
+    <ClCompile Include="Game\Script\CameraScript\CameraScript.cpp" />
+    <ClCompile Include="Game\Script\MoveScript\MoveScript.cpp" />
+    <ClCompile Include="Game\Script\TestScript\TestScript.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Setting\Window\Window.cpp" />
     <ClCompile Include="System\DebugLog\DebugLog.cpp" />
@@ -188,8 +199,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\DirectX11App\DirectX11App.h" />
+    <ClInclude Include="App\GameApp\GameApp.h" />
     <ClInclude Include="App\WindowApp\WindowApp.h" />
     <ClInclude Include="Define\D3D11Defines.h" />
+    <ClInclude Include="Editor\ImGUI\imconfig.h" />
+    <ClInclude Include="Editor\ImGUI\imgui.h" />
+    <ClInclude Include="Editor\ImGUI\imgui_impl_dx11.h" />
+    <ClInclude Include="Editor\ImGUI\imgui_impl_win32.h" />
+    <ClInclude Include="Editor\ImGUI\imgui_internal.h" />
+    <ClInclude Include="Editor\ImGUI\imstb_rectpack.h" />
+    <ClInclude Include="Editor\ImGUI\imstb_textedit.h" />
+    <ClInclude Include="Editor\ImGUI\imstb_truetype.h" />
     <ClInclude Include="GameSystemBase\Base\Component\Component.h" />
     <ClInclude Include="GameSystemBase\Base\Component\ComponentDesc.h" />
     <ClInclude Include="GameSystemBase\Base\GameJobs\GameJobs.h" />
@@ -212,6 +232,11 @@
     <ClInclude Include="GameSystemBase\Manager\DrawManager\DrawManager.h" />
     <ClInclude Include="GameSystemBase\Manager\GameObjectManager\GameObjectManager.h" />
     <ClInclude Include="GameSystemBase\Manager\SceneManager\SceneManager.h" />
+    <ClInclude Include="Game\Scene\GameMain\GameMain.h" />
+    <ClInclude Include="Game\Scene\GameTitle\GameTitle.h" />
+    <ClInclude Include="Game\Script\CameraScript\CameraScript.h" />
+    <ClInclude Include="Game\Script\MoveScript\MoveScript.h" />
+    <ClInclude Include="Game\Script\TestScript\TestScript.h" />
     <ClInclude Include="Setting\Window\Window.h" />
     <ClInclude Include="System\DebugLog\DebugLog.h" />
     <ClInclude Include="Utility\BufferCreate\BufferCreate.h" />

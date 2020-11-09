@@ -8,4 +8,5 @@ void ResourceLoad::Load()
 	ShaderLoader::Instance().PixelShaderLoad("Shader/PixelShader.hlsl");
 
 	ModelLoader::Instance().Load("Resources/alicia-solid.vrm");
+	ModelLoader::Instance().Load("Resources/Box.fbx");
 }
