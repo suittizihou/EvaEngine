@@ -8,4 +8,5 @@ public:
 	~TestScript() = default;
 
 	void Awake() override;
+	void Update() override;
 };

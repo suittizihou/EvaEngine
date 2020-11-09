@@ -40,6 +40,7 @@ public:
 
 	// シーンのタスクシステムを回す
 	void Initialize();
+	void SceneUpdate();
 	void FixedUpdate();
 	void Update();
 	void LateUpdate();

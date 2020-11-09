@@ -42,6 +42,11 @@ void SceneDataBase::Initialize()
     m_CurrentScene.lock()->Initialize();
 }
 
+void SceneDataBase::SceneUpdate()
+{
+    m_CurrentScene.lock()->SceneUpdate();
+}
+
 void SceneDataBase::FixedUpdate()
 {
     m_CurrentScene.lock()->FixedUpdate();

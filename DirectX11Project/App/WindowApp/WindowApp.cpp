@@ -146,6 +146,8 @@ int WindowApp::Update()
             gameApp.Update();
 
             gameApp.Draw(DirectX11App::g_Context);
+
+            gameApp.Last();
         }
     }
 

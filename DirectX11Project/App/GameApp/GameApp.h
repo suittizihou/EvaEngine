@@ -11,4 +11,5 @@ public:
 	void Init();
 	void Update();
 	void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
+	void Last();
 };

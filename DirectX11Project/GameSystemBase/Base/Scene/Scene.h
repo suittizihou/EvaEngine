@@ -11,7 +11,11 @@ public:
 	virtual ~Scene() = default;
 
 public:
+	// シーンの初期化
 	virtual void Initialize() = 0;
+
+	// シーンのアップデート
+	virtual void SceneUpdate() = 0;
 
 	// 固定更新処理
 	void FixedUpdate() {

@@ -19,19 +19,24 @@ public:
 		Component(0U, false, false) {};
 	// デストラクタ
 	~Transform();
-	// ワールド空間の Transform の青軸を取得
+	// ワールド空間の Transform の青軸 前を取得
 	Vector3 forward() const;
-	// ワールド空間の Transform の青軸を設定
+	// ワールド空間の Transform の青軸 前を設定
 	void forward(const Vector3& value);
-	// ワールド空間の Transform の赤軸を取得
+	// ワールド空間の Transform の青軸 後を取得
+	Vector3 back() const;
+	// ワールド空間の Transform の赤軸 右を取得
 	Vector3 right() const;
-	// ワールド空間の Transform の赤軸を設定
+	// ワールド空間の Transform の赤軸 右を設定
 	void right(const Vector3& value);
-	// ワールド空間の Transform の緑軸を取得
+	// ワールド空間の Transform の赤軸 左を取得
+	Vector3 left() const;
+	// ワールド空間の Transform の緑軸 上を取得
 	Vector3 up() const;
-	// ワールド空間の Transform の緑軸を設定
+	// ワールド空間の Transform の緑軸 上を設定
 	void up(const Vector3& value);
-
+	// ワールド空間の Transform の緑軸 下を取得
+	Vector3 down() const;
 	// オブジェクトのグローバルスケールを取得
 	Vector3 lossy_scale() const;
 	// ワールド空間の Transform の位置を取得
@@ -40,6 +45,8 @@ public:
 	void position(const Vector3& value);
 	// ワールド空間での移動
 	void move(const Vector3& velocity);
+	// 親の Transform オブジェクトからVelocity分移動
+	void local_move(const Vector3& velocity);
 	// Quaternion として保存されるワールド空間での Transform の回転を取得
 	Quaternion rotation() const;
 	// Quaternion として保存されるワールド空間での Transform の回転を設定
@@ -97,8 +104,6 @@ public:
 	Vector3 local_position() const;
 	// 親の Transform オブジェクトから見た相対的な位置を設定
 	void local_position(const Vector3& value);
-	// 親の Transform オブジェクトからVelocity分移動
-	void local_move(const Vector3& velocity);
 	// 親の Transform オブジェクトから見た相対的な回転を取得
 	Quaternion local_rotation() const;
 	// 親の Transform オブジェクトから見た相対的な回転を設定

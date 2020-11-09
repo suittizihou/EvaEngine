@@ -58,32 +58,10 @@ HRESULT DirectX11App::Init()
 		return hr;
 	}
 
-	//GameObject gameObject{};
-	//ComponentDesc componentDesc{};
-	//ZeroMemory(&componentDesc, sizeof(ComponentDesc));
-	//gameObject.AddComponent<Transform>();
-	//SetConstantBuffer(gameObject.AddComponent<Camera>(Window::GetViewport(), 0.3f, 1000.0f, 60.0f));
-
-		// Viewマトリクス設定
-	DirectX::XMVECTOR eye = DirectX::XMVectorSet(0.0f, 2.0f, -5.0f, 0.0f);
-	DirectX::XMVECTOR focus = DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
-	DirectX::XMVECTOR up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-	DirectX::XMMATRIX view_matrix = DirectX::XMMatrixLookAtLH(eye, focus, up);
-
-	// プロジェクションマトリクス設定
-	float    fov = DirectX::XMConvertToRadians(45.0f);
-	float    aspect = (float)(Window::GetViewport().Width) / (Window::GetViewport().Height);
-	float    nearZ = 0.1f;
-	float    farZ = 1000.0f;
-	DirectX::XMMATRIX proj_matrix = DirectX::XMMatrixPerspectiveFovLH(fov, aspect, nearZ, farZ);
-
 	// ライトの設定
 	DirectX::XMVECTOR light = DirectX::XMVector3Normalize(DirectX::XMVectorSet(0.0f, 0.5f, -1.0f, 0.0f));
 
-	DirectX::XMStoreFloat4x4(&DirectX11App::g_ConstantBufferData.view, XMMatrixTranspose(view_matrix));
-	DirectX::XMStoreFloat4x4(&DirectX11App::g_ConstantBufferData.projection, XMMatrixTranspose(proj_matrix));
 	DirectX::XMStoreFloat4(&DirectX11App::g_ConstantBufferData.lightVector, light);
-	DirectX::XMStoreFloat4(&DirectX11App::g_ConstantBufferData.cameraPos, eye);
 
 	// ライトのカラー設定
 	DirectX11App::g_ConstantBufferData.lightColor = DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1);

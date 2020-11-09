@@ -19,6 +19,11 @@ void Transform::forward(const Vector3& value)
 	rotation(Quaternion::look_rotation(value));
 }
 
+Vector3 Transform::back() const
+{
+	return rotation_ * Vector3::back();
+}
+
 Vector3 Transform::right() const
 {
 	return rotation_ * Vector3::right();
@@ -29,6 +34,11 @@ void Transform::right(const Vector3& value)
 	rotation(Quaternion::from_to_rotation(Vector3::right(), value));
 }
 
+Vector3 Transform::left() const
+{
+	return rotation_ * Vector3::left();
+}
+
 Vector3 Transform::up() const
 {
 	return rotation_ * Vector3::up();
@@ -37,6 +47,11 @@ Vector3 Transform::up() const
 void Transform::up(const Vector3& value)
 {
 	rotation(Quaternion::from_to_rotation(Vector3::up(), value));
+}
+
+Vector3 Transform::down() const
+{
+	return rotation_ * Vector3::down();
 }
 
 Vector3 Transform::lossy_scale() const
@@ -61,7 +76,12 @@ void Transform::position(const Vector3& value)
 
 void Transform::move(const Vector3& velocity)
 {
-	position(position() + velocity);
+	position(position_ + velocity);
+}
+
+void Transform::local_move(const Vector3& velocity)
+{
+	local_position(local_position_ + velocity);
 }
 
 Quaternion Transform::rotation() const
@@ -256,11 +276,6 @@ void Transform::local_position(const Vector3& value)
 	local_position_ = value;
 	// ワールド空間を更新
 	update_world_transform(parent_);
-}
-
-void Transform::local_move(const Vector3& velocity)
-{
-	local_position(local_position() + velocity);
 }
 
 Quaternion Transform::local_rotation() const

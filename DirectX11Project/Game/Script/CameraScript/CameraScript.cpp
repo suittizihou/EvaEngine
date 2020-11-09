@@ -3,6 +3,8 @@
 #include "../../../GameSystemBase/Base/GameObject/GameObject.h"
 #include "../../../GameSystemBase/Components/ComponentHeaders.h"
 
+#include "../MoveScript/MoveScript.h"
+
 CameraScript::CameraScript(const Vector3& position, const Vector3& euler) :
 	MonoBehaviour(FunctionMask::UPDATE),
 	m_Position(position),
@@ -13,17 +15,29 @@ CameraScript::CameraScript(const Vector3& position, const Vector3& euler) :
 void CameraScript::Awake()
 {
 	GetGameObject().lock()->AddComponent<Camera>();
-	GetTransform().lock()->move(m_Position);
+	GetGameObject().lock()->AddComponent<MoveScript>(0.001f);
+	GetTransform().lock()->position(m_Position);
 	GetTransform().lock()->euler_angles(m_Euler);
 }
 
 void CameraScript::Update()
 {
 	if (Input::GetKey(KeyCode::UpArrow)) {
-		GetTransform().lock()->rotate(0.1f, 0.0f, 0.0f);
-	}
-	if (Input::GetKey(KeyCode::DownArrow)) {
 		GetTransform().lock()->rotate(-0.1f, 0.0f, 0.0f);
 	}
-	Vector3 euler = GetTransform().lock()->euler_angles();
+	if (Input::GetKey(KeyCode::DownArrow)) {
+		GetTransform().lock()->rotate(0.1f, 0.0f, 0.0f);
+	}
+	if (Input::GetKey(KeyCode::LeftArrow)) {
+		GetTransform().lock()->rotate(0.0f, -0.1f, 0.0f, Transform::Space::World);
+	}
+	if (Input::GetKey(KeyCode::RightArrow)) {
+		GetTransform().lock()->rotate(0.0f, 0.1f, 0.0f, Transform::Space::World);
+	}
+
+	if (Input::GetKeyDown(KeyCode::Y)) {
+		auto obj = AddGameObject();
+		obj.lock()->GetTransform().lock()->position(GetTransform().lock()->position());
+		obj.lock()->AddComponent<MeshRenderer>(obj.lock()->AddComponent<MeshFilter>(1), GetGameObject().lock()->GetComponent<Camera>());
+	}
 }

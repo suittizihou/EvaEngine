@@ -29,12 +29,11 @@ void GameApp::Init()
 
 void GameApp::Update()
 {
+	SceneDataBase::Instance().SceneUpdate();
 	SceneDataBase::Instance().FixedUpdate();
 	SceneDataBase::Instance().Update();
 	SceneDataBase::Instance().LateUpdate();
 	SceneDataBase::Instance().RemoveComponent();
-
-	SceneDataBase::Instance().SceneChange();
 }
 
 void GameApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
@@ -55,4 +54,9 @@ void GameApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
 
 	// ï`âÊèIóπèàóù
 	DrawManager::DrawEnd();
+}
+
+void GameApp::Last()
+{
+	SceneDataBase::Instance().SceneChange();
 }

@@ -2,6 +2,8 @@
 #include "../../Script/CameraScript/CameraScript.h"
 #include "../../Script/TestScript/TestScript.h"
 #include "../../Script/MoveScript/MoveScript.h"
+#include "../../../Utility/Input/Input.h"
+#include "../../../GameSystemBase/Manager/SceneManager/SceneManager.h"
 
 GameTitle::GameTitle(const SceneType& sceneType) : Scene(sceneType)
 {
@@ -13,5 +15,12 @@ void GameTitle::Initialize()
 
 	auto charaObj = AddGameObject();
 	charaObj.lock()->AddComponent<TestScript>();
-	charaObj.lock()->AddComponent<MoveScript>(0.001f);
+	//charaObj.lock()->AddComponent<MoveScript>(0.001f);
+}
+
+void GameTitle::SceneUpdate()
+{
+	if (Input::GetKeyDown(KeyCode::Space)) {
+		SceneManager::LoadScene(SceneType::GameMain);
+	}
 }

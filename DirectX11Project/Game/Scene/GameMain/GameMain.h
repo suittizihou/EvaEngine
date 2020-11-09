@@ -8,4 +8,5 @@ public:
 	~GameMain() = default;
 
 	void Initialize() override;
+	void SceneUpdate() override;
 };
