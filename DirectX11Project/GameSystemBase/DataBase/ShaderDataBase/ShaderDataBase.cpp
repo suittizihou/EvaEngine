@@ -75,68 +75,98 @@ ID3D11DomainShader* ShaderDataBase::GetDomainShader(const int shaderHandle)
 void ShaderDataBase::DeleteVertexShader(const int shaderHandle)
 {
     m_VertexShaders[shaderHandle]->Release();
+    m_VertexShaders[shaderHandle] = nullptr;
     m_VertexShaders.erase(shaderHandle);
 }
 
 void ShaderDataBase::DeletePixelShader(const int shaderHandle)
 {
     m_PixelShaders[shaderHandle]->Release();
+    m_PixelShaders[shaderHandle] = nullptr;
     m_PixelShaders.erase(shaderHandle);
 }
 
 void ShaderDataBase::DeleteGeometryShader(const int shaderHandle)
 {
     m_GeometryShaders[shaderHandle]->Release();
+    m_GeometryShaders[shaderHandle] = nullptr;
     m_GeometryShaders.erase(shaderHandle);
 }
 
 void ShaderDataBase::DeleteComputeShader(const int shaderHandle)
 {
     m_ComputeShaders[shaderHandle]->Release();
+    m_ComputeShaders[shaderHandle] = nullptr;
     m_ComputeShaders.erase(shaderHandle);
 }
 
 void ShaderDataBase::DeleteHullShader(const int shaderHandle)
 {
     m_HullShaders[shaderHandle]->Release();
+    m_HullShaders[shaderHandle] = nullptr;
     m_HullShaders.erase(shaderHandle);
 }
 
 void ShaderDataBase::DeleteDomainShader(const int shaderHandle)
 {
     m_DomainShaders[shaderHandle]->Release();
+    m_DomainShaders[shaderHandle] = nullptr;
     m_DomainShaders.erase(shaderHandle);
 }
 
 void ShaderDataBase::DeleteAllShader()
 {
 	// 頂点シェーダーの解放
-	for (const auto& shader : m_VertexShaders) {
-		shader.second->Release();
+	for (auto& shader : m_VertexShaders) {
+        if (shader.second != nullptr) {
+		    shader.second->Release();
+            shader.second = nullptr;
+        }
 	}
+    m_VertexShaders.clear();
 
 	// ピクセルシェーダーの解放
-	for (const auto& shader : m_PixelShaders) {
-		shader.second->Release();
-	}
+	for (auto& shader : m_PixelShaders) {
+        if (shader.second != nullptr) {
+            shader.second->Release();
+            shader.second = nullptr;
+        }
+    }
+    m_PixelShaders.clear();
 
 	// ジオメトリシェーダーの解放
-	for (const auto& shader : m_GeometryShaders) {
-		shader.second->Release();
-	}
+	for (auto& shader : m_GeometryShaders) {
+        if (shader.second != nullptr) {
+            shader.second->Release();
+            shader.second = nullptr;
+        }
+    }
+    m_GeometryShaders.clear();
 
 	// コンピュートシェーダーの解放
-	for (const auto& shader : m_ComputeShaders) {
-		shader.second->Release();
-	}
+	for (auto& shader : m_ComputeShaders) {
+        if (shader.second != nullptr) {
+            shader.second->Release();
+            shader.second = nullptr;
+        }
+    }
+    m_ComputeShaders.clear();
 
 	// ハルシェーダーの解放
-	for (const auto& shader : m_HullShaders) {
-		shader.second->Release();
-	}
+	for (auto& shader : m_HullShaders) {
+        if (shader.second != nullptr) {
+            shader.second->Release();
+            shader.second = nullptr;
+        }
+    }
+    m_HullShaders.clear();
 
 	// ドメインシェーダーの解放
-	for (const auto& shader : m_DomainShaders) {
-		shader.second->Release();
-	}
+	for (auto& shader : m_DomainShaders) {
+        if (shader.second != nullptr) {
+            shader.second->Release();
+            shader.second = nullptr;
+        }
+    }
+    m_DomainShaders.clear();
 }

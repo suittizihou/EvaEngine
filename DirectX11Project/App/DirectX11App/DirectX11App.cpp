@@ -18,7 +18,6 @@ My3DLib::ConstantBufferData DirectX11App::g_ConstantBufferData{};
 
 IDXGIAdapter* DirectX11App::m_Adapter{ nullptr };
 
-
 HRESULT DirectX11App::Init()
 {
 	HRESULT hr{};
@@ -125,6 +124,7 @@ HRESULT DirectX11App::HardWareCheck()
 		}
 
 		add->Release();
+		add = nullptr;
 
 		// アダプタアウトプットを解放
 		adapterOutput->Release();
@@ -182,9 +182,9 @@ HRESULT DirectX11App::CreateDeviceAndSwapChain()
 		&featureLevels, 
 		&g_Context);
 
-	//// アダプターの解放
-	//m_Adapter->Release();
-	//m_Adapter = nullptr;
+	// アダプターの解放
+	m_Adapter->Release();
+	m_Adapter = nullptr;
 
 	return hr;
 }
@@ -207,6 +207,8 @@ HRESULT DirectX11App::CreateRasterizerState()
 
 	// ラスタライザーステートをセット
 	DirectX11App::g_Context->RSSetState(rasterizerState);
+	rasterizerState->Release();
+	rasterizerState = nullptr;
 
 	return hr;
 }
@@ -223,19 +225,16 @@ HRESULT DirectX11App::CreateRenderTargetView()
 		return hr;
 	}
 
-	//ID3D11RenderTargetView* renderTarget{ nullptr };
-
 	// レンダーターゲットView作成
 	hr = g_Device->CreateRenderTargetView(backBuffer, NULL, g_RenderTargetView.GetAddressOf());
 	if (FAILED(hr)) {
 		DebugLog::LogError("Render Target View Create Failed.");
 		return hr;
 	}
-	//g_RenderTargetView.Attach(renderTarget);
 
 	// 使い終わったものを解放
 	backBuffer->Release();
-	//renderTarget->Release();
+	backBuffer = nullptr;
 
 	return hr;
 }
@@ -273,14 +272,14 @@ HRESULT DirectX11App::CreateDepthAndStencilView()
 	dsvDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	dsvDesc.Texture2D.MipSlice = 0;
 
-	//ID3D11DepthStencilView* view{ nullptr };
 	hr = g_Device->CreateDepthStencilView(depthStencil, &dsvDesc, &g_DepthStencilView);
 	if(FAILED(hr)){
 		DebugLog::LogError("Depth Stencill View Create Failed");
 		return hr;
 	}
 
-	//g_DepthStencilView.Attach(view);
+	depthStencil->Release();
+	depthStencil = nullptr;
 
 	return hr;
 }

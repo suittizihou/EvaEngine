@@ -36,7 +36,9 @@ InputBufferUpdate::~InputBufferUpdate()
 {
 	m_pKeyDevice->Unacquire();
 	m_pKeyDevice->Release();
+	m_pKeyDevice = nullptr;
 	m_pInputInterface->Release();
+	m_pInputInterface = nullptr;
 }
 
 
