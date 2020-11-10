@@ -4,6 +4,7 @@
 #include "../../../GameSystemBase/Components/ComponentHeaders.h"
 
 #include "../MoveScript/MoveScript.h"
+#include "../SinMove/SinMove.h"
 
 CameraScript::CameraScript(const Vector3& position, const Vector3& euler) :
 	MonoBehaviour(FunctionMask::UPDATE),
@@ -36,11 +37,13 @@ void CameraScript::Update()
 	}
 
 	// プレイヤーの座標を見る
-	GetTransform().lock()->look_at(FindGameObjectWithTag("Player").lock()->GetTransform().lock()->position());
+	//GetTransform().lock()->look_at(FindGameObjectWithTag("Player").lock()->GetTransform().lock()->position());
 
 	if (Input::GetKeyDown(KeyCode::Y)) {
 		auto obj = AddGameObject();
 		obj.lock()->GetTransform().lock()->position(GetTransform().lock()->position());
+		obj.lock()->GetTransform().lock()->local_scale(Vector3(0.1f, 0.1f, 0.1f));
+		obj.lock()->AddComponent<SinMove>(0.0025f, 0.0003f);
 		obj.lock()->AddComponent<MeshRenderer>(obj.lock()->AddComponent<MeshFilter>(1), GetGameObject().lock()->GetComponent<Camera>());
 	}
 }

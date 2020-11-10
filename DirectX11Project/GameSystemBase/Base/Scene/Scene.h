@@ -43,6 +43,14 @@ public:
 		ComponentManager::Instance().Draw(m_SceneType, command);
 	};
 
+	// 名前で検索
+	std::weak_ptr<GameObject> Find(const std::string& name);
+	// タグで検索してゲームオブジェクトを一つ持ってくる
+	std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
+	// タグで検索してヒットしたゲームオブジェクトを全部持ってくる
+	std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
+
+
 	std::weak_ptr<GameObject> AddGameObject(const std::string& name = "GameObject", const std::string& tag = "None");
 
 protected:
