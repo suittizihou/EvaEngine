@@ -23,7 +23,7 @@ MeshRenderer::MeshRenderer(
 }
 
 void MeshRenderer::Awake() {
-	m_Transform = GetGameObject().lock()->GetComponent<Transform>();
+	m_Transform = GetTransform();
 }
 
 void MeshRenderer::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)

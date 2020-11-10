@@ -35,6 +35,9 @@ void CameraScript::Update()
 		GetTransform().lock()->rotate(0.0f, 0.1f, 0.0f, Transform::Space::World);
 	}
 
+	// プレイヤーの座標を見る
+	GetTransform().lock()->look_at(FindGameObjectWithTag("Player").lock()->GetTransform().lock()->position());
+
 	if (Input::GetKeyDown(KeyCode::Y)) {
 		auto obj = AddGameObject();
 		obj.lock()->GetTransform().lock()->position(GetTransform().lock()->position());

@@ -257,7 +257,8 @@ Vector3 Vector3::move_towards(const Vector3& current, const Vector3& target, flo
 Vector3 Vector3::normalize(const Vector3& value)
 {
 	float mag = value.magnitude();
-	return Vector3();
+	if (mag > kEpsilon) return value / mag;
+	else return zero();
 }
 
 Vector3 Vector3::project(const Vector3& vector, const Vector3& onNormal)
