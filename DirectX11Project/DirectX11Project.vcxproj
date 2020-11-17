@@ -174,6 +174,7 @@
     <ClCompile Include="Game\Scene\GameMain\GameMain.cpp" />
     <ClCompile Include="Game\Scene\GameTitle\GameTitle.cpp" />
     <ClCompile Include="Game\Script\CameraScript\CameraScript.cpp" />
+    <ClCompile Include="Game\Script\JumpScript\JumpScript.cpp" />
     <ClCompile Include="Game\Script\MoveScript\MoveScript.cpp" />
     <ClCompile Include="Game\Script\SinMove\SinMove.cpp" />
     <ClCompile Include="Game\Script\TestScript\TestScript.cpp" />
@@ -236,6 +237,7 @@
     <ClInclude Include="Game\Scene\GameMain\GameMain.h" />
     <ClInclude Include="Game\Scene\GameTitle\GameTitle.h" />
     <ClInclude Include="Game\Script\CameraScript\CameraScript.h" />
+    <ClInclude Include="Game\Script\JumpScript\JumpScript.h" />
     <ClInclude Include="Game\Script\MoveScript\MoveScript.h" />
     <ClInclude Include="Game\Script\SinMove\SinMove.h" />
     <ClInclude Include="Game\Script\TestScript\TestScript.h" />
