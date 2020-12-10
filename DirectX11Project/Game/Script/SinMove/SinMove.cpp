@@ -11,6 +11,6 @@ SinMove::SinMove(float speed, float magnitude) :
 
 void SinMove::Update()
 {
-	GetTransform().lock()->move(Vector3::up() * std::sin(m_MoveCounter) * m_Magnitude);
+	GetTransform().lock()->move(Vector3::right() * std::sin(m_MoveCounter) * m_Magnitude);
 	m_MoveCounter += m_Speed;
 }

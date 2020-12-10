@@ -4,6 +4,7 @@
 #include "../../Script/MoveScript/MoveScript.h"
 #include "../../Script/SinMove/SinMove.h"
 #include "../../../Utility/Input/Input.h"
+#include "../../Script/JumpScript/JumpScript.h"
 #include "../../../GameSystemBase/Manager/SceneManager/SceneManager.h"
 
 GameTitle::GameTitle(const SceneType& sceneType) : Scene(sceneType)
@@ -27,13 +28,14 @@ void GameTitle::Initialize()
 			obj.lock()->GetTransform().lock()->local_scale(Vector3(0.5f, 0.5f, 0.5f));
 			obj.lock()->AddComponent<SinMove>(0.0025f, 0.0003f);
 			obj.lock()->AddComponent<MeshRenderer>(obj.lock()->AddComponent<MeshFilter>(1), camera);
+			obj.lock()->AddComponent<JumpScript>();
 		}
 	}
 }
 
 void GameTitle::SceneUpdate()
 {
-	if (Input::GetKeyDown(KeyCode::Space)) {
-		SceneManager::LoadScene(SceneType::GameMain);
-	}
+	//if (Input::GetKeyDown(KeyCode::Space)) {
+	//	SceneManager::LoadScene(SceneType::GameMain);
+	//}
 }
