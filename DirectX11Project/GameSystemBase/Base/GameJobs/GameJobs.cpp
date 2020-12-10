@@ -3,7 +3,7 @@
 
 std::weak_ptr<GameObject> GameJobs::AddGameObject()
 {
-    return GameObjectManager::Instance().AddGameObject(m_SceneType);
+    return GameObjectManager::Instance().AddGameObject(m_SceneType, "None", "GameObject");
 }
 
 void GameJobs::SetSceneType(const SceneType& sceneType)

@@ -2,6 +2,7 @@
 
 #include "../../Manager/ComponentManager/ComponentManager.h"
 #include "../../Manager/GameObjectManager/GameObjectManager.h"
+#include "../../../GameSystemBase/Components/ComponentHeaders.h"
 
 #include "SceneType.h"
 
@@ -51,7 +52,7 @@ public:
 	std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
 
 
-	std::weak_ptr<GameObject> AddGameObject(const std::string& name = "GameObject", const std::string& tag = "None");
+	std::weak_ptr<GameObject> AddGameObject(const std::string& tag = "None", const std::string& name = "GameObject");
 
 protected:
 	SceneType m_SceneType{};

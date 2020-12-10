@@ -16,7 +16,7 @@ std::vector<std::weak_ptr<GameObject>> Scene::FindGameObjectsWithTag(const std::
 }
 
 
-std::weak_ptr<GameObject> Scene::AddGameObject(const std::string& name, const std::string& tag)
+std::weak_ptr<GameObject> Scene::AddGameObject(const std::string& tag, const std::string& name)
 {
-    return GameObjectManager::Instance().AddGameObject(m_SceneType, name, tag);
+    return GameObjectManager::Instance().AddGameObject(m_SceneType, tag, name);
 }

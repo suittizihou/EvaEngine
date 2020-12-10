@@ -25,7 +25,7 @@ public:
 	// ゲームオブジェクトデータベースをシーンに追加
 	void AddGameObjectDataBase(const SceneType& sceneType);
 
-	std::weak_ptr<GameObject> AddGameObject(const SceneType& sceneType, const std::string& name = "GameObject", const std::string& tag = "None");
+	std::weak_ptr<GameObject> AddGameObject(const SceneType& sceneType, const std::string& tag, const std::string& name);
 	// 名前で検索
 	std::weak_ptr<GameObject> Find(const SceneType& sceneType, const std::string& name);
 	// タグで検索してゲームオブジェクトを一つ持ってくる

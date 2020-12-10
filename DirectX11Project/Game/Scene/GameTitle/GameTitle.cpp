@@ -5,7 +5,6 @@
 #include "../../Script/SinMove/SinMove.h"
 #include "../../../Utility/Input/Input.h"
 #include "../../../GameSystemBase/Manager/SceneManager/SceneManager.h"
-#include "../../../GameSystemBase/Components/ComponentHeaders.h"
 
 GameTitle::GameTitle(const SceneType& sceneType) : Scene(sceneType)
 {
@@ -17,8 +16,8 @@ void GameTitle::Initialize()
 	cameraObject.lock()->AddComponent<CameraScript>(Vector3(0.0f, 1.25f, -5.0f), Vector3(0.0f, 0.0f, 0.0f));
 	auto camera = cameraObject.lock()->GetComponent<Camera>();
 
-	//auto charaObj = AddGameObject("Player");
-	//charaObj.lock()->AddComponent<TestScript>();
+	auto charaObj = AddGameObject("Player");
+	charaObj.lock()->AddComponent<TestScript>();
 	//charaObj.lock()->AddComponent<MoveScript>(0.001f);
 
 	for (int i = 0; i < 1; ++i) {
