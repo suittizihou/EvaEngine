@@ -44,7 +44,6 @@ public:
 	void FixedUpdate();
 	void Update();
 	void LateUpdate();
-	void RemoveComponent();
 	void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
 
 private:

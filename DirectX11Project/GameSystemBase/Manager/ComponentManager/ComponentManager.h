@@ -49,8 +49,6 @@ public:
 		m_ComponentList[sceneType]->RemoveComponent<T>(gameObjectID);
 	}
 
-	// 削除依頼が出てるコンポーネントを消す
-	void RunRemoveComponents(const SceneType& sceneType);
 	// 保持しているコンポーネントを全部削除
 	void RemoveAllComponent(const SceneType& sceneType);
 

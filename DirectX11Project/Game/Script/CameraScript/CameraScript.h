@@ -14,4 +14,5 @@ public:
 private:
 	Vector3 m_Position{};
 	Vector3 m_Euler{};
+	std::weak_ptr<GameObject> m_GameObject;
 };

@@ -62,11 +62,6 @@ void SceneDataBase::LateUpdate()
     m_CurrentScene.lock()->LateUpdate();
 }
 
-void SceneDataBase::RemoveComponent()
-{
-    m_CurrentScene.lock()->RemoveComponent();
-}
-
 void SceneDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
 {
     m_CurrentScene.lock()->Draw(command);

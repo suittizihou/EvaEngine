@@ -28,11 +28,6 @@ void ComponentManager::AddComponentDataBase(const SceneType& sceneType)
 	m_ComponentList[sceneType] = std::make_shared<ComponentDataBase>();
 }
 
-void ComponentManager::RunRemoveComponents(const SceneType& sceneType)
-{
-	m_ComponentList[sceneType]->RunRemoveComponents();
-}
-
 void ComponentManager::RemoveAllComponent(const SceneType& sceneType)
 {
 	m_ComponentList[sceneType]->RemoveAllComponent();

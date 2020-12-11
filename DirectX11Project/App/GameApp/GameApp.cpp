@@ -33,7 +33,6 @@ void GameApp::Update()
 	SceneDataBase::Instance().FixedUpdate();
 	SceneDataBase::Instance().Update();
 	SceneDataBase::Instance().LateUpdate();
-	SceneDataBase::Instance().RemoveComponent();
 }
 
 void GameApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
