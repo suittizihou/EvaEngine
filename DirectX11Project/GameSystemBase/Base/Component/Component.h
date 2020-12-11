@@ -5,7 +5,6 @@
 #include "../GameJobs/GameJobs.h"
 #include "ComponentDesc.h"
 
-class GameObject;
 class Transform;
 
 // 使用する関数を示すビットフラグ

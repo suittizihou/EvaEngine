@@ -10,7 +10,7 @@ public:
 	GameObjectDataBase() = default;
 	~GameObjectDataBase() = default;
 
-	std::weak_ptr<GameObject> AddGameObject(const SceneType& sceneType, const std::string& name = "GameObject", const std::string& tag = "None");
+	std::weak_ptr<GameObject> AddGameObject(const SceneType& sceneType, const std::string& tag = "None", const std::string& name = "GameObject");
 	// 名前で検索
 	std::weak_ptr<GameObject> Find(const std::string& name);
 	// タグで検索してゲームオブジェクトを一つ持ってくる

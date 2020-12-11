@@ -33,11 +33,6 @@ public:
 		ComponentManager::Instance().LateUpdate(m_SceneType);
 	}
 
-	// コンポーネント削除処理
-	void RemoveComponent() {
-		ComponentManager::Instance().RunRemoveComponents(m_SceneType);
-	}
-
 	// 描画処理
 	void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
 	{

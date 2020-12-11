@@ -28,16 +28,17 @@ public:
 		// 複数アタッチできないコンポーネントの場合
 		if (!component_temp->GetCanMultiAttach()) {
 			// 同じコンポーネントが無いかチェック
-			for (const auto& component : m_ComponentList[gameObject.lock()->GetObjectID()]) {
-				if (componentDesc.hashCode == component->GetHashCode()) {
-					throw std::runtime_error("Can't multi attach." + (std::string)typeid(T).name() + " : このコンポーネントは複数アタッチできません");
-					return std::weak_ptr<T>();
-				}
+			for (int i = 0; i < m_Components.size(); ++i) {
+				if (!IsGameObjectIDEquals(m_Components[i]->GetGameObject(), gameObject)) continue;
+				if (componentDesc.hashCode != m_Components[i]->GetHashCode()) continue;
+
+				throw std::runtime_error("Can't multi attach." + (std::string)typeid(T).name() + " : このコンポーネントは複数アタッチできません");
+				return std::weak_ptr<T>();
 			}
 		}
 
 		// コンポーネントを追加(関数なども登録)
-		AddComponent(gameObject, component_temp);
+		AddComponent(component_temp, m_Components.size());
 		// コンポーネントIDをインクリメント
 		m_ComponentID += 1;
 
@@ -54,13 +55,16 @@ public:
 	template<class T>
 	std::weak_ptr<T> GetComponent(const UINT& gameObjectID)
 	{
+		size_t hashCode = typeid(T).hash_code();
 		// コンポーネント検索
-		for (const auto& component : m_ComponentList[gameObjectID]) {
-			// 指定したコンポーネントのIDと同じIDの物が見つかればそれを返す
-			if (typeid(T).hash_code() == component->GetHashCode()) {
-				// dynamic_castを使用していないのは型変換チェックによる速度低下を防ぐため
-				return std::static_pointer_cast<T>(component);
-			}
+		for (int i = 0; i < m_Components.size(); ++i) {
+			// ゲームオブジェクトIDが違う場合はスキップ
+			if (!IsGameObjectIDEquals(m_Components[i]->GetGameObject(), gameObjectID)) continue;
+
+			// 指定したコンポーネントとハッシュ値が違う場合はコンティニュー
+			if (hashCode != m_Components[i]->GetHashCode()) continue;
+			// dynamic_castを使用していないのは型変換チェックによる速度低下を防ぐため
+			return std::static_pointer_cast<T>(m_Components[i]);
 		}
 
 		throw std::runtime_error(
@@ -77,25 +81,25 @@ public:
 	void RemoveComponent(const UINT& gameObjectID)
 	{
 		size_t hashCode = typeid(T).hash_code();
-		for (const auto& component : m_ComponentList[gameObjectID]) {
-			// 同じIDがあったら
-			if (hashCode == component->GetHashCode()) {
-				// 消せないコンポーネントなら早期リターン
-				if (!component->GetCanRemove()) {
-					throw std::runtime_error(
-						"Can't remove component : " +
-						(std::string)typeid(T).name() +
-						" : " +
-						std::to_string(typeid(T).hash_code()) +
-						" : このコンポーネントは消せません");
-					return;
-				}
+		for (int i = 0; i < m_Components.size(); ++i) {
+			if (!IsGameObjectIDEquals(m_Components[i]->GetGameObject(), gameObjectID)) continue;
+			if (hashCode != m_Components[i]->GetHashCode()) continue;
 
-				// 消す対象のオブジェクトIDとコンポーネントのハッシュ値をQueueに追加
-				std::map<UINT, size_t> removeList{ { gameObjectID, hashCode } };
-				m_RemoveHashQueue.push(removeList);
+			// 消せないコンポーネントなら早期リターン
+			if (!m_Components[i]->GetCanRemove()) {
+				throw std::runtime_error(
+					"Can't remove component : " +
+					(std::string)typeid(T).name() +
+					" : " +
+					std::to_string(typeid(T).hash_code()) +
+					" : このコンポーネントは消せません");
 				return;
 			}
+
+			// 消す対象の要素番号とFunctionMaskを渡して消す
+			RemoveComponent(i, m_Components[i]->GetFunctionMask());
+			return;
+			
 		}
 
 		throw std::runtime_error(
@@ -106,8 +110,6 @@ public:
 			" : コンポーネントが見つかりませんでした");
 	}
 
-	// 削除依頼が出てるコンポーネントを消す
-	void RunRemoveComponents();
 	// 保持しているコンポーネントを全部削除
 	void RemoveAllComponent();
 
@@ -122,60 +124,33 @@ public:
 		const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) const;
 
 private:
-	template<class T>
-	void AddComponent(const std::weak_ptr<GameObjectBase>& gameObject, std::shared_ptr<T> component) {
-		// FixedUpdate関数の登録
-		if (component->GetFunctionMask() & FunctionMask::FIXED_UPDATE) {
-			m_FixedUpdateFunctionList[gameObject.lock()->GetObjectID()][m_ComponentID] = [=]()
-				->void { return component->FixedUpdate(); };
-		}
-		// Update関数の登録
-		if (component->GetFunctionMask() & FunctionMask::UPDATE) {
-			m_UpdateFunctionList[gameObject.lock()->GetObjectID()][m_ComponentID] = [=]()
-				->void { return component->Update(); };
-		}
-		// LateUpdate関数の登録
-		if (component->GetFunctionMask() & FunctionMask::LATE_UPDATE) {
-			m_LateUpdateFunctionList[gameObject.lock()->GetObjectID()][m_ComponentID] = [=]()
-				->void { return component->LateUpdate(); };
-		}
-		// Draw関数の登録
-		if (component->GetFunctionMask() & FunctionMask::DRAW) {
-			m_DrawFunctionList[gameObject.lock()->GetObjectID()][m_ComponentID] = [=](const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
-				->void { return component->Draw(command); };
-		}
-		// コンポーネントの登録
-		m_ComponentList[gameObject.lock()->GetObjectID()].push_back(component);
-	}
+	// コンポーネントを追加
+	void AddComponent(const std::shared_ptr<Component>& component, const int indexNum);
 
+	// 消すコンポーネントを後ろに持ってったり消す数をカウントしたり
+	void RemoveComponent(const int index, const UINT mask);
+	// 指定の数字に合った部分の要素番号を取得する
+	__int64 FindItr(const std::vector<int>& vec, int value);
+
+	// 指定されたゲームオブジェクトと指定されたIDが同じか確認する(ここにGameObjectのヘッダーを書くと循環参照が発生するためcppに逃がす)
+	bool IsGameObjectIDEquals(const std::weak_ptr<GameObject>& obj, const UINT& id);
+	bool IsGameObjectIDEquals(const std::weak_ptr<GameObject>& obj1, const std::weak_ptr<GameObjectBase>& obj2);
 
 private:
-	// コンポーネントのリスト(firstはオブジェクトID)
-	std::map<UINT,		// GameObjectID
-		std::list<std::shared_ptr<Component>>> m_ComponentList;
+	// コンポーネントのデータ
+	std::vector<std::shared_ptr<Component>> m_Components;
 
-	// FixedUpdate関数のリスト
-	std::map <UINT,	// GameObjectID
-		std::map<UINT,	// ComponentID
-		std::function<void()>>> m_FixedUpdateFunctionList;
+	// FixedUpdate関数が記入されているコンポーネントが格納されている印字の番号を格納する配列
+	std::vector<int> m_FixedUpdateFuncNumber;
 
-	// Update関数のリスト
-	std::map<UINT,		// GameObjectID
-		std::map<UINT,	// ComponentID
-		std::function<void()>>> m_UpdateFunctionList;
+	// Update関数が記入されているコンポーネントが格納されている印字の番号を格納する配列
+	std::vector<int> m_UpdateFuncNumber;
 
-	// LateUpdate関数のリスト
-	std::map<UINT,		// GameObjectID
-		std::map<UINT,	// ComponentID
-		std::function<void()>>> m_LateUpdateFunctionList;
+	// LateUpdate関数が記入されているコンポーネントが格納されている印字の番号を格納する配列
+	std::vector<int> m_LateUpdateFuncNumber;
 
-	// Draw関数のリスト
-	std::map<UINT,		// GameObjectID
-		std::map<UINT,	// ComponentID
-		std::function<void(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>&)>>> m_DrawFunctionList;
-
-	// 削除予定のハッシュキュー
-	std::queue<std::map<UINT, size_t>> m_RemoveHashQueue;
+	// Draw関数が記入されているコンポーネントが格納されている印字の番号を格納する配列
+	std::vector<int> m_DrawFuncNumber;
 
 	UINT m_ComponentID{};
 };

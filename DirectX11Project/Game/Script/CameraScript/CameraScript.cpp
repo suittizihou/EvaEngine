@@ -45,5 +45,14 @@ void CameraScript::Update()
 		obj.lock()->GetTransform().lock()->local_scale(Vector3(0.1f, 0.1f, 0.1f));
 		obj.lock()->AddComponent<SinMove>(0.0025f, 0.0003f);
 		obj.lock()->AddComponent<MeshRenderer>(obj.lock()->AddComponent<MeshFilter>(1), GetGameObject().lock()->GetComponent<Camera>());
+		m_GameObject = obj;
+	}
+
+	if (Input::GetKeyDown(KeyCode::U)) {
+		m_GameObject.lock()->RemoveComponent<SinMove>();
+	}
+
+	if (Input::GetKeyDown(KeyCode::I)) {
+		FindGameObjectWithTag("Player").lock()->RemoveComponent<MeshRenderer>();
 	}
 }
