@@ -49,6 +49,7 @@ void GameApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
 	// レンダーターゲットの設定
 	DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_RenderTargetView.GetAddressOf(), DirectX11App::g_DepthStencilView.Get());
 
+	// 描画
 	SceneDataBase::Instance().Draw(command);
 
 	// 描画終了処理

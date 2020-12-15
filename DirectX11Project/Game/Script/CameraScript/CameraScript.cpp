@@ -16,7 +16,7 @@ CameraScript::CameraScript(const Vector3& position, const Vector3& euler) :
 void CameraScript::Awake()
 {
 	GetGameObject().lock()->AddComponent<Camera>();
-	GetGameObject().lock()->AddComponent<MoveScript>(0.001f);
+	GetGameObject().lock()->AddComponent<MoveScript>(0.1f);
 	GetTransform().lock()->position(m_Position);
 	GetTransform().lock()->euler_angles(m_Euler);
 }
@@ -24,16 +24,16 @@ void CameraScript::Awake()
 void CameraScript::Update()
 {
 	if (Input::GetKey(KeyCode::UpArrow)) {
-		GetTransform().lock()->rotate(-0.1f, 0.0f, 0.0f);
+		GetTransform().lock()->rotate(-1.0f, 0.0f, 0.0f);
 	}
 	if (Input::GetKey(KeyCode::DownArrow)) {
-		GetTransform().lock()->rotate(0.1f, 0.0f, 0.0f);
+		GetTransform().lock()->rotate(1.0f, 0.0f, 0.0f);
 	}
 	if (Input::GetKey(KeyCode::LeftArrow)) {
-		GetTransform().lock()->rotate(0.0f, -0.1f, 0.0f, Transform::Space::World);
+		GetTransform().lock()->rotate(0.0f, -1.0, 0.0f, Transform::Space::World);
 	}
 	if (Input::GetKey(KeyCode::RightArrow)) {
-		GetTransform().lock()->rotate(0.0f, 0.1f, 0.0f, Transform::Space::World);
+		GetTransform().lock()->rotate(0.0f, 1.0f, 0.0f, Transform::Space::World);
 	}
 
 	// プレイヤーの座標を見る

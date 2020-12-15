@@ -3,9 +3,9 @@
 
 const std::string Window::g_WindowName{ "DirectX11Project" };
 UINT Window::g_WindowLeft{ 0 };
-UINT Window::g_WindowRight{ 640 };
+UINT Window::g_WindowRight{ 1280 };
 UINT Window::g_WindowTop{ 0 };
-UINT Window::g_WindowBottom{ 480 };
+UINT Window::g_WindowBottom{ 720 };
 UINT Window::g_FPS{ 60 };
 HINSTANCE Window::g_hInstance{};
 HWND Window::g_hWnd{};

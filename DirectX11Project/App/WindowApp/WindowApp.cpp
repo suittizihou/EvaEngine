@@ -36,7 +36,7 @@ HRESULT WindowApp::Init()
 
     // COMライブラリを初期化するもの(COMとはコンポーネント・オブジェクト・モデルの略)
     // COMライブラリを使う時に使うスレッドで少なくとも１回は実行する必要がある。
-    // D3D関連の色んなクラスがこのCOMを利用して実装されており、これをする必要がある(たぶん)
+    // D3D関連の色んなクラスがこのCOMを利用して実装されており、これをする必要がある
     hr = CoInitializeEx(NULL, COINIT_MULTITHREADED);
 
     if (FAILED(hr)) {

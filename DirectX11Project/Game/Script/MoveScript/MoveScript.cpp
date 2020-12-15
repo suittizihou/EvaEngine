@@ -11,7 +11,7 @@ void MoveScript::Update()
 {
 	// ¶‚ÉˆÚ“®
 	if (Input::GetKey(KeyCode::A)) {
-		GetTransform().lock()->move(-GetTransform().lock()->right() * m_Speed);
+		GetTransform().lock()->move(GetTransform().lock()->left() * m_Speed);
 	}
 
 	// ‰E‚ÉˆÚ“®
@@ -27,5 +27,15 @@ void MoveScript::Update()
 	// Žè‘O‚ÉˆÚ“®
 	if (Input::GetKey(KeyCode::S)) {
 		GetTransform().lock()->move(GetTransform().lock()->back() * m_Speed);
+	}
+
+	// ã‚ÉˆÚ“®
+	if (Input::GetKey(KeyCode::E)) {
+		GetTransform().lock()->move(Vector3::up() * m_Speed);
+	}
+
+	// ‰º‚ÉˆÚ“®
+	if (Input::GetKey(KeyCode::Q)) {
+		GetTransform().lock()->move(Vector3::down() * m_Speed);
 	}
 }
