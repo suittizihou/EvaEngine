@@ -1,6 +1,7 @@
 #include "DrawManager.h"
 #include "../../../App/DirectX11App/DirectX11App.h"
 #include "../../../Setting/Window/Window.h"
+#include "../../../Utility/Mesh/Mesh.h"
 #include "../../../Utility/Material/Material.h"
 #include "../../../Utility/Math/Vector3/Vector3.h"
 #include "../../Components/Camera/Camera.h"
@@ -37,7 +38,7 @@ void DrawManager::DrawBegin()
 		0);												// ステンシルクリア値
 }
 
-void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<Transform>& transform, const My3DLib::Model& model)
+void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<Transform>& transform, My3DLib::ModelData& model)
 {
 	UINT strides = sizeof(My3DLib::VertexData);
 	UINT offset = 0;
@@ -60,13 +61,10 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 	// カメラの座標をセット
 	Vector3 cameraPos = camera.lock()->GetTransform().lock()->position();
 	DirectX::XMStoreFloat4(&DirectX11App::g_ConstantBufferData.cameraPos, DirectX::XMVectorSet(cameraPos.x, cameraPos.y, cameraPos.z, 0.0f));
-	// 定数バッファの更新
-	DirectX11App::g_Context->UpdateSubresource(DirectX11App::g_ConstantBuffer.Get(), 0, NULL, &DirectX11App::g_ConstantBufferData, 0, 0);
-	// コンテキストに定数バッファを設定
-	DirectX11App::g_Context->VSSetConstantBuffers(0, 1, DirectX11App::g_ConstantBuffer.GetAddressOf());
-	DirectX11App::g_Context->PSSetConstantBuffers(0, 1, DirectX11App::g_ConstantBuffer.GetAddressOf());
 
+	// メッシュ情報が格納されているMapからメッシュを取り出す
 	for (const auto& meshs : model.meshes) {
+		// メッシュ情報が格納された配列から１メッシュずつ取り出す
 		for (auto mesh : meshs.second) {
 			// インプットレイアウトの設定
 			DirectX11App::g_Context->IASetInputLayout(m_InputLayout.Get());
@@ -74,6 +72,16 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 			DirectX11App::g_Context->IASetVertexBuffers(0, 1, mesh.GetVertexBuffer(), &strides, &offset);
 			// インデックスバッファの設定
 			DirectX11App::g_Context->IASetIndexBuffer(mesh.GetIndexBuffer(), DXGI_FORMAT_R32_UINT, 0);
+
+			// マテリアルのセット
+			SetMaterial(model.materials[mesh.GetMaterialName()]);
+
+			// 定数バッファの更新
+			DirectX11App::g_Context->UpdateSubresource(DirectX11App::g_ConstantBuffer.Get(), 0, NULL, &DirectX11App::g_ConstantBufferData, 0, 0);
+			// コンテキストに定数バッファを設定
+			DirectX11App::g_Context->VSSetConstantBuffers(0, 1, DirectX11App::g_ConstantBuffer.GetAddressOf());
+			DirectX11App::g_Context->PSSetConstantBuffers(0, 1, DirectX11App::g_ConstantBuffer.GetAddressOf());
+
 			// ポリゴン描画
 			DirectX11App::g_Context->DrawIndexed(static_cast<UINT>(mesh.GetIndices().size()), 0, 0);
 		}
@@ -87,7 +95,9 @@ void DrawManager::DrawEnd()
 
 void DrawManager::SetMaterial(const My3DLib::Material& material)
 {
-	DirectX11App::g_ConstantBufferData.materialDiffuse = DirectX::XMFLOAT4();
+	DirectX11App::g_ConstantBufferData.materialDiffuse = material.diffuse;
+	DirectX11App::g_ConstantBufferData.materialAmbient = material.ambient;
+	DirectX11App::g_ConstantBufferData.materialSpecular = material.specular;
 }
 
 void DrawManager::SetShader(Shader& shader) {

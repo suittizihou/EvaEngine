@@ -25,13 +25,13 @@ void GameTitle::Initialize()
 	std::mt19937 mt{ std::random_device{}() };
 	std::uniform_int_distribution<int> dist(1, 3);
 
-	for (int i = 0; i < 100; ++i) {
-		for (int k = 0; k < 100; ++k) {
+	for (int i = 0; i < 10; ++i) {
+		for (int k = 0; k < 10; ++k) {
 			auto obj = AddGameObject();
 			obj.lock()->GetTransform().lock()->position(Vector3(i + 1.0f * i, 0.0f, k + 1.0f * k));
 			obj.lock()->GetTransform().lock()->local_scale(Vector3::one());
 			obj.lock()->AddComponent<SinMove>(0.025f * dist(mt), 0.03f);
-			obj.lock()->AddComponent<MeshRenderer>(obj.lock()->AddComponent<MeshFilter>(1), camera);
+			obj.lock()->AddComponent<MeshRenderer>(obj.lock()->AddComponent<MeshFilter>(2), camera);
 			//obj.lock()->AddComponent<JumpScript>();
 		}
 	}

@@ -7,14 +7,14 @@
 #include "../../../Mesh/Mesh.h"
 #include "../../../Material/Material.h"
 
-My3DLib::Model FBXModelLoader::LoadModel(const char* fileName)
+My3DLib::ModelData FBXModelLoader::LoadModel(const char* fileName)
 {
     // FbxManager作成
     FbxManager* fbx_manager = fbxsdk::FbxManager::Create();
     if (fbx_manager == nullptr)
     {
         std::runtime_error("FbxManagerの作成に失敗しました");
-        return My3DLib::Model();
+        return My3DLib::ModelData();
     }
 
     // FbxImporter作成
@@ -22,7 +22,7 @@ My3DLib::Model FBXModelLoader::LoadModel(const char* fileName)
     if (fbx_importer == nullptr) {
         fbx_manager->Destroy();
         std::runtime_error("FbxImporterの作成に失敗しました");
-        return My3DLib::Model();
+        return My3DLib::ModelData();
     }
 
     // FbxSceneを生成
@@ -31,7 +31,7 @@ My3DLib::Model FBXModelLoader::LoadModel(const char* fileName)
         fbx_importer->Destroy();
         fbx_manager->Destroy();
         std::runtime_error("FbxSceneの作成に失敗しました");
-        return My3DLib::Model();
+        return My3DLib::ModelData();
     }
 
     // Fileを初期化
@@ -120,7 +120,7 @@ void FBXModelLoader::LoadMaterial(fbxsdk::FbxSurfaceMaterial* material)
     factor = factors[(int)MaterialOrder::Diffuse];
     tempMaterial.diffuse = DirectX::XMFLOAT4((float)color[0], (float)color[1], (float)color[2], (float)factor);
 
-    m_Model.materials[material->GetName()].push_back(tempMaterial);
+    m_Model.materials[material->GetName()] = tempMaterial;
 
     // テクスチャ読み込み
     // Diffuseプロパティを取得

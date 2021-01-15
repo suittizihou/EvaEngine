@@ -1,7 +1,7 @@
 #pragma once
 
 #include <map>
-#include "../../ModelData/ModelData.h"
+#include "../ModelLoaderBase.h"
 
 #pragma comment(lib, "libfbxsdk-md.lib")
 #pragma comment(lib, "libxml2-md.lib")
@@ -14,17 +14,17 @@ namespace fbxsdk {
 	class FbxFileTexture;
 }
 
-class FBXModelLoader {
+class FBXModelLoader : public ModelLoaderBase {
 public:
 	FBXModelLoader() = default;
 	~FBXModelLoader() = default;
 
-	My3DLib::Model LoadModel(const char* fileName);
+	My3DLib::ModelData LoadModel(const char* fileName) override;
 	void LoadMaterial(fbxsdk::FbxSurfaceMaterial* material);
 	bool LoadTexture(fbxsdk::FbxFileTexture* texture, std::string& keyword);
 	void FindMeshNode(fbxsdk::FbxNode* node, std::map<std::string, fbxsdk::FbxNode*>& list);
 	bool CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh);
 
 private:
-	My3DLib::Model m_Model{};
+	My3DLib::ModelData m_Model{};
 };

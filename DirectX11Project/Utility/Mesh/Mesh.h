@@ -2,6 +2,7 @@
 
 #include "../../Define/D3D11Defines.h"
 #include <vector>
+#include <string>
 #include <DirectXMath.h>
 #include "../ModelUtility/ModelData/VertexData.h"
 
@@ -32,8 +33,9 @@ namespace My3DLib {
 		void SetIndices(std::vector<unsigned int> indices);
 		// インデックスバッファの設定
 		void SetIndexBuffer(ID3D11Buffer* indexBuffer);
-		// マテリアルIDの設定
-		void SetMaterialID(UINT materialID);
+		// マテリアル名の設定
+		void SetMaterialName(UINT materialID);
+		void SetMaterialName(std::string materialName);
 
 		// 頂点情報の取得
 		std::vector<My3DLib::VertexData> GetVertexData();
@@ -43,8 +45,8 @@ namespace My3DLib {
 		std::vector<unsigned int> GetIndices();
 		// インデックスバッファの取得
 		ID3D11Buffer* GetIndexBuffer();
-		// マテリアルIDの取得
-		UINT GetMaterial();
+		// マテリアルの取得
+		std::string GetMaterialName() const;
 
 	private:
 		// 頂点データの配列
@@ -52,7 +54,7 @@ namespace My3DLib {
 		// インデックスバッファ
 		std::vector<unsigned int> m_Indices;
 		// マテリアルID
-		UINT m_MaterialID{};
+		std::string m_MaterialName{};
 
 		// GPU用頂点バッファー
 		VertexBuffer m_VertexBuffer{ nullptr };

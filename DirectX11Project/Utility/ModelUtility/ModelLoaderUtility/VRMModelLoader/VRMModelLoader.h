@@ -3,7 +3,7 @@
 #include <DirectXMath.h>
 #include <GLTFSDK/GLTF.h>
 
-#include "../../ModelData/ModelData.h"
+#include "../ModelLoaderBase.h"
 
 namespace Microsoft {
 	namespace glTF {
@@ -12,23 +12,23 @@ namespace Microsoft {
 	}
 }
 
-class VRMModelLoader {
+class VRMModelLoader : public ModelLoaderBase {
 public:
 	template<class T>
 	using ComPtr = Microsoft::WRL::ComPtr<T>;
 
 	VRMModelLoader() = default;
 	~VRMModelLoader() = default;
-	My3DLib::Model LoadModel(const std::string fileName);
-	My3DLib::Model MakeModelDataMemory(const My3DLib::Model& model);
+	My3DLib::ModelData LoadModel(const char* fileName) override;
+	My3DLib::ModelData MakeModelDataMemory(const My3DLib::ModelData& model);
 
 private:
 	void LoadModelGeometry(const Microsoft::glTF::Document& doc, std::shared_ptr<Microsoft::glTF::GLTFResourceReader> reader);
-	void MakeModelGeometry(My3DLib::Model& model);
+	void MakeModelGeometry(My3DLib::ModelData& model);
 	void LoadModelMaterial(const Microsoft::glTF::Document& doc, std::shared_ptr<Microsoft::glTF::GLTFResourceReader> reader);
-	void MakeModelMaterial(My3DLib::Model& model);
+	void MakeModelMaterial(My3DLib::ModelData& model);
 
 private:
-	My3DLib::Model m_Model{};
+	My3DLib::ModelData m_Model{};
 
 };

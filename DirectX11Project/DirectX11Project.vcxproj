@@ -193,7 +193,8 @@
     <ClCompile Include="GameSystemBase\DataBase\ModelDataBase\ModelDataBase.cpp" />
     <ClCompile Include="Utility\Mesh\Mesh.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.cpp" />
-    <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoader\ModelLoader.cpp" />
+    <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoadManager\ModelLoadManager.cpp" />
+    <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\OBJModelLoader\OBJModelLoader.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.cpp" />
     <ClCompile Include="Utility\ResourceLoad\ResourceLoad.cpp" />
     <ClCompile Include="Utility\ShaderUtility\ShaderCompiler\ShaderCompiler.cpp" />
@@ -262,7 +263,9 @@
     <ClInclude Include="Utility\ModelUtility\ModelData\ShaderParameters.h" />
     <ClInclude Include="Utility\ModelUtility\ModelData\VertexData.h" />
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoader\ModelLoader.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoaderBase.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoadManager\ModelLoadManager.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\OBJModelLoader\OBJModelLoader.h" />
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.h" />
     <ClInclude Include="Utility\ResourceLoad\ResourceLoad.h" />
     <ClInclude Include="Utility\ShaderUtility\ShaderCompiler\ShaderCompiler.h" />

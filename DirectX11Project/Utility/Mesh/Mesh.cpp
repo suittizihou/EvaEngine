@@ -78,9 +78,14 @@ void My3DLib::Mesh::SetIndexBuffer(ID3D11Buffer* indexBuffer)
 	m_IndexBuffer.Attach(indexBuffer);
 }
 
-void My3DLib::Mesh::SetMaterialID(UINT materialID)
+void My3DLib::Mesh::SetMaterialName(UINT materialID)
 {
-	m_MaterialID = materialID;
+	m_MaterialName = std::to_string(materialID);
+}
+
+void My3DLib::Mesh::SetMaterialName(std::string materialName)
+{
+	m_MaterialName = materialName;
 }
 
 std::vector<My3DLib::VertexData> Mesh::GetVertexData()
@@ -103,7 +108,7 @@ ID3D11Buffer* My3DLib::Mesh::GetIndexBuffer()
 	return m_IndexBuffer.Get();
 }
 
-UINT My3DLib::Mesh::GetMaterial()
+std::string My3DLib::Mesh::GetMaterialName() const
 {
-	return m_MaterialID;
+	return m_MaterialName;
 }

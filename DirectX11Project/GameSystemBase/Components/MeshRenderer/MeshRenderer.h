@@ -22,7 +22,7 @@ public:
 	void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) override;
 
 private:
-	My3DLib::Model m_Model{};
+	My3DLib::ModelData m_Model{};
 	std::weak_ptr<MeshFilter> m_MeshFilter;
 	std::weak_ptr<Transform> m_Transform;
 	std::weak_ptr<Camera> m_Camera;

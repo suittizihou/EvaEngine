@@ -3,7 +3,7 @@ struct VS_INPUT
     float4 pos : POSITION;
     float4 nor : NORMAL;
     float4 col : COLOR;
-    float4 uv : TEXCOORD;
+    float2 uv : TEXCOORD;
 };
 
 struct VS_OUT
@@ -11,7 +11,7 @@ struct VS_OUT
     float4 pos : SV_POSITION;
     float4 nor : NORMAL;
     float4 col : COLOR;
-    float4 uv : TEXCOORD;
+    float2 uv : TEXCOORD;
 };
 
 cbuffer ConstantBuffer
@@ -37,12 +37,7 @@ VS_OUT vsMain(VS_INPUT input) {
     output.pos = mul(output.pos, View);
 	// ビュー座標 * プロジェクション座標変換行列
     output.pos = mul(output.pos, Projection);
-
-    // 頂点色を指定
-    output.col = input.col;
-	// Texture指定
-    output.uv = input.uv;
-
+    
     float4 normal;
 	// 移動が計算に反映させない
     input.nor.w = 0.0;
@@ -50,9 +45,14 @@ VS_OUT vsMain(VS_INPUT input) {
 	// ワールド座標上での法線の向きに変換する
     normal = mul(input.nor, World).xyzw;
     normal = normalize(normal);
-	// saturate => 引数で指定した値を0～1間での範囲に収める
+    // saturate => 引数で指定した値を0～1間での範囲に収める
 	// dot => 内積計算
     output.nor = saturate(dot(normal, LightVector));
+    
+    // 頂点色を指定
+    output.col = input.col;
+	// Texture指定
+    output.uv = input.uv;
     
 	return output;
 }

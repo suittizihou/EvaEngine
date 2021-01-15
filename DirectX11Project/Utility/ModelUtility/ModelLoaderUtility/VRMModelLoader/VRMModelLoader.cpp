@@ -10,7 +10,7 @@
 using namespace DirectX;
 using namespace std;
 
-My3DLib::Model VRMModelLoader::LoadModel(const std::string fileName)
+My3DLib::ModelData VRMModelLoader::LoadModel(const char* fileName)
 {
     // モデルデータの読み込み
     auto modelFilePath = experimental::filesystem::path(fileName);
@@ -31,9 +31,9 @@ My3DLib::Model VRMModelLoader::LoadModel(const std::string fileName)
     return m_Model;
 }
 
-My3DLib::Model VRMModelLoader::MakeModelDataMemory(const My3DLib::Model& model)
+My3DLib::ModelData VRMModelLoader::MakeModelDataMemory(const My3DLib::ModelData& model)
 {
-    My3DLib::Model tempModel = model;
+    My3DLib::ModelData tempModel = model;
     MakeModelGeometry(tempModel);
     MakeModelMaterial(tempModel);
     //ModelApp::Instance().CreateConstantBuffer(tempModel);
@@ -48,7 +48,7 @@ void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std
     {
         for (const auto& meshPrimitive : mesh.primitives)
         {
-            My3DLib::Mesh mesh{};
+            My3DLib::Mesh tempMesh{};
 
             // 頂点位置情報アクセッサの取得
             auto& idPos = meshPrimitive.GetAttributeAccessorId(ACCESSOR_POSITION);
@@ -90,18 +90,18 @@ void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std
             }
 
             // 頂点データをセット
-            mesh.SetVertexData(vertices);
+            tempMesh.SetVertexData(vertices);
             // インデックスデータをセット
-            mesh.SetIndices(reader->ReadBinaryData<uint32_t>(doc, accIndex));
+            tempMesh.SetIndices(reader->ReadBinaryData<uint32_t>(doc, accIndex));
             // マテリアルIDを登録
-            mesh.SetMaterialID(int(doc.materials.GetIndex(meshPrimitive.materialId)));
+            tempMesh.SetMaterialName(int(doc.materials.GetIndex(meshPrimitive.materialId)));
 
-            m_Model.meshes[""].push_back(mesh);
+            m_Model.meshes[mesh.name].push_back(tempMesh);
         }
     }
 }
 
-void VRMModelLoader::MakeModelGeometry(My3DLib::Model& model)
+void VRMModelLoader::MakeModelGeometry(My3DLib::ModelData& model)
 {
     size_t vertexBufferSize = sizeof(My3DLib::VertexData);
     for (auto& meshs : model.meshes) {
@@ -136,11 +136,11 @@ void VRMModelLoader::LoadModelMaterial(const Microsoft::glTF::Document& doc, std
         material.g_ImageData = imageData;
         material.g_AlphaMode = m.alphaMode;
 
-        m_Model.materials[""].push_back(material);
+        m_Model.materials[m.name] = material;
     }
 }
 
-void VRMModelLoader::MakeModelMaterial(My3DLib::Model& model)
+void VRMModelLoader::MakeModelMaterial(My3DLib::ModelData& model)
 {
     //int textureIndex = 0;
 

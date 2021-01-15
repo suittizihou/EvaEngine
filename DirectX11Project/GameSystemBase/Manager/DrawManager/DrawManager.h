@@ -14,7 +14,7 @@ public:
 	// •`‰æŠJn
 	static void DrawBegin();
 	// •`‰æ
-	static void Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<Transform>& transform, const My3DLib::Model& model);
+	static void Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<Transform>& transform, My3DLib::ModelData& model);
 	// •`‰æI—¹
 	static void DrawEnd();
 

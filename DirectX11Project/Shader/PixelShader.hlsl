@@ -3,7 +3,7 @@ struct PS_INPUT
 	float4 pos : SV_POSITION;
     float4 nor : NORMAL;
 	float4 col : COLOR;
-    float4 uv : TEXCOORD;
+    float2 uv : TEXCOORD;
 };
 
 cbuffer ConstantBuffer
@@ -23,6 +23,11 @@ Texture2D Texture : register(t0[0]); // Texture‚ğƒXƒƒbƒg0‚Ì0”Ô–Ú‚ÌƒeƒNƒXƒ`ƒƒƒŒƒ
 SamplerState Sampler : register(s0[0]); // Sampler‚ğƒXƒƒbƒg0‚Ì0”Ô–Ú‚ÌƒTƒ“ƒvƒ‰ƒŒƒWƒXƒ^‚Éİ’è
 
 float4 psMain(PS_INPUT input) : SV_TARGET
-{
-	return input.col * input.nor;
+{    
+    //float4 color = Texture.Sample(Sampler, input.uv)/* * input.col * input.nor*/;
+    //color *= input.col;
+    
+    float4 color = input.col * input.nor;
+
+	return color;
 }
