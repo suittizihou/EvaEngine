@@ -39,7 +39,7 @@ void Split(char split_char, char* buffer, std::vector<std::string>& out)
 }
 
 void Replase(char searchChar, char replaceChar, char* buffer) {
-    int len = strlen(buffer);
+    int len = static_cast<int>(strlen(buffer));
 
     for (int i = 0; i < len; ++i) {
         if (buffer[i] != searchChar) continue;
@@ -121,7 +121,7 @@ void OBJModelLoader::ParseVKeywordTag(std::vector<DirectX::XMFLOAT3>& data, char
     float values[3] = { 0.0f };
 
     for (std::string str : splitStrings) {
-        values[count] = atof(str.c_str());
+        values[count] = static_cast<float>(atof(str.c_str()));
         count += 1;
     }
 
@@ -166,11 +166,11 @@ void OBJModelLoader::ParseFKeywordTag(
         outVertexData.push_back(vertexData);
 
         // インデックスバッファに追加
-        outIndices.push_back(outVertexData.size() - 1);
+        outIndices.push_back(static_cast<unsigned int>(outVertexData.size() - 1));
     }
 
     // ポリゴン作成の頂点順番を反転する
-    int size = static_cast<int>(outIndices.size());
+    unsigned int size = static_cast<unsigned int>(outIndices.size());
     unsigned int temp = outIndices[size - 1];
     outIndices[size - 1] = outIndices[size - 3];
     outIndices[size - 3] = temp;

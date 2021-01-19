@@ -42,8 +42,8 @@ void CameraScript::Update()
 	if (Input::GetKeyDown(KeyCode::Y)) {
 		auto obj = AddGameObject();
 		obj.lock()->GetTransform().lock()->position(GetTransform().lock()->position());
-		obj.lock()->GetTransform().lock()->local_scale(Vector3(0.1f, 0.1f, 0.1f));
-		obj.lock()->AddComponent<SinMove>(0.0025f, 0.0003f);
+		obj.lock()->GetTransform().lock()->local_scale(Vector3(1.0f, 1.0f, 1.0f));
+		obj.lock()->AddComponent<SinMove>(0.025f, 0.03f);
 		obj.lock()->AddComponent<MeshRenderer>(obj.lock()->AddComponent<MeshFilter>(1), GetGameObject().lock()->GetComponent<Camera>());
 		m_GameObject = obj;
 	}

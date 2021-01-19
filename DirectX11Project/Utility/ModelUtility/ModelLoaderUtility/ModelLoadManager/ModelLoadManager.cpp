@@ -6,11 +6,13 @@
 #include "../VRMModelLoader/VRMModelLoader.h"
 #include "../OBJModelLoader/OBJModelLoader.h"
 
+#include "../../../../System/DebugLog/DebugLog.h"
+
 int ModelLoadManager::Load(const std::string& fileName)
 {
-    std::vector<std::string> fileSplit = StringAssist::split(fileName, '.');
+    std::vector<std::string> fileSplit{ StringAssist::split(fileName, '.') };
 
-    if (fileSplit.size() == 0) std::runtime_error("Šg’£Žq•t‚«‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢");
+    if (fileSplit.size() == 0) DebugLog::LogError("Šg’£Žq•t‚«‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢");
 
     std::string modelType = fileSplit[fileSplit.size() - 1];
 

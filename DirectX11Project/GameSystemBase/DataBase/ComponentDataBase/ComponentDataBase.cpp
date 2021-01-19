@@ -53,12 +53,16 @@ void ComponentDataBase::AddComponent(const std::shared_ptr<Component>& component
 
 void ComponentDataBase::RemoveComponent(const int index, const UINT mask)
 {
+	// 末尾のコンポーネントが使用している関数マスクを取得
 	UINT endElementMask = m_Components.back()->GetFunctionMask();
+
 	// 消す場所と末尾をクルっと入れ替え
 	std::iter_swap(m_Components.begin() + index, m_Components.end() - 1);
 	// 末尾を削除
 	m_Components.pop_back();
 
+	// 削除前のコンポーネントがあった配列番号を各関数添字配列の末尾に入れる
+	// (この削除前の添字の場所(m_Components配列の場所)には削除しないコンポーネントの添字が入っている)
 	if (endElementMask & FunctionMask::FIXED_UPDATE) m_FixedUpdateFuncNumber[m_FixedUpdateFuncNumber.size() - 1] = index;
 	if (endElementMask & FunctionMask::UPDATE) m_UpdateFuncNumber[m_UpdateFuncNumber.size() - 1] = index;
 	if (endElementMask & FunctionMask::LATE_UPDATE) m_LateUpdateFuncNumber[m_LateUpdateFuncNumber.size() - 1] = index;
