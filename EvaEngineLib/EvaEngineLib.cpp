@@ -1,6 +1,9 @@
-#if _DEBUG
+ï»¿#if _DEBUG
 #define _CRTDBG_MAP_ALLOC
 #endif
+
+#include "pch.h"
+#include "framework.h"
 
 #include <Windows.h>
 #include <stdexcept>
@@ -14,16 +17,14 @@
 
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
 #if _DEBUG
-    // ƒƒ‚ƒŠƒŠ[ƒNŒŸo
+    // ãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯æ¤œå‡º
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
-
-    return WrapperDllMain(hInstance, hPrev, lpCmdLine, nCmdShow, &user_main);
 
     Window::g_hInstance = hInstance;
     Window::g_nCmdShow = nCmdShow;
 
-    // ƒEƒBƒ“ƒhƒE‚Ì‰Šú‰»
+    // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®åˆæœŸåŒ–
     if (FAILED(WindowApp::Init())) {
         DebugLog::LogError("Window Initialize Failed.");
         return -1;
@@ -31,6 +32,6 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance
 
     int result = WindowApp::Update();
 
-    // ƒƒbƒZ[ƒWƒ‹[ƒv
+    // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—
     return result;
 }

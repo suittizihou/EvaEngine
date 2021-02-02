@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{0444EED1-2BC0-48D3-A811-A122AEA84305}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>EvaEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>EvaEngine</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\lib\vs2017store\x64\release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\lib\vs2017store\x86\debug;C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\lib\vs2017\x86\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\lib\vs2017store\x64\debug;C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\lib\vs2017\x64\debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\lib\vs2017store\x86\release;C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\lib\vs2017\x86\release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;EVAENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalLibraryDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\lib\vs2017\x64\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;EVAENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;EVAENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;EVAENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="App\DirectX11App\DirectX11App.h" />
+    <ClInclude Include="App\GameApp\GameApp.h" />
+    <ClInclude Include="App\WindowApp\WindowApp.h" />
+    <ClInclude Include="Define\D3D11Defines.h" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="GameSystemBase\Base\Component\Component.h" />
+    <ClInclude Include="GameSystemBase\Base\Component\ComponentDesc.h" />
+    <ClInclude Include="GameSystemBase\Base\GameJobs\GameJobs.h" />
+    <ClInclude Include="GameSystemBase\Base\GameObject\GameObject.h" />
+    <ClInclude Include="GameSystemBase\Base\GameObject\GameObjectBase.h" />
+    <ClInclude Include="GameSystemBase\Base\Scene\Scene.h" />
+    <ClInclude Include="GameSystemBase\Base\Scene\SceneType.h" />
+    <ClInclude Include="GameSystemBase\Components\Camera\Camera.h" />
+    <ClInclude Include="GameSystemBase\Components\ComponentHeaders.h" />
+    <ClInclude Include="GameSystemBase\Components\MeshFilter\MeshFilter.h" />
+    <ClInclude Include="GameSystemBase\Components\MeshRenderer\MeshRenderer.h" />
+    <ClInclude Include="GameSystemBase\Components\MonoBehaviour\MonoBehaviour.h" />
+    <ClInclude Include="GameSystemBase\Components\Transform\Transform.h" />
+    <ClInclude Include="GameSystemBase\DataBase\ComponentDataBase\ComponentDataBase.h" />
+    <ClInclude Include="GameSystemBase\DataBase\GameObjectDataBase\GameObjectDataBase.h" />
+    <ClInclude Include="GameSystemBase\DataBase\ModelDataBase\ModelDataBase.h" />
+    <ClInclude Include="GameSystemBase\DataBase\SceneDataBase\SceneDataBase.h" />
+    <ClInclude Include="GameSystemBase\DataBase\ShaderDataBase\ShaderDataBase.h" />
+    <ClInclude Include="GameSystemBase\DataBase\TextureDataBase\TextureDataBase.h" />
+    <ClInclude Include="GameSystemBase\Manager\ComponentManager\ComponentManager.h" />
+    <ClInclude Include="GameSystemBase\Manager\DrawManager\DrawManager.h" />
+    <ClInclude Include="GameSystemBase\Manager\GameObjectManager\GameObjectManager.h" />
+    <ClInclude Include="GameSystemBase\Manager\SceneManager\SceneManager.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Setting\Window\Window.h" />
+    <ClInclude Include="System\DebugLog\DebugLog.h" />
+    <ClInclude Include="Utility\BufferCreate\BufferCreate.h" />
+    <ClInclude Include="Utility\Input\Input.h" />
+    <ClInclude Include="Utility\Input\InputBufferUpdate\InputBufferUpdate.h" />
+    <ClInclude Include="Utility\Input\KeyCode.h" />
+    <ClInclude Include="Utility\Material\Material.h" />
+    <ClInclude Include="Utility\Math\Mathf\Mathf.h" />
+    <ClInclude Include="Utility\Math\Matrix3x3\Matrix3x3.h" />
+    <ClInclude Include="Utility\Math\Matrix4x4\Matrix4x4.h" />
+    <ClInclude Include="Utility\Math\Quaternion\Quaternion.h" />
+    <ClInclude Include="Utility\Math\Vector2\Vector2.h" />
+    <ClInclude Include="Utility\Math\Vector3\Vector3.h" />
+    <ClInclude Include="Utility\Mesh\Mesh.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelData\ConstantBufferData.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelData\ModelData.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelData\ShaderParameters.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelData\VertexData.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoaderBase.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoadManager\ModelLoadManager.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\OBJModelLoader\OBJModelLoader.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.h" />
+    <ClInclude Include="Utility\ResourceLoad\ResourceLoad.h" />
+    <ClInclude Include="Utility\ShaderUtility\ShaderCompiler\ShaderCompiler.h" />
+    <ClInclude Include="Utility\ShaderUtility\ShaderLoader\ShaderLoader.h" />
+    <ClInclude Include="Utility\ShaderUtility\Shader\Shader.h" />
+    <ClInclude Include="Utility\StringAssist\StringAssist.h" />
+    <ClInclude Include="Utility\Time\Time.h" />
+    <ClInclude Include="Utility\Time\TimeBase.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App\DirectX11App\DirectX11App.cpp" />
+    <ClCompile Include="App\GameApp\GameApp.cpp" />
+    <ClCompile Include="App\WindowApp\WindowApp.cpp" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="GameSystemBase\Base\Component\Component.cpp" />
+    <ClCompile Include="GameSystemBase\Base\GameJobs\GameJobs.cpp" />
+    <ClCompile Include="GameSystemBase\Base\GameObject\GameObject.cpp" />
+    <ClCompile Include="GameSystemBase\Base\Scene\Scene.cpp" />
+    <ClCompile Include="GameSystemBase\Components\Camera\Camera.cpp" />
+    <ClCompile Include="GameSystemBase\Components\MeshRenderer\MeshRenderer.cpp" />
+    <ClCompile Include="GameSystemBase\Components\MonoBehaviour\MonoBehaviour.cpp" />
+    <ClCompile Include="GameSystemBase\Components\Transform\Transform.cpp" />
+    <ClCompile Include="GameSystemBase\DataBase\ComponentDataBase\ComponentDataBase.cpp" />
+    <ClCompile Include="GameSystemBase\DataBase\GameObjectDataBase\GameObjectDataBase.cpp" />
+    <ClCompile Include="GameSystemBase\DataBase\ModelDataBase\ModelDataBase.cpp" />
+    <ClCompile Include="GameSystemBase\DataBase\SceneDataBase\SceneDataBase.cpp" />
+    <ClCompile Include="GameSystemBase\DataBase\ShaderDataBase\ShaderDataBase.cpp" />
+    <ClCompile Include="GameSystemBase\Manager\ComponentManager\ComponentManager.cpp" />
+    <ClCompile Include="GameSystemBase\Manager\DrawManager\DrawManager.cpp" />
+    <ClCompile Include="GameSystemBase\Manager\GameObjectManager\GameObjectManager.cpp" />
+    <ClCompile Include="GameSystemBase\Manager\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Setting\Window\Window.cpp" />
+    <ClCompile Include="System\DebugLog\DebugLog.cpp" />
+    <ClCompile Include="Utility\BufferCreate\BufferCreate.cpp" />
+    <ClCompile Include="Utility\Input\Input.cpp" />
+    <ClCompile Include="Utility\Input\InputBufferUpdate\InputBufferUpdate.cpp" />
+    <ClCompile Include="Utility\Math\Matrix3x3\Matrix3x3.cpp" />
+    <ClCompile Include="Utility\Math\Matrix4x4\Matrix4x4.cpp" />
+    <ClCompile Include="Utility\Math\Quaternion\Quaternion.cpp" />
+    <ClCompile Include="Utility\Math\Vector2\Vector2.cpp" />
+    <ClCompile Include="Utility\Math\Vector3\Vector3.cpp" />
+    <ClCompile Include="Utility\Mesh\Mesh.cpp" />
+    <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.cpp" />
+    <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoadManager\ModelLoadManager.cpp" />
+    <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\OBJModelLoader\OBJModelLoader.cpp" />
+    <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.cpp" />
+    <ClCompile Include="Utility\ResourceLoad\ResourceLoad.cpp" />
+    <ClCompile Include="Utility\ShaderUtility\ShaderCompiler\ShaderCompiler.cpp" />
+    <ClCompile Include="Utility\ShaderUtility\ShaderLoader\ShaderLoader.cpp" />
+    <ClCompile Include="Utility\ShaderUtility\Shader\Shader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shader\PixelShader.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">psMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">psMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">psMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">psMain</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Shader\VertexShader.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">vsMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">vsMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">vsMain</EntryPointName>
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">vsMain</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\directxtex_desktop_win10.2020.8.15.1\build\native\directxtex_desktop_win10.targets" Condition="Exists('..\packages\directxtex_desktop_win10.2020.8.15.1\build\native\directxtex_desktop_win10.targets')" />
+    <Import Project="..\packages\rapidjson.temprelease.0.0.2.20\build\native\rapidjson.temprelease.targets" Condition="Exists('..\packages\rapidjson.temprelease.0.0.2.20\build\native\rapidjson.temprelease.targets')" />
+    <Import Project="..\packages\Microsoft.glTF.CPP.1.6.3.1\build\native\Microsoft.glTF.CPP.targets" Condition="Exists('..\packages\Microsoft.glTF.CPP.1.6.3.1\build\native\Microsoft.glTF.CPP.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\directxtex_desktop_win10.2020.8.15.1\build\native\directxtex_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtex_desktop_win10.2020.8.15.1\build\native\directxtex_desktop_win10.targets'))" />
+    <Error Condition="!Exists('..\packages\rapidjson.temprelease.0.0.2.20\build\native\rapidjson.temprelease.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\rapidjson.temprelease.0.0.2.20\build\native\rapidjson.temprelease.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.glTF.CPP.1.6.3.1\build\native\Microsoft.glTF.CPP.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.glTF.CPP.1.6.3.1\build\native\Microsoft.glTF.CPP.targets'))" />
+  </Target>
+</Project>

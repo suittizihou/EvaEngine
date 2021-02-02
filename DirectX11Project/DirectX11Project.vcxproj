@@ -24,6 +24,7 @@
     <ProjectGuid>{e07f6479-07d1-4366-a187-42040759706b}</ProjectGuid>
     <RootNamespace>DirectX11Project</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>TestProject</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -148,30 +149,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="App\DirectX11App\DirectX11App.cpp" />
-    <ClCompile Include="App\GameApp\GameApp.cpp" />
-    <ClCompile Include="App\WindowApp\WindowApp.cpp" />
-    <ClCompile Include="Editor\ImGUI\imgui.cpp" />
-    <ClCompile Include="Editor\ImGUI\imgui_draw.cpp" />
-    <ClCompile Include="Editor\ImGUI\imgui_impl_dx11.cpp" />
-    <ClCompile Include="Editor\ImGUI\imgui_impl_win32.cpp" />
-    <ClCompile Include="Editor\ImGUI\imgui_widgets.cpp" />
-    <ClCompile Include="GameSystemBase\Base\Component\Component.cpp" />
-    <ClCompile Include="GameSystemBase\Base\GameJobs\GameJobs.cpp" />
-    <ClCompile Include="GameSystemBase\Base\GameObject\GameObject.cpp" />
-    <ClCompile Include="GameSystemBase\Base\Scene\Scene.cpp" />
     <ClCompile Include="GameSystemBase\Components\Camera\Camera.cpp" />
-    <ClCompile Include="GameSystemBase\Components\MeshRenderer\MeshRenderer.cpp" />
     <ClCompile Include="GameSystemBase\Components\MonoBehaviour\MonoBehaviour.cpp" />
     <ClCompile Include="GameSystemBase\Components\Transform\Transform.cpp" />
     <ClCompile Include="GameSystemBase\DataBase\ComponentDataBase\ComponentDataBase.cpp" />
     <ClCompile Include="GameSystemBase\DataBase\GameObjectDataBase\GameObjectDataBase.cpp" />
-    <ClCompile Include="GameSystemBase\DataBase\SceneDataBase\SceneDataBase.cpp" />
     <ClCompile Include="GameSystemBase\DataBase\ShaderDataBase\ShaderDataBase.cpp" />
     <ClCompile Include="GameSystemBase\Manager\ComponentManager\ComponentManager.cpp" />
-    <ClCompile Include="GameSystemBase\Manager\DrawManager\DrawManager.cpp" />
     <ClCompile Include="GameSystemBase\Manager\GameObjectManager\GameObjectManager.cpp" />
-    <ClCompile Include="GameSystemBase\Manager\SceneManager\SceneManager.cpp" />
     <ClCompile Include="Game\Scene\GameMain\GameMain.cpp" />
     <ClCompile Include="Game\Scene\GameTitle\GameTitle.cpp" />
     <ClCompile Include="Game\Script\CameraScript\CameraScript.cpp" />
@@ -180,62 +165,30 @@
     <ClCompile Include="Game\Script\SinMove\SinMove.cpp" />
     <ClCompile Include="Game\Script\TestScript\TestScript.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Setting\Window\Window.cpp" />
-    <ClCompile Include="System\DebugLog\DebugLog.cpp" />
     <ClCompile Include="Utility\BufferCreate\BufferCreate.cpp" />
-    <ClCompile Include="Utility\Input\Input.cpp" />
     <ClCompile Include="Utility\Input\InputBufferUpdate\InputBufferUpdate.cpp" />
-    <ClCompile Include="Utility\Math\Matrix3x3\Matrix3x3.cpp" />
-    <ClCompile Include="Utility\Math\Matrix4x4\Matrix4x4.cpp" />
     <ClCompile Include="Utility\Math\Quaternion\Quaternion.cpp" />
-    <ClCompile Include="Utility\Math\Vector2\Vector2.cpp" />
     <ClCompile Include="Utility\Math\Vector3\Vector3.cpp" />
-    <ClCompile Include="GameSystemBase\DataBase\ModelDataBase\ModelDataBase.cpp" />
-    <ClCompile Include="Utility\Mesh\Mesh.cpp" />
-    <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoadManager\ModelLoadManager.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\OBJModelLoader\OBJModelLoader.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.cpp" />
     <ClCompile Include="Utility\ResourceLoad\ResourceLoad.cpp" />
-    <ClCompile Include="Utility\ShaderUtility\ShaderCompiler\ShaderCompiler.cpp" />
-    <ClCompile Include="Utility\ShaderUtility\ShaderLoader\ShaderLoader.cpp" />
-    <ClCompile Include="Utility\ShaderUtility\Shader\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\DirectX11App\DirectX11App.h" />
     <ClInclude Include="App\GameApp\GameApp.h" />
     <ClInclude Include="App\WindowApp\WindowApp.h" />
-    <ClInclude Include="Define\D3D11Defines.h" />
-    <ClInclude Include="Editor\ImGUI\imconfig.h" />
-    <ClInclude Include="Editor\ImGUI\imgui.h" />
-    <ClInclude Include="Editor\ImGUI\imgui_impl_dx11.h" />
-    <ClInclude Include="Editor\ImGUI\imgui_impl_win32.h" />
-    <ClInclude Include="Editor\ImGUI\imgui_internal.h" />
-    <ClInclude Include="Editor\ImGUI\imstb_rectpack.h" />
-    <ClInclude Include="Editor\ImGUI\imstb_textedit.h" />
-    <ClInclude Include="Editor\ImGUI\imstb_truetype.h" />
     <ClInclude Include="GameSystemBase\Base\Component\Component.h" />
     <ClInclude Include="GameSystemBase\Base\Component\ComponentDesc.h" />
-    <ClInclude Include="GameSystemBase\Base\GameJobs\GameJobs.h" />
-    <ClInclude Include="GameSystemBase\Base\GameObject\GameObject.h" />
-    <ClInclude Include="GameSystemBase\Base\GameObject\GameObjectBase.h" />
     <ClInclude Include="GameSystemBase\Base\Scene\Scene.h" />
-    <ClInclude Include="GameSystemBase\Base\Scene\SceneType.h" />
-    <ClInclude Include="GameSystemBase\Components\Camera\Camera.h" />
     <ClInclude Include="GameSystemBase\Components\ComponentHeaders.h" />
-    <ClInclude Include="GameSystemBase\Components\MeshFilter\MeshFilter.h" />
-    <ClInclude Include="GameSystemBase\Components\MeshRenderer\MeshRenderer.h" />
-    <ClInclude Include="GameSystemBase\Components\MonoBehaviour\MonoBehaviour.h" />
     <ClInclude Include="GameSystemBase\Components\Transform\Transform.h" />
     <ClInclude Include="GameSystemBase\DataBase\ComponentDataBase\ComponentDataBase.h" />
     <ClInclude Include="GameSystemBase\DataBase\GameObjectDataBase\GameObjectDataBase.h" />
     <ClInclude Include="GameSystemBase\DataBase\SceneDataBase\SceneDataBase.h" />
-    <ClInclude Include="GameSystemBase\DataBase\ShaderDataBase\ShaderDataBase.h" />
     <ClInclude Include="GameSystemBase\DataBase\TextureDataBase\TextureDataBase.h" />
     <ClInclude Include="GameSystemBase\Manager\ComponentManager\ComponentManager.h" />
-    <ClInclude Include="GameSystemBase\Manager\DrawManager\DrawManager.h" />
     <ClInclude Include="GameSystemBase\Manager\GameObjectManager\GameObjectManager.h" />
-    <ClInclude Include="GameSystemBase\Manager\SceneManager\SceneManager.h" />
     <ClInclude Include="Game\Scene\GameMain\GameMain.h" />
     <ClInclude Include="Game\Scene\GameTitle\GameTitle.h" />
     <ClInclude Include="Game\Script\CameraScript\CameraScript.h" />
@@ -243,37 +196,14 @@
     <ClInclude Include="Game\Script\MoveScript\MoveScript.h" />
     <ClInclude Include="Game\Script\SinMove\SinMove.h" />
     <ClInclude Include="Game\Script\TestScript\TestScript.h" />
-    <ClInclude Include="Setting\Window\Window.h" />
-    <ClInclude Include="System\DebugLog\DebugLog.h" />
     <ClInclude Include="Utility\BufferCreate\BufferCreate.h" />
-    <ClInclude Include="Utility\Input\Input.h" />
-    <ClInclude Include="Utility\Input\InputBufferUpdate\InputBufferUpdate.h" />
-    <ClInclude Include="Utility\Input\KeyCode.h" />
-    <ClInclude Include="Utility\Material\Material.h" />
-    <ClInclude Include="Utility\Math\Mathf\Mathf.h" />
-    <ClInclude Include="Utility\Math\Matrix3x3\Matrix3x3.h" />
-    <ClInclude Include="Utility\Math\Matrix4x4\Matrix4x4.h" />
-    <ClInclude Include="Utility\Math\Quaternion\Quaternion.h" />
-    <ClInclude Include="Utility\Math\Vector2\Vector2.h" />
-    <ClInclude Include="Utility\Math\Vector3\Vector3.h" />
     <ClInclude Include="GameSystemBase\DataBase\ModelDataBase\ModelDataBase.h" />
-    <ClInclude Include="Utility\Mesh\Mesh.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelData\ConstantBufferData.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelData\ModelData.h" />
     <ClInclude Include="Utility\ModelUtility\ModelData\ShaderParameters.h" />
     <ClInclude Include="Utility\ModelUtility\ModelData\VertexData.h" />
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoaderBase.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoadManager\ModelLoadManager.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\OBJModelLoader\OBJModelLoader.h" />
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.h" />
     <ClInclude Include="Utility\ResourceLoad\ResourceLoad.h" />
-    <ClInclude Include="Utility\ShaderUtility\ShaderCompiler\ShaderCompiler.h" />
-    <ClInclude Include="Utility\ShaderUtility\ShaderLoader\ShaderLoader.h" />
     <ClInclude Include="Utility\ShaderUtility\Shader\Shader.h" />
-    <ClInclude Include="Utility\StringAssist\StringAssist.h" />
-    <ClInclude Include="Utility\Time\Time.h" />
-    <ClInclude Include="Utility\Time\TimeBase.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -288,16 +218,6 @@
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">psMain</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">psMain</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">psMain</EntryPointName>
-    </FxCompile>
-    <FxCompile Include="Shader\VertexShader.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">vsMain</EntryPointName>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">vsMain</EntryPointName>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">vsMain</EntryPointName>
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">vsMain</EntryPointName>
     </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
