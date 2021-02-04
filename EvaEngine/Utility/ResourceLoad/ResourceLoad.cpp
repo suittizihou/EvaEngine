@@ -1,13 +1,13 @@
 #include "ResourceLoad.h"
-#include "../ModelUtility/ModelLoaderUtility/ModelLoadManager/ModelLoadManager.h"
+#include "../ModelUtility/ModelLoader/ModelLoader.h"
 #include "../ShaderUtility/ShaderLoader/ShaderLoader.h"
 
 void ResourceLoad::Load()
 {
-	ShaderLoader::Instance().VertexShaderLoad("Shader/VertexShader.hlsl");
-	ShaderLoader::Instance().PixelShaderLoad("Shader/PixelShader.hlsl");
+	ShaderLoader::VertexShaderLoad("Shader/VertexShader.hlsl");
+	ShaderLoader::PixelShaderLoad("Shader/PixelShader.hlsl");
 
-	ModelLoadManager::Instance().Load("Resources/alicia-solid.vrm");
-	ModelLoadManager::Instance().Load("Resources/Box.fbx");
-	ModelLoadManager::Instance().Load("Resources/Cube.obj");
+	ModelLoader::Load("Resources/alicia-solid.vrm");
+	ModelLoader::Load("Resources/Box.fbx");
+	ModelLoader::Load("Resources/Cube.obj");
 }

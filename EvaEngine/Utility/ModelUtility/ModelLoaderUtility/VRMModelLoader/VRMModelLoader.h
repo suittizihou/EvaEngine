@@ -3,7 +3,7 @@
 #include <DirectXMath.h>
 #include <GLTFSDK/GLTF.h>
 
-#include "../ModelLoaderBase.h"
+#include "../ModelLoadBase.h"
 
 namespace Microsoft {
 	namespace glTF {
@@ -12,7 +12,7 @@ namespace Microsoft {
 	}
 }
 
-class VRMModelLoader : public ModelLoaderBase {
+class VRMModelLoader : public ModelLoadBase {
 public:
 	template<class T>
 	using ComPtr = Microsoft::WRL::ComPtr<T>;

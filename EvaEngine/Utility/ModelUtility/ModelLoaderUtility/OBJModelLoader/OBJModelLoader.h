@@ -1,9 +1,9 @@
 #pragma once
 
 #include "../../ModelData/VertexData.h"
-#include "../ModelLoaderBase.h"
+#include "../ModelLoadBase.h"
 
-class OBJModelLoader : public ModelLoaderBase {
+class OBJModelLoader : public ModelLoadBase {
 public:
 
 	My3DLib::ModelData LoadModel(const char* fileName) override;

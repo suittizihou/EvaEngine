@@ -1,7 +1,7 @@
 #pragma once
 
 #include <map>
-#include "../ModelLoaderBase.h"
+#include "../ModelLoadBase.h"
 
 #pragma comment(lib, "libfbxsdk-md.lib")
 #pragma comment(lib, "libxml2-md.lib")
@@ -14,7 +14,7 @@ namespace fbxsdk {
 	class FbxFileTexture;
 }
 
-class FBXModelLoader : public ModelLoaderBase {
+class FBXModelLoader : public ModelLoadBase {
 public:
 	FBXModelLoader() = default;
 	~FBXModelLoader() = default;

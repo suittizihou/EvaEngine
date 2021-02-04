@@ -17,21 +17,16 @@ private:
 	~ShaderLoader() = default;
 
 public:
-	EVAENGINE_API static ShaderLoader& Instance() {
-		static ShaderLoader instance;
-		return instance;
-	}
-
 	// 頂点シェーダーの読み込み
-	EVAENGINE_API int VertexShaderLoad(const std::string & fileName, const std::string& entryPoint = "vsMain");
+	EVAENGINE_API static int VertexShaderLoad(const std::string & fileName, const std::string& entryPoint = "vsMain");
 	// ピクセルシェーダーの読み込み
-	EVAENGINE_API int PixelShaderLoad(const std::string & fileName, const std::string& entryPoint = "psMain");
+	EVAENGINE_API static int PixelShaderLoad(const std::string & fileName, const std::string& entryPoint = "psMain");
 	// ジオメトリシェーダーの読み込み
-	EVAENGINE_API int GeometryShaderLoad(const std::string & fileName, const std::string& entryPoint = "gsMain");
+	EVAENGINE_API static int GeometryShaderLoad(const std::string & fileName, const std::string& entryPoint = "gsMain");
 	// コンピュートシェーダーの読み込み
-	EVAENGINE_API int ComputeShaderLoad(const std::string & fileName, const std::string& entryPoint = "csMain");
+	EVAENGINE_API static int ComputeShaderLoad(const std::string & fileName, const std::string& entryPoint = "csMain");
 	// ハルシェーダーの読み込み
-	EVAENGINE_API int HullShaderLoad(const std::string & fileName, const std::string& entryPoint = "hsMain");
+	EVAENGINE_API static int HullShaderLoad(const std::string & fileName, const std::string& entryPoint = "hsMain");
 	// ドメインシェーダーの読み込み
-	EVAENGINE_API int DomainShaderLoad(const std::string & fileName, const std::string& entryPoint = "dsMain");
+	EVAENGINE_API static int DomainShaderLoad(const std::string & fileName, const std::string& entryPoint = "dsMain");
 };

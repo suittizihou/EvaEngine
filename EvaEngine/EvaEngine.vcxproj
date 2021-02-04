@@ -112,7 +112,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;EVAENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -130,7 +130,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;EVAENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -148,7 +148,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -217,8 +217,8 @@
     <ClInclude Include="Utility\ModelUtility\ModelData\ShaderParameters.h" />
     <ClInclude Include="Utility\ModelUtility\ModelData\VertexData.h" />
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoaderBase.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoadManager\ModelLoadManager.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoadBase.h" />
+    <ClInclude Include="Utility\ModelUtility\ModelLoader\ModelLoader.h" />
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\OBJModelLoader\OBJModelLoader.h" />
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.h" />
     <ClInclude Include="Utility\ResourceLoad\ResourceLoad.h" />
@@ -269,7 +269,7 @@
     <ClCompile Include="Utility\Math\Vector3\Vector3.cpp" />
     <ClCompile Include="Utility\Mesh\Mesh.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.cpp" />
-    <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoadManager\ModelLoadManager.cpp" />
+    <ClCompile Include="Utility\ModelUtility\ModelLoader\ModelLoader.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\OBJModelLoader\OBJModelLoader.cpp" />
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.cpp" />
     <ClCompile Include="Utility\ResourceLoad\ResourceLoad.cpp" />
@@ -308,6 +308,7 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="cpp.hint" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

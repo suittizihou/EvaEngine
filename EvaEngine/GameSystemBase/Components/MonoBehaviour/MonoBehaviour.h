@@ -9,7 +9,7 @@ class Transform;
 
 class MonoBehaviour : public Component {
 public:
-	MonoBehaviour(
+	EVAENGINE_API MonoBehaviour(
 		const UINT& functionMask,
 		const bool canMultiAttach = true,
 		const bool canRemove = true);

@@ -65,9 +65,9 @@ HRESULT DirectX11App::Init()
 	// ライトのカラー設定
 	DirectX11App::g_ConstantBufferData.lightColor = DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1);
 
-
+	D3D11_VIEWPORT viewPort{ Window::GetViewport() };
 	// ビューポートのセットアップ
-	g_Context->RSSetViewports(1, &Window::GetViewport());
+	g_Context->RSSetViewports(1, &viewPort);
 
 	return hr;
 }

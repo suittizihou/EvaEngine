@@ -159,16 +159,10 @@
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoadManager\ModelLoadManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\OBJModelLoader\OBJModelLoader.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoaderBase.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Utility\ResourceLoad\ResourceLoad.h">
@@ -190,6 +184,12 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Utility\Time\TimeBase.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoadBase.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\ModelUtility\ModelLoader\ModelLoader.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -296,9 +296,6 @@
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoadManager\ModelLoadManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\OBJModelLoader\OBJModelLoader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -317,6 +314,9 @@
     <ClCompile Include="Utility\ShaderUtility\ShaderLoader\ShaderLoader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Utility\ModelUtility\ModelLoader\ModelLoader.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\PixelShader.hlsl" />
@@ -324,5 +324,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

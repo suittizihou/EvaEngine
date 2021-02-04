@@ -4,8 +4,6 @@
 #include "../../GameSystemBase/DataBase/ShaderDataBase/ShaderDataBase.h"
 #include "../../GameSystemBase/DataBase/TextureDataBase/TextureDataBase.h"
 #include "../../GameSystemBase/DataBase/SceneDataBase/SceneDataBase.h"
-#include "../../Game/Scene/GameTitle/GameTitle.h"
-#include "../../Game/Scene/GameMain/GameMain.h"
 #include "../../GameSystemBase/Manager/DrawManager/DrawManager.h"
 
 GameApp::GameApp()
@@ -20,10 +18,7 @@ GameApp::~GameApp()
 
 void GameApp::Init()
 {
-	SceneDataBase::Instance().AddScene<GameTitle>(SceneType::GameTitle);
-	SceneDataBase::Instance().AddScene<GameMain>(SceneType::GameMain);
-
-	SceneDataBase::Instance().LoadScene(SceneType::GameTitle);
+	// ÉVÅ[ÉìÇÃèâä˙âª
 	SceneDataBase::Instance().InitializeScene();
 }
 
