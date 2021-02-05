@@ -43,7 +43,7 @@ std::vector<std::weak_ptr<GameObject>> GameObjectDataBase::FindGameObjectsWithTa
 		return nullVector;
 	}
 
-	std::vector<std::weak_ptr<GameObject>> objVector(m_GameObjectList[tag].begin(), m_GameObjectList[tag].end());
+	std::vector<std::weak_ptr<GameObject>> objVector{ m_GameObjectList[tag].begin(), m_GameObjectList[tag].end() };
 	return objVector;
 }
 

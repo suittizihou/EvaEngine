@@ -6,7 +6,7 @@
 
 #include "SceneType.h"
 
-class Scene {
+EVAENGINE_API class Scene {
 public:
 	Scene(const SceneType& sceneType) : m_SceneType(sceneType) {};
 	virtual ~Scene() = default;
@@ -40,14 +40,14 @@ public:
 	};
 
 	// 名前で検索
-	EVAENGINE_API std::weak_ptr<GameObject> Find(const std::string& name);
+	std::weak_ptr<GameObject> Find(const std::string& name);
 	// タグで検索してゲームオブジェクトを一つ持ってくる
-	EVAENGINE_API std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
+	std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
 	// タグで検索してヒットしたゲームオブジェクトを全部持ってくる
-	EVAENGINE_API std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
+	std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
 
 
-	EVAENGINE_API std::weak_ptr<GameObject> AddGameObject(const std::string& tag = "None", const std::string& name = "GameObject");
+	std::weak_ptr<GameObject> AddGameObject(const std::string& tag = "None", const std::string& name = "GameObject");
 
 protected:
 	SceneType m_SceneType{};

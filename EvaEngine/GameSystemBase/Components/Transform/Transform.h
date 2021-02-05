@@ -7,7 +7,7 @@
 #include <list>
 
 // トランスフォームクラス
-class Transform : public Component {
+EVAENGINE_API class Transform : public Component {
 public:
 	// 座標系の指定
 	enum class Space {
@@ -21,102 +21,102 @@ public:
 	// デストラクタ
 	~Transform();
 	// ワールド空間の Transform の青軸 前を取得
-	EVAENGINE_API Vector3 forward() const;
+	Vector3 forward() const;
 	// ワールド空間の Transform の青軸 前を設定
-	EVAENGINE_API void forward(const Vector3& value);
+	void forward(const Vector3& value);
 	// ワールド空間の Transform の青軸 後を取得
-	EVAENGINE_API Vector3 back() const;
+	Vector3 back() const;
 	// ワールド空間の Transform の赤軸 右を取得
-	EVAENGINE_API Vector3 right() const;
+	Vector3 right() const;
 	// ワールド空間の Transform の赤軸 右を設定
-	EVAENGINE_API void right(const Vector3& value);
+	void right(const Vector3& value);
 	// ワールド空間の Transform の赤軸 左を取得
-	EVAENGINE_API Vector3 left() const;
+	Vector3 left() const;
 	// ワールド空間の Transform の緑軸 上を取得
-	EVAENGINE_API Vector3 up() const;
+	Vector3 up() const;
 	// ワールド空間の Transform の緑軸 上を設定
-	EVAENGINE_API void up(const Vector3& value);
+	void up(const Vector3& value);
 	// ワールド空間の Transform の緑軸 下を取得
-	EVAENGINE_API Vector3 down() const;
+	Vector3 down() const;
 	// オブジェクトのグローバルスケールを取得
-	EVAENGINE_API Vector3 lossy_scale() const;
+	Vector3 lossy_scale() const;
 	// ワールド空間の Transform の位置を取得
-	EVAENGINE_API Vector3 position() const;
+	Vector3 position() const;
 	// ワールド空間の Transform の位置を設定
-	EVAENGINE_API void position(const Vector3& value);
+	void position(const Vector3& value);
 	// ワールド空間での移動
-	EVAENGINE_API void move(const Vector3& velocity);
+	void move(const Vector3& velocity);
 	// 親の Transform オブジェクトからVelocity分移動
-	EVAENGINE_API void local_move(const Vector3& velocity);
+	void local_move(const Vector3& velocity);
 	// Quaternion として保存されるワールド空間での Transform の回転を取得
-	EVAENGINE_API Quaternion rotation() const;
+	Quaternion rotation() const;
 	// Quaternion として保存されるワールド空間での Transform の回転を設定
-	EVAENGINE_API void rotation(const Quaternion& value);
+	void rotation(const Quaternion& value);
 	// オイラー角としての角度を取得
-	EVAENGINE_API Vector3 euler_angles() const;
+	Vector3 euler_angles() const;
 	// オイラー角としての角度を設定
-	EVAENGINE_API void euler_angles(const Vector3& value);
+	void euler_angles(const Vector3& value);
 
 	// 対象の Transform を設定し、その方向へと向かせます
-	EVAENGINE_API void look_at(const Transform& target, const Vector3& world_up = Vector3{ 0.0f, 1.0f, 0.0f });
-	EVAENGINE_API void look_at(const Vector3& target, const Vector3& world_up = Vector3{ 0.0f, 1.0f, 0.0f });
+	void look_at(const Transform& target, const Vector3& world_up = Vector3{ 0.0f, 1.0f, 0.0f });
+	void look_at(const Vector3& target, const Vector3& world_up = Vector3{ 0.0f, 1.0f, 0.0f });
 	// Z 軸でeulers.z 度回転、X軸で euler.x 度回転、Y軸でeulers.y 度回転します(順番は説明した順)
-	EVAENGINE_API void rotate(const Vector3& eulers, Space relative_to = Space::Self);
-	EVAENGINE_API void rotate(float x, float y, float z, Space relative_to = Space::Self);
+	void rotate(const Vector3& eulers, Space relative_to = Space::Self);
+	void rotate(float x, float y, float z, Space relative_to = Space::Self);
 	// axis 軸の周りに angle 度、回転します
-	EVAENGINE_API void rotate(const Vector3& axis, float angle, Space relative_to = Space::Self);
+	void rotate(const Vector3& axis, float angle, Space relative_to = Space::Self);
 	// ワールド座標の point を中心とした軸(axis)で angle 度回転させます
-	EVAENGINE_API void rotate_around(const Vector3& point, const Vector3& axis, float angle);
+	void rotate_around(const Vector3& point, const Vector3& axis, float angle);
 
 	// translation の方向と距離に移動します
-	EVAENGINE_API void translate(const Vector3& translation, Space relative_to = Space::Self);
+	void translate(const Vector3& translation, Space relative_to = Space::Self);
 
 	// ローカル座標からワールド座標へ変換した行列
-	EVAENGINE_API Matrix4x4 local_to_world_matrix() const;
+	Matrix4x4 local_to_world_matrix() const;
 	// ワールド座標からローカル座標へ変換した行列
-	EVAENGINE_API Matrix4x4 world_to_local_matrix() const;
+	Matrix4x4 world_to_local_matrix() const;
 
 	// ローカル空間からワールド空間へ position を変換します。(スケール・回転・平行移動）
-	EVAENGINE_API Vector3 transform_point(const Vector3& position) const;
+	Vector3 transform_point(const Vector3& position) const;
 	// ローカル空間からワールド空間へ vector を変換します。(スケール・回転）
-	EVAENGINE_API Vector3 transform_vector(const Vector3& vector) const;
+	Vector3 transform_vector(const Vector3& vector) const;
 	// ローカル空間からワールド空間へ direction を変換します(回転）
-	EVAENGINE_API Vector3 transform_direction(const Vector3& direction) const;
+	Vector3 transform_direction(const Vector3& direction) const;
 
 	// ワールド空間からローカル空間へ position を変換します
-	EVAENGINE_API Vector3 inverse_transform_point(const Vector3& position) const;
+	Vector3 inverse_transform_point(const Vector3& position) const;
 	// ワールド空間からローカル空間へ vector を変換します
-	EVAENGINE_API Vector3 inverse_transform_vector(const Vector3& vector) const;
+	Vector3 inverse_transform_vector(const Vector3& vector) const;
 	// ワールド空間からローカル空間へ direction を変換します
-	EVAENGINE_API Vector3 inverse_transform_direction(const Vector3& direction) const;
+	Vector3 inverse_transform_direction(const Vector3& direction) const;
 
 	// Transform の親を取得
-	EVAENGINE_API Transform* parent() const;
+	Transform* parent() const;
 	// Transform の親を設定
-	EVAENGINE_API void parent(Transform* parent);
+	void parent(Transform* parent);
 	// Transform の親を設定
-	EVAENGINE_API void set_parent(Transform* parent, bool world_position_stays = true);
+	void set_parent(Transform* parent, bool world_position_stays = true);
 
 	// 親の Transform オブジェクトから見た相対的なスケールを取得
-	EVAENGINE_API Vector3 local_scale() const;
+	Vector3 local_scale() const;
 	// 親の Transform オブジェクトから見た相対的なスケールを設定
-	EVAENGINE_API void local_scale(const Vector3& value);
+	void local_scale(const Vector3& value);
 	// 親の Transform オブジェクトから見た相対的な位置を取得
-	EVAENGINE_API Vector3 local_position() const;
+	Vector3 local_position() const;
 	// 親の Transform オブジェクトから見た相対的な位置を設定
-	EVAENGINE_API void local_position(const Vector3& value);
+	void local_position(const Vector3& value);
 	// 親の Transform オブジェクトから見た相対的な回転を取得
-	EVAENGINE_API Quaternion local_rotation() const;
+	Quaternion local_rotation() const;
 	// 親の Transform オブジェクトから見た相対的な回転を設定
-	EVAENGINE_API void local_rotation(const Quaternion& value);
+	void local_rotation(const Quaternion& value);
 	// 親の Transform オブジェクトから見た相対的なオイラー角としての回転値を取得
-	EVAENGINE_API Vector3 local_euler_angles() const;
+	Vector3 local_euler_angles() const;
 	// 親の Transform オブジェクトから見た相対的なオイラー角としての回転値を設定
-	EVAENGINE_API void local_euler_angles(const Vector3& value);
+	void local_euler_angles(const Vector3& value);
 	// すべての子オブジェクトを親オブジェクトから切り離します
-	EVAENGINE_API void detach_children();
+	void detach_children();
 	// 親の Transform から切り離す
-	EVAENGINE_API void detach_parent();
+	void detach_parent();
 
 private:
 	// ワールド座標系の更新

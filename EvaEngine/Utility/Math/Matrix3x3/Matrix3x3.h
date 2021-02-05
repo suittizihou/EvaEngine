@@ -12,25 +12,25 @@
 struct Vector2;
 
 // 行列
-struct Matrix3x3 {
+EVAENGINE_API struct Matrix3x3 {
 	float m[3][3];
 
 	// コンストラクタ
-	EVAENGINE_API Matrix3x3() = default;
+	Matrix3x3() = default;
 	// コンストラクタ
-	EVAENGINE_API Matrix3x3(	float m11, float m12, float m13,
+	Matrix3x3(	float m11, float m12, float m13,
 				float m21, float m22, float m23,
 				float m31, float m32, float m33);
 	// ゼロ行列
-	EVAENGINE_API static Matrix3x3 zero();
+	static Matrix3x3 zero();
 	// 単位行列
-	EVAENGINE_API static Matrix3x3 identity();
+	static Matrix3x3 identity();
 	// 拡大縮小行列
-	EVAENGINE_API static Matrix3x3 scale(const Vector2& vector);
+	static Matrix3x3 scale(const Vector2& vector);
 	// 回転
-	EVAENGINE_API static Matrix3x3 rotate(float rotation);
+	static Matrix3x3 rotate(float rotation);
 	// 平行移動
-	EVAENGINE_API static Matrix3x3 translate(const Vector2& position);
+	static Matrix3x3 translate(const Vector2& position);
 };
 
 // 行列の加算

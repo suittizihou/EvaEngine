@@ -4,7 +4,13 @@
 #include "../../App/DirectX11App/DirectX11App.h"
 #include "../ModelUtility/ModelData/ModelData.h"
 
-class BufferCreate {
+#ifdef EVAENGINE_EXPORTS
+#define EVAENGINE_API __declspec(dllexport)
+#else
+#define EVAENGINE_API __declspec(dllimport)
+#endif
+
+EVAENGINE_API class BufferCreate {
 public:
 	// 頂点バッファの作成
 	static ID3D11Buffer* CreateVertexBuffer(const std::vector<My3DLib::VertexData>& vertices, size_t strides);

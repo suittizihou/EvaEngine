@@ -1,7 +1,9 @@
 #pragma once
 #include "../ShaderCompiler/ShaderCompiler.h"
 
-class Shader {
+#include "../../../Define/DLLDefine.h"
+
+EVAENGINE_API class Shader {
 public:
 	Shader() = default;
 

@@ -1,8 +1,14 @@
 #pragma once
 
 #include "KeyCode.h"
+
+#ifdef EVAENGINE_EXPORTS
+#define EVAENGINE_API __declspec(dllexport)
+#else
+#define EVAENGINE_API __declspec(dllimport)
+#endif
                               
-class Input {                 
+EVAENGINE_API class Input {
 public:
 	Input() = default;
 	~Input() = default;

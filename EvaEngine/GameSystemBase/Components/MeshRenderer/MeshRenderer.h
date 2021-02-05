@@ -10,7 +10,7 @@ class MeshFilter;
 class Transform;
 class Camera;
 
-class MeshRenderer : public Component {
+EVAENGINE_API class MeshRenderer : public Component {
 public:
 	MeshRenderer(
 		const std::weak_ptr<MeshFilter>& meshFilter,

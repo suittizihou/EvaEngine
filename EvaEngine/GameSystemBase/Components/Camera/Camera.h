@@ -9,7 +9,7 @@
 
 struct Matrix4x4;
 
-class Camera : public Component
+EVAENGINE_API class Camera : public Component
 {
 public:
 	Camera(
@@ -29,17 +29,17 @@ public:
 
 public:
 	// ビューポートを取得
-	EVAENGINE_API D3D11_VIEWPORT  GetViewport() const;
+	D3D11_VIEWPORT  GetViewport() const;
 	// ビュー行列を取得
-	EVAENGINE_API DirectX::XMMATRIX GetViewMatrix() const;
+	DirectX::XMMATRIX GetViewMatrix() const;
 	// プロジェクション行列を取得
-	EVAENGINE_API DirectX::XMMATRIX GetProjectionMatrix() const;
+	DirectX::XMMATRIX GetProjectionMatrix() const;
 
 	// ビュー行列を作成
-	EVAENGINE_API DirectX::XMMATRIX CreateViewMatrix(const std::weak_ptr<Transform>& transform);
-	EVAENGINE_API DirectX::XMMATRIX CreateViewMatrix(const Matrix4x4& rotateMatrix, const Matrix4x4& positionMatrix);
+	DirectX::XMMATRIX CreateViewMatrix(const std::weak_ptr<Transform>& transform);
+	DirectX::XMMATRIX CreateViewMatrix(const Matrix4x4& rotateMatrix, const Matrix4x4& positionMatrix);
 	// プロジェクション行列を作成
-	EVAENGINE_API DirectX::XMMATRIX CreateProjectionMatrix(
+	DirectX::XMMATRIX CreateProjectionMatrix(
 									const D3D11_VIEWPORT& viewPort,
 									const float& near,
 									const float& far,
