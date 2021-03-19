@@ -2,17 +2,11 @@
 
 #include <iosfwd>
 
-#ifdef EVAENGINE_EXPORTS
-#define EVAENGINE_API __declspec(dllexport)
-#else
-#define EVAENGINE_API __declspec(dllimport)
-#endif
-
 struct Vector3;
 struct Quaternion;
 
 // 行列
-EVAENGINE_API struct Matrix4x4 {
+struct Matrix4x4 {
 	float m[4][4]{};
 	// コンストラクタ
 	Matrix4x4() = default;
@@ -79,17 +73,17 @@ EVAENGINE_API struct Matrix4x4 {
 };
 
 // 行列の加算
-EVAENGINE_API Matrix4x4 operator + (const Matrix4x4& lhs, const Matrix4x4& rhs);
+Matrix4x4 operator + (const Matrix4x4& lhs, const Matrix4x4& rhs);
 // 行列の減算
-EVAENGINE_API Matrix4x4 operator - (const Matrix4x4& lhs, const Matrix4x4& rhs);
+Matrix4x4 operator - (const Matrix4x4& lhs, const Matrix4x4& rhs);
 // 行列のスカラー倍
-EVAENGINE_API Matrix4x4 operator * (const Matrix4x4& lhs, float rhs);
+Matrix4x4 operator * (const Matrix4x4& lhs, float rhs);
 // 行列のスカラー倍 
-EVAENGINE_API Matrix4x4 operator * (float lhs, const Matrix4x4& rhs);
+Matrix4x4 operator * (float lhs, const Matrix4x4& rhs);
 // 行列の乗算
-EVAENGINE_API Matrix4x4 operator * (const Matrix4x4& lhs, const Matrix4x4& rhs);
+Matrix4x4 operator * (const Matrix4x4& lhs, const Matrix4x4& rhs);
 // 行列とベクトルの積
-EVAENGINE_API Vector3 operator * (const Vector3& lhs, const Matrix4x4& rhs);
+Vector3 operator * (const Vector3& lhs, const Matrix4x4& rhs);
 
 // 行列の出力
-EVAENGINE_API std::ostream& operator << (std::ostream& lhs, const Matrix4x4& rhs);
+std::ostream& operator << (std::ostream& lhs, const Matrix4x4& rhs);

@@ -3,16 +3,10 @@
 // ostreamの先行宣言
 #include <iosfwd>
 
-#ifdef EVAENGINE_EXPORTS
-#define EVAENGINE_API __declspec(dllexport)
-#else
-#define EVAENGINE_API __declspec(dllimport)
-#endif
-
 struct Vector2;
 
 // 行列
-EVAENGINE_API struct Matrix3x3 {
+struct Matrix3x3 {
 	float m[3][3];
 
 	// コンストラクタ
@@ -34,17 +28,17 @@ EVAENGINE_API struct Matrix3x3 {
 };
 
 // 行列の加算
-EVAENGINE_API Matrix3x3 operator + (const Matrix3x3& lhs, const Matrix3x3 rhs);
+Matrix3x3 operator + (const Matrix3x3& lhs, const Matrix3x3 rhs);
 // 行列の減算
-EVAENGINE_API Matrix3x3 operator - (const Matrix3x3& lhs, const Matrix3x3 rhs);
+Matrix3x3 operator - (const Matrix3x3& lhs, const Matrix3x3 rhs);
 // 行列のスカラー倍
-EVAENGINE_API Matrix3x3 operator * (const Matrix3x3& lhs, const float rhs);
+Matrix3x3 operator * (const Matrix3x3& lhs, const float rhs);
 // 行列のスカラー倍
-EVAENGINE_API Matrix3x3 operator * (const float lhs, const Matrix3x3& rhs);
+Matrix3x3 operator * (const float lhs, const Matrix3x3& rhs);
 // 行列の乗算
-EVAENGINE_API Matrix3x3 operator * (const Matrix3x3& lhs, const Matrix3x3 rhs);
+Matrix3x3 operator * (const Matrix3x3& lhs, const Matrix3x3 rhs);
 // 行列とベクトルの積
-EVAENGINE_API Vector2 operator * (const Vector2& lhs, const Matrix3x3 rhs);
+Vector2 operator * (const Vector2& lhs, const Matrix3x3 rhs);
 
 // 行列の出力
-EVAENGINE_API std::ostream& operator << (std::ostream& out, const Matrix3x3& rhs);
+std::ostream& operator << (std::ostream& out, const Matrix3x3& rhs);

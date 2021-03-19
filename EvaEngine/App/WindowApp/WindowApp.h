@@ -2,13 +2,13 @@
 #include <Windows.h>
 
 #ifdef EVAENGINE_EXPORTS
-#define EVAENGINE_API __declspec(dllexport)
+#define __declspec(dllexport)
 #else
-#define EVAENGINE_API __declspec(dllimport)
+#define __declspec(dllimport)
 #endif
 
 class WindowApp {
 public:
-	EVAENGINE_API static HRESULT Init();
-	EVAENGINE_API static int Update();
+	static HRESULT Init();
+	static int Update();
 };

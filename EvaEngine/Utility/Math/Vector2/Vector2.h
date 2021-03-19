@@ -2,14 +2,8 @@
 
 #include <string>
 
-#ifdef EVAENGINE_EXPORTS
-#define EVAENGINE_API __declspec(dllexport)
-#else
-#define EVAENGINE_API __declspec(dllimport)
-#endif
-
 // 2Dベクトル
-EVAENGINE_API struct Vector2 {
+struct Vector2 {
 	// ベクトルのx成分
 	float x{ 0.0f };
 	// ベクトルのy成分
@@ -88,20 +82,20 @@ EVAENGINE_API struct Vector2 {
 };
 
 // 単項演算子オーバーロード
-EVAENGINE_API Vector2 operator - (const Vector2& v);
+Vector2 operator - (const Vector2& v);
 
 // 代入演算子オーバーロード
-EVAENGINE_API Vector2& operator += (Vector2& lhs, const Vector2& rhs);
-EVAENGINE_API Vector2& operator -= (Vector2& lhs, const Vector2& rhs);
-EVAENGINE_API Vector2& operator *= (Vector2& lhs, float rhs);
-EVAENGINE_API Vector2& operator /= (Vector2& lhs, float rhs);
+Vector2& operator += (Vector2& lhs, const Vector2& rhs);
+Vector2& operator -= (Vector2& lhs, const Vector2& rhs);
+Vector2& operator *= (Vector2& lhs, float rhs);
+Vector2& operator /= (Vector2& lhs, float rhs);
 
 // ２項演算子オーバーロード
-EVAENGINE_API Vector2 operator + (const Vector2& lhs, const Vector2& rhs);
-EVAENGINE_API Vector2 operator - (const Vector2& lhs, const Vector2& rhs);
-EVAENGINE_API Vector2 operator * (const Vector2& lhs, float rhs);
-EVAENGINE_API Vector2 operator * (float lhs, const Vector2& rhs);
-EVAENGINE_API Vector2 operator / (const Vector2& lhs, float rhs);
+Vector2 operator + (const Vector2& lhs, const Vector2& rhs);
+Vector2 operator - (const Vector2& lhs, const Vector2& rhs);
+Vector2 operator * (const Vector2& lhs, float rhs);
+Vector2 operator * (float lhs, const Vector2& rhs);
+Vector2 operator / (const Vector2& lhs, float rhs);
 
-EVAENGINE_API bool operator == (const Vector2& lhs, const Vector2& rhs);
-EVAENGINE_API bool operator != (const Vector2& lhs, const Vector2& rhs);
+bool operator == (const Vector2& lhs, const Vector2& rhs);
+bool operator != (const Vector2& lhs, const Vector2& rhs);

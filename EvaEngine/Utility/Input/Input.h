@@ -2,13 +2,7 @@
 
 #include "KeyCode.h"
 
-#ifdef EVAENGINE_EXPORTS
-#define EVAENGINE_API __declspec(dllexport)
-#else
-#define EVAENGINE_API __declspec(dllimport)
-#endif
-                              
-EVAENGINE_API class Input {
+class Input {
 public:
 	Input() = default;
 	~Input() = default;

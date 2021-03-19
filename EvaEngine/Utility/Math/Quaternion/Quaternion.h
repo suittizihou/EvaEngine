@@ -2,10 +2,9 @@
 
 #include "../Vector3/Vector3.h"
 #include <string>
-#include "../../../Define/DLLDefine.h"
 
 // クォータニオン
-EVAENGINE_API struct Quaternion {
+struct Quaternion {
 	float x{ 0.0f };
 	float y{ 0.0f };
 	float z{ 0.0f };
@@ -89,13 +88,13 @@ public:
 };
 
 // 演算子オーバーロード
-EVAENGINE_API Quaternion operator - (const Quaternion& q);
-EVAENGINE_API Quaternion operator + (const Quaternion& lhs, const Quaternion& rhs);
-EVAENGINE_API Quaternion operator - (const Quaternion& lhs, const Quaternion& rhs);
-EVAENGINE_API Quaternion operator * (const Quaternion& lhs, float rhs);
-EVAENGINE_API Quaternion operator * (float rhs, const Quaternion& lhs);
-EVAENGINE_API Quaternion operator * (const Quaternion& lhs, const Quaternion& rhs);
-EVAENGINE_API Quaternion operator / (Quaternion lhs, float s);
-EVAENGINE_API Vector3 operator * (const Quaternion& rotation, const Vector3& point);
-EVAENGINE_API bool operator == (const Quaternion& lhs, const Quaternion& rhs);
-EVAENGINE_API bool operator != (const Quaternion& lhs, const Quaternion& rhs);
+Quaternion operator - (const Quaternion& q);
+Quaternion operator + (const Quaternion& lhs, const Quaternion& rhs);
+Quaternion operator - (const Quaternion& lhs, const Quaternion& rhs);
+Quaternion operator * (const Quaternion& lhs, float rhs);
+Quaternion operator * (float rhs, const Quaternion& lhs);
+Quaternion operator * (const Quaternion& lhs, const Quaternion& rhs);
+Quaternion operator / (Quaternion lhs, float s);
+Vector3 operator * (const Quaternion& rotation, const Vector3& point);
+bool operator == (const Quaternion& lhs, const Quaternion& rhs);
+bool operator != (const Quaternion& lhs, const Quaternion& rhs);

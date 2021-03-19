@@ -24,38 +24,38 @@ public:
 	void Initialize() override;
 
 	// ObjectIDを返す
-	EVAENGINE_API UINT GetObjectID() const override;
+	UINT GetObjectID() const override;
 	// 名前を返す
-	EVAENGINE_API std::string GetName() const override;
+	std::string GetName() const override;
 	// タグを返す
-	EVAENGINE_API std::string GetTag() const override;
+	std::string GetTag() const override;
 	// Transformを返す
-	EVAENGINE_API std::weak_ptr<Transform> GetTransform();
+	std::weak_ptr<Transform> GetTransform();
 
 	// コンポーネントの登録
 	template<class T, class... Args>
-	EVAENGINE_API std::weak_ptr<T> AddComponent(Args&& ... args) {
+	std::weak_ptr<T> AddComponent(Args&& ... args) {
 		return ComponentManager::Instance().AddComponent<T>(GetSceneType(), GetGameObject(), args...);
 	}
 
 	// コンポーネントの取得
 	template<class T>
-	EVAENGINE_API std::weak_ptr<T> GetComponent() {
+	std::weak_ptr<T> GetComponent() {
 		return ComponentManager::Instance().GetComponent<T>(GetSceneType(), m_GameObjectID);
 	}
 
 	// コンポーネントの削除
 	template<class T>
-	EVAENGINE_API void RemoveComponent() {
+	void RemoveComponent() {
 		ComponentManager::Instance().RemoveComponent<T>(GetSceneType(), m_GameObjectID);
 	}
 
 	// 名前で検索
-	EVAENGINE_API std::weak_ptr<GameObject> Find(const std::string& name);
+	std::weak_ptr<GameObject> Find(const std::string& name);
 	// タグで検索してゲームオブジェクトを一つ持ってくる
-	EVAENGINE_API std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
+	std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
 	// タグで検索してヒットしたゲームオブジェクトを全部持ってくる
-	EVAENGINE_API std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
+	std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
 
 private:
 	std::weak_ptr<Transform> m_Transform;

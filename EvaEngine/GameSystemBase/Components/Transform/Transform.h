@@ -7,7 +7,7 @@
 #include <list>
 
 // トランスフォームクラス
-EVAENGINE_API class Transform : public Component {
+class Transform : public Component {
 public:
 	// 座標系の指定
 	enum class Space {

@@ -4,9 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "../../Define/DLLDefine.h"
-
-EVAENGINE_API class StringAssist {
+class StringAssist {
 public:
 
 	static std::vector<std::string> split(std::string str, char del) {

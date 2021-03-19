@@ -44,19 +44,19 @@ public:
 	void SetComponentDesc(const ComponentDesc& componentDesc);
 
 	// このコンポーネントに紐づいているオブジェクトを返す
-	EVAENGINE_API std::weak_ptr<GameObject> GetGameObject() const;
+	std::weak_ptr<GameObject> GetGameObject() const;
 	// トランスフォームを返す
-	EVAENGINE_API std::weak_ptr<Transform> GetTransform() const;
+	std::weak_ptr<Transform> GetTransform() const;
 	// 複数アタッチできるコンポーネントか返す
-	EVAENGINE_API bool GetCanMultiAttach() const;
+	bool GetCanMultiAttach() const;
 	// このコンポーネントは消せるか
-	EVAENGINE_API bool GetCanRemove() const;
+	bool GetCanRemove() const;
 	// コンポーネントのハッシュ値を返す(何型のコンポーネントか識別用)
-	EVAENGINE_API size_t GetHashCode() const;
+	size_t GetHashCode() const;
 	// コンポーネントのIDを返す(固有のID)
-	EVAENGINE_API UINT GetComponentID() const;
+	UINT GetComponentID() const;
 	// どの関数を呼び出すかのマスクを返す
-	EVAENGINE_API UINT GetFunctionMask() const;
+	UINT GetFunctionMask() const;
 
 private:
 	std::weak_ptr<GameObject> m_GameObject;

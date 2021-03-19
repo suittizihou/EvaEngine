@@ -5,7 +5,7 @@
 #include "../ModelUtility/ModelData/ShaderParameters.h"
 
 namespace My3DLib {
-	EVAENGINE_API struct Material {
+	struct Material {
 		DirectX::XMFLOAT4 ambient{ 1.0f, 1.0f, 1.0f, 1.0f };
 		DirectX::XMFLOAT4 diffuse{ 1.0f, 1.0f, 1.0f, 1.0f };
 		DirectX::XMFLOAT4 specular{ 1.0f, 1.0f, 1.0f, 1.0f };

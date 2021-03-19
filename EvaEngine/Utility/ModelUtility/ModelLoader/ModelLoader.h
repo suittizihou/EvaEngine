@@ -4,9 +4,9 @@
 #include <iostream>
 
 #ifdef EVAENGINE_EXPORTS
-#define EVAENGINE_API __declspec(dllexport)
+#define __declspec(dllexport)
 #else
-#define EVAENGINE_API __declspec(dllimport)
+#define __declspec(dllimport)
 #endif
 
 class ModelLoader {
@@ -17,5 +17,5 @@ private:
 	~ModelLoader() = default;
 
 public:
-	EVAENGINE_API static int Load(const std::string& fileName);
+	static int Load(const std::string& fileName);
 };

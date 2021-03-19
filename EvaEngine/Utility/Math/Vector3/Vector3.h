@@ -5,9 +5,7 @@
 
 #include <string>
 
-#include "../../../Define/DLLDefine.h"
-
-EVAENGINE_API struct Vector3 {
+struct Vector3 {
 	float x{ 0.0f };	// X component of the vector.
 	float y{ 0.0f };	// Y component of the vector.
 	float z{ 0.0f };	// Z component of the vector.
@@ -101,20 +99,20 @@ EVAENGINE_API struct Vector3 {
 };
 
 // 単項演算子オーバーロード
-EVAENGINE_API Vector3 operator - (const Vector3& v);
+Vector3 operator - (const Vector3& v);
 
 // 代入演算子オーバーロード
-EVAENGINE_API Vector3& operator += (Vector3& lhs, const Vector3& rhs);
-EVAENGINE_API Vector3& operator -= (Vector3& lhs, const Vector3& rhs);
-EVAENGINE_API Vector3& operator *= (Vector3& lhs, float rhs);
-EVAENGINE_API Vector3& operator /= (Vector3& lhs, float rhs);
+Vector3& operator += (Vector3& lhs, const Vector3& rhs);
+Vector3& operator -= (Vector3& lhs, const Vector3& rhs);
+Vector3& operator *= (Vector3& lhs, float rhs);
+Vector3& operator /= (Vector3& lhs, float rhs);
 
 // ２項演算子オーバーロード
-EVAENGINE_API Vector3 operator + (const Vector3& lhs, const Vector3& rhs);
-EVAENGINE_API Vector3 operator - (const Vector3& lhs, const Vector3& rhs);
-EVAENGINE_API Vector3 operator * (const Vector3& lhs, float rhs);
-EVAENGINE_API Vector3 operator * (float lhs, const Vector3& rhs);
-EVAENGINE_API Vector3 operator / (const Vector3& lhs, float rhs);
+Vector3 operator + (const Vector3& lhs, const Vector3& rhs);
+Vector3 operator - (const Vector3& lhs, const Vector3& rhs);
+Vector3 operator * (const Vector3& lhs, float rhs);
+Vector3 operator * (float lhs, const Vector3& rhs);
+Vector3 operator / (const Vector3& lhs, float rhs);
 
-EVAENGINE_API bool operator == (const Vector3& lhs, const Vector3& rhs);
-EVAENGINE_API bool operator != (const Vector3& lhs, const Vector3& rhs);
+bool operator == (const Vector3& lhs, const Vector3& rhs);
+bool operator != (const Vector3& lhs, const Vector3& rhs);

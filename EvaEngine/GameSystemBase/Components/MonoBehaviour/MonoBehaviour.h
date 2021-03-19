@@ -7,7 +7,7 @@
 class GameObject;
 class Transform;
 
-EVAENGINE_API class MonoBehaviour : public Component {
+class MonoBehaviour : public Component {
 public:
 	MonoBehaviour(
 		const UINT& functionMask,

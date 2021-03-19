@@ -9,7 +9,7 @@
 
 struct Matrix4x4;
 
-EVAENGINE_API class Camera : public Component
+class Camera : public Component
 {
 public:
 	Camera(

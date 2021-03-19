@@ -3,13 +3,7 @@
 #include <cmath>
 #include <limits>
 
-#ifdef EVAENGINE_EXPORTS
-#define EVAENGINE_API __declspec(dllexport)
-#else
-#define EVAENGINE_API __declspec(dllimport)
-#endif
-
-EVAENGINE_API struct Mathf {
+struct Mathf {
 public:
 	// ‰~Žü—¦
 	static float pi() {

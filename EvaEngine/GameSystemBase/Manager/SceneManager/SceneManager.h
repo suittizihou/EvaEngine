@@ -13,14 +13,14 @@ public:
 public:
 	// シーンの追加
 	template<class T>
-	EVAENGINE_API static void AddScene(const SceneType& sceneType) {
+	static void AddScene(const SceneType& sceneType) {
 		SceneDataBase::Instance().AddScene<T>(sceneType);
 	}
 
 	// シーンのロード
-	EVAENGINE_API static void LoadScene(const SceneType& sceneType);
-	EVAENGINE_API static void LoadScene(const UINT& sceneType);
+	static void LoadScene(const SceneType& sceneType);
+	static void LoadScene(const UINT& sceneType);
 	
 	// 現在のシーンを取得
-	EVAENGINE_API static SceneType GetCurrentScene();
+	static SceneType GetCurrentScene();
 };

@@ -12,9 +12,9 @@
 #include "../Scene/SceneType.h"
 
 #ifdef EVAENGINE_EXPORTS
-#define EVAENGINE_API __declspec(dllexport)
+#define __declspec(dllexport)
 #else
-#define EVAENGINE_API __declspec(dllimport)
+#define __declspec(dllimport)
 #endif
 
 class GameObject;
@@ -25,12 +25,12 @@ public:
 	virtual ~GameJobs() = default;
 
 	// ゲームオブジェクトの追加
-	EVAENGINE_API std::weak_ptr<GameObject> AddGameObject();
+	std::weak_ptr<GameObject> AddGameObject();
 
 	// 所属するシーンを設定
-	EVAENGINE_API void SetSceneType(const SceneType& sceneType);
+	void SetSceneType(const SceneType& sceneType);
 	// 所属するシーンを返す
-	EVAENGINE_API SceneType GetSceneType();
+	SceneType GetSceneType();
 
 private:
 	SceneType m_SceneType{};

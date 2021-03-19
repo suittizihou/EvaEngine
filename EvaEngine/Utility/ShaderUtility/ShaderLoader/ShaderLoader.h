@@ -2,9 +2,8 @@
 
 #include <string>
 #include "../../../Define/D3D11Defines.h"
-#include "../../../Define/DLLDefine.h"
 
-EVAENGINE_API class ShaderLoader {
+class ShaderLoader {
 private:
 	ShaderLoader() = default;
 	ShaderLoader(const ShaderLoader&);

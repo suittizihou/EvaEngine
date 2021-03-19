@@ -3,7 +3,7 @@
 #include "../../Base/Component/Component.h"
 #include "../../DataBase/ModelDataBase/ModelDataBase.h"
 
-EVAENGINE_API class MeshFilter : public Component {
+class MeshFilter : public Component {
 public:
 	MeshFilter(const int& modelHandle)
 		:Component(0U, false),

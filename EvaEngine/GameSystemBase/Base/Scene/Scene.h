@@ -6,7 +6,7 @@
 
 #include "SceneType.h"
 
-EVAENGINE_API class Scene {
+class Scene {
 public:
 	Scene(const SceneType& sceneType) : m_SceneType(sceneType) {};
 	virtual ~Scene() = default;
