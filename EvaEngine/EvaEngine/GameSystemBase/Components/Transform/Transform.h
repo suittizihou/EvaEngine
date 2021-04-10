@@ -92,11 +92,11 @@ namespace EvaEngine {
 		Vector3 inverse_transform_direction(const Vector3& direction) const;
 
 		// Transform の親を取得
-		Transform* parent() const;
+		std::weak_ptr<Transform> parent() const;
 		// Transform の親を設定
-		void parent(Transform* parent);
+		void parent(std::weak_ptr<Transform> parent);
 		// Transform の親を設定
-		void set_parent(Transform* parent, bool world_position_stays = true);
+		void set_parent(std::weak_ptr<Transform> parent, bool world_position_stays = true);
 
 		// 親の Transform オブジェクトから見た相対的なスケールを取得
 		Vector3 local_scale() const;
@@ -139,7 +139,7 @@ namespace EvaEngine {
 		Vector3 local_scale_{ 1.0f, 1.0f, 1.0f };
 
 		// 親のトランスフォーム
-		Transform* parent_{ nullptr };
+		std::weak_ptr<Transform> parent_;
 		// 子のトランスフォーム
 		std::list<Transform*> children_;
 	};

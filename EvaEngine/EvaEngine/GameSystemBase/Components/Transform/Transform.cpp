@@ -68,8 +68,8 @@ Vector3 Transform::position() const
 
 void Transform::position(const Vector3& value)
 {
-	if (parent_ != nullptr) {
-		local_position(parent_->inverse_transform_point(value));
+	if (!parent_.expired()) {
+		local_position(parent_.lock()->inverse_transform_point(value));
 	}
 	else {
 		local_position(value);
@@ -93,8 +93,8 @@ Quaternion Transform::rotation() const
 
 void Transform::rotation(const Quaternion& value)
 {
-	if (parent_ != nullptr) {
-		local_rotation(Quaternion::inverse(parent_->rotation()) * value);
+	if (!parent_.expired()) {
+		local_rotation(Quaternion::inverse(parent_.lock()->rotation()) * value);
 	}
 	else {
 		local_rotation(value);
@@ -218,34 +218,34 @@ Vector3 Transform::inverse_transform_direction(const Vector3& direction) const
 	return Quaternion::inverse(rotation_) * direction;
 }
 
-Transform* Transform::parent() const
+std::weak_ptr<Transform> Transform::parent() const
 {
 	return parent_;
 }
 
-void Transform::parent(Transform* parent)
+void Transform::parent(std::weak_ptr<Transform> parent)
 {
 	set_parent(parent, true);
 }
 
-void Transform::set_parent(Transform* parent, bool world_position_stays)
+void Transform::set_parent(std::weak_ptr<Transform> parent, bool world_position_stays)
 {
 	// 現在の親から切り離す
 	detach_parent();
 	// 新しい親を設定
 	parent_ = parent;
-	if (parent_ != nullptr) {
+	if (!parent_.expired()) {
 		if (world_position_stays) {
 			// 現在のワールド空間を保つか？
-			local_rotation_ = Quaternion::inverse(parent_->rotation()) * rotation_;
-			local_position_ = parent_->inverse_transform_point(position_);
+			local_rotation_ = Quaternion::inverse(parent_.lock()->rotation()) * rotation_;
+			local_position_ = parent_.lock()->inverse_transform_point(position_);
 		}
 		else {
 			// 現在のローカル空間を更新せずにワールド空間を更新
-			update_world_transform(parent_);
+			update_world_transform(parent_.lock().get());
 		}
 		// 自分自身を親の子に登録
-		parent->children_.push_back(this);
+		parent.lock()->children_.push_back(this);
 	}
 	else {
 		// 親がいなければ、ローカル空間はワールド空間と同じ
@@ -265,7 +265,7 @@ void Transform::local_scale(const Vector3& value)
 {
 	local_scale_ = value;
 	// ワールド空間を更新
-	update_world_transform(parent_);
+	update_world_transform(parent_.lock().get());
 }
 
 Vector3 Transform::local_position() const
@@ -277,7 +277,7 @@ void Transform::local_position(const Vector3& value)
 {
 	local_position_ = value;
 	// ワールド空間を更新
-	update_world_transform(parent_);
+	update_world_transform(parent_.lock().get());
 }
 
 Quaternion Transform::local_rotation() const
@@ -289,7 +289,7 @@ void Transform::local_rotation(const Quaternion& value)
 {
 	local_rotation_ = value;
 	// ワールド空間を更新
-	update_world_transform(parent_);
+	update_world_transform(parent_.lock().get());
 }
 
 Vector3 Transform::local_euler_angles() const
@@ -312,10 +312,10 @@ void Transform::detach_children()
 
 void Transform::detach_parent()
 {
-	if (parent_ != nullptr) {
+	if (!parent_.expired()) {
 		// 親のリストから自身を削除
-		parent_->children_.remove(this);
-		parent_ = nullptr;
+		parent_.lock()->children_.remove(this);
+		parent_ = std::weak_ptr<Transform>();
 	}
 }
 
