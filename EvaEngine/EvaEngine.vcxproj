@@ -97,7 +97,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\VisualStudioProgram\EvaEngine\EvaEngine\FbxSDK\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -111,7 +111,7 @@
       </EntryPointSymbol>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>E:\VisualStudioProgram\DirectX11Project\EvaEngine\FbxSDK\lib\vs2017\x64\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\VisualStudioProgram\EvaEngine\EvaEngine\FbxSDK\lib\vs2017\x64\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libfbxsdk-mt.lib;libxml2-mt.lib;zlib-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
@@ -123,7 +123,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;EVAENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\VisualStudioProgram\EvaEngine\EvaEngine\FbxSDK\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -134,7 +134,7 @@
       </EntryPointSymbol>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>E:\VisualStudioProgram\DirectX11Project\EvaEngine\FbxSDK\lib\vs2017\x86\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\VisualStudioProgram\EvaEngine\EvaEngine\FbxSDK\lib\vs2017\x86\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libfbxsdk-md.lib;libxml2-md.lib;zlib-md.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
@@ -146,7 +146,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>E:\VisualStudioProgram\DirectX11Project\EvaEngine\FbxSDK\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\VisualStudioProgram\EvaEngine\EvaEngine\FbxSDK\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -157,7 +157,7 @@
       </EntryPointSymbol>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>E:\VisualStudioProgram\DirectX11Project\EvaEngine\FbxSDK\lib\vs2017\x64\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\VisualStudioProgram\EvaEngine\EvaEngine\FbxSDK\lib\vs2017\x64\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libfbxsdk-md.lib;libxml2-md.lib;zlib-md.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
@@ -171,7 +171,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\VisualStudioProgram\EvaEngine\EvaEngine\FbxSDK\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -184,7 +184,7 @@
       </EntryPointSymbol>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>E:\VisualStudioProgram\DirectX11Project\EvaEngine\FbxSDK\lib\vs2017\x86\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\VisualStudioProgram\EvaEngine\EvaEngine\FbxSDK\lib\vs2017\x86\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>libfbxsdk-mt.lib;libxml2-mt.lib;zlib-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
