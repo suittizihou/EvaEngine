@@ -28,26 +28,26 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -94,10 +94,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;EVAENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -109,6 +110,10 @@
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>E:\VisualStudioProgram\DirectX11Project\EvaEngine\FbxSDK\lib\vs2017\x64\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfbxsdk-mt.lib;libxml2-mt.lib;zlib-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -119,6 +124,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -127,16 +133,21 @@
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>E:\VisualStudioProgram\DirectX11Project\EvaEngine\FbxSDK\lib\vs2017\x86\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfbxsdk-md.lib;libxml2-md.lib;zlib-md.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;EVAENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\VisualStudioProgram\DirectX11Project\EvaEngine\FbxSDK\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -145,6 +156,10 @@
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>E:\VisualStudioProgram\DirectX11Project\EvaEngine\FbxSDK\lib\vs2017\x64\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfbxsdk-md.lib;libxml2-md.lib;zlib-md.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -153,10 +168,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;EVAENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>C:\Program Files\Autodesk\FBX\FBX SDK\2020.0.1\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -167,118 +183,406 @@
       <EntryPointSymbol>
       </EntryPointSymbol>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>E:\VisualStudioProgram\DirectX11Project\EvaEngine\FbxSDK\lib\vs2017\x86\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfbxsdk-mt.lib;libxml2-mt.lib;zlib-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="App\DirectX11App\DirectX11App.h" />
-    <ClInclude Include="App\GameApp\GameApp.h" />
-    <ClInclude Include="App\WindowApp\WindowApp.h" />
-    <ClInclude Include="Define\D3D11Defines.h" />
+    <ClInclude Include="EvaEngine\App\DirectX11App\DirectX11App.h" />
+    <ClInclude Include="EvaEngine\App\EvaEngineApp\EvaEngineApp.h" />
+    <ClInclude Include="EvaEngine\App\MainApp\MainApp.h" />
+    <ClInclude Include="EvaEngine\App\WindowApp\WindowApp.h" />
+    <ClInclude Include="EvaEngine\Define\D3D11Defines.h" />
+    <ClInclude Include="EvaEngine.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\arch\fbxalloc.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\arch\fbxarch.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\arch\fbxdebug.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\arch\fbxnew.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\arch\fbxstdcompliant.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\arch\fbxtypes.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxarray.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxbitset.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxcharptrset.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxcontainerallocators.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxdynamicarray.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxfile.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxfolder.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxhashmap.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxintrusivelist.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxmap.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxmemorypool.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxmultimap.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxpair.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxredblacktree.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxset.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxstatus.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxstring.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxstringlist.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxtime.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxtimecode.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\base\fbxutils.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxclassid.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxconnectionpoint.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxdatatypes.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxemitter.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxevent.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxeventhandler.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxlistener.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxloadingstrategy.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxmanager.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxmodule.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxobject.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxperipheral.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxplugin.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxplugincontainer.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxproperty.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxpropertydef.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxpropertyhandle.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxpropertypage.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxpropertytypes.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxquery.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxqueryevent.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxscopedloadingdirectory.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxscopedloadingfilename.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxstream.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxsymbol.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxsystemunit.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\fbxxref.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\math\fbxaffinematrix.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\math\fbxdualquaternion.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\math\fbxmath.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\math\fbxmatrix.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\math\fbxquaternion.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\math\fbxtransforms.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\math\fbxvector2.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\math\fbxvector4.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\sync\fbxatomic.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\sync\fbxclock.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\sync\fbxsync.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\core\sync\fbxthread.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fbxsdk_def.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fbxsdk_nsbegin.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fbxsdk_nsend.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fbxsdk_version.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\collada\fbxcolladaanimationelement.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\collada\fbxcolladaelement.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\collada\fbxcolladaiostream.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\collada\fbxcolladanamespace.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\collada\fbxcolladatokens.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\collada\fbxcolladautils.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\collada\fbxreadercollada14.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\collada\fbxwritercollada14.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxbase64coder.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxcallbacks.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxexporter.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxexternaldocreflistener.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxfiletokens.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxglobalcamerasettings.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxgloballightsettings.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxglobalsettings.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxgobo.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbximporter.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxiobase.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxiopluginregistry.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxiosettings.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxiosettingspath.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxprogress.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxreader.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxstatistics.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxstatisticsfbx.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbxwriter.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbx\fbxio.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbx\fbxreaderfbx5.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbx\fbxreaderfbx6.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbx\fbxreaderfbx7.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbx\fbxwriterfbx5.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbx\fbxwriterfbx6.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\fileio\fbx\fbxwriterfbx7.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\animation\fbxanimcurve.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\animation\fbxanimcurvebase.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\animation\fbxanimcurvefilters.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\animation\fbxanimcurvenode.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\animation\fbxanimevalclassic.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\animation\fbxanimevalstate.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\animation\fbxanimevaluator.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\animation\fbxanimlayer.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\animation\fbxanimstack.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\animation\fbxanimutilities.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\constraint\fbxcharacter.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\constraint\fbxcharacternodename.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\constraint\fbxcharacterpose.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\constraint\fbxconstraint.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\constraint\fbxconstraintaim.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\constraint\fbxconstraintcustom.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\constraint\fbxconstraintparent.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\constraint\fbxconstraintposition.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\constraint\fbxconstraintrotation.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\constraint\fbxconstraintscale.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\constraint\fbxconstraintsinglechainik.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\constraint\fbxconstraintutils.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\constraint\fbxcontrolset.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\constraint\fbxhik2fbxcharacter.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxaudio.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxaudiolayer.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxaxissystem.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxcollection.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxcollectionexclusive.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxcontainer.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxcontainertemplate.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxdisplaylayer.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxdocument.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxdocumentinfo.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxenvironment.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxgroupname.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxlibrary.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxmediaclip.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxobjectfilter.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxobjectmetadata.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxobjectscontainer.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxpose.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxreference.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxscene.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxselectionnode.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxselectionset.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxtakeinfo.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxthumbnail.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\fbxvideo.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxblendshape.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxblendshapechannel.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxcache.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxcachedeffect.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxcamera.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxcamerastereo.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxcameraswitcher.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxcluster.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxdeformer.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxgenericnode.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxgeometry.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxgeometrybase.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxgeometryweightedmap.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxlayer.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxlayercontainer.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxlight.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxlimitsutilities.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxline.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxlodgroup.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxmarker.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxmesh.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxnode.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxnodeattribute.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxnull.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxnurbs.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxnurbscurve.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxnurbssurface.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxopticalreference.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxpatch.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxproceduralgeometry.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxshape.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxskeleton.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxskin.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxsubdeformer.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxsubdiv.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxtrimnurbssurface.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxvertexcachedeformer.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\geometry\fbxweightedmapping.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxbindingoperator.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxbindingsentryview.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxbindingtable.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxbindingtablebase.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxbindingtableentry.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxconstantentryview.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxentryview.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxfiletexture.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbximplementation.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbximplementationfilter.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbximplementationutils.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxlayeredtexture.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxlayerentryview.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxoperatorentryview.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxproceduraltexture.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxpropertyentryview.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxsemanticentryview.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxshadingconventions.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxsurfacelambert.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxsurfacematerial.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxsurfacephong.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxtexture.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxclonemanager.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxdeformationsevaluator.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxembeddedfilesaccumulator.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxgeometryconverter.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxmanipulators.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxmaterialconverter.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxnamehandler.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxprocessor.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxprocessorshaderdependency.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxprocessorxref.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxprocessorxrefuserlib.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxrenamingstrategy.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxrenamingstrategybase.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxrenamingstrategyfbx5.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxrenamingstrategyfbx6.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxrenamingstrategyfbx7.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxrenamingstrategyutilities.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxrootnodeutility.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxscenecheckutility.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxusernotification.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\c14n.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\catalog.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\chvalid.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\debugXML.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\dict.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\DOCBparser.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\encoding.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\entities.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\globals.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\hash.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\HTMLparser.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\HTMLtree.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\list.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\nanoftp.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\nanohttp.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\parser.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\parserInternals.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\pattern.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\relaxng.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\SAX.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\SAX2.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\schemasInternals.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\schematron.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\threads.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\tree.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\uri.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\valid.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xinclude.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xlink.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlautomata.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlerror.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlexports.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlIO.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlmemory.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlmodule.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlreader.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlregexp.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlsave.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlschemas.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlschemastypes.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlstring.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlunicode.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlversion.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlwin32version.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xmlwriter.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xpath.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xpathInternals.h" />
+    <ClInclude Include="FbxSDK\include\libxml2\libxml\xpointer.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="GameSystemBase\Base\Component\Component.h" />
-    <ClInclude Include="GameSystemBase\Base\Component\ComponentDesc.h" />
-    <ClInclude Include="GameSystemBase\Base\GameJobs\GameJobs.h" />
-    <ClInclude Include="GameSystemBase\Base\GameObject\GameObject.h" />
-    <ClInclude Include="GameSystemBase\Base\GameObject\GameObjectBase.h" />
-    <ClInclude Include="GameSystemBase\Base\Scene\Scene.h" />
-    <ClInclude Include="GameSystemBase\Base\Scene\SceneType.h" />
-    <ClInclude Include="GameSystemBase\Components\Camera\Camera.h" />
-    <ClInclude Include="GameSystemBase\Components\ComponentHeaders.h" />
-    <ClInclude Include="GameSystemBase\Components\MeshFilter\MeshFilter.h" />
-    <ClInclude Include="GameSystemBase\Components\MeshRenderer\MeshRenderer.h" />
-    <ClInclude Include="GameSystemBase\Components\MonoBehaviour\MonoBehaviour.h" />
-    <ClInclude Include="GameSystemBase\Components\Transform\Transform.h" />
-    <ClInclude Include="GameSystemBase\DataBase\ComponentDataBase\ComponentDataBase.h" />
-    <ClInclude Include="GameSystemBase\DataBase\GameObjectDataBase\GameObjectDataBase.h" />
-    <ClInclude Include="GameSystemBase\DataBase\ModelDataBase\ModelDataBase.h" />
-    <ClInclude Include="GameSystemBase\DataBase\SceneDataBase\SceneDataBase.h" />
-    <ClInclude Include="GameSystemBase\DataBase\ShaderDataBase\ShaderDataBase.h" />
-    <ClInclude Include="GameSystemBase\DataBase\TextureDataBase\TextureDataBase.h" />
-    <ClInclude Include="GameSystemBase\Manager\ComponentManager\ComponentManager.h" />
-    <ClInclude Include="GameSystemBase\Manager\DrawManager\DrawManager.h" />
-    <ClInclude Include="GameSystemBase\Manager\GameObjectManager\GameObjectManager.h" />
-    <ClInclude Include="GameSystemBase\Manager\SceneManager\SceneManager.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Base\Component\Component.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Base\Component\ComponentDesc.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Base\GameBase\GameBase.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Base\GameJobs\GameJobs.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Base\GameObject\GameObject.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Base\GameObject\GameObjectBase.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Base\Scene\Scene.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Components\Camera\Camera.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Components\ComponentHeaders.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Components\MeshFilter\MeshFilter.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Components\MeshRenderer\MeshRenderer.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Components\MonoBehaviour\MonoBehaviour.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Components\Transform\Transform.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\DataBase\ComponentDataBase\ComponentDataBase.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\DataBase\GameObjectDataBase\GameObjectDataBase.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\DataBase\ModelDataBase\ModelDataBase.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\DataBase\SceneDataBase\SceneDataBase.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\DataBase\ShaderDataBase\ShaderDataBase.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\DataBase\TextureDataBase\TextureDataBase.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Manager\ComponentManager\ComponentManager.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Manager\DrawManager\DrawManager.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Manager\GameObjectManager\GameObjectManager.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Manager\SceneManager\SceneManager.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Setting\Window\Window.h" />
-    <ClInclude Include="System\DebugLog\DebugLog.h" />
-    <ClInclude Include="Utility\BufferCreate\BufferCreate.h" />
-    <ClInclude Include="Utility\Input\Input.h" />
-    <ClInclude Include="Utility\Input\InputBufferUpdate\InputBufferUpdate.h" />
-    <ClInclude Include="Utility\Input\KeyCode.h" />
-    <ClInclude Include="Utility\Material\Material.h" />
-    <ClInclude Include="Utility\Math\Mathf\Mathf.h" />
-    <ClInclude Include="Utility\Math\Matrix3x3\Matrix3x3.h" />
-    <ClInclude Include="Utility\Math\Matrix4x4\Matrix4x4.h" />
-    <ClInclude Include="Utility\Math\Quaternion\Quaternion.h" />
-    <ClInclude Include="Utility\Math\Vector2\Vector2.h" />
-    <ClInclude Include="Utility\Math\Vector3\Vector3.h" />
-    <ClInclude Include="Utility\Mesh\Mesh.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelData\ConstantBufferData.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelData\ModelData.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelData\ShaderParameters.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelData\VertexData.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\ModelLoadBase.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelLoader\ModelLoader.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\OBJModelLoader\OBJModelLoader.h" />
-    <ClInclude Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.h" />
-    <ClInclude Include="Utility\ResourceLoad\ResourceLoad.h" />
-    <ClInclude Include="Utility\ShaderUtility\ShaderCompiler\ShaderCompiler.h" />
-    <ClInclude Include="Utility\ShaderUtility\ShaderLoader\ShaderLoader.h" />
-    <ClInclude Include="Utility\ShaderUtility\Shader\Shader.h" />
-    <ClInclude Include="Utility\StringAssist\StringAssist.h" />
-    <ClInclude Include="Utility\Time\Time.h" />
-    <ClInclude Include="Utility\Time\TimeBase.h" />
+    <ClInclude Include="EvaEngine\Setting\Window\Window.h" />
+    <ClInclude Include="EvaEngine\System\DebugLog\DebugLog.h" />
+    <ClInclude Include="EvaEngine\Utility\BufferCreate\BufferCreate.h" />
+    <ClInclude Include="EvaEngine\Utility\Input\Input.h" />
+    <ClInclude Include="EvaEngine\Utility\Input\InputBufferUpdate\InputBufferUpdate.h" />
+    <ClInclude Include="EvaEngine\Utility\Input\KeyCode.h" />
+    <ClInclude Include="EvaEngine\Utility\Material\Material.h" />
+    <ClInclude Include="EvaEngine\Utility\Math\Mathf\Mathf.h" />
+    <ClInclude Include="EvaEngine\Utility\Math\Matrix3x3\Matrix3x3.h" />
+    <ClInclude Include="EvaEngine\Utility\Math\Matrix4x4\Matrix4x4.h" />
+    <ClInclude Include="EvaEngine\Utility\Math\Quaternion\Quaternion.h" />
+    <ClInclude Include="EvaEngine\Utility\Math\Vector2\Vector2.h" />
+    <ClInclude Include="EvaEngine\Utility\Math\Vector3\Vector3.h" />
+    <ClInclude Include="EvaEngine\Utility\Mesh\Mesh.h" />
+    <ClInclude Include="EvaEngine\Utility\ModelUtility\ModelData\ConstantBufferData.h" />
+    <ClInclude Include="EvaEngine\Utility\ModelUtility\ModelData\ModelData.h" />
+    <ClInclude Include="EvaEngine\Utility\ModelUtility\ModelData\ShaderParameters.h" />
+    <ClInclude Include="EvaEngine\Utility\ModelUtility\ModelData\VertexData.h" />
+    <ClInclude Include="EvaEngine\Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.h" />
+    <ClInclude Include="EvaEngine\Utility\ModelUtility\ModelLoaderUtility\ModelLoadBase.h" />
+    <ClInclude Include="EvaEngine\Utility\ModelUtility\ModelLoader\ModelLoader.h" />
+    <ClInclude Include="EvaEngine\Utility\ModelUtility\ModelLoaderUtility\OBJModelLoader\OBJModelLoader.h" />
+    <ClInclude Include="EvaEngine\Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.h" />
+    <ClInclude Include="EvaEngine\Utility\ShaderUtility\ShaderCompiler\ShaderCompiler.h" />
+    <ClInclude Include="EvaEngine\Utility\ShaderUtility\ShaderLoader\ShaderLoader.h" />
+    <ClInclude Include="EvaEngine\Utility\ShaderUtility\Shader\Shader.h" />
+    <ClInclude Include="EvaEngine\Utility\StringAssist\StringAssist.h" />
+    <ClInclude Include="EvaEngine\Utility\Time\Time.h" />
+    <ClInclude Include="EvaEngine\Utility\Time\TimeBase.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="App\DirectX11App\DirectX11App.cpp" />
-    <ClCompile Include="App\GameApp\GameApp.cpp" />
-    <ClCompile Include="App\WindowApp\WindowApp.cpp" />
-    <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="GameSystemBase\Base\Component\Component.cpp" />
-    <ClCompile Include="GameSystemBase\Base\GameJobs\GameJobs.cpp" />
-    <ClCompile Include="GameSystemBase\Base\GameObject\GameObject.cpp" />
-    <ClCompile Include="GameSystemBase\Base\Scene\Scene.cpp" />
-    <ClCompile Include="GameSystemBase\Components\Camera\Camera.cpp" />
-    <ClCompile Include="GameSystemBase\Components\MeshRenderer\MeshRenderer.cpp" />
-    <ClCompile Include="GameSystemBase\Components\MonoBehaviour\MonoBehaviour.cpp" />
-    <ClCompile Include="GameSystemBase\Components\Transform\Transform.cpp" />
-    <ClCompile Include="GameSystemBase\DataBase\ComponentDataBase\ComponentDataBase.cpp" />
-    <ClCompile Include="GameSystemBase\DataBase\GameObjectDataBase\GameObjectDataBase.cpp" />
-    <ClCompile Include="GameSystemBase\DataBase\ModelDataBase\ModelDataBase.cpp" />
-    <ClCompile Include="GameSystemBase\DataBase\SceneDataBase\SceneDataBase.cpp" />
-    <ClCompile Include="GameSystemBase\DataBase\ShaderDataBase\ShaderDataBase.cpp" />
-    <ClCompile Include="GameSystemBase\Manager\ComponentManager\ComponentManager.cpp" />
-    <ClCompile Include="GameSystemBase\Manager\DrawManager\DrawManager.cpp" />
-    <ClCompile Include="GameSystemBase\Manager\GameObjectManager\GameObjectManager.cpp" />
-    <ClCompile Include="GameSystemBase\Manager\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="EvaEngine\App\DirectX11App\DirectX11App.cpp" />
+    <ClCompile Include="EvaEngine\App\EvaEngineApp\EvaEngineApp.cpp" />
+    <ClCompile Include="EvaEngine\App\MainApp\MainApp.cpp" />
+    <ClCompile Include="EvaEngine\App\WindowApp\WindowApp.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Base\Component\Component.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Base\GameBase\GameBase.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Base\GameJobs\GameJobs.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Base\GameObject\GameObject.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Base\Scene\Scene.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Components\Camera\Camera.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Components\MeshRenderer\MeshRenderer.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Components\MonoBehaviour\MonoBehaviour.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Components\Transform\Transform.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\DataBase\ComponentDataBase\ComponentDataBase.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\DataBase\GameObjectDataBase\GameObjectDataBase.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\DataBase\ModelDataBase\ModelDataBase.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\DataBase\SceneDataBase\SceneDataBase.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\DataBase\ShaderDataBase\ShaderDataBase.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Manager\ComponentManager\ComponentManager.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Manager\DrawManager\DrawManager.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Manager\GameObjectManager\GameObjectManager.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Manager\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Time\TimeBase.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Setting\Window\Window.cpp" />
-    <ClCompile Include="System\DebugLog\DebugLog.cpp" />
-    <ClCompile Include="Utility\BufferCreate\BufferCreate.cpp" />
-    <ClCompile Include="Utility\Input\Input.cpp" />
-    <ClCompile Include="Utility\Input\InputBufferUpdate\InputBufferUpdate.cpp" />
-    <ClCompile Include="Utility\Math\Matrix3x3\Matrix3x3.cpp" />
-    <ClCompile Include="Utility\Math\Matrix4x4\Matrix4x4.cpp" />
-    <ClCompile Include="Utility\Math\Quaternion\Quaternion.cpp" />
-    <ClCompile Include="Utility\Math\Vector2\Vector2.cpp" />
-    <ClCompile Include="Utility\Math\Vector3\Vector3.cpp" />
-    <ClCompile Include="Utility\Mesh\Mesh.cpp" />
-    <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.cpp" />
-    <ClCompile Include="Utility\ModelUtility\ModelLoader\ModelLoader.cpp" />
-    <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\OBJModelLoader\OBJModelLoader.cpp" />
-    <ClCompile Include="Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.cpp" />
-    <ClCompile Include="Utility\ResourceLoad\ResourceLoad.cpp" />
-    <ClCompile Include="Utility\ShaderUtility\ShaderCompiler\ShaderCompiler.cpp" />
-    <ClCompile Include="Utility\ShaderUtility\ShaderLoader\ShaderLoader.cpp" />
-    <ClCompile Include="Utility\ShaderUtility\Shader\Shader.cpp" />
+    <ClCompile Include="EvaEngine\Setting\Window\Window.cpp" />
+    <ClCompile Include="EvaEngine\System\DebugLog\DebugLog.cpp" />
+    <ClCompile Include="EvaEngine\Utility\BufferCreate\BufferCreate.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Input\Input.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Input\InputBufferUpdate\InputBufferUpdate.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Math\Matrix3x3\Matrix3x3.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Math\Matrix4x4\Matrix4x4.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Math\Quaternion\Quaternion.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Math\Vector2\Vector2.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Math\Vector3\Vector3.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Mesh\Mesh.cpp" />
+    <ClCompile Include="EvaEngine\Utility\ModelUtility\ModelLoaderUtility\FBXModelLoader\FBXModelLoader.cpp" />
+    <ClCompile Include="EvaEngine\Utility\ModelUtility\ModelLoader\ModelLoader.cpp" />
+    <ClCompile Include="EvaEngine\Utility\ModelUtility\ModelLoaderUtility\OBJModelLoader\OBJModelLoader.cpp" />
+    <ClCompile Include="EvaEngine\Utility\ModelUtility\ModelLoaderUtility\VRMModelLoader\VRMModelLoader.cpp" />
+    <ClCompile Include="EvaEngine\Utility\ShaderUtility\ShaderCompiler\ShaderCompiler.cpp" />
+    <ClCompile Include="EvaEngine\Utility\ShaderUtility\ShaderLoader\ShaderLoader.cpp" />
+    <ClCompile Include="EvaEngine\Utility\ShaderUtility\Shader\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shader\PixelShader.hlsl">
+    <FxCompile Include="EvaEngine\Shader\PixelShader.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">psMain</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">psMain</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">psMain</EntryPointName>
@@ -292,7 +596,7 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
-    <FxCompile Include="Shader\VertexShader.hlsl">
+    <FxCompile Include="EvaEngine\Shader\VertexShader.hlsl">
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">vsMain</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">vsMain</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">vsMain</EntryPointName>
@@ -308,7 +612,8 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
+    <None Include="dxcompiler.dll" />
+    <None Include="dxil.dll" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,0 +1,28 @@
+#include "GameBase.h"
+#include "../../../System/DebugLog/DebugLog.h"
+#include "../../../Setting/Window/Window.h"
+#include "../../../App/WindowApp/WindowApp.h"
+#include "../../../App/DirectX11App/DirectX11App.h"
+#include "../../Manager/DrawManager/DrawManager.h"
+#include "../../../App/EvaEngineApp/EvaEngineApp.h"
+
+using namespace EvaEngine;
+
+GameBase* GameBase::m_GameBase{ nullptr };
+
+GameBase::GameBase(const unsigned int windowWidth, const unsigned int windowHeight)
+{
+	Window::g_WindowRight = windowWidth;
+	Window::g_WindowBottom = windowHeight;
+	m_GameBase = this;
+}
+
+GameBase::~GameBase()
+{
+	m_GameBase = nullptr;
+}
+
+GameBase* EvaEngine::GameBase::Instance()
+{
+	return m_GameBase;
+}
