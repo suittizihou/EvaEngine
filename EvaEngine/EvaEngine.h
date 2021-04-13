@@ -1,4 +1,7 @@
 #pragma once
+
+#pragma comment(lib, "EvaEngine.lib")
+
 #include "EvaEngine/App/MainApp/MainApp.h"
 #include "EvaEngine/GameSystemBase/Base/GameBase/GameBase.h"
 #include "EvaEngine/GameSystemBase/Components/ComponentHeaders.h"
