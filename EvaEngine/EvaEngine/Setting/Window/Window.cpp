@@ -11,6 +11,7 @@ UINT Window::g_FPS{ 60 };
 HINSTANCE Window::g_hInstance{};
 HWND Window::g_hWnd{};
 int Window::g_nCmdShow{};
+WNDCLASSEX Window::g_wc{};
 
 D3D11_VIEWPORT Window::GetViewport()
 {

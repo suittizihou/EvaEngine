@@ -17,7 +17,11 @@
 
 using namespace EvaEngine;
 
+LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
+
+    if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wp, lp)) return true;
     
     switch (msg) {
     case WM_CLOSE:
@@ -64,6 +68,8 @@ HRESULT WindowApp::Init()
         DebugLog::LogError("WNDCLASSEX Initialize Failed.");
         return hr;
     }
+
+    Window::g_wc = wc;
 
     RECT rect = { 0,0, static_cast<LONG>(Window::g_WindowRight), static_cast<LONG>(Window::g_WindowBottom) };
 
@@ -129,13 +135,19 @@ int WindowApp::Update()
         else {
             InputBufferUpdate::Instance().KeyUpdate();
 
+            // エンジンの更新処理
             EvaEngineApp::Instance().Update();
 
+            // エンジンの描画処理
             EvaEngineApp::Instance().Draw(DirectX11App::g_Context);
 
-            EvaEngineApp::Instance().Last();
+            // エンジンのフレーム終了時処理
+            EvaEngineApp::Instance().FrameEnd();
         }
     }
+
+    // エンジンの終了時処理
+    EvaEngineApp::Instance().End();
 
     return static_cast<int>(msg.wParam);
 }

@@ -29,5 +29,7 @@ namespace EvaEngine {
 		static HWND g_hWnd;
 		// ウインドウをどのように表示するかを示す定数
 		static int g_nCmdShow;
+		// ウィンドウの各パラメータをまとめる構造体
+		static WNDCLASSEX g_wc;
 	};
 }
