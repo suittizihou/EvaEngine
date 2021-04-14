@@ -97,7 +97,7 @@
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)FbxSDK\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)FbxSDK\include\;$(ProjectDir)ImGUI\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -123,7 +123,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;EVAENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)FbxSDK\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)FbxSDK\include\;$(ProjectDir)ImGUI\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -146,7 +146,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)FbxSDK\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)FbxSDK\include\;$(ProjectDir)ImGUI\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -171,7 +171,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)FbxSDK\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)FbxSDK\include\;$(ProjectDir)ImGUI\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -195,6 +195,7 @@
     <ClInclude Include="EvaEngine\App\WindowApp\WindowApp.h" />
     <ClInclude Include="EvaEngine\Define\D3D11Defines.h" />
     <ClInclude Include="EvaEngine.h" />
+    <ClInclude Include="EvaEngine\Editor\Editor.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk\core\arch\fbxalloc.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk\core\arch\fbxarch.h" />
@@ -501,6 +502,14 @@
     <ClInclude Include="EvaEngine\GameSystemBase\Manager\DrawManager\DrawManager.h" />
     <ClInclude Include="EvaEngine\GameSystemBase\Manager\GameObjectManager\GameObjectManager.h" />
     <ClInclude Include="EvaEngine\GameSystemBase\Manager\SceneManager\SceneManager.h" />
+    <ClInclude Include="ImGUI\imconfig.h" />
+    <ClInclude Include="ImGUI\imgui.h" />
+    <ClInclude Include="ImGUI\imgui_impl_dx11.h" />
+    <ClInclude Include="ImGUI\imgui_impl_win32.h" />
+    <ClInclude Include="ImGUI\imgui_internal.h" />
+    <ClInclude Include="ImGUI\imstb_rectpack.h" />
+    <ClInclude Include="ImGUI\imstb_textedit.h" />
+    <ClInclude Include="ImGUI\imstb_truetype.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="EvaEngine\Setting\Window\Window.h" />
     <ClInclude Include="EvaEngine\System\DebugLog\DebugLog.h" />
@@ -556,6 +565,11 @@
     <ClCompile Include="EvaEngine\GameSystemBase\Manager\GameObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Manager\SceneManager\SceneManager.cpp" />
     <ClCompile Include="EvaEngine\Utility\Time\TimeBase.cpp" />
+    <ClCompile Include="ImGUI\imgui.cpp" />
+    <ClCompile Include="ImGUI\imgui_draw.cpp" />
+    <ClCompile Include="ImGUI\imgui_impl_dx11.cpp" />
+    <ClCompile Include="ImGUI\imgui_impl_win32.cpp" />
+    <ClCompile Include="ImGUI\imgui_widgets.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

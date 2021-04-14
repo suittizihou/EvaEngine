@@ -9,8 +9,6 @@
 using namespace EvaEngine;
 
 EvaEngineApp::~EvaEngineApp() {
-	// 全シェーダーのリソースを解放
-	ShaderDataBase::Instance().DeleteAllShader();
 }
 
 HRESULT EvaEngineApp::Init()
