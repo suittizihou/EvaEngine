@@ -64,8 +64,8 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance
 		return -1;
 	}
 
+	// メッセージループ
 	int result = EvaEngine::MainApp::Instance().Run();
 
-	// メッセージループ
 	return result;
 }
