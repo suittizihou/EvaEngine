@@ -16,9 +16,17 @@ namespace EvaEngine {
 			World   // ワールド座標系
 		};
 
+#if NDEBUG
 		// コンストラクタ
 		Transform() :
-			Component(0U, false, false) {};
+			Component(FunctionMask::NONE, false, false) {};
+#elif _DEBUG
+		// コンストラクタ
+		Transform() :
+			Component(FunctionMask::DRAW, false, false) {};
+
+		void Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) override;
+#endif
 		// デストラクタ
 		~Transform();
 		// ワールド空間の Transform の青軸 前を取得

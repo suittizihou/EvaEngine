@@ -8,6 +8,7 @@
 namespace EvaEngine {
 
 	class Transform;
+	class Camera;
 
 	// 使用する関数を示すビットフラグ
 	namespace FunctionMask {
@@ -40,7 +41,7 @@ namespace EvaEngine {
 		// Updateの後に呼ばれる
 		virtual void LateUpdate() {}
 		// 上記全ての処理が終わったタイミングで呼ばれる
-		virtual void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) {}
+		virtual void Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) {}
 
 		// コンポーネントに必要なデータを設定
 		void SetComponentDesc(const ComponentDesc& componentDesc);

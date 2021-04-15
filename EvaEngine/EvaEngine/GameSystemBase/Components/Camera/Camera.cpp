@@ -7,6 +7,8 @@ using namespace DirectX;
 using namespace EvaEngine;
 using namespace FunctionMask;
 
+std::vector<std::weak_ptr<Camera>> m_Cameras{};
+
 Camera::Camera(
 	const D3D11_VIEWPORT& viewPort,
 	const float& near,
@@ -18,6 +20,7 @@ Camera::Camera(
 	m_Fov(fov),
 	m_ProjectionMatrix(CreateProjectionMatrix(viewPort, near, far, fov))
 {
+	m_Cameras.push_back(shared_from_this());
 }
 
 Camera::Camera(
@@ -28,6 +31,26 @@ Camera::Camera(
 	m_Fov(fov)
 {
 	m_ProjectionMatrix = CreateProjectionMatrix(Window::GetViewport(), near, far, fov);
+	m_Cameras.push_back(shared_from_this());
+}
+
+EvaEngine::Camera::~Camera()
+{
+	// 末尾のコンポーネントＩＤと自分のコンポーネントＩＤが同じなら消してリターン
+	if (m_Cameras.end()->lock()->GetComponentID() == GetComponentID()) {
+		m_Cameras.pop_back();
+		return;
+	}
+
+	// 自分と同じコンポーネントＩＤのCameraを検索
+	for (int i = 0; i < m_Cameras.size(); ++i) {
+		if (m_Cameras[i].lock()->GetComponentID() == GetComponentID()) {
+			// 消す部分と末尾の部分をクルっと入れ替え
+			std::iter_swap(m_Cameras.begin() + i, m_Cameras.end() - 1);
+			m_Cameras.pop_back();
+			return;
+		}
+	}
 }
 
 void Camera::Awake()
@@ -49,14 +72,24 @@ D3D11_VIEWPORT Camera::GetViewport() const
 	return Window::GetViewport();
 }
 
-XMMATRIX Camera::GetViewMatrix() const
+XMMATRIX Camera::GetViewMatrixDxMath() const
 {
 	return m_ViewMatrix;
 }
 
-XMMATRIX Camera::GetProjectionMatrix() const
+EvaEngine::Matrix4x4 EvaEngine::Camera::GetViewMatrix() const
+{
+	return Matrix4x4::to_Matrix4x4(m_ViewMatrix);
+}
+
+XMMATRIX Camera::GetProjectionMatrixDxMath() const
 {
 	return m_ProjectionMatrix;
+}
+
+EvaEngine::Matrix4x4 EvaEngine::Camera::GetProjectionMatrix() const
+{
+	return Matrix4x4::to_Matrix4x4(m_ProjectionMatrix);
 }
 
 XMMATRIX Camera::CreateViewMatrix(const std::weak_ptr<Transform>& transform)
@@ -66,20 +99,28 @@ XMMATRIX Camera::CreateViewMatrix(const std::weak_ptr<Transform>& transform)
 
 DirectX::XMMATRIX Camera::CreateViewMatrix(const Matrix4x4& rotateMatrix, const Matrix4x4& positionMatrix)
 {
-	// ビュー行列を求める(まだ逆行列をしてない)
-	Matrix4x4 viewMatrix = rotateMatrix * positionMatrix;
-
-	// DirectXMathの行列に変換し逆行列にして返す
-	return XMMatrixInverse(nullptr,
-		XMMATRIX(
-			viewMatrix.m[0][0], viewMatrix.m[0][1], viewMatrix.m[0][2], viewMatrix.m[0][3],
-			viewMatrix.m[1][0], viewMatrix.m[1][1], viewMatrix.m[1][2], viewMatrix.m[1][3],
-			viewMatrix.m[2][0], viewMatrix.m[2][1], viewMatrix.m[2][2], viewMatrix.m[2][3],
-			viewMatrix.m[3][0], viewMatrix.m[3][1], viewMatrix.m[3][2], viewMatrix.m[3][3]));
+	// ビュー行列を逆行列にして返す
+	return XMMatrixInverse(nullptr, (rotateMatrix * positionMatrix).to_XMMATRIX());
 }
 
 DirectX::XMMATRIX Camera::CreateProjectionMatrix(const D3D11_VIEWPORT& viewPort, const float& near, const float& far, const float& fovDegree)
 {
 	return XMMatrixPerspectiveFovLH(XMConvertToRadians(fovDegree),
 			viewPort.Width / viewPort.Height, near, far);
+}
+
+std::weak_ptr<Camera> EvaEngine::Camera::GetMainCamera()
+{
+	for (int i = 0; i < m_Cameras.size(); ++i) {
+		if (m_Cameras[i].lock()->GetGameObject().lock()->GetTag() == "Main Camera") {
+			return m_Cameras[i];
+		}
+	}
+
+	return std::weak_ptr<Camera>();
+}
+
+std::vector<std::weak_ptr<Camera>> EvaEngine::Camera::GetAllCamera()
+{
+	return m_Cameras;
 }

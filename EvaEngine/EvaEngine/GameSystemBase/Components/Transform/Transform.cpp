@@ -3,6 +3,13 @@
 
 using namespace EvaEngine;
 
+#if _DEBUG
+void EvaEngine::Transform::Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
+{
+	
+}
+#endif
+
 Transform::~Transform()
 {
 	// 子オブジェクトを切り離す

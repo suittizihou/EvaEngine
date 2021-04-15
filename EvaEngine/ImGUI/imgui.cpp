@@ -6118,6 +6118,21 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
     return !window->SkipItems;
 }
 
+#ifndef IMGUI_DISABLE_OBSOLETE_FUNCTIONS
+bool ImGui::Begin(const char* name, bool* p_open, const ImVec2& size_first_use, float bg_alpha_override, ImGuiWindowFlags flags)
+{
+    // Old API feature: we could pass the initial window size as a parameter. This was misleading because it only had an effect if the window didn't have data in the .ini file.
+    if (size_first_use.x != 0.0f || size_first_use.y != 0.0f)
+        SetNextWindowSize(size_first_use, ImGuiCond_FirstUseEver);
+
+    // Old API feature: override the window background alpha with a parameter.
+    if (bg_alpha_override >= 0.0f)
+        SetNextWindowBgAlpha(bg_alpha_override);
+
+    return Begin(name, p_open, flags);
+}
+#endif // IMGUI_DISABLE_OBSOLETE_FUNCTIONS
+
 void ImGui::End()
 {
     ImGuiContext& g = *GImGui;

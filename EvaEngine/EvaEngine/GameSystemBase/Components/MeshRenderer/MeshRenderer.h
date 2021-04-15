@@ -21,7 +21,7 @@ namespace EvaEngine {
 		~MeshRenderer() { std::cout << "デストラクタ" << std::endl; }
 
 		void Awake() override;
-		void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) override;
+		void Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) override;
 
 	private:
 		ModelData m_Model{};

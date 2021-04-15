@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iosfwd>
+#include <DirectXMath.h>
 
 namespace EvaEngine {
 
@@ -72,6 +73,12 @@ namespace EvaEngine {
 		static Matrix4x4 TRS(const Vector3& t, const Quaternion& r, const Vector3& s);
 		// この行列を移動、回転やスケーリングする行列に設定します
 		void set_TRS(const Vector3& t, const Quaternion& r, const Vector3& s);
+
+		// Matrix4x4をDirectXMathのXMATRIXに変換する
+		DirectX::XMMATRIX to_XMMATRIX() const;
+		static DirectX::XMMATRIX to_XMMATRIX(const Matrix4x4& matrix);
+		// DirectXMathのXMATRIXをMatrix4x4に変換する
+		static Matrix4x4 to_Matrix4x4(const DirectX::XMMATRIX& matrix);
 	};
 
 	// 行列の加算

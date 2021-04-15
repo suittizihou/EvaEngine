@@ -299,8 +299,8 @@ void DirectX11App::SetConstantBuffer(const std::weak_ptr<Camera>& camera)
 {
 	DirectX::XMVECTOR light = DirectX::XMVector3Normalize(DirectX::XMVectorSet(0.0f, 0.5f, -1.0f, 0.0f));
 
-	DirectX::XMStoreFloat4x4(&g_ConstantBufferData.view, DirectX::XMMatrixTranspose(camera.lock()->GetViewMatrix()));
-	DirectX::XMStoreFloat4x4(&g_ConstantBufferData.projection, DirectX::XMMatrixTranspose(camera.lock()->GetProjectionMatrix()));
+	DirectX::XMStoreFloat4x4(&g_ConstantBufferData.view, DirectX::XMMatrixTranspose(camera.lock()->GetViewMatrixDxMath()));
+	DirectX::XMStoreFloat4x4(&g_ConstantBufferData.projection, DirectX::XMMatrixTranspose(camera.lock()->GetProjectionMatrixDxMath()));
 	DirectX::XMStoreFloat4(&g_ConstantBufferData.lightVector, light);
 	DirectX::XMStoreFloat4(&g_ConstantBufferData.cameraPos, 
 		DirectX::XMVectorSet(

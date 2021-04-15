@@ -190,6 +190,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="EvaEngine\App\DirectX11App\DirectX11App.h" />
+    <ClInclude Include="EvaEngine\App\EditorApp\EditorApp.h" />
     <ClInclude Include="EvaEngine\App\EvaEngineApp\EvaEngineApp.h" />
     <ClInclude Include="EvaEngine\App\MainApp\MainApp.h" />
     <ClInclude Include="EvaEngine\App\WindowApp\WindowApp.h" />
@@ -504,6 +505,8 @@
     <ClInclude Include="EvaEngine\GameSystemBase\Manager\SceneManager\SceneManager.h" />
     <ClInclude Include="ImGUI\imconfig.h" />
     <ClInclude Include="ImGUI\imgui.h" />
+    <ClInclude Include="ImGUI\ImGuizmo.h" />
+    <ClInclude Include="ImGUI\imgui_dock.h" />
     <ClInclude Include="ImGUI\imgui_impl_dx11.h" />
     <ClInclude Include="ImGUI\imgui_impl_win32.h" />
     <ClInclude Include="ImGUI\imgui_internal.h" />
@@ -543,6 +546,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EvaEngine\App\DirectX11App\DirectX11App.cpp" />
+    <ClCompile Include="EvaEngine\App\EditorApp\EditorApp.cpp" />
     <ClCompile Include="EvaEngine\App\EvaEngineApp\EvaEngineApp.cpp" />
     <ClCompile Include="EvaEngine\App\MainApp\MainApp.cpp" />
     <ClCompile Include="EvaEngine\App\WindowApp\WindowApp.cpp" />
@@ -566,6 +570,8 @@
     <ClCompile Include="EvaEngine\GameSystemBase\Manager\SceneManager\SceneManager.cpp" />
     <ClCompile Include="EvaEngine\Utility\Time\TimeBase.cpp" />
     <ClCompile Include="ImGUI\imgui.cpp" />
+    <ClCompile Include="ImGUI\ImGuizmo.cpp" />
+    <ClCompile Include="ImGUI\imgui_dock.cpp" />
     <ClCompile Include="ImGUI\imgui_draw.cpp" />
     <ClCompile Include="ImGUI\imgui_impl_dx11.cpp" />
     <ClCompile Include="ImGUI\imgui_impl_win32.cpp" />

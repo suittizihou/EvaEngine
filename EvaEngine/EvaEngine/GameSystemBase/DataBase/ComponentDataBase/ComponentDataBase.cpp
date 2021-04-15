@@ -1,5 +1,6 @@
 #include "ComponentDataBase.h"
 #include "../../Base/GameObject/GameObject.h"
+#include "../../Components/Camera/Camera.h"
 #include <iterator>
 
 using namespace EvaEngine;
@@ -27,8 +28,12 @@ void ComponentDataBase::LateUpdate()
 
 void ComponentDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) const
 {
-	for (int i = 0; i < m_DrawFuncNumber.size(); ++i) {
-		m_Components[m_DrawFuncNumber[i]]->Draw(command);
+	// ƒJƒƒ‰‚Ì”‚¾‚¯•`‰æ‚·‚é
+	std::vector<std::weak_ptr<Camera>> cameras = Camera::GetAllCamera();
+	for (int cameraNum = 0; cameraNum < cameras.size(); ++cameraNum) {
+		for (int i = 0; i < m_DrawFuncNumber.size(); ++i) {
+			m_Components[m_DrawFuncNumber[i]]->Draw(cameras[cameraNum].lock(), command);
+		}
 	}
 }
 

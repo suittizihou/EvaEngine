@@ -294,6 +294,29 @@ void Matrix4x4::set_TRS(const Vector3& t, const Quaternion& r, const Vector3& s)
 	*this = TRS(t, r, s);
 }
 
+DirectX::XMMATRIX EvaEngine::Matrix4x4::to_XMMATRIX() const
+{
+	return DirectX::XMMATRIX(
+		m[0][0], m[0][1], m[0][2], m[0][3],
+		m[1][0], m[1][1], m[1][2], m[1][3],
+		m[2][0], m[2][1], m[2][2], m[2][3],
+		m[3][0], m[3][1], m[3][2], m[3][3]);
+}
+
+DirectX::XMMATRIX EvaEngine::Matrix4x4::to_XMMATRIX(const Matrix4x4& matrix)
+{
+	return matrix.to_XMMATRIX();
+}
+
+Matrix4x4 EvaEngine::Matrix4x4::to_Matrix4x4(const DirectX::XMMATRIX& matrix)
+{
+	return Matrix4x4(
+		matrix.r[0].m128_f32[0], matrix.r[0].m128_f32[1], matrix.r[0].m128_f32[2], matrix.r[0].m128_f32[3],
+		matrix.r[1].m128_f32[0], matrix.r[1].m128_f32[1], matrix.r[1].m128_f32[2], matrix.r[1].m128_f32[3],
+		matrix.r[2].m128_f32[0], matrix.r[2].m128_f32[1], matrix.r[2].m128_f32[2], matrix.r[2].m128_f32[3],
+		matrix.r[3].m128_f32[0], matrix.r[3].m128_f32[1], matrix.r[3].m128_f32[2], matrix.r[3].m128_f32[3]);
+}
+
 Matrix4x4 EvaEngine::operator+(const Matrix4x4& lhs, const Matrix4x4& rhs)
 {
 	Matrix4x4 result;

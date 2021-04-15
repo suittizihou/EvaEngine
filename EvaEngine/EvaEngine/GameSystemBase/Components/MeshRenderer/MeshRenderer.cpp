@@ -27,7 +27,7 @@ void MeshRenderer::Awake() {
 	m_Transform = GetTransform();
 }
 
-void MeshRenderer::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
+void MeshRenderer::Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
 {
 	DrawManager::Draw(m_Camera, m_Transform, m_Model);
 }
