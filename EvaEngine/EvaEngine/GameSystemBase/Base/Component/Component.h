@@ -43,6 +43,11 @@ namespace EvaEngine {
 		// 上記全ての処理が終わったタイミングで呼ばれる
 		virtual void Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) {}
 
+#if _DEBUG
+		// Editor用の描画
+		virtual void DrawEditor(const std::weak_ptr<Camera> sceneViewCamera, const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) {}
+#endif
+
 		// コンポーネントに必要なデータを設定
 		void SetComponentDesc(const ComponentDesc& componentDesc);
 

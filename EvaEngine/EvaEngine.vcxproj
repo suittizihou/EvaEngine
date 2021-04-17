@@ -196,7 +196,7 @@
     <ClInclude Include="EvaEngine\App\WindowApp\WindowApp.h" />
     <ClInclude Include="EvaEngine\Define\D3D11Defines.h" />
     <ClInclude Include="EvaEngine.h" />
-    <ClInclude Include="EvaEngine\Editor\Editor.h" />
+    <ClInclude Include="EvaEngine\Editor\SceneView\SceneView.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk\core\arch\fbxalloc.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk\core\arch\fbxarch.h" />
@@ -550,6 +550,7 @@
     <ClCompile Include="EvaEngine\App\EvaEngineApp\EvaEngineApp.cpp" />
     <ClCompile Include="EvaEngine\App\MainApp\MainApp.cpp" />
     <ClCompile Include="EvaEngine\App\WindowApp\WindowApp.cpp" />
+    <ClCompile Include="EvaEngine\Editor\SceneView\SceneView.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Base\Component\Component.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Base\GameBase\GameBase.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Base\GameJobs\GameJobs.cpp" />

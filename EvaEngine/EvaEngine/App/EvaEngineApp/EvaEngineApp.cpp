@@ -31,7 +31,7 @@ HRESULT EvaEngineApp::Init()
 		return hr;
 	}
 
-#if _DEGUB
+#if _DEBUG
 	// Editor‚Ì‰Šú‰»
 	hr = EditorApp::Init();
 	if (FAILED(hr)) {
