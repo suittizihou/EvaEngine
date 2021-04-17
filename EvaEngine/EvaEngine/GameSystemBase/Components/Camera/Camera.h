@@ -32,6 +32,10 @@ namespace EvaEngine {
 		void Awake() override;
 		void Update() override;
 
+#if _DEBUG
+		void OnGUI() override {}
+#endif
+
 	public:
 		// ビューポートを取得
 		D3D11_VIEWPORT  GetViewport() const;

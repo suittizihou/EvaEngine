@@ -22,9 +22,6 @@ namespace EvaEngine {
 
 	public:
 		void EditTransform(float* cameraView, float* cameraProjection, float* matrix, bool editTransformDecomposition);
-
-	private:
-		static ImGuiIO& io;
 	};
 }
 #endif

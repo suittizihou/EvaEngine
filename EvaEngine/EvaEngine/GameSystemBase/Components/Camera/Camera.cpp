@@ -7,7 +7,7 @@ using namespace DirectX;
 using namespace EvaEngine;
 using namespace FunctionMask;
 
-std::vector<std::weak_ptr<Camera>> m_Cameras{};
+std::vector<std::weak_ptr<Camera>> Camera::m_Cameras{};
 
 Camera::Camera(
 	const D3D11_VIEWPORT& viewPort,
@@ -20,7 +20,7 @@ Camera::Camera(
 	m_Fov(fov),
 	m_ProjectionMatrix(CreateProjectionMatrix(viewPort, near, far, fov))
 {
-	m_Cameras.push_back(shared_from_this());
+	m_Cameras.push_back(weak_from_this());
 }
 
 Camera::Camera(
@@ -31,20 +31,14 @@ Camera::Camera(
 	m_Fov(fov)
 {
 	m_ProjectionMatrix = CreateProjectionMatrix(Window::GetViewport(), near, far, fov);
-	m_Cameras.push_back(shared_from_this());
+	m_Cameras.push_back(weak_from_this());
 }
 
 EvaEngine::Camera::~Camera()
 {
-	// 末尾のコンポーネントＩＤと自分のコンポーネントＩＤが同じなら消してリターン
-	if (m_Cameras.end()->lock()->GetComponentID() == GetComponentID()) {
-		m_Cameras.pop_back();
-		return;
-	}
-
-	// 自分と同じコンポーネントＩＤのCameraを検索
+	// 参照先がnullになってるものを消す
 	for (int i = 0; i < m_Cameras.size(); ++i) {
-		if (m_Cameras[i].lock()->GetComponentID() == GetComponentID()) {
+		if (m_Cameras[i].expired()) {
 			// 消す部分と末尾の部分をクルっと入れ替え
 			std::iter_swap(m_Cameras.begin() + i, m_Cameras.end() - 1);
 			m_Cameras.pop_back();

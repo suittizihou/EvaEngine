@@ -31,3 +31,9 @@ void MeshRenderer::Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL
 {
 	DrawManager::Draw(m_Camera, m_Transform, m_Model);
 }
+
+#if _DEBUG
+void EvaEngine::MeshRenderer::OnGUI()
+{
+}
+#endif
