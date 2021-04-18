@@ -20,10 +20,12 @@ void EvaEngine::Scene::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& c
     ComponentManager::Instance().Draw(m_SceneName, command);
 }
 
-void EvaEngine::Scene::DrawEditor()
+#if _DEBUG
+void EvaEngine::Scene::OnGUI(const SceneView& sceneView)
 {
-    ComponentManager::Instance()
+    ComponentManager::Instance().OnGUI(m_SceneName, sceneView);
 }
+#endif
 
 std::weak_ptr<GameObject> Scene::Find(const std::string& name)
 {

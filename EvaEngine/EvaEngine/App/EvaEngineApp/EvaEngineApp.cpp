@@ -75,7 +75,7 @@ void EvaEngineApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& comma
 
 #if _DEBUG
 	// Editor‚Ì•`‰æˆ—
-	EditorApp::Draw();
+	EditorApp::Draw(command);
 	// Editor•`‰æI—¹ˆ—
 	EditorApp::DrawEnd();
 #endif

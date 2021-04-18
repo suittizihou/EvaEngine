@@ -6,6 +6,7 @@
 #include "../DirectX11App/DirectX11App.h"
 #include "../../GameSystemBase/Components/Camera/Camera.h"
 #include "../../Utility/Math/Matrix4x4/Matrix4x4.h"
+#include "../../Editor/SceneView/SceneView.h"
 
 #include <imgui.h>
 #include <imgui_impl_win32.h>
@@ -19,12 +20,35 @@ using namespace EvaEngine;
 
 float camDistance = 8.f;
 static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::TRANSLATE);
+std::unique_ptr<SceneView> EditorApp::m_SceneView{ nullptr };
 
 HRESULT EditorApp::Init()
 {
 	// ImGuiの初期化
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
+
+	try {
+		// ImGuiのドッキング機能の初期化
+		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		// iniを生成しない
+		io.IniFilename = NULL;
+		// 日本語フォントに対応
+		io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\meiryo.ttc", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
+		// ドッキング機能を有効化
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+		// ダークテーマに設定
+		ImGui::StyleColorsDark();
+
+		auto style = ImGui::GetStyle();
+		style.WindowRounding = 0.0f;
+		style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+	}
+	catch (std::string& error) {
+		DebugLog::LogError("ImGuiの設定に失敗しました。");
+		return E_ABORT;
+	}
 
 	if (!ImGui_ImplWin32_Init(Window::g_hWnd)) {
 		DebugLog::LogError("ImGui_ImplWin32_Initに失敗しました。");
@@ -40,17 +64,8 @@ HRESULT EditorApp::Init()
 		return E_ABORT;
 	}
 
-	// ImGuiのドッキング機能の初期化
-	//ImGui::InitDock();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	// iniを生成しない
-	io.IniFilename = NULL;
-	// 日本語フォントに対応
-	io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\meiryo.ttc", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
-	// ドッキング機能を有効化
-	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-	// ダークテーマに設定
-	ImGui::StyleColorsDark();
+	// シーンビューの作成
+	m_SceneView = std::make_unique<SceneView>();
 
 	return S_OK;
 }
@@ -62,7 +77,7 @@ void EvaEngine::EditorApp::DrawBegin()
 	ImGui::NewFrame();
 }
 
-void EvaEngine::EditorApp::Draw()
+void EvaEngine::EditorApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
 {
 	static bool demoWindow{ false };
 	static bool anotherWindow{ false };
@@ -91,7 +106,7 @@ void EvaEngine::EditorApp::Draw()
 	}
 
 	{
-		ImGui::Begin("TestWindow");                          // Create a window called "Hello, world!" and append into it.
+		ImGui::Begin("TestWindow");
 
 		ImGui::Text("あいうえお");
 
@@ -103,6 +118,9 @@ void EvaEngine::EditorApp::DrawEnd()
 {
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+
+	ImGui::UpdatePlatformWindows();
+	ImGui::RenderPlatformWindowsDefault();
 }
 
 void EvaEngine::EditorApp::End()

@@ -83,3 +83,8 @@ void SceneDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& comm
 {
     m_CurrentScene.lock()->Draw(command);
 }
+
+void EvaEngine::SceneDataBase::OnGUI(const SceneView& sceneView)
+{
+    m_CurrentScene.lock()->OnGUI(sceneView);
+}

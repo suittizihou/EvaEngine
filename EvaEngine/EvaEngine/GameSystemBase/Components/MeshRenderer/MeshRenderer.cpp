@@ -29,11 +29,11 @@ void MeshRenderer::Awake() {
 
 void MeshRenderer::Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
 {
-	DrawManager::Draw(m_Camera, m_Transform, m_Model);
+	DrawManager::Draw(camera, m_Transform, m_Model);
 }
 
 #if _DEBUG
-void EvaEngine::MeshRenderer::OnGUI()
+void EvaEngine::MeshRenderer::OnGUI(const SceneView& sceneView)
 {
 }
 #endif

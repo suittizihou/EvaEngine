@@ -150,11 +150,13 @@
     <ClInclude Include="Editor\EditorEntry\EditorEntry.h" />
     <ClInclude Include="Editor\EditorWindow\EditorWindow.h" />
     <ClInclude Include="SampleScene\SampleScene.h" />
+    <ClInclude Include="Script\Move\Move.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Editor\EditorEntry\EditorEntry.cpp" />
     <ClCompile Include="Editor\EditorWindow\EditorWindow.cpp" />
     <ClCompile Include="SampleScene\SampleScene.cpp" />
+    <ClCompile Include="Script\Move\Move.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

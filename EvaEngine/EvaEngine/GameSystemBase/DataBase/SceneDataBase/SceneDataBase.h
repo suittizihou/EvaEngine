@@ -47,6 +47,10 @@ namespace EvaEngine {
 		void LateUpdate();
 		void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
 
+#if _DEBUG
+		void OnGUI(const SceneView& sceneView);
+#endif
+
 	private:
 		std::string m_CurrentSceneName{};
 		std::string m_PreviousSceneName{};

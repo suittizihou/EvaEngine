@@ -33,7 +33,7 @@ namespace EvaEngine {
 		void Update() override;
 
 #if _DEBUG
-		void OnGUI() override {}
+		void OnGUI(const SceneView& sceneView) override {}
 #endif
 
 	public:

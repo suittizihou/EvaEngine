@@ -25,10 +25,12 @@ void ComponentManager::Draw(
 	m_ComponentList[sceneName]->Draw(command);
 }
 
-void EvaEngine::ComponentManager::DrawEditor(std::string& sceneName)
+#if _DEBUG
+void EvaEngine::ComponentManager::OnGUI(std::string& sceneName, const SceneView& sceneView)
 {
-	m_ComponentList[sceneName]
+	m_ComponentList[sceneName]->OnGUI(sceneView);
 }
+#endif
 
 void ComponentManager::AddComponentDataBase(const std::string& sceneName)
 {

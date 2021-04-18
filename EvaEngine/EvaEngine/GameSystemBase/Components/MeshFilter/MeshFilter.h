@@ -14,7 +14,7 @@ namespace EvaEngine {
 		~MeshFilter() = default;
 
 #if _DEBUG
-		void OnGUI() override {}
+		void OnGUI(const SceneView& sceneView) override {}
 #endif
 
 		ModelData GetModel() { return m_Model; }

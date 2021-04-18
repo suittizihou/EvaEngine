@@ -111,6 +111,7 @@ std::weak_ptr<Camera> EvaEngine::Camera::GetMainCamera()
 		}
 	}
 
+	// Œ©‚Â‚©‚ç‚È‚©‚Á‚½‚ç‹ó‚Ìweak_ptr‚ð•Ô‚·
 	return std::weak_ptr<Camera>();
 }
 

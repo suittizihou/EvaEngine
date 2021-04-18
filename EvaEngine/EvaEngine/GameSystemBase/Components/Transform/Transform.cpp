@@ -12,7 +12,7 @@ Transform::~Transform()
 }
 
 #if _DEBUG
-void EvaEngine::Transform::OnGUI()
+void EvaEngine::Transform::OnGUI(const SceneView& sceneView)
 {
 }
 #endif

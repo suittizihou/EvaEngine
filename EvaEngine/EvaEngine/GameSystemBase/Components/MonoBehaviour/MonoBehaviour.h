@@ -24,7 +24,7 @@ namespace EvaEngine {
 		std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
 
 #if _DEBUG
-		virtual void OnGUI() override {}
+		virtual void OnGUI(const SceneView& sceneView) override {}
 #endif
 
 	private:

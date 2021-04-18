@@ -37,12 +37,14 @@ void ComponentDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& 
 	}
 }
 
-void EvaEngine::ComponentDataBase::DrawEditor()
+#if _DEBUG
+void EvaEngine::ComponentDataBase::OnGUI(const SceneView& sceneView)
 {
 	for (const auto& component : m_Components) {
-		component->DrawEditor();
+		component->OnGUI(sceneView);
 	}
 }
+#endif
 
 void ComponentDataBase::AddComponent(const std::shared_ptr<Component>& component, const int indexNum) {
 	// FixedUpdateä÷êîÇÃìoò^
