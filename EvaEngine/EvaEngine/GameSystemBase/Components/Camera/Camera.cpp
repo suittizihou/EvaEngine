@@ -20,7 +20,6 @@ Camera::Camera(
 	m_Fov(fov),
 	m_ProjectionMatrix(CreateProjectionMatrix(viewPort, near, far, fov))
 {
-	m_Cameras.push_back(weak_from_this());
 }
 
 Camera::Camera(
@@ -31,7 +30,6 @@ Camera::Camera(
 	m_Fov(fov)
 {
 	m_ProjectionMatrix = CreateProjectionMatrix(Window::GetViewport(), near, far, fov);
-	m_Cameras.push_back(weak_from_this());
 }
 
 EvaEngine::Camera::~Camera()
@@ -49,6 +47,7 @@ EvaEngine::Camera::~Camera()
 
 void Camera::Awake()
 {
+	m_Cameras.push_back(weak_from_this());
 	m_ViewMatrix = CreateViewMatrix(GetTransform());
 }
 

@@ -29,21 +29,23 @@ HRESULT EditorApp::Init()
 	ImGui::CreateContext();
 
 	try {
-		// ImGuiのドッキング機能の初期化
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		// iniを生成しない
 		io.IniFilename = NULL;
 		// 日本語フォントに対応
 		io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\meiryo.ttc", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
 		// ドッキング機能を有効化
-		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+		//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 		// ダークテーマに設定
 		ImGui::StyleColorsDark();
 
-		auto style = ImGui::GetStyle();
-		style.WindowRounding = 0.0f;
-		style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		ImGuiStyle& style = ImGui::GetStyle();
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			style.WindowRounding = 0.0f;
+			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		}
 	}
 	catch (std::string& error) {
 		DebugLog::LogError("ImGuiの設定に失敗しました。");
@@ -63,9 +65,10 @@ HRESULT EditorApp::Init()
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
 		return E_ABORT;
 	}
-
 	// シーンビューの作成
 	m_SceneView = std::make_unique<SceneView>();
+
+	ImGuiConfigFlags flags = ImGui::GetIO().ConfigFlags;
 
 	return S_OK;
 }
@@ -75,12 +78,15 @@ void EvaEngine::EditorApp::DrawBegin()
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
+	ImGuiConfigFlags flags = ImGui::GetIO().ConfigFlags;
 }
 
 void EvaEngine::EditorApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
 {
 	static bool demoWindow{ false };
 	static bool anotherWindow{ false };
+
+	ImGuiConfigFlags flags = ImGui::GetIO().ConfigFlags;
 
 	ImVec4 clearColor = ImVec4(0.45f, 0.55f, 0.60f, 1.0f);
 	{
@@ -119,8 +125,11 @@ void EvaEngine::EditorApp::DrawEnd()
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-	ImGui::UpdatePlatformWindows();
-	ImGui::RenderPlatformWindowsDefault();
+	ImGuiConfigFlags flags = ImGui::GetIO().ConfigFlags;
+	if (flags & ImGuiConfigFlags_ViewportsEnable) {
+		ImGui::UpdatePlatformWindows();
+		ImGui::RenderPlatformWindowsDefault();
+	}
 }
 
 void EvaEngine::EditorApp::End()
