@@ -5,8 +5,6 @@
 #include "../GameJobs/GameJobs.h"
 #include "ComponentDesc.h"
 
-class SceneView;
-
 namespace EvaEngine {
 
 	class Transform;
@@ -47,7 +45,7 @@ namespace EvaEngine {
 
 #if _DEBUG
 		// Editor用の描画
-		virtual void DrawEditor(const SceneView& sceneViewCamera) {}
+		virtual void OnGUI() = 0;
 #endif
 
 		// コンポーネントに必要なデータを設定

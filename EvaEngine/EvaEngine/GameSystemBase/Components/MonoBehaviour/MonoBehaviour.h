@@ -23,6 +23,10 @@ namespace EvaEngine {
 		// タグで検索してヒットしたゲームオブジェクトを全部持ってくる
 		std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
 
+#if _DEBUG
+		virtual void OnGUI() override {}
+#endif
+
 	private:
 		std::weak_ptr<Transform> m_Transform;
 	};

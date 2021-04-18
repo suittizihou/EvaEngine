@@ -13,6 +13,10 @@ namespace EvaEngine {
 
 		~MeshFilter() = default;
 
+#if _DEBUG
+		void OnGUI() override {}
+#endif
+
 		ModelData GetModel() { return m_Model; }
 
 	private:

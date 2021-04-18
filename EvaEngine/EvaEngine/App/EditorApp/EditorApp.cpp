@@ -7,9 +7,9 @@
 #include "../../GameSystemBase/Components/Camera/Camera.h"
 #include "../../Utility/Math/Matrix4x4/Matrix4x4.h"
 
+#include <imgui.h>
 #include <imgui_impl_win32.h>
 #include <imgui_impl_dx11.h>
-#include <imgui_dock.h>
 #include <ImGuizmo.h>
 #include <iostream>
 
@@ -25,8 +25,6 @@ HRESULT EditorApp::Init()
 	// ImGuiの初期化
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	io = ImGui::GetIO(); (void)io;
-	ImGui::StyleColorsLight();
 
 	if (!ImGui_ImplWin32_Init(Window::g_hWnd)) {
 		DebugLog::LogError("ImGui_ImplWin32_Initに失敗しました。");
@@ -43,11 +41,16 @@ HRESULT EditorApp::Init()
 	}
 
 	// ImGuiのドッキング機能の初期化
-	ImGui::InitDock();
+	//ImGui::InitDock();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	// iniを生成しない
 	io.IniFilename = NULL;
 	// 日本語フォントに対応
 	io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\meiryo.ttc", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
+	// ドッキング機能を有効化
+	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+	// ダークテーマに設定
+	ImGui::StyleColorsDark();
 
 	return S_OK;
 }
@@ -61,6 +64,39 @@ void EvaEngine::EditorApp::DrawBegin()
 
 void EvaEngine::EditorApp::Draw()
 {
+	static bool demoWindow{ false };
+	static bool anotherWindow{ false };
+
+	ImVec4 clearColor = ImVec4(0.45f, 0.55f, 0.60f, 1.0f);
+	{
+		static float f = 0.0f;
+		static int counter = 0;
+
+		ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+
+		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+		ImGui::Checkbox("Demo Window", &demoWindow);      // Edit bools storing our window open/close state
+		ImGui::Checkbox("Another Window", &anotherWindow);
+
+		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+		ImGui::ColorEdit3("clear color", (float*)&clearColor); // Edit 3 floats representing a color
+
+		if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+			counter++;
+		ImGui::SameLine();
+		ImGui::Text("counter = %d", counter);
+
+		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		ImGui::End();
+	}
+
+	{
+		ImGui::Begin("TestWindow");                          // Create a window called "Hello, world!" and append into it.
+
+		ImGui::Text("あいうえお");
+
+		ImGui::End();
+	}
 }
 
 void EvaEngine::EditorApp::DrawEnd()

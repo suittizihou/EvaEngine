@@ -16,16 +16,13 @@ namespace EvaEngine {
 			World   // ワールド座標系
 		};
 
-#if NDEBUG
 		// コンストラクタ
 		Transform() :
 			Component(FunctionMask::NONE, false, false) {};
-#elif _DEBUG
-		// コンストラクタ
-		Transform() :
-			Component(FunctionMask::DRAW, false, false) {};
 
-		void Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) override;
+#if _DEBUG
+		// Editor用の描画関数
+		void OnGUI() override;
 #endif
 		// デストラクタ
 		~Transform();

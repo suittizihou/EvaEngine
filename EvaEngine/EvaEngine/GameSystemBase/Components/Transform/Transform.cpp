@@ -3,13 +3,6 @@
 
 using namespace EvaEngine;
 
-#if _DEBUG
-void EvaEngine::Transform::Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
-{
-	
-}
-#endif
-
 Transform::~Transform()
 {
 	// 子オブジェクトを切り離す
@@ -17,6 +10,12 @@ Transform::~Transform()
 	// 親オブジェクトから切り離す
 	detach_parent();
 }
+
+#if _DEBUG
+void EvaEngine::Transform::OnGUI()
+{
+}
+#endif
 
 Vector3 Transform::forward() const
 {
