@@ -14,12 +14,10 @@ using namespace EvaEngine;
 using namespace FunctionMask;
 
 MeshRenderer::MeshRenderer(
-	const std::weak_ptr<MeshFilter>& meshFilter,
-	const std::weak_ptr<Camera>& camera) :
+	const std::weak_ptr<MeshFilter>& meshFilter) :
 	Component(DRAW, false),
 	m_Model(meshFilter.lock()->GetModel()),
-	m_MeshFilter(meshFilter),
-	m_Camera(camera)
+	m_MeshFilter(meshFilter)
 {
 }
 

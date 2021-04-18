@@ -12,8 +12,8 @@ void GameObjectManager::AddGameObjectDataBase(const std::string& sceneName)
 	m_GameObjectList[sceneName] = std::make_shared<GameObjectDataBase>();
 }
 
-std::weak_ptr<GameObject> GameObjectManager::AddGameObject(const std::string& sceneName, const std::string& tag, const std::string& name) {
-	return m_GameObjectList[sceneName]->AddGameObject(sceneName, tag, name);
+std::weak_ptr<GameObject> GameObjectManager::Instantiate(const std::string& sceneName, const std::string& tag, const std::string& name) {
+	return m_GameObjectList[sceneName]->Instantiate(sceneName, tag, name);
 }
 
 std::weak_ptr<GameObject> GameObjectManager::Find(const std::string& sceneName, const std::string& name)

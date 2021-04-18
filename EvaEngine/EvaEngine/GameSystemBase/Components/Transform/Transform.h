@@ -50,8 +50,10 @@ namespace EvaEngine {
 		Vector3 position() const;
 		// ワールド空間の Transform の位置を設定
 		void position(const Vector3& value);
+		void position(float x, float y, float z);
 		// ワールド空間での移動
 		void move(const Vector3& velocity);
+		void move(float x, float y, float z);
 		// 親の Transform オブジェクトからVelocity分移動
 		void local_move(const Vector3& velocity);
 		// Quaternion として保存されるワールド空間での Transform の回転を取得

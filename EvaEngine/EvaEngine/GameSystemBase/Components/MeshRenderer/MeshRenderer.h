@@ -15,8 +15,7 @@ namespace EvaEngine {
 	class MeshRenderer : public Component {
 	public:
 		MeshRenderer(
-			const std::weak_ptr<MeshFilter>& meshFilter,
-			const std::weak_ptr<Camera>& camera);
+			const std::weak_ptr<MeshFilter>& meshFilter);
 
 		~MeshRenderer() { std::cout << "デストラクタ" << std::endl; }
 
@@ -31,6 +30,5 @@ namespace EvaEngine {
 		ModelData m_Model{};
 		std::weak_ptr<MeshFilter> m_MeshFilter;
 		std::weak_ptr<Transform> m_Transform;
-		std::weak_ptr<Camera> m_Camera;
 	};
 }

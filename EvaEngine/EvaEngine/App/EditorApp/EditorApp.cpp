@@ -33,12 +33,12 @@ HRESULT EditorApp::Init()
 		// iniを生成しない
 		//io.IniFilename = NULL;
 		// 日本語フォントに対応
+		//ImFontConfig fontConfig{};
+		//fontConfig.MergeMode = true;
 		io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\meiryo.ttc", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
 		// ドッキング機能を有効化
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-		//io.BackendFlags |= ImGuiBackendFlags_PlatformHasViewports;
-		//io.BackendFlags |= ImGuiBackendFlags_RendererHasViewports;
 		// ダークテーマに設定
 		ImGui::StyleColorsDark();
 
@@ -71,8 +71,6 @@ HRESULT EditorApp::Init()
 	// シーンビューの作成
 	m_SceneView = std::make_unique<SceneView>();
 
-	ImGuiConfigFlags flags = ImGui::GetIO().ConfigFlags;
-
 	return S_OK;
 }
 
@@ -81,7 +79,6 @@ void EvaEngine::EditorApp::DrawBegin()
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
-	ImGuiConfigFlags flags = ImGui::GetIO().ConfigFlags;
 }
 
 void EvaEngine::EditorApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
@@ -115,7 +112,7 @@ void EvaEngine::EditorApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext
 	{
 		ImGui::Begin("TestWindow");
 
-		ImGui::Text("あいうえお");
+		ImGui::Text(u8"あいうえお");
 
 		ImGui::End();
 	}

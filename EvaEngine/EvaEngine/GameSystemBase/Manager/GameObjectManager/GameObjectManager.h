@@ -25,7 +25,7 @@ namespace EvaEngine {
 		// ゲームオブジェクトデータベースをシーンに追加
 		void AddGameObjectDataBase(const std::string& sceneName);
 
-		std::weak_ptr<GameObject> AddGameObject(const std::string& sceneName, const std::string& tag, const std::string& name);
+		std::weak_ptr<GameObject> Instantiate(const std::string& sceneName, const std::string& tag, const std::string& name);
 		// 名前で検索
 		std::weak_ptr<GameObject> Find(const std::string& sceneName, const std::string& name);
 		// タグで検索してゲームオブジェクトを一つ持ってくる

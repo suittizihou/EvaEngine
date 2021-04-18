@@ -49,7 +49,7 @@ namespace EvaEngine {
 		UINT GetSceneID() const;
 
 		// ゲームオブジェクトの追加
-		std::weak_ptr<GameObject> AddGameObject(const std::string& tag = "None", const std::string& name = "GameObject");
+		std::weak_ptr<GameObject> Instantiate(const std::string& tag = "None", const std::string& name = "GameObject");
 
 	protected:
 		std::string m_SceneName{};

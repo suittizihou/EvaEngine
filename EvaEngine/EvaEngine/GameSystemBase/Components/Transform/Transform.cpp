@@ -82,9 +82,19 @@ void Transform::position(const Vector3& value)
 	}
 }
 
+void EvaEngine::Transform::position(float x, float y, float z)
+{
+	position_ = Vector3(x, y, z);
+}
+
 void Transform::move(const Vector3& velocity)
 {
 	position(position_ + velocity);
+}
+
+void EvaEngine::Transform::move(float x, float y, float z)
+{
+	position(position_.x + x, position_.y + y, position_.z + z);
 }
 
 void Transform::local_move(const Vector3& velocity)

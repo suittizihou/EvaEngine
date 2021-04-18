@@ -12,7 +12,7 @@ namespace EvaEngine {
 		GameObjectDataBase() = default;
 		~GameObjectDataBase() = default;
 
-		std::weak_ptr<GameObject> AddGameObject(const std::string& sceneName, const std::string& tag = "None", const std::string& name = "GameObject");
+		std::weak_ptr<GameObject> Instantiate(const std::string& sceneName, const std::string& tag = "None", const std::string& name = "GameObject");
 		// 名前で検索
 		std::weak_ptr<GameObject> Find(const std::string& name);
 		// タグで検索してゲームオブジェクトを一つ持ってくる

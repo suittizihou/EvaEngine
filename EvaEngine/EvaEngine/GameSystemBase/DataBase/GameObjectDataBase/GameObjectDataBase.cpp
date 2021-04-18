@@ -7,7 +7,7 @@
 
 using namespace EvaEngine;
 
-std::weak_ptr<GameObject> GameObjectDataBase::AddGameObject(const std::string& sceneType, const std::string& tag, const std::string& name) {
+std::weak_ptr<GameObject> GameObjectDataBase::Instantiate(const std::string& sceneType, const std::string& tag, const std::string& name) {
 	std::shared_ptr<GameObject> obj = std::make_shared<GameObject>(sceneType, m_ObjectID, tag, name);
 	obj->Initialize();
 	m_GameObjectList[tag].push_back(obj);

@@ -52,7 +52,7 @@ UINT EvaEngine::Scene::GetSceneID() const
     return m_SceneID;
 }
 
-std::weak_ptr<GameObject> Scene::AddGameObject(const std::string& tag, const std::string& name)
+std::weak_ptr<GameObject> Scene::Instantiate(const std::string& tag, const std::string& name)
 {
-    return GameObjectManager::Instance().AddGameObject(m_SceneName, tag, name);
+    return GameObjectManager::Instance().Instantiate(m_SceneName, tag, name);
 }
