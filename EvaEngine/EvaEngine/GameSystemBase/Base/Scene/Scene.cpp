@@ -1,6 +1,29 @@
 #include "Scene.h"
+#include "../../Manager/ComponentManager/ComponentManager.h"
 
 using namespace EvaEngine;
+
+void EvaEngine::Scene::FixedUpdate() {
+    ComponentManager::Instance().FixedUpdate(m_SceneName);
+}
+
+void EvaEngine::Scene::Update() {
+    ComponentManager::Instance().Update(m_SceneName);
+}
+
+void EvaEngine::Scene::LateUpdate() {
+    ComponentManager::Instance().LateUpdate(m_SceneName);
+}
+
+void EvaEngine::Scene::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
+{
+    ComponentManager::Instance().Draw(m_SceneName, command);
+}
+
+void EvaEngine::Scene::DrawEditor()
+{
+    ComponentManager::Instance()
+}
 
 std::weak_ptr<GameObject> Scene::Find(const std::string& name)
 {

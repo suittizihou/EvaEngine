@@ -64,6 +64,11 @@ namespace EvaEngine {
 			const std::string& sceneName,
 			const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
 
+#if _DEBUG
+		// Editor用の描画
+		void DrawEditor(std:: string& sceneName);
+#endif
+
 	private:
 		// コンポーネントのリスト(firstはオブジェクトID)
 		std::map<std::string,		// GameObjectID

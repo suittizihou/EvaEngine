@@ -25,6 +25,11 @@ void ComponentManager::Draw(
 	m_ComponentList[sceneName]->Draw(command);
 }
 
+void EvaEngine::ComponentManager::DrawEditor(std::string& sceneName)
+{
+	m_ComponentList[sceneName]
+}
+
 void ComponentManager::AddComponentDataBase(const std::string& sceneName)
 {
 	m_ComponentList[sceneName] = std::make_shared<ComponentDataBase>();

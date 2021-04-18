@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../../Manager/ComponentManager/ComponentManager.h"
 #include "../../Manager/GameObjectManager/GameObjectManager.h"
 #include "../../../GameSystemBase/Components/ComponentHeaders.h"
 
@@ -21,25 +20,21 @@ namespace EvaEngine {
 		virtual void SceneUpdate() = 0;
 
 		// 固定更新処理
-		void FixedUpdate() {
-			ComponentManager::Instance().FixedUpdate(m_SceneName);
-		}
+		void FixedUpdate();
 
 		// 更新処理
-		void Update() {
-			ComponentManager::Instance().Update(m_SceneName);
-		};
+		void Update();
 
 		// 遅延更新処理
-		void LateUpdate() {
-			ComponentManager::Instance().LateUpdate(m_SceneName);
-		}
+		void LateUpdate();
 
 		// 描画処理
-		void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
-		{
-			ComponentManager::Instance().Draw(m_SceneName, command);
-		};
+		void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
+
+#if _DEBUG
+		// Editor用の描画処理
+		void DrawEditor();
+#endif
 
 		// 名前で検索
 		std::weak_ptr<GameObject> Find(const std::string& name);

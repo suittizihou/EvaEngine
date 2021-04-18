@@ -37,6 +37,13 @@ void ComponentDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& 
 	}
 }
 
+void EvaEngine::ComponentDataBase::DrawEditor()
+{
+	for (const auto& component : m_Components) {
+		component->DrawEditor();
+	}
+}
+
 void ComponentDataBase::AddComponent(const std::shared_ptr<Component>& component, const int indexNum) {
 	// FixedUpdateŠÖ”‚Ì“o˜^
 	if (component->GetFunctionMask() & FunctionMask::FIXED_UPDATE) {
