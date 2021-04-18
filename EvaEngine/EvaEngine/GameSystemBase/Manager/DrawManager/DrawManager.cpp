@@ -38,21 +38,27 @@ void DrawManager::DrawBegin()
 	// ポリゴンの生成方法の指定
 	DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	// 指定色で画面クリア
-	float clearColor[4] = { 1.0f, 1.0f, 0.8f, 1.0f };
-
-	// RenderTargetViewのクリア
-	DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_RenderTargetView.Get(), clearColor);
-
 	// DepthViewとStencilViewのクリア
 	DirectX11App::g_Context->ClearDepthStencilView(
 		DirectX11App::g_DepthStencilView.Get(),			// クリア対象のView
 		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// クリアフラグ
 		1.0f,											// 深度クリア値
 		0);												// ステンシルクリア値
+
+		// シェーダーのセット
+	Shader shader{ DrawManager::GetDefaultShader() };
+	SetShader(&shader);
+
+	// レンダーターゲットの設定
+	DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_RenderTargetView.GetAddressOf(), DirectX11App::g_DepthStencilView.Get());
+
+	// 指定色で画面クリア
+	float clearColor[4] = { 1.0f, 1.0f, 0.8f, 1.0f };
+	// RenderTargetViewのクリア
+	DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_RenderTargetView.Get(), clearColor);
 }
 
-void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<Transform>& transform, ModelData& model)
+void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<Transform>& transform, ModelData* model)
 {
 	UINT strides = sizeof(VertexData);
 	UINT offset = 0;
@@ -77,7 +83,7 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 	DirectX::XMStoreFloat4(&DirectX11App::g_ConstantBufferData.cameraPos, DirectX::XMVectorSet(cameraPos.x, cameraPos.y, cameraPos.z, 0.0f));
 
 	// メッシュ情報が格納されているMapからメッシュを取り出す
-	for (const auto& meshs : model.meshes) {
+	for (const auto& meshs : model->meshes) {
 		// メッシュ情報が格納された配列から１メッシュずつ取り出す
 		for (auto mesh : meshs.second) {
 			// インプットレイアウトの設定
@@ -88,7 +94,7 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 			DirectX11App::g_Context->IASetIndexBuffer(mesh.GetIndexBuffer(), DXGI_FORMAT_R32_UINT, 0);
 
 			// マテリアルのセット
-			SetMaterial(model.materials[mesh.GetMaterialName()]);
+			SetMaterial(&model->materials[mesh.GetMaterialName()]);
 
 			// 定数バッファの更新
 			DirectX11App::g_Context->UpdateSubresource(DirectX11App::g_ConstantBuffer.Get(), 0, NULL, &DirectX11App::g_ConstantBufferData, 0, 0);
@@ -104,32 +110,32 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 
 void DrawManager::DrawEnd()
 {
-	DirectX11App::g_SwapChain->Present(0, 0);
+	DirectX11App::g_SwapChain->Present(1, 0);
 }
 
-void DrawManager::SetMaterial(Material& material)
+void DrawManager::SetMaterial(Material* material)
 {
-	DirectX11App::g_ConstantBufferData.materialDiffuse = material.diffuse;
-	DirectX11App::g_ConstantBufferData.materialAmbient = material.ambient;
-	DirectX11App::g_ConstantBufferData.materialSpecular = material.specular;
+	DirectX11App::g_ConstantBufferData.materialDiffuse = material->diffuse;
+	DirectX11App::g_ConstantBufferData.materialAmbient = material->ambient;
+	DirectX11App::g_ConstantBufferData.materialSpecular = material->specular;
 
 	SetShader(material);
 }
 
-void DrawManager::SetShader(Shader& shader) {
+void DrawManager::SetShader(Shader* shader) {
 
 	// nullptr でない場合シェーダーをセットする
-	if (shader.GetComputeShader() != nullptr) DirectX11App::g_Context->CSSetShader(shader.GetComputeShader(), nullptr, 0);
-	if (shader.GetVertexShader() != nullptr) DirectX11App::g_Context->VSSetShader(shader.GetVertexShader(), nullptr, 0);
-	if (shader.GetHullShader() != nullptr) DirectX11App::g_Context->HSSetShader(shader.GetHullShader(), nullptr, 0);
-	if (shader.GetDomainShader() != nullptr) DirectX11App::g_Context->DSSetShader(shader.GetDomainShader(), nullptr, 0);
-	if (shader.GetGeometryShader() != nullptr) DirectX11App::g_Context->GSSetShader(shader.GetGeometryShader(), nullptr, 0);
-	if (shader.GetPixelShader() != nullptr) DirectX11App::g_Context->PSSetShader(shader.GetPixelShader(), nullptr, 0);
+	if (shader->GetComputeShader() != nullptr) DirectX11App::g_Context->CSSetShader(shader->GetComputeShader(), nullptr, 0);
+	if (shader->GetVertexShader() != nullptr) DirectX11App::g_Context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
+	if (shader->GetHullShader() != nullptr) DirectX11App::g_Context->HSSetShader(shader->GetHullShader(), nullptr, 0);
+	if (shader->GetDomainShader() != nullptr) DirectX11App::g_Context->DSSetShader(shader->GetDomainShader(), nullptr, 0);
+	if (shader->GetGeometryShader() != nullptr) DirectX11App::g_Context->GSSetShader(shader->GetGeometryShader(), nullptr, 0);
+	if (shader->GetPixelShader() != nullptr) DirectX11App::g_Context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
 }
 
-void DrawManager::SetShader(Material& material)
+void DrawManager::SetShader(Material* material)
 {
-	SetShader(material.g_Shader);
+	SetShader(&material->g_Shader);
 }
 
 Shader DrawManager::GetDefaultShader()

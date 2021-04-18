@@ -61,15 +61,6 @@ void EvaEngineApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& comma
 	EditorApp::DrawBegin();
 #endif
 
-	// ポリゴンの種類
-	DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	// シェーダーのセット
-	Shader shader{ DrawManager::GetDefaultShader() };
-	DrawManager::SetShader(shader);
-	// レンダーターゲットの設定
-	DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_RenderTargetView.GetAddressOf(), DirectX11App::g_DepthStencilView.Get());
-
 	// 描画
 	SceneDataBase::Instance().Draw(command);
 

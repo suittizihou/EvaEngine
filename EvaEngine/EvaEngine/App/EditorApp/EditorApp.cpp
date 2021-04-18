@@ -31,12 +31,14 @@ HRESULT EditorApp::Init()
 	try {
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		// iniを生成しない
-		io.IniFilename = NULL;
+		//io.IniFilename = NULL;
 		// 日本語フォントに対応
 		io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\meiryo.ttc", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
 		// ドッキング機能を有効化
-		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-		//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+		//io.BackendFlags |= ImGuiBackendFlags_PlatformHasViewports;
+		//io.BackendFlags |= ImGuiBackendFlags_RendererHasViewports;
 		// ダークテーマに設定
 		ImGui::StyleColorsDark();
 
@@ -65,6 +67,7 @@ HRESULT EditorApp::Init()
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
 		return E_ABORT;
 	}
+
 	// シーンビューの作成
 	m_SceneView = std::make_unique<SceneView>();
 
@@ -85,8 +88,6 @@ void EvaEngine::EditorApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext
 {
 	static bool demoWindow{ false };
 	static bool anotherWindow{ false };
-
-	ImGuiConfigFlags flags = ImGui::GetIO().ConfigFlags;
 
 	ImVec4 clearColor = ImVec4(0.45f, 0.55f, 0.60f, 1.0f);
 	{
@@ -125,8 +126,7 @@ void EvaEngine::EditorApp::DrawEnd()
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-	ImGuiConfigFlags flags = ImGui::GetIO().ConfigFlags;
-	if (flags & ImGuiConfigFlags_ViewportsEnable) {
+	if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
 		ImGui::UpdatePlatformWindows();
 		ImGui::RenderPlatformWindowsDefault();
 	}

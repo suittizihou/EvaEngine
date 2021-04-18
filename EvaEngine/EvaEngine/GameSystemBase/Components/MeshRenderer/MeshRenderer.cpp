@@ -29,7 +29,7 @@ void MeshRenderer::Awake() {
 
 void MeshRenderer::Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
 {
-	DrawManager::Draw(camera, m_Transform, m_Model);
+	DrawManager::Draw(camera, m_Transform, &m_Model);
 }
 
 #if _DEBUG
