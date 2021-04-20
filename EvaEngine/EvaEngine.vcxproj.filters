@@ -1074,6 +1074,12 @@
     <ClInclude Include="EvaEngine\Editor\SceneView\SceneView.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="EvaEngine\Editor\EditorCommand\EditorCommand.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaEngine\Utility\Math\Math.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1227,6 +1233,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="ImGUI\imgui_tables.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaEngine\Editor\EditorCommand\EditorCommand.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

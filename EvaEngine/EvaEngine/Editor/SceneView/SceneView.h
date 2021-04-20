@@ -2,9 +2,11 @@
 #pragma once
 #include <memory>
 
-class Camera;
 
 namespace EvaEngine {
+	
+	class Camera;
+
 	class SceneView {
 	public:
 		SceneView() = default;

@@ -33,7 +33,7 @@ namespace EvaEngine {
 
 #if _DEBUG
 		// Editor—p‚Ì•`‰æˆ—
-		void OnGUI(const SceneView& sceneView);
+		void OnGUI(SceneView* sceneView, EditorCommand* editorCommand);
 #endif
 
 		// –¼‘O‚ÅŒŸõ

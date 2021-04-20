@@ -65,8 +65,9 @@ void EvaEngineApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& comma
 	SceneDataBase::Instance().Draw(command);
 
 #if _DEBUG
+	EditorCommand editorCommand{};
 	// Editor‚Ì•`‰æˆ—
-	EditorApp::Draw(command);
+	EditorApp::Draw(&m_SceneView, &editorCommand);
 	// Editor•`‰æI—¹ˆ—
 	EditorApp::DrawEnd();
 #endif

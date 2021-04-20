@@ -1,6 +1,10 @@
 #include "Transform.h"
 #include "../../../Utility/Math/Mathf/Mathf.h"
 
+#if _DEBUG
+#include "../Camera/Camera.h"
+#endif
+
 using namespace EvaEngine;
 
 Transform::~Transform()
@@ -12,8 +16,17 @@ Transform::~Transform()
 }
 
 #if _DEBUG
-void EvaEngine::Transform::OnGUI(const SceneView& sceneView)
+void EvaEngine::Transform::OnGUI(SceneView* sceneView, EditorCommand* editorCommand)
 {
+	Matrix4x4 matrix{ local_to_world_matrix() };
+	std::weak_ptr<EvaEngine::Camera> camera = sceneView->GetSceneCamera();
+	Matrix4x4 viewMatrix = camera.lock()->GetViewMatrix();
+	Matrix4x4 projectionMatrix = camera.lock()->GetProjectionMatrix();
+	//editorCommand->EditTransform(
+	//	&viewMatrix.m[0][0],
+	//	&projectionMatrix.m[0][0],
+	//	&matrix.m[0][0],
+	//	true);
 }
 #endif
 

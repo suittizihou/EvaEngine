@@ -3,6 +3,8 @@
 #include <cmath>
 #include <limits>
 
+#undef min
+
 namespace EvaEngine {
 	struct Mathf {
 	public:

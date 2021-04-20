@@ -5,11 +5,15 @@
 #include "../GameJobs/GameJobs.h"
 #include "ComponentDesc.h"
 
+#if _DEBUG
+#include "../../../Editor/EditorCommand/EditorCommand.h"
+#include "../../../Editor/SceneView/SceneView.h"
+#endif
+
 namespace EvaEngine {
 
 	class Transform;
 	class Camera;
-	class SceneView;
 
 	// 使用する関数を示すビットフラグ
 	namespace FunctionMask {
@@ -46,7 +50,7 @@ namespace EvaEngine {
 
 #if _DEBUG
 		// Editor用の描画
-		virtual void OnGUI(const SceneView& sceneView) = 0;
+		virtual void OnGUI(SceneView* sceneView, EditorCommand* editorCommand) = 0;
 #endif
 
 		// コンポーネントに必要なデータを設定

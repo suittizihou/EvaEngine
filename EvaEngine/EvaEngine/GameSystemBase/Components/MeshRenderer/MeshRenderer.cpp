@@ -31,7 +31,7 @@ void MeshRenderer::Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL
 }
 
 #if _DEBUG
-void EvaEngine::MeshRenderer::OnGUI(const SceneView& sceneView)
+void EvaEngine::MeshRenderer::OnGUI(SceneView* sceneView, EditorCommand* editorCommand)
 {
 }
 #endif

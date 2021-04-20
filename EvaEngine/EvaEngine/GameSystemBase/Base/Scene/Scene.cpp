@@ -21,9 +21,9 @@ void EvaEngine::Scene::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& c
 }
 
 #if _DEBUG
-void EvaEngine::Scene::OnGUI(const SceneView& sceneView)
+void EvaEngine::Scene::OnGUI(SceneView* sceneView, EditorCommand* editorCommand)
 {
-    ComponentManager::Instance().OnGUI(m_SceneName, sceneView);
+    ComponentManager::Instance().OnGUI(m_SceneName, sceneView, editorCommand);
 }
 #endif
 

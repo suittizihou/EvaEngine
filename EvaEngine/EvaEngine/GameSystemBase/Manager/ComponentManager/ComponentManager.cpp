@@ -26,9 +26,9 @@ void ComponentManager::Draw(
 }
 
 #if _DEBUG
-void EvaEngine::ComponentManager::OnGUI(std::string& sceneName, const SceneView& sceneView)
+void EvaEngine::ComponentManager::OnGUI(std::string& sceneName, SceneView* sceneView, EditorCommand* editorCommand)
 {
-	m_ComponentList[sceneName]->OnGUI(sceneView);
+	m_ComponentList[sceneName]->OnGUI(sceneView, editorCommand);
 }
 #endif
 

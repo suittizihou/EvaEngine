@@ -3,6 +3,11 @@
 #include <d3d11.h>
 #include <wrl.h>
 
+#if _DEBUG
+#include "../../Editor/EditorCommand/EditorCommand.h"
+#include "../../Editor/SceneView/SceneView.h"
+#endif
+
 namespace EvaEngine {
 	class EvaEngineApp {
 	private:
@@ -30,10 +35,9 @@ namespace EvaEngine {
 		// ƒGƒ“ƒWƒ“‚ÌI—¹ˆ—
 		void End();
 
-	//private:
-	//	void InternalInit();
-	//	void InternalUpdate();
-	//	void InternalDraw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
-	//	void InternalLast();
+#if _DEBUG
+	private:
+		SceneView m_SceneView{};
 	};
+#endif
 }
