@@ -23,6 +23,8 @@ namespace EvaEngine {
 		// ƒV[ƒ“‚Ì’Ç‰Á
 		template<class T>
 		void AddScene(const std::string& sceneName) {
+			static_assert(std::is_base_of<Scene, T>::value == true, "The argument does not inherit from Scene.");
+
 			std::shared_ptr<T> scene = std::make_shared<T>(sceneName, m_Scenes.size());
 			m_Scenes[sceneName] = scene;
 			ComponentManager::Instance().AddComponentDataBase(sceneName);

@@ -19,6 +19,8 @@ namespace EvaEngine {
 		template<class T, class... Args>
 		std::weak_ptr<T> AddComponent(const std::string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject, Args&& ... args)
 		{
+			static_assert(std::is_base_of<Component, T>::value == true, "The argument does not inherit from Component.");
+
 			ComponentDesc componentDesc{};
 			componentDesc.sceneName = sceneName;
 			componentDesc.gameObject = gameObject;
