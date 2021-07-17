@@ -1080,6 +1080,15 @@
     <ClInclude Include="EvaEngine\Utility\Math\Math.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="EvaEngine\Editor\EditorWindow\EditorWindow.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaEngine\Editor\EditorWindowDataBase\EditorWindowDataBase.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaEngine\Editor\EditorWindows\ConsoleWindow\ConsoleWindow.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1236,6 +1245,15 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="EvaEngine\Editor\EditorCommand\EditorCommand.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaEngine\Editor\EditorWindow\EditorWindow.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaEngine\Editor\EditorWindowDataBase\EditorWindowDataBase.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaEngine\Editor\EditorWindows\ConsoleWindow\ConsoleWindow.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

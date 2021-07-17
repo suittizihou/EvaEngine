@@ -39,5 +39,6 @@ void ComponentManager::AddComponentDataBase(const std::string& sceneName)
 
 void ComponentManager::RemoveAllComponent(const std::string& sceneName)
 {
+	if (m_ComponentList.count(sceneName) == 0) return;
 	m_ComponentList[sceneName]->RemoveAllComponent();
 }

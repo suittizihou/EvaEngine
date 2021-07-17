@@ -34,8 +34,10 @@ namespace EvaEngine {
 		// シーンのロード
 		void LoadScene(const std::string& sceneName);
 		void LoadScene(const UINT& sceneID);
-		// 今のシーンのTypeを返す
-		std::string GetCurrentSceneType();
+		// 今のシーン名を返す
+		std::string GetCurrentSceneName() const;
+		// 前のシーン名を返す
+		std::string GetPreviousSceneName() const;
 		// シーンの初期化を行う
 		HRESULT InitializeScene();
 		// シーンを変える
@@ -54,6 +56,7 @@ namespace EvaEngine {
 #endif
 
 	private:
+		bool m_IsChangeScene{};
 		std::string m_CurrentSceneName{};
 		std::string m_PreviousSceneName{};
 		std::weak_ptr<Scene> m_CurrentScene;

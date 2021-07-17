@@ -5,6 +5,6 @@
 namespace EvaEngine {
 	class Time {
 	public:
-		static float GetDeltaTime() { return TimeBase::m_DeltaTime; }
+		static float GetDeltaTime() { return Internal::TimeBase::GetDeltaTime(); }
 	};
 }

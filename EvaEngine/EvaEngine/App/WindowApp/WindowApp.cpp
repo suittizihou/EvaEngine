@@ -10,6 +10,7 @@
 #include "../../Utility/ShaderUtility/Shader/Shader.h"
 #include "../../GameSystemBase/DataBase/ShaderDataBase/ShaderDataBase.h"
 #include "../../GameSystemBase/DataBase/ModelDataBase/ModelDataBase.h"
+#include "../../Utility/Time/TimeBase.h"
 
 #include "../EvaEngineApp/EvaEngineApp.h"
 
@@ -133,6 +134,9 @@ int WindowApp::Update()
             }
         }
         else {
+            // DeltaTimeを更新
+            Internal::TimeBase::UpdateDeltaTime();
+
             InputBufferUpdate::Instance().KeyUpdate();
 
             // エンジンの更新処理
@@ -140,6 +144,11 @@ int WindowApp::Update()
 
             // エンジンの描画処理
             EvaEngineApp::Instance().Draw(DirectX11App::g_Context);
+
+#if _DEBUG
+            // Editor関連の描画
+            EvaEngineApp::Instance().DrawEditor();
+#endif
 
             // エンジンのフレーム終了時処理
             EvaEngineApp::Instance().FrameEnd();

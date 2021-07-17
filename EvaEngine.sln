@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EvaEngine", "EvaEngine\EvaEngine.vcxproj", "{0444EED1-2BC0-48D3-A811-A122AEA84305}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleProject", "SampleProject\Editor.vcxproj", "{D4A32438-43B7-4161-9B64-2A30565810D5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0444EED1-2BC0-48D3-A811-A122AEA84305} = {0444EED1-2BC0-48D3-A811-A122AEA84305}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

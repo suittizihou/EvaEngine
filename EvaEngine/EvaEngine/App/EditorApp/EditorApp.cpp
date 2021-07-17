@@ -8,6 +8,7 @@
 #include "../../Utility/Math/Matrix4x4/Matrix4x4.h"
 #include "../../Editor/SceneView/SceneView.h"
 #include "../../GameSystemBase/DataBase/SceneDataBase/SceneDataBase.h"
+#include "../../Editor/EditorWindowDataBase/EditorWindowDataBase.h"
 
 #include <imgui.h>
 #include <imgui_impl_win32.h>
@@ -91,6 +92,7 @@ void EvaEngine::EditorApp::DrawBegin()
 
 void EvaEngine::EditorApp::Draw(SceneView* sceneView, EditorCommand* editorCommand)
 {
+	Internal::EditorWindowDataBase::Draw();
 	SceneDataBase::Instance().OnGUI(sceneView, editorCommand);
 }
 

@@ -8,12 +8,17 @@ void SceneManager::LoadScene(const std::string& sceneName)
     SceneDataBase::Instance().LoadScene(sceneName);
 }
 
-void SceneManager::LoadScene(const UINT& sceneName)
+void SceneManager::LoadScene(const UINT& sceneID)
 {
-    SceneDataBase::Instance().LoadScene(sceneName);
+    SceneDataBase::Instance().LoadScene(sceneID);
 }
 
-std::string SceneManager::GetCurrentScene()
+std::string SceneManager::GetCurrentSceneName()
 {
-    return SceneDataBase::Instance().GetCurrentSceneType();
+    return SceneDataBase::Instance().GetCurrentSceneName();
+}
+
+std::string SceneManager::GetPreviousSceneName()
+{
+    return SceneDataBase::Instance().GetPreviousSceneName();
 }

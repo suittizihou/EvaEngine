@@ -33,6 +33,7 @@ std::vector<std::weak_ptr<GameObject>> GameObjectManager::FindGameObjectsWithTag
 
 void GameObjectManager::RemoveAllGameObject(const std::string& sceneName)
 {
+	if (m_GameObjectList.count(sceneName) == 0) return;
 	m_GameObjectList[sceneName]->RemoveAllGameObject();
 }
 

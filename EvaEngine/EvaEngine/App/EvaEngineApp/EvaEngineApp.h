@@ -29,6 +29,8 @@ namespace EvaEngine {
 		void Update();
 		// 描画処理
 		void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
+		// Editor関連の描画
+		void DrawEditor();
 		// フレーム終了時処理
 		void FrameEnd();
 

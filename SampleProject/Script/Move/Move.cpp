@@ -11,8 +11,8 @@ void Move::Update()
 	if (Input::GetKey(KeyCode::D)) { velocity += transform->right(); }
 	if (Input::GetKey(KeyCode::W)) { velocity += transform->forward(); }
 	if (Input::GetKey(KeyCode::S)) { velocity += transform->back(); }
-	if (Input::GetKey(KeyCode::Space)) { velocity += Vector3::up(); }
-	if (Input::GetKey(KeyCode::Lcontrol)) { velocity += Vector3::down(); }
+	if (Input::GetKey(KeyCode::E)) { velocity += Vector3::up(); }
+	if (Input::GetKey(KeyCode::Q)) { velocity += Vector3::down(); }
 
-	transform->move(velocity * m_Speed);
+	transform->move(velocity * m_Speed * Time::GetDeltaTime());
 }

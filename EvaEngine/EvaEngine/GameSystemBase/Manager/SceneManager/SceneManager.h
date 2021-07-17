@@ -20,9 +20,11 @@ namespace EvaEngine {
 
 		// シーンのロード
 		static void LoadScene(const std::string& sceneName);
-		static void LoadScene(const UINT& sceneName);
+		static void LoadScene(const UINT& sceneID);
 
-		// 現在のシーンを取得
-		static std::string GetCurrentScene();
+		// 現在のシーン名を取得
+		static std::string GetCurrentSceneName();
+		// 前のシーン名をを取得
+		static std::string GetPreviousSceneName();
 	};
 }

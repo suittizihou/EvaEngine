@@ -201,6 +201,9 @@
     <ClInclude Include="EvaEngine\Define\D3D11Defines.h" />
     <ClInclude Include="EvaEngine.h" />
     <ClInclude Include="EvaEngine\Editor\EditorCommand\EditorCommand.h" />
+    <ClInclude Include="EvaEngine\Editor\EditorWindowDataBase\EditorWindowDataBase.h" />
+    <ClInclude Include="EvaEngine\Editor\EditorWindows\ConsoleWindow\ConsoleWindow.h" />
+    <ClInclude Include="EvaEngine\Editor\EditorWindow\EditorWindow.h" />
     <ClInclude Include="EvaEngine\Editor\SceneView\SceneView.h" />
     <ClInclude Include="EvaEngine\Utility\Math\Math.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk.h" />
@@ -556,6 +559,9 @@
     <ClCompile Include="EvaEngine\App\MainApp\MainApp.cpp" />
     <ClCompile Include="EvaEngine\App\WindowApp\WindowApp.cpp" />
     <ClCompile Include="EvaEngine\Editor\EditorCommand\EditorCommand.cpp" />
+    <ClCompile Include="EvaEngine\Editor\EditorWindowDataBase\EditorWindowDataBase.cpp" />
+    <ClCompile Include="EvaEngine\Editor\EditorWindows\ConsoleWindow\ConsoleWindow.cpp" />
+    <ClCompile Include="EvaEngine\Editor\EditorWindow\EditorWindow.cpp" />
     <ClCompile Include="EvaEngine\Editor\SceneView\SceneView.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Base\Component\Component.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Base\GameBase\GameBase.cpp" />

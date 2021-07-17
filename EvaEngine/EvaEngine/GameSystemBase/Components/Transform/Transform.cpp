@@ -18,10 +18,10 @@ Transform::~Transform()
 #if _DEBUG
 void EvaEngine::Transform::OnGUI(SceneView* sceneView, EditorCommand* editorCommand)
 {
-	Matrix4x4 matrix{ local_to_world_matrix() };
-	std::weak_ptr<EvaEngine::Camera> camera = sceneView->GetSceneCamera();
-	Matrix4x4 viewMatrix = camera.lock()->GetViewMatrix();
-	Matrix4x4 projectionMatrix = camera.lock()->GetProjectionMatrix();
+	//Matrix4x4 matrix{ local_to_world_matrix() };
+	//std::weak_ptr<EvaEngine::Camera> camera = sceneView->GetSceneCamera();
+	//Matrix4x4 viewMatrix = camera.lock()->GetViewMatrix();
+	//Matrix4x4 projectionMatrix = camera.lock()->GetProjectionMatrix();
 	//editorCommand->EditTransform(
 	//	&viewMatrix.m[0][0],
 	//	&projectionMatrix.m[0][0],

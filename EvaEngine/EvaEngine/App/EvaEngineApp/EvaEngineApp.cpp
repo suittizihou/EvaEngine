@@ -7,6 +7,9 @@
 #include "../../GameSystemBase/DataBase/TextureDataBase/TextureDataBase.h"
 #include "../../GameSystemBase/DataBase/SceneDataBase/SceneDataBase.h"
 #include "../../GameSystemBase/Manager/DrawManager/DrawManager.h"
+#include "../../Editor/EditorWindowDataBase/EditorWindowDataBase.h"
+
+#include "../../Editor/EditorWindows/ConsoleWindow/ConsoleWindow.h"
 
 using namespace EvaEngine;
 
@@ -38,6 +41,9 @@ HRESULT EvaEngineApp::Init()
 		DebugLog::LogError("Editor‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½B");
 		return hr;
 	}
+
+	// EditorWindow‚Ì’Ç‰Á
+	Internal::EditorWindowDataBase::CreateWindow<Editor::ConsoleWindow>("Console", "Window");
 #endif
 
 	return S_OK;
@@ -56,24 +62,24 @@ void EvaEngineApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& comma
 	// •`‰æŠJnˆ—
 	DrawManager::DrawBegin();
 
-#if _DEBUG
-	// Editor‚Ì•`‰æŠJnˆ—
-	EditorApp::DrawBegin();
-#endif
-
 	// •`‰æ
 	SceneDataBase::Instance().Draw(command);
 
-#if _DEBUG
+	// •`‰æI—¹ˆ—
+	DrawManager::DrawEnd();
+}
+
+void EvaEngine::EvaEngineApp::DrawEditor()
+{
+	// Editor‚Ì•`‰æŠJnˆ—
+	EditorApp::DrawBegin();
+
 	EditorCommand editorCommand{};
 	// Editor‚Ì•`‰æˆ—
 	EditorApp::Draw(&m_SceneView, &editorCommand);
+	
 	// Editor•`‰æI—¹ˆ—
 	EditorApp::DrawEnd();
-#endif
-
-	// •`‰æI—¹ˆ—
-	DrawManager::DrawEnd();
 }
 
 void EvaEngineApp::FrameEnd()

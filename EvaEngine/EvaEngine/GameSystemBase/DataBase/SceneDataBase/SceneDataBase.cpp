@@ -6,6 +6,7 @@ using namespace EvaEngine;
 
 void SceneDataBase::LoadScene(const std::string& sceneType)
 {
+    m_IsChangeScene = true;
     m_CurrentSceneName = sceneType;
 }
 
@@ -19,9 +20,14 @@ void SceneDataBase::LoadScene(const UINT& sceneID)
     }
 }
 
-std::string SceneDataBase::GetCurrentSceneType()
+std::string SceneDataBase::GetCurrentSceneName() const
 {
     return m_CurrentSceneName;
+}
+
+std::string EvaEngine::SceneDataBase::GetPreviousSceneName() const
+{
+    return m_PreviousSceneName;
 }
 
 HRESULT SceneDataBase::InitializeScene() {
@@ -44,8 +50,10 @@ HRESULT SceneDataBase::InitializeScene() {
 
 void SceneDataBase::SceneChange()
 {
-    // 前のシーンと今のシーンが同じなら早期リターン
-    if (m_CurrentSceneName == m_PreviousSceneName) return;
+    // シーン切り替わりフラグが立っていなかったら早期リターン
+    if (!m_IsChangeScene) return;
+
+    m_IsChangeScene = false;
 
     // 前のシーンで保持していたオブジェクトとコンポーネントを全削除
     ComponentManager::Instance().RemoveAllComponent(m_PreviousSceneName);
