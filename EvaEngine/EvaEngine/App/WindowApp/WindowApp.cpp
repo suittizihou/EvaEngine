@@ -134,10 +134,11 @@ int WindowApp::Update()
             }
         }
         else {
+            // 入力処理
+            InputBufferUpdate::Instance().KeyUpdate();
+
             // DeltaTimeを更新
             Internal::TimeBase::UpdateDeltaTime();
-
-            InputBufferUpdate::Instance().KeyUpdate();
 
             // エンジンの更新処理
             EvaEngineApp::Instance().Update();

@@ -29,8 +29,12 @@ namespace EvaEngine {
 		void Update();
 		// 描画処理
 		void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
+
+#if _DEBUG
 		// Editor関連の描画
 		void DrawEditor();
+#endif
+
 		// フレーム終了時処理
 		void FrameEnd();
 
@@ -40,6 +44,6 @@ namespace EvaEngine {
 #if _DEBUG
 	private:
 		SceneView m_SceneView{};
-	};
 #endif
+	};
 }

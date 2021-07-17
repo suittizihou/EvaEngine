@@ -26,6 +26,7 @@ namespace EvaEngine {
 		static void LogError(const std::string& errorMessage);
 
 		static std::vector<LogData> GetLogDatas();
+		static void ClearLog();
 
 	private:
 		static std::vector<LogData> m_LogDatas;

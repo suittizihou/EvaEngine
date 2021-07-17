@@ -7,9 +7,12 @@
 #include "../../GameSystemBase/DataBase/TextureDataBase/TextureDataBase.h"
 #include "../../GameSystemBase/DataBase/SceneDataBase/SceneDataBase.h"
 #include "../../GameSystemBase/Manager/DrawManager/DrawManager.h"
+
+#if _DEBUG
 #include "../../Editor/EditorWindowDataBase/EditorWindowDataBase.h"
 
 #include "../../Editor/EditorWindows/ConsoleWindow/ConsoleWindow.h"
+#endif
 
 using namespace EvaEngine;
 
@@ -69,6 +72,7 @@ void EvaEngineApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& comma
 	DrawManager::DrawEnd();
 }
 
+#if _DEBUG
 void EvaEngine::EvaEngineApp::DrawEditor()
 {
 	// Editor‚Ì•`‰æŠJnˆ—
@@ -81,6 +85,7 @@ void EvaEngine::EvaEngineApp::DrawEditor()
 	// Editor•`‰æI—¹ˆ—
 	EditorApp::DrawEnd();
 }
+#endif
 
 void EvaEngineApp::FrameEnd()
 {
