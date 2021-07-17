@@ -105,11 +105,11 @@ HRESULT DirectX11App::HardWareCheck()
 
 		if (error != 0) break;
 
-		DebugLog::Log(u8"ビデオカード名 : " + std::string(videoCardDescription, sizeof(videoCardDescription) / sizeof(videoCardDescription[0])));
+		//DebugLog::Log(u8"ビデオカード名 : " + std::string(videoCardDescription, sizeof(videoCardDescription) / sizeof(videoCardDescription[0])));
 
 		// ビデオカードメモリを取得(MB単位)
 		int videoCardMemory = static_cast<int>(adapterDesc.DedicatedVideoMemory / 1024 / 1024);
-		DebugLog::Log(u8"ビデオメモリー : " + videoCardMemory);
+		//DebugLog::Log(u8"ビデオメモリー : " + videoCardMemory);
 
 		// アウトプット(モニター)に番号IDを付ける
 		hr = add->EnumOutputs(0, &adapterOutput);
@@ -118,7 +118,7 @@ HRESULT DirectX11App::HardWareCheck()
 		// DXGI_FORMAT_R8G8B8A8_UNORM の表示形式数を取得する
 		hr = adapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, NULL);
 		if (FAILED(hr)) continue;
-		DebugLog::Log(u8"RGBA8_UNORM Count : " + numModes);
+		//DebugLog::Log(u8"RGBA8_UNORM Count : " + numModes);
 
 		if (videoCardMemory > gpuMaxMem) {
 			gpuMaxMem = videoCardMemory;
