@@ -23,7 +23,7 @@ namespace EvaEngine {
 		void Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) override;
 
 #if _DEBUG
-		void OnGUI(EvaEngine::Editor::Internal::SceneView* sceneView, EvaEngine::Editor::Internal::EditorCommand* editorCommand) override;
+		void OnGUI() override;
 #endif
 
 	private:

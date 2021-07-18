@@ -5,12 +5,12 @@
 namespace EvaEngine {
 	namespace Editor {
 		namespace Internal {
-			class ConsoleWindow : public EditorWindow {
+			class ConsoleWindow : public EditorWindow<ConsoleWindow> {
 			public:
-				ConsoleWindow(const std::string& windowName, const std::string& windowPath);
+				ConsoleWindow(const std::string& windowPath);
 				~ConsoleWindow() = default;
 
-				void OnGUI();
+				void OnGUI() override;
 			};
 		}
 	}

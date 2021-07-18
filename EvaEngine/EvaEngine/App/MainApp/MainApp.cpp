@@ -26,7 +26,7 @@ HRESULT MainApp::Init()
 	GameBase::Instance()->Init();
 
 	// エンジンの初期化
-	hr = EvaEngineApp::Instance().Init();
+	hr = EvaEngineApp::Init();
 	if (FAILED(hr)) {
 		DebugLog::LogError("EvaEngine initialize failed.");
 		return hr;
@@ -61,13 +61,13 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance
 	EvaEngine::Internal::Window::g_nCmdShow = nCmdShow;
 
 	// EvaEngineの初期化
-	if (FAILED(MainApp::Instance().Init())) {
+	if (FAILED(MainApp::Init())) {
 		EvaEngine::DebugLog::LogError("EvaEngine initialize failed.");
 		return -1;
 	}
 
 	// メッセージループ
-	int result = MainApp::Instance().Run();
+	int result = MainApp::Run();
 
 	return result;
 }

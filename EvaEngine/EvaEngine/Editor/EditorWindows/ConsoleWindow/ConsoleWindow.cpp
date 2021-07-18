@@ -3,8 +3,8 @@
 
 using namespace EvaEngine::Editor::Internal;
 
-ConsoleWindow::ConsoleWindow(const std::string& windowName, const std::string& windowPath) :
-	EditorWindow(windowName, windowPath)
+ConsoleWindow::ConsoleWindow(const std::string& windowPath) :
+	EditorWindow(windowPath)
 {
 
 }

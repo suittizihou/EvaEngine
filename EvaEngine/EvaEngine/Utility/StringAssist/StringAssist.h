@@ -8,7 +8,7 @@ namespace EvaEngine {
 	class StringAssist {
 	public:
 
-		static std::vector<std::string> split(std::string str, char del) {
+		static std::vector<std::string> Split(std::string str, char del) {
 			int first = 0;
 			int last = static_cast<int>(str.find_first_not_of(del));
 

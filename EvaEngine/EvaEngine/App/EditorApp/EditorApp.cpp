@@ -8,7 +8,9 @@
 #include "../../Utility/Math/Matrix4x4/Matrix4x4.h"
 #include "../../Editor/SceneView/SceneView.h"
 #include "../../GameSystemBase/DataBase/SceneDataBase/SceneDataBase.h"
-#include "../../Editor/EditorWindowDataBase/EditorWindowDataBase.h"
+
+#include "../../Editor/EditorBaseWindow/EditorBaseWindow.h"
+#include "../../Editor/EditorWindows/ConsoleWindow/ConsoleWindow.h"
 
 #include <imgui.h>
 #include <imgui_impl_win32.h>
@@ -21,7 +23,8 @@
 using namespace EvaEngine::Internal;
 using namespace EvaEngine::Editor::Internal;
 
-std::unique_ptr<SceneView> EditorApp::m_SceneView{ nullptr };
+std::shared_ptr<SceneView> EditorApp::m_SceneView{ nullptr };
+EditorWindowDataBase EditorApp::m_EditorWindows{};
 
 HRESULT EditorApp::ImGuiSetting()
 {
@@ -78,6 +81,10 @@ HRESULT EditorApp::Init()
 		return E_ABORT;
 	}
 
+	// EditorWindowの追加
+	//m_EditorWindows.CreateEditorWindow<Editor::Internal::EditorBaseWindow>("Window");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::ConsoleWindow>("Window");
+
 	// シーンビューの作成
 	m_SceneView = std::make_unique<SceneView>();
 
@@ -91,10 +98,10 @@ void EditorApp::DrawBegin()
 	ImGui::NewFrame();
 }
 
-void EditorApp::Draw(SceneView* sceneView, EditorCommand* editorCommand)
+void EditorApp::Draw()
 {
-	Internal::EditorWindowDataBase::Draw();
-	SceneDataBase::Instance().OnGUI(sceneView, editorCommand);
+	m_EditorWindows.Draw();
+	SceneDataBase::Instance().OnGUI();
 }
 
 void EditorApp::DrawEnd()
@@ -114,6 +121,10 @@ void EditorApp::End()
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();
+}
+
+std::shared_ptr<SceneView> EditorApp::GetSceneView() {
+	return m_SceneView;
 }
 
 #endif

@@ -141,23 +141,23 @@ int WindowApp::Update()
             Internal::TimeBase::UpdateDeltaTime();
 
             // エンジンの更新処理
-            EvaEngineApp::Instance().Update();
+            EvaEngineApp::Update();
 
             // エンジンの描画処理
-            EvaEngineApp::Instance().Draw(DirectX11App::g_Context);
+            EvaEngineApp::Draw(DirectX11App::g_Context);
 
 #if _DEBUG
             // Editor関連の描画
-            EvaEngineApp::Instance().DrawEditor();
+            EvaEngineApp::DrawEditor();
 #endif
 
             // エンジンのフレーム終了時処理
-            EvaEngineApp::Instance().FrameEnd();
+            EvaEngineApp::FrameEnd();
         }
     }
 
     // エンジンの終了時処理
-    EvaEngineApp::Instance().End();
+    EvaEngineApp::End();
 
     return static_cast<int>(msg.wParam);
 }

@@ -127,7 +127,7 @@ namespace EvaEngine {
 			void Draw(
 				const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) const;
 #if _DEBUG
-			void OnGUI(EvaEngine::Editor::Internal::SceneView* sceneView, EvaEngine::Editor::Internal::EditorCommand* editorCommand);
+			void OnGUI();
 #endif
 
 		private:

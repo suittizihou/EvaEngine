@@ -93,8 +93,8 @@ void SceneDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& comm
 }
 
 #if _DEBUG
-void SceneDataBase::OnGUI(EvaEngine::Editor::Internal::SceneView* sceneView, EvaEngine::Editor::Internal::EditorCommand* editorCommand)
+void SceneDataBase::OnGUI()
 {
-    m_CurrentScene.lock()->OnGUI(sceneView, editorCommand);
+    m_CurrentScene.lock()->OnGUI();
 }
 #endif

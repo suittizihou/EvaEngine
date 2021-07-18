@@ -1,7 +1,7 @@
 #include "EvaEngineApp.h"
+#include "../EditorApp/EditorApp.h"
 #include "../../Setting/Window/Window.h"
 #include "../DirectX11App/DirectX11App.h"
-#include "../EditorApp/EditorApp.h"
 #include "../../GameSystemBase/DataBase/ModelDataBase/ModelDataBase.h"
 #include "../../GameSystemBase/DataBase/ShaderDataBase/ShaderDataBase.h"
 #include "../../GameSystemBase/DataBase/TextureDataBase/TextureDataBase.h"
@@ -9,19 +9,10 @@
 #include "../../GameSystemBase/Manager/DrawManager/DrawManager.h"
 
 #if _DEBUG
-#include "../../Editor/EditorWindowDataBase/EditorWindowDataBase.h"
-
-#include "../../Editor/EditorWindows/ConsoleWindow/ConsoleWindow.h"
-#endif
-
-#if _DEBUG
 using namespace EvaEngine::Editor::Internal;
 #endif
 
 using namespace EvaEngine::Internal;
-
-EvaEngineApp::~EvaEngineApp() {
-}
 
 HRESULT EvaEngineApp::Init()
 {
@@ -48,9 +39,6 @@ HRESULT EvaEngineApp::Init()
 		DebugLog::LogError("Editor‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½B");
 		return hr;
 	}
-
-	// EditorWindow‚Ì’Ç‰Á
-	Editor::Internal::EditorWindowDataBase::CreateWindow<Editor::Internal::ConsoleWindow>("Console", "Window");
 #endif
 
 	return S_OK;
@@ -82,9 +70,8 @@ void EvaEngineApp::DrawEditor()
 	// Editor‚Ì•`‰æŠJnˆ—
 	EditorApp::DrawBegin();
 
-	EvaEngine::Editor::Internal::EditorCommand editorCommand{};
 	// Editor‚Ì•`‰æˆ—
-	EditorApp::Draw(&m_SceneView, &editorCommand);
+	EditorApp::Draw();
 	
 	// Editor•`‰æI—¹ˆ—
 	EditorApp::DrawEnd();

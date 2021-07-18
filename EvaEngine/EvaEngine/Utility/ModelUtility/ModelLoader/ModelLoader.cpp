@@ -13,7 +13,7 @@ using namespace EvaEngine::Internal;
 
 int ModelLoader::Load(const std::string& fileName)
 {
-    std::vector<std::string> fileSplit{ StringAssist::split(fileName, '.') };
+    std::vector<std::string> fileSplit{ StringAssist::Split(fileName, '.') };
 
     if (fileSplit.size() == 0) DebugLog::LogError("Šg’£Žq•t‚«‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢");
 

@@ -2,6 +2,9 @@
 
 #include <string>
 
+#undef max
+#undef min
+
 namespace EvaEngine {
 	// 2DƒxƒNƒgƒ‹
 	struct Vector2 {

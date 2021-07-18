@@ -50,7 +50,7 @@ namespace EvaEngine {
 
 #if _DEBUG
 		// Editor用の描画
-		virtual void OnGUI(EvaEngine::Editor::Internal::SceneView* sceneView, EvaEngine::Editor::Internal::EditorCommand* editorCommand) = 0;
+		virtual void OnGUI() = 0;
 #endif
 
 		// コンポーネントに必要なデータを設定

@@ -66,7 +66,7 @@ namespace EvaEngine {
 
 #if _DEBUG
 			// Editor—p‚Ì•`‰æ
-			void OnGUI(std::string& sceneName, EvaEngine::Editor::Internal::SceneView* sceneView, EvaEngine::Editor::Internal::EditorCommand* editorCommand);
+			void OnGUI(std::string& sceneName);
 #endif
 
 		private:

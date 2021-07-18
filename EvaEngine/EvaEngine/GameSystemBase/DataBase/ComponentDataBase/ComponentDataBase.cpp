@@ -38,10 +38,10 @@ void ComponentDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& 
 }
 
 #if _DEBUG
-void ComponentDataBase::OnGUI(EvaEngine::Editor::Internal::SceneView* sceneView, EvaEngine::Editor::Internal::EditorCommand* editorCommand)
+void ComponentDataBase::OnGUI()
 {
 	for (const auto& component : m_Components) {
-		component->OnGUI(sceneView, editorCommand);
+		component->OnGUI();
 	}
 }
 #endif
