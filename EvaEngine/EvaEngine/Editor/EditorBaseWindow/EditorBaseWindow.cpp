@@ -3,8 +3,10 @@
 
 using namespace EvaEngine::Editor::Internal;
 
-EditorBaseWindow::EditorBaseWindow(const std::string& windowPath) :
-	EditorWindow(windowPath, ImGuiWindowFlags_MenuBar) {
+EditorBaseWindow::EditorBaseWindow(const std::string& windowPath, std::vector<std::shared_ptr<EditorWindowData>> editorWindowDataBase) :
+	EditorWindow(windowPath, ImGuiWindowFlags_MenuBar),
+	m_EditorWindowDataBase{ editorWindowDataBase }
+{
 
 }
 
@@ -15,8 +17,6 @@ void EditorBaseWindow::Begin() {
 }
 
 void EditorBaseWindow::OnGUI() {
-
-	
 
 	//if (ImGui::BeginMenuBar()) {
 	//	if (ImGui::BeginMenu("File")) {

@@ -82,7 +82,7 @@ HRESULT EditorApp::Init()
 	}
 
 	// EditorWindowの追加
-	//m_EditorWindows.CreateEditorWindow<Editor::Internal::EditorBaseWindow>("Window");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::EditorBaseWindow>("Window");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::ConsoleWindow>("Window");
 
 	// シーンビューの作成

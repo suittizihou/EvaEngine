@@ -4,6 +4,7 @@
 #include <string>
 #include "../EditorWindow/EditorWindow.h"
 #include "../../Utility/StringAssist/StringAssist.h"
+#include "../EditorBaseWindow/EditorBaseWindow.h"
 
 namespace EvaEngine {
 	namespace Editor {
@@ -39,10 +40,22 @@ namespace EvaEngine {
 					}
 
 					//// ìØÇ∂äKëwÇ™ñ≥ÇØÇÍÇŒêVÇµÇ≠í«â¡
-					std::unique_ptr<EditorWindowData> windowData = std::make_unique<EditorWindowData>();
+					std::shared_ptr<EditorWindowData> windowData = std::make_shared<EditorWindowData>();
 					windowData->windowPaths = paths;
 					windowData->editorWindow.push_back(window);
-					m_EditorWindows.push_back(std::move(windowData));
+					m_EditorWindows.push_back(windowData);
+				}
+
+				template<>
+				void CreateEditorWindow<EditorBaseWindow>(const std::string& windowPath) {
+					std::shared_ptr<Editor::EditorWindow<EditorBaseWindow>> window = std::make_shared<EditorBaseWindow>(windowPath, m_EditorWindows);
+					std::vector<std::string> paths = StringAssist::Split(window->GetWindowPath(), '/');
+
+					// ìØÇ∂äKëwÇ™ñ≥ÇØÇÍÇŒêVÇµÇ≠í«â¡
+					std::shared_ptr<EditorWindowData> windowData = std::make_shared<EditorWindowData>();
+					windowData->windowPaths = paths;
+					windowData->editorWindow.push_back(window);
+					m_EditorWindows.push_back(windowData);
 				}
 
 				void Draw();
@@ -51,7 +64,7 @@ namespace EvaEngine {
 				bool CheckEquals(const std::vector<std::string>& lhs, const std::vector<std::string>& rhs);
 
 			private:
-				std::vector<std::unique_ptr<EditorWindowData>> m_EditorWindows{};
+				std::vector<std::shared_ptr<EditorWindowData>> m_EditorWindows{};
 			};
 		}
 	}
