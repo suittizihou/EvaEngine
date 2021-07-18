@@ -6,19 +6,22 @@ namespace ImGuizmo {
 }
 
 namespace EvaEngine {
-	class EditorCommand {
-	public:
-		EditorCommand() = default;
+	namespace Editor {
+		namespace Internal {
+			class EditorCommand {
+			public:
+				EditorCommand() = default;
 
-		// Transformの編集をGUIで行えるようにする関数
-		void EditTransform(float* cameraView, float* cameraProjection, float* matrix, bool editTransformDecomposition);
+				// Transformの編集をGUIで行えるようにする関数
+				void EditTransform(float* cameraView, float* cameraProjection, float* matrix, bool editTransformDecomposition);
 
-	public:
-		float camDistance = 8.f;
+			public:
+				float camDistance = 8.f;
 
-	private:
-		static ImGuizmo::OPERATION mCurrentGizmoOperation;
-	};
+			private:
+				static ImGuizmo::OPERATION mCurrentGizmoOperation;
+			};
+		}
+	}
 }
-
 #endif

@@ -33,7 +33,7 @@ namespace EvaEngine {
 		void Update() override;
 
 #if _DEBUG
-		void OnGUI(SceneView* sceneView, EditorCommand* editorCommand) override {}
+		void OnGUI(EvaEngine::Editor::Internal::SceneView* sceneView, EvaEngine::Editor::Internal::EditorCommand* editorCommand) override {}
 #endif
 
 	public:

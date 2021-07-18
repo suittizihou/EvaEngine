@@ -1,9 +1,9 @@
 #include "ShaderDataBase.h"
 #include "../../../Utility/ShaderUtility/ShaderCompiler/ShaderCompiler.h"
 
-using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
-EvaEngine::ShaderDataBase::~ShaderDataBase() 
+ShaderDataBase::~ShaderDataBase() 
 { 
     if (m_DefaultVertexShader != nullptr) { m_DefaultVertexShader->Release(); }
     if (m_DefaultPixelShader != nullptr) { m_DefaultPixelShader->Release(); }
@@ -11,7 +11,7 @@ EvaEngine::ShaderDataBase::~ShaderDataBase()
     DeleteAllShader(); 
 }
 
-void EvaEngine::ShaderDataBase::LoadDefaultShader()
+void ShaderDataBase::LoadDefaultShader()
 {
     m_DefaultVertexShader = ShaderCompiler::CreateVertexShader("Shader/VertexShader.hlsl");
     m_DefaultPixelShader = ShaderCompiler::CreatePixelShader("Shader/PixelShader.hlsl");
@@ -59,12 +59,12 @@ int ShaderDataBase::AddDomainShader(ID3D11DomainShader* domainShader)
     return m_DomainShaderCount - 1;
 }
 
-ID3D11VertexShader* EvaEngine::ShaderDataBase::GetDefaultVertexShader()
+ID3D11VertexShader* ShaderDataBase::GetDefaultVertexShader()
 {
     return m_DefaultVertexShader;
 }
 
-ID3D11PixelShader* EvaEngine::ShaderDataBase::GetDefaultPixelShader()
+ID3D11PixelShader* ShaderDataBase::GetDefaultPixelShader()
 {
     return m_DefaultPixelShader;
 }

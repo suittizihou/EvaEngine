@@ -1,12 +1,14 @@
 #pragma once
 
 namespace EvaEngine {
-	class TextureDataBase {
-	public:
-		TextureDataBase() = default;
-		~TextureDataBase() = default;
+	namespace Internal {
+		class TextureDataBase {
+		public:
+			TextureDataBase() = default;
+			~TextureDataBase() = default;
 
-	private:
+		private:
 
-	};
+		};
+	}
 }

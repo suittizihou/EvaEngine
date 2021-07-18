@@ -19,12 +19,12 @@ void Mesh::SetVertexData(std::vector<VertexData> vertexDatas, bool isCreateIndic
 	m_Vertexs = vertexDatas;
 
 	// 頂点バッファを作成してセット
-	m_VertexBuffer.Attach(BufferCreate::CreateVertexBuffer(m_Vertexs, sizeof(VertexData)));
+	m_VertexBuffer.Attach(EvaEngine::Internal::BufferCreate::CreateVertexBuffer(m_Vertexs, sizeof(VertexData)));
 	
 	// インデックスバッファの作成をするならする
 	if (isCreateIndices) {
 		m_Indices = CreateIndices(m_Vertexs);
-		m_IndexBuffer.Attach(BufferCreate::CreateIndexBuffer(m_Indices, sizeof(UINT)));
+		m_IndexBuffer.Attach(EvaEngine::Internal::BufferCreate::CreateIndexBuffer(m_Indices, sizeof(UINT)));
 	}
 }
 
@@ -70,7 +70,7 @@ std::vector<UINT> Mesh::CreateIndices(const std::vector<VertexData>& vertexDatas
 void Mesh::SetIndices(std::vector<unsigned int> indices)
 {
 	m_Indices = indices;
-	m_IndexBuffer.Attach(BufferCreate::CreateIndexBuffer(m_Indices, sizeof(UINT)));
+	m_IndexBuffer.Attach(EvaEngine::Internal::BufferCreate::CreateIndexBuffer(m_Indices, sizeof(UINT)));
 }
 
 void Mesh::SetIndexBuffer(ID3D11Buffer* indexBuffer)

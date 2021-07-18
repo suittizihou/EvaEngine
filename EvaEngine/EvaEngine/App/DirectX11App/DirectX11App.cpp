@@ -8,15 +8,15 @@
 
 #include <DirectXMath.h>
 
-using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
-D3DDevice DirectX11App::g_Device{ nullptr };
-D3DContext DirectX11App::g_Context{ nullptr };
-SwapChain DirectX11App::g_SwapChain{ nullptr };
-RenderTargetView DirectX11App::g_RenderTargetView{ nullptr };
-DepthStencilView DirectX11App::g_DepthStencilView{ nullptr };
-ConstantBuffer DirectX11App::g_ConstantBuffer{ nullptr };
-ConstantBufferData DirectX11App::g_ConstantBufferData{};
+EvaEngine::D3DDevice DirectX11App::g_Device{ nullptr };
+EvaEngine::D3DContext DirectX11App::g_Context{ nullptr };
+EvaEngine::SwapChain DirectX11App::g_SwapChain{ nullptr };
+EvaEngine::RenderTargetView DirectX11App::g_RenderTargetView{ nullptr };
+EvaEngine::DepthStencilView DirectX11App::g_DepthStencilView{ nullptr };
+EvaEngine::ConstantBuffer DirectX11App::g_ConstantBuffer{ nullptr };
+EvaEngine::Internal::ConstantBufferData DirectX11App::g_ConstantBufferData{};
 
 IDXGIAdapter* DirectX11App::m_Adapter{ nullptr };
 
@@ -295,7 +295,7 @@ HRESULT DirectX11App::CreateConstantBuffer()
 	return S_OK;
 }
 
-void DirectX11App::SetConstantBuffer(const std::weak_ptr<Camera>& camera)
+void DirectX11App::SetConstantBuffer(const std::weak_ptr<EvaEngine::Camera>& camera)
 {
 	DirectX::XMVECTOR light = DirectX::XMVector3Normalize(DirectX::XMVectorSet(0.0f, 0.5f, -1.0f, 0.0f));
 

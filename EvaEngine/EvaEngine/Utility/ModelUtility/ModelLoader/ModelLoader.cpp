@@ -9,6 +9,7 @@
 #include "../../../System/DebugLog/DebugLog.h"
 
 using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 int ModelLoader::Load(const std::string& fileName)
 {

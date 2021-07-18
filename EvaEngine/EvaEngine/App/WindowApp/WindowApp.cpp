@@ -16,7 +16,7 @@
 
 #include <vector>
 
-using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);
 

@@ -18,11 +18,12 @@
 
 #define IMGUI_DISABLE_OBSOLETE_FUNCTIONS
 
-using namespace EvaEngine;
+using namespace EvaEngine::Internal;
+using namespace EvaEngine::Editor::Internal;
 
 std::unique_ptr<SceneView> EditorApp::m_SceneView{ nullptr };
 
-HRESULT EvaEngine::EditorApp::ImGuiSetting()
+HRESULT EditorApp::ImGuiSetting()
 {
 	try {
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -70,7 +71,7 @@ HRESULT EditorApp::Init()
 		return E_ABORT;
 	}
 
-	if (!ImGui_ImplDX11_Init(DirectX11App::g_Device.Get(), DirectX11App::g_Context.Get())) {
+	if (!ImGui_ImplDX11_Init(EvaEngine::Internal::DirectX11App::g_Device.Get(), EvaEngine::Internal::DirectX11App::g_Context.Get())) {
 		DebugLog::LogError("ImGui_ImplDX11_InitÇ…é∏îsÇµÇ‹ÇµÇΩÅB");
 		ImGui::DestroyContext();
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
@@ -83,20 +84,20 @@ HRESULT EditorApp::Init()
 	return S_OK;
 }
 
-void EvaEngine::EditorApp::DrawBegin()
+void EditorApp::DrawBegin()
 {
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 }
 
-void EvaEngine::EditorApp::Draw(SceneView* sceneView, EditorCommand* editorCommand)
+void EditorApp::Draw(SceneView* sceneView, EditorCommand* editorCommand)
 {
 	Internal::EditorWindowDataBase::Draw();
 	SceneDataBase::Instance().OnGUI(sceneView, editorCommand);
 }
 
-void EvaEngine::EditorApp::DrawEnd()
+void EditorApp::DrawEnd()
 {
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
@@ -107,7 +108,7 @@ void EvaEngine::EditorApp::DrawEnd()
 	}
 }
 
-void EvaEngine::EditorApp::End()
+void EditorApp::End()
 {
 	// ImGuiÇÃâï˙
 	ImGui_ImplDX11_Shutdown();

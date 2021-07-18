@@ -2,6 +2,7 @@
 #include "../../../Utility/ModelUtility/ModelLoaderUtility/VRMModelLoader/VRMModelLoader.h"
 
 using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 int ModelDataBase::AddModelData(const ModelData& model)
 {

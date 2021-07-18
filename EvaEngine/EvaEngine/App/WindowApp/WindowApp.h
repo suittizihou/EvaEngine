@@ -2,9 +2,11 @@
 #include <Windows.h>
 
 namespace EvaEngine {
-	class WindowApp {
-	public:
-		static HRESULT Init();
-		static int Update();
-	};
+	namespace Internal {
+		class WindowApp {
+		public:
+			static HRESULT Init();
+			static int Update();
+		};
+	}
 }

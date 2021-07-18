@@ -1,6 +1,6 @@
 #include "Window.h"
 
-using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 const std::string Window::g_WindowName{ "DirectX11Project" };
 UINT Window::g_WindowLeft{ 0 };

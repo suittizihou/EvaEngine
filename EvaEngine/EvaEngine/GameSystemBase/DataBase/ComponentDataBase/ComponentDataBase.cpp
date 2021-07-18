@@ -3,7 +3,7 @@
 #include "../../Components/Camera/Camera.h"
 #include <iterator>
 
-using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 void ComponentDataBase::FixedUpdate()
 {
@@ -38,7 +38,7 @@ void ComponentDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& 
 }
 
 #if _DEBUG
-void EvaEngine::ComponentDataBase::OnGUI(SceneView* sceneView, EditorCommand* editorCommand)
+void ComponentDataBase::OnGUI(EvaEngine::Editor::Internal::SceneView* sceneView, EvaEngine::Editor::Internal::EditorCommand* editorCommand)
 {
 	for (const auto& component : m_Components) {
 		component->OnGUI(sceneView, editorCommand);

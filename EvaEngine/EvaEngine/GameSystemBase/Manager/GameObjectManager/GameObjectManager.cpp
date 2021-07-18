@@ -6,6 +6,7 @@
 #include "../../Components/Transform/Transform.h"
 
 using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 void GameObjectManager::AddGameObjectDataBase(const std::string& sceneName)
 {

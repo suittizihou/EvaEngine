@@ -2,6 +2,7 @@
 #include "../../../../System/DebugLog/DebugLog.h"
 
 using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 void Split(char split_char, char* buffer, std::vector<std::string>& out)
 {

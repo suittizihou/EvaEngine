@@ -21,19 +21,20 @@ namespace fbxsdk {
 }
 
 namespace EvaEngine {
+	namespace Internal {
+		class FBXModelLoader : public ModelLoadBase {
+		public:
+			FBXModelLoader() = default;
+			~FBXModelLoader() = default;
 
-	class FBXModelLoader : public ModelLoadBase {
-	public:
-		FBXModelLoader() = default;
-		~FBXModelLoader() = default;
+			ModelData LoadModel(const char* fileName) override;
+			void LoadMaterial(fbxsdk::FbxSurfaceMaterial* material);
+			bool LoadTexture(fbxsdk::FbxFileTexture* texture, std::string& keyword);
+			void FindMeshNode(fbxsdk::FbxNode* node, std::map<std::string, fbxsdk::FbxNode*>& list);
+			bool CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh);
 
-		ModelData LoadModel(const char* fileName) override;
-		void LoadMaterial(fbxsdk::FbxSurfaceMaterial* material);
-		bool LoadTexture(fbxsdk::FbxFileTexture* texture, std::string& keyword);
-		void FindMeshNode(fbxsdk::FbxNode* node, std::map<std::string, fbxsdk::FbxNode*>& list);
-		bool CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh);
-
-	private:
-		ModelData m_Model{};
-	};
+		private:
+			ModelData m_Model{};
+		};
+	}
 }

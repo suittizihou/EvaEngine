@@ -4,20 +4,22 @@
 
 
 namespace EvaEngine {
-	
 	class Camera;
+	namespace Editor {
+		namespace Internal {
 
-	class SceneView {
-	public:
-		SceneView() = default;
-		~SceneView() = default;
+			class SceneView {
+			public:
+				SceneView() = default;
+				~SceneView() = default;
 
-		// シーンビューで使用してるカメラを取得
-		std::weak_ptr<Camera> GetSceneCamera();
+				// シーンビューで使用してるカメラを取得
+				std::weak_ptr<Camera> GetSceneCamera();
 
-	private:
-		std::weak_ptr<Camera> m_SceneCamera;
-	};
+			private:
+				std::weak_ptr<Camera> m_SceneCamera;
+			};
+		}
+	}
 }
-
 #endif

@@ -3,6 +3,7 @@
 #include "../ShaderCompiler/ShaderCompiler.h"
 
 using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 int ShaderLoader::VertexShaderLoad(const std::string& fileName, const std::string& entryPoint)
 {

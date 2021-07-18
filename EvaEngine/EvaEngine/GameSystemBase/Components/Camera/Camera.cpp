@@ -29,7 +29,7 @@ EvaEngine::Camera::Camera(
 	m_Far(far),
 	m_Fov(fov)
 {
-	m_ProjectionMatrix = CreateProjectionMatrix(Window::GetViewport(), near, far, fov);
+	m_ProjectionMatrix = CreateProjectionMatrix(EvaEngine::Internal::Window::GetViewport(), near, far, fov);
 }
 
 EvaEngine::Camera::~Camera()
@@ -57,12 +57,12 @@ void EvaEngine::Camera::Update()
 	m_ViewMatrix = CreateViewMatrix(GetTransform());
 
 	// éãêçë‰ÇÃçÏê¨
-	m_ProjectionMatrix = CreateProjectionMatrix(Window::GetViewport(), m_Near, m_Far, m_Fov);
+	m_ProjectionMatrix = CreateProjectionMatrix(EvaEngine::Internal::Window::GetViewport(), m_Near, m_Far, m_Fov);
 }
 
 D3D11_VIEWPORT EvaEngine::Camera::GetViewport() const
 {
-	return Window::GetViewport();
+	return EvaEngine::Internal::Window::GetViewport();
 }
 
 XMMATRIX EvaEngine::Camera::GetViewMatrixDxMath() const

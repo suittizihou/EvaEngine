@@ -16,7 +16,7 @@ Transform::~Transform()
 }
 
 #if _DEBUG
-void EvaEngine::Transform::OnGUI(SceneView* sceneView, EditorCommand* editorCommand)
+void EvaEngine::Transform::OnGUI(EvaEngine::Editor::Internal::SceneView* sceneView, EvaEngine::Editor::Internal::EditorCommand* editorCommand)
 {
 	//Matrix4x4 matrix{ local_to_world_matrix() };
 	//std::weak_ptr<EvaEngine::Camera> camera = sceneView->GetSceneCamera();

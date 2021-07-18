@@ -2,7 +2,7 @@
 #include "../Mesh/Mesh.h"
 #include "../ModelUtility/ModelData/ConstantBufferData.h"
 
-using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 ID3D11Buffer* BufferCreate::CreateVertexBuffer(const std::vector<VertexData>& vertices, size_t strides)
 {

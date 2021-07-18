@@ -8,6 +8,7 @@
 #include "../../../Material/Material.h"
 
 using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 ModelData FBXModelLoader::LoadModel(const char* fileName)
 {

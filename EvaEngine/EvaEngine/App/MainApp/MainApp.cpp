@@ -4,20 +4,22 @@
 #include "../EvaEngineApp/EvaEngineApp.h"
 #include "../../GameSystemBase/Base/GameBase/GameBase.h"
 
-bool EvaEngine::MainApp::Init()
+using namespace EvaEngine::Internal;
+
+HRESULT MainApp::Init()
 {
 	// ウィンドウの初期化
 	HRESULT hr = WindowApp::Init();
 	if (FAILED(hr)) {
 		DebugLog::LogError("Window initialize failed.");
-		return false;
+		return hr;
 	}
 
 	// DirectX11の初期化
 	hr = DirectX11App::Init();
 	if (FAILED(hr)) {
 		DebugLog::LogError("DirectX initialize failed.");
-		return false;
+		return hr;
 	}
 
 	// ユーザーの初期化処理(シーンの追加などがあるためここでする)
@@ -27,13 +29,13 @@ bool EvaEngine::MainApp::Init()
 	hr = EvaEngineApp::Instance().Init();
 	if (FAILED(hr)) {
 		DebugLog::LogError("EvaEngine initialize failed.");
-		return false;
+		return hr;
 	}
 
-	return true;
+	return hr;
 }
 
-int EvaEngine::MainApp::Run()
+int MainApp::Run()
 {
 	return WindowApp::Update();
 }
@@ -55,17 +57,17 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-	EvaEngine::Window::g_hInstance = hInstance;
-	EvaEngine::Window::g_nCmdShow = nCmdShow;
+	EvaEngine::Internal::Window::g_hInstance = hInstance;
+	EvaEngine::Internal::Window::g_nCmdShow = nCmdShow;
 
 	// EvaEngineの初期化
-	if (FAILED(EvaEngine::MainApp::Instance().Init())) {
+	if (FAILED(MainApp::Instance().Init())) {
 		EvaEngine::DebugLog::LogError("EvaEngine initialize failed.");
 		return -1;
 	}
 
 	// メッセージループ
-	int result = EvaEngine::MainApp::Instance().Run();
+	int result = MainApp::Instance().Run();
 
 	return result;
 }

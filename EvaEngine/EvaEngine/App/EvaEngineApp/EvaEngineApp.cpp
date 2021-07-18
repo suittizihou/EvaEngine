@@ -14,7 +14,11 @@
 #include "../../Editor/EditorWindows/ConsoleWindow/ConsoleWindow.h"
 #endif
 
-using namespace EvaEngine;
+#if _DEBUG
+using namespace EvaEngine::Editor::Internal;
+#endif
+
+using namespace EvaEngine::Internal;
 
 EvaEngineApp::~EvaEngineApp() {
 }
@@ -46,7 +50,7 @@ HRESULT EvaEngineApp::Init()
 	}
 
 	// EditorWindowÇÃí«â¡
-	Internal::EditorWindowDataBase::CreateWindow<Editor::ConsoleWindow>("Console", "Window");
+	Editor::Internal::EditorWindowDataBase::CreateWindow<Editor::Internal::ConsoleWindow>("Console", "Window");
 #endif
 
 	return S_OK;
@@ -73,12 +77,12 @@ void EvaEngineApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& comma
 }
 
 #if _DEBUG
-void EvaEngine::EvaEngineApp::DrawEditor()
+void EvaEngineApp::DrawEditor()
 {
 	// EditorÇÃï`âÊäJénèàóù
 	EditorApp::DrawBegin();
 
-	EditorCommand editorCommand{};
+	EvaEngine::Editor::Internal::EditorCommand editorCommand{};
 	// EditorÇÃï`âÊèàóù
 	EditorApp::Draw(&m_SceneView, &editorCommand);
 	
@@ -92,7 +96,7 @@ void EvaEngineApp::FrameEnd()
 	SceneDataBase::Instance().SceneChange();
 }
 
-void EvaEngine::EvaEngineApp::End()
+void EvaEngineApp::End()
 {
 #if _DEBUG
 	EditorApp::End();

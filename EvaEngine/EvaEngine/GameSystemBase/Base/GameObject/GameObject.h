@@ -37,19 +37,19 @@ namespace EvaEngine {
 		// コンポーネントの登録
 		template<class T, class... Args>
 		std::weak_ptr<T> AddComponent(Args&& ... args) {
-			return ComponentManager::Instance().AddComponent<T>(GetSceneType(), GetGameObject(), args...);
+			return EvaEngine::Internal::ComponentManager::Instance().AddComponent<T>(GetSceneType(), GetGameObject(), args...);
 		}
 
 		// コンポーネントの取得
 		template<class T>
 		std::weak_ptr<T> GetComponent() {
-			return ComponentManager::Instance().GetComponent<T>(GetSceneType(), m_GameObjectID);
+			return EvaEngine::Internal::ComponentManager::Instance().GetComponent<T>(GetSceneType(), m_GameObjectID);
 		}
 
 		// コンポーネントの削除
 		template<class T>
 		void RemoveComponent() {
-			ComponentManager::Instance().RemoveComponent<T>(GetSceneType(), m_GameObjectID);
+			EvaEngine::Internal::ComponentManager::Instance().RemoveComponent<T>(GetSceneType(), m_GameObjectID);
 		}
 
 		// 名前で検索

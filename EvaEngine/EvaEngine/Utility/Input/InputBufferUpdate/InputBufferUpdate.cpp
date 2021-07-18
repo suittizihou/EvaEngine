@@ -1,7 +1,7 @@
 #include "InputBufferUpdate.h"
 #include <stdexcept>
 
-using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 InputBufferUpdate::InputBufferUpdate()
 {
@@ -69,12 +69,12 @@ void InputBufferUpdate::KeyUpdate()
 	}
 }
 
-std::array<KeyState, INPUT_BUFFER_SIZE> InputBufferUpdate::GetCurrentKeyStatus()
+std::array<EvaEngine::KeyState, INPUT_BUFFER_SIZE> InputBufferUpdate::GetCurrentKeyStatus()
 {
 	return m_CurrentKeyStatus;
 }
 
-std::array<KeyState, INPUT_BUFFER_SIZE> InputBufferUpdate::GetPreviousKeyStatus()
+std::array<EvaEngine::KeyState, INPUT_BUFFER_SIZE> InputBufferUpdate::GetPreviousKeyStatus()
 {
 	return m_PreviousKeyStatus;
 }

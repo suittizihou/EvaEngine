@@ -8,10 +8,10 @@
 #include "../../Components/Transform/Transform.h"
 #include "../../DataBase/ShaderDataBase/ShaderDataBase.h"
 
-using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
-InputLayout DrawManager::m_InputLayout{ nullptr };
-Shader DrawManager::m_Shader{};
+EvaEngine::InputLayout DrawManager::m_InputLayout{ nullptr };
+EvaEngine::Shader DrawManager::m_Shader{};
 
 HRESULT DrawManager::Init()
 {
@@ -138,7 +138,7 @@ void DrawManager::SetShader(Material* material)
 	SetShader(&material->g_Shader);
 }
 
-Shader DrawManager::GetDefaultShader()
+EvaEngine::Shader DrawManager::GetDefaultShader()
 {
 	return m_Shader;
 }

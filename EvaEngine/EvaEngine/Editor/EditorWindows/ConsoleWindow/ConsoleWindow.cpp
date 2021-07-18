@@ -1,7 +1,7 @@
 #include "ConsoleWindow.h"
 #include "../../../System/DebugLog/DebugLog.h"
 
-using namespace EvaEngine::Editor;
+using namespace EvaEngine::Editor::Internal;
 
 ConsoleWindow::ConsoleWindow(const std::string& windowName, const std::string& windowPath) :
 	EditorWindow(windowName, windowPath)

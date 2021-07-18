@@ -8,7 +8,7 @@
 #include <d3dcompiler.h>
 #pragma comment(lib, "d3dcompiler.lib")
 
-using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 ID3D11VertexShader* ShaderCompiler::CreateVertexShader(const std::string& fileName, const std::string& entrypath, bool error)
 {

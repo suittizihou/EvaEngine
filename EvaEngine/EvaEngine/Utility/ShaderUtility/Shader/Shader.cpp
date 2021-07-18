@@ -2,6 +2,7 @@
 #include "../../../GameSystemBase/DataBase/ShaderDataBase/ShaderDataBase.h"
 
 using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 void Shader::SetVertexShader(const int shaderHandle)
 {

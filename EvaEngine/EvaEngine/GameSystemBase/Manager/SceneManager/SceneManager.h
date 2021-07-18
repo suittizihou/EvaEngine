@@ -15,7 +15,7 @@ namespace EvaEngine {
 		// シーンの追加
 		template<class T>
 		static void AddScene(const std::string& sceneName) {
-			SceneDataBase::Instance().AddScene<T>(sceneName);
+			EvaEngine::Internal::SceneDataBase::Instance().AddScene<T>(sceneName);
 		}
 
 		// シーンのロード

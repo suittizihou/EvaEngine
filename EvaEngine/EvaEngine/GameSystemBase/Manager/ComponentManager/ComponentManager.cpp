@@ -1,7 +1,7 @@
 #include "ComponentManager.h"
 #include "../../Base/GameObject/GameObject.h"
 
-using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 void ComponentManager::FixedUpdate(const std::string& sceneName)
 {
@@ -26,7 +26,7 @@ void ComponentManager::Draw(
 }
 
 #if _DEBUG
-void EvaEngine::ComponentManager::OnGUI(std::string& sceneName, SceneView* sceneView, EditorCommand* editorCommand)
+void ComponentManager::OnGUI(std::string& sceneName, EvaEngine::Editor::Internal::SceneView* sceneView, EvaEngine::Editor::Internal::EditorCommand* editorCommand)
 {
 	m_ComponentList[sceneName]->OnGUI(sceneView, editorCommand);
 }

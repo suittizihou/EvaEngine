@@ -6,30 +6,34 @@
 #include <memory>
 
 namespace EvaEngine {
-	class SceneView;
-	class EditorCommand;
+	namespace Editor {
+		namespace Internal {
+			class SceneView;
+			class EditorCommand;
 
-	class EditorApp {
-	public:
-		// 初期化
-		static HRESULT Init();
+			class EditorApp {
+			public:
+				// 初期化
+				static HRESULT Init();
 
-		// Editor描画前準備
-		static void DrawBegin();
-		// Editor描画処理
-		static void Draw(SceneView* sceneView, EditorCommand* editorCommand);
-		// Editor描画終了時
-		static void DrawEnd();
+				// Editor描画前準備
+				static void DrawBegin();
+				// Editor描画処理
+				static void Draw(SceneView* sceneView, EditorCommand* editorCommand);
+				// Editor描画終了時
+				static void DrawEnd();
 
-		// Editor終了時処理
-		static void End();
+				// Editor終了時処理
+				static void End();
 
-	private:
-		// ImGuiの設定を行う
-		static HRESULT ImGuiSetting();
+			private:
+				// ImGuiの設定を行う
+				static HRESULT ImGuiSetting();
 
-	private:
-		static std::unique_ptr<SceneView> m_SceneView;
-	};
+			private:
+				static std::unique_ptr<SceneView> m_SceneView;
+			};
+		}
+	}
 }
 #endif

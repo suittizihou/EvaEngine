@@ -2,6 +2,7 @@
 #include "../../Manager/ComponentManager/ComponentManager.h"
 
 using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 void EvaEngine::Scene::FixedUpdate() {
     ComponentManager::Instance().FixedUpdate(m_SceneName);
@@ -21,7 +22,7 @@ void EvaEngine::Scene::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& c
 }
 
 #if _DEBUG
-void EvaEngine::Scene::OnGUI(SceneView* sceneView, EditorCommand* editorCommand)
+void EvaEngine::Scene::OnGUI(EvaEngine::Editor::Internal::SceneView* sceneView, EvaEngine::Editor::Internal::EditorCommand* editorCommand)
 {
     ComponentManager::Instance().OnGUI(m_SceneName, sceneView, editorCommand);
 }

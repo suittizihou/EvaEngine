@@ -31,15 +31,15 @@ std::weak_ptr<Transform> GameObject::GetTransform()
 
 std::weak_ptr<GameObject> GameObject::Find(const std::string& name)
 {
-    return GameObjectManager::Instance().Find(GetSceneType(), name);
+    return EvaEngine::Internal::GameObjectManager::Instance().Find(GetSceneType(), name);
 }
 
 std::weak_ptr<GameObject> GameObject::FindGameObjectWithTag(const std::string& tag)
 {
-    return GameObjectManager::Instance().FindGameObjectWithTag(GetSceneType(), tag);
+    return EvaEngine::Internal::GameObjectManager::Instance().FindGameObjectWithTag(GetSceneType(), tag);
 }
 
 std::vector<std::weak_ptr<GameObject>> GameObject::FindGameObjectsWithTag(const std::string& tag)
 {
-    return GameObjectManager::Instance().FindGameObjectsWithTag(GetSceneType(), tag);
+    return EvaEngine::Internal::GameObjectManager::Instance().FindGameObjectsWithTag(GetSceneType(), tag);
 }

@@ -10,6 +10,7 @@
 using namespace DirectX;
 using namespace std;
 using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 ModelData VRMModelLoader::LoadModel(const char* fileName)
 {

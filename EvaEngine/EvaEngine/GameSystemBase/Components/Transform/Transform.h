@@ -22,7 +22,7 @@ namespace EvaEngine {
 
 #if _DEBUG
 		// Editor用の描画関数
-		void OnGUI(SceneView* sceneView, EditorCommand* editorCommand) override;
+		void OnGUI(EvaEngine::Editor::Internal::SceneView* sceneView, EvaEngine::Editor::Internal::EditorCommand* editorCommand) override;
 #endif
 		// デストラクタ
 		~Transform();

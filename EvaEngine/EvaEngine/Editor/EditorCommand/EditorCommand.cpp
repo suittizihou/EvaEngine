@@ -7,7 +7,7 @@
 #include "EditorCommand.h"
 #include "../EvaEngine/Utility/Math/Math.h"
 
-using namespace EvaEngine;
+using namespace EvaEngine::Editor::Internal;
 
 ImGuizmo::OPERATION EditorCommand::mCurrentGizmoOperation{ ImGuizmo::TRANSLATE };
 

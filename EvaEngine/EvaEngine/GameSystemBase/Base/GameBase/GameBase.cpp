@@ -10,8 +10,8 @@ EvaEngine::GameBase* EvaEngine::GameBase::m_GameBase{ nullptr };
 
 EvaEngine::GameBase::GameBase(const unsigned int windowWidth, const unsigned int windowHeight)
 {
-	Window::g_WindowRight = windowWidth;
-	Window::g_WindowBottom = windowHeight;
+	EvaEngine::Internal::Window::g_WindowRight = windowWidth;
+	EvaEngine::Internal::Window::g_WindowBottom = windowHeight;
 	m_GameBase = this;
 }
 

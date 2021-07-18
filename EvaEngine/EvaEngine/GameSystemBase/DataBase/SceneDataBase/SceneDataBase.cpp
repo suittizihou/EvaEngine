@@ -2,7 +2,7 @@
 #include "../../Manager/ComponentManager/ComponentManager.h"
 #include "../../Manager/GameObjectManager/GameObjectManager.h"
 
-using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 void SceneDataBase::LoadScene(const std::string& sceneType)
 {
@@ -25,7 +25,7 @@ std::string SceneDataBase::GetCurrentSceneName() const
     return m_CurrentSceneName;
 }
 
-std::string EvaEngine::SceneDataBase::GetPreviousSceneName() const
+std::string SceneDataBase::GetPreviousSceneName() const
 {
     return m_PreviousSceneName;
 }
@@ -93,7 +93,7 @@ void SceneDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& comm
 }
 
 #if _DEBUG
-void EvaEngine::SceneDataBase::OnGUI(SceneView* sceneView, EditorCommand* editorCommand)
+void SceneDataBase::OnGUI(EvaEngine::Editor::Internal::SceneView* sceneView, EvaEngine::Editor::Internal::EditorCommand* editorCommand)
 {
     m_CurrentScene.lock()->OnGUI(sceneView, editorCommand);
 }

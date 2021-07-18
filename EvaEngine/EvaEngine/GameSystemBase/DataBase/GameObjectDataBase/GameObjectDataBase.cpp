@@ -6,6 +6,7 @@
 #include "../../Components/Transform/Transform.h"
 
 using namespace EvaEngine;
+using namespace EvaEngine::Internal;
 
 std::weak_ptr<GameObject> GameObjectDataBase::Instantiate(const std::string& sceneType, const std::string& tag, const std::string& name) {
 	std::shared_ptr<GameObject> obj = std::make_shared<GameObject>(sceneType, m_ObjectID, tag, name);
