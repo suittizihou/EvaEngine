@@ -5,11 +5,20 @@ using namespace EvaEngine::Editor::Internal;
 
 //std::vector<EditorWindowData> EditorWindowDataBase::m_EditorWindows;
 
+EvaEngine::Editor::Internal::EditorWindowDataBase::EditorWindowDataBase()
+{
+	for (const auto& parentPath : m_ParentPaths) {
+		auto windowData = std::make_shared<EditorWindowData>();
+		windowData->windowPath = parentPath;
+		m_EditorWindows.push_back(windowData);
+	}
+}
+
 void EditorWindowDataBase::Draw() {
 	for (const auto& windowData : m_EditorWindows) {
-		for (const auto& window : windowData->editorWindow)
+		for (const auto& window : windowData->editorWindows)
 		{
-			if (!window->IsOpen()) continue;
+			if (!window->isOpen) continue;
 
 			window->Begin();
 			window->OnGUI();

@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include "../../System/DebugLog/DebugLog.h"
 #include "../EditorWindow/EditorWindow.h"
 #include "../../Utility/StringAssist/StringAssist.h"
 #include "../EditorBaseWindow/EditorBaseWindow.h"
@@ -11,50 +12,106 @@ namespace EvaEngine {
 		namespace Internal {
 
 			struct EditorWindowData {
-				// ƒpƒX‚ğ•ªŠ„‚µ‚Ä“ü‚ê‚é
-				std::vector<std::string> windowPaths;
-				// EditorWindow‚ğŠi”[‚·‚é
-				std::vector<std::shared_ptr<Editor::EditorWindowBase>> editorWindow;
+				// ƒpƒX(ŠK‘w‚²‚Æ)
+				std::string windowPath;
+
+				bool AddChildWindow(
+					const std::vector<std::string> paths,
+					const int pathIndex,
+					const std::shared_ptr<EditorWindowBase> window) {
+
+					// ŠK‘w–¼‚ªˆá‚¤ê‡ƒŠƒ^[ƒ“
+					if (windowPath != paths[pathIndex]) return false;
+					// ÅŒã‚ÌŠK‘w‚È‚ç’Ç‰Á
+					if (paths.size() - 1 == pathIndex) { editorWindows.push_back(window); return true; }
+
+					for (auto child : childDatas) {
+						// ÅŒã‚ÌŠK‘w‚Å‚È‚¢‚È‚çX‚ÉŠK‘w‚ği‚Ş
+						if (child->AddChildWindow(paths, pathIndex + 1, window)) {
+							return true;
+						}
+					}
+
+					// ‚Ç‚ê‚É‚à“–‚Ä‚Í‚Ü‚ç‚È‚¢ê‡V‚µ‚¢‚à‚Ì‚Æ‚µ‚ÄV‹K’Ç‰Á
+					for (int i = pathIndex + 1; i < paths.size(); ++i) {
+						auto child = std::make_shared< EditorWindowData>();
+						child->windowPath = paths[i];
+						if(paths.size() - 1 == i)  child->editorWindows.push_back(window);
+						childDatas.push_back(child);
+					}
+					return true;
+				}
+
+				// q‹Ÿ‚ÌŠK‘w
+				std::vector<std::shared_ptr<EditorWindowData>> childDatas;
+
+				// ‚±‚ÌŠK‘w‚É‚ ‚éEditorWindow‚ğŠi”[‚·‚é
+				std::vector<std::shared_ptr<Editor::EditorWindowBase>> editorWindows;
 			};
 
 			class EditorWindowDataBase {
 			public:
-				EditorWindowDataBase() = default;
+				EditorWindowDataBase();
 				~EditorWindowDataBase() = default;
 
 				template<class T>
 				void CreateEditorWindow(const std::string& windowPath) {
-					static_assert(std::is_base_of<Editor::EditorWindow<T>, T>::value == true, "The argument does not inherit from EditorWindow.");
+					static_assert(std::is_base_of<Editor::EditorWindowBase, T>::value == true, "The argument does not inherit from EditorWindowBase.");
 
-					std::shared_ptr<Editor::EditorWindow<T>> window = std::make_shared<T>(windowPath);
-					std::vector<std::string> paths = StringAssist::Split(window->GetWindowPath(), '/');
+					std::shared_ptr<Editor::EditorWindowBase> window = std::make_shared<T>(windowPath);
+					std::vector<std::string> paths = StringAssist::Split(window->GetWindowPath(), "/");
+
+					if (paths.size() <= 1) {
+						DebugLog::LogError(u8"Ignoring menu item Window because it is in no submenu!");
+						return;
+					}
 
 					// “¯‚¶ƒpƒX‚È‚ç“¯‚¶ŠK‘w‚É’Ç‰Á
 					for (int i = 0; i < m_EditorWindows.size(); ++i) 
 					{
-						// ƒpƒX‚ª“¯‚¶‚©ƒ`ƒFƒbƒN
-						if (CheckEquals(m_EditorWindows[i]->windowPaths, paths)) {
-							m_EditorWindows[i]->editorWindow.push_back(window);
+						// eŠK‘w‚ª‚ ‚ê‚Î‚»‚Ìq‹Ÿ‚É’Ç‰Á‚µ‚Ä‚¢‚­
+						if (m_EditorWindows[i]->windowPath == paths[0]) {
+							m_EditorWindows[i]->AddChildWindow(paths, 0, window);
 							return;
 						}
+						//// ŠK‘w‚ªˆê‚Â‚µ‚©‚È‚¢ê‡‚Í‚»‚±‚É
+						//if (paths.size() == 1) {
+						//	m_EditorWindows[i]->editorWindows.push_back(window);
+						//	return;
+						//}
+
+						//AddChildItem(m_EditorWindows[i], paths, window);
+						//return;
+
+						// ƒpƒX‚ª“¯‚¶‚©ƒ`ƒFƒbƒN
+						//if (CheckEquals(m_EditorWindows[i]->windowPath, paths)) {
+						//	m_EditorWindows[i]->editorWindow.push_back(window);
+						//	return;
+						//}
 					}
 
-					//// “¯‚¶ŠK‘w‚ª–³‚¯‚ê‚ÎV‚µ‚­’Ç‰Á
+					// eŠK‘w‚ª–³‚¯‚ê‚ÎV‚µ‚­’Ç‰Á
 					std::shared_ptr<EditorWindowData> windowData = std::make_shared<EditorWindowData>();
-					windowData->windowPaths = paths;
-					windowData->editorWindow.push_back(window);
+					windowData->windowPath = paths[0];
 					m_EditorWindows.push_back(windowData);
+					m_EditorWindows.back()->AddChildWindow(paths, 0, window);
 				}
 
 				template<>
 				void CreateEditorWindow<EditorBaseWindow>(const std::string& windowPath) {
-					std::shared_ptr<Editor::EditorWindow<EditorBaseWindow>> window = std::make_shared<EditorBaseWindow>(windowPath, m_EditorWindows);
-					std::vector<std::string> paths = StringAssist::Split(window->GetWindowPath(), '/');
+
+					std::vector<std::weak_ptr<EditorWindowData>> editorWindowDatas;
+					for (auto data : m_EditorWindows) {
+						editorWindowDatas.push_back(data);
+					}
+
+					std::shared_ptr<Editor::EditorWindow<EditorBaseWindow>> window = std::make_shared<EditorBaseWindow>(windowPath, editorWindowDatas);
+					std::vector<std::string> paths = StringAssist::Split(window->GetWindowPath(), "/");
 
 					// “¯‚¶ŠK‘w‚ª–³‚¯‚ê‚ÎV‚µ‚­’Ç‰Á
 					std::shared_ptr<EditorWindowData> windowData = std::make_shared<EditorWindowData>();
-					windowData->windowPaths = paths;
-					windowData->editorWindow.push_back(window);
+					windowData->windowPath = paths[0];
+					windowData->editorWindows.push_back(window);
 					m_EditorWindows.push_back(windowData);
 				}
 
@@ -64,6 +121,7 @@ namespace EvaEngine {
 				bool CheckEquals(const std::vector<std::string>& lhs, const std::vector<std::string>& rhs);
 
 			private:
+				std::vector<std::string> m_ParentPaths{ "File", "Window" };
 				std::vector<std::shared_ptr<EditorWindowData>> m_EditorWindows{};
 			};
 		}

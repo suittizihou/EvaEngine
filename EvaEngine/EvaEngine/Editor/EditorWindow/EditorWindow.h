@@ -15,12 +15,14 @@ namespace EvaEngine {
 			virtual void Begin() = 0;
 			virtual void OnGUI() = 0;
 			virtual void End() = 0;
+			
+			virtual std::string GetWindowName() const = 0;
+			virtual std::string GetWindowPath() const = 0;
+			virtual Vector2 GetWindowSize() const = 0;
+
 
 		public:
-			bool IsOpen() { return isOpen; };
-
-		protected:
-			bool isOpen{ true };
+			bool isOpen{ false };
 		};
 
 		template<class T>
@@ -66,11 +68,11 @@ namespace EvaEngine {
 
 			void virtual End() override { ImGui::End(); };
 
-			std::string GetWindowName() const { return m_WindowName; };
+			std::string GetWindowName() const override { return m_WindowName; };
 
-			std::string GetWindowPath() const { return m_WindowPath; };
+			std::string GetWindowPath() const override { return m_WindowPath; };
 
-			Vector2 GetWindowSize() const { return m_WindowSize; };
+			Vector2 GetWindowSize() const override { return m_WindowSize; };
 			
 		public:
 			ImGuiWindowFlags windowFlags{};

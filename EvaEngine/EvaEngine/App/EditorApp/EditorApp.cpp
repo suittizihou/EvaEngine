@@ -11,6 +11,7 @@
 
 #include "../../Editor/EditorBaseWindow/EditorBaseWindow.h"
 #include "../../Editor/EditorWindows/ConsoleWindow/ConsoleWindow.h"
+#include "../../Editor/EditorWindows/SceneWindow/SceneWindow.h"
 
 #include <imgui.h>
 #include <imgui_impl_win32.h>
@@ -82,8 +83,9 @@ HRESULT EditorApp::Init()
 	}
 
 	// EditorWindowの追加
-	m_EditorWindows.CreateEditorWindow<Editor::Internal::EditorBaseWindow>("Window");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::EditorBaseWindow>("EditorBaseWindow");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::ConsoleWindow>("Window");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::SceneWindow>("Window/Test");
 
 	// シーンビューの作成
 	m_SceneView = std::make_unique<SceneView>();
