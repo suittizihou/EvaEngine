@@ -12,6 +12,9 @@
 #include "../../Editor/EditorBaseWindow/EditorBaseWindow.h"
 #include "../../Editor/EditorWindows/ConsoleWindow/ConsoleWindow.h"
 #include "../../Editor/EditorWindows/SceneWindow/SceneWindow.h"
+#include "../../Editor/EditorWindows/GameWindow/GameWindow.h"
+#include "../../Editor/EditorWindows/InspectorWindow/InspectorWindow.h"
+#include "../../Editor/EditorWindows/ProjectWindow/ProjectWindow.h"
 
 #include <imgui.h>
 #include <imgui_impl_win32.h>
@@ -74,7 +77,7 @@ HRESULT EditorApp::Init()
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
 		return E_ABORT;
 	}
-
+	
 	if (!ImGui_ImplDX11_Init(EvaEngine::Internal::DirectX11App::g_Device.Get(), EvaEngine::Internal::DirectX11App::g_Context.Get())) {
 		DebugLog::LogError("ImGui_ImplDX11_Initに失敗しました。");
 		ImGui::DestroyContext();
@@ -83,9 +86,12 @@ HRESULT EditorApp::Init()
 	}
 
 	// EditorWindowの追加
-	m_EditorWindows.CreateEditorWindow<Editor::Internal::EditorBaseWindow>("EditorBaseWindow");
-	m_EditorWindows.CreateEditorWindow<Editor::Internal::ConsoleWindow>("Window");
-	m_EditorWindows.CreateEditorWindow<Editor::Internal::SceneWindow>("Window/Test");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::EditorBaseWindow>("");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::ConsoleWindow>("Window/General/Console");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::SceneWindow>("Window/General/Scene");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::GameWindow>("Window/General/Game");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::InspectorWindow>("Window/General/Inspector");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::ProjectWindow>("Window/General/Project");
 
 	// シーンビューの作成
 	m_SceneView = std::make_unique<SceneView>();

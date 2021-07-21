@@ -33,12 +33,15 @@ namespace EvaEngine {
 					}
 
 					// ‚Ç‚ê‚É‚à“–‚Ä‚Í‚Ü‚ç‚È‚¢ê‡V‚µ‚¢‚à‚Ì‚Æ‚µ‚ÄV‹K’Ç‰Á
-					for (int i = pathIndex + 1; i < paths.size(); ++i) {
-						auto child = std::make_shared< EditorWindowData>();
-						child->windowPath = paths[i];
-						if(paths.size() - 1 == i)  child->editorWindows.push_back(window);
-						childDatas.push_back(child);
-					}
+					auto child = std::make_shared< EditorWindowData>();
+					bool lastIndex = (paths.size() - 1 == pathIndex + 1);
+					child->windowPath = paths[pathIndex + 1];
+					if(lastIndex)  child->editorWindows.push_back(window);
+					childDatas.push_back(child);
+					
+					// ÅŒã‚ÌŠK‘w‚Å‚È‚¢‚È‚çŒp‘±
+					if(!lastIndex) child->AddChildWindow(paths, pathIndex + 1, window);
+
 					return true;
 				}
 
@@ -99,13 +102,7 @@ namespace EvaEngine {
 
 				template<>
 				void CreateEditorWindow<EditorBaseWindow>(const std::string& windowPath) {
-
-					std::vector<std::weak_ptr<EditorWindowData>> editorWindowDatas;
-					for (auto data : m_EditorWindows) {
-						editorWindowDatas.push_back(data);
-					}
-
-					std::shared_ptr<Editor::EditorWindow<EditorBaseWindow>> window = std::make_shared<EditorBaseWindow>(windowPath, editorWindowDatas);
+					std::shared_ptr<Editor::EditorWindow<EditorBaseWindow>> window = std::make_shared<EditorBaseWindow>(windowPath, this);
 					std::vector<std::string> paths = StringAssist::Split(window->GetWindowPath(), "/");
 
 					// “¯‚¶ŠK‘w‚ª–³‚¯‚ê‚ÎV‚µ‚­’Ç‰Á
@@ -116,9 +113,11 @@ namespace EvaEngine {
 				}
 
 				void Draw();
+				std::vector<std::shared_ptr<EditorWindowData>> GetEditorWindows();
 
 			private:
 				bool CheckEquals(const std::vector<std::string>& lhs, const std::vector<std::string>& rhs);
+				void DrawWindow(const std::shared_ptr<EditorWindowData> editorWindowData) const;
 
 			private:
 				std::vector<std::string> m_ParentPaths{ "File", "Window" };

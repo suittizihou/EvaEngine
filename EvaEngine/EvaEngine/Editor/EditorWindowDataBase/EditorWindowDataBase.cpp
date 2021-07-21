@@ -16,14 +16,28 @@ EvaEngine::Editor::Internal::EditorWindowDataBase::EditorWindowDataBase()
 
 void EditorWindowDataBase::Draw() {
 	for (const auto& windowData : m_EditorWindows) {
-		for (const auto& window : windowData->editorWindows)
-		{
-			if (!window->isOpen) continue;
+		DrawWindow(windowData);
+	}
+}
 
-			window->Begin();
-			window->OnGUI();
-			window->End();
-		}
+std::vector<std::shared_ptr<EditorWindowData>> EvaEngine::Editor::Internal::EditorWindowDataBase::GetEditorWindows()
+{
+	return m_EditorWindows;
+}
+
+void EvaEngine::Editor::Internal::EditorWindowDataBase::DrawWindow(const std::shared_ptr<EditorWindowData> editorWindowData) const
+{
+	for (const auto& window : editorWindowData->editorWindows)
+	{
+		if (!window->isOpen) continue;
+
+		window->Begin();
+		window->OnGUI();
+		window->End();
+	}
+
+	for (const auto& child : editorWindowData->childDatas) {
+		DrawWindow(child);
 	}
 }
 

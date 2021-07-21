@@ -6,19 +6,20 @@ namespace EvaEngine {
 		namespace Internal {
 
 			class EditorWindowData;
+			class EditorWindowDataBase;
 
 			class EditorBaseWindow : public EditorWindow<EditorBaseWindow> {
 			public:
-				EditorBaseWindow(const std::string& windowPath, std::vector<std::weak_ptr<EditorWindowData>> editorWindowDataBase);
+				EditorBaseWindow(const std::string& windowPath, EditorWindowDataBase* editorWindowDataBase);
 				~EditorBaseWindow() = default;
 
 				void Begin() override;
 				void OnGUI() override;
 
-				void Scanning(std::weak_ptr<EditorWindowData> editorWindow);
+				void Scanning(std::weak_ptr<EditorWindowData> editorWindows);
 
 			private:
-				std::vector<std::weak_ptr<EditorWindowData>> m_EditorWindowDataBase{};
+				EditorWindowDataBase* p_EditorWindowDataBase{ nullptr };
 			};
 		}
 	}

@@ -3,9 +3,9 @@
 
 using namespace EvaEngine::Editor::Internal;
 
-EditorBaseWindow::EditorBaseWindow(const std::string& windowPath, std::vector<std::weak_ptr<EditorWindowData>> editorWindowDataBase) :
+EditorBaseWindow::EditorBaseWindow(const std::string& windowPath, EditorWindowDataBase* editorWindowDataBase) :
 	EditorWindow(windowPath, ImGuiWindowFlags_MenuBar),
-	m_EditorWindowDataBase{ editorWindowDataBase }
+	p_EditorWindowDataBase{ editorWindowDataBase }
 {
 	isOpen = true;
 }
@@ -19,11 +19,13 @@ void EditorBaseWindow::Begin() {
 void EditorBaseWindow::OnGUI() {
 
 	if (ImGui::BeginMenuBar()) {
-		for (auto windowData : m_EditorWindowDataBase) {
-			//if (ImGui::BeginMenu(windowData->windowPath.c_str())) {
-				Scanning(windowData.lock());
-				//ImGui::EndMenu();
-			//}
+		for (auto windowData : p_EditorWindowDataBase->GetEditorWindows()) {
+			if (windowData->windowPath.size() == 0) continue;
+
+			if (ImGui::BeginMenu(windowData->windowPath.c_str())) {
+					Scanning(windowData);
+				ImGui::EndMenu();
+			}
 		}
 		ImGui::EndMenuBar();
 	}
@@ -48,21 +50,38 @@ void EditorBaseWindow::OnGUI() {
 	//}
 }
 
-void EditorBaseWindow::Scanning(std::weak_ptr<EditorWindowData> editorWindow) {
+void EditorBaseWindow::Scanning(std::weak_ptr<EditorWindowData> editorWindows) {
 	
-	if (ImGui::MenuItem(editorWindow.lock()->windowPath.c_str()))
-	{
-		for (auto window : editorWindow.lock()->editorWindows) {
-			window->isOpen = true;
-		}
-
-		for (const auto& child : editorWindow.lock()->childDatas) {
-			if (ImGui::BeginMenu(child->windowPath.c_str())) {
-				Scanning(child);
+	for (auto editorWindow : editorWindows.lock()->childDatas) {
+		if (editorWindow->childDatas.size() >= 1) {
+			if (ImGui::BeginMenu(editorWindow->windowPath.c_str())) {
+				Scanning(editorWindow);
 				ImGui::EndMenu();
 			}
 		}
+		else if(editorWindow->windowPath.size() >= 1) {
+			if (ImGui::MenuItem(editorWindow->windowPath.c_str())) {
+				for (auto window : editorWindow->editorWindows) {
+					window->isOpen = true;
+				}
+			}
+		}
+
+		//if (ImGui::MenuItem(editorWindow->windowPath.c_str()))
+		//{
+		//	for (auto window : editorWindow->editorWindows) {
+		//		window->isOpen = true;
+		//	}
+
+		//	//if (editorWindow->childDatas.size() >= 1) {
+		//		if (ImGui::BeginMenu(editorWindow->windowPath.c_str())) {
+		//			Scanning(editorWindow);
+		//			ImGui::EndMenu();
+		//		}
+		//	//}
+		//}
 	}
+		
 
 	// ItemIndexとパスのサイズが同じ場合その場でWindowを表示
 	//if (editorWindow->windowPath.size() == itemIndex) {

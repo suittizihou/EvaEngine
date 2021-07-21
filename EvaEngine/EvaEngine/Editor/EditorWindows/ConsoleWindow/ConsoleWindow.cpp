@@ -6,7 +6,6 @@ using namespace EvaEngine::Editor::Internal;
 ConsoleWindow::ConsoleWindow(const std::string& windowPath) :
 	EditorWindow(windowPath)
 {
-
 }
 
 void ConsoleWindow::OnGUI()
