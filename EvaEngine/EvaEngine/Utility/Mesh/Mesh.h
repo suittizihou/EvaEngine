@@ -60,8 +60,8 @@ namespace EvaEngine {
 		std::string m_MaterialName{};
 
 		// GPU用頂点バッファー
-		VertexBuffer m_VertexBuffer{ nullptr };
+		Internal::VertexBuffer m_VertexBuffer{ nullptr };
 		// GPU用インデックスバッファ
-		IndexBuffer m_IndexBuffer{ nullptr };
+		Internal::IndexBuffer m_IndexBuffer{ nullptr };
 	};
 }

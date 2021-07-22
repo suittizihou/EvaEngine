@@ -8,10 +8,11 @@
 #include "../../Components/Transform/Transform.h"
 #include "../../DataBase/ShaderDataBase/ShaderDataBase.h"
 
+using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-EvaEngine::InputLayout DrawManager::m_InputLayout{ nullptr };
-EvaEngine::Shader DrawManager::m_Shader{};
+InputLayout DrawManager::m_InputLayout{ nullptr };
+Shader DrawManager::m_Shader{};
 
 HRESULT DrawManager::Init()
 {
@@ -101,7 +102,7 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 			// コンテキストに定数バッファを設定
 			DirectX11App::g_Context->VSSetConstantBuffers(0, 1, DirectX11App::g_ConstantBuffer.GetAddressOf());
 			DirectX11App::g_Context->PSSetConstantBuffers(0, 1, DirectX11App::g_ConstantBuffer.GetAddressOf());
-
+			
 			// ポリゴン描画
 			DirectX11App::g_Context->DrawIndexed(static_cast<UINT>(mesh.GetIndices().size()), 0, 0);
 		}

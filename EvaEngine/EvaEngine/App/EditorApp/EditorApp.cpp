@@ -15,6 +15,7 @@
 #include "../../Editor/EditorWindows/GameWindow/GameWindow.h"
 #include "../../Editor/EditorWindows/InspectorWindow/InspectorWindow.h"
 #include "../../Editor/EditorWindows/ProjectWindow/ProjectWindow.h"
+#include "../../Editor/EditorWindows/DemoWindow/DemoWindow.h"
 
 #include <imgui.h>
 #include <imgui_impl_win32.h>
@@ -92,6 +93,7 @@ HRESULT EditorApp::Init()
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::GameWindow>("Window/General/Game");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::InspectorWindow>("Window/General/Inspector");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::ProjectWindow>("Window/General/Project");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::DemoWindow>("Help/DemoWindow");
 
 	// シーンビューの作成
 	m_SceneView = std::make_unique<SceneView>();

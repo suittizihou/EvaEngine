@@ -14,11 +14,11 @@ namespace EvaEngine {
 		ID3D11ShaderResourceView* shaderResourcesView{ nullptr };
 
 		Shader g_Shader{};
-		Texture2D g_Texture{};
+		Internal::Texture2D g_Texture{};
 		std::vector<char> g_ImageData;
 		Microsoft::glTF::AlphaMode g_AlphaMode{};
 
 	private:
-		InputLayout m_InputLayout{ nullptr };
+		Internal::InputLayout m_InputLayout{ nullptr };
 	};
 }

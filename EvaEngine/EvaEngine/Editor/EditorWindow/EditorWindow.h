@@ -72,7 +72,7 @@ namespace EvaEngine {
 			void virtual Begin() override
 			{
 				ImGui::SetNextWindowSize(ImVec2(m_WindowSize.x, m_WindowSize.y), ImGuiCond_FirstUseEver);
-				ImGui::Begin(m_WindowName.c_str(), &isOpen, windowFlags, &load);
+				ImGui::Begin(m_WindowName.c_str(), &isOpen, windowFlags, &m_Loaded);
 			}
 			// ï`âÊèàóù
 			void virtual OnGUI() override {};
@@ -96,7 +96,7 @@ namespace EvaEngine {
 			Vector2 m_WindowSize{ 300.0f, 450.0f };
 
 		private:
-			bool load{ false };
+			bool m_Loaded{ false };
 		};
 	}
 }

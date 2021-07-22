@@ -11,7 +11,8 @@ namespace EvaEngine {
 	namespace Editor {
 		namespace Internal {
 
-			struct EditorWindowData {
+			class EditorWindowData {
+			public:
 				// ƒpƒX(ŠK‘w‚²‚Æ)
 				std::string windowPath;
 
@@ -106,7 +107,7 @@ namespace EvaEngine {
 				void DrawWindow(const std::shared_ptr<EditorWindowData> editorWindowData) const;
 
 			private:
-				std::vector<std::string> m_ParentPaths{ "File", "Window" };
+				std::vector<std::string> m_ParentPaths{ "File", "Window", "Help" };
 				std::vector<std::shared_ptr<EditorWindowData>> m_EditorWindows{};
 			};
 		}

@@ -13,6 +13,9 @@ namespace EvaEngine {
 				void Begin() override {};
 				void OnGUI() override;
 				void End() override {};
+
+			private:
+				bool m_Loaded{ false };
 			};
 		}
 	}

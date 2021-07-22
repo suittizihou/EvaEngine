@@ -204,6 +204,7 @@
     <ClInclude Include="EvaEngine\Editor\EditorCommand\EditorCommand.h" />
     <ClInclude Include="EvaEngine\Editor\EditorWindowDataBase\EditorWindowDataBase.h" />
     <ClInclude Include="EvaEngine\Editor\EditorWindows\ConsoleWindow\ConsoleWindow.h" />
+    <ClInclude Include="EvaEngine\Editor\EditorWindows\DemoWindow\DemoWindow.h" />
     <ClInclude Include="EvaEngine\Editor\EditorWindows\GameWindow\GameWindow.h" />
     <ClInclude Include="EvaEngine\Editor\EditorWindows\InspectorWindow\InspectorWindow.h" />
     <ClInclude Include="EvaEngine\Editor\EditorWindows\ProjectWindow\ProjectWindow.h" />
@@ -568,6 +569,7 @@
     <ClCompile Include="EvaEngine\Editor\EditorCommand\EditorCommand.cpp" />
     <ClCompile Include="EvaEngine\Editor\EditorWindowDataBase\EditorWindowDataBase.cpp" />
     <ClCompile Include="EvaEngine\Editor\EditorWindows\ConsoleWindow\ConsoleWindow.cpp" />
+    <ClCompile Include="EvaEngine\Editor\EditorWindows\DemoWindow\DemoWindow.cpp" />
     <ClCompile Include="EvaEngine\Editor\EditorWindows\GameWindow\GameWindow.cpp" />
     <ClCompile Include="EvaEngine\Editor\EditorWindows\InspectorWindow\InspectorWindow.cpp" />
     <ClCompile Include="EvaEngine\Editor\EditorWindows\ProjectWindow\ProjectWindow.cpp" />
