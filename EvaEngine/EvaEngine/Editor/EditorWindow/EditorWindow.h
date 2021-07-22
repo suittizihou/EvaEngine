@@ -32,6 +32,7 @@ namespace EvaEngine {
 				m_WindowName{ TypeIDAssist<T>().GetClassName() },
 				m_WindowPath{ windowPath }
 			{
+				Init();
 			}
 
 			EditorWindow(const std::string& windowPath, const Vector2& windowSize) :
@@ -39,6 +40,7 @@ namespace EvaEngine {
 				m_WindowPath{ windowPath },
 				m_WindowSize{ windowSize }
 			{
+				Init();
 			}
 
 			EditorWindow(const std::string& windowPath, const ImGuiWindowFlags& windowFlags) :
@@ -46,6 +48,7 @@ namespace EvaEngine {
 				m_WindowPath{ windowPath },
 				windowFlags{ windowFlags }
 			{
+				Init();
 			}
 
 			EditorWindow(const std::string& windowPath, const Vector2& windowSize, const ImGuiWindowFlags& windowFlags) :
@@ -54,24 +57,34 @@ namespace EvaEngine {
 				m_WindowSize{ windowSize },
 				windowFlags{ windowFlags }
 			{
+				Init();
 			}
 
 			virtual ~EditorWindow() = default;
 
+		protected:
+			void Init() {
+				isOpen = true;
+			};
+
+		public:
+			// ŠJnˆ—
 			void virtual Begin() override
 			{
 				ImGui::SetNextWindowSize(ImVec2(m_WindowSize.x, m_WindowSize.y), ImGuiCond_FirstUseEver);
-				ImGui::Begin(m_WindowName.c_str(), &isOpen, windowFlags);
+				ImGui::Begin(m_WindowName.c_str(), &isOpen, windowFlags, &load);
 			}
-
+			// •`‰æˆ—
 			void virtual OnGUI() override {};
-
+			// I—¹ˆ—
 			void virtual End() override { ImGui::End(); };
 
+		public:
+			// Window–¼‚ğæ“¾
 			std::string GetWindowName() const override { return m_WindowName; };
-
+			// WindowPath‚ğæ“¾
 			std::string GetWindowPath() const override { return m_WindowPath; };
-
+			// WindowSize‚ğæ“¾
 			Vector2 GetWindowSize() const override { return m_WindowSize; };
 			
 		public:
@@ -81,6 +94,9 @@ namespace EvaEngine {
 			std::string m_WindowName{};
 			std::string m_WindowPath{};
 			Vector2 m_WindowSize{ 300.0f, 450.0f };
+
+		private:
+			bool load{ false };
 		};
 	}
 }
