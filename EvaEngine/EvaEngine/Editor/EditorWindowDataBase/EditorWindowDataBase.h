@@ -91,7 +91,7 @@ namespace EvaEngine {
 					std::shared_ptr<Editor::EditorWindow<EditorBaseWindow>> window = std::make_shared<EditorBaseWindow>(windowPath, this);
 					std::vector<std::string> paths = StringAssist::Split(window->GetWindowPath(), "/");
 
-					// “¯‚¶ŠK‘w‚ª–³‚¯‚ê‚ÎV‚µ‚­’Ç‰Á
+					// EditorBaseWindow‚Í•K‚¸V‹K’Ç‰Á
 					std::shared_ptr<EditorWindowData> windowData = std::make_shared<EditorWindowData>();
 					windowData->windowPath = paths[0];
 					windowData->editorWindows.push_back(window);
