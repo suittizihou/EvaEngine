@@ -82,7 +82,7 @@ namespace EvaEngine {
 					// eŠK‘w‚ª–³‚¯‚ê‚ÎV‚µ‚­’Ç‰Á
 					std::shared_ptr<EditorWindowData> windowData = std::make_shared<EditorWindowData>();
 					windowData->windowPath = paths[0];
-					window->AddChildWindow(paths, 0, window);
+					windowData->AddChildWindow(paths, 0, window);
 					m_EditorWindows.push_back(windowData);
 				}
 
