@@ -3,6 +3,7 @@
 #include <cmath>
 #include <limits>
 
+#undef max
 #undef min
 
 namespace EvaEngine {
@@ -36,7 +37,7 @@ namespace EvaEngine {
 		static float clamp(float value, float min, float max) {
 			return (value < min) ? min : (value > max) ? max : value;
 		}
-		// 0 と 1 の間に値を制限し、その値を返します。。
+		// 0 と 1 の間に値を制限し、その値を返します。
 		static float clamp01(float value) {
 			return clamp(value, 0.0f, 1.0f);
 		}
@@ -46,10 +47,29 @@ namespace EvaEngine {
 				return target;
 			return current + sign(target - current) * max_delta;
 		}
+		// 最大値を返す
+		static float max(float a, float b) { return a > b ? a : b; }
 		// 最小値を返す
-		static float min(float a, float b)
-		{
-			return (a >= b) ? b : a;
+		static float min(float a, float b) { return (a >= b) ? b : a; }
+		// ガンマ (sRGB) からリニアの色空間へ値を変換します。
+		static float gamma_to_linear_space(const float value) {
+			if (value <= 0.04045f)
+				return value / 12.92f;
+			else if (value < 1.0f)
+				return pow((value + 0.055f) / 1.055F, 2.4f);
+			else
+				return pow(value, 2.2f);
+		}
+		// リニアからガンマ (sRGB) の色空間へ値を変換します。
+		static float linear_to_gamma_space(const float value) {
+			if (value <= 0.0f)
+				return 0.0f;
+			else if (value <= 0.0031308f)
+				return 12.92f * value;
+			else if (value < 1.0f)
+				return 1.055f * pow(value, 0.4166667f) - 0.055f;
+			else
+				return pow(value, 0.45454545f);
 		}
 	};
 }

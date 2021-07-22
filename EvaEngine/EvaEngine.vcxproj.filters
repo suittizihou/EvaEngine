@@ -1110,6 +1110,21 @@
     <ClInclude Include="EvaEngine\Editor\EditorWindows\DemoWindow\DemoWindow.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="EvaEngine\Utility\Texture\Texture2D\Texture2D.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaEngine\Utility\Texture\Texture\Texture.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaEngine\Utility\Texture\RenderTexture\RenderTexture.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaEngine\Utility\Math\Color\Color.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaEngine\Utility\Math\Vector4\Vector4.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1296,6 +1311,18 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="EvaEngine\Editor\EditorWindows\DemoWindow\DemoWindow.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaEngine\Utility\Texture\Texture\Texture.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaEngine\Utility\Texture\Texture2D\Texture2D.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaEngine\Utility\Math\Color\Color.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaEngine\Utility\Math\Vector4\Vector4.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

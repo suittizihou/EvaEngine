@@ -6,6 +6,10 @@
 #undef min
 
 namespace EvaEngine {
+	struct Vector3;
+	struct Vector4;
+	struct Color;
+
 	// 2Dベクトル
 	struct Vector2 {
 		// ベクトルのx成分
@@ -83,6 +87,13 @@ namespace EvaEngine {
 		// 目的地に向かって時間の経過とともに徐々にベクトルを変化させます
 		Vector2 smooth_damp(const Vector2& current, const Vector2& target,
 			Vector2& currentVelocity, float smooth_time, float max_speed, float delta_time);
+
+		// Vector3への暗黙キャスト
+		operator Vector3() const;
+		// Vector4への暗黙キャスト
+		operator Vector4() const;
+		// Colorへの暗黙キャスト
+		operator Color() const;
 	};
 
 	// 単項演算子オーバーロード

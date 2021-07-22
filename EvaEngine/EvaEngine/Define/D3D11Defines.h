@@ -10,20 +10,20 @@ namespace EvaEngine {
 	namespace Internal {
 		typedef Microsoft::WRL::ComPtr<ID3D11Device> D3DDevice;
 		typedef Microsoft::WRL::ComPtr<ID3D11DeviceContext> D3DContext;
-		typedef Microsoft::WRL::ComPtr<IDXGISwapChain> SwapChain;
-		typedef Microsoft::WRL::ComPtr<ID3D11RenderTargetView> RenderTargetView;
-		typedef Microsoft::WRL::ComPtr<ID3D11Buffer> ConstantBuffer, VertexBuffer, IndexBuffer, StructuredBuffer;
-		typedef Microsoft::WRL::ComPtr<ID3D11InputLayout> InputLayout;
-		typedef Microsoft::WRL::ComPtr<ID3D11VertexShader> VertexShader;
-		typedef Microsoft::WRL::ComPtr<ID3D11GeometryShader> GeometryShader;
-		typedef Microsoft::WRL::ComPtr<ID3D11PixelShader> PixelShader;
-		typedef Microsoft::WRL::ComPtr<ID3D11ComputeShader> ComputeShader;
-		typedef Microsoft::WRL::ComPtr<ID3D11HullShader> HullShader;
-		typedef Microsoft::WRL::ComPtr<ID3D11DomainShader> DomainShader;
+		typedef Microsoft::WRL::ComPtr<IDXGISwapChain> D3DSwapChain;
+		typedef Microsoft::WRL::ComPtr<ID3D11RenderTargetView> D3DRenderTargetView;
+		typedef Microsoft::WRL::ComPtr<ID3D11Buffer> ConstantBuffer, D3DVertexBuffer, D3DIndexBuffer, D3DStructuredBuffer;
+		typedef Microsoft::WRL::ComPtr<ID3D11InputLayout> D3DInputLayout;
+		typedef Microsoft::WRL::ComPtr<ID3D11VertexShader> D3DVertexShader;
+		typedef Microsoft::WRL::ComPtr<ID3D11GeometryShader> D3DGeometryShader;
+		typedef Microsoft::WRL::ComPtr<ID3D11PixelShader> D3DPixelShader;
+		typedef Microsoft::WRL::ComPtr<ID3D11ComputeShader> D3DComputeShader;
+		typedef Microsoft::WRL::ComPtr<ID3D11HullShader> D3DHullShader;
+		typedef Microsoft::WRL::ComPtr<ID3D11DomainShader> D3DDomainShader;
 		typedef Microsoft::WRL::ComPtr<ID3DBlob> D3DBlob;
-		typedef Microsoft::WRL::ComPtr<ID3D11Texture2D> Texture2D;
-		typedef Microsoft::WRL::ComPtr<ID3D11DepthStencilView> DepthStencilView;
-		typedef Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> ShaderTexture;
-		typedef Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView> ComputeOutputView;
+		typedef Microsoft::WRL::ComPtr<ID3D11Texture2D> D3DTexture2D;
+		typedef Microsoft::WRL::ComPtr<ID3D11DepthStencilView> D3DDepthStencilView;
+		typedef Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> D3DShaderTexture;
+		typedef Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView> D3DComputeOutputView;
 	}
 }

@@ -11,7 +11,7 @@
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-InputLayout DrawManager::m_InputLayout{ nullptr };
+D3DInputLayout DrawManager::m_InputLayout{ nullptr };
 Shader DrawManager::m_Shader{};
 
 HRESULT DrawManager::Init()

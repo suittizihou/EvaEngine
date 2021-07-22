@@ -33,9 +33,9 @@ namespace EvaEngine {
 		public:
 			static D3DDevice g_Device;
 			static D3DContext g_Context;
-			static SwapChain g_SwapChain;
-			static RenderTargetView g_RenderTargetView;
-			static DepthStencilView g_DepthStencilView;
+			static D3DSwapChain g_SwapChain;
+			static D3DRenderTargetView g_RenderTargetView;
+			static D3DDepthStencilView g_DepthStencilView;
 
 			static ConstantBuffer g_ConstantBuffer;
 			static ConstantBufferData g_ConstantBufferData;

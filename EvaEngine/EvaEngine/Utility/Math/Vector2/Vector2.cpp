@@ -1,4 +1,7 @@
 #include "Vector2.h"
+#include "../Vector3/Vector3.h"
+#include "../Vector4/Vector4.h"
+#include "../Color/Color.h"
 #include "..//Mathf/Mathf.h"
 #include <iostream>
 #include <algorithm>
@@ -260,6 +263,21 @@ Vector2 Vector2::smooth_damp(const Vector2& current, const Vector2& target, Vect
 		currentVelocity.y = (output_y - originalTo.y) / delta_time;
 	}
 	return Vector2(output_x, output_y);
+}
+
+EvaEngine::Vector2::operator Vector3() const
+{
+	return Vector3(x, y, 0.0f);
+}
+
+EvaEngine::Vector2::operator Vector4() const
+{
+	return Vector4(x, y, 0.0f, 0.0f);
+}
+
+EvaEngine::Vector2::operator Color() const
+{
+	return Color(x, y, 0.0f, 0.0f);
 }
 
 Vector2 EvaEngine::operator-(const Vector2& v)

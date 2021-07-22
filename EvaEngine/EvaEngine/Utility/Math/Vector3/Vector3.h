@@ -6,6 +6,9 @@
 #include <string>
 
 namespace EvaEngine {
+	struct Vector2;
+	struct Vector4;
+	struct Color;
 	struct Vector3 {
 		float x{ 0.0f };	// X component of the vector.
 		float y{ 0.0f };	// Y component of the vector.
@@ -97,6 +100,13 @@ namespace EvaEngine {
 		// 目的地に向かって時間の経過とともに徐々にベクトルを変化させます
 		static Vector3 smooth_damp(const Vector3& current, const Vector3& target,
 			Vector3& currentVelocity, float smoothTime, float maxSpeed, float deltaTime);
+
+		// Vector2への暗黙キャスト
+		operator Vector2() const;
+		// Vector2への暗黙キャスト
+		operator Vector4() const;
+		// Vector2への暗黙キャスト
+		operator Color() const;
 	};
 
 	// 単項演算子オーバーロード

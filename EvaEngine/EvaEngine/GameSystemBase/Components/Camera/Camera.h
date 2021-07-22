@@ -5,6 +5,7 @@
 #include <vector>
 #include "../../../App/DirectX11App/DirectX11App.h"
 #include "../../Base/Component/Component.h"
+#include "../../../Utility/Texture/Texture2D/Texture2D.h"
 
 #undef near
 #undef far
@@ -57,10 +58,7 @@ namespace EvaEngine {
 			const float& fovDegree);
 
 	public:
-		// シーンに存在するMain CameraタグのCameraコンポーネントを返す
-		static std::weak_ptr<Camera> GetMainCamera();
-		// 全カメラを返す
-		static std::vector<std::weak_ptr<Camera>> GetAllCamera();
+		Texture2D targetTexture{};
 
 	private:
 		DirectX::XMMATRIX m_ViewMatrix{};
@@ -69,6 +67,12 @@ namespace EvaEngine {
 		float m_Near{};
 		float m_Far{};
 		float m_Fov{};
+
+	public:
+		// シーンに存在するMain CameraタグのCameraコンポーネントを返す
+		static std::weak_ptr<Camera> GetMainCamera();
+		// 全カメラを返す
+		static std::vector<std::weak_ptr<Camera>> GetAllCamera();
 
 	private:
 		static std::vector<std::weak_ptr<Camera>> m_Cameras;

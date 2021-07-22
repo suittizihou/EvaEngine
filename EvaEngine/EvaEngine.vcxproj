@@ -211,7 +211,12 @@
     <ClInclude Include="EvaEngine\Editor\EditorWindows\SceneWindow\SceneWindow.h" />
     <ClInclude Include="EvaEngine\Editor\EditorWindow\EditorWindow.h" />
     <ClInclude Include="EvaEngine\Editor\SceneView\SceneView.h" />
+    <ClInclude Include="EvaEngine\Utility\Math\Color\Color.h" />
     <ClInclude Include="EvaEngine\Utility\Math\Math.h" />
+    <ClInclude Include="EvaEngine\Utility\Math\Vector4\Vector4.h" />
+    <ClInclude Include="EvaEngine\Utility\Texture\RenderTexture\RenderTexture.h" />
+    <ClInclude Include="EvaEngine\Utility\Texture\Texture2D\Texture2D.h" />
+    <ClInclude Include="EvaEngine\Utility\Texture\Texture\Texture.h" />
     <ClInclude Include="EvaEngine\Utility\TypeIDAssist\TypeIDAssist.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk\core\arch\fbxalloc.h" />
@@ -594,6 +599,10 @@
     <ClCompile Include="EvaEngine\GameSystemBase\Manager\DrawManager\DrawManager.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Manager\GameObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Manager\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Math\Color\Color.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Math\Vector4\Vector4.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Texture\Texture2D\Texture2D.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Texture\Texture\Texture.cpp" />
     <ClCompile Include="EvaEngine\Utility\Time\TimeBase.cpp" />
     <ClCompile Include="ImGUI\imgui.cpp" />
     <ClCompile Include="ImGUI\ImGuizmo.cpp" />

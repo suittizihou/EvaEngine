@@ -37,7 +37,7 @@ namespace EvaEngine {
 			static Shader GetDefaultShader();
 
 		private:
-			static InputLayout m_InputLayout;
+			static D3DInputLayout m_InputLayout;
 			static Shader m_Shader;
 		};
 	}

@@ -6,3 +6,5 @@
 #include "Quaternion/Quaternion.h"
 #include "Vector2/Vector2.h"
 #include "Vector3/Vector3.h"
+#include "Vector4/Vector4.h"
+#include "Color/Color.h"

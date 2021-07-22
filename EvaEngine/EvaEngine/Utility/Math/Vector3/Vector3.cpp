@@ -1,4 +1,7 @@
 #include "Vector3.h"
+#include "../Vector2/Vector2.h"
+#include "../Vector4/Vector4.h"
+#include "../Color/Color.h"
 #include "..//Mathf/Mathf.h"
 #include <stdexcept>
 #include <algorithm>
@@ -162,9 +165,14 @@ Vector3& EvaEngine::operator*=(Vector3& lhs, float rhs)
 
 Vector3& EvaEngine::operator/=(Vector3& lhs, float rhs)
 {
-	lhs.x /= rhs;
-	lhs.y /= rhs;
-	lhs.z /= rhs;
+	if (rhs == 0.0f) {
+		lhs = Vector3::zero();
+	}
+	else {
+		lhs.x /= rhs;
+		lhs.y /= rhs;
+		lhs.z /= rhs;
+	}
 	return lhs;
 }
 
@@ -384,4 +392,19 @@ Vector3 Vector3::smooth_damp(const Vector3& current, const Vector3& target, Vect
 	}
 
 	return Vector3(output_x, output_y, output_z);
+}
+
+EvaEngine::Vector3::operator Vector2() const
+{
+	return Vector2(x, y);
+}
+
+EvaEngine::Vector3::operator Vector4() const
+{
+	return Vector4(x, y, z, 0.0f);
+}
+
+EvaEngine::Vector3::operator Color() const
+{
+	return Color(x, y, z, 0.0f);
 }
