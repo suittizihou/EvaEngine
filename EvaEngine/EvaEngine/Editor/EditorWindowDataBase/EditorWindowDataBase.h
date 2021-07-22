@@ -77,27 +77,13 @@ namespace EvaEngine {
 							m_EditorWindows[i]->AddChildWindow(paths, 0, window);
 							return;
 						}
-						//// 階層が一つしかない場合はそこに
-						//if (paths.size() == 1) {
-						//	m_EditorWindows[i]->editorWindows.push_back(window);
-						//	return;
-						//}
-
-						//AddChildItem(m_EditorWindows[i], paths, window);
-						//return;
-
-						// パスが同じかチェック
-						//if (CheckEquals(m_EditorWindows[i]->windowPath, paths)) {
-						//	m_EditorWindows[i]->editorWindow.push_back(window);
-						//	return;
-						//}
 					}
 
 					// 親階層が無ければ新しく追加
 					std::shared_ptr<EditorWindowData> windowData = std::make_shared<EditorWindowData>();
 					windowData->windowPath = paths[0];
+					window->AddChildWindow(paths, 0, window);
 					m_EditorWindows.push_back(windowData);
-					m_EditorWindows.back()->AddChildWindow(paths, 0, window);
 				}
 
 				template<>

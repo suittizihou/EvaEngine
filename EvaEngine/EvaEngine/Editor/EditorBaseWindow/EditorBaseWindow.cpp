@@ -29,25 +29,6 @@ void EditorBaseWindow::OnGUI() {
 		}
 		ImGui::EndMenuBar();
 	}
-
-	//if (ImGui::BeginMenuBar()) {
-	//	for (int i = 0; i < m_EditorWindowDataBase.size(); ++i) {
-	//		if (ImGui::BeginMenu(m_EditorWindowDataBase[i]->windowPath[0].c_str())) {
-	//			Scanning(m_EditorWindowDataBase[i], 1, 0);
-	//			ImGui::EndMenu();
-	//		}
-	//	}
-	//	ImGui::EndMenuBar();
-	//}
-
-	//if (ImGui::BeginMenuBar()) {
-	//	if (ImGui::BeginMenu("Window")) {
-	//		if (ImGui::MenuItem("Test")) {
-	//		}
-	//		ImGui::EndMenu();
-	//	}
-	//	ImGui::EndMenuBar();
-	//}
 }
 
 void EditorBaseWindow::Scanning(std::weak_ptr<EditorWindowData> editorWindows) {
@@ -59,49 +40,12 @@ void EditorBaseWindow::Scanning(std::weak_ptr<EditorWindowData> editorWindows) {
 				ImGui::EndMenu();
 			}
 		}
-		else if(editorWindow->windowPath.size() >= 1) {
+		else if (editorWindow->windowPath.size() >= 1) {
 			if (ImGui::MenuItem(editorWindow->windowPath.c_str())) {
 				for (auto window : editorWindow->editorWindows) {
 					window->isOpen = true;
 				}
 			}
 		}
-
-		//if (ImGui::MenuItem(editorWindow->windowPath.c_str()))
-		//{
-		//	for (auto window : editorWindow->editorWindows) {
-		//		window->isOpen = true;
-		//	}
-
-		//	//if (editorWindow->childDatas.size() >= 1) {
-		//		if (ImGui::BeginMenu(editorWindow->windowPath.c_str())) {
-		//			Scanning(editorWindow);
-		//			ImGui::EndMenu();
-		//		}
-		//	//}
-		//}
 	}
-		
-
-	// ItemIndexとパスのサイズが同じ場合その場でWindowを表示
-	//if (editorWindow->windowPath.size() == itemIndex) {
-	//	if (ImGui::MenuItem(editorWindow->editorWindows[windowIndex]->GetWindowName().c_str())) {
-
-	//		editorWindow->editorWindows[windowIndex]->isOpen = true;
-	//		if (editorWindow->editorWindows.size() - 1 > windowIndex) {
-	//			Scanning(editorWindow, itemIndex, windowIndex + 1);
-	//		}
-	//	}
-	//}
-	//else if (ImGui::MenuItem(editorWindow->windowPath[itemIndex].c_str())) {
-	//	if (editorWindow->windowPath.size() - 1 == itemIndex) {
-	//		editorWindow->editorWindows[windowIndex]->isOpen = true;
-	//		if (editorWindow->editorWindows.size() - 1 > windowIndex) {
-	//			Scanning(editorWindow, itemIndex, windowIndex + 1);
-	//		}
-	//	}
-	//	else {
-	//		Scanning(editorWindow, itemIndex + 1, windowIndex);
-	//	}
-	//}
 }

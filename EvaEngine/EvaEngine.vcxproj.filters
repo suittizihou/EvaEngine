@@ -1289,6 +1289,9 @@
     <ClCompile Include="EvaEngine\Editor\EditorWindows\ProjectWindow\ProjectWindow.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="ImGUI\imgui_demo.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="EvaEngine\Shader\PixelShader.hlsl" />

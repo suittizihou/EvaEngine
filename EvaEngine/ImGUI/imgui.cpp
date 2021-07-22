@@ -11218,6 +11218,7 @@ static void WindowSettingsHandler_ReadLine(ImGuiContext*, ImGuiSettingsHandler*,
     else if (sscanf(line, "DockId=0x%X,%d", &u1, &i) == 2)  { settings->DockId = u1; settings->DockOrder = (short)i; }
     else if (sscanf(line, "DockId=0x%X", &u1) == 1)         { settings->DockId = u1; settings->DockOrder = -1; }
     else if (sscanf(line, "ClassId=0x%X", &u1) == 1)        { settings->ClassId = u1; }
+    else if (sscanf(line, "Collapsed=%d", &i) == 1)         { settings->Open = (i != 0); }
 }
 
 // Apply to existing windows (if any)
@@ -11260,6 +11261,7 @@ static void WindowSettingsHandler_WriteAll(ImGuiContext* ctx, ImGuiSettingsHandl
         settings->ClassId = window->WindowClass.ClassId;
         settings->DockOrder = window->DockOrder;
         settings->Collapsed = window->Collapsed;
+        settings->Open = window->Open;
     }
 
     // Write to text buffer
@@ -11287,6 +11289,7 @@ static void WindowSettingsHandler_WriteAll(ImGuiContext* ctx, ImGuiSettingsHandl
             if (settings->ClassId != 0)
                 buf->appendf("ClassId=0x%08X\n", settings->ClassId);
         }
+        buf->appendf("Open=%d\n", settings->Open);
         buf->append("\n");
     }
 }
