@@ -7,8 +7,9 @@ namespace EvaEngine {
 
 	class RenderTexture : public Texture {
 	public:
-
-
+		RenderTexture();
+	private:
+		void Create();
 	private:
 		Texture2D* m_Texture2D{ nullptr };
 	};

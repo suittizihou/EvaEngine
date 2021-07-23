@@ -32,6 +32,11 @@ void ComponentDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& 
 	//std::vector<std::weak_ptr<Camera>> cameras = Camera::GetAllCamera();
 	//for (int cameraNum = 0; cameraNum < cameras.size(); ++cameraNum) {
 		for (int i = 0; i < m_DrawFuncNumber.size(); ++i) {
+			// 自前のレンダーターゲットビューに切り替え
+			//command->OMSetRenderTargets(1, &mpRTV, pDSV);
+			//command->ClearRenderTargetView(mpRTV, clearColor);
+			//command->ClearDepthStencilView(pDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
+
 			m_Components[m_DrawFuncNumber[i]]->Draw(Camera::GetMainCamera(), command);
 		}
 	//}

@@ -58,7 +58,7 @@ namespace EvaEngine {
 			const float& fovDegree);
 
 	public:
-		Texture2D targetTexture{};
+		Texture2D targetTexture{ 500, 500 };
 
 	private:
 		DirectX::XMMATRIX m_ViewMatrix{};
