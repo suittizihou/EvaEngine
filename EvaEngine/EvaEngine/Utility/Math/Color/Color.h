@@ -17,253 +17,74 @@ namespace EvaEngine {
         float a{};
 
 
-        // Constructs a new Color with given r,g,b,a components.
+        // 指定されたr、g、b、aコンポーネントを使用して新しい色を作成します。
         Color(const float r, const float g, const float b, const float a);
-
-        // Constructs a new Color with given r,g,b components and sets /a/ to 1.
+        // 指定されたr、g、bコンポーネントを使用して新しい色を作成し、/ a /を1に設定します。
         Color(const float r, const float g, const float b);
 
-        /// *listonly*
+        // 文字列に変換します。
         std::string ToString();
 
+        // 等しいか比較します。
         bool Equals(const Color& other);
 
-        // Interpolates between colors /a/ and /b/ by /t/.
+        // 色/ a /と/ b /の間を/ t /で補間します。
         static Color Lerp(Color a, Color b, float t);
-
-        // Interpolates between colors /a/ and /b/ by /t/ without clamping the interpolant
+        // 補間関数をクランプせずに、色 / a / と / b / の間を / t / で補間します。
         static Color LerpUnclamped(Color a, Color b, float t);
 
-        // Returns new color that has RGB components multiplied, but leaving alpha untouched.
+        // RGBコンポーネントが乗算されているが、アルファは変更されていない新しい色を返します。
         Color RGBMultiplied(float multiplier);
-        // Returns new color that has RGB components multiplied, but leaving alpha untouched.
+        // RGBコンポーネントが乗算されているが、アルファは変更されていない新しい色を返します。
         Color AlphaMultiplied(float multiplier);
-        // Returns new color that has RGB components multiplied, but leaving alpha untouched.
+        //  RGBコンポーネントが乗算されているが、アルファは変更されていない新しい色を返します。
         Color RGBMultiplied(Color multiplier);
 
-        // Solid red. RGBA is (1, 0, 0, 1).
+        // RGBA(1, 0, 0, 1)と同じ意味
         static Color Red();
-        // Solid green. RGBA is (0, 1, 0, 1).
+        // RGBA(0, 1, 0, 1)と同じ意味
         static Color Green();
-        // Solid blue. RGBA is (0, 0, 1, 1).
+        // RGBA(0, 0, 1, 1)と同じ意味
         static Color Blue();
-        // Solid white. RGBA is (1, 1, 1, 1).
+        // RGBA(1, 1, 1, 1)と同じ意味
         static Color White();
-        // Solid black. RGBA is (0, 0, 0, 1).
+        // RGBA(0, 0, 0, 1)と同じ意味
         static Color Black();
-        // Yellow. RGBA is (1, 0.92, 0.016, 1), but the color is nice to look at!
+        // RGBA(1, 0.92, 0.016, 1)と同じ意味
         static Color Yellow();
-        // Cyan. RGBA is (0, 1, 1, 1).
+        // RGBA(0, 1, 1, 1)と同じ意味
         static Color Cyan();
-        // Magenta. RGBA is (1, 0, 1, 1).
+        // RGBA(1, 0, 1, 1)と同じ意味
         static Color Magenta();
-        // Gray. RGBA is (0.5, 0.5, 0.5, 1).
+        // RGBA(0.5, 0.5, 0.5, 1)と同じ意味
         static Color Gray();
-        // English spelling for ::ref::gray. RGBA is the same (0.5, 0.5, 0.5, 1).
+        // RGBA(0.5, 0.5, 0.5, 1)と同じ意味
         static Color Grey();
-        // Completely transparent. RGBA is (0, 0, 0, 0).
+        // RGBA(0, 0, 0, 0)と同じ意味
         static Color Clear();
 
-        // The grayscale value of the color (RO)
+        // グレースケールを返します。
         float GrayScale();
-
-        // A version of the color that has had the inverse gamma curve applied
+        // sRGBカラーの線形値を返します。
         Color Linear() const;
-
-            // A version of the color that has had the gamma curve applied
+        // ガンマカーブが適用された色のバージョンを返します。
         Color Gamma() const;
-
+        // 色成分値の最大値を返します
         float MaxColorComponent() const;
-
         // Vector4への暗黙キャスト
         operator Vector4() const;
+        float operator[](int index) const;
+        float& operator[](int index);
 
-                   // // Access the r, g, b,a components using [0], [1], [2], [3] respectively.
-                   //float this[int index]
-                   // {
-                   //     get
-                   //     {
-                   //         switch (index)
-                   //         {
-                   //             case 0: return r;
-                   //             case 1: return g;
-                   //             case 2: return b;
-                   //             case 3: return a;
-                   //             default:
-                   //                 throw new IndexOutOfRangeException("Invalid Color index(" + index + ")!");
-                   //         }
-                   //     }
+        // RGBをHSVに変換します
+        static void RGBToHSV(const Color& rgbColor, float* H, float* S, float* V);
 
-                   //     set
-                   //     {
-                   //         switch (index)
-                   //         {
-                   //             case 0: r = value; break;
-                   //             case 1: g = value; break;
-                   //             case 2: b = value; break;
-                   //             case 3: a = value; break;
-                   //             default:
-                   //                 throw new IndexOutOfRangeException("Invalid Color index(" + index + ")!");
-                   //         }
-                   //     }
-                   // }
+        static void RGBToHSVHelper(float offset, float dominantcolor, float colorone, float colortwo, float* H, float* S, float* V);
 
-                   //     // Convert a color from RGB to HSV color space.
-                   //        static void RGBToHSV(Color rgbColor, out float H, out float S, out float V)
-                   //     {
-                   //         // when blue is highest valued
-                   //         if ((rgbColor.b > rgbColor.g) && (rgbColor.b > rgbColor.r))
-                   //             RGBToHSVHelper((float)4, rgbColor.b, rgbColor.r, rgbColor.g, out H, out S, out V);
-                   //         //when green is highest valued
-                   //         else if (rgbColor.g > rgbColor.r)
-                   //             RGBToHSVHelper((float)2, rgbColor.g, rgbColor.b, rgbColor.r, out H, out S, out V);
-                   //         //when red is highest valued
-                   //         else
-                   //             RGBToHSVHelper((float)0, rgbColor.r, rgbColor.g, rgbColor.b, out H, out S, out V);
-                   //     }
+        static Color HSVToRGB(float H, float S, float V);
 
-                   //     static void RGBToHSVHelper(float offset, float dominantcolor, float colorone, float colortwo, out float H, out float S, out float V)
-                   //     {
-                   //         V = dominantcolor;
-                   //         //we need to find out which is the minimum color
-                   //         if (V != 0)
-                   //         {
-                   //             //we check which color is smallest
-                   //             float small = 0;
-                   //             if (colorone > colortwo) small = colortwo;
-                   //             else small = colorone;
-
-                   //             float diff = V - small;
-
-                   //             //if the two values are not the same, we compute the like this
-                   //             if (diff != 0)
-                   //             {
-                   //                 //S = max-min/max
-                   //                 S = diff / V;
-                   //                 //H = hue is offset by X, and is the difference between the two smallest colors
-                   //                 H = offset + ((colorone - colortwo) / diff);
-                   //             }
-                   //             else
-                   //             {
-                   //                 //S = 0 when the difference is zero
-                   //                 S = 0;
-                   //                 //H = 4 + (R-G) hue is offset by 4 when blue, and is the difference between the two smallest colors
-                   //                 H = offset + (colorone - colortwo);
-                   //             }
-
-                   //             H /= 6;
-
-                   //             //conversion values
-                   //             if (H < 0)
-                   //                 H += 1.0f;
-                   //         }
-                   //         else
-                   //         {
-                   //             S = 0;
-                   //             H = 0;
-                   //         }
-                   //     }
-
-                   //    static Color HSVToRGB(float H, float S, float V)
-                   //     {
-                   //         return HSVToRGB(H, S, V, true);
-                   //     }
-
-                   //     // Convert a set of HSV values to an RGB Color.
-                   //    static Color HSVToRGB(float H, float S, float V, bool hdr)
-                   //     {
-                   //         Color retval = Color.white;
-                   //         if (S == 0)
-                   //         {
-                   //             retval.r = V;
-                   //             retval.g = V;
-                   //             retval.b = V;
-                   //         }
-                   //         else if (V == 0)
-                   //         {
-                   //             retval.r = 0;
-                   //             retval.g = 0;
-                   //             retval.b = 0;
-                   //         }
-                   //         else
-                   //         {
-                   //             retval.r = 0;
-                   //             retval.g = 0;
-                   //             retval.b = 0;
-
-                   //             //crazy hsv conversion
-                   //             float t_S, t_V, h_to_floor;
-
-                   //             t_S = S;
-                   //             t_V = V;
-                   //             h_to_floor = H * 6.0f;
-
-                   //             int temp = (int)Mathf.Floor(h_to_floor);
-                   //             float t = h_to_floor - ((float)temp);
-                   //             float var_1 = (t_V) * (1 - t_S);
-                   //             float var_2 = t_V * (1 - t_S * t);
-                   //             float var_3 = t_V * (1 - t_S * (1 - t));
-
-                   //             switch (temp)
-                   //             {
-                   //             case 0:
-                   //                 retval.r = t_V;
-                   //                 retval.g = var_3;
-                   //                 retval.b = var_1;
-                   //                 break;
-
-                   //             case 1:
-                   //                 retval.r = var_2;
-                   //                 retval.g = t_V;
-                   //                 retval.b = var_1;
-                   //                 break;
-
-                   //             case 2:
-                   //                 retval.r = var_1;
-                   //                 retval.g = t_V;
-                   //                 retval.b = var_3;
-                   //                 break;
-
-                   //             case 3:
-                   //                 retval.r = var_1;
-                   //                 retval.g = var_2;
-                   //                 retval.b = t_V;
-                   //                 break;
-
-                   //             case 4:
-                   //                 retval.r = var_3;
-                   //                 retval.g = var_1;
-                   //                 retval.b = t_V;
-                   //                 break;
-
-                   //             case 5:
-                   //                 retval.r = t_V;
-                   //                 retval.g = var_1;
-                   //                 retval.b = var_2;
-                   //                 break;
-
-                   //             case 6:
-                   //                 retval.r = t_V;
-                   //                 retval.g = var_3;
-                   //                 retval.b = var_1;
-                   //                 break;
-
-                   //             case -1:
-                   //                 retval.r = t_V;
-                   //                 retval.g = var_1;
-                   //                 retval.b = var_2;
-                   //                 break;
-                   //             }
-
-                   //             if (!hdr)
-                   //             {
-                   //                 retval.r = Mathf.Clamp(retval.r, 0.0f, 1.0f);
-                   //                 retval.g = Mathf.Clamp(retval.g, 0.0f, 1.0f);
-                   //                 retval.b = Mathf.Clamp(retval.b, 0.0f, 1.0f);
-                   //             }
-                   //         }
-                   //         return retval;
-                   //     }
+            // Convert a set of HSV values to an RGB Color.
+        static Color HSVToRGB(float H, float S, float V, bool hdr);
     };
 
     // 代入演算子のオーバーロード

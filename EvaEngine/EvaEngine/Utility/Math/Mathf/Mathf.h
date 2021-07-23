@@ -47,6 +47,10 @@ namespace EvaEngine {
 				return target;
 			return current + sign(target - current) * max_delta;
 		}
+		// 引数 x 以下で最大の整数値を得ます。（床関数）
+		static float floor(const float value) {
+			return std::floor(value);
+		}
 		// 最大値を返す
 		static float max(float a, float b) { return a > b ? a : b; }
 		// 最小値を返す
