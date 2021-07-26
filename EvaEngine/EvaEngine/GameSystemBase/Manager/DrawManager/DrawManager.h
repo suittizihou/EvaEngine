@@ -15,7 +15,7 @@ namespace EvaEngine {
 			static HRESULT Init();
 
 			// •`‰æŠJŽn
-			static void DrawBegin();
+			static void DrawBegin(const std::weak_ptr<Camera>& camera);
 			// •`‰æ
 			static void Draw(
 				const std::weak_ptr<Camera>& camera,

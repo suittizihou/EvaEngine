@@ -7,6 +7,14 @@ EditorBaseWindow::EditorBaseWindow(const std::string& windowPath, EditorWindowDa
 	EditorWindow(windowPath, ImGuiWindowFlags_MenuBar),
 	p_EditorWindowDataBase{ editorWindowDataBase }
 {
+	//windowFlags |= 
+	//	ImGuiWindowFlags_NoTitleBar |
+	//	ImGuiWindowFlags_NoCollapse |
+	//	ImGuiWindowFlags_NoResize |
+	//	ImGuiWindowFlags_NoMove |
+	//	ImGuiWindowFlags_NoBringToFrontOnFocus |
+	//	ImGuiWindowFlags_NoNavFocus;
+
 	isOpen = true;
 }
 

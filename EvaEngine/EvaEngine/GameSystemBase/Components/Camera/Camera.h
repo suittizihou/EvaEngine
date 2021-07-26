@@ -5,7 +5,6 @@
 #include <vector>
 #include "../../../App/DirectX11App/DirectX11App.h"
 #include "../../Base/Component/Component.h"
-#include "../../../Utility/Texture/Texture2D/Texture2D.h"
 
 #undef near
 #undef far
@@ -13,6 +12,7 @@
 namespace EvaEngine {
 
 	struct Matrix4x4;
+	class RenderTexture;
 
 	class Camera : public Component, public std::enable_shared_from_this<Camera>
 	{
@@ -58,7 +58,7 @@ namespace EvaEngine {
 			const float& fovDegree);
 
 	public:
-		Texture2D targetTexture{ 500, 500 };
+		std::shared_ptr<RenderTexture> targetTexture{ nullptr };
 
 	private:
 		DirectX::XMMATRIX m_ViewMatrix{};

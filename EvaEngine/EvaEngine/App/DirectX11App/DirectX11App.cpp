@@ -219,7 +219,7 @@ HRESULT DirectX11App::CreateRenderTargetView()
 {
 	HRESULT hr{};
 	ID3D11Texture2D* backBuffer{ nullptr };
-
+	
 	// スワップチェインに用意されたバッファ(2Dテクスチャ)を取得
 	hr = g_SwapChain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
 	if (FAILED(hr)) {

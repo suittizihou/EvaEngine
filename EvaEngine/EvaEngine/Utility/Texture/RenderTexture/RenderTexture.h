@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "../Texture/Texture.h"
 
 namespace EvaEngine {
@@ -7,10 +8,10 @@ namespace EvaEngine {
 
 	class RenderTexture : public Texture {
 	public:
-		RenderTexture();
+		RenderTexture(const UINT width, const UINT height);
 	private:
 		void Create();
 	private:
-		Texture2D* m_Texture2D{ nullptr };
+		std::unique_ptr<Texture2D> m_pTexture2D{ nullptr };
 	};
 }

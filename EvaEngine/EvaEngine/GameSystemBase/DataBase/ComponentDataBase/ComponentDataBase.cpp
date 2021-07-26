@@ -1,6 +1,7 @@
 #include "ComponentDataBase.h"
 #include "../../Base/GameObject/GameObject.h"
 #include "../../Components/Camera/Camera.h"
+#include "../../Manager/DrawManager/DrawManager.h"
 #include <iterator>
 
 using namespace EvaEngine::Internal;
@@ -29,17 +30,23 @@ void ComponentDataBase::LateUpdate()
 void ComponentDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) const
 {
 	// カメラの数だけ描画する
-	//std::vector<std::weak_ptr<Camera>> cameras = Camera::GetAllCamera();
-	//for (int cameraNum = 0; cameraNum < cameras.size(); ++cameraNum) {
+	std::vector<std::weak_ptr<Camera>> cameras = Camera::GetAllCamera();
+	for (int cameraNum = 0; cameraNum < cameras.size(); ++cameraNum) {
 		for (int i = 0; i < m_DrawFuncNumber.size(); ++i) {
+			// 描画開始処理
+			DrawManager::DrawBegin(cameras[cameraNum]);
+
 			// 自前のレンダーターゲットビューに切り替え
 			//command->OMSetRenderTargets(1, &mpRTV, pDSV);
 			//command->ClearRenderTargetView(mpRTV, clearColor);
 			//command->ClearDepthStencilView(pDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
-			m_Components[m_DrawFuncNumber[i]]->Draw(Camera::GetMainCamera(), command);
+			m_Components[m_DrawFuncNumber[i]]->Draw(cameras[cameraNum], command);
+
+			// 描画終了処理
+			DrawManager::DrawEnd();
 		}
-	//}
+	}
 }
 
 #if _DEBUG

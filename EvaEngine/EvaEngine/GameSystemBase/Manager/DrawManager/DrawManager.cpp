@@ -34,7 +34,7 @@ HRESULT DrawManager::Init()
 	}
 }
 
-void DrawManager::DrawBegin()
+void DrawManager::DrawBegin(const std::weak_ptr<Camera>& camera)
 {
 	// ƒ|ƒŠƒSƒ“‚Ì¶¬•û–@‚ÌŽw’è
 	DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);

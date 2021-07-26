@@ -54,14 +54,8 @@ void EvaEngineApp::Update()
 
 void EvaEngineApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
 {
-	// •`‰æŠJnˆ—
-	DrawManager::DrawBegin();
-
 	// •`‰æ
 	SceneDataBase::Instance().Draw(command);
-
-	// •`‰æI—¹ˆ—
-	DrawManager::DrawEnd();
 }
 
 #if _DEBUG

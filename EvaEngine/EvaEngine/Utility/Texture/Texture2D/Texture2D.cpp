@@ -46,8 +46,6 @@ EvaEngine::Texture2D::Texture2D(const UINT width, const UINT height, const D3D11
 
 EvaEngine::Texture2D::~Texture2D()
 {
-	if(m_Texture2D != nullptr)
-		m_Texture2D->Release();
 }
 
 void STDMETHODCALLTYPE Texture2D::GetD3DTexture2D(_Out_ D3D11_TEXTURE2D_DESC* pDesc)
