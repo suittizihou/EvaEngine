@@ -4,27 +4,31 @@
 using namespace EvaEngine::Editor::Internal;
 
 EditorBaseWindow::EditorBaseWindow(const std::string& windowPath, EditorWindowDataBase* editorWindowDataBase) :
-	EditorWindow(windowPath, ImGuiWindowFlags_MenuBar),
+	EditorWindow(windowPath, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking),
 	p_EditorWindowDataBase{ editorWindowDataBase }
 {
-	//windowFlags |= 
-	//	ImGuiWindowFlags_NoTitleBar |
-	//	ImGuiWindowFlags_NoCollapse |
-	//	ImGuiWindowFlags_NoResize |
-	//	ImGuiWindowFlags_NoMove |
-	//	ImGuiWindowFlags_NoBringToFrontOnFocus |
-	//	ImGuiWindowFlags_NoNavFocus;
-
 	isOpen = true;
 }
 
 void EditorBaseWindow::Begin() {
-	Vector2 size = GetWindowSize();
-	ImGui::SetNextWindowSize(ImVec2(size.x, size.y), ImGuiCond_FirstUseEver);
+	const ImGuiViewport* viewport = ImGui::GetMainViewport();
+	ImGui::SetNextWindowPos(viewport->WorkPos);
+	ImGui::SetNextWindowSize(viewport->WorkSize);
+	ImGui::SetNextWindowViewport(viewport->ID);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+	windowFlags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+	windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 	ImGui::Begin(GetWindowName().c_str(), nullptr, windowFlags);
+	ImGui::PopStyleVar();
+	ImGui::PopStyleVar(2);
 }
 
 void EditorBaseWindow::OnGUI() {
+
+	ImGuiID dockspaceID = ImGui::GetID("EditorDockSpace");
+	ImGui::DockSpace(dockspaceID, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_None);
 
 	if (ImGui::BeginMenuBar()) {
 		for (auto windowData : p_EditorWindowDataBase->GetEditorWindows()) {

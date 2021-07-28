@@ -13,8 +13,8 @@ using namespace EvaEngine::Internal;
 D3DDevice DirectX11App::g_Device{ nullptr };
 D3DContext DirectX11App::g_Context{ nullptr };
 D3DSwapChain DirectX11App::g_SwapChain{ nullptr };
-D3DRenderTargetView DirectX11App::g_RenderTargetView{ nullptr };
-D3DDepthStencilView DirectX11App::g_DepthStencilView{ nullptr };
+D3DRenderTargetView DirectX11App::g_EditorRenderTargetView{ nullptr };
+D3DDepthStencilView DirectX11App::g_EditorDepthStencilView{ nullptr };
 ConstantBuffer DirectX11App::g_ConstantBuffer{ nullptr };
 ConstantBufferData DirectX11App::g_ConstantBufferData{};
 
@@ -228,7 +228,7 @@ HRESULT DirectX11App::CreateRenderTargetView()
 	}
 
 	// レンダーターゲットView作成
-	hr = g_Device->CreateRenderTargetView(backBuffer, NULL, g_RenderTargetView.GetAddressOf());
+	hr = g_Device->CreateRenderTargetView(backBuffer, NULL, g_EditorRenderTargetView.GetAddressOf());
 	if (FAILED(hr)) {
 		DebugLog::LogError(u8"Render Target View Create Failed.");
 		return hr;
@@ -274,7 +274,7 @@ HRESULT DirectX11App::CreateDepthAndStencilView()
 	dsvDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	dsvDesc.Texture2D.MipSlice = 0;
 
-	hr = g_Device->CreateDepthStencilView(depthStencil, &dsvDesc, &g_DepthStencilView);
+	hr = g_Device->CreateDepthStencilView(depthStencil, &dsvDesc, &g_EditorDepthStencilView);
 	if(FAILED(hr)){
 		DebugLog::LogError(u8"Depth Stencill View Create Failed");
 		return hr;

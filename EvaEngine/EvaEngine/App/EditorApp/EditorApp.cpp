@@ -8,6 +8,7 @@
 #include "../../Utility/Math/Matrix4x4/Matrix4x4.h"
 #include "../../Editor/SceneView/SceneView.h"
 #include "../../GameSystemBase/DataBase/SceneDataBase/SceneDataBase.h"
+#include "../../GameSystemBase/Manager/DrawManager/DrawManager.h"
 
 #include "../../Editor/EditorBaseWindow/EditorBaseWindow.h"
 #include "../../Editor/EditorWindows/ConsoleWindow/ConsoleWindow.h"
@@ -34,6 +35,8 @@ EditorWindowDataBase EditorApp::m_EditorWindows{};
 HRESULT EditorApp::ImGuiSetting()
 {
 	try {
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		// iniを生成しない
 		//io.IniFilename = NULL;
@@ -42,6 +45,7 @@ HRESULT EditorApp::ImGuiSetting()
 		//fontConfig.MergeMode = true;
 		io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\meiryo.ttc", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
 		// ドッキング機能を有効化
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 		// ダークテーマに設定
@@ -64,9 +68,6 @@ HRESULT EditorApp::ImGuiSetting()
 HRESULT EditorApp::Init()
 {
 	// ImGuiの初期化
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-
 	if (FAILED(ImGuiSetting())) {
 		DebugLog::LogError("ImGuiの設定に失敗しました。");
 		return E_ABORT;
@@ -103,6 +104,17 @@ HRESULT EditorApp::Init()
 
 void EditorApp::DrawBegin()
 {
+	// DepthViewとStencilViewのクリア
+	DirectX11App::g_Context->ClearDepthStencilView(
+		DirectX11App::g_EditorDepthStencilView.Get(),			// クリア対象のView
+		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// クリアフラグ
+		1.0f,											// 深度クリア値
+		0);												// ステンシルクリア値
+
+	// シェーダーのセット
+	Shader shader{ DrawManager::GetDefaultShader() };
+	DrawManager::SetShader(&shader);
+
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
@@ -117,6 +129,13 @@ void EditorApp::Draw()
 void EditorApp::DrawEnd()
 {
 	ImGui::Render();
+	// レンダーターゲットの設定
+	DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_EditorRenderTargetView.GetAddressOf(), DirectX11App::g_EditorDepthStencilView.Get());
+
+	// 指定色で画面クリア
+	float clearColor[4] = { 1.0f, 1.0f, 0.8f, 1.0f };
+	// RenderTargetViewのクリア
+	DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_EditorRenderTargetView.Get(), clearColor);
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
 	if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {

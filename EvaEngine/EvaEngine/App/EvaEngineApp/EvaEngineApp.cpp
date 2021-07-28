@@ -74,6 +74,7 @@ void EvaEngineApp::DrawEditor()
 
 void EvaEngineApp::FrameEnd()
 {
+	DrawManager::DrawEnd();	// SwapChain->Present
 	SceneDataBase::Instance().SceneChange();
 }
 

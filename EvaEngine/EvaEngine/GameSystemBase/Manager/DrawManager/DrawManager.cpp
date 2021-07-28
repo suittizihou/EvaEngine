@@ -39,24 +39,24 @@ void DrawManager::DrawBegin(const std::weak_ptr<Camera>& camera)
 	// ポリゴンの生成方法の指定
 	DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	// DepthViewとStencilViewのクリア
-	DirectX11App::g_Context->ClearDepthStencilView(
-		DirectX11App::g_DepthStencilView.Get(),			// クリア対象のView
-		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// クリアフラグ
-		1.0f,											// 深度クリア値
-		0);												// ステンシルクリア値
+	//// DepthViewとStencilViewのクリア
+	//DirectX11App::g_Context->ClearDepthStencilView(
+	//	DirectX11App::g_EditorDepthStencilView.Get(),			// クリア対象のView
+	//	D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// クリアフラグ
+	//	1.0f,											// 深度クリア値
+	//	0);												// ステンシルクリア値
 
-		// シェーダーのセット
-	Shader shader{ DrawManager::GetDefaultShader() };
-	SetShader(&shader);
+	//	// シェーダーのセット
+	//Shader shader{ DrawManager::GetDefaultShader() };
+	//SetShader(&shader);
 
-	// レンダーターゲットの設定
-	DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_RenderTargetView.GetAddressOf(), DirectX11App::g_DepthStencilView.Get());
+	//// レンダーターゲットの設定
+	//DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_EditorRenderTargetView.GetAddressOf(), DirectX11App::g_EditorDepthStencilView.Get());
 
-	// 指定色で画面クリア
-	float clearColor[4] = { 1.0f, 1.0f, 0.8f, 1.0f };
-	// RenderTargetViewのクリア
-	DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_RenderTargetView.Get(), clearColor);
+	//// 指定色で画面クリア
+	//float clearColor[4] = { 1.0f, 1.0f, 0.8f, 1.0f };
+	//// RenderTargetViewのクリア
+	//DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_EditorRenderTargetView.Get(), clearColor);
 }
 
 void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<Transform>& transform, ModelData* model)
@@ -110,7 +110,7 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 }
 
 void DrawManager::DrawEnd()
-{
+{	
 	DirectX11App::g_SwapChain->Present(1, 0);
 }
 

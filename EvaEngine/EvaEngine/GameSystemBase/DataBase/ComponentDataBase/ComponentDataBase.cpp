@@ -32,9 +32,9 @@ void ComponentDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& 
 	// カメラの数だけ描画する
 	std::vector<std::weak_ptr<Camera>> cameras = Camera::GetAllCamera();
 	for (int cameraNum = 0; cameraNum < cameras.size(); ++cameraNum) {
+		// 描画開始処理
+		DrawManager::DrawBegin(cameras[cameraNum]);
 		for (int i = 0; i < m_DrawFuncNumber.size(); ++i) {
-			// 描画開始処理
-			DrawManager::DrawBegin(cameras[cameraNum]);
 
 			// 自前のレンダーターゲットビューに切り替え
 			//command->OMSetRenderTargets(1, &mpRTV, pDSV);
@@ -42,9 +42,6 @@ void ComponentDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& 
 			//command->ClearDepthStencilView(pDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
 			m_Components[m_DrawFuncNumber[i]]->Draw(cameras[cameraNum], command);
-
-			// 描画終了処理
-			DrawManager::DrawEnd();
 		}
 	}
 }

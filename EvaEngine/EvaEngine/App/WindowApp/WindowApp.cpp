@@ -144,7 +144,7 @@ int WindowApp::Update()
             EvaEngineApp::Update();
 
             // ƒGƒ“ƒWƒ“‚Ì•`‰æˆ—
-            EvaEngineApp::Draw(DirectX11App::g_Context);
+            //EvaEngineApp::Draw(DirectX11App::g_Context);
 
 #if _DEBUG
             // EditorŠÖ˜A‚Ì•`‰æ
