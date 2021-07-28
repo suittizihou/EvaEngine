@@ -26,9 +26,8 @@ void EditorBaseWindow::Begin() {
 }
 
 void EditorBaseWindow::OnGUI() {
-
-	ImGuiID dockspaceID = ImGui::GetID("EditorDockSpace");
-	ImGui::DockSpace(dockspaceID, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_None);
+	ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+	ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_None);
 
 	if (ImGui::BeginMenuBar()) {
 		for (auto windowData : p_EditorWindowDataBase->GetEditorWindows()) {
