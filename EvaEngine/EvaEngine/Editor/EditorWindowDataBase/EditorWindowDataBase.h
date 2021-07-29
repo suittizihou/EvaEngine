@@ -92,11 +92,17 @@ namespace EvaEngine {
 					std::shared_ptr<Editor::EditorWindow<EditorBaseWindow>> window = std::make_shared<EditorBaseWindow>(windowPath, this);
 					std::vector<std::string> paths = StringAssist::Split(window->GetWindowPath(), "/");
 
+					// 既に登録済みであれば返す
+					if (m_EditorWindows[0]->windowPath == "") return;
+
 					// EditorBaseWindowは必ず新規追加
 					std::shared_ptr<EditorWindowData> windowData = std::make_shared<EditorWindowData>();
 					windowData->windowPath = paths[0];
 					windowData->editorWindows.push_back(window);
 					m_EditorWindows.push_back(windowData);
+
+					// 先頭と末尾をクルっと入れ替え(DockSpaceを正しく機能させる必要があるため、EditorBaseWindowは必ず最初に実行されるようにする)
+					std::iter_swap(m_EditorWindows.begin(), m_EditorWindows.end() - 1);
 				}
 
 				void Draw();

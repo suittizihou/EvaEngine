@@ -129,6 +129,7 @@ void EditorApp::Draw()
 void EditorApp::DrawEnd()
 {
 	ImGui::Render();
+
 	// レンダーターゲットの設定
 	DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_EditorRenderTargetView.GetAddressOf(), DirectX11App::g_EditorDepthStencilView.Get());
 
