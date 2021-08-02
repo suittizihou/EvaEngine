@@ -55,6 +55,15 @@ namespace EvaEngine {
 		static float max(float a, float b) { return a > b ? a : b; }
 		// 最小値を返す
 		static float min(float a, float b) { return (a >= b) ? b : a; }
+		// 最大公約数を返す
+		static int gcd(int a, int b) {
+			if (b == 0) return a;
+			else return gcd(b, a % b);
+		}
+		// 最小公約数を返す
+		static int lcm(int a, int b) {
+			return a * b / gcd(a, b);
+		}
 		// ガンマ (sRGB) からリニアの色空間へ値を変換します。
 		static float gamma_to_linear_space(const float value) {
 			if (value <= 0.04045f)

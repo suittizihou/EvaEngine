@@ -40,7 +40,7 @@ namespace EvaEngine {
 
 		private:
 			UINT m_ObjectID{};
-			std::map <std::string,	// Tag 
+			std::map <std::string,	// SceneName
 				std::shared_ptr<GameObjectDataBase>> m_GameObjectList;
 		};
 	}

@@ -2,6 +2,8 @@
 #include "../../Base/GameObject/GameObject.h"
 #include "../../Components/Camera/Camera.h"
 #include "../../Manager/DrawManager/DrawManager.h"
+#include "../../../App/EditorApp/EditorApp.h"
+#include "../../../Editor/SceneView/SceneView.h"
 #include <iterator>
 
 using namespace EvaEngine::Internal;
@@ -29,18 +31,23 @@ void ComponentDataBase::LateUpdate()
 
 void ComponentDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) const
 {
+#if _DEBUG
+	// シーンビューの描画
+	auto sceneViewCamera = EvaEngine::Editor::Internal::EditorApp::GetSceneView().lock()->GetSceneCamera();
+	for (int i = 0; i < m_DrawFuncNumber.size(); ++i) {
+		sceneViewCamera.lock()->SetRenderTarget();
+		m_Components[m_DrawFuncNumber[i]]->Draw(sceneViewCamera, command);
+	}
+#endif
+
 	// カメラの数だけ描画する
-	std::vector<std::weak_ptr<Camera>> cameras = Camera::GetAllCamera();
-	for (int cameraNum = 0; cameraNum < cameras.size(); ++cameraNum) {
+	auto cameras = Camera::GetAllCamera();
+	// １から始まっているのは、0番目の要素は必ずSceneViewのため
+	for (int cameraNum = 1; cameraNum < cameras.size(); ++cameraNum) {
 		// 描画開始処理
-		DrawManager::DrawBegin(cameras[cameraNum]);
+		cameras[cameraNum].lock()->SetRenderTarget();
+		// 描画開始
 		for (int i = 0; i < m_DrawFuncNumber.size(); ++i) {
-
-			// 自前のレンダーターゲットビューに切り替え
-			//command->OMSetRenderTargets(1, &mpRTV, pDSV);
-			//command->ClearRenderTargetView(mpRTV, clearColor);
-			//command->ClearDepthStencilView(pDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
-
 			m_Components[m_DrawFuncNumber[i]]->Draw(cameras[cameraNum], command);
 		}
 	}

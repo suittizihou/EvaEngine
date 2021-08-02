@@ -5,6 +5,7 @@
 #include <vector>
 #include "../../../App/DirectX11App/DirectX11App.h"
 #include "../../Base/Component/Component.h"
+#include "../../../Utility/Math/Color/Color.h"
 
 #undef near
 #undef far
@@ -29,6 +30,9 @@ namespace EvaEngine {
 
 		~Camera();
 
+	protected:
+		void Init() override;
+
 	public:
 		void Awake() override;
 		void Update() override;
@@ -38,6 +42,11 @@ namespace EvaEngine {
 #endif
 
 	public:
+		// ビューポートの設定
+		void SetViewport(const UINT width, const UINT height);
+		// レンダーターゲットを設定
+		void SetRenderTarget() const;
+
 		// ビューポートを取得
 		D3D11_VIEWPORT  GetViewport() const;
 		// ビュー行列を取得
@@ -46,6 +55,7 @@ namespace EvaEngine {
 		// プロジェクション行列を取得
 		DirectX::XMMATRIX GetProjectionMatrixDxMath() const;
 		EvaEngine::Matrix4x4 GetProjectionMatrix() const;
+
 
 		// ビュー行列を作成
 		DirectX::XMMATRIX CreateViewMatrix(const std::weak_ptr<Transform>& transform);
@@ -59,6 +69,12 @@ namespace EvaEngine {
 
 	public:
 		std::shared_ptr<RenderTexture> targetTexture{ nullptr };
+		Color clearColor{ 1.0f, 1.0f, 1.0f, 1.0f };
+
+	private:
+		Internal::D3DRenderTargetView m_RenderTarget{ nullptr };
+		Internal::D3DDepthStencilView m_DepthStencil{ nullptr };
+		D3D11_VIEWPORT m_Viewport{};
 
 	private:
 		DirectX::XMMATRIX m_ViewMatrix{};

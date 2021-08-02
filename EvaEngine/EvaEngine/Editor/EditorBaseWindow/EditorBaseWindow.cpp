@@ -8,6 +8,8 @@ EditorBaseWindow::EditorBaseWindow(const std::string& windowPath, EditorWindowDa
 	p_EditorWindowDataBase{ editorWindowDataBase }
 {
 	isOpen = true;
+	windowFlags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+	windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 }
 
 void EditorBaseWindow::Begin() {
@@ -18,15 +20,13 @@ void EditorBaseWindow::Begin() {
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-	windowFlags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-	windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 	ImGui::Begin(GetWindowName().c_str(), nullptr, windowFlags);
 	ImGui::PopStyleVar();
 	ImGui::PopStyleVar(2);
 }
 
 void EditorBaseWindow::OnGUI() {
-	ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+	ImGuiID dockspace_id = ImGui::GetID("EditorDockSpace");
 	ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), ImGuiDockNodeFlags_None);
 
 	if (ImGui::BeginMenuBar()) {
@@ -42,6 +42,7 @@ void EditorBaseWindow::OnGUI() {
 	}
 }
 
+// 登録されたEditorWindowのパスをメニューに表示するため、再帰的に呼び出し
 void EditorBaseWindow::Scanning(std::weak_ptr<EditorWindowData> editorWindows) {
 	
 	for (auto editorWindow : editorWindows.lock()->childDatas) {

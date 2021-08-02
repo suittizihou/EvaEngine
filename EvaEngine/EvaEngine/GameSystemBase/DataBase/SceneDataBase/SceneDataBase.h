@@ -26,6 +26,18 @@ namespace EvaEngine {
 			void AddScene(const std::string& sceneName) {
 				static_assert(std::is_base_of<Scene, T>::value == true, "The argument does not inherit from Scene.");
 
+				// Editor‚Æ‚¢‚¤–¼‘O‚ÌƒV[ƒ“–¼‚Í“o˜^‚Å‚«‚È‚¢
+				if (sceneName == "Editor") {
+					DebugLog::LogError(u8"You cannot use the name ""Editor"" in the scene name.");
+					return;
+				}
+
+				// “¯‚¶ƒV[ƒ“–¼‚ªŠù‚É“o˜^‚³‚ê‚Ä‚¢‚ê‚Î•Ô‚·
+				if (m_Scenes.count(sceneName) >= 1) {
+					DebugLog::LogError(u8"A scene with the same name has already been registered.");
+					return;
+				}
+
 				std::shared_ptr<T> scene = std::make_shared<T>(sceneName, m_Scenes.size());
 				m_Scenes[sceneName] = scene;
 				ComponentManager::Instance().AddComponentDataBase(sceneName);

@@ -25,13 +25,6 @@ HRESULT EvaEngineApp::Init()
 		return hr;
 	}
 
-	// シーンの初期化
-	hr = SceneDataBase::Instance().InitializeScene();
-	if (FAILED(hr)) {
-		DebugLog::LogError("シーンの初期化に失敗しました。");
-		return hr;
-	}
-
 #if _DEBUG
 	// Editorの初期化
 	hr = EditorApp::Init();
@@ -40,6 +33,13 @@ HRESULT EvaEngineApp::Init()
 		return hr;
 	}
 #endif
+
+	// シーンの初期化
+	hr = SceneDataBase::Instance().InitializeScene();
+	if (FAILED(hr)) {
+		DebugLog::LogError("シーンの初期化に失敗しました。");
+		return hr;
+	}
 
 	return S_OK;
 }
@@ -59,6 +59,11 @@ void EvaEngineApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& comma
 }
 
 #if _DEBUG
+void EvaEngine::Internal::EvaEngineApp::UpdateEditor()
+{
+	EditorApp::Update();
+}
+
 void EvaEngineApp::DrawEditor()
 {
 	// Editorの描画開始処理

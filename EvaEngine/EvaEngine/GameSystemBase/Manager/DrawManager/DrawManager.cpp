@@ -4,6 +4,7 @@
 #include "../../../Utility/Mesh/Mesh.h"
 #include "../../../Utility/Material/Material.h"
 #include "../../../Utility/Math/Vector3/Vector3.h"
+#include "../../../Utility/Texture/RenderTexture/RenderTexture.h"
 #include "../../Components/Camera/Camera.h"
 #include "../../Components/Transform/Transform.h"
 #include "../../DataBase/ShaderDataBase/ShaderDataBase.h"
@@ -36,8 +37,6 @@ HRESULT DrawManager::Init()
 
 void DrawManager::DrawBegin(const std::weak_ptr<Camera>& camera)
 {
-	// ポリゴンの生成方法の指定
-	DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	//// DepthViewとStencilViewのクリア
 	//DirectX11App::g_Context->ClearDepthStencilView(
@@ -57,6 +56,8 @@ void DrawManager::DrawBegin(const std::weak_ptr<Camera>& camera)
 	//float clearColor[4] = { 1.0f, 1.0f, 0.8f, 1.0f };
 	//// RenderTargetViewのクリア
 	//DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_EditorRenderTargetView.Get(), clearColor);
+
+	camera.lock()->SetRenderTarget();
 }
 
 void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<Transform>& transform, ModelData* model)

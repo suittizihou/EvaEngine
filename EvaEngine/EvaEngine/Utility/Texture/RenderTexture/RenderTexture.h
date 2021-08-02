@@ -9,9 +9,19 @@ namespace EvaEngine {
 	class RenderTexture : public Texture {
 	public:
 		RenderTexture(const UINT width, const UINT height);
-	private:
+	public:
 		void Create();
+		
+	public:
+		void SetRenderTarget(const Color& clearColor) const;
+
+		ID3D11ShaderResourceView* GetShaderResourceView() const;
+
 	private:
-		std::unique_ptr<Texture2D> m_pTexture2D{ nullptr };
+		std::shared_ptr<Texture2D> m_pTexture2D{ nullptr };
+		Internal::D3DRenderTargetView m_RenderTargetView{ nullptr };
+		Internal::D3DDepthStencilView m_DepthStencilView{ nullptr };
+		Internal::D3DShaderResourceView m_ShaderResourceView{ nullptr };
+		Internal::D3DSamplerState m_SamplerState{ nullptr };
 	};
 }

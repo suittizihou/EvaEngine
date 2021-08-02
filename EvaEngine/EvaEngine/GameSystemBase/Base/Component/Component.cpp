@@ -12,7 +12,7 @@ Component::Component(
 	m_CanMultiAttach(canMultiAttach),
 	m_CanRemove(canRemove)
 {
-
+	Init();
 }
 
 void Component::SetComponentDesc(const ComponentDesc& componentDesc)

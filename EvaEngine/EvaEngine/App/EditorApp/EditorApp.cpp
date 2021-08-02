@@ -8,6 +8,9 @@
 #include "../../Utility/Math/Matrix4x4/Matrix4x4.h"
 #include "../../Editor/SceneView/SceneView.h"
 #include "../../GameSystemBase/DataBase/SceneDataBase/SceneDataBase.h"
+#include "../../GameSystemBase/DataBase/GameObjectDataBase/GameObjectDataBase.h"
+#include "../../GameSystemBase/Manager/GameObjectManager/GameObjectManager.h"
+#include "../../GameSystemBase/Manager/ComponentManager/ComponentManager.h"
 #include "../../GameSystemBase/Manager/DrawManager/DrawManager.h"
 
 #include "../../Editor/EditorBaseWindow/EditorBaseWindow.h"
@@ -29,7 +32,7 @@
 using namespace EvaEngine::Internal;
 using namespace EvaEngine::Editor::Internal;
 
-std::shared_ptr<SceneView> EditorApp::m_SceneView{ nullptr };
+std::weak_ptr<EvaEngine::Editor::Internal::SceneView> EditorApp::m_SceneView;
 EditorWindowDataBase EditorApp::m_EditorWindows{};
 
 HRESULT EditorApp::ImGuiSetting()
@@ -96,10 +99,19 @@ HRESULT EditorApp::Init()
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::ProjectWindow>("Window/General/Project");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::DemoWindow>("Help/DemoWindow");
 
+	// Editor専用のManagerを作成
+	GameObjectManager::Instance().AddGameObjectDataBase("Editor");
+	ComponentManager::Instance().AddComponentDataBase("Editor");
+
 	// シーンビューの作成
-	m_SceneView = std::make_unique<SceneView>();
+	m_SceneView = GameObjectManager::Instance().Instantiate("Editor", "SceneView", "SceneView").lock()->AddComponent<SceneView>();
 
 	return S_OK;
+}
+
+void EvaEngine::Editor::Internal::EditorApp::Update()
+{
+	m_SceneView.lock()->Update();
 }
 
 void EditorApp::DrawBegin()
@@ -153,7 +165,7 @@ void EditorApp::End()
 	ImGui::DestroyContext();
 }
 
-std::shared_ptr<SceneView> EditorApp::GetSceneView() {
+std::weak_ptr<EvaEngine::Editor::Internal::SceneView> EditorApp::GetSceneView() {
 	return m_SceneView;
 }
 

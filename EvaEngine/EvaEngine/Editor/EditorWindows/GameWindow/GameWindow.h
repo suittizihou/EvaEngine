@@ -14,6 +14,7 @@ namespace EvaEngine
 					EditorWindow<GameWindow>(windowPath) {};
 				~GameWindow() = default;
 
+				void Init() override;
 				void OnGUI() override;
 			};
 		}

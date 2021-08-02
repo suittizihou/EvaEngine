@@ -23,7 +23,8 @@ namespace EvaEngine {
 		typedef Microsoft::WRL::ComPtr<ID3DBlob> D3DBlob;
 		typedef Microsoft::WRL::ComPtr<ID3D11Texture2D> D3DTexture2D;
 		typedef Microsoft::WRL::ComPtr<ID3D11DepthStencilView> D3DDepthStencilView;
-		typedef Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> D3DShaderTexture;
+		typedef Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> D3DShaderResourceView;
 		typedef Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView> D3DComputeOutputView;
+		typedef Microsoft::WRL::ComPtr<ID3D11SamplerState> D3DSamplerState;
 	}
 }

@@ -1,11 +1,113 @@
 #include "RenderTexture.h"
+
+#include "../../../App/DirectX11App/DirectX11App.h"
 #include "../Texture2D/Texture2D.h"
 
-EvaEngine::RenderTexture::RenderTexture(const UINT width, const UINT height)
+using namespace EvaEngine::Internal;
+
+EvaEngine::RenderTexture::RenderTexture(const UINT width, const UINT height) : Texture(width, height)
 {
-	m_pTexture2D = std::make_unique<Texture2D>(width, height);
 }
 
 void EvaEngine::RenderTexture::Create()
 {
+	m_pTexture2D = std::make_shared<Texture2D>(texelSize.x, texelSize.y);
+	m_pTexture2D->Create();
+
+	D3D11_RENDER_TARGET_VIEW_DESC rtvDesc;
+	memset(&rtvDesc, 0, sizeof(rtvDesc));
+	rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+
+	HRESULT hr = DirectX11App::g_Device->CreateRenderTargetView(*m_pTexture2D, &rtvDesc, &m_RenderTargetView);
+	if (FAILED(hr)) {
+		DebugLog::LogError(u8"Failed : CreateRenderTargetView in RenderTexture");
+		return;
+	}
+
+	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
+	memset(&srvDesc, 0, sizeof(srvDesc));
+	srvDesc.Format = rtvDesc.Format;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = 1;
+
+	hr = DirectX11App::g_Device->CreateShaderResourceView(*m_pTexture2D, &srvDesc, &m_ShaderResourceView);
+	if (FAILED(hr)) {
+		DebugLog::LogError(u8"Failed : CreateShaderResourceView in RenderTexture");
+		return;
+	}
+
+	// 深度ステンシルバッファの作成
+	D3D11_TEXTURE2D_DESC textureDesc{};
+	ZeroMemory(&textureDesc, sizeof(D3D11_TEXTURE2D_DESC));
+	textureDesc.Width = static_cast<UINT>(texelSize.x);
+	textureDesc.Height = static_cast<UINT>(texelSize.y);
+	textureDesc.MipLevels = 1;
+	textureDesc.ArraySize = 1;
+	textureDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	textureDesc.SampleDesc.Count = 1;
+	textureDesc.SampleDesc.Quality = 0;
+	textureDesc.Usage = D3D11_USAGE_DEFAULT;
+	textureDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	textureDesc.CPUAccessFlags = 0;
+	textureDesc.MiscFlags = 0;
+
+	ID3D11Texture2D* depthStencil{ nullptr };
+
+	hr = DirectX11App::g_Device->CreateTexture2D(&textureDesc, NULL, &depthStencil);
+	if (FAILED(hr)) {
+		DebugLog::LogError(u8"Failed : CreateTexture2D in RenderTexture");
+		return;
+	}
+
+	CD3D11_DEPTH_STENCIL_VIEW_DESC dsvDesc{};
+	ZeroMemory(&dsvDesc, sizeof(dsvDesc));
+	dsvDesc.Format = textureDesc.Format;
+	dsvDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	dsvDesc.Texture2D.MipSlice = 0;
+
+	hr = DirectX11App::g_Device->CreateDepthStencilView(depthStencil, &dsvDesc, &m_DepthStencilView);
+	if (FAILED(hr)) {
+		DebugLog::LogError(u8"Failed : CreateDepthStencilView in RenderTexture");
+		return;
+	}
+
+	depthStencil->Release();
+	depthStencil = nullptr;
+
+	D3D11_SAMPLER_DESC smpDesc;
+	memset(&smpDesc, 0, sizeof(smpDesc));
+	smpDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	smpDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	smpDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	smpDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	smpDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+	smpDesc.MinLOD = 0;
+	smpDesc.MaxLOD = D3D11_FLOAT32_MAX;
+
+	hr = DirectX11App::g_Device->CreateSamplerState(&smpDesc, &m_SamplerState);
+	if (FAILED(hr)) {
+		DebugLog::LogError(u8"Failed : CreateSamplerState in RenderTexture");
+		return;
+	}
+}
+
+void EvaEngine::RenderTexture::SetRenderTarget(const Color& clearColor) const
+{
+	// ポリゴンの生成方法の指定
+	DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	
+	// レンダーターゲットを設定
+	DirectX11App::g_Context->OMSetRenderTargets(1, m_RenderTargetView.GetAddressOf(), m_DepthStencilView.Get());
+
+	// レンダーターゲットをクリア
+	float color[4] = { clearColor.r, clearColor.g, clearColor.b, clearColor.a };
+	DirectX11App::g_Context->ClearRenderTargetView(m_RenderTargetView.Get(), color);
+	// 深度ステンシルバッファをクリア
+	DirectX11App::g_Context->ClearDepthStencilView(m_DepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
+}
+
+ID3D11ShaderResourceView* EvaEngine::RenderTexture::GetShaderResourceView() const
+{
+	return m_ShaderResourceView.Get();
 }

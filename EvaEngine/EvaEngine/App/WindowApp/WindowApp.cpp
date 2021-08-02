@@ -143,13 +143,15 @@ int WindowApp::Update()
             // エンジンの更新処理
             EvaEngineApp::Update();
 
-            // エンジンの描画処理
-            //EvaEngineApp::Draw(DirectX11App::g_Context);
-
 #if _DEBUG
+            // Editor関連の更新
+            EvaEngineApp::UpdateEditor();
             // Editor関連の描画
             EvaEngineApp::DrawEditor();
 #endif
+
+            // エンジンの描画処理
+            EvaEngineApp::Draw(DirectX11App::g_Context);
 
             // エンジンのフレーム終了時処理
             EvaEngineApp::FrameEnd();

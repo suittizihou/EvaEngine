@@ -12,6 +12,11 @@ namespace EvaEngine {
 
 		class EditorWindowBase {
 		public:
+			EditorWindowBase() = default;
+			virtual ~EditorWindowBase() = default;
+
+		public:
+			virtual void Init() = 0;
 			virtual void Begin() = 0;
 			virtual void OnGUI() = 0;
 			virtual void End() = 0;
@@ -32,7 +37,7 @@ namespace EvaEngine {
 				m_WindowName{ TypeIDAssist<T>().GetClassName() },
 				m_WindowPath{ windowPath }
 			{
-				Init();
+				InternalInit();
 			}
 
 			EditorWindow(const std::string& windowPath, const Vector2& windowSize) :
@@ -40,7 +45,7 @@ namespace EvaEngine {
 				m_WindowPath{ windowPath },
 				m_WindowSize{ windowSize }
 			{
-				Init();
+				InternalInit();
 			}
 
 			EditorWindow(const std::string& windowPath, const ImGuiWindowFlags& windowFlags) :
@@ -48,7 +53,7 @@ namespace EvaEngine {
 				m_WindowPath{ windowPath },
 				windowFlags{ windowFlags }
 			{
-				Init();
+				InternalInit();
 			}
 
 			EditorWindow(const std::string& windowPath, const Vector2& windowSize, const ImGuiWindowFlags& windowFlags) :
@@ -57,15 +62,18 @@ namespace EvaEngine {
 				m_WindowSize{ windowSize },
 				windowFlags{ windowFlags }
 			{
-				Init();
+				InternalInit();
 			}
 
 			virtual ~EditorWindow() = default;
 
-		protected:
-			void Init() {
+		private:
+			void InternalInit() {
 				isOpen = true;
-			};
+			}
+
+		protected:
+			virtual void Init() override {};
 
 		public:
 			// äJénèàóù

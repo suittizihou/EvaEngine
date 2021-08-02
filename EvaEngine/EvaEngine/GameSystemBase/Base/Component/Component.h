@@ -7,7 +7,6 @@
 
 #if _DEBUG
 #include "../../../Editor/EditorCommand/EditorCommand.h"
-#include "../../../Editor/SceneView/SceneView.h"
 #endif
 
 namespace EvaEngine {
@@ -34,6 +33,9 @@ namespace EvaEngine {
 			const bool canRemove = true);
 		virtual ~Component() = default;
 
+	protected:
+		virtual void Init() {}
+
 	public:
 		// Active状態じゃなくても呼ばれる
 		virtual void Awake() {}
@@ -50,7 +52,7 @@ namespace EvaEngine {
 
 #if _DEBUG
 		// Editor用の描画
-		virtual void OnGUI() = 0;
+		virtual void OnGUI() {};
 #endif
 
 		// コンポーネントに必要なデータを設定

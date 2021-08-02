@@ -70,6 +70,8 @@ namespace EvaEngine {
 						return;
 					}
 
+					window->Init();
+
 					// 同じパスなら同じ階層に追加
 					for (int i = 0; i < m_EditorWindows.size(); ++i) 
 					{
@@ -93,16 +95,10 @@ namespace EvaEngine {
 					std::vector<std::string> paths = StringAssist::Split(window->GetWindowPath(), "/");
 
 					// 既に登録済みであれば返す
-					if (m_EditorWindows[0]->windowPath == "") return;
+					if (m_EditorWindows[0]->editorWindows.size() == 1) return;
 
-					// EditorBaseWindowは必ず新規追加
-					std::shared_ptr<EditorWindowData> windowData = std::make_shared<EditorWindowData>();
-					windowData->windowPath = paths[0];
-					windowData->editorWindows.push_back(window);
-					m_EditorWindows.push_back(windowData);
-
-					// 先頭と末尾をクルっと入れ替え(DockSpaceを正しく機能させる必要があるため、EditorBaseWindowは必ず最初に実行されるようにする)
-					std::iter_swap(m_EditorWindows.begin(), m_EditorWindows.end() - 1);
+					// 必ず最初に追加
+					m_EditorWindows[0]->AddChildWindow(paths, 0, window);
 				}
 
 				void Draw();
@@ -113,7 +109,7 @@ namespace EvaEngine {
 				void DrawWindow(const std::shared_ptr<EditorWindowData> editorWindowData) const;
 
 			private:
-				std::vector<std::string> m_ParentPaths{ "File", "Window", "Help" };
+				std::vector<std::string> m_ParentPaths{ "", "File", "Window", "Help" };
 				std::vector<std::shared_ptr<EditorWindowData>> m_EditorWindows{};
 			};
 		}

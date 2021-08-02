@@ -2,6 +2,7 @@
 #include "../../../Setting/Window/Window.h"
 #include "../../Base/GameObject/GameObject.h"
 #include "../Transform/Transform.h"
+#include "../../../Utility/Texture/RenderTexture/RenderTexture.h"
 
 using namespace DirectX;
 using namespace EvaEngine;
@@ -18,8 +19,10 @@ EvaEngine::Camera::Camera(
 	m_Near(near),
 	m_Far(far),
 	m_Fov(fov),
+	m_Viewport(viewPort),
 	m_ProjectionMatrix(CreateProjectionMatrix(viewPort, near, far, fov))
 {
+	Init();
 }
 
 EvaEngine::Camera::Camera(
@@ -27,9 +30,11 @@ EvaEngine::Camera::Camera(
 	Component(UPDATE, false),
 	m_Near(near),
 	m_Far(far),
-	m_Fov(fov)
+	m_Fov(fov),
+	m_Viewport(EvaEngine::Internal::Window::GetViewport())
 {
-	m_ProjectionMatrix = CreateProjectionMatrix(EvaEngine::Internal::Window::GetViewport(), near, far, fov);
+	m_ProjectionMatrix = CreateProjectionMatrix(m_Viewport, near, far, fov);
+	Init();
 }
 
 EvaEngine::Camera::~Camera()
@@ -45,6 +50,12 @@ EvaEngine::Camera::~Camera()
 	}
 }
 
+void EvaEngine::Camera::Init()
+{
+	targetTexture = std::make_shared<RenderTexture>(m_Viewport.Width, m_Viewport.Height);
+	targetTexture->Create();
+}
+
 void EvaEngine::Camera::Awake()
 {
 	m_Cameras.push_back(weak_from_this());
@@ -57,12 +68,30 @@ void EvaEngine::Camera::Update()
 	m_ViewMatrix = CreateViewMatrix(GetTransform());
 
 	// 視錐台の作成
-	m_ProjectionMatrix = CreateProjectionMatrix(EvaEngine::Internal::Window::GetViewport(), m_Near, m_Far, m_Fov);
+	m_ProjectionMatrix = CreateProjectionMatrix(m_Viewport, m_Near, m_Far, m_Fov);
+}
+
+void EvaEngine::Camera::SetViewport(const UINT width, const UINT height)
+{
+	m_Viewport = D3D11_VIEWPORT
+	{
+		static_cast<FLOAT>(0),			// ウィンドウの左端の座標
+		static_cast<FLOAT>(0),			// ウィンドウの上端の座標
+		static_cast<FLOAT>(width - 0),	// ウィンドウの横幅
+		static_cast<FLOAT>(height - 0),	// ウィンドウの縦幅
+		0.0f,							// 最小深度
+		1.0f							// 最大深度
+	};
+}
+
+void EvaEngine::Camera::SetRenderTarget() const
+{
+	targetTexture->SetRenderTarget(clearColor);
 }
 
 D3D11_VIEWPORT EvaEngine::Camera::GetViewport() const
 {
-	return EvaEngine::Internal::Window::GetViewport();
+	return m_Viewport;
 }
 
 XMMATRIX EvaEngine::Camera::GetViewMatrixDxMath() const

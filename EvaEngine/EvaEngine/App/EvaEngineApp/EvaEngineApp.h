@@ -16,6 +16,8 @@ namespace EvaEngine {
 			static void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
 
 #if _DEBUG
+			// Editor関連の更新
+			static void UpdateEditor();
 			// Editor関連の描画
 			static void DrawEditor();
 #endif

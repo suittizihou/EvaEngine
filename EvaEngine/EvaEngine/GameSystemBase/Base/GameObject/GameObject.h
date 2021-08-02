@@ -37,6 +37,7 @@ namespace EvaEngine {
 		// コンポーネントの登録
 		template<class T, class... Args>
 		std::weak_ptr<T> AddComponent(Args&& ... args) {
+			static_assert(std::is_base_of<Component, T>::value == true, "The argument does not inherit from Component.");
 			return EvaEngine::Internal::ComponentManager::Instance().AddComponent<T>(GetSceneType(), GetGameObject(), args...);
 		}
 

@@ -3,6 +3,7 @@
 #include "../Texture/Texture.h"
 
 namespace EvaEngine {
+
 	class Texture2D : public Texture {
 	public:
 		Texture2D(const UINT width, const UINT height);
@@ -14,7 +15,13 @@ namespace EvaEngine {
 
 	private:
 		void Init();
+
+	public:
 		void Create();
+		
+	public:
+		operator ID3D11Texture2D*() const;
+
 	private:
 		// 2次元テクスチャの設定
 		D3D11_TEXTURE2D_DESC m_TextureDesc{};
