@@ -2,8 +2,9 @@
 #pragma once
 
 #include <d3d11.h>
-#include <wrl.h>
 #include <memory>
+#pragma comment(lib,"d3d11.lib")
+#pragma comment(lib, "dxgi.lib")
 
 #include "../../Editor/EditorWindowDataBase/EditorWindowDataBase.h"
 
@@ -16,9 +17,9 @@ namespace EvaEngine {
 			class EditorCommand;
 
 			class EditorApp {
-			public:
 				EditorApp() = default;
 				~EditorApp() = default;
+			public:
 
 				// èâä˙âª
 				static HRESULT Init();

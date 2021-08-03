@@ -4,6 +4,10 @@
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
+EvaEngine::Internal::ModelDataBase::~ModelDataBase()
+{
+}
+
 int ModelDataBase::AddModelData(const ModelData& model)
 {
     m_Models[modelCount] = model;
@@ -19,7 +23,16 @@ ModelData ModelDataBase::GetModel(const int modelHandle)
 
 void ModelDataBase::DeleteModel(const int modelHandle)
 {
+    m_Models[modelHandle].Release();
     m_Models.erase(modelHandle);
+}
+
+void EvaEngine::Internal::ModelDataBase::AllDeleteModel()
+{
+    for (auto& model : m_Models) {
+        model.second.Release();
+    }
+    m_Models.clear();
 }
 
 ModelData ModelDataBase::LoadModelDataMemory(const ModelData& model)

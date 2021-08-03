@@ -25,7 +25,7 @@ namespace EvaEngine {
 		private:
 			UINT m_ObjectID{};
 			std::map <std::string,	// Tag 
-				std::list<std::shared_ptr<GameObject>>> m_GameObjectList;
+				std::vector<std::shared_ptr<GameObject>>> m_GameObjectList;
 
 		};
 	}

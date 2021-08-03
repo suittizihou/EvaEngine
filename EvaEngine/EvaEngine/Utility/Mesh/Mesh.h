@@ -10,6 +10,7 @@ namespace EvaEngine {
 	class Mesh {
 	public:
 		Mesh(int vertexSize = 0);
+		~Mesh();
 
 	public:
 		// 頂点の数を設定
@@ -47,6 +48,8 @@ namespace EvaEngine {
 		// マテリアルの取得
 		std::string GetMaterialName() const;
 
+		void Release();
+
 	public:
 		// メッシュ名
 		std::string name{};
@@ -60,8 +63,8 @@ namespace EvaEngine {
 		std::string m_MaterialName{};
 
 		// GPU用頂点バッファー
-		Internal::D3DVertexBuffer m_VertexBuffer{ nullptr };
+		ID3D11Buffer* m_VertexBuffer{ nullptr };
 		// GPU用インデックスバッファ
-		Internal::D3DIndexBuffer m_IndexBuffer{ nullptr };
+		ID3D11Buffer* m_IndexBuffer{ nullptr };
 	};
 }

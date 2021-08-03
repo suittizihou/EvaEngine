@@ -1,50 +1,54 @@
 #pragma once
 #include "../ShaderCompiler/ShaderCompiler.h"
+#include "../ShaderBase/ShaderBase.h"
 
 namespace EvaEngine {
 	class Shader {
 	public:
 		Shader() = default;
-		~Shader() = default;
+		~Shader();
 
 		// 頂点シェーダーをセット
 		void SetVertexShader(const int shaderHandle);
-		void SetVertexShader(ID3D11VertexShader* shader);
+		void SetVertexShader(const Internal::VertexShader& shader);
 		// ピクセルシェーダーをセット
 		void SetPixelShader(const int shaderHandle);
-		void SetPixelShader(ID3D11PixelShader* shader);
+		void SetPixelShader(const Internal::PixelShader& shader);
 		// ジオメトリシェーダーをセット
 		void SetGeometryShader(const int shaderHandle);
-		void SetGeometryShader(ID3D11GeometryShader* shader);
+		void SetGeometryShader(const Internal::GeometryShader& shader);
 		// コンピュートシェーダーをセット
 		void SetComputeShader(const int shaderHandle);
-		void SetComputeShader(ID3D11ComputeShader* shader);
+		void SetComputeShader(const Internal::ComputeShader& shader);
 		// ハルシェーダーをセット
 		void SetHullShader(const int shaderHandle);
-		void SetHullShader(ID3D11HullShader* shader);
+		void SetHullShader(const Internal::HullShader& shader);
 		// ドメインシェーダーをセット
 		void SetDomainShader(const int shaderHandle);
-		void SetDomainShader(ID3D11DomainShader* shader);
+		void SetDomainShader(const Internal::DomainShader& shader);
 
 		// 頂点シェーダーの取得
-		ID3D11VertexShader* GetVertexShader();
+		Internal::VertexShader GetVertexShader();
 		// ピクセルシェーダーの取得
-		ID3D11PixelShader* GetPixelShader();
+		Internal::PixelShader GetPixelShader();
 		// ジオメトリシェーダーの取得
-		ID3D11GeometryShader* GetGeometryShader();
+		Internal::GeometryShader GetGeometryShader();
 		// コンピュートシェーダーの取得
-		ID3D11ComputeShader* GetComputeShader();
+		Internal::ComputeShader GetComputeShader();
 		// ハルシェーダーの取得
-		ID3D11HullShader* GetHullShader();
+		Internal::HullShader GetHullShader();
 		// ドメインシェーダーの取得
-		ID3D11DomainShader* GetDomainShader();
+		Internal::DomainShader GetDomainShader();
 
 	private:
-		ID3D11VertexShader* m_VertexShader{ nullptr };
-		ID3D11PixelShader* m_PixelShader{ nullptr };
-		ID3D11GeometryShader* m_GeometryShader{ nullptr };
-		ID3D11ComputeShader* m_ComputeShader{ nullptr };
-		ID3D11HullShader* m_HullShader{ nullptr };
-		ID3D11DomainShader* m_DomainShader{ nullptr };
+		//void AllRelease();
+
+	private:
+		Internal::VertexShader m_VertexShader{};
+		Internal::PixelShader m_PixelShader{};
+		Internal::GeometryShader m_GeometryShader{};
+		Internal::ComputeShader m_ComputeShader{};
+		Internal::HullShader m_HullShader{};
+		Internal::DomainShader m_DomainShader{};
 	};
 }

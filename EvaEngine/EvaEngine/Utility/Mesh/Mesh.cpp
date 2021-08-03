@@ -9,6 +9,10 @@ Mesh::Mesh(int vertexSize)
 	m_Vertexs.resize(vertexSize);
 }
 
+EvaEngine::Mesh::~Mesh()
+{
+}
+
 void Mesh::SetVertexNum(int vertexSize)
 {
 	m_Vertexs.resize(vertexSize);
@@ -19,12 +23,12 @@ void Mesh::SetVertexData(std::vector<VertexData> vertexDatas, bool isCreateIndic
 	m_Vertexs = vertexDatas;
 
 	// 頂点バッファを作成してセット
-	m_VertexBuffer.Attach(EvaEngine::Internal::BufferCreate::CreateVertexBuffer(m_Vertexs, sizeof(VertexData)));
+	m_VertexBuffer = EvaEngine::Internal::BufferCreate::CreateVertexBuffer(m_Vertexs, sizeof(VertexData));
 	
 	// インデックスバッファの作成をするならする
 	if (isCreateIndices) {
 		m_Indices = CreateIndices(m_Vertexs);
-		m_IndexBuffer.Attach(EvaEngine::Internal::BufferCreate::CreateIndexBuffer(m_Indices, sizeof(UINT)));
+		m_IndexBuffer = EvaEngine::Internal::BufferCreate::CreateIndexBuffer(m_Indices, sizeof(UINT));
 	}
 }
 
@@ -50,7 +54,7 @@ void Mesh::SetVertexUV(int vertexNum, float u, float v)
 
 void Mesh::SetVertexBuffer(ID3D11Buffer* vertexBuffer)
 {
-	m_VertexBuffer.Attach(vertexBuffer);
+	m_VertexBuffer = vertexBuffer;
 }
 
 std::vector<UINT> Mesh::CreateIndices(const std::vector<VertexData>& vertexDatas)
@@ -70,12 +74,12 @@ std::vector<UINT> Mesh::CreateIndices(const std::vector<VertexData>& vertexDatas
 void Mesh::SetIndices(std::vector<unsigned int> indices)
 {
 	m_Indices = indices;
-	m_IndexBuffer.Attach(EvaEngine::Internal::BufferCreate::CreateIndexBuffer(m_Indices, sizeof(UINT)));
+	m_IndexBuffer = EvaEngine::Internal::BufferCreate::CreateIndexBuffer(m_Indices, sizeof(UINT));
 }
 
 void Mesh::SetIndexBuffer(ID3D11Buffer* indexBuffer)
 {
-	m_IndexBuffer.Attach(indexBuffer);
+	m_IndexBuffer = indexBuffer;
 }
 
 void Mesh::SetMaterialName(UINT materialID)
@@ -95,7 +99,7 @@ std::vector<VertexData> Mesh::GetVertexData()
 
 ID3D11Buffer* const* Mesh::GetVertexBuffer()
 {
-	return m_VertexBuffer.GetAddressOf();
+	return &m_VertexBuffer;
 }
 
 std::vector<unsigned int> Mesh::GetIndices()
@@ -105,10 +109,23 @@ std::vector<unsigned int> Mesh::GetIndices()
 
 ID3D11Buffer* Mesh::GetIndexBuffer()
 {
-	return m_IndexBuffer.Get();
+	return m_IndexBuffer;
 }
 
 std::string Mesh::GetMaterialName() const
 {
 	return m_MaterialName;
+}
+
+void EvaEngine::Mesh::Release()
+{
+	if (m_VertexBuffer != nullptr) {
+		m_VertexBuffer->Release();
+		m_VertexBuffer = nullptr;
+	}
+
+	if (m_IndexBuffer != nullptr) {
+		m_IndexBuffer->Release();
+		m_IndexBuffer = nullptr;
+	}
 }

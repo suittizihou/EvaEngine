@@ -7,7 +7,7 @@ UINT Window::g_WindowLeft{ 0 };
 UINT Window::g_WindowRight{ 1280 };
 UINT Window::g_WindowTop{ 0 };
 UINT Window::g_WindowBottom{ 720 };
-UINT Window::g_FPS{ 60 };
+UINT Window::g_FPS{ 144 };
 HINSTANCE Window::g_hInstance{};
 HWND Window::g_hWnd{};
 int Window::g_nCmdShow{};

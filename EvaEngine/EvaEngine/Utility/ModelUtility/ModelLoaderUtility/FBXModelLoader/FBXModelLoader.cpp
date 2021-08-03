@@ -4,6 +4,7 @@
 
 #include "FBXModelLoader.h"
 
+#include "../../../../System/DebugLog/DebugLog.h"
 #include "../../../Mesh/Mesh.h"
 #include "../../../Material/Material.h"
 
@@ -13,10 +14,10 @@ using namespace EvaEngine::Internal;
 ModelData FBXModelLoader::LoadModel(const char* fileName)
 {
     // FbxManagerì¬
-    FbxManager* fbx_manager = fbxsdk::FbxManager::Create();
+    fbxsdk::FbxManager* fbx_manager = fbxsdk::FbxManager::Create();
     if (fbx_manager == nullptr)
     {
-        std::runtime_error("FbxManager‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
+        DebugLog::LogError(u8"FbxManager‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
         return ModelData();
     }
 
@@ -24,16 +25,16 @@ ModelData FBXModelLoader::LoadModel(const char* fileName)
     FbxImporter* fbx_importer = FbxImporter::Create(fbx_manager, "");
     if (fbx_importer == nullptr) {
         fbx_manager->Destroy();
-        std::runtime_error("FbxImporter‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
+        DebugLog::LogError(u8"FbxImporter‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
         return ModelData();
     }
 
     // FbxScene‚ğ¶¬
-    FbxScene* fbx_scene = FbxScene::Create(fbx_manager, "");
+    fbxsdk::FbxScene* fbx_scene = fbxsdk::FbxScene::Create(fbx_manager, "");
     if (fbx_scene == nullptr) {
         fbx_importer->Destroy();
         fbx_manager->Destroy();
-        std::runtime_error("FbxScene‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
+        DebugLog::LogError(u8"FbxScene‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
         return ModelData();
     }
 
@@ -233,6 +234,8 @@ bool FBXModelLoader::CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh)
 
     // ’¸“_î•ñ‚ÌƒZƒbƒg
     m_Model.meshes[node_name].push_back(tempMesh);
+
+    mesh->Destroy();
 
     return true;
 }

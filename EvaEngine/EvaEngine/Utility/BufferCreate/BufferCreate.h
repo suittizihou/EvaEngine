@@ -7,6 +7,8 @@
 namespace EvaEngine {
 	namespace Internal {
 		class BufferCreate {
+			BufferCreate() = default;
+			~BufferCreate() = default;
 		public:
 			// 頂点バッファの作成
 			static ID3D11Buffer* CreateVertexBuffer(const std::vector<VertexData>& vertices, size_t strides);

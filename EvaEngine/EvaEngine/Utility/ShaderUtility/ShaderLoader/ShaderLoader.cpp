@@ -5,32 +5,44 @@
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-int ShaderLoader::VertexShaderLoad(const std::string& fileName, const std::string& entryPoint)
+int ShaderLoader::VertexShaderLoad(const std::string& fileName, const D3D11_INPUT_ELEMENT_DESC* layout, const UINT arraySize, const std::string& entryPoint)
 {
-    return ShaderDataBase::Instance().AddVertexShader(ShaderCompiler::CreateVertexShader(fileName, entryPoint));
+    VertexShader shader{};
+    ShaderCompiler::CreateVertexShader(&shader, layout, arraySize, fileName, entryPoint);
+    return ShaderDataBase::Instance().AddVertexShader(shader);
 }
 
 int ShaderLoader::PixelShaderLoad(const std::string& fileName, const std::string& entryPoint)
 {
-    return ShaderDataBase::Instance().AddPixelShader(ShaderCompiler::CreatePixelShader(fileName, entryPoint));
+    PixelShader shader{};
+    ShaderCompiler::CreatePixelShader(&shader, fileName, entryPoint);
+    return ShaderDataBase::Instance().AddPixelShader(shader);
 }
 
 int ShaderLoader::GeometryShaderLoad(const std::string& fileName, const std::string& entryPoint)
 {
-    return ShaderDataBase::Instance().AddGeometryShader(ShaderCompiler::CreateGeometryShader(fileName, entryPoint));
+    GeometryShader shader{};
+    ShaderCompiler::CreateGeometryShader(&shader, fileName, entryPoint);
+    return ShaderDataBase::Instance().AddGeometryShader(shader);
 }
 
 int ShaderLoader::ComputeShaderLoad(const std::string& fileName, const std::string& entryPoint)
 {
-    return ShaderDataBase::Instance().AddComputeShader(ShaderCompiler::CreateComputeShader(fileName, entryPoint));
+    ComputeShader shader{};
+    ShaderCompiler::CreateComputeShader(&shader, fileName, entryPoint);
+    return ShaderDataBase::Instance().AddComputeShader(shader);
 }
 
 int ShaderLoader::HullShaderLoad(const std::string& fileName, const std::string& entryPoint)
 {
-    return ShaderDataBase::Instance().AddHullShader(ShaderCompiler::CreateHullShader(fileName, entryPoint));
+    HullShader shader{};
+    ShaderCompiler::CreateHullShader(&shader, fileName, entryPoint);
+    return ShaderDataBase::Instance().AddHullShader(shader);
 }
 
 int ShaderLoader::DomainShaderLoad(const std::string& fileName, const std::string& entryPoint)
 {
-    return ShaderDataBase::Instance().AddDomainShader(ShaderCompiler::CreateDomainShader(fileName, entryPoint));
+    DomainShader shader{};
+    ShaderCompiler::CreateDomainShader(&shader, fileName, entryPoint);
+    return ShaderDataBase::Instance().AddDomainShader(shader);
 }

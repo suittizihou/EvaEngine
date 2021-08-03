@@ -24,8 +24,6 @@ namespace EvaEngine {
 			// シーンの追加
 			template<class T>
 			void AddScene(const std::string& sceneName) {
-				static_assert(std::is_base_of<Scene, T>::value == true, "The argument does not inherit from Scene.");
-
 				// Editorという名前のシーン名は登録できない
 				if (sceneName == "Editor") {
 					DebugLog::LogError(u8"You cannot use the name ""Editor"" in the scene name.");
@@ -62,11 +60,14 @@ namespace EvaEngine {
 			void FixedUpdate();
 			void Update();
 			void LateUpdate();
-			void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
+			void Draw(ID3D11DeviceContext* command);
 
 #if _DEBUG
 			void OnGUI();
 #endif
+
+		public:
+			void AllDeleteScene();
 
 		private:
 			bool m_IsChangeScene{};

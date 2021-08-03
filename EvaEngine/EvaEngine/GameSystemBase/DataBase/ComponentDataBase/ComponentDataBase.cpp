@@ -29,7 +29,7 @@ void ComponentDataBase::LateUpdate()
 	}
 }
 
-void ComponentDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) const
+void ComponentDataBase::Draw(ID3D11DeviceContext* command) const
 {
 #if _DEBUG
 	// シーンビューの描画

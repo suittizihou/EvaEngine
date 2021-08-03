@@ -9,6 +9,11 @@ EvaEngine::RenderTexture::RenderTexture(const UINT width, const UINT height) : T
 {
 }
 
+EvaEngine::RenderTexture::~RenderTexture()
+{
+	Release();
+}
+
 void EvaEngine::RenderTexture::Create()
 {
 	m_pTexture2D = std::make_shared<Texture2D>(texelSize.x, texelSize.y);
@@ -92,22 +97,47 @@ void EvaEngine::RenderTexture::Create()
 	}
 }
 
+void EvaEngine::RenderTexture::Release()
+{
+	m_pTexture2D->Release();
+
+	if (m_RenderTargetView != nullptr) {
+		m_RenderTargetView->Release();
+		m_RenderTargetView = nullptr;
+	}
+
+	if (m_DepthStencilView != nullptr) {
+		m_DepthStencilView->Release();
+		m_DepthStencilView = nullptr;
+	}
+
+	if (m_ShaderResourceView != nullptr) {
+		m_ShaderResourceView->Release();
+		m_ShaderResourceView = nullptr;
+	}
+
+	if (m_SamplerState != nullptr) {
+		m_SamplerState->Release();
+		m_SamplerState = nullptr;
+	}
+}
+
 void EvaEngine::RenderTexture::SetRenderTarget(const Color& clearColor) const
 {
 	// ポリゴンの生成方法の指定
 	DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	
 	// レンダーターゲットを設定
-	DirectX11App::g_Context->OMSetRenderTargets(1, m_RenderTargetView.GetAddressOf(), m_DepthStencilView.Get());
+	DirectX11App::g_Context->OMSetRenderTargets(1, &m_RenderTargetView, m_DepthStencilView);
 
 	// レンダーターゲットをクリア
 	float color[4] = { clearColor.r, clearColor.g, clearColor.b, clearColor.a };
-	DirectX11App::g_Context->ClearRenderTargetView(m_RenderTargetView.Get(), color);
+	DirectX11App::g_Context->ClearRenderTargetView(m_RenderTargetView, color);
 	// 深度ステンシルバッファをクリア
-	DirectX11App::g_Context->ClearDepthStencilView(m_DepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
+	DirectX11App::g_Context->ClearDepthStencilView(m_DepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
 ID3D11ShaderResourceView* EvaEngine::RenderTexture::GetShaderResourceView() const
 {
-	return m_ShaderResourceView.Get();
+	return m_ShaderResourceView;
 }

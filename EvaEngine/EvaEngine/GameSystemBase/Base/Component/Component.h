@@ -48,7 +48,7 @@ namespace EvaEngine {
 		// Updateの後に呼ばれる
 		virtual void LateUpdate() {}
 		// 上記全ての処理が終わったタイミングで呼ばれる
-		virtual void Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) {}
+		virtual void Draw(const std::weak_ptr<Camera> camera, ID3D11DeviceContext* command) {}
 
 #if _DEBUG
 		// Editor用の描画

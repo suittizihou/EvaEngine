@@ -1,11 +1,12 @@
 #pragma once
 
 #include <d3d11.h>
-#include <wrl.h>
 
 namespace EvaEngine {
 	namespace Internal {
 		class EvaEngineApp {
+			EvaEngineApp() = default;
+			~EvaEngineApp() = default;
 		public:
 			// 初期化処理
 			static HRESULT Init();
@@ -13,7 +14,7 @@ namespace EvaEngine {
 			// 更新処理
 			static void Update();
 			// 描画処理
-			static void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
+			static void Draw(ID3D11DeviceContext* command);
 
 #if _DEBUG
 			// Editor関連の更新

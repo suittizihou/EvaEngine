@@ -13,7 +13,7 @@ namespace EvaEngine {
 
 	public:
 		// 頂点シェーダーの読み込み
-		static int VertexShaderLoad(const std::string& fileName, const std::string& entryPoint = "vsMain");
+		static int VertexShaderLoad(const std::string& fileName, const D3D11_INPUT_ELEMENT_DESC* layout, const UINT arraySize, const std::string& entryPoint = "vsMain");
 		// ピクセルシェーダーの読み込み
 		static int PixelShaderLoad(const std::string& fileName, const std::string& entryPoint = "psMain");
 		// ジオメトリシェーダーの読み込み

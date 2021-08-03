@@ -25,7 +25,7 @@ void MeshRenderer::Awake() {
 	m_Transform = GetTransform();
 }
 
-void MeshRenderer::Draw(const std::weak_ptr<Camera> camera, const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
+void MeshRenderer::Draw(const std::weak_ptr<Camera> camera, ID3D11DeviceContext* command)
 {
 	EvaEngine::Internal::DrawManager::Draw(camera, m_Transform, &m_Model);
 }

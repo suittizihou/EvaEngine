@@ -56,7 +56,6 @@ namespace EvaEngine {
 		DirectX::XMMATRIX GetProjectionMatrixDxMath() const;
 		EvaEngine::Matrix4x4 GetProjectionMatrix() const;
 
-
 		// ビュー行列を作成
 		DirectX::XMMATRIX CreateViewMatrix(const std::weak_ptr<Transform>& transform);
 		DirectX::XMMATRIX CreateViewMatrix(const Matrix4x4& rotateMatrix, const Matrix4x4& positionMatrix);
@@ -72,8 +71,6 @@ namespace EvaEngine {
 		Color clearColor{ 1.0f, 1.0f, 1.0f, 1.0f };
 
 	private:
-		Internal::D3DRenderTargetView m_RenderTarget{ nullptr };
-		Internal::D3DDepthStencilView m_DepthStencil{ nullptr };
 		D3D11_VIEWPORT m_Viewport{};
 
 	private:
@@ -89,6 +86,8 @@ namespace EvaEngine {
 		static std::weak_ptr<Camera> GetMainCamera();
 		// 全カメラを返す
 		static std::vector<std::weak_ptr<Camera>> GetAllCamera();
+		// 全カメラの解放
+		static void AllDeleteCamera();
 
 	private:
 		static std::vector<std::weak_ptr<Camera>> m_Cameras;

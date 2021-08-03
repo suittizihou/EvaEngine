@@ -87,7 +87,7 @@ void SceneDataBase::LateUpdate()
     m_CurrentScene.lock()->LateUpdate();
 }
 
-void SceneDataBase::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
+void SceneDataBase::Draw(ID3D11DeviceContext* command)
 {
     m_CurrentScene.lock()->Draw(command);
 }
@@ -98,3 +98,8 @@ void SceneDataBase::OnGUI()
     m_CurrentScene.lock()->OnGUI();
 }
 #endif
+
+void EvaEngine::Internal::SceneDataBase::AllDeleteScene()
+{
+    m_Scenes.clear();
+}

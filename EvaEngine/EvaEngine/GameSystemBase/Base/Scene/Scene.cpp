@@ -16,7 +16,7 @@ void EvaEngine::Scene::LateUpdate() {
     ComponentManager::Instance().LateUpdate(m_SceneName);
 }
 
-void EvaEngine::Scene::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
+void EvaEngine::Scene::Draw(ID3D11DeviceContext* command)
 {
     ComponentManager::Instance().Draw(m_SceneName, command);
 }

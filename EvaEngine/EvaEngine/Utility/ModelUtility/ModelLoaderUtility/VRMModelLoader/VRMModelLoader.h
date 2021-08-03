@@ -16,13 +16,13 @@ namespace EvaEngine {
 	namespace Internal {
 		class VRMModelLoader : public ModelLoadBase {
 		public:
-			template<class T>
-			using ComPtr = Microsoft::WRL::ComPtr<T>;
+			//template<class T>
+			//using ComPtr = Microsoft::WRL::ComPtr<T>;
 
 			VRMModelLoader() = default;
 			~VRMModelLoader() = default;
-			ModelData LoadModel(const char* fileName) override;
-			ModelData MakeModelDataMemory(const ModelData& model);
+			EvaEngine::ModelData LoadModel(const char* fileName) override;
+			EvaEngine::ModelData MakeModelDataMemory(const EvaEngine::ModelData& model);
 
 		private:
 			void LoadModelGeometry(const Microsoft::glTF::Document& doc, std::shared_ptr<Microsoft::glTF::GLTFResourceReader> reader);
@@ -31,7 +31,7 @@ namespace EvaEngine {
 			void MakeModelMaterial(ModelData& model);
 
 		private:
-			ModelData m_Model{};
+			EvaEngine::ModelData m_Model{};
 		};
 	}
 }

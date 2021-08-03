@@ -65,7 +65,15 @@ void EvaEngine::Texture2D::Create()
 	}
 }
 
+void EvaEngine::Texture2D::Release()
+{
+	if (m_Texture2D != nullptr) {
+		m_Texture2D->Release();
+		m_Texture2D = nullptr;
+	}
+}
+
 EvaEngine::Texture2D::operator ID3D11Texture2D*() const
 {
-	return m_Texture2D.Get();
+	return m_Texture2D;
 }

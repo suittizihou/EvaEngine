@@ -4,12 +4,17 @@
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
+EvaEngine::Shader::~Shader()
+{
+	//AllRelease();
+}
+
 void Shader::SetVertexShader(const int shaderHandle)
 {
 	m_VertexShader = ShaderDataBase::Instance().GetVertexShader(shaderHandle);
 }
 
-void EvaEngine::Shader::SetVertexShader(ID3D11VertexShader* shader)
+void EvaEngine::Shader::SetVertexShader(const VertexShader& shader)
 {
 	m_VertexShader = shader;
 }
@@ -19,7 +24,7 @@ void Shader::SetPixelShader(const int shaderHandle)
 	m_PixelShader = ShaderDataBase::Instance().GetPixelShader(shaderHandle);
 }
 
-void EvaEngine::Shader::SetPixelShader(ID3D11PixelShader* shader)
+void EvaEngine::Shader::SetPixelShader(const PixelShader& shader)
 {
 	m_PixelShader = shader;
 }
@@ -29,7 +34,7 @@ void Shader::SetGeometryShader(const int shaderHandle)
 	m_GeometryShader = ShaderDataBase::Instance().GetGeometryShader(shaderHandle);
 }
 
-void EvaEngine::Shader::SetGeometryShader(ID3D11GeometryShader* shader)
+void EvaEngine::Shader::SetGeometryShader(const GeometryShader& shader)
 {
 	m_GeometryShader = shader;
 }
@@ -39,7 +44,7 @@ void Shader::SetComputeShader(const int shaderHandle)
 	m_ComputeShader = ShaderDataBase::Instance().GetComputeShader(shaderHandle);
 }
 
-void EvaEngine::Shader::SetComputeShader(ID3D11ComputeShader* shader)
+void EvaEngine::Shader::SetComputeShader(const ComputeShader& shader)
 {
 	m_ComputeShader = shader;
 }
@@ -49,7 +54,7 @@ void Shader::SetHullShader(const int shaderHandle)
 	m_HullShader = ShaderDataBase::Instance().GetHullShader(shaderHandle);
 }
 
-void EvaEngine::Shader::SetHullShader(ID3D11HullShader* shader)
+void EvaEngine::Shader::SetHullShader(const HullShader& shader)
 {
 	m_HullShader = shader;
 }
@@ -59,37 +64,71 @@ void Shader::SetDomainShader(const int shaderHandle)
 	m_DomainShader = ShaderDataBase::Instance().GetDomainShader(shaderHandle);
 }
 
-void EvaEngine::Shader::SetDomainShader(ID3D11DomainShader* shader)
+void EvaEngine::Shader::SetDomainShader(const DomainShader& shader)
 {
 	m_DomainShader = shader;
 }
 
-ID3D11VertexShader* Shader::GetVertexShader()
+VertexShader Shader::GetVertexShader()
 {
 	return m_VertexShader;
 }
 
-ID3D11PixelShader* Shader::GetPixelShader()
+PixelShader Shader::GetPixelShader()
 {
 	return m_PixelShader;
 }
 
-ID3D11GeometryShader* Shader::GetGeometryShader()
+GeometryShader Shader::GetGeometryShader()
 {
 	return m_GeometryShader;
 }
 
-ID3D11ComputeShader* Shader::GetComputeShader()
+ComputeShader Shader::GetComputeShader()
 {
 	return m_ComputeShader;
 }
 
-ID3D11HullShader* Shader::GetHullShader()
+HullShader Shader::GetHullShader()
 {
 	return m_HullShader;
 }
 
-ID3D11DomainShader* Shader::GetDomainShader()
+DomainShader Shader::GetDomainShader()
 {
 	return m_DomainShader;
 }
+
+//void EvaEngine::Shader::AllRelease()
+//{
+//	if (m_VertexShader != nullptr) {
+//		m_VertexShader->Release();
+//		m_VertexShader = nullptr;
+//	}
+//
+//	if (m_PixelShader != nullptr) {
+//		m_PixelShader->Release();
+//		m_PixelShader = nullptr;
+//	}
+//
+//
+//	if (m_GeometryShader != nullptr) {
+//		m_GeometryShader->Release();
+//		m_GeometryShader = nullptr;
+//	}
+//
+//	if (m_ComputeShader != nullptr) {
+//		m_ComputeShader->Release();
+//		m_ComputeShader = nullptr;
+//	}
+//
+//	if (m_HullShader != nullptr) {
+//		m_HullShader->Release();
+//		m_HullShader = nullptr;
+//	}
+//
+//	if (m_DomainShader != nullptr) {
+//		m_DomainShader->Release();
+//		m_DomainShader = nullptr;
+//	}
+//}

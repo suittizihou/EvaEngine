@@ -5,9 +5,9 @@
 namespace EvaEngine {
 
 	class Input {
-	public:
 		Input() = default;
 		~Input() = default;
+	public:
 
 		// ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
 		static bool GetKey(const KeyCode& keyCode);

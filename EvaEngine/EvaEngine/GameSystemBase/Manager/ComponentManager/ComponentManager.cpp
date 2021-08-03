@@ -20,7 +20,7 @@ void ComponentManager::LateUpdate(const std::string& sceneName)
 
 void ComponentManager::Draw(
 	const std::string& sceneName, 
-	const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
+	ID3D11DeviceContext* command)
 {
 	m_ComponentList[sceneName]->Draw(command);
 }
@@ -41,4 +41,11 @@ void ComponentManager::RemoveAllComponent(const std::string& sceneName)
 {
 	if (m_ComponentList.count(sceneName) == 0) return;
 	m_ComponentList[sceneName]->RemoveAllComponent();
+}
+
+void EvaEngine::Internal::ComponentManager::RemoveAllComponent()
+{
+	for (const auto& componentList : m_ComponentList) {
+		componentList.second->RemoveAllComponent();
+	}
 }

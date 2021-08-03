@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../../Define/D3D11Defines.h"
+#include "../../../Utility/ShaderUtility/ShaderBase/ShaderBase.h"
 #include <map>
 
 namespace EvaEngine {
@@ -22,35 +23,35 @@ namespace EvaEngine {
 			void LoadDefaultShader();
 
 			// 頂点シェーダーの追加
-			int AddVertexShader(ID3D11VertexShader* vertexShader);
+			int AddVertexShader(const VertexShader& vertexShader);
 			// ピクセルシェーダーの追加
-			int AddPixelShader(ID3D11PixelShader* pixelShader);
+			int AddPixelShader(const PixelShader& pixelShader);
 			// ジオメトリシェーダーの追加
-			int AddGeometryShader(ID3D11GeometryShader* geometryShader);
+			int AddGeometryShader(const GeometryShader& geometryShader);
 			// コンピュートシェーダーの追加
-			int AddComputeShader(ID3D11ComputeShader* computeShader);
+			int AddComputeShader(const ComputeShader& computeShader);
 			// ハルシェーダーの追加
-			int AddHullShader(ID3D11HullShader* hullShader);
+			int AddHullShader(const HullShader& hullShader);
 			// ドメインシェーダーの追加
-			int AddDomainShader(ID3D11DomainShader* domainShader);
+			int AddDomainShader(const DomainShader& domainShader);
 
 			// デフォルトの頂点シェーダーを取得
-			ID3D11VertexShader* GetDefaultVertexShader();
+			VertexShader GetDefaultVertexShader();
 			// デフォルトのピクセルシェーダーを取得
-			ID3D11PixelShader* GetDefaultPixelShader();
+			PixelShader GetDefaultPixelShader();
 
 			// 頂点シェーダーの取得
-			ID3D11VertexShader* GetVertexShader(const int shaderHandle);
+			VertexShader GetVertexShader(const int shaderHandle);
 			// ピクセルシェーダーの取得
-			ID3D11PixelShader* GetPixelShader(const int shaderHandle);
+			PixelShader GetPixelShader(const int shaderHandle);
 			// ジオメトリシェーダーの取得
-			ID3D11GeometryShader* GetGeometryShader(const int shaderHandle);
+			GeometryShader GetGeometryShader(const int shaderHandle);
 			// コンピュートシェーダーの取得
-			ID3D11ComputeShader* GetComputeShader(const int shaderHandle);
+			ComputeShader GetComputeShader(const int shaderHandle);
 			// ハルシェーダーの取得
-			ID3D11HullShader* GetHullShader(const int shaderHandle);
+			HullShader GetHullShader(const int shaderHandle);
 			// ドメインシェーダーの取得
-			ID3D11DomainShader* GetDomainShader(const int shaderHandle);
+			DomainShader GetDomainShader(const int shaderHandle);
 
 			// 頂点シェーダーの削除
 			void DeleteVertexShader(const int shaderHandle);
@@ -66,7 +67,8 @@ namespace EvaEngine {
 			void DeleteDomainShader(const int shaderHandle);
 
 			// 全シェーダーリソースの解放
-			void DeleteAllShader();
+			void AllDeleteShader();
+
 
 		private:
 			// 頂点シェーダーのハンドル
@@ -83,20 +85,20 @@ namespace EvaEngine {
 			int m_DomainShaderCount{ 0 };
 
 			// コンパイル済み頂点シェーダー
-			std::map<int, ID3D11VertexShader*> m_VertexShaders{};
+			std::map<int, VertexShader> m_VertexShaders{};
 			// コンパイル済みピクセルシェーダー
-			std::map<int, ID3D11PixelShader*> m_PixelShaders{};
+			std::map<int, PixelShader> m_PixelShaders{};
 			// コンパイル済みジオメトリシェーダー
-			std::map<int, ID3D11GeometryShader*> m_GeometryShaders{};
+			std::map<int, GeometryShader> m_GeometryShaders{};
 			// コンパイル済みコンピュートシェーダー
-			std::map<int, ID3D11ComputeShader*> m_ComputeShaders{};
+			std::map<int, ComputeShader> m_ComputeShaders{};
 			// コンパイル済みハルシェーダー
-			std::map<int, ID3D11HullShader*> m_HullShaders{};
+			std::map<int, HullShader> m_HullShaders{};
 			// コンパイル済みドメインシェーダー
-			std::map<int, ID3D11DomainShader*> m_DomainShaders{};
+			std::map<int, DomainShader> m_DomainShaders{};
 
-			ID3D11VertexShader* m_DefaultVertexShader{ nullptr };
-			ID3D11PixelShader* m_DefaultPixelShader{ nullptr };
+			VertexShader m_DefaultVertexShader{};
+			PixelShader m_DefaultPixelShader{};
 		};
 	}
 }

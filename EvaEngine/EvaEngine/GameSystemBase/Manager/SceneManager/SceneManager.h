@@ -5,9 +5,9 @@
 
 namespace EvaEngine {
 	class SceneManager {
-	public:
 		SceneManager() = default;
 		~SceneManager() = default;
+	public:
 
 		typedef unsigned int UINT;
 
@@ -15,6 +15,7 @@ namespace EvaEngine {
 		// ƒV[ƒ“‚Ì’Ç‰Á
 		template<class T>
 		static void AddScene(const std::string& sceneName) {
+			static_assert(std::is_base_of<Scene, T>::value == true, "The argument does not inherit from Scene.");
 			EvaEngine::Internal::SceneDataBase::Instance().AddScene<T>(sceneName);
 		}
 

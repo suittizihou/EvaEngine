@@ -1,5 +1,4 @@
 #include "WindowApp.h"
-#include <wrl.h>
 #include "../../Setting/Window/Window.h"
 #include "../../Utility/Input/InputBufferUpdate/InputBufferUpdate.h"
 #include "../../Utility/Input/Input.h"
@@ -122,9 +121,7 @@ int WindowApp::Update()
 {
     MSG msg{};
     while (msg.message != WM_QUIT) {
-
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
-
             if (msg.message == WM_QUIT) {
                 break;
             }

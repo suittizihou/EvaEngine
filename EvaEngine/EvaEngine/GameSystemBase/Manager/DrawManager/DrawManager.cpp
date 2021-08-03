@@ -5,6 +5,7 @@
 #include "../../../Utility/Material/Material.h"
 #include "../../../Utility/Math/Vector3/Vector3.h"
 #include "../../../Utility/Texture/RenderTexture/RenderTexture.h"
+#include "../../../Utility/ShaderUtility/ShaderBase/ShaderBase.h"
 #include "../../Components/Camera/Camera.h"
 #include "../../Components/Transform/Transform.h"
 #include "../../DataBase/ShaderDataBase/ShaderDataBase.h"
@@ -12,15 +13,11 @@
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-D3DInputLayout DrawManager::m_InputLayout{ nullptr };
 Shader DrawManager::m_Shader{};
 
 HRESULT DrawManager::Init()
 {
 	try {
-		// 頂点レイアウトを設定
-		DrawManager::SetVertexLayout();
-
 		// デフォルトのシェーダーをロードする
 		ShaderDataBase::Instance().LoadDefaultShader();
 
@@ -89,7 +86,7 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 		// メッシュ情報が格納された配列から１メッシュずつ取り出す
 		for (auto mesh : meshs.second) {
 			// インプットレイアウトの設定
-			DirectX11App::g_Context->IASetInputLayout(m_InputLayout.Get());
+			DirectX11App::g_Context->IASetInputLayout(ShaderDataBase::Instance().GetDefaultVertexShader().m_pInputLayout);
 			// 頂点バッファーの設定
 			DirectX11App::g_Context->IASetVertexBuffers(0, 1, mesh.GetVertexBuffer(), &strides, &offset);
 			// インデックスバッファの設定
@@ -99,10 +96,10 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 			SetMaterial(&model->materials[mesh.GetMaterialName()]);
 
 			// 定数バッファの更新
-			DirectX11App::g_Context->UpdateSubresource(DirectX11App::g_ConstantBuffer.Get(), 0, NULL, &DirectX11App::g_ConstantBufferData, 0, 0);
+			DirectX11App::g_Context->UpdateSubresource(DirectX11App::g_ConstantBuffer, 0, NULL, &DirectX11App::g_ConstantBufferData, 0, 0);
 			// コンテキストに定数バッファを設定
-			DirectX11App::g_Context->VSSetConstantBuffers(0, 1, DirectX11App::g_ConstantBuffer.GetAddressOf());
-			DirectX11App::g_Context->PSSetConstantBuffers(0, 1, DirectX11App::g_ConstantBuffer.GetAddressOf());
+			DirectX11App::g_Context->VSSetConstantBuffers(0, 1, &DirectX11App::g_ConstantBuffer);
+			DirectX11App::g_Context->PSSetConstantBuffers(0, 1, &DirectX11App::g_ConstantBuffer);
 			
 			// ポリゴン描画
 			DirectX11App::g_Context->DrawIndexed(static_cast<UINT>(mesh.GetIndices().size()), 0, 0);
@@ -127,12 +124,12 @@ void DrawManager::SetMaterial(Material* material)
 void DrawManager::SetShader(Shader* shader) {
 
 	// nullptr でない場合シェーダーをセットする
-	if (shader->GetComputeShader() != nullptr) DirectX11App::g_Context->CSSetShader(shader->GetComputeShader(), nullptr, 0);
-	if (shader->GetVertexShader() != nullptr) DirectX11App::g_Context->VSSetShader(shader->GetVertexShader(), nullptr, 0);
-	if (shader->GetHullShader() != nullptr) DirectX11App::g_Context->HSSetShader(shader->GetHullShader(), nullptr, 0);
-	if (shader->GetDomainShader() != nullptr) DirectX11App::g_Context->DSSetShader(shader->GetDomainShader(), nullptr, 0);
-	if (shader->GetGeometryShader() != nullptr) DirectX11App::g_Context->GSSetShader(shader->GetGeometryShader(), nullptr, 0);
-	if (shader->GetPixelShader() != nullptr) DirectX11App::g_Context->PSSetShader(shader->GetPixelShader(), nullptr, 0);
+	if (shader->GetComputeShader().m_pShader != nullptr) DirectX11App::g_Context->CSSetShader(shader->GetComputeShader().m_pShader, nullptr, 0);
+	if (shader->GetVertexShader().m_pShader != nullptr) DirectX11App::g_Context->VSSetShader(shader->GetVertexShader().m_pShader, nullptr, 0);
+	if (shader->GetHullShader().m_pShader != nullptr) DirectX11App::g_Context->HSSetShader(shader->GetHullShader().m_pShader, nullptr, 0);
+	if (shader->GetDomainShader().m_pShader != nullptr) DirectX11App::g_Context->DSSetShader(shader->GetDomainShader().m_pShader, nullptr, 0);
+	if (shader->GetGeometryShader().m_pShader != nullptr) DirectX11App::g_Context->GSSetShader(shader->GetGeometryShader().m_pShader, nullptr, 0);
+	if (shader->GetPixelShader().m_pShader != nullptr) DirectX11App::g_Context->PSSetShader(shader->GetPixelShader().m_pShader, nullptr, 0);
 }
 
 void DrawManager::SetShader(Material* material)
@@ -143,17 +140,4 @@ void DrawManager::SetShader(Material* material)
 EvaEngine::Shader DrawManager::GetDefaultShader()
 {
 	return m_Shader;
-}
-
-void DrawManager::SetVertexLayout()
-{
-	D3D11_INPUT_ELEMENT_DESC elem[] = {
-	{ "POSITION",   0, DXGI_FORMAT_R32G32B32_FLOAT,     0,  0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-	{ "NORMAL",     0, DXGI_FORMAT_R32G32B32_FLOAT,     0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
-	{ "COLOR",      0, DXGI_FORMAT_R32G32B32A32_FLOAT,  0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0},
-	{ "TEXCOORD",   0, DXGI_FORMAT_R32G32_FLOAT,        0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0}
-	};
-
-	// 頂点レイアウトをセット
-	m_InputLayout.Attach(ShaderCompiler::CreateVertexLayout(elem, 4, "Shader/VertexShader.hlsl", "vsMain"));
 }

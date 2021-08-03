@@ -6,6 +6,8 @@
 
 namespace EvaEngine {
     class StringAssist {
+        StringAssist() = default;
+        ~StringAssist() = default;
     public:
 
         static std::vector<std::string> Split(std::string str, const std::string& del) {

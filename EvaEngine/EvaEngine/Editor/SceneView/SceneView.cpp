@@ -10,18 +10,22 @@
 
 EvaEngine::Editor::Internal::SceneView::SceneView() : EvaEngine::Component(EvaEngine::FunctionMask::UPDATE)
 {
-	m_SceneCameraParent = EvaEngine::Internal::GameObjectManager::Instance().
+}
+
+void EvaEngine::Editor::Internal::SceneView::Awake()
+{
+	m_SceneCameraObj = EvaEngine::Internal::GameObjectManager::Instance().
 		Instantiate("Editor", "SceneView", "SceneViewParent").lock()->GetComponent<Transform>();
 
-	m_SceneCameraParent.lock()->set_parent(GetTransform(), false);
-	m_SceneCamera = m_SceneCameraParent.lock()->GetGameObject().lock()->AddComponent<Camera>();
+	m_SceneCameraObj.lock()->set_parent(GetTransform(), false);
+	m_SceneCamera = m_SceneCameraObj.lock()->GetGameObject().lock()->AddComponent<Camera>();
 }
 
 void EvaEngine::Editor::Internal::SceneView::Update() {
-
 	// ˆÚ“®
 	Vector3 velocity{};
 	auto transform = GetTransform().lock();
+	float deltaTime = Time::GetDeltaTime();
 
 	if (Input::GetKey(KeyCode::A)) { velocity += transform->left(); }
 	if (Input::GetKey(KeyCode::D)) { velocity += transform->right(); }
@@ -30,7 +34,7 @@ void EvaEngine::Editor::Internal::SceneView::Update() {
 	if (Input::GetKey(KeyCode::E)) { velocity += Vector3::up(); }
 	if (Input::GetKey(KeyCode::Q)) { velocity += Vector3::down(); }
 
-	transform->move(velocity * m_Speed * Time::GetDeltaTime());
+	transform->move(velocity * m_MoveSpeed * deltaTime);
 
 	// ‰ñ“]
 	Vector3 xAxis{}, yAxis{};
@@ -39,9 +43,8 @@ void EvaEngine::Editor::Internal::SceneView::Update() {
 	if (Input::GetKey(KeyCode::LeftArrow)) { yAxis += Vector3::down(); }
 	if (Input::GetKey(KeyCode::RightArrow)) { yAxis += Vector3::up(); }
 
-	float deltaTime = Time::GetDeltaTime();
-	m_SceneCameraParent.lock()->rotate(xAxis * m_Speed * deltaTime);
-	transform->rotate(yAxis * m_Speed * deltaTime);
+	m_SceneCameraObj.lock()->rotate(xAxis * m_RotateSpeed * deltaTime);
+	transform->rotate(yAxis * m_RotateSpeed * deltaTime);
 }
 
 std::weak_ptr<EvaEngine::Camera> EvaEngine::Editor::Internal::SceneView::GetSceneCamera()

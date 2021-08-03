@@ -7,6 +7,8 @@
 #include <memory>
 #include <stdexcept>
 #include "../../Base/Component/Component.h"
+#pragma comment(lib,"d3d11.lib")
+#pragma comment(lib, "dxgi.lib")
 
 namespace EvaEngine {
 	namespace Internal {
@@ -122,8 +124,7 @@ namespace EvaEngine {
 			// LateUpdateŠÖ”‚ğ‰ñ‚·
 			void LateUpdate();
 			// DrawŠÖ”‚ğ‰ñ‚·
-			void Draw(
-				const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) const;
+			void Draw(ID3D11DeviceContext* command) const;
 #if _DEBUG
 			void OnGUI();
 #endif

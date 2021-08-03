@@ -12,9 +12,10 @@ SampleScene::SampleScene(const std::string& sceneName, const UINT sceneID) :
 void SampleScene::Initialize()
 {
 	auto cameraParent = Instantiate("None", "CameraParent");
+	cameraParent.lock()->AddComponent<Camera>();
 	cameraParent.lock()->GetTransform().lock()->position(Vector3(0.0f, 0.0f, -5.0f));
-	cameraParent.lock()->AddComponent<Move>(5.0f);
-	cameraParent.lock()->AddComponent<Rotate>(50.0f);
+	//cameraParent.lock()->AddComponent<Move>(5.0f);
+	//cameraParent.lock()->AddComponent<Rotate>(50.0f);
 
 	int modelHandle = ModelLoader::Load("Cylinder.fbx");
 	auto mesh = Instantiate("None", "GameObject").lock()->AddComponent<MeshFilter>(modelHandle);

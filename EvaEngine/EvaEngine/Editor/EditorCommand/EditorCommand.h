@@ -9,8 +9,9 @@ namespace EvaEngine {
 	namespace Editor {
 		namespace Internal {
 			class EditorCommand {
-			public:
 				EditorCommand() = default;
+				~EditorCommand() = default;
+			public:
 
 				// Transform‚Ì•ÒW‚ğGUI‚Ås‚¦‚é‚æ‚¤‚É‚·‚éŠÖ”
 				void EditTransform(float* cameraView, float* cameraProjection, float* matrix, bool editTransformDecomposition);

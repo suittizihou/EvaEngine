@@ -1,13 +1,12 @@
 #pragma once
 
-#include <wrl/client.h>
 #include <functional>
 #include <list>
 #include <d3d11.h>
 #include <memory>
 #include <bitset>
 
-#pragma comment(lib,"d3d12.lib")
+#pragma comment(lib,"d3d11.lib")
 
 namespace EvaEngine {
 

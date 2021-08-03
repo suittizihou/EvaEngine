@@ -214,6 +214,7 @@
     <ClInclude Include="EvaEngine\Utility\Math\Color\Color.h" />
     <ClInclude Include="EvaEngine\Utility\Math\Math.h" />
     <ClInclude Include="EvaEngine\Utility\Math\Vector4\Vector4.h" />
+    <ClInclude Include="EvaEngine\Utility\ShaderUtility\ShaderBase\ShaderBase.h" />
     <ClInclude Include="EvaEngine\Utility\Texture\RenderTexture\RenderTexture.h" />
     <ClInclude Include="EvaEngine\Utility\Texture\Texture2D\Texture2D.h" />
     <ClInclude Include="EvaEngine\Utility\Texture\Texture\Texture.h" />
@@ -599,8 +600,10 @@
     <ClCompile Include="EvaEngine\GameSystemBase\Manager\DrawManager\DrawManager.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Manager\GameObjectManager\GameObjectManager.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Manager\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Material\Material.cpp" />
     <ClCompile Include="EvaEngine\Utility\Math\Color\Color.cpp" />
     <ClCompile Include="EvaEngine\Utility\Math\Vector4\Vector4.cpp" />
+    <ClCompile Include="EvaEngine\Utility\ModelUtility\ModelData\ModelData.cpp" />
     <ClCompile Include="EvaEngine\Utility\Texture\RenderTexture\RenderTexture.cpp" />
     <ClCompile Include="EvaEngine\Utility\Texture\Texture2D\Texture2D.cpp" />
     <ClCompile Include="EvaEngine\Utility\Texture\Texture\Texture.cpp" />

@@ -10,13 +10,18 @@
 
 using namespace EvaEngine::Internal;
 
-D3DDevice DirectX11App::g_Device{ nullptr };
-D3DContext DirectX11App::g_Context{ nullptr };
-D3DSwapChain DirectX11App::g_SwapChain{ nullptr };
-D3DRenderTargetView DirectX11App::g_EditorRenderTargetView{ nullptr };
-D3DDepthStencilView DirectX11App::g_EditorDepthStencilView{ nullptr };
-ConstantBuffer DirectX11App::g_ConstantBuffer{ nullptr };
+ID3D11Device* DirectX11App::g_Device{ nullptr };
+ID3D11DeviceContext* DirectX11App::g_Context{ nullptr };
+IDXGISwapChain* DirectX11App::g_SwapChain{ nullptr };
+ID3D11RenderTargetView* DirectX11App::g_EditorRenderTargetView{ nullptr };
+ID3D11DepthStencilView* DirectX11App::g_EditorDepthStencilView{ nullptr };
+ID3D11Buffer* DirectX11App::g_ConstantBuffer{ nullptr };
 ConstantBufferData DirectX11App::g_ConstantBufferData{};
+
+#if _DEBUG
+IDXGIDebug* DirectX11App::g_pDxgiDebug{ nullptr };
+ID3D11Debug* DirectX11App::g_pD3DDebug{ nullptr };
+#endif
 
 IDXGIAdapter* DirectX11App::m_Adapter{ nullptr };
 
@@ -72,6 +77,24 @@ HRESULT DirectX11App::Init()
 	g_Context->RSSetViewports(1, &viewPort);
 
 	return hr;
+}
+
+void EvaEngine::Internal::DirectX11App::Release()
+{
+	g_Device->Release();
+	g_Device = nullptr;
+	g_Context->Release();
+	g_Context = nullptr;
+	g_SwapChain->Release();
+	g_SwapChain = nullptr;
+	g_EditorRenderTargetView->Release();
+	g_EditorRenderTargetView = nullptr;
+	g_EditorDepthStencilView->Release();
+	g_EditorDepthStencilView = nullptr;
+	g_ConstantBuffer->Release();
+	g_ConstantBuffer = nullptr;
+	m_Adapter->Release();
+	m_Adapter = nullptr;
 }
 
 HRESULT DirectX11App::HardWareCheck()
@@ -147,24 +170,24 @@ HRESULT DirectX11App::CreateDeviceAndSwapChain()
 {
 	UINT cdev_flags{};
 #ifdef _DEBUG
-	cdev_flags |= D3D11_CREATE_DEVICE_DEBUG;
+	cdev_flags |= D3D11_CREATE_DEVICE_DEBUG/* | D3D11_CREATE_DEVICE_BGRA_SUPPORT*/ | D3D11_CREATE_DEVICE_SWITCH_TO_REF;
 #endif
 
 	// スワップチェイン設定
 	DXGI_SWAP_CHAIN_DESC sd{};
 	ZeroMemory(&sd, sizeof(DXGI_SWAP_CHAIN_DESC));
-	sd.BufferCount = 1;
+	sd.BufferCount = 2;
+	sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 	sd.BufferDesc.Width = static_cast<UINT>(Window::GetViewport().Width);
 	sd.BufferDesc.Height = static_cast<UINT>(Window::GetViewport().Height);
 	sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	sd.BufferDesc.RefreshRate.Numerator = Window::g_FPS;
-	sd.BufferDesc.RefreshRate.Denominator = 1; // 1 / 60 = 60fps
+	sd.BufferDesc.RefreshRate.Numerator = Window::g_FPS; // リフレッシュレートの分母
+	sd.BufferDesc.RefreshRate.Denominator = 1; // リフレッシュレートの分子
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	sd.OutputWindow = Window::g_hWnd;
 	sd.SampleDesc.Count = 1;
 	sd.SampleDesc.Quality = 0;
 	sd.Windowed = true;
-
 
 	HRESULT hr{};
 	D3D_FEATURE_LEVEL featureLevels{};
@@ -174,7 +197,11 @@ HRESULT DirectX11App::CreateDeviceAndSwapChain()
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
 		nullptr,
+#if defined(DEBUG) || defined(_DEBUG)
 		cdev_flags, 
+#else
+		D3D11_CREATE_DEVICE_BGRA_SUPPORT,
+#endif
 		nullptr, 
 		0, 
 		D3D11_SDK_VERSION, 
@@ -183,10 +210,6 @@ HRESULT DirectX11App::CreateDeviceAndSwapChain()
 		&g_Device, 
 		&featureLevels, 
 		&g_Context);
-
-	// アダプターの解放
-	m_Adapter->Release();
-	m_Adapter = nullptr;
 
 	return hr;
 }
@@ -228,7 +251,7 @@ HRESULT DirectX11App::CreateRenderTargetView()
 	}
 
 	// レンダーターゲットView作成
-	hr = g_Device->CreateRenderTargetView(backBuffer, NULL, g_EditorRenderTargetView.GetAddressOf());
+	hr = g_Device->CreateRenderTargetView(backBuffer, NULL, &g_EditorRenderTargetView);
 	if (FAILED(hr)) {
 		DebugLog::LogError(u8"Render Target View Create Failed.");
 		return hr;
@@ -309,4 +332,52 @@ void DirectX11App::SetConstantBuffer(const std::weak_ptr<EvaEngine::Camera>& cam
 		camera.lock()->GetTransform().lock()->position().z,
 		0.0f));
 	g_ConstantBufferData.lightColor = DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+}
+
+void EvaEngine::Internal::DirectX11App::ReportLiveObjects()
+{
+	OSVERSIONINFOEX OSver;
+	ULONGLONG condition = 0;
+	OSver.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
+	OSver.dwMajorVersion = 6;
+	OSver.dwMinorVersion = 2;
+	VER_SET_CONDITION(condition, VER_MAJORVERSION, VER_GREATER_EQUAL);
+	VER_SET_CONDITION(condition, VER_MINORVERSION, VER_GREATER_EQUAL);
+
+	if (VerifyVersionInfo(&OSver, VER_MAJORVERSION | VER_MINORVERSION, condition))
+	{
+		// Widows8.0以上なら
+		if (g_pDxgiDebug == nullptr)
+		{
+			// 作成
+			typedef HRESULT(__stdcall* fPtr)(const IID&, void**);
+			HMODULE hDll = GetModuleHandleW(L"dxgidebug.dll");
+			fPtr DXGIGetDebugInterface = (fPtr)GetProcAddress(hDll, "DXGIGetDebugInterface");
+
+			DXGIGetDebugInterface(__uuidof(IDXGIDebug), (void**)&g_pDxgiDebug);
+
+			// 出力
+			g_pDxgiDebug->ReportLiveObjects(DXGI_DEBUG_D3D11, DXGI_DEBUG_RLO_DETAIL);
+		}
+		else
+			g_pDxgiDebug->ReportLiveObjects(DXGI_DEBUG_D3D11, DXGI_DEBUG_RLO_DETAIL);
+	}
+	else
+	{
+		g_Device->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&g_pD3DDebug));
+		g_pD3DDebug->ReportLiveDeviceObjects(D3D11_RLDO_DETAIL);
+	}
+}
+
+void EvaEngine::Internal::DirectX11App::DebugRelease()
+{
+	if (g_pD3DDebug != nullptr) {
+		g_pD3DDebug->Release();
+		g_pD3DDebug = nullptr;
+	}
+
+	if (g_pDxgiDebug != nullptr) {
+		g_pDxgiDebug->Release();
+		g_pDxgiDebug = nullptr;
+	}
 }

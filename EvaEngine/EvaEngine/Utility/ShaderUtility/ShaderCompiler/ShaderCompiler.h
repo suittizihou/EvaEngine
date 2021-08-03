@@ -4,29 +4,36 @@
 
 namespace EvaEngine {
 	namespace Internal {
-		class ShaderCompiler {
-		public:
-			// 頂点シェーダーのコンパイル
-			static ID3D11VertexShader* CreateVertexShader(const std::string& fileName, const std::string& entrypath = "vsMain", bool error = true);
-			// ピクセルシェーダーのコンパイル
-			static ID3D11PixelShader* CreatePixelShader(const std::string& fileName, const std::string& entrypath = "psMain", bool error = true);
-			// ジオメトリシェーダーのコンパイル
-			static ID3D11GeometryShader* CreateGeometryShader(const std::string& fileName, const std::string& entrypath = "gsMain", bool error = true);
-			// コンピュートシェーダーのコンパイル
-			static ID3D11ComputeShader* CreateComputeShader(const std::string& fileName, const std::string& entrypath = "gsMain", bool error = true);
-			// ハルシェーダーのコンパイル
-			static ID3D11HullShader* CreateHullShader(const std::string& fileName, const std::string& entrypath = "hsMain", bool error = true);
-			// ドメインシェーダーのコンパイル
-			static ID3D11DomainShader* CreateDomainShader(const std::string& fileName, const std::string& entrypath = "dsMain", bool error = true);
+		class VertexShader;
+		class PixelShader;
+		class GeometryShader;
+		class ComputeShader;
+		class HullShader;
+		class DomainShader;
 
-			// セマンティクスのセットなどをする頂点レイアウトを作成
-			static ID3D11InputLayout* CreateVertexLayout(D3D11_INPUT_ELEMENT_DESC* layout, UINT elemNum, const std::string& fileName, const std::string& entryPath);
+		class ShaderCompiler {
+			ShaderCompiler() = default;
+			~ShaderCompiler() = default;
+
+		public:
+			// 頂点シェーダーを作成
+			static HRESULT CreateVertexShader(VertexShader* shader, const D3D11_INPUT_ELEMENT_DESC* layout, const UINT arraySize, const std::string& fileName, const std::string& entrypath = "vsMain", bool error = true);
+			// ピクセルシェーダーを作成
+			static HRESULT CreatePixelShader(PixelShader* shader, const std::string& fileName, const std::string& entrypath = "psMain", bool error = true);
+			// ジオメトリシェーダーを作成
+			static HRESULT CreateGeometryShader(GeometryShader* shader, const std::string& fileName, const std::string& entrypath = "gsMain", bool error = true);
+			// コンピュートシェーダーを作成
+			static HRESULT CreateComputeShader(ComputeShader* shader, const std::string& fileName, const std::string& entrypath = "gsMain", bool error = true);
+			// ハルシェーダーを作成
+			static HRESULT CreateHullShader(HullShader* shader, const std::string& fileName, const std::string& entrypath = "hsMain", bool error = true);
+			// ドメインシェーダーを作成
+			static HRESULT CreateDomainShader(DomainShader* shader, const std::string& fileName, const std::string& entrypath = "dsMain", bool error = true);
 
 		private:
-			// シェーダーのエラーチェック
-			static HRESULT ShaderErrorCheck(const std::string& fileName, const std::string& entryPath, const LPCSTR& pTarget, ID3DBlob** blob, bool error = true);
-			// インプットレイアウトのエラーチェック
-			static HRESULT InputLayoutErrorCheck(const std::string& fileName, const std::string& entryPath, const LPCSTR& pTarget, ID3DBlob** blob);
+			// セマンティクスのセットなどをする頂点レイアウトを作成
+			static HRESULT CreateInputLayout(VertexShader* shader, const D3D11_INPUT_ELEMENT_DESC* layout, const UINT arraySize);
+			// シェーダーのコンパイル
+			static HRESULT Compile(const std::string& fileName, const std::string& entryPath, const LPCSTR& pTarget, ID3DBlob** blob, bool error = true);
 		};
 	}
 }

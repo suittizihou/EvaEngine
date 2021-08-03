@@ -6,6 +6,8 @@
 namespace EvaEngine {
 	namespace Internal {
 		class Window {
+			Window() = default;
+			~Window() = default;
 		public:
 			// DirectX11‚ÅŽg‚¤Viewport‚É‚µ‚Ä•Ô‚·
 			static D3D11_VIEWPORT GetViewport();

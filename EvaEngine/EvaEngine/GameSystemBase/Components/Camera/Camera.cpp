@@ -147,3 +147,11 @@ std::vector<std::weak_ptr<EvaEngine::Camera>> EvaEngine::Camera::GetAllCamera()
 {
 	return m_Cameras;
 }
+
+void EvaEngine::Camera::AllDeleteCamera()
+{
+	for (auto& camera : m_Cameras)
+	{
+		camera.lock()->targetTexture->Release();
+	}
+}

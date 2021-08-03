@@ -29,7 +29,7 @@ namespace EvaEngine {
 		void LateUpdate();
 
 		// •`‰æˆ—
-		void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
+		void Draw(ID3D11DeviceContext* command);
 
 #if _DEBUG
 		// Editor—p‚Ì•`‰æˆ—

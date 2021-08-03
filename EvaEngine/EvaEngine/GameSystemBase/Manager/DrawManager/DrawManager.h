@@ -10,6 +10,8 @@ namespace EvaEngine {
 
 	namespace Internal {
 		class DrawManager {
+			DrawManager() = default;
+			~DrawManager() = default;
 		public:
 			// 初期化
 			static HRESULT Init();
@@ -27,8 +29,6 @@ namespace EvaEngine {
 
 			// マテリアルの設定
 			static void SetMaterial(Material* material);
-			// 頂点レイアウトの設定
-			static void SetVertexLayout();
 
 			// シェーダーの設定
 			static void SetShader(Shader* shader);
@@ -37,7 +37,6 @@ namespace EvaEngine {
 			static Shader GetDefaultShader();
 
 		private:
-			static D3DInputLayout m_InputLayout;
 			static Shader m_Shader;
 		};
 	}

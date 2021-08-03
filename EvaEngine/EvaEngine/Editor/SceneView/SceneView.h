@@ -14,15 +14,17 @@ namespace EvaEngine {
 				SceneView();
 				~SceneView() = default;
 
+				void Awake() override;
 				void Update() override;
 
 				// シーンビューで使用してるカメラを取得
 				std::weak_ptr<Camera> GetSceneCamera();
 
 			private:
-				std::weak_ptr<Transform> m_SceneCameraParent;
+				std::weak_ptr<Transform> m_SceneCameraObj;
 				std::weak_ptr<Camera> m_SceneCamera;
-				float m_Speed{ 5.0f };
+				float m_MoveSpeed{ 5.0f };
+				float m_RotateSpeed{ 50.0f };
 			};
 		}
 	}

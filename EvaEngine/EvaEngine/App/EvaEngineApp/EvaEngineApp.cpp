@@ -6,6 +6,9 @@
 #include "../../GameSystemBase/DataBase/ShaderDataBase/ShaderDataBase.h"
 #include "../../GameSystemBase/DataBase/TextureDataBase/TextureDataBase.h"
 #include "../../GameSystemBase/DataBase/SceneDataBase/SceneDataBase.h"
+#include "../../GameSystemBase/Manager/GameObjectManager/GameObjectManager.h"
+#include "../../GameSystemBase/Manager/ComponentManager/ComponentManager.h"
+#include "../../GameSystemBase/Components/Camera/Camera.h"
 #include "../../GameSystemBase/Manager/DrawManager/DrawManager.h"
 
 #if _DEBUG
@@ -52,7 +55,7 @@ void EvaEngineApp::Update()
 	SceneDataBase::Instance().LateUpdate();
 }
 
-void EvaEngineApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
+void EvaEngineApp::Draw(ID3D11DeviceContext* command)
 {
 	// •`‰æ
 	SceneDataBase::Instance().Draw(command);
@@ -61,7 +64,7 @@ void EvaEngineApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& comma
 #if _DEBUG
 void EvaEngine::Internal::EvaEngineApp::UpdateEditor()
 {
-	EditorApp::Update();
+	ComponentManager::Instance().Update("Editor");
 }
 
 void EvaEngineApp::DrawEditor()
@@ -85,6 +88,13 @@ void EvaEngineApp::FrameEnd()
 
 void EvaEngineApp::End()
 {
+	GameObjectManager::Instance().RemoveAllGameObject();
+	ComponentManager::Instance().RemoveAllComponent();
+	ModelDataBase::Instance().AllDeleteModel();
+	ShaderDataBase::Instance().AllDeleteShader();
+	SceneDataBase::Instance().AllDeleteScene();
+	Camera::AllDeleteCamera();
+
 #if _DEBUG
 	EditorApp::End();
 #endif

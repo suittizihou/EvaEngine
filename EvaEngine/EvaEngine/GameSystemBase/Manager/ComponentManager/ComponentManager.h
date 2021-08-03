@@ -52,6 +52,7 @@ namespace EvaEngine {
 
 			// 保持しているコンポーネントを全部削除
 			void RemoveAllComponent(const std::string& sceneName);
+			void RemoveAllComponent();
 
 			// FixedUpdate関数を回す
 			void FixedUpdate(const std::string& sceneName);
@@ -62,7 +63,7 @@ namespace EvaEngine {
 			// Draw関数を回す
 			void Draw(
 				const std::string& sceneName,
-				const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
+				ID3D11DeviceContext* command);
 
 #if _DEBUG
 			// Editor用の描画
@@ -70,8 +71,8 @@ namespace EvaEngine {
 #endif
 
 		private:
-			// コンポーネントのリスト(firstはオブジェクトID)
-			std::map<std::string,		// GameObjectID
+			// コンポーネントのリスト(firstはシーン名)
+			std::map<std::string,		// シーン名
 				std::shared_ptr<ComponentDataBase>> m_ComponentList;
 
 			UINT m_ComponentID{};

@@ -9,7 +9,7 @@ namespace EvaEngine {
 			ModelDataBase() = default;
 			ModelDataBase(const ModelDataBase&);
 			ModelDataBase operator=(const ModelDataBase&);
-			~ModelDataBase() = default;
+			~ModelDataBase();
 
 		public:
 			static ModelDataBase& Instance() {
@@ -18,19 +18,21 @@ namespace EvaEngine {
 			}
 
 			// モデルデータを追加する
-			int AddModelData(const ModelData& model);
+			int AddModelData(const EvaEngine::ModelData& model);
 			// モデルデータを取得
 			ModelData GetModel(const int modelHandle);
 			// モデルデータをメモリから消す
 			void DeleteModel(const int modelHandle);
+			// 全モデルデータをメモリから消す
+			void AllDeleteModel();
 			// メモリにモデルのデータを読み込む
-			ModelData LoadModelDataMemory(const ModelData& model);
+			ModelData LoadModelDataMemory(const EvaEngine::ModelData& model);
 
 		private:
 			// モデルデータのハンドル
 			int modelCount{ 0 };
 			// モデルデータ
-			std::map<int, ModelData> m_Models{};
+			std::map<int, EvaEngine::ModelData> m_Models{};
 		};
 	}
 }

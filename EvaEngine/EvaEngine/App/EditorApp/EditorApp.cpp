@@ -83,7 +83,7 @@ HRESULT EditorApp::Init()
 		return E_ABORT;
 	}
 	
-	if (!ImGui_ImplDX11_Init(EvaEngine::Internal::DirectX11App::g_Device.Get(), EvaEngine::Internal::DirectX11App::g_Context.Get())) {
+	if (!ImGui_ImplDX11_Init(EvaEngine::Internal::DirectX11App::g_Device, EvaEngine::Internal::DirectX11App::g_Context)) {
 		DebugLog::LogError("ImGui_ImplDX11_Initに失敗しました。");
 		ImGui::DestroyContext();
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
@@ -118,7 +118,7 @@ void EditorApp::DrawBegin()
 {
 	// DepthViewとStencilViewのクリア
 	DirectX11App::g_Context->ClearDepthStencilView(
-		DirectX11App::g_EditorDepthStencilView.Get(),			// クリア対象のView
+		DirectX11App::g_EditorDepthStencilView,			// クリア対象のView
 		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// クリアフラグ
 		1.0f,											// 深度クリア値
 		0);												// ステンシルクリア値
@@ -143,12 +143,12 @@ void EditorApp::DrawEnd()
 	ImGui::Render();
 
 	// レンダーターゲットの設定
-	DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_EditorRenderTargetView.GetAddressOf(), DirectX11App::g_EditorDepthStencilView.Get());
+	DirectX11App::g_Context->OMSetRenderTargets(1, &DirectX11App::g_EditorRenderTargetView, DirectX11App::g_EditorDepthStencilView);
 
 	// 指定色で画面クリア
 	float clearColor[4] = { 1.0f, 1.0f, 0.8f, 1.0f };
 	// RenderTargetViewのクリア
-	DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_EditorRenderTargetView.Get(), clearColor);
+	DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_EditorRenderTargetView, clearColor);
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
 	if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {

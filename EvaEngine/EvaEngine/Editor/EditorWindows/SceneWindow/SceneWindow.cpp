@@ -15,7 +15,6 @@ SceneWindow::SceneWindow(const std::string& windowPath) :
 void SceneWindow::OnGUI()
 {
 	// シーンビューの描画
-
 	auto windowSize = ImGui::GetWindowSize();
 	auto camera = EditorApp::GetSceneView().lock()->GetSceneCamera();
 	auto tagetTexture = camera.lock()->targetTexture;

@@ -20,6 +20,8 @@ namespace EvaEngine {
 	};
 
 	class DebugLog {
+		DebugLog() = default;
+		~DebugLog() = default;
 	public:
 		static void Log(const std::string& logMessage);
 		static void LogWarning(const std::string& warningMessage);

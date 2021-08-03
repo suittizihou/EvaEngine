@@ -32,6 +32,12 @@ std::vector<std::weak_ptr<GameObject>> GameObjectManager::FindGameObjectsWithTag
 	return m_GameObjectList[sceneName]->FindGameObjectsWithTag(tag);
 }
 
+std::weak_ptr<GameObjectDataBase> EvaEngine::Internal::GameObjectManager::GetGameObjectDataBase(const std::string& sceneName)
+{
+	if (m_GameObjectList.count(sceneName) == 0) return std::weak_ptr<GameObjectDataBase>();
+	return m_GameObjectList[sceneName];
+}
+
 void GameObjectManager::RemoveAllGameObject(const std::string& sceneName)
 {
 	if (m_GameObjectList.count(sceneName) == 0) return;

@@ -6,6 +6,8 @@
 namespace EvaEngine {
 	template<class T>
 	class TypeIDAssist {
+		TypeIDAssist() = default;
+		~TypeIDAssist() = default;
 	public:
 		static std::string GetClassName() {
 			auto temp = StringAssist::Split(typeid(T).name(), "::");

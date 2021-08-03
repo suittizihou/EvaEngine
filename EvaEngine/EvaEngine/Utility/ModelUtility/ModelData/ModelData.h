@@ -14,6 +14,10 @@ namespace EvaEngine {
 		ModelData() = default;
 		~ModelData() = default;
 
+	public:
+		void Release();
+
+	public:
 		std::map<std::string, std::vector<Mesh>> meshes;
 		std::map<std::string, Material> materials;
 	};

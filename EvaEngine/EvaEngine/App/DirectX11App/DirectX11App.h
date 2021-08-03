@@ -3,6 +3,7 @@
 #include "../../System/DebugLog/DebugLog.h"
 #include "../../Utility/ModelUtility/ModelData/ConstantBufferData.h"
 #include <memory>
+#include <dxgidebug.h>
 
 namespace EvaEngine {
 	class Camera;
@@ -10,9 +11,21 @@ namespace EvaEngine {
 	namespace Internal {
 
 		class DirectX11App {
+			DirectX11App() = default;
+			~DirectX11App() = default;
 		public:
+
 			// DirectXの初期化
 			static HRESULT Init();
+			// ComPtrたちの解放
+			static void Release();
+
+#if _DEBUG
+			// ComPtrのメモリリークを出力
+			static void ReportLiveObjects();
+			// Debugに使ったオブジェクトを解放
+			static void DebugRelease();
+#endif
 
 		private:
 			// ハードウェアのチェック(つよつよGPUを見つけてそのGPUを使うようにする)
@@ -31,14 +44,19 @@ namespace EvaEngine {
 			static void SetConstantBuffer(const std::weak_ptr<Camera>& camera);
 
 		public:
-			static D3DDevice g_Device;
-			static D3DContext g_Context;
-			static D3DSwapChain g_SwapChain;
-			static D3DRenderTargetView g_EditorRenderTargetView;
-			static D3DDepthStencilView g_EditorDepthStencilView;
+			static ID3D11Device* g_Device;
+			static ID3D11DeviceContext* g_Context;
+			static IDXGISwapChain* g_SwapChain;
+			static ID3D11RenderTargetView* g_EditorRenderTargetView;
+			static ID3D11DepthStencilView* g_EditorDepthStencilView;
 
-			static ConstantBuffer g_ConstantBuffer;
+			static ID3D11Buffer* g_ConstantBuffer;
 			static ConstantBufferData g_ConstantBufferData;
+
+#if _DEBUG
+			static IDXGIDebug* g_pDxgiDebug;
+			static ID3D11Debug* g_pD3DDebug;
+#endif
 
 		private:
 			static IDXGIAdapter* m_Adapter;

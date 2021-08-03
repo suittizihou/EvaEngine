@@ -18,13 +18,13 @@ namespace EvaEngine {
 
 	public:
 		void Create();
-		
+		void Release();
 	public:
 		operator ID3D11Texture2D*() const;
 
 	private:
 		// 2次元テクスチャの設定
 		D3D11_TEXTURE2D_DESC m_TextureDesc{};
-		Internal::D3DTexture2D m_Texture2D{ nullptr };
+		ID3D11Texture2D* m_Texture2D{ nullptr };
 	};
 }

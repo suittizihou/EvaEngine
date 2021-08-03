@@ -34,14 +34,14 @@ namespace EvaEngine {
 		class EditorWindow : public EditorWindowBase {
 		public:
 			EditorWindow(const std::string& windowPath) :
-				m_WindowName{ TypeIDAssist<T>().GetClassName() },
+				m_WindowName{ TypeIDAssist<T>::GetClassName() },
 				m_WindowPath{ windowPath }
 			{
 				InternalInit();
 			}
 
 			EditorWindow(const std::string& windowPath, const Vector2& windowSize) :
-				m_WindowName{ TypeIDAssist<T>().GetClassName() },
+				m_WindowName{ TypeIDAssist<T>::GetClassName() },
 				m_WindowPath{ windowPath },
 				m_WindowSize{ windowSize }
 			{
@@ -49,7 +49,7 @@ namespace EvaEngine {
 			}
 
 			EditorWindow(const std::string& windowPath, const ImGuiWindowFlags& windowFlags) :
-				m_WindowName{ TypeIDAssist<T>().GetClassName() },
+				m_WindowName{ TypeIDAssist<T>::GetClassName() },
 				m_WindowPath{ windowPath },
 				windowFlags{ windowFlags }
 			{
@@ -57,7 +57,7 @@ namespace EvaEngine {
 			}
 
 			EditorWindow(const std::string& windowPath, const Vector2& windowSize, const ImGuiWindowFlags& windowFlags) :
-				m_WindowName{ TypeIDAssist<T>().GetClassName() },
+				m_WindowName{ TypeIDAssist<T>::GetClassName() },
 				m_WindowPath{ windowPath },
 				m_WindowSize{ windowSize },
 				windowFlags{ windowFlags }
