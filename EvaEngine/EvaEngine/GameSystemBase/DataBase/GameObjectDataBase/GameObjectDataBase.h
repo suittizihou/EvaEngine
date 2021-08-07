@@ -19,13 +19,19 @@ namespace EvaEngine {
 			std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
 			// タグで検索してヒットしたゲームオブジェクトを全部持ってくる
 			std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
+			// 所持する全ゲームオブジェクトを返す
+			void GetAllGameObject(std::vector<std::weak_ptr<GameObject>>& outputObjects);
 			// 保持しているゲームオブジェクトを全削除
 			void RemoveAllGameObject();
 
 		private:
 			UINT m_ObjectID{};
+
+			// タグで分けず参照を保持するリスト
+			std::vector<std::weak_ptr<GameObject>> m_GameObjectReference;
+			// ゲームオブジェクトの実体を実際に所有するリスト
 			std::map <std::string,	// Tag 
-				std::vector<std::shared_ptr<GameObject>>> m_GameObjectList;
+				std::vector<std::shared_ptr<GameObject>>> m_GameObjectListSource;
 
 		};
 	}

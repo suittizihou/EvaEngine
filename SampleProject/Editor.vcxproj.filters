@@ -30,6 +30,9 @@
     <ClInclude Include="Scenes\GameMain\GameMain.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Script\SinMove\SinMove.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Editor\EditorEntry\EditorEntry.cpp">
@@ -45,6 +48,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\GameMain\GameMain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Script\SinMove\SinMove.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,38 +1,31 @@
 #pragma once
-
+#include <memory>
 #include "../../../Utility/ModelUtility/ModelData/ModelData.h"
 
 namespace EvaEngine {
 	namespace Internal {
 		class ModelDataBase {
-		private:
-			ModelDataBase() = default;
-			ModelDataBase(const ModelDataBase&);
-			ModelDataBase operator=(const ModelDataBase&);
-			~ModelDataBase();
-
 		public:
-			static ModelDataBase& Instance() {
-				static ModelDataBase instance;
-				return instance;
-			}
+			ModelDataBase() = default;
+			~ModelDataBase() = default;
 
 			// モデルデータを追加する
-			int AddModelData(const EvaEngine::ModelData& model);
+			int AddModelData(const std::shared_ptr<EvaEngine::ModelData>& model);
+			int AddModelData(const std::string& fileName);
 			// モデルデータを取得
-			ModelData GetModel(const int modelHandle);
+			std::weak_ptr<ModelData> GetModel(const int modelHandle);
 			// モデルデータをメモリから消す
 			void DeleteModel(const int modelHandle);
 			// 全モデルデータをメモリから消す
-			void AllDeleteModel();
-			// メモリにモデルのデータを読み込む
-			ModelData LoadModelDataMemory(const EvaEngine::ModelData& model);
+			void DeleteAllModel();
+			//// メモリにモデルのデータを読み込む
+			//ModelData LoadModelDataMemory(const std::shared_ptr<EvaEngine::ModelData>& model);
 
 		private:
 			// モデルデータのハンドル
 			int modelCount{ 0 };
 			// モデルデータ
-			std::map<int, EvaEngine::ModelData> m_Models{};
+			std::map<int, std::shared_ptr<EvaEngine::ModelData>> m_Models{};
 		};
 	}
 }

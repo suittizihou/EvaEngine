@@ -12,6 +12,10 @@ namespace EvaEngine {
 				~InspectorWindow() = default;
 				
 				void OnGUI() override;
+
+			private:
+				int m_ItemNum{ 0 };
+				bool isFirstOpen{ false };
 			};
 		}
 	}

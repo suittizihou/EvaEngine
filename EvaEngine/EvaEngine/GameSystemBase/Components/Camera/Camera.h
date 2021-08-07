@@ -3,6 +3,7 @@
 #include <DirectXMath.h>
 #include <memory>
 #include <vector>
+#include <map>
 #include "../../../App/DirectX11App/DirectX11App.h"
 #include "../../Base/Component/Component.h"
 #include "../../../Utility/Math/Color/Color.h"
@@ -84,12 +85,14 @@ namespace EvaEngine {
 	public:
 		// シーンに存在するMain CameraタグのCameraコンポーネントを返す
 		static std::weak_ptr<Camera> GetMainCamera();
-		// 全カメラを返す
+		// 現在のシーンの全カメラを返す
 		static std::vector<std::weak_ptr<Camera>> GetAllCamera();
+		// 指定されたシーンの全カメラを返す
+		static std::vector<std::weak_ptr<Camera>> GetAllCamera(const std::string& sceneName);
 		// 全カメラの解放
 		static void AllDeleteCamera();
 
 	private:
-		static std::vector<std::weak_ptr<Camera>> m_Cameras;
+		static std::map<std::string, std::vector<std::weak_ptr<Camera>>> m_Cameras;
 	};
 }

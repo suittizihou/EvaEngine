@@ -3,7 +3,7 @@
 
 class EditorEntry : public EvaEngine::GameBase {
 public:
-	EditorEntry() : GameBase(1280, 720) {};
+	EditorEntry() : GameBase(1920, 1080) {};
 
 	void Init() override;
 };

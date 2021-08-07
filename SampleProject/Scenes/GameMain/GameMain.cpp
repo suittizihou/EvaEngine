@@ -18,5 +18,6 @@ void GameMain::Initialize()
 
 void GameMain::SceneUpdate()
 {
-	if (Input::GetKeyDown(KeyCode::B)) SceneManager::LoadScene(SceneManager::GetPreviousSceneName());
+	if (Input::GetKeyDown(KeyCode::B)) 
+		SceneManager::LoadScene(SceneManager::GetPreviousSceneName());
 }

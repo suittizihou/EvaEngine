@@ -20,10 +20,10 @@ namespace EvaEngine {
 		// ゲームオブジェクトの追加
 		std::weak_ptr<GameObject> Instantiate(const std::string& tag = "None", const std::string& name = "GameObject");
 
-		// 所属するシーンを設定
+		// 所属するシーン名を設定
 		void SetSceneName(const std::string& sceneType);
-		// 所属するシーンを返す
-		std::string GetSceneType();
+		// 所属するシーン名を返す
+		std::string GetSceneName();
 
 	private:
 		std::string m_SceneName{};

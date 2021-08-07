@@ -11,14 +11,14 @@
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-ModelData FBXModelLoader::LoadModel(const char* fileName)
+void FBXModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model)
 {
     // FbxManager作成
     fbxsdk::FbxManager* fbx_manager = fbxsdk::FbxManager::Create();
     if (fbx_manager == nullptr)
     {
         DebugLog::LogError(u8"FbxManagerの作成に失敗しました");
-        return ModelData();
+        return;
     }
 
     // FbxImporter作成
@@ -26,7 +26,7 @@ ModelData FBXModelLoader::LoadModel(const char* fileName)
     if (fbx_importer == nullptr) {
         fbx_manager->Destroy();
         DebugLog::LogError(u8"FbxImporterの作成に失敗しました");
-        return ModelData();
+        return;
     }
 
     // FbxSceneを生成
@@ -35,7 +35,7 @@ ModelData FBXModelLoader::LoadModel(const char* fileName)
         fbx_importer->Destroy();
         fbx_manager->Destroy();
         DebugLog::LogError(u8"FbxSceneの作成に失敗しました");
-        return ModelData();
+        return;
     }
 
     // Fileを初期化
@@ -49,7 +49,7 @@ ModelData FBXModelLoader::LoadModel(const char* fileName)
 
     int materialNum = fbx_scene->GetSrcObjectCount<FbxSurfaceMaterial>();
     for (int i = 0; i < materialNum; ++i) {
-        LoadMaterial(fbx_scene->GetSrcObject<FbxSurfaceMaterial>(i));
+        LoadMaterial(model, fbx_scene->GetSrcObject<FbxSurfaceMaterial>(i));
     }
 
     std::map<std::string, FbxNode*> mesh_node_list;
@@ -58,7 +58,7 @@ ModelData FBXModelLoader::LoadModel(const char* fileName)
 
     for (auto data : mesh_node_list) {
         // mesh作成
-        CreateMesh(data.first.c_str(), data.second->GetMesh());
+        CreateMesh(model, data.first.c_str(), data.second->GetMesh());
     }
 
     // 関連するすべてのオブジェクトが解放される
@@ -68,11 +68,9 @@ ModelData FBXModelLoader::LoadModel(const char* fileName)
     fbx_scene->Destroy();
     // マネージャ解放
     fbx_manager->Destroy();
-
-    return m_Model;
 }
 
-void FBXModelLoader::LoadMaterial(fbxsdk::FbxSurfaceMaterial* material)
+void FBXModelLoader::LoadMaterial(std::shared_ptr<EvaEngine::ModelData>& model, fbxsdk::FbxSurfaceMaterial* material)
 {
     Material tempMaterial{};
 
@@ -124,7 +122,7 @@ void FBXModelLoader::LoadMaterial(fbxsdk::FbxSurfaceMaterial* material)
     factor = factors[(int)MaterialOrder::Diffuse];
     tempMaterial.diffuse = DirectX::XMFLOAT4((float)color[0], (float)color[1], (float)color[2], (float)factor);
 
-    m_Model.materials[material->GetName()] = tempMaterial;
+    model->materials[material->GetName()] = tempMaterial;
 
     // テクスチャ読み込み
     // Diffuseプロパティを取得
@@ -145,13 +143,13 @@ void FBXModelLoader::LoadMaterial(fbxsdk::FbxSurfaceMaterial* material)
     }
 
     if (texture != nullptr &&
-        LoadTexture(texture, keyword)) {
+        LoadTexture(model, texture, keyword)) {
         // 読み込んだテクスチャとマテリアルの関係を保持
 
     }
 }
 
-bool FBXModelLoader::LoadTexture(fbxsdk::FbxFileTexture* texture, std::string& keyword)
+bool FBXModelLoader::LoadTexture(std::shared_ptr<EvaEngine::ModelData>& model, fbxsdk::FbxFileTexture* texture, std::string& keyword)
 {
     return false;
 }
@@ -176,7 +174,7 @@ void FBXModelLoader::FindMeshNode(fbxsdk::FbxNode* node, std::map<std::string, f
     }
 }
 
-bool FBXModelLoader::CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh)
+bool FBXModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, const char* node_name, fbxsdk::FbxMesh* mesh)
 {
     // 頂点バッファの取得
     fbxsdk::FbxVector4* vertices = mesh->GetControlPoints();
@@ -233,7 +231,7 @@ bool FBXModelLoader::CreateMesh(const char* node_name, fbxsdk::FbxMesh* mesh)
     tempMesh.name = node_name;
 
     // 頂点情報のセット
-    m_Model.meshes[node_name].push_back(tempMesh);
+    model->meshes[node_name].push_back(tempMesh);
 
     mesh->Destroy();
 

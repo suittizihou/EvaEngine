@@ -7,6 +7,8 @@
 #include <memory>
 #include <stdexcept>
 #include "../../Base/Component/Component.h"
+#include "../../../System/DebugLog/DebugLog.h"
+#include "../../../Utility/TypeIDAssist/TypeIDAssist.h"
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
 
@@ -22,6 +24,7 @@ namespace EvaEngine {
 			std::weak_ptr<T> AddComponent(const std::string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject, Args&& ... args)
 			{
 				ComponentDesc componentDesc{};
+				componentDesc.componentName = TypeIDAssist<T>::GetClassName();
 				componentDesc.sceneName = sceneName;
 				componentDesc.gameObject = gameObject;
 				componentDesc.hashCode = typeid(T).hash_code();
@@ -32,11 +35,10 @@ namespace EvaEngine {
 				// 複数アタッチできないコンポーネントの場合
 				if (!component_temp->GetCanMultiAttach()) {
 					// 同じコンポーネントが無いかチェック
-					for (int i = 0; i < m_Components.size(); ++i) {
-						if (!IsGameObjectIDEquals(m_Components[i]->GetGameObject(), gameObject)) continue;
-						if (componentDesc.hashCode != m_Components[i]->GetHashCode()) continue;
+					for (const auto& component : gameObject.lock()->GetAllComponents()) {
+						if (component.lock()->GetHashCode() != component_temp->GetHashCode()) continue;
 
-						throw std::runtime_error("Can't multi attach." + (std::string)typeid(T).name() + " : このコンポーネントは複数アタッチできません");
+						DebugLog::LogError(u8"Can't multi attach." + (std::string)typeid(T).name() + " : このコンポーネントは複数アタッチできません");
 						return std::weak_ptr<T>();
 					}
 				}
@@ -57,9 +59,32 @@ namespace EvaEngine {
 
 			// コンポーネントの取得
 			template<class T>
+			std::weak_ptr<T> GetComponent(const std::weak_ptr<GameObjectBase>& gameObject)
+			{
+				size_t hashCode = typeid(T).hash_code();
+
+				for (const auto& component : gameObject.lock()->GetAllComponents()) {
+					// 指定したコンポーネントとハッシュ値が違う場合はコンティニュー
+					if (hashCode != component.lock()->GetHashCode()) continue;
+					// dynamic_castを使用していないのは型変換チェックによる速度低下を防ぐため
+					return std::static_pointer_cast<T>(component.lock());
+				}
+
+				DebugLog::LogError(
+					u8"Not found. : Name : " +
+					(std::string)typeid(T).name() +
+					" : " +
+					std::to_string(typeid(T).hash_code()) +
+					" : コンポーネントが見つかりませんでした");
+				return std::weak_ptr<T>();
+			}
+
+			// コンポーネントの取得
+			template<class T>
 			std::weak_ptr<T> GetComponent(const UINT& gameObjectID)
 			{
 				size_t hashCode = typeid(T).hash_code();
+
 				// コンポーネント検索
 				for (int i = 0; i < m_Components.size(); ++i) {
 					// ゲームオブジェクトIDが違う場合はスキップ
@@ -71,13 +96,46 @@ namespace EvaEngine {
 					return std::static_pointer_cast<T>(m_Components[i]);
 				}
 
-				throw std::runtime_error(
-					"Not found. : Name : " +
+				DebugLog::LogError(
+					u8"Not found. : Name : " +
 					(std::string)typeid(T).name() +
 					" : " +
 					std::to_string(typeid(T).hash_code()) +
 					" : コンポーネントが見つかりませんでした");
 				return std::weak_ptr<T>();
+			}
+
+			// コンポーネントを削除
+			template<class T>
+			void RemoveComponent(const std::weak_ptr<GameObjectBase>& gameObject)
+			{
+				size_t hashCode = typeid(T).hash_code();
+
+				for (const auto& component : gameObject.lock()->GetAllComponents()) {
+					if (hashCode != component.lock()->GetHashCode()) continue;
+
+					// 消せないコンポーネントなら早期リターン
+					if (!component.lock()->GetCanRemove()) {
+						DebugLog::LogError(
+							u8"Can't remove component : " +
+							(std::string)typeid(T).name() +
+							" : " +
+							std::to_string(typeid(T).hash_code()) +
+							" : このコンポーネントは消せません");
+						return;
+					}
+
+					// 実際に消す
+					RemoveComponent(component);
+					return;
+				}
+
+				DebugLog::LogError(
+					u8"Not found.: Name : " +
+					(std::string)typeid(T).name() +
+					" : " +
+					std::to_string(typeid(T).hash_code()) +
+					" : コンポーネントが見つかりませんでした");
 			}
 
 			// コンポーネントを削除
@@ -91,8 +149,8 @@ namespace EvaEngine {
 
 					// 消せないコンポーネントなら早期リターン
 					if (!m_Components[i]->GetCanRemove()) {
-						throw std::runtime_error(
-							"Can't remove component : " +
+						DebugLog::LogError(
+							u8"Can't remove component : " +
 							(std::string)typeid(T).name() +
 							" : " +
 							std::to_string(typeid(T).hash_code()) +
@@ -100,14 +158,13 @@ namespace EvaEngine {
 						return;
 					}
 
+
 					// 消す対象の要素番号とFunctionMaskを渡して消す
 					RemoveComponent(i, m_Components[i]->GetFunctionMask());
-					return;
-
 				}
 
-				throw std::runtime_error(
-					"Not found.: Name : " +
+				DebugLog::LogError(
+					u8"Not found.: Name : " +
 					(std::string)typeid(T).name() +
 					" : " +
 					std::to_string(typeid(T).hash_code()) +
@@ -134,7 +191,8 @@ namespace EvaEngine {
 			void AddComponent(const std::shared_ptr<Component>& component, const int indexNum);
 
 			// 消すコンポーネントを後ろに持ってったり消す数をカウントしたり
-			void RemoveComponent(const int index, const UINT mask);
+			void RemoveComponent(const std::weak_ptr<Component>& component);
+			void RemoveComponent(const UINT& index, const UINT& mask);
 			// 指定の数字に合った部分の要素番号を取得する
 			__int64 FindItr(const std::vector<int>& vec, int value);
 

@@ -17,6 +17,7 @@
 #include "../../Editor/EditorWindows/ConsoleWindow/ConsoleWindow.h"
 #include "../../Editor/EditorWindows/SceneWindow/SceneWindow.h"
 #include "../../Editor/EditorWindows/GameWindow/GameWindow.h"
+#include "../../Editor/EditorWindows/HierarchyWindow/HierarchyWindow.h"
 #include "../../Editor/EditorWindows/InspectorWindow/InspectorWindow.h"
 #include "../../Editor/EditorWindows/ProjectWindow/ProjectWindow.h"
 #include "../../Editor/EditorWindows/DemoWindow/DemoWindow.h"
@@ -72,19 +73,19 @@ HRESULT EditorApp::Init()
 {
 	// ImGuiÇÃèâä˙âª
 	if (FAILED(ImGuiSetting())) {
-		DebugLog::LogError("ImGuiÇÃê›íËÇ…é∏îsÇµÇ‹ÇµÇΩÅB");
+		DebugLog::LogError(u8"ImGuiÇÃê›íËÇ…é∏îsÇµÇ‹ÇµÇΩÅB");
 		return E_ABORT;
 	}
 
 	if (!ImGui_ImplWin32_Init(Window::g_hWnd)) {
-		DebugLog::LogError("ImGui_ImplWin32_InitÇ…é∏îsÇµÇ‹ÇµÇΩÅB");
+		DebugLog::LogError(u8"ImGui_ImplWin32_InitÇ…é∏îsÇµÇ‹ÇµÇΩÅB");
 		ImGui::DestroyContext();
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
 		return E_ABORT;
 	}
 	
 	if (!ImGui_ImplDX11_Init(EvaEngine::Internal::DirectX11App::g_Device, EvaEngine::Internal::DirectX11App::g_Context)) {
-		DebugLog::LogError("ImGui_ImplDX11_InitÇ…é∏îsÇµÇ‹ÇµÇΩÅB");
+		DebugLog::LogError(u8"ImGui_ImplDX11_InitÇ…é∏îsÇµÇ‹ÇµÇΩÅB");
 		ImGui::DestroyContext();
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
 		return E_ABORT;
@@ -95,6 +96,7 @@ HRESULT EditorApp::Init()
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::ConsoleWindow>("Window/General/Console");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::SceneWindow>("Window/General/Scene");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::GameWindow>("Window/General/Game");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::HierarchyWindow>("Window/General/Hierarchy");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::InspectorWindow>("Window/General/Inspector");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::ProjectWindow>("Window/General/Project");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::DemoWindow>("Help/DemoWindow");
@@ -135,7 +137,6 @@ void EditorApp::DrawBegin()
 void EditorApp::Draw()
 {
 	m_EditorWindows.Draw();
-	SceneDataBase::Instance().OnGUI();
 }
 
 void EditorApp::DrawEnd()

@@ -2,8 +2,11 @@
 
 #include <d3d11.h>
 #include <iostream>
+#include <memory>
 
 namespace EvaEngine {
+	class ModelData;
+
 	class ModelLoader {
 	private:
 		ModelLoader() = default;
@@ -12,6 +15,6 @@ namespace EvaEngine {
 		~ModelLoader() = default;
 
 	public:
-		static int Load(const std::string& fileName);
+		static std::shared_ptr<ModelData> Load(const std::string& fileName);
 	};
 }

@@ -1,45 +1,9 @@
 #include "OBJModelLoader.h"
 #include "../../../../System/DebugLog/DebugLog.h"
+#include "../../../StringAssist/StringAssist.h"
 
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
-
-void Split(char split_char, char* buffer, std::vector<std::string>& out)
-{
-    int count = 0;
-    if (buffer == nullptr)
-    {
-        return;
-    }
-
-    int start_point = 0;
-
-    while (buffer[count] != '\0')
-    {
-        if (buffer[count] == split_char)
-        {
-            if (start_point != count)
-            {
-                char split_str[256] = { 0 };
-                strncpy_s(split_str, 256, &buffer[start_point], count - start_point);
-                out.emplace_back(split_str);
-            }
-            else
-            {
-                out.emplace_back("");
-            }
-            start_point = count + 1;
-        }
-        count += 1;
-    }
-
-    if (start_point != count)
-    {
-        char split_str[256] = { 0 };
-        strncpy_s(split_str, 256, &buffer[start_point], count - start_point);
-        out.emplace_back(split_str);
-    }
-}
 
 void Replase(char searchChar, char replaceChar, char* buffer) {
     int len = static_cast<int>(strlen(buffer));
@@ -51,18 +15,15 @@ void Replase(char searchChar, char replaceChar, char* buffer) {
     }
 }
 
-ModelData OBJModelLoader::LoadModel(const char* fileName)
+void OBJModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model)
 {
-    ModelData modelData{};
-    if (!CreateMesh(modelData, fileName)) {
+    if (!CreateMesh(model, fileName)) {
         DebugLog::LogError("ファイル名 : " + std::string{ fileName } + " モデルの読み込みに失敗しました。");
-        return modelData;
+        return;
     }
-
-    return modelData;
 }
 
-bool OBJModelLoader::CreateMesh(ModelData& model, const char* fileName)
+bool OBJModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, const char* fileName)
 {
     FILE* file{ nullptr };
     fopen_s(&file, fileName, "r");
@@ -110,7 +71,7 @@ bool OBJModelLoader::CreateMesh(ModelData& model, const char* fileName)
     Mesh mesh{};
     mesh.SetVertexData(vertexData);
     mesh.SetIndices(indices);
-    model.meshes["default"].push_back(mesh);
+    model->meshes["default"].push_back(mesh);
 
     return true;
 }
@@ -118,7 +79,7 @@ bool OBJModelLoader::CreateMesh(ModelData& model, const char* fileName)
 void OBJModelLoader::ParseVKeywordTag(std::vector<DirectX::XMFLOAT3>& data, char* buffer)
 {
     std::vector<std::string> splitStrings;
-    Split(' ', buffer, splitStrings);
+    StringAssist::Split(' ', buffer, splitStrings);
 
     int count{};
     float values[3] = { 0.0f };
@@ -143,7 +104,7 @@ void OBJModelLoader::ParseFKeywordTag(
         -1, -1, -1
     };
     std::vector<std::string> spaceSplit;
-    Split(' ', buffer, spaceSplit);
+    StringAssist::Split(' ', buffer, spaceSplit);
 
     for (int i = 0; i < spaceSplit.size(); ++i) {
         VertexData vertexData{};
@@ -183,7 +144,7 @@ void OBJModelLoader::ParseShashKeywordTag(int* list, char* buffer)
 {
     int counter{};
     std::vector<std::string> slashSplit;
-    Split('/', buffer, slashSplit);
+    StringAssist::Split('/', buffer, slashSplit);
 
     for (std::string str : slashSplit) {
         if (str.size() > 0) {

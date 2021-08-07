@@ -13,7 +13,7 @@ void GameJobs::SetSceneName(const std::string& sceneName)
     m_SceneName = sceneName;
 }
 
-std::string GameJobs::GetSceneType()
+std::string GameJobs::GetSceneName()
 {
     return m_SceneName;
 }

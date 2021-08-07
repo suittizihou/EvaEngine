@@ -14,6 +14,10 @@ namespace EvaEngine {
 	class Transform;
 	class Camera;
 
+	namespace Internal {
+		class ComponentDataBase;
+	}
+
 	// 使用する関数を示すビットフラグ
 	namespace FunctionMask {
 		const UINT NONE(0 << 0);
@@ -26,6 +30,8 @@ namespace EvaEngine {
 	}
 
 	class Component : public GameJobs {
+		friend Internal::ComponentDataBase;
+
 	public:
 		Component(
 			const UINT& functionMask,
@@ -51,12 +57,11 @@ namespace EvaEngine {
 		virtual void Draw(const std::weak_ptr<Camera> camera, ID3D11DeviceContext* command) {}
 
 #if _DEBUG
+		// Editor用の描画開始処理
+		virtual void OnBeginGUI() {};
 		// Editor用の描画
 		virtual void OnGUI() {};
 #endif
-
-		// コンポーネントに必要なデータを設定
-		void SetComponentDesc(const ComponentDesc& componentDesc);
 
 		// このコンポーネントに紐づいているオブジェクトを返す
 		std::weak_ptr<GameObject> GetGameObject() const;
@@ -72,6 +77,16 @@ namespace EvaEngine {
 		UINT GetComponentID() const;
 		// どの関数を呼び出すかのマスクを返す
 		UINT GetFunctionMask() const;
+		// 自身が登録されている配列番号を返す
+		UINT GetIndex() const;
+		// コンポーネントの名前を返す
+		std::string GetComponentName() const;
+
+	private:
+		// コンポーネントに必要なデータを設定
+		void SetComponentDesc(const ComponentDesc& componentDesc);
+		// コンポーネントが登録されている配列番号を設定
+		void SetIndex(const UINT index);
 
 	private:
 		std::weak_ptr<GameObject> m_GameObject;
@@ -79,7 +94,9 @@ namespace EvaEngine {
 		size_t m_HashCode{};
 		UINT m_ComponentID{};
 		UINT m_FunctionMask{};
+		UINT m_Index{}; // ComponentDataBaseに登録されている自身の配列番号
 		bool m_CanMultiAttach{ true };
 		bool m_CanRemove{ true };
+		std::string m_ComponentName{ "None" };
 	};
 }

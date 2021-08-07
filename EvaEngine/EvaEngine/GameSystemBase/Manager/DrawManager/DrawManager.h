@@ -22,7 +22,7 @@ namespace EvaEngine {
 			static void Draw(
 				const std::weak_ptr<Camera>& camera,
 				const std::weak_ptr<Transform>& transform,
-				ModelData* model);
+				std::weak_ptr<ModelData>& model);
 
 			// •`‰æI—¹
 			static void DrawEnd();

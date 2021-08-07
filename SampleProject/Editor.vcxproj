@@ -161,6 +161,7 @@
     <ClInclude Include="Scenes\SampleScene\SampleScene.h" />
     <ClInclude Include="Script\Move\Move.h" />
     <ClInclude Include="Script\Rotate\Rotate.h" />
+    <ClInclude Include="Script\SinMove\SinMove.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Editor\EditorEntry\EditorEntry.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="Scenes\SampleScene\SampleScene.cpp" />
     <ClCompile Include="Script\Move\Move.cpp" />
     <ClCompile Include="Script\Rotate\Rotate.cpp" />
+    <ClCompile Include="Script\SinMove\SinMove.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

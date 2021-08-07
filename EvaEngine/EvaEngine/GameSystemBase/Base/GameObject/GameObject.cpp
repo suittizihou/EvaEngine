@@ -31,15 +31,25 @@ std::weak_ptr<Transform> GameObject::GetTransform()
 
 std::weak_ptr<GameObject> GameObject::Find(const std::string& name)
 {
-    return EvaEngine::Internal::GameObjectManager::Instance().Find(GetSceneType(), name);
+    return EvaEngine::Internal::GameObjectManager::Instance().Find(GetSceneName(), name);
 }
 
 std::weak_ptr<GameObject> GameObject::FindGameObjectWithTag(const std::string& tag)
 {
-    return EvaEngine::Internal::GameObjectManager::Instance().FindGameObjectWithTag(GetSceneType(), tag);
+    return EvaEngine::Internal::GameObjectManager::Instance().FindGameObjectWithTag(GetSceneName(), tag);
 }
 
 std::vector<std::weak_ptr<GameObject>> GameObject::FindGameObjectsWithTag(const std::string& tag)
 {
-    return EvaEngine::Internal::GameObjectManager::Instance().FindGameObjectsWithTag(GetSceneType(), tag);
+    return EvaEngine::Internal::GameObjectManager::Instance().FindGameObjectsWithTag(GetSceneName(), tag);
+}
+
+void EvaEngine::GameObject::SetActive(const bool active)
+{
+    m_IsActive = active;
+}
+
+bool EvaEngine::GameObject::ActiveSelf() const
+{
+    return m_IsActive;
 }

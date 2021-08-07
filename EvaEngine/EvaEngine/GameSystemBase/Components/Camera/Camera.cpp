@@ -3,12 +3,13 @@
 #include "../../Base/GameObject/GameObject.h"
 #include "../Transform/Transform.h"
 #include "../../../Utility/Texture/RenderTexture/RenderTexture.h"
+#include "../../Manager/SceneManager/SceneManager.h"
 
 using namespace DirectX;
 using namespace EvaEngine;
 using namespace FunctionMask;
 
-std::vector<std::weak_ptr<EvaEngine::Camera>> EvaEngine::Camera::m_Cameras{};
+std::map<std::string, std::vector<std::weak_ptr<EvaEngine::Camera>>> EvaEngine::Camera::m_Cameras;
 
 EvaEngine::Camera::Camera(
 	const D3D11_VIEWPORT& viewPort,
@@ -40,12 +41,14 @@ EvaEngine::Camera::Camera(
 EvaEngine::Camera::~Camera()
 {
 	// QÆæ‚ªnull‚É‚È‚Á‚Ä‚é‚à‚Ì‚ğÁ‚·
-	for (int i = 0; i < m_Cameras.size(); ++i) {
-		if (m_Cameras[i].expired()) {
-			// Á‚·•”•ª‚Æ––”ö‚Ì•”•ª‚ğƒNƒ‹‚Á‚Æ“ü‚ê‘Ö‚¦
-			std::iter_swap(m_Cameras.begin() + i, m_Cameras.end() - 1);
-			m_Cameras.pop_back();
-			return;
+	for (auto& camera : m_Cameras) {
+		for (int i = 0; i < camera.second.size(); ++i) {
+			if (camera.second[i].expired()) {
+				// Á‚·•”•ª‚Æ––”ö‚Ì•”•ª‚ğƒNƒ‹‚Á‚Æ“ü‚ê‘Ö‚¦
+				std::iter_swap(camera.second.begin() + i, camera.second.end() - 1);
+				camera.second.pop_back();
+				return;
+			}
 		}
 	}
 }
@@ -58,7 +61,7 @@ void EvaEngine::Camera::Init()
 
 void EvaEngine::Camera::Awake()
 {
-	m_Cameras.push_back(weak_from_this());
+	m_Cameras[this->GetSceneName()].push_back(weak_from_this());
 	m_ViewMatrix = CreateViewMatrix(GetTransform());
 }
 
@@ -133,9 +136,10 @@ DirectX::XMMATRIX EvaEngine::Camera::CreateProjectionMatrix(const D3D11_VIEWPORT
 
 std::weak_ptr<EvaEngine::Camera> EvaEngine::Camera::GetMainCamera()
 {
-	for (int i = 0; i < m_Cameras.size(); ++i) {
-		if (m_Cameras[i].lock()->GetGameObject().lock()->GetTag() == "Main Camera") {
-			return m_Cameras[i];
+	auto currentSceneCameras = m_Cameras[SceneManager::GetCurrentSceneName()];
+	for (int i = 0; i < currentSceneCameras.size(); ++i) {
+		if (currentSceneCameras[i].lock()->GetGameObject().lock()->GetTag() == "Main Camera") {
+			return currentSceneCameras[i];
 		}
 	}
 
@@ -145,13 +149,21 @@ std::weak_ptr<EvaEngine::Camera> EvaEngine::Camera::GetMainCamera()
 
 std::vector<std::weak_ptr<EvaEngine::Camera>> EvaEngine::Camera::GetAllCamera()
 {
-	return m_Cameras;
+	return m_Cameras[SceneManager::GetCurrentSceneName()];
+}
+
+std::vector<std::weak_ptr<Camera>> EvaEngine::Camera::GetAllCamera(const std::string& sceneName)
+{
+	if (m_Cameras.count(sceneName) == 0) return std::vector<std::weak_ptr<Camera>>();
+	return m_Cameras[sceneName];
 }
 
 void EvaEngine::Camera::AllDeleteCamera()
 {
-	for (auto& camera : m_Cameras)
+	for (auto& cameras : m_Cameras)
 	{
-		camera.lock()->targetTexture->Release();
+		for (auto& camera : cameras.second) {
+			camera.lock()->targetTexture->Release();
+		}
 	}
 }

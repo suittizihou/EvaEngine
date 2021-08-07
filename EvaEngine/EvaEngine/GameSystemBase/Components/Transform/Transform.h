@@ -4,11 +4,12 @@
 #include "../../../Utility/Math/Vector3/Vector3.h"
 #include "../../../Utility/Math/Matrix4x4/Matrix4x4.h"
 #include "../../../Utility/Math/Quaternion/Quaternion.h"
+#include <memory>
 #include <list>
 
 namespace EvaEngine {
 	// トランスフォームクラス
-	class Transform : public Component {
+	class Transform : public Component, public std::enable_shared_from_this<Transform> {
 	public:
 		// 座標系の指定
 		enum class Space {
@@ -64,6 +65,7 @@ namespace EvaEngine {
 		Vector3 euler_angles() const;
 		// オイラー角としての角度を設定
 		void euler_angles(const Vector3& value);
+		void euler_angles(float x, float y, float z);
 
 		// 対象の Transform を設定し、その方向へと向かせます
 		void look_at(const Transform& target, const Vector3& world_up = Vector3{ 0.0f, 1.0f, 0.0f });
@@ -104,31 +106,52 @@ namespace EvaEngine {
 		void parent(std::weak_ptr<Transform> parent);
 		// Transform の親を設定
 		void set_parent(std::weak_ptr<Transform> parent, bool world_position_stays = true);
+		// 子供を取得
+		std::list<std::weak_ptr<Transform>> get_children() const;
+		// 子供の数を取得
+		int get_child_count() const;
 
 		// 親の Transform オブジェクトから見た相対的なスケールを取得
 		Vector3 local_scale() const;
 		// 親の Transform オブジェクトから見た相対的なスケールを設定
 		void local_scale(const Vector3& value);
+		void local_scale(float x, float y, float z);
 		// 親の Transform オブジェクトから見た相対的な位置を取得
 		Vector3 local_position() const;
 		// 親の Transform オブジェクトから見た相対的な位置を設定
 		void local_position(const Vector3& value);
+		void local_position(float x, float y, float z);
 		// 親の Transform オブジェクトから見た相対的な回転を取得
 		Quaternion local_rotation() const;
 		// 親の Transform オブジェクトから見た相対的な回転を設定
 		void local_rotation(const Quaternion& value);
+		void local_rotation(float x, float y, float z, float w);
 		// 親の Transform オブジェクトから見た相対的なオイラー角としての回転値を取得
 		Vector3 local_euler_angles() const;
 		// 親の Transform オブジェクトから見た相対的なオイラー角としての回転値を設定
 		void local_euler_angles(const Vector3& value);
+		void local_euler_angles(float x, float y, float z);
 		// すべての子オブジェクトを親オブジェクトから切り離します
 		void detach_children();
 		// 親の Transform から切り離す
 		void detach_parent();
 
 	private:
+		void internal_position(const Vector3& value);
+		void internal_position(float x, float y, float z);
+		void internal_local_position(const Vector3& value);
+		void internal_local_position(float x, float y, float z);
+
+		void internal_rotation(const Quaternion& value);
+		void internal_rotation(float x, float y, float z, float w);
+		void internal_local_rotation(const Quaternion& value);
+		void internal_local_rotation(float x, float y, float z, float w);
+		
+		void internal_local_scale(const Vector3& value);
+		void internal_local_scale(float x, float y, float z);
+
 		// ワールド座標系の更新
-		void update_world_transform(const Transform* parent);
+		void update_world_transform(const std::weak_ptr<Transform>& parent);
 
 	private:
 		// ポジション (ワールド座標系)
@@ -145,9 +168,11 @@ namespace EvaEngine {
 		// スケール (ローカル座標系)
 		Vector3 local_scale_{ 1.0f, 1.0f, 1.0f };
 
+		Vector3 internal_euler_rotation{ 0.0f, 0.0f, 0.0f };
+
 		// 親のトランスフォーム
 		std::weak_ptr<Transform> parent_;
 		// 子のトランスフォーム
-		std::list<Transform*> children_;
+		std::list<std::weak_ptr<Transform>> children_;
 	};
 }

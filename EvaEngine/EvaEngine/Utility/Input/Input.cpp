@@ -1,10 +1,16 @@
 #include "Input.h"
 #include "InputBufferUpdate/InputBufferUpdate.h"
+#include "../../Editor/EditorApplication/EditorApplication.h"
 
 using namespace EvaEngine;
 
 bool Input::GetKey(const KeyCode& keyCode)
 {
+#if _DEBUG
+	// 入力を受け付けないフラグが立っている時はfalse
+	if (EvaEngine::Editor::EditorApplication::isInputFreeze) return false;
+#endif
+
 	return EvaEngine::Internal::InputBufferUpdate::Instance().GetCurrentKeyStatus()[(BYTE)keyCode] == KeyState::Down;
 }
 
@@ -20,6 +26,11 @@ bool Input::GetKeyUp(const KeyCode& keyCode)
 
 bool Input::GetKeyDownOrUpCheck(const KeyCode& keyCode, const KeyState& keyState)
 {
+#if _DEBUG
+	// 入力を受け付けないフラグが立っている時はfalse
+	if (EvaEngine::Editor::EditorApplication::isInputFreeze) return false;
+#endif
+
 	BYTE key = (BYTE)keyCode;
 	KeyState state = EvaEngine::Internal::InputBufferUpdate::Instance().GetCurrentKeyStatus()[key];
 

@@ -11,6 +11,7 @@
 #include "EvaEngine/GameSystemBase/Base/Component/ComponentDesc.h"
 #include "EvaEngine/GameSystemBase/Base/Scene/Scene.h"
 #include "EvaEngine/GameSystemBase/Manager/SceneManager/SceneManager.h"
+#include "EvaEngine/GameSystemBase/Manager/ModelManager/ModelManager.h"
 #include "EvaEngine/Utility/Time/Time.h"
 #include "EvaEngine/Utility/ShaderUtility/ShaderLoader/ShaderLoader.h"
 #include "EvaEngine/Utility/ModelUtility/ModelLoader/ModelLoader.h"

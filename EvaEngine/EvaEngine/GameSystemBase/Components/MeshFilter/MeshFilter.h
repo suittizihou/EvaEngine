@@ -1,14 +1,14 @@
 #pragma once
 
 #include "../../Base/Component/Component.h"
-#include "../../DataBase/ModelDataBase/ModelDataBase.h"
+#include "../../Manager/ModelManager/ModelManager.h"
 
 namespace EvaEngine {
 	class MeshFilter : public Component {
 	public:
 		MeshFilter(const int& modelHandle)
 			:Component(0U, false),
-			m_Model(EvaEngine::Internal::ModelDataBase::Instance().GetModel(modelHandle))
+			m_Model(ModelManager::Instance().GetModel(modelHandle))
 		{}
 
 		~MeshFilter() = default;
@@ -17,9 +17,9 @@ namespace EvaEngine {
 		void OnGUI() override {}
 #endif
 
-		ModelData GetModel() { return m_Model; }
+		std::weak_ptr<ModelData> GetModel() { return m_Model; }
 
 	private:
-		ModelData m_Model{};
+		std::weak_ptr<ModelData> m_Model;
 	};
 }

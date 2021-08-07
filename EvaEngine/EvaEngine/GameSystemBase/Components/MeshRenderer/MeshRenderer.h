@@ -27,7 +27,7 @@ namespace EvaEngine {
 #endif
 
 	private:
-		ModelData m_Model{};
+		std::weak_ptr<ModelData> m_Model;
 		std::weak_ptr<MeshFilter> m_MeshFilter;
 		std::weak_ptr<Transform> m_Transform;
 	};

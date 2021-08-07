@@ -12,7 +12,7 @@ using namespace std;
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-ModelData VRMModelLoader::LoadModel(const char* fileName)
+void VRMModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model)
 {
     // モデルデータの読み込み
     auto modelFilePath = experimental::filesystem::path(fileName);
@@ -27,15 +27,13 @@ ModelData VRMModelLoader::LoadModel(const char* fileName)
     auto glbResourceReader = make_shared<Microsoft::glTF::GLBResourceReader>(std::move(reader), std::move(glbStream));
     auto document = Microsoft::glTF::Deserialize(glbResourceReader->GetJson());
 
-    LoadModelGeometry(document, glbResourceReader);
-    LoadModelMaterial(document, glbResourceReader);
-
-    return m_Model;
+    LoadModelGeometry(model, document, glbResourceReader);
+    LoadModelMaterial(model, document, glbResourceReader);
 }
 
-ModelData VRMModelLoader::MakeModelDataMemory(const ModelData& model)
+std::shared_ptr<EvaEngine::ModelData> VRMModelLoader::MakeModelDataMemory(std::shared_ptr<EvaEngine::ModelData>& model)
 {
-    ModelData tempModel = model;
+    std::shared_ptr<ModelData> tempModel = model;
     MakeModelGeometry(tempModel);
     MakeModelMaterial(tempModel);
     //ModelApp::Instance().CreateConstantBuffer(tempModel);
@@ -43,7 +41,7 @@ ModelData VRMModelLoader::MakeModelDataMemory(const ModelData& model)
     return tempModel;
 }
 
-void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std::shared_ptr<Microsoft::glTF::GLTFResourceReader> reader)
+void VRMModelLoader::LoadModelGeometry(std::shared_ptr<EvaEngine::ModelData>& model, const Microsoft::glTF::Document& doc, std::shared_ptr<Microsoft::glTF::GLTFResourceReader> reader)
 {
     using namespace Microsoft::glTF;
     for (const auto& mesh : doc.meshes.Elements())
@@ -98,15 +96,15 @@ void VRMModelLoader::LoadModelGeometry(const Microsoft::glTF::Document& doc, std
             // マテリアルIDを登録
             tempMesh.SetMaterialName(int(doc.materials.GetIndex(meshPrimitive.materialId)));
 
-            m_Model.meshes[mesh.name].push_back(tempMesh);
+            model->meshes[mesh.name].push_back(tempMesh);
         }
     }
 }
 
-void VRMModelLoader::MakeModelGeometry(ModelData& model)
+void VRMModelLoader::MakeModelGeometry(std::shared_ptr<ModelData>& model)
 {
     size_t vertexBufferSize = sizeof(VertexData);
-    for (auto& meshs : model.meshes) {
+    for (auto& meshs : model->meshes) {
         for (auto& mesh : meshs.second) {
             // 頂点バッファの作成とセット
             auto vertexBuffer = BufferCreate::CreateVertexBuffer(mesh.GetVertexData(), vertexBufferSize);
@@ -120,7 +118,7 @@ void VRMModelLoader::MakeModelGeometry(ModelData& model)
     }
 }
 
-void VRMModelLoader::LoadModelMaterial(const Microsoft::glTF::Document& doc, std::shared_ptr<Microsoft::glTF::GLTFResourceReader> reader)
+void VRMModelLoader::LoadModelMaterial(std::shared_ptr<EvaEngine::ModelData>& model, const Microsoft::glTF::Document& doc, std::shared_ptr<Microsoft::glTF::GLTFResourceReader> reader)
 {
     for (auto& m : doc.materials.Elements())
     {
@@ -138,11 +136,11 @@ void VRMModelLoader::LoadModelMaterial(const Microsoft::glTF::Document& doc, std
         material.g_ImageData = imageData;
         material.g_AlphaMode = m.alphaMode;
 
-        m_Model.materials[m.name] = material;
+        model->materials[m.name] = material;
     }
 }
 
-void VRMModelLoader::MakeModelMaterial(ModelData& model)
+void VRMModelLoader::MakeModelMaterial(std::shared_ptr<ModelData>& model)
 {
     //int textureIndex = 0;
 

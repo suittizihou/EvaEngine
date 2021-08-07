@@ -2,6 +2,7 @@
 
 #include "GameObjectBase.h"
 #include "../../Manager/ComponentManager/ComponentManager.h"
+#include "../../../System/DebugLog/DebugLog.h"
 
 namespace EvaEngine {
 
@@ -38,19 +39,37 @@ namespace EvaEngine {
 		template<class T, class... Args>
 		std::weak_ptr<T> AddComponent(Args&& ... args) {
 			static_assert(std::is_base_of<Component, T>::value == true, "The argument does not inherit from Component.");
-			return EvaEngine::Internal::ComponentManager::Instance().AddComponent<T>(GetSceneType(), GetGameObject(), args...);
+			auto component = EvaEngine::Internal::ComponentManager::Instance().AddComponent<T>(GetSceneName(), GetGameObject(), args...);
+			m_Components.push_back(component);
+			return component;
 		}
 
 		// コンポーネントの取得
 		template<class T>
 		std::weak_ptr<T> GetComponent() {
-			return EvaEngine::Internal::ComponentManager::Instance().GetComponent<T>(GetSceneType(), m_GameObjectID);
+			return EvaEngine::Internal::ComponentManager::Instance().GetComponent<T>(GetSceneName(), GetGameObject());
 		}
+
+		std::vector<std::weak_ptr<Component>> GetAllComponents() override { return m_Components; };
 
 		// コンポーネントの削除
 		template<class T>
 		void RemoveComponent() {
-			EvaEngine::Internal::ComponentManager::Instance().RemoveComponent<T>(GetSceneType(), m_GameObjectID);
+			EvaEngine::Internal::ComponentManager::Instance().RemoveComponent<T>(GetSceneName(), m_GameObjectID);
+			
+			// 参照が切れたコンポーネントを配列から削除
+			for (int i = 0; i < m_Components.size(); ++i)
+			{
+				if (m_Components[i].expired()) {
+					// 消す場所と末尾をクルっと入れ替え
+					std::iter_swap(m_Components.begin() + i, m_Components.end() - 1);
+					// 末尾を削除
+					m_Components.pop_back();
+					return;
+				}
+			}
+
+			DebugLog::LogError(u8"GameObject側のComponent削除に失敗しました。");
 		}
 
 		// 名前で検索
@@ -59,11 +78,17 @@ namespace EvaEngine {
 		std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
 		// タグで検索してヒットしたゲームオブジェクトを全部持ってくる
 		std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
+		// オブジェクトのアクティブ状態を設定
+		void SetActive(const bool active);
+		// オブジェクトのアクティブ状態を取得
+		bool ActiveSelf() const;
 
 	private:
+		std::vector<std::weak_ptr<Component>> m_Components;
 		std::weak_ptr<Transform> m_Transform;
 		std::string m_Tag{};
 		std::string m_Name{};
+		bool m_IsActive{ true };
 		UINT m_GameObjectID{};
 	};
 }

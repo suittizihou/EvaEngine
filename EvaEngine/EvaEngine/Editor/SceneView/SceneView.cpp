@@ -7,6 +7,7 @@
 #include "../../Utility/Input/Input.h"
 #include "../../Utility/Math/Vector3/Vector3.h"
 #include "../../Utility/Time/Time.h"
+#include "../../Editor/EditorApplication/EditorApplication.h"
 
 EvaEngine::Editor::Internal::SceneView::SceneView() : EvaEngine::Component(EvaEngine::FunctionMask::UPDATE)
 {
@@ -16,12 +17,17 @@ void EvaEngine::Editor::Internal::SceneView::Awake()
 {
 	m_SceneCameraObj = EvaEngine::Internal::GameObjectManager::Instance().
 		Instantiate("Editor", "SceneView", "SceneViewParent").lock()->GetComponent<Transform>();
+	m_SceneCameraObj.lock()->position(0.0f, 0.0f, -5.0f);
 
 	m_SceneCameraObj.lock()->set_parent(GetTransform(), false);
 	m_SceneCamera = m_SceneCameraObj.lock()->GetGameObject().lock()->AddComponent<Camera>();
 }
 
 void EvaEngine::Editor::Internal::SceneView::Update() {
+
+	// SceneWindowが非アクティブの時は返す
+	if (EvaEngine::Editor::EditorApplication::sceneWindowIsActive == false) return;
+
 	// 移動
 	Vector3 velocity{};
 	auto transform = GetTransform().lock();

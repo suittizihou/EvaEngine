@@ -7,15 +7,20 @@ namespace EvaEngine {
 
 	// クォータニオン
 	struct Quaternion {
-		float x{ 0.0f };
-		float y{ 0.0f };
-		float z{ 0.0f };
-		float w{ 1.0f };
+		union {
+			struct {
+				float x;
+				float y;
+				float z;
+				float w;
+			};
+			float xyzw[3];
+		};
 
 		// デフォルトコンストラクタ
 		Quaternion() = default;
 		// コンストラクタ
-		Quaternion(float x, float y, float z, float w);
+		Quaternion(float x, float y, float z, float w = 1.0f);
 
 		// 単位クォータニオン
 		static Quaternion identity();

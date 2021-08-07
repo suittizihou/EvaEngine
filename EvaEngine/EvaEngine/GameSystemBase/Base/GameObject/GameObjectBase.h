@@ -1,9 +1,11 @@
 #pragma once
 
+#include <vector>
 #include <memory>
 #include "../GameJobs/GameJobs.h"
 
 namespace EvaEngine {
+	class Component;
 
 	class GameObjectBase : public GameJobs, public std::enable_shared_from_this<GameObjectBase> {
 	public:
@@ -19,6 +21,8 @@ namespace EvaEngine {
 
 		// 自身のweak_ptrを返す
 		std::weak_ptr<GameObjectBase> GetGameObject() { return shared_from_this(); }
+		// 所持している全コンポーネントを返す
+		virtual std::vector<std::weak_ptr<Component>> GetAllComponents() = 0;
 
 		// ObjectIDを返す
 		virtual UINT GetObjectID() const = 0;

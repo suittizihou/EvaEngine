@@ -7,6 +7,9 @@ using namespace EvaEngine::Internal;
 void SceneDataBase::LoadScene(const std::string& sceneType)
 {
     m_IsChangeScene = true;
+
+    // 前のシーン名を保持
+    m_PreviousSceneName = m_CurrentSceneName;
     m_CurrentSceneName = sceneType;
 }
 
@@ -14,6 +17,8 @@ void SceneDataBase::LoadScene(const UINT& sceneID)
 {
     for (const auto& scene : m_Scenes) {
         if (scene.second->GetSceneID() == sceneID) {
+            // 前のシーン名を保持
+            m_PreviousSceneName = m_CurrentSceneName;
             m_CurrentSceneName = scene.second->GetSceneName();
             return;
         }
@@ -38,9 +43,6 @@ HRESULT SceneDataBase::InitializeScene() {
         m_CurrentScene = m_Scenes[m_CurrentSceneName];
         Initialize();
 
-        // 今のシーンを保持
-        m_PreviousSceneName = m_CurrentSceneName;
-
         return S_OK;
     }
     catch (std::string error) {
@@ -48,18 +50,28 @@ HRESULT SceneDataBase::InitializeScene() {
     }
 }
 
-void SceneDataBase::SceneChange()
+HRESULT SceneDataBase::SceneChange()
 {
     // シーン切り替わりフラグが立っていなかったら早期リターン
-    if (!m_IsChangeScene) return;
+    if (!m_IsChangeScene) return S_OK;
 
     m_IsChangeScene = false;
+
+    if (IsCheckExists(m_CurrentSceneName) == false) {
+        DebugLog::LogError(m_CurrentSceneName + u8" は登録されていないシーンです。");
+        return E_ABORT;
+    }
 
     // 前のシーンで保持していたオブジェクトとコンポーネントを全削除
     ComponentManager::Instance().RemoveAllComponent(m_PreviousSceneName);
     GameObjectManager::Instance().RemoveAllGameObject(m_PreviousSceneName);
 
-    InitializeScene();
+    return InitializeScene();
+}
+
+bool EvaEngine::Internal::SceneDataBase::IsCheckExists(const std::string& sceneName)
+{
+    return m_Scenes.count(sceneName) == 1;
 }
 
 void SceneDataBase::Initialize()

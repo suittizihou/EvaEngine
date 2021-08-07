@@ -27,7 +27,7 @@ void MeshRenderer::Awake() {
 
 void MeshRenderer::Draw(const std::weak_ptr<Camera> camera, ID3D11DeviceContext* command)
 {
-	EvaEngine::Internal::DrawManager::Draw(camera, m_Transform, &m_Model);
+	EvaEngine::Internal::DrawManager::Draw(camera, m_Transform, m_Model);
 }
 
 #if _DEBUG

@@ -57,7 +57,7 @@ void DrawManager::DrawBegin(const std::weak_ptr<Camera>& camera)
 	camera.lock()->SetRenderTarget();
 }
 
-void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<Transform>& transform, ModelData* model)
+void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<Transform>& transform, std::weak_ptr<ModelData>& model)
 {
 	UINT strides = sizeof(VertexData);
 	UINT offset = 0;
@@ -82,7 +82,7 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 	DirectX::XMStoreFloat4(&DirectX11App::g_ConstantBufferData.cameraPos, DirectX::XMVectorSet(cameraPos.x, cameraPos.y, cameraPos.z, 0.0f));
 
 	// メッシュ情報が格納されているMapからメッシュを取り出す
-	for (const auto& meshs : model->meshes) {
+	for (const auto& meshs : model.lock()->meshes) {
 		// メッシュ情報が格納された配列から１メッシュずつ取り出す
 		for (auto mesh : meshs.second) {
 			// インプットレイアウトの設定
@@ -93,7 +93,7 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 			DirectX11App::g_Context->IASetIndexBuffer(mesh.GetIndexBuffer(), DXGI_FORMAT_R32_UINT, 0);
 
 			// マテリアルのセット
-			SetMaterial(&model->materials[mesh.GetMaterialName()]);
+			SetMaterial(&model.lock()->materials[mesh.GetMaterialName()]);
 
 			// 定数バッファの更新
 			DirectX11App::g_Context->UpdateSubresource(DirectX11App::g_ConstantBuffer, 0, NULL, &DirectX11App::g_ConstantBufferData, 0, 0);

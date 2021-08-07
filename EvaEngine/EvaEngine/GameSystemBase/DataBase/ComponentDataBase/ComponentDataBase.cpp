@@ -4,6 +4,7 @@
 #include "../../Manager/DrawManager/DrawManager.h"
 #include "../../../App/EditorApp/EditorApp.h"
 #include "../../../Editor/SceneView/SceneView.h"
+#include "../../../Editor/EditorApplication/EditorApplication.h"
 #include <iterator>
 
 using namespace EvaEngine::Internal;
@@ -11,6 +12,8 @@ using namespace EvaEngine::Internal;
 void ComponentDataBase::FixedUpdate()
 {
 	for (int i = 0; i < m_FixedUpdateFuncNumber.size(); ++i) {
+		if (m_Components[m_FixedUpdateFuncNumber[i]]->GetGameObject().lock()->ActiveSelf() == false) continue;
+
 		m_Components[m_FixedUpdateFuncNumber[i]]->FixedUpdate();
 	}
 }
@@ -18,6 +21,8 @@ void ComponentDataBase::FixedUpdate()
 void ComponentDataBase::Update()
 {
 	for (int i = 0; i < m_UpdateFuncNumber.size(); ++i) {
+		if (m_Components[m_UpdateFuncNumber[i]]->GetGameObject().lock()->ActiveSelf() == false) continue;
+
 		m_Components[m_UpdateFuncNumber[i]]->Update();
 	}
 }
@@ -25,6 +30,8 @@ void ComponentDataBase::Update()
 void ComponentDataBase::LateUpdate()
 {
 	for (int i = 0; i < m_LateUpdateFuncNumber.size(); ++i) {
+		if (m_Components[m_LateUpdateFuncNumber[i]]->GetGameObject().lock()->ActiveSelf() == false) continue;
+
 		m_Components[m_LateUpdateFuncNumber[i]]->LateUpdate();
 	}
 }
@@ -34,20 +41,23 @@ void ComponentDataBase::Draw(ID3D11DeviceContext* command) const
 #if _DEBUG
 	// シーンビューの描画
 	auto sceneViewCamera = EvaEngine::Editor::Internal::EditorApp::GetSceneView().lock()->GetSceneCamera();
+	sceneViewCamera.lock()->SetRenderTarget();
 	for (int i = 0; i < m_DrawFuncNumber.size(); ++i) {
-		sceneViewCamera.lock()->SetRenderTarget();
 		m_Components[m_DrawFuncNumber[i]]->Draw(sceneViewCamera, command);
 	}
 #endif
 
 	// カメラの数だけ描画する
 	auto cameras = Camera::GetAllCamera();
-	// １から始まっているのは、0番目の要素は必ずSceneViewのため
-	for (int cameraNum = 1; cameraNum < cameras.size(); ++cameraNum) {
+	for (int cameraNum = 0; cameraNum < cameras.size(); ++cameraNum) {
+		if (cameras[cameraNum].lock()->GetGameObject().lock()->ActiveSelf() == false) continue;
+
 		// 描画開始処理
 		cameras[cameraNum].lock()->SetRenderTarget();
 		// 描画開始
 		for (int i = 0; i < m_DrawFuncNumber.size(); ++i) {
+			if (m_Components[m_DrawFuncNumber[i]]->GetGameObject().lock()->ActiveSelf() == false) continue;
+
 			m_Components[m_DrawFuncNumber[i]]->Draw(cameras[cameraNum], command);
 		}
 	}
@@ -79,11 +89,69 @@ void ComponentDataBase::AddComponent(const std::shared_ptr<Component>& component
 	if (component->GetFunctionMask() & FunctionMask::DRAW) {
 		m_DrawFuncNumber.push_back(indexNum);
 	}
+	// 自身が登録されているコンポーネントの配列番号を設定
+	component->SetIndex(indexNum);
 	// コンポーネントの登録
 	m_Components.push_back(component);
 }
 
-void ComponentDataBase::RemoveComponent(const int index, const UINT mask)
+void ComponentDataBase::RemoveComponent(const std::weak_ptr<Component>& component)
+{
+	UINT index = component.lock()->GetIndex();
+	UINT mask = component.lock()->GetFunctionMask();
+
+	// 末尾のコンポーネントが使用している関数マスクを取得
+	UINT endElementMask = m_Components.back()->GetFunctionMask();
+
+	// 消す場所と末尾をクルっと入れ替え
+	std::iter_swap(m_Components.begin() + index, m_Components.end() - 1);
+	// 末尾を削除
+	m_Components.pop_back();
+	
+	// 現在の配列番号を設定
+	m_Components[index]->SetIndex(index);
+
+	// 削除前のコンポーネントがあった配列番号を各関数添字配列の末尾に入れる
+	// (この削除前の添字の場所(m_Components配列の場所)には削除しないコンポーネントの添字が入っている)
+	if (endElementMask & FunctionMask::FIXED_UPDATE) m_FixedUpdateFuncNumber[m_FixedUpdateFuncNumber.size() - 1] = index;
+	if (endElementMask & FunctionMask::UPDATE) m_UpdateFuncNumber[m_UpdateFuncNumber.size() - 1] = index;
+	if (endElementMask & FunctionMask::LATE_UPDATE) m_LateUpdateFuncNumber[m_LateUpdateFuncNumber.size() - 1] = index;
+	if (endElementMask & FunctionMask::DRAW) m_DrawFuncNumber[m_DrawFuncNumber.size() - 1] = index;
+
+	if (mask & FunctionMask::FIXED_UPDATE)
+	{
+		// 末尾の値を指定の場所にコピー
+		m_FixedUpdateFuncNumber[FindItr(m_FixedUpdateFuncNumber, index)] = m_FixedUpdateFuncNumber.back();
+		// 末尾を消す
+		m_FixedUpdateFuncNumber.pop_back();
+	}
+
+	if (mask & FunctionMask::UPDATE)
+	{
+		// 末尾の値を指定の場所にコピー
+		m_UpdateFuncNumber[FindItr(m_UpdateFuncNumber, index)] = m_UpdateFuncNumber.back();
+		// 末尾を消す
+		m_UpdateFuncNumber.pop_back();
+	}
+
+	if (mask & FunctionMask::LATE_UPDATE)
+	{
+		// 末尾の値を指定の場所にコピー
+		m_LateUpdateFuncNumber[FindItr(m_LateUpdateFuncNumber, index)] = m_LateUpdateFuncNumber.back();
+		// 末尾を消す
+		m_LateUpdateFuncNumber.pop_back();
+	}
+
+	if (mask & FunctionMask::DRAW)
+	{
+		// 末尾の値を指定の場所にコピー
+		m_DrawFuncNumber[FindItr(m_DrawFuncNumber, index)] = m_DrawFuncNumber.back();
+		// 末尾を消す
+		m_DrawFuncNumber.pop_back();
+	}
+}
+
+void ComponentDataBase::RemoveComponent(const UINT& index, const UINT& mask)
 {
 	// 末尾のコンポーネントが使用している関数マスクを取得
 	UINT endElementMask = m_Components.back()->GetFunctionMask();
@@ -92,6 +160,9 @@ void ComponentDataBase::RemoveComponent(const int index, const UINT mask)
 	std::iter_swap(m_Components.begin() + index, m_Components.end() - 1);
 	// 末尾を削除
 	m_Components.pop_back();
+	
+	// 現在の配列番号を設定
+	m_Components[index]->SetIndex(index);
 
 	// 削除前のコンポーネントがあった配列番号を各関数添字配列の末尾に入れる
 	// (この削除前の添字の場所(m_Components配列の場所)には削除しないコンポーネントの添字が入っている)

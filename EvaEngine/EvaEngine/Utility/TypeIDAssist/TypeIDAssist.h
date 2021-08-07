@@ -11,6 +11,7 @@ namespace EvaEngine {
 	public:
 		static std::string GetClassName() {
 			auto temp = StringAssist::Split(typeid(T).name(), "::");
+			if (temp.size() <= 1) temp = StringAssist::Split(typeid(T).name(), " ");
 			return temp[temp.size() - 1];
 		}
 	};

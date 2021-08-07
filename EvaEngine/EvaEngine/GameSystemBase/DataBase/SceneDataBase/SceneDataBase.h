@@ -40,6 +40,7 @@ namespace EvaEngine {
 				m_Scenes[sceneName] = scene;
 				ComponentManager::Instance().AddComponentDataBase(sceneName);
 				GameObjectManager::Instance().AddGameObjectDataBase(sceneName);
+				ModelManager::Instance().AddModelDataBase(sceneName);
 			}
 
 			// シーンのロード
@@ -52,7 +53,9 @@ namespace EvaEngine {
 			// シーンの初期化を行う
 			HRESULT InitializeScene();
 			// シーンを変える
-			void SceneChange();
+			HRESULT SceneChange();
+			// シーンが存在するかチェック
+			bool IsCheckExists(const std::string& sceneName);
 
 			// シーンのタスクシステムを回す
 			void Initialize();

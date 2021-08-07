@@ -1,5 +1,7 @@
 #include "ConsoleWindow.h"
 #include "../../../System/DebugLog/DebugLog.h"
+#include <iostream>
+#include <sstream>
 
 using namespace EvaEngine::Editor::Internal;
 

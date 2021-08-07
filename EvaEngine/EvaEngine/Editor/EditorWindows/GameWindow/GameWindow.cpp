@@ -1,6 +1,9 @@
 #include "GameWindow.h"
 #include "../../../GameSystemBase/Components/Camera/Camera.h"
 #include "../../../Utility/Texture/RenderTexture/RenderTexture.h"
+#include "../../EditorApplication/EditorApplication.h"
+
+using namespace EvaEngine::Editor;
 
 void EvaEngine::Editor::Internal::GameWindow::Init()
 {
@@ -9,12 +12,13 @@ void EvaEngine::Editor::Internal::GameWindow::Init()
 
 void EvaEngine::Editor::Internal::GameWindow::OnGUI()
 {
+	EditorApplication::gameWindowIsActive = ImGui::IsWindowFocused(ImGuiFocusedFlags_RootWindow);
+
 	auto windowSize = ImGui::GetWindowSize();
 
 	// 全カメラ情報を取得し、テクスチャとしてGameWindowに描画
 	auto cameras = Camera::GetAllCamera();
-	// １から始まっているのは、0番目の要素は必ずSceneViewのため
-	for (int i = 1; i < cameras.size(); ++i) {
+	for (int i = 0; i < cameras.size(); ++i) {
 		auto tagetTexture = cameras[i].lock()->targetTexture;
 		auto size = tagetTexture->GetTexelSize();
 		cameras[i].lock()->SetViewport(size.x, size.y);

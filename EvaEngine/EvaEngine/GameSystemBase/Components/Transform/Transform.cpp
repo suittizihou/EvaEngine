@@ -1,5 +1,6 @@
 #include "Transform.h"
 #include "../../../Utility/Math/Mathf/Mathf.h"
+#include <imgui.h>
 
 #if _DEBUG
 #include "../Camera/Camera.h"
@@ -18,6 +19,23 @@ Transform::~Transform()
 #if _DEBUG
 void EvaEngine::Transform::OnGUI()
 {
+	bool changeFlag = false;
+
+	Vector3 tempPos{ local_position_ };
+	changeFlag = ImGui::DragFloat3("position", tempPos.xyz, 0.05f, -FLT_MAX, +FLT_MAX);
+	local_position(tempPos);
+
+	changeFlag = ImGui::DragFloat3("rotation", internal_euler_rotation.xyz, 0.05f, -FLT_MAX, +FLT_MAX);
+	local_rotation(Quaternion::euler(internal_euler_rotation));
+
+	Vector3 tempScale{ local_scale_ };
+	changeFlag = ImGui::DragFloat3("scale", tempScale.xyz, 0.05f, -FLT_MAX, +FLT_MAX);
+	local_scale(tempScale);
+
+	//if (changeFlag) {
+	//	// ワールド空間を更新
+	//	update_world_transform(parent_);
+	//}
 	//Matrix4x4 matrix{ local_to_world_matrix() };
 	//std::weak_ptr<EvaEngine::Camera> camera = sceneView->GetSceneCamera();
 	//Matrix4x4 viewMatrix = camera.lock()->GetViewMatrix();
@@ -97,7 +115,7 @@ void Transform::position(const Vector3& value)
 
 void EvaEngine::Transform::position(float x, float y, float z)
 {
-	position_ = Vector3(x, y, z);
+	position(Vector3(x, y, z));
 }
 
 void Transform::move(const Vector3& velocity)
@@ -140,6 +158,11 @@ void Transform::euler_angles(const Vector3& value)
 	rotation(Quaternion::euler(value));
 }
 
+void EvaEngine::Transform::euler_angles(float x, float y, float z)
+{
+	euler_angles(Vector3(x, y, z));
+}
+
 void Transform::look_at(const Transform& target, const Vector3& world_up)
 {
 	look_at(target.position(), world_up);
@@ -152,18 +175,18 @@ void Transform::look_at(const Vector3& target, const Vector3& world_up)
 
 void Transform::rotate(const Vector3& eulers, Space relative_to)
 {
-	rotate(eulers.x, eulers.y, eulers.z, relative_to);
-}
-
-void Transform::rotate(float x, float y, float z, Space relative_to)
-{
-	Quaternion euler_rot = Quaternion::euler(x, y, z);
+	Quaternion euler_rot = Quaternion::euler(eulers);
 	if (relative_to == Space::Self) {
 		local_rotation(local_rotation_ * euler_rot);
 	}
 	else {
 		rotation(euler_rot * rotation_);
 	}
+}
+
+void Transform::rotate(float x, float y, float z, Space relative_to)
+{
+	rotate(Vector3(x, y, z), relative_to);
 }
 
 void Transform::rotate(const Vector3& axis, float angle, Space relative_to)
@@ -271,10 +294,10 @@ void Transform::set_parent(std::weak_ptr<Transform> parent, bool world_position_
 		}
 		else {
 			// 現在のローカル空間を更新せずにワールド空間を更新
-			update_world_transform(parent_.lock().get());
+			update_world_transform(parent_);
 		}
 		// 自分自身を親の子に登録
-		parent.lock()->children_.push_back(this);
+		parent.lock()->children_.push_back(weak_from_this());
 	}
 	else {
 		// 親がいなければ、ローカル空間はワールド空間と同じ
@@ -283,6 +306,16 @@ void Transform::set_parent(std::weak_ptr<Transform> parent, bool world_position_
 		local_scale_ = scale_;
 	}
 
+}
+
+std::list<std::weak_ptr<Transform>> EvaEngine::Transform::get_children() const
+{
+	return children_;
+}
+
+int EvaEngine::Transform::get_child_count() const
+{
+	return children_.size();
 }
 
 Vector3 Transform::local_scale() const
@@ -294,7 +327,12 @@ void Transform::local_scale(const Vector3& value)
 {
 	local_scale_ = value;
 	// ワールド空間を更新
-	update_world_transform(parent_.lock().get());
+	update_world_transform(parent_);
+}
+
+void EvaEngine::Transform::local_scale(float x, float y, float z)
+{
+	local_scale(Vector3(x, y, z));
 }
 
 Vector3 Transform::local_position() const
@@ -306,7 +344,12 @@ void Transform::local_position(const Vector3& value)
 {
 	local_position_ = value;
 	// ワールド空間を更新
-	update_world_transform(parent_.lock().get());
+	update_world_transform(parent_);
+}
+
+void EvaEngine::Transform::local_position(float x, float y, float z)
+{
+	local_position(Vector3(x, y, z));
 }
 
 Quaternion Transform::local_rotation() const
@@ -318,7 +361,12 @@ void Transform::local_rotation(const Quaternion& value)
 {
 	local_rotation_ = value;
 	// ワールド空間を更新
-	update_world_transform(parent_.lock().get());
+	update_world_transform(parent_);
+}
+
+void EvaEngine::Transform::local_rotation(float x, float y, float z, float w)
+{
+	local_rotation(Quaternion(x, y, z, w));
 }
 
 Vector3 Transform::local_euler_angles() const
@@ -331,11 +379,16 @@ void Transform::local_euler_angles(const Vector3& value)
 	local_rotation(Quaternion::euler(value));
 }
 
+void EvaEngine::Transform::local_euler_angles(float x, float y, float z)
+{
+	local_rotation(Quaternion::euler(x, y, z));
+}
+
 void Transform::detach_children()
 {
 	// 自身の親を子の親に変更する
 	for (auto child : children_) {
-		child->parent(parent_);
+		child.lock()->parent(parent_);
 	}
 }
 
@@ -343,18 +396,87 @@ void Transform::detach_parent()
 {
 	if (!parent_.expired()) {
 		// 親のリストから自身を削除
-		parent_.lock()->children_.remove(this);
+		std::weak_ptr<Transform> wp = weak_from_this();
+		parent_.lock()->children_.remove_if([wp](std::weak_ptr<Transform> p) {
+			std::shared_ptr<Transform> swp = wp.lock();
+			std::shared_ptr<Transform> sp = p.lock();
+			if (swp && sp) return swp == sp;
+			return false;
+		});
 		parent_ = std::weak_ptr<Transform>();
 	}
 }
 
-void Transform::update_world_transform(const Transform* parent)
+void EvaEngine::Transform::internal_position(const Vector3& value)
 {
-	if (parent != nullptr) {
+	if (!parent_.expired()) {
+		internal_local_position(parent_.lock()->inverse_transform_point(value));
+	}
+	else {
+		internal_local_position(value);
+	}
+}
+
+void EvaEngine::Transform::internal_position(float x, float y, float z)
+{
+	internal_position(x, y, z);
+}
+
+void EvaEngine::Transform::internal_local_position(const Vector3& value)
+{
+	local_position_ = value;
+	update_world_transform(parent_);
+}
+
+void EvaEngine::Transform::internal_local_position(float x, float y, float z)
+{
+	local_position(Vector3(x, y, z));
+}
+
+void EvaEngine::Transform::internal_rotation(const Quaternion& value)
+{
+	if (!parent_.expired()) {
+		internal_local_rotation(Quaternion::inverse(parent_.lock()->rotation()) * value);
+	}
+	else {
+		internal_local_rotation(value);
+	}
+}
+
+void EvaEngine::Transform::internal_rotation(float x, float y, float z, float w)
+{
+	internal_rotation(Quaternion(x, y, z, w));
+}
+
+void EvaEngine::Transform::internal_local_rotation(const Quaternion& value)
+{
+	local_rotation_ = value;
+	update_world_transform(parent_);
+}
+
+void EvaEngine::Transform::internal_local_rotation(float x, float y, float z, float w)
+{
+	internal_local_rotation(Quaternion(x, y, z, w));
+}
+
+void EvaEngine::Transform::internal_local_scale(const Vector3& value)
+{
+	local_scale_ = value;
+	update_world_transform(parent_);
+}
+
+void EvaEngine::Transform::internal_local_scale(float x, float y, float z)
+{
+	internal_local_scale(Vector3(x, y, z));
+}
+
+void Transform::update_world_transform(const std::weak_ptr<Transform>& parent)
+{
+	if (parent.lock().get() != nullptr) {
 		// ワールド空間の更新
-		position_ = parent->transform_point(local_position_);
-		rotation_ = parent->rotation_ * local_rotation_;
-		scale_ = Vector3::scale(parent->scale_, local_scale_);
+		position_ = parent.lock()->transform_point(local_position_);
+		rotation_ = parent.lock()->rotation_ * local_rotation_;
+		scale_ = Vector3::scale(parent.lock()->scale_, local_scale_);
 	}
 	else {
 		// 親がいなければローカル座標とワールド座標は同じ
@@ -364,6 +486,6 @@ void Transform::update_world_transform(const Transform* parent)
 	}
 	// 子供のワールド座標を更新
 	for (auto child : children_) {
-		child->update_world_transform(this);
+		child.lock()->update_world_transform(weak_from_this());
 	}
 }

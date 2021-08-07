@@ -10,10 +10,14 @@ namespace EvaEngine {
 	struct Vector4;
 	struct Color;
 	struct Vector3 {
-		float x{ 0.0f };	// X component of the vector.
-		float y{ 0.0f };	// Y component of the vector.
-		float z{ 0.0f };	// Z component of the vector.
-
+		union {
+			struct {
+				float x;	// X component of the vector.
+				float y;	// Y component of the vector.
+				float z;	// Z component of the vector.
+			};
+			float xyz[3];
+		};
 		static const float kEpsilon;
 
 		// デフォルトコンストラクタ

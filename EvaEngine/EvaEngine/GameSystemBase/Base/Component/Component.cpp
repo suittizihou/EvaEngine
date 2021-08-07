@@ -17,12 +17,18 @@ Component::Component(
 
 void Component::SetComponentDesc(const ComponentDesc& componentDesc)
 {
+	m_ComponentName = componentDesc.componentName;
 	SetSceneName(componentDesc.sceneName);
 	m_GameObject = std::static_pointer_cast<GameObject>(componentDesc.gameObject.lock());
 	m_HashCode = componentDesc.hashCode;
 	m_ComponentID = componentDesc.componentID;
 
 	m_Transform = m_GameObject.lock()->GetTransform();
+}
+
+void EvaEngine::Component::SetIndex(const UINT index)
+{
+	m_Index = index;
 }
 
 std::weak_ptr<GameObject> Component::GetGameObject() const
@@ -58,4 +64,14 @@ UINT Component::GetComponentID() const
 UINT Component::GetFunctionMask() const
 {
 	return m_FunctionMask;
+}
+
+UINT EvaEngine::Component::GetIndex() const
+{
+	return m_Index;
+}
+
+std::string EvaEngine::Component::GetComponentName() const
+{
+	return m_ComponentName;
 }

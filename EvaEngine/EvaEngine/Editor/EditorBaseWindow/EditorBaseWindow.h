@@ -16,7 +16,9 @@ namespace EvaEngine {
 				void Begin() override;
 				void OnGUI() override;
 
-				void Scanning(std::weak_ptr<EditorWindowData> editorWindows);
+			private:
+				void DrawPlayButtons();
+				void Scanning(const std::weak_ptr<EditorWindowData>& editorWindows);
 
 			private:
 				EditorWindowDataBase* p_EditorWindowDataBase{ nullptr };

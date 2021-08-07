@@ -6,7 +6,7 @@ namespace EvaEngine {
 	namespace Internal {
 		class ModelLoadBase {
 		public:
-			virtual ModelData LoadModel(const char* fileName) = 0;
+			virtual void LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model) = 0;
 		};
 	}
 }
