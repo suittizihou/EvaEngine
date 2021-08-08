@@ -57,10 +57,10 @@ namespace EvaEngine {
 		virtual void Draw(const std::weak_ptr<Camera> camera, ID3D11DeviceContext* command) {}
 
 #if _DEBUG
-		// Editor用の描画開始処理
-		virtual void OnBeginGUI() {};
 		// Editor用の描画
 		virtual void OnGUI() {};
+		// 閉じている時呼ばれる処理
+		virtual void OnClosedGUI() {}
 #endif
 
 		// このコンポーネントに紐づいているオブジェクトを返す

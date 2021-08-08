@@ -15,7 +15,6 @@ namespace EvaEngine {
 
 			private:
 				int m_ItemNum{ 0 };
-				bool isFirstOpen{ false };
 			};
 		}
 	}

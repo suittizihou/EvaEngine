@@ -19,17 +19,21 @@ Transform::~Transform()
 #if _DEBUG
 void EvaEngine::Transform::OnGUI()
 {
-	bool changeFlag = false;
+	//if (m_OpenedFlag == false) {
+	//	internal_euler_rotation += Vector3(360.0f, 360.0f, 360.0f) - euler_angles();
+	//}
+	//m_OpenedFlag = true;
 
 	Vector3 tempPos{ local_position_ };
-	changeFlag = ImGui::DragFloat3("position", tempPos.xyz, 0.05f, -FLT_MAX, +FLT_MAX);
+	m_OpenedFlag = ImGui::DragFloat3("position", tempPos.xyz, 0.05f, -FLT_MAX, +FLT_MAX);
 	local_position(tempPos);
 
-	changeFlag = ImGui::DragFloat3("rotation", internal_euler_rotation.xyz, 0.05f, -FLT_MAX, +FLT_MAX);
+	internal_euler_rotation = local_euler_angles();
+	m_OpenedFlag = ImGui::DragFloat3("rotation", internal_euler_rotation.xyz, 0.05f, -FLT_MAX, +FLT_MAX);
 	local_rotation(Quaternion::euler(internal_euler_rotation));
 
 	Vector3 tempScale{ local_scale_ };
-	changeFlag = ImGui::DragFloat3("scale", tempScale.xyz, 0.05f, -FLT_MAX, +FLT_MAX);
+	m_OpenedFlag = ImGui::DragFloat3("scale", tempScale.xyz, 0.05f, -FLT_MAX, +FLT_MAX);
 	local_scale(tempScale);
 
 	//if (changeFlag) {
@@ -45,6 +49,11 @@ void EvaEngine::Transform::OnGUI()
 	//	&projectionMatrix.m[0][0],
 	//	&matrix.m[0][0],
 	//	true);
+}
+
+void EvaEngine::Transform::OnClosedGUI()
+{
+	m_OpenedFlag = false;
 }
 #endif
 

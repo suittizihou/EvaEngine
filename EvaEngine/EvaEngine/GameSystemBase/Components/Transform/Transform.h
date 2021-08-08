@@ -24,6 +24,7 @@ namespace EvaEngine {
 #if _DEBUG
 		// Editor用の描画関数
 		void OnGUI() override;
+		void OnClosedGUI() override;
 #endif
 		// デストラクタ
 		~Transform();
@@ -174,5 +175,7 @@ namespace EvaEngine {
 		std::weak_ptr<Transform> parent_;
 		// 子のトランスフォーム
 		std::list<std::weak_ptr<Transform>> children_;
+
+		bool m_OpenedFlag{ false };
 	};
 }
