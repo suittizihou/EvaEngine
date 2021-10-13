@@ -8,6 +8,8 @@
 #include "../../../Mesh/Mesh.h"
 #include "../../../Material/Material.h"
 
+#include <chrono>
+
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
@@ -44,13 +46,18 @@ void FBXModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::
     fbx_importer->Import(fbx_scene);
 
     FbxGeometryConverter converter(fbx_manager);
+
+    auto start = std::chrono::system_clock::now();
     // ポリゴンを三角形にする
     converter.Triangulate(fbx_scene, true);
+    auto end = std::chrono::system_clock::now();
+    DebugLog::Log(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()));
 
     int materialNum = fbx_scene->GetSrcObjectCount<FbxSurfaceMaterial>();
     for (int i = 0; i < materialNum; ++i) {
         LoadMaterial(model, fbx_scene->GetSrcObject<FbxSurfaceMaterial>(i));
     }
+
 
     std::map<std::string, FbxNode*> mesh_node_list;
     // メッシュNodeを探す
@@ -183,7 +190,7 @@ bool FBXModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, co
     // 頂点座標の数の取得
     int polygon_vertex_count = mesh->GetPolygonVertexCount();
     
-    std::vector<VertexData> vertexData{};
+    std::vector<VertexData> vertexData(polygon_vertex_count);
 
     // GetPolygonVertexCount => 頂点数
     for (int i = 0; i < polygon_vertex_count; ++i) {
@@ -195,7 +202,7 @@ bool FBXModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, co
         vertex.position.z = (float)vertices[index][2];
 
         // 頂点座標リストから座標を取得する
-        vertexData.push_back(vertex);
+        vertexData[i] = vertex;
     }
 
     for (int i = 0; i < vertexData.size(); ++i) {
@@ -215,12 +222,18 @@ bool FBXModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, co
     // ポリゴン数の取得
     int polygon_count = mesh->GetPolygonCount();
 
-    std::vector<unsigned int> tempIndices;
+    std::vector<unsigned int> tempIndices(polygon_count * 3);
+    int polygonIndexNum = 0;
     // ポリゴンの数だけ連番として保存する
     for (int i = 0; i < polygon_count; ++i) {
-        tempIndices.push_back(i * 3 + 2);
-        tempIndices.push_back(i * 3 + 1);
-        tempIndices.push_back(i * 3);
+        tempIndices[polygonIndexNum] = i * 3 + 2;
+        polygonIndexNum++;
+
+        tempIndices[polygonIndexNum] = i * 3 + 1;
+        polygonIndexNum++;
+        
+        tempIndices[polygonIndexNum] = i * 3;
+        polygonIndexNum++;
     }
 
     Mesh tempMesh{};

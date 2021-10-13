@@ -11,7 +11,7 @@ using namespace EvaEngine::Editor::Internal;
 
 ImGuizmo::OPERATION EditorCommand::mCurrentGizmoOperation{ ImGuizmo::TRANSLATE };
 
-void EditorCommand::EditTransform(float* cameraView, float* cameraProjection, float* matrix, bool editTransformDecomposition)
+void EditorCommand::EditTransform(float* cameraView, float* cameraProjection, float* matrix, bool editTransformDecomposition, float camDistance)
 {
 	static ImGuizmo::MODE mCurrentGizmoMode(ImGuizmo::LOCAL);
 	static bool useSnap = false;

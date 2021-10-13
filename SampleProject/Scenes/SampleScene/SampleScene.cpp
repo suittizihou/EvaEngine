@@ -25,8 +25,8 @@ void SampleScene::Initialize()
 	std::uniform_real_distribution<> rand_1(2.5f, 5.0f);
 	std::uniform_real_distribution<> rand_2(0.5f, 1.0f);
 
-	for (int i = 0; i < 20; ++i) {
-		for (int k = 0; k < 20; ++k) {
+	for (int i = 0; i < 1; ++i) {
+		for (int k = 0; k < 1; ++k) {
 			auto meshObj = Instantiate("None", "GameObject");
 			auto mesh = meshObj.lock()->AddComponent<MeshFilter>(0);
 			mesh.lock()->GetGameObject().lock()->AddComponent<MeshRenderer>(mesh);
