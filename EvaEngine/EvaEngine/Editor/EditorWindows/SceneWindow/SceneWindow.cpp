@@ -9,6 +9,8 @@
 #include "../../../GameSystemBase/Base/GameObject/GameObject.h"
 #include "../../../GameSystemBase/Components/Transform/Transform.h"
 
+#include <ImGuizmo.h>
+
 using namespace EvaEngine::Editor;
 using namespace EvaEngine::Editor::Internal;
 
@@ -30,12 +32,28 @@ void SceneWindow::OnGUI()
 	auto tagetTexture = camera.lock()->targetTexture;
 	auto size = tagetTexture->GetTexelSize();
 	camera.lock()->SetViewport(windowSize.x, windowSize.y);
+	ImGui::Image((void*)tagetTexture->GetShaderResourceView(), ImVec2(windowSize.x, windowSize.y));
 
 	auto selectGameObject = Selection::GetActiveObject();
 	if (!selectGameObject.expired()) {
 		float* outMatrix = selectGameObject.lock()->GetTransform().lock()->world_to_local_matrix();
-		EditorCommand::EditTransform(camera.lock()->GetViewMatrix().m[0], camera.lock()->GetProjectionMatrix().m[0], outMatrix, true);
-	}
 
-	ImGui::Image((void*)tagetTexture->GetShaderResourceView(), ImVec2(windowSize.x, windowSize.y));
+		//float windowWidth = (float)ImGui::GetWindowWidth();
+		//float windowHeight = (float)ImGui::GetWindowHeight();
+		//ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+
+		//ImGuizmo::Manipulate(
+		//	camera.lock()->GetViewMatrix().m[0], 
+		//	camera.lock()->GetProjectionMatrix().m[0], 
+		//	ImGuizmo::TRANSLATE,
+		//	ImGuizmo::LOCAL, 
+		//	outMatrix);
+
+		//Matrix4x4 view = camera.lock()->GetViewMatrix();
+		//Matrix4x4 projection = camera.lock()->GetProjectionMatrix();
+
+		ImGuizmo::SetID(0);
+		EditorCommand::EditTransform(camera.lock()->GetViewMatrix().m[0], camera.lock()->GetProjectionMatrix().m[0], outMatrix, true);
+		ImGuizmo::IsUsing();
+	}
 }
