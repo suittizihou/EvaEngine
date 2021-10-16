@@ -1,6 +1,5 @@
 #include "Transform.h"
 #include "../../../Utility/Math/Mathf/Mathf.h"
-#include <imgui.h>
 
 #if _DEBUG
 #include "../Camera/Camera.h"

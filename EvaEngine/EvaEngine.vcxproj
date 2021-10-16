@@ -595,6 +595,7 @@
     <ClCompile Include="EvaEngine\GameSystemBase\Base\GameObject\GameObject.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Base\Scene\Scene.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Components\Camera\Camera.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Components\MeshFilter\MeshFilter.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Components\MeshRenderer\MeshRenderer.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Components\MonoBehaviour\MonoBehaviour.cpp" />
     <ClCompile Include="EvaEngine\GameSystemBase\Components\Transform\Transform.cpp" />

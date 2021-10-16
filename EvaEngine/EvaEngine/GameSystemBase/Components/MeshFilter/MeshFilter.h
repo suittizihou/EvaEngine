@@ -14,7 +14,7 @@ namespace EvaEngine {
 		~MeshFilter() = default;
 
 #if _DEBUG
-		void OnGUI() override {}
+		void OnGUI() override;
 #endif
 
 		std::weak_ptr<ModelData> GetModel() { return m_Model; }
