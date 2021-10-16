@@ -17,6 +17,11 @@ namespace EvaEngine {
 		static GameBase* Instance();
 
 	private:
+		// ÉRÉsÅ[ã÷é~
+		GameBase(const GameBase& other) = delete;
+		GameBase& operator=(const GameBase& other) = delete;
+
+	private:
 		static GameBase* m_GameBase;
 	};
 }

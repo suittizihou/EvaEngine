@@ -11,10 +11,12 @@ SinMove::SinMove(const float swingWidth, const float speed) :
 
 void SinMove::Awake()
 {
-	m_DefaultPos = GetTransform().lock()->position();
+	Vector3 position = GetTransform().lock()->position();
+	m_DefaultPos = position;
+	m_Counter = (position.x + position.z) * 0.1f;
 }
 
 void SinMove::Update() {
 	GetTransform().lock()->position(m_DefaultPos.x, std::sin(m_Counter) * m_SwingWidth, m_DefaultPos.z);
-	m_Counter += m_Speed * Time::GetDeltaTime();
+	m_Counter += 1.0f * Time::GetDeltaTime();
 }

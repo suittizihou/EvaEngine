@@ -2,7 +2,7 @@
 
 using namespace EvaEngine::Internal;
 
-const std::string Window::g_WindowName{ "DirectX11Project" };
+const std::string Window::g_WindowName{ "EvaEngine" };
 UINT Window::g_WindowLeft{ 0 };
 UINT Window::g_WindowRight{ 1280 };
 UINT Window::g_WindowTop{ 0 };

@@ -14,6 +14,11 @@ Matrix4x4::Matrix4x4(float m11, float m12, float m13, float m14, float m21, floa
 	m[3][0] = m41; m[3][1] = m42; m[3][2] = m43; m[3][3] = m44;
 }
 
+EvaEngine::Matrix4x4::Matrix4x4(float* matrix)
+{
+	memcpy(&m16[0], &matrix[0], sizeof(float) * 16);
+}
+
 Matrix4x4 Matrix4x4::zero()
 {
 	return Matrix4x4(

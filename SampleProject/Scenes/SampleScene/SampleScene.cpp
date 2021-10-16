@@ -25,14 +25,14 @@ void SampleScene::Initialize()
 	std::uniform_real_distribution<> rand_1(2.5f, 5.0f);
 	std::uniform_real_distribution<> rand_2(0.5f, 1.0f);
 
-	for (int i = 0; i < 20; ++i) {
-		for (int k = 0; k < 20; ++k) {
+	for (int i = 0; i < 32; ++i) {
+		for (int k = 0; k < 32; ++k) {
 			auto meshObj = Instantiate("None", "GameObject");
 			auto mesh = meshObj.lock()->AddComponent<MeshFilter>(0);
 			mesh.lock()->GetGameObject().lock()->AddComponent<MeshRenderer>(mesh);
 			mesh.lock()->GetTransform().lock()->rotate(90.0f, 0.0f, 0.0f);
 			mesh.lock()->GetTransform().lock()->position(i * 2, 0.0f, k * 2);
-			mesh.lock()->GetGameObject().lock()->AddComponent<SinMove>(rand_2(mt), rand_1(mt));
+			mesh.lock()->GetGameObject().lock()->AddComponent<SinMove>(2.0f, rand_1(mt));
 		}
 	}
 }

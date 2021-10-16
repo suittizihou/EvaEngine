@@ -14,10 +14,7 @@ namespace EvaEngine {
 			public:
 
 				// TransformÇÃï“èWÇGUIÇ≈çsÇ¶ÇÈÇÊÇ§Ç…Ç∑ÇÈä÷êî
-				void EditTransform(float* cameraView, float* cameraProjection, float* matrix, bool editTransformDecomposition);
-
-			public:
-				float camDistance = 8.f;
+				static void EditTransform(float* cameraView, float* cameraProjection, float* matrix, bool editTransformDecomposition, float camDistance = 8.0f);
 
 			private:
 				static ImGuizmo::OPERATION mCurrentGizmoOperation;

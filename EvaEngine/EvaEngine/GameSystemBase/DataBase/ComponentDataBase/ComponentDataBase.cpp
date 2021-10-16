@@ -11,7 +11,7 @@ using namespace EvaEngine::Internal;
 
 void ComponentDataBase::FixedUpdate()
 {
-	for (int i = 0; i < m_FixedUpdateFuncNumber.size(); ++i) {
+	for (int i = 0, size = m_FixedUpdateFuncNumber.size(); i < size; ++i) {
 		if (m_Components[m_FixedUpdateFuncNumber[i]]->GetGameObject().lock()->ActiveSelf() == false) continue;
 
 		m_Components[m_FixedUpdateFuncNumber[i]]->FixedUpdate();
@@ -20,7 +20,7 @@ void ComponentDataBase::FixedUpdate()
 
 void ComponentDataBase::Update()
 {
-	for (int i = 0; i < m_UpdateFuncNumber.size(); ++i) {
+	for (int i = 0, size = m_UpdateFuncNumber.size(); i < size; ++i) {
 		if (m_Components[m_UpdateFuncNumber[i]]->GetGameObject().lock()->ActiveSelf() == false) continue;
 
 		m_Components[m_UpdateFuncNumber[i]]->Update();
@@ -29,7 +29,7 @@ void ComponentDataBase::Update()
 
 void ComponentDataBase::LateUpdate()
 {
-	for (int i = 0; i < m_LateUpdateFuncNumber.size(); ++i) {
+	for (int i = 0, size = m_LateUpdateFuncNumber.size(); i < size; ++i) {
 		if (m_Components[m_LateUpdateFuncNumber[i]]->GetGameObject().lock()->ActiveSelf() == false) continue;
 
 		m_Components[m_LateUpdateFuncNumber[i]]->LateUpdate();
@@ -42,20 +42,21 @@ void ComponentDataBase::Draw(ID3D11DeviceContext* command) const
 	// シーンビューの描画
 	auto sceneViewCamera = EvaEngine::Editor::Internal::EditorApp::GetSceneView().lock()->GetSceneCamera();
 	sceneViewCamera.lock()->SetRenderTarget();
-	for (int i = 0; i < m_DrawFuncNumber.size(); ++i) {
+	for (int i = 0, size = m_DrawFuncNumber.size(); i < size; ++i) {
 		m_Components[m_DrawFuncNumber[i]]->Draw(sceneViewCamera, command);
 	}
 #endif
 
+
 	// カメラの数だけ描画する
 	auto cameras = Camera::GetAllCamera();
-	for (int cameraNum = 0; cameraNum < cameras.size(); ++cameraNum) {
+	for (int cameraNum = 0, size = cameras.size(); cameraNum < size; ++cameraNum) {
 		if (cameras[cameraNum].lock()->GetGameObject().lock()->ActiveSelf() == false) continue;
 
 		// 描画開始処理
 		cameras[cameraNum].lock()->SetRenderTarget();
 		// 描画開始
-		for (int i = 0; i < m_DrawFuncNumber.size(); ++i) {
+		for (int i = 0, size = m_DrawFuncNumber.size(); i < size; ++i) {
 			if (m_Components[m_DrawFuncNumber[i]]->GetGameObject().lock()->ActiveSelf() == false) continue;
 
 			m_Components[m_DrawFuncNumber[i]]->Draw(cameras[cameraNum], command);

@@ -10,6 +10,8 @@
 #include "../../Components/Transform/Transform.h"
 #include "../../DataBase/ShaderDataBase/ShaderDataBase.h"
 
+//#include <chrono>
+
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
@@ -57,12 +59,14 @@ void DrawManager::DrawBegin(const std::weak_ptr<Camera>& camera)
 	camera.lock()->SetRenderTarget();
 }
 
-void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<Transform>& transform, std::weak_ptr<ModelData>& model)
+void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<Transform>& transform, const std::weak_ptr<ModelData>& model)
 {
+	//std::chrono::system_clock::time_point start, end;
+	//start = std::chrono::system_clock::now();
 	UINT strides = sizeof(VertexData);
 	UINT offset = 0;
 
-	Matrix4x4 matrix = transform.lock()->local_to_world_matrix();
+	Matrix4x4 matrix{ transform.lock()->local_to_world_matrix().m[0] };
 	DirectX::XMMATRIX worldMatrix
 	{
 		matrix.m[0][0], matrix.m[0][1], matrix.m[0][2], matrix.m[0][3],
@@ -105,6 +109,8 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 			DirectX11App::g_Context->DrawIndexed(static_cast<UINT>(mesh.GetIndices().size()), 0, 0);
 		}
 	}
+	//end = std::chrono::system_clock::now();
+	//double elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
 }
 
 void DrawManager::DrawEnd()

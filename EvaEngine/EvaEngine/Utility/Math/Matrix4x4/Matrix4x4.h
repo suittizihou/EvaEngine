@@ -10,7 +10,12 @@ namespace EvaEngine {
 
 	// 行列
 	struct Matrix4x4 {
-		float m[4][4]{};
+
+		union{
+			float m[4][4];
+			float m16[16];
+		};
+
 		// コンストラクタ
 		Matrix4x4() = default;
 		// コンストラクタ
@@ -20,6 +25,11 @@ namespace EvaEngine {
 			float m31, float m32, float m33, float m34,
 			float m41, float m42, float m43, float m44
 		);
+		Matrix4x4(float* matrix);
+		Matrix4x4(const Matrix4x4& matrix) { memcpy(&m16[0], &matrix.m16[0], sizeof(float) * 16); }
+
+		operator float* () { return m16; }
+		operator const float* () const { return m16; }
 
 		// ゼロ行列
 		static Matrix4x4 zero();
