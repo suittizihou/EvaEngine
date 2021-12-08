@@ -2,6 +2,7 @@
 #include "../../../Utility/Math/Mathf/Mathf.h"
 
 #if _DEBUG
+#include <imgui.h>
 #include "../Camera/Camera.h"
 #endif
 

@@ -40,13 +40,8 @@ void ComponentDataBase::Draw(ID3D11DeviceContext* command) const
 {
 #if _DEBUG
 	// シーンビューの描画
-	auto sceneViewCamera = EvaEngine::Editor::Internal::EditorApp::GetSceneView().lock()->GetSceneCamera();
-	sceneViewCamera.lock()->SetRenderTarget();
-	for (int i = 0, size = m_DrawFuncNumber.size(); i < size; ++i) {
-		m_Components[m_DrawFuncNumber[i]]->Draw(sceneViewCamera, command);
-	}
+	DrawSceneView(command);
 #endif
-
 
 	// カメラの数だけ描画する
 	auto cameras = Camera::GetAllCamera();
@@ -65,6 +60,15 @@ void ComponentDataBase::Draw(ID3D11DeviceContext* command) const
 }
 
 #if _DEBUG
+void EvaEngine::Internal::ComponentDataBase::DrawSceneView(ID3D11DeviceContext* command) const
+{
+	auto sceneViewCamera = EvaEngine::Editor::Internal::EditorApp::GetSceneView().lock()->GetSceneCamera();
+	sceneViewCamera.lock()->SetRenderTarget();
+	for (int i = 0, size = m_DrawFuncNumber.size(); i < size; ++i) {
+		m_Components[m_DrawFuncNumber[i]]->Draw(sceneViewCamera, command);
+	}
+}
+
 void ComponentDataBase::OnGUI()
 {
 	for (const auto& component : m_Components) {

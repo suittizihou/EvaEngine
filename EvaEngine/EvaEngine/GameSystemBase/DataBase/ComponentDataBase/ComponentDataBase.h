@@ -183,6 +183,9 @@ namespace EvaEngine {
 			// Draw関数を回す
 			void Draw(ID3D11DeviceContext* command) const;
 #if _DEBUG
+			// シーンビュー用描画関数
+			void DrawSceneView(ID3D11DeviceContext* command) const;
+			// ComponentのOnGUIを呼び出す用
 			void OnGUI();
 #endif
 

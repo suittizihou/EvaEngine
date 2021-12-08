@@ -48,7 +48,7 @@ EvaEngine::Texture2D::~Texture2D()
 
 void STDMETHODCALLTYPE Texture2D::GetD3DTexture2D(_Out_ D3D11_TEXTURE2D_DESC* pDesc)
 {
-	return m_Texture2D->GetDesc(pDesc);
+	m_Texture2D->GetDesc(pDesc);
 }
 
 void EvaEngine::Texture2D::Init()
@@ -63,6 +63,10 @@ void EvaEngine::Texture2D::Create()
 		DebugLog::LogError(u8"Failed : CreateTexture2D in Texture2D");
 		return;
 	}
+}
+
+void EvaEngine::Texture2D::LoadImage()
+{
 }
 
 void EvaEngine::Texture2D::Release()

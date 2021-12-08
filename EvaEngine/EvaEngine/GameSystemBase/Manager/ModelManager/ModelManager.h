@@ -28,8 +28,8 @@ namespace EvaEngine {
 		void AddModelDataBase(const std::string& sceneName);
 
 		// モデルを追加
-		int AddModel(const std::string& fileName);
-		int AddModel(const std::shared_ptr<ModelData>& model);
+		int LoadModel(const std::string& fileName);
+		int LoadModel(const std::shared_ptr<ModelData>& model);
 		// モデルデータを取得
 		std::weak_ptr<ModelData> GetModel(const int modelHandle);
 		// モデルデータを削除

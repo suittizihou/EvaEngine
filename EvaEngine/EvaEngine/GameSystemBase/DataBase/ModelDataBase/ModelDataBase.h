@@ -10,8 +10,8 @@ namespace EvaEngine {
 			~ModelDataBase() = default;
 
 			// モデルデータを追加する
-			int AddModelData(const std::shared_ptr<EvaEngine::ModelData>& model);
-			int AddModelData(const std::string& fileName);
+			int LoadModelData(const std::shared_ptr<EvaEngine::ModelData>& model);
+			int LoadModelData(const std::string& fileName);
 			// モデルデータを取得
 			std::weak_ptr<ModelData> GetModel(const int modelHandle);
 			// モデルデータをメモリから消す

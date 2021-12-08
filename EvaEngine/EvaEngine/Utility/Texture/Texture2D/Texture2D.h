@@ -2,6 +2,8 @@
 
 #include "../Texture/Texture.h"
 
+#undef LoadImage
+
 namespace EvaEngine {
 
 	class Texture2D : public Texture {
@@ -18,6 +20,7 @@ namespace EvaEngine {
 
 	public:
 		void Create();
+		void LoadImage();
 		void Release();
 	public:
 		operator ID3D11Texture2D*() const;

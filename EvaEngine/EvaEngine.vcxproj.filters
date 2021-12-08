@@ -1140,6 +1140,21 @@
     <ClInclude Include="EvaEngine\Editor\Selection\Selection.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="imgui\ImGradient.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\ImCurveEdit.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\ImSequencer.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaEngine\Utility\Plugin\StreamReader.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaEngine\Utility\Texture\TextureLoader\TextureLoader.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1362,6 +1377,15 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="EvaEngine\GameSystemBase\Components\MeshFilter\MeshFilter.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\ImCurveEdit.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\ImGradient.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\ImSequencer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

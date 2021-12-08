@@ -5,16 +5,16 @@
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-int ModelDataBase::AddModelData(const std::shared_ptr<EvaEngine::ModelData>& model)
+int ModelDataBase::LoadModelData(const std::shared_ptr<EvaEngine::ModelData>& model)
 {
     m_Models[modelCount] = model;
     modelCount += 1;
     return modelCount - 1;
 }
 
-int ModelDataBase::AddModelData(const std::string& fileName)
+int ModelDataBase::LoadModelData(const std::string& fileName)
 {
-    return AddModelData(ModelLoader::Load(fileName));
+    return LoadModelData(ModelLoader::Load(fileName));
 }
 
 std::weak_ptr<ModelData> ModelDataBase::GetModel(const int modelHandle)

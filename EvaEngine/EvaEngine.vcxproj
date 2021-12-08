@@ -218,9 +218,11 @@
     <ClInclude Include="EvaEngine\Utility\Math\Color\Color.h" />
     <ClInclude Include="EvaEngine\Utility\Math\Math.h" />
     <ClInclude Include="EvaEngine\Utility\Math\Vector4\Vector4.h" />
+    <ClInclude Include="EvaEngine\Utility\Plugin\StreamReader.h" />
     <ClInclude Include="EvaEngine\Utility\ShaderUtility\ShaderBase\ShaderBase.h" />
     <ClInclude Include="EvaEngine\Utility\Texture\RenderTexture\RenderTexture.h" />
     <ClInclude Include="EvaEngine\Utility\Texture\Texture2D\Texture2D.h" />
+    <ClInclude Include="EvaEngine\Utility\Texture\TextureLoader\TextureLoader.h" />
     <ClInclude Include="EvaEngine\Utility\Texture\Texture\Texture.h" />
     <ClInclude Include="EvaEngine\Utility\TypeIDAssist\TypeIDAssist.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk.h" />
@@ -532,9 +534,12 @@
     <ClInclude Include="imgui\backends\imgui_impl_dx11.h" />
     <ClInclude Include="imgui\backends\imgui_impl_win32.h" />
     <ClInclude Include="imgui\imconfig.h" />
+    <ClInclude Include="imgui\ImCurveEdit.h" />
+    <ClInclude Include="imgui\ImGradient.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\ImGuizmo.h" />
     <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="imgui\ImSequencer.h" />
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
@@ -619,12 +624,15 @@
     <ClCompile Include="EvaEngine\Utility\Time\TimeBase.cpp" />
     <ClCompile Include="imgui\backends\imgui_impl_dx11.cpp" />
     <ClCompile Include="imgui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="imgui\ImCurveEdit.cpp" />
+    <ClCompile Include="imgui\ImGradient.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\ImGuizmo.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClCompile Include="imgui\ImSequencer.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

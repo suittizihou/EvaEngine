@@ -15,16 +15,15 @@
 using namespace EvaEngine;
 using namespace FunctionMask;
 
-MeshRenderer::MeshRenderer(
-	const std::weak_ptr<MeshFilter>& meshFilter) :
-	Component(DRAW, false),
-	m_Model(meshFilter.lock()->GetModel()),
-	m_MeshFilter(meshFilter)
+MeshRenderer::MeshRenderer() :
+	Component(DRAW, false)
 {
 }
 
 void MeshRenderer::Awake() {
 	m_Transform = GetTransform();
+	m_MeshFilter = GetGameObject().lock()->GetComponent<MeshFilter>();
+	m_Model = m_MeshFilter.lock()->GetModel();
 }
 
 void MeshRenderer::Draw(const std::weak_ptr<Camera>& camera, ID3D11DeviceContext* command)

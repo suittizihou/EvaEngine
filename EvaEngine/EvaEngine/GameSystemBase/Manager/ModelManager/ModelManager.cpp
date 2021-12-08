@@ -10,14 +10,14 @@ void EvaEngine::ModelManager::AddModelDataBase(const std::string& sceneName)
 	m_ModelDatas[sceneName] = std::make_shared<ModelDataBase>();
 }
 
-int EvaEngine::ModelManager::AddModel(const std::string& fileName)
+int EvaEngine::ModelManager::LoadModel(const std::string& fileName)
 {
-	return m_ModelDatas[SceneManager::GetCurrentSceneName()]->AddModelData(fileName);
+	return m_ModelDatas[SceneManager::GetCurrentSceneName()]->LoadModelData(fileName);
 }
 
-int EvaEngine::ModelManager::AddModel(const std::shared_ptr<ModelData>& model)
+int EvaEngine::ModelManager::LoadModel(const std::shared_ptr<ModelData>& model)
 {
-	return m_ModelDatas[SceneManager::GetCurrentSceneName()]->AddModelData(model);
+	return m_ModelDatas[SceneManager::GetCurrentSceneName()]->LoadModelData(model);
 }
 
 std::weak_ptr<ModelData> EvaEngine::ModelManager::GetModel(const int modelHandle)

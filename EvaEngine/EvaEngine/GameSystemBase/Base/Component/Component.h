@@ -7,7 +7,6 @@
 
 #if _DEBUG
 #include "../../../Editor/EditorCommand/EditorCommand.h"
-#include <imgui.h>
 #endif
 
 namespace EvaEngine {
