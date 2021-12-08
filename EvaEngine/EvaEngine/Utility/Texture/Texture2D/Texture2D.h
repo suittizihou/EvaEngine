@@ -13,7 +13,6 @@ namespace EvaEngine {
 		Texture2D(const UINT width, const UINT height, const D3D11_TEXTURE2D_DESC& textureDesc);
 		~Texture2D();
 
-		void STDMETHODCALLTYPE GetD3DTexture2D(_Out_ D3D11_TEXTURE2D_DESC* pDesc);
 
 	private:
 		void Init();
@@ -22,8 +21,9 @@ namespace EvaEngine {
 		void Create();
 		void LoadImage();
 		void Release();
-	public:
-		operator ID3D11Texture2D*() const;
+
+		void STDMETHODCALLTYPE GetD3DTexture2DDESC(_Out_ D3D11_TEXTURE2D_DESC* pDesc);
+		ID3D11Texture2D* GetD3DTexture2D() const;
 
 	private:
 		// 2次元テクスチャの設定

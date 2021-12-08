@@ -16,7 +16,7 @@ EvaEngine::RenderTexture::~RenderTexture()
 
 void EvaEngine::RenderTexture::Create()
 {
-	m_pTexture2D = std::make_shared<Texture2D>(texelSize.x, texelSize.y);
+	m_pTexture2D = std::make_unique<Texture2D>(texelSize.x, texelSize.y);
 	m_pTexture2D->Create();
 
 	D3D11_RENDER_TARGET_VIEW_DESC rtvDesc;
@@ -24,7 +24,7 @@ void EvaEngine::RenderTexture::Create()
 	rtvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
 
-	HRESULT hr = DirectX11App::g_Device->CreateRenderTargetView(*m_pTexture2D, &rtvDesc, &m_RenderTargetView);
+	HRESULT hr = DirectX11App::g_Device->CreateRenderTargetView(m_pTexture2D->GetD3DTexture2D(), &rtvDesc, &m_RenderTargetView);
 	if (FAILED(hr)) {
 		DebugLog::LogError(u8"Failed : CreateRenderTargetView in RenderTexture");
 		return;
@@ -36,7 +36,7 @@ void EvaEngine::RenderTexture::Create()
 	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 	srvDesc.Texture2D.MipLevels = 1;
 
-	hr = DirectX11App::g_Device->CreateShaderResourceView(*m_pTexture2D, &srvDesc, &m_ShaderResourceView);
+	hr = DirectX11App::g_Device->CreateShaderResourceView(m_pTexture2D->GetD3DTexture2D(), &srvDesc, &m_ShaderResourceView);
 	if (FAILED(hr)) {
 		DebugLog::LogError(u8"Failed : CreateShaderResourceView in RenderTexture");
 		return;

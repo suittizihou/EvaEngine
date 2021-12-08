@@ -46,11 +46,6 @@ EvaEngine::Texture2D::~Texture2D()
 {
 }
 
-void STDMETHODCALLTYPE Texture2D::GetD3DTexture2D(_Out_ D3D11_TEXTURE2D_DESC* pDesc)
-{
-	m_Texture2D->GetDesc(pDesc);
-}
-
 void EvaEngine::Texture2D::Init()
 {
 	textureType = TextureType::Tex2D;
@@ -67,6 +62,7 @@ void EvaEngine::Texture2D::Create()
 
 void EvaEngine::Texture2D::LoadImage()
 {
+	
 }
 
 void EvaEngine::Texture2D::Release()
@@ -77,7 +73,12 @@ void EvaEngine::Texture2D::Release()
 	}
 }
 
-EvaEngine::Texture2D::operator ID3D11Texture2D*() const
+void STDMETHODCALLTYPE Texture2D::GetD3DTexture2DDESC(_Out_ D3D11_TEXTURE2D_DESC* pDesc)
+{
+	m_Texture2D->GetDesc(pDesc);
+}
+
+ID3D11Texture2D* EvaEngine::Texture2D::GetD3DTexture2D() const
 {
 	return m_Texture2D;
 }

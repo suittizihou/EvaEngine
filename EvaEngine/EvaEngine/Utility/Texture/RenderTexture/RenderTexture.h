@@ -20,10 +20,8 @@ namespace EvaEngine {
 		ID3D11ShaderResourceView* GetShaderResourceView() const;
 
 	private:
-		std::shared_ptr<Texture2D> m_pTexture2D{ nullptr };
+		std::unique_ptr<Texture2D> m_pTexture2D{ nullptr };
 		ID3D11RenderTargetView* m_RenderTargetView{ nullptr };
 		ID3D11DepthStencilView* m_DepthStencilView{ nullptr };
-		ID3D11ShaderResourceView* m_ShaderResourceView{ nullptr };
-		ID3D11SamplerState* m_SamplerState{ nullptr };
 	};
 }
