@@ -18,16 +18,16 @@ namespace EvaEngine {
 		void Init();
 
 	public:
-		void Create();
-		void LoadImage();
-		void Release();
+		void Create() override;
 
 		void STDMETHODCALLTYPE GetD3DTexture2DDESC(_Out_ D3D11_TEXTURE2D_DESC* pDesc);
 		ID3D11Texture2D* GetD3DTexture2D() const;
 
+		void CreateShaderResourceView(const D3D11_SHADER_RESOURCE_VIEW_DESC& desc);
+		void CreateSamplerState(const D3D11_SAMPLER_DESC& desc);
+
 	private:
 		// 2次元テクスチャの設定
 		D3D11_TEXTURE2D_DESC m_TextureDesc{};
-		ID3D11Texture2D* m_Texture2D{ nullptr };
 	};
 }

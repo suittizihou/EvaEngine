@@ -53,32 +53,35 @@ void EvaEngine::Texture2D::Init()
 
 void EvaEngine::Texture2D::Create()
 {
-	HRESULT hr = DirectX11App::g_Device->CreateTexture2D(&m_TextureDesc, nullptr, &m_Texture2D);
+	ID3D11Texture2D* texture{ nullptr };
+	HRESULT hr = DirectX11App::g_Device->CreateTexture2D(&m_TextureDesc, nullptr, &texture);
 	if (FAILED(hr)) {
 		DebugLog::LogError(u8"Failed : CreateTexture2D in Texture2D");
 		return;
 	}
-}
-
-void EvaEngine::Texture2D::LoadImage()
-{
-	
-}
-
-void EvaEngine::Texture2D::Release()
-{
-	if (m_Texture2D != nullptr) {
-		m_Texture2D->Release();
-		m_Texture2D = nullptr;
-	}
+	m_Texture = texture;
 }
 
 void STDMETHODCALLTYPE Texture2D::GetD3DTexture2DDESC(_Out_ D3D11_TEXTURE2D_DESC* pDesc)
 {
-	m_Texture2D->GetDesc(pDesc);
+	GetD3DTexture2D()->GetDesc(pDesc);
 }
 
 ID3D11Texture2D* EvaEngine::Texture2D::GetD3DTexture2D() const
 {
-	return m_Texture2D;
+	return static_cast<ID3D11Texture2D*>(m_Texture);
+}
+
+void EvaEngine::Texture2D::CreateShaderResourceView(const D3D11_SHADER_RESOURCE_VIEW_DESC& desc)
+{
+	HRESULT hr = Internal::DirectX11App::g_Device->CreateShaderResourceView(m_Texture, &desc, &m_ShaderResourceView);
+
+	if (FAILED(hr)) DebugLog::LogError(u8"Failed : CreateShaderResourceView in Texture2D");
+}
+
+void EvaEngine::Texture2D::CreateSamplerState(const D3D11_SAMPLER_DESC& desc)
+{
+	HRESULT hr = Internal::DirectX11App::g_Device->CreateSamplerState(&desc, &m_SamplerState);
+
+	if (FAILED(hr)) DebugLog::LogError(u8"Failed : CreateSamplerState in Texture2D");
 }

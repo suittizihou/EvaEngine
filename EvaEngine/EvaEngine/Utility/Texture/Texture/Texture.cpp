@@ -24,20 +24,6 @@ Vector2 EvaEngine::Texture::GetAspect() const
 	return Vector2(texelSize.x / gcd, texelSize.y / gcd);
 }
 
-void EvaEngine::Texture::CreateShaderResourceView(const ID3D11Resource& resource, const D3D11_SHADER_RESOURCE_VIEW_DESC& desc)
-{
-	HRESULT hr = Internal::DirectX11App::g_Device->CreateShaderResourceView(m_Texture, &desc, &m_ShaderResourceView);
-
-	if (FAILED(hr)) DebugLog::LogError(u8"Failed : CreateShaderResourceView in Texture");
-}
-
-void EvaEngine::Texture::CreateSamplerState(const D3D11_SAMPLER_DESC& desc)
-{
-	HRESULT hr = Internal::DirectX11App::g_Device->CreateSamplerState(&desc, &m_SamplerState);
-
-	if (FAILED(hr)) DebugLog::LogError(u8"Failed : CreateSamplerState in Texture");
-}
-
 ID3D11ShaderResourceView* EvaEngine::Texture::GetD3DShaderResrouceView() const
 {
 	return m_ShaderResourceView;
@@ -46,4 +32,12 @@ ID3D11ShaderResourceView* EvaEngine::Texture::GetD3DShaderResrouceView() const
 ID3D11SamplerState* EvaEngine::Texture::GetD3DSamplerState() const
 {
 	return m_SamplerState;
+}
+
+void EvaEngine::Texture::Release()
+{
+	if (m_Texture != nullptr) {
+		m_Texture->Release();
+		m_Texture = nullptr;
+	}
 }
