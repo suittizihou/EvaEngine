@@ -115,4 +115,4 @@ void STDMETHODCALLTYPE Texture2D::GetD3DTexture2DDESC(_Out_ D3D11_TEXTURE2D_DESC
 ID3D11Texture2D* EvaEngine::Texture2D::GetD3DTexture2D() const
 {
 	return static_cast<ID3D11Texture2D*>(m_Texture);
-}}
+}
