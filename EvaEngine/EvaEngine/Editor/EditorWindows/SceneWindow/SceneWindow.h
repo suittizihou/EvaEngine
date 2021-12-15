@@ -1,4 +1,4 @@
-#pragma once
+#if _DEBUG
 #pragma once
 
 #include "../../EditorWindow/EditorWindow.h"
@@ -16,3 +16,4 @@ namespace EvaEngine {
 		}
 	}
 }
+#endif

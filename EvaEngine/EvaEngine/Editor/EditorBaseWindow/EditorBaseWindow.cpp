@@ -1,3 +1,4 @@
+#if _DEBUG
 #include "EditorBaseWindow.h"
 #include "../../Setting/Window/Window.h"
 #include "../EditorWindowDataBase/EditorWindowDataBase.h"
@@ -109,3 +110,4 @@ void EditorBaseWindow::Scanning(const std::weak_ptr<EditorWindowData>& editorWin
 		}
 	}
 }
+#endif

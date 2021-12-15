@@ -1,3 +1,4 @@
+#if _DEBUG
 #include "HierarchyWindow.h"
 #include "../../../GameSystemBase/Manager/GameObjectManager/GameObjectManager.h"
 #include "../../../GameSystemBase/Manager/ComponentManager/ComponentManager.h"
@@ -59,3 +60,5 @@ void EvaEngine::Editor::Internal::HierarchyWindow::Scanning(const std::weak_ptr<
 		ImGui::TreePop();
 	}
 }
+
+#endif

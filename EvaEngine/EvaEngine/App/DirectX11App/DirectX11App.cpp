@@ -334,6 +334,7 @@ void DirectX11App::SetConstantBuffer(const std::weak_ptr<EvaEngine::Camera>& cam
 	g_ConstantBufferData.lightColor = DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
 }
 
+#if _DEBUG
 void EvaEngine::Internal::DirectX11App::ReportLiveObjects()
 {
 	OSVERSIONINFOEX OSver;
@@ -381,3 +382,4 @@ void EvaEngine::Internal::DirectX11App::DebugRelease()
 		g_pDxgiDebug = nullptr;
 	}
 }
+#endif

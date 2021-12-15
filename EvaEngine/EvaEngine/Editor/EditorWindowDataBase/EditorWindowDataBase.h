@@ -1,4 +1,5 @@
 #pragma once
+#if _DEBUG
 #include <vector>
 #include <memory>
 #include <string>
@@ -115,3 +116,4 @@ namespace EvaEngine {
 		}
 	}
 }
+#endif

@@ -1,3 +1,4 @@
+#if _DEBUG
 #include "InspectorWindow.h"
 #include "../../../GameSystemBase/Manager/GameObjectManager/GameObjectManager.h"
 #include "../../../GameSystemBase/Manager/ComponentManager/ComponentManager.h"
@@ -26,3 +27,4 @@ void EvaEngine::Editor::Internal::InspectorWindow::OnGUI()
 		}
 	}
 }
+#endif

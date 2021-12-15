@@ -36,10 +36,9 @@ HRESULT DrawManager::Init()
 
 void DrawManager::DrawBegin(const std::weak_ptr<Camera>& camera)
 {
-
 	//// DepthViewとStencilViewのクリア
 	//DirectX11App::g_Context->ClearDepthStencilView(
-	//	DirectX11App::g_EditorDepthStencilView.Get(),			// クリア対象のView
+	//	DirectX11App::g_EditorDepthStencilView.Get(),	// クリア対象のView
 	//	D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// クリアフラグ
 	//	1.0f,											// 深度クリア値
 	//	0);												// ステンシルクリア値
@@ -56,7 +55,7 @@ void DrawManager::DrawBegin(const std::weak_ptr<Camera>& camera)
 	//// RenderTargetViewのクリア
 	//DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_EditorRenderTargetView.Get(), clearColor);
 
-	camera.lock()->SetRenderTarget();
+	//camera.lock()->SetRenderTarget();
 }
 
 void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<Transform>& transform, const std::weak_ptr<ModelData>& model)

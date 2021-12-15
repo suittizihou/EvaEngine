@@ -1,3 +1,4 @@
+#if _DEBUG
 #include "EditorWindowDataBase.h"
 #include "../EditorWindow/EditorWindow.h"
 
@@ -51,3 +52,4 @@ bool EditorWindowDataBase::CheckEquals(const std::vector<std::string>& lhs, cons
 	}
 	return true;
 }
+#endif

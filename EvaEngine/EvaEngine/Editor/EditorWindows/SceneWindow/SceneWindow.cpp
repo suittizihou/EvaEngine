@@ -6,6 +6,7 @@
 #include "../../EditorApplication/EditorApplication.h"
 #include "../../EditorCommand/EditorCommand.h"
 #include "../../Selection/Selection.h"
+#if _DEBUG
 #include "../../../GameSystemBase/Base/GameObject/GameObject.h"
 #include "../../../GameSystemBase/Components/Transform/Transform.h"
 
@@ -57,3 +58,4 @@ void SceneWindow::OnGUI()
 		ImGuizmo::IsUsing();
 	}
 }
+#endif

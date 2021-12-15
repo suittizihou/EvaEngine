@@ -1,3 +1,4 @@
+#if _DEBUG
 #include "EditorApplication.h"
 #include "../../GameSystemBase/Manager/SceneManager/SceneManager.h"
 #include "../../GameSystemBase/Manager/ComponentManager/ComponentManager.h"
@@ -20,3 +21,4 @@ void EvaEngine::Editor::EditorApplication::Step()
 	ComponentManager::Instance().Update(SceneManager::GetCurrentSceneName());
 	ComponentManager::Instance().LateUpdate(SceneManager::GetCurrentSceneName());
 }
+#endif

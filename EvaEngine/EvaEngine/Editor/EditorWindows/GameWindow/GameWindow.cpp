@@ -1,3 +1,4 @@
+#if _DEBUG
 #include "GameWindow.h"
 #include "../../../GameSystemBase/Components/Camera/Camera.h"
 #include "../../../Utility/Texture/RenderTexture/RenderTexture.h"
@@ -27,3 +28,4 @@ void EvaEngine::Editor::Internal::GameWindow::OnGUI()
 		ImGui::Image((void*)tagetTexture->GetShaderResourceView(), ImVec2(windowSize.x, windowSize.y));
 	}
 }
+#endif
