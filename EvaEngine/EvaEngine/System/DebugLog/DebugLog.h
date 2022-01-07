@@ -27,9 +27,9 @@ namespace EvaEngine {
 		DebugLog() = default;
 		~DebugLog() = default;
 	public:
-		static inline void Log(const std::string& logMessage);
-		static inline void LogWarning(const std::string& warningMessage);
-		static inline void LogError(const std::string& errorMessage);
+		static void Log(const std::string& logMessage);
+		static void LogWarning(const std::string& warningMessage);
+		static void LogError(const std::string& errorMessage);
 
 		static std::vector<LogData> GetLogDatas();
 		static void ClearLog();

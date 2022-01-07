@@ -2,7 +2,7 @@
 #include <memory>
 #include <unordered_map>
 #include <string>
-
+#include <guiddef.h>
 
 namespace EvaEngine {
 	
@@ -11,8 +11,8 @@ namespace EvaEngine {
 	class TextureManager
 	{
 	public:
-		GUID const& AddTexture(const std::string& fileName);
-		GUID const& GetTextureGUID();
+		const GUID& AddTexture(const std::string& fileName);
+		const GUID& GetTextureGUID();
 		
 	private:
 		std::unordered_map<GUID*, std::shared_ptr<Texture>> m_Textures;
