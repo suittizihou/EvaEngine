@@ -28,7 +28,6 @@ namespace EvaEngine {
 		~DebugLog() = default;
 	public:
 		static void Log(const std::string& logMessage);
-		//static void Log(void* logMessage);
 		static void LogWarning(const std::string& warningMessage);
 		static void LogError(const std::string& errorMessage);
 

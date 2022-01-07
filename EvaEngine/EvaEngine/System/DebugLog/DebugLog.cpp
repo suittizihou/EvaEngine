@@ -13,17 +13,6 @@ void DebugLog::Log(const std::string& logMessage)
 	m_LogDatas.push_back(LogData(LogType::Normal, logMessage));
 #endif
 }
-//
-//void DebugLog::Log(void* logMessage)
-//{
-//#if _DEBUG
-//	std::string text{};
-//	std::istringstream iss(text);
-//	iss >> logMessage;
-//
-//	m_LogDatas.push_back(LogData(LogType::Normal, iss.str()));
-//#endif
-//}
 
 void DebugLog::LogWarning(const std::string& warningMessage)
 {
