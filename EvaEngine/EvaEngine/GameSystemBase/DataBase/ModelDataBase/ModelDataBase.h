@@ -2,11 +2,8 @@
 #include <memory>
 #include <unordered_map>
 #include <guiddef.h>
+#include "../../../Utility/GUIDUtility/GUIDUtility.h"
 #include "../../../Utility/ModelUtility/ModelData/ModelData.h"
-
-struct GUIDComparer {
-	bool operator()(const GUID& lfs, const GUID& rhs) const { return memcmp(&lfs, &rhs, sizeof(rhs)) < 0; }
-};
 
 namespace EvaEngine {
 	namespace Internal {
