@@ -532,6 +532,7 @@
     <ClInclude Include="EvaEngine\GameSystemBase\Manager\DrawManager\DrawManager.h" />
     <ClInclude Include="EvaEngine\GameSystemBase\Manager\GameObjectManager\GameObjectManager.h" />
     <ClInclude Include="EvaEngine\GameSystemBase\Manager\SceneManager\SceneManager.h" />
+    <ClInclude Include="EvaEngine\Utility\GUIDCreator\GUIDCreator.h" />
     <ClInclude Include="imgui\backends\imgui_impl_dx11.h" />
     <ClInclude Include="imgui\backends\imgui_impl_win32.h" />
     <ClInclude Include="imgui\imconfig.h" />
@@ -574,6 +575,7 @@
     <ClInclude Include="EvaEngine\Utility\StringAssist\StringAssist.h" />
     <ClInclude Include="EvaEngine\Utility\Time\Time.h" />
     <ClInclude Include="EvaEngine\Utility\Time\TimeBase.h" />
+    <ClInclude Include="EvaEngine\GameSystemBase\Manager\TextureManager\TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EvaEngine\App\DirectX11App\DirectX11App.cpp" />
@@ -623,8 +625,10 @@
     <ClCompile Include="EvaEngine\Utility\Texture\RenderTexture\RenderTexture.cpp" />
     <ClCompile Include="EvaEngine\Utility\Texture\Texture2D\Texture2D.cpp" />
     <ClCompile Include="EvaEngine\Utility\Texture\TextureLoader\PNGLoader\PNGLoader.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Texture\TextureLoader\TextureLoader.cpp" />
     <ClCompile Include="EvaEngine\Utility\Texture\Texture\Texture.cpp" />
     <ClCompile Include="EvaEngine\Utility\Time\TimeBase.cpp" />
+    <ClCompile Include="EvaEngine\Utility\GUIDCreator\GUIDCreator.cpp" />
     <ClCompile Include="imgui\backends\imgui_impl_dx11.cpp" />
     <ClCompile Include="imgui\backends\imgui_impl_win32.cpp" />
     <ClCompile Include="imgui\ImCurveEdit.cpp" />
@@ -660,6 +664,7 @@
     <ClCompile Include="EvaEngine\Utility\ShaderUtility\ShaderCompiler\ShaderCompiler.cpp" />
     <ClCompile Include="EvaEngine\Utility\ShaderUtility\ShaderLoader\ShaderLoader.cpp" />
     <ClCompile Include="EvaEngine\Utility\ShaderUtility\Shader\Shader.cpp" />
+    <ClCompile Include="EvaEngine\GameSystemBase\Manager\TextureManager\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="EvaEngine\Shader\PixelShader.hlsl">

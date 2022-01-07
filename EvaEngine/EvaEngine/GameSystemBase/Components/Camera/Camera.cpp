@@ -9,7 +9,7 @@ using namespace DirectX;
 using namespace EvaEngine;
 using namespace FunctionMask;
 
-std::map<std::string, std::vector<std::weak_ptr<EvaEngine::Camera>>> EvaEngine::Camera::m_Cameras;
+std::unordered_map<std::string, std::vector<std::weak_ptr<EvaEngine::Camera>>> EvaEngine::Camera::m_Cameras;
 
 EvaEngine::Camera::Camera(
 	const D3D11_VIEWPORT& viewPort,

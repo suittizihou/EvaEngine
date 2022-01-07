@@ -2,7 +2,7 @@
 
 #include "../../Base/Scene/Scene.h"
 
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <memory>
 
@@ -77,7 +77,7 @@ namespace EvaEngine {
 			std::string m_CurrentSceneName{};
 			std::string m_PreviousSceneName{};
 			std::weak_ptr<Scene> m_CurrentScene;
-			std::map<std::string, std::shared_ptr<Scene>> m_Scenes;
+			std::unordered_map<std::string, std::shared_ptr<Scene>> m_Scenes;
 		};
 	}
 }

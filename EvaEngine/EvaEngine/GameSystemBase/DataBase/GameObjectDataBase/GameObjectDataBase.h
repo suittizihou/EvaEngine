@@ -30,7 +30,7 @@ namespace EvaEngine {
 			// タグで分けず参照を保持するリスト
 			std::vector<std::weak_ptr<GameObject>> m_GameObjectReference;
 			// ゲームオブジェクトの実体を実際に所有するリスト
-			std::map <std::string,	// Tag 
+			std::unordered_map<std::string,	// Tag 
 				std::vector<std::shared_ptr<GameObject>>> m_GameObjectListSource;
 
 		};

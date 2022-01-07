@@ -1158,6 +1158,12 @@
     <ClInclude Include="EvaEngine\Utility\Texture\TextureLoader\PNGLoader\PNGLoader.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="EvaEngine\GameSystemBase\Manager\TextureManager\TextureManager.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaEngine\Utility\GUIDCreator\GUIDCreator.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -1395,6 +1401,15 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="EvaEngine\Utility\StringAssist\StringAssist.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaEngine\Utility\Texture\TextureLoader\TextureLoader.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaEngine\GameSystemBase\Manager\TextureManager\TextureManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaEngine\Utility\GUIDCreator\GUIDCreator.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

@@ -2,7 +2,7 @@
 
 #include "../../../Define/D3D11Defines.h"
 #include "../../../Utility/ShaderUtility/ShaderBase/ShaderBase.h"
-#include <map>
+#include <unordered_map>
 
 namespace EvaEngine {
 	namespace Internal {
@@ -85,17 +85,17 @@ namespace EvaEngine {
 			int m_DomainShaderCount{ 0 };
 
 			// コンパイル済み頂点シェーダー
-			std::map<int, VertexShader> m_VertexShaders{};
+			std::unordered_map<int, VertexShader> m_VertexShaders{};
 			// コンパイル済みピクセルシェーダー
-			std::map<int, PixelShader> m_PixelShaders{};
+			std::unordered_map<int, PixelShader> m_PixelShaders{};
 			// コンパイル済みジオメトリシェーダー
-			std::map<int, GeometryShader> m_GeometryShaders{};
+			std::unordered_map<int, GeometryShader> m_GeometryShaders{};
 			// コンパイル済みコンピュートシェーダー
-			std::map<int, ComputeShader> m_ComputeShaders{};
+			std::unordered_map<int, ComputeShader> m_ComputeShaders{};
 			// コンパイル済みハルシェーダー
-			std::map<int, HullShader> m_HullShaders{};
+			std::unordered_map<int, HullShader> m_HullShaders{};
 			// コンパイル済みドメインシェーダー
-			std::map<int, DomainShader> m_DomainShaders{};
+			std::unordered_map<int, DomainShader> m_DomainShaders{};
 
 			VertexShader m_DefaultVertexShader{};
 			PixelShader m_DefaultPixelShader{};

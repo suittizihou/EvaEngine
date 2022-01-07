@@ -107,6 +107,7 @@ HRESULT EditorApp::Init()
 
 	// シーンビューの作成
 	m_SceneView = GameObjectManager::Instance().Instantiate("Editor", "SceneView", "SceneView").lock()->AddComponent<SceneView>();
+	m_SceneView.lock()->GetTransform().lock()->position(0.0f, 0.0f, -5.0f);
 
 	return S_OK;
 }

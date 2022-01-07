@@ -3,7 +3,7 @@
 #include <string>
 #include <list>
 #include <queue>
-#include <map>
+#include <unordered_map>
 #include <memory>
 #include <stdexcept>
 #include <functional>
@@ -86,7 +86,7 @@ namespace EvaEngine {
 
 		private:
 			// コンポーネントのリスト(firstはシーン名)
-			std::map<std::string,		// シーン名
+			std::unordered_map<std::string,		// シーン名
 				std::shared_ptr<ComponentDataBase>> m_ComponentList;
 
 			UINT m_ComponentID{};

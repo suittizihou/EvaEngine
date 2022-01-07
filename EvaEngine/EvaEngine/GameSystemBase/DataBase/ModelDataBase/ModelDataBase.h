@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <unordered_map>
 #include "../../../Utility/ModelUtility/ModelData/ModelData.h"
 
 namespace EvaEngine {
@@ -25,7 +26,7 @@ namespace EvaEngine {
 			// モデルデータのハンドル
 			int modelCount{ 0 };
 			// モデルデータ
-			std::map<int, std::shared_ptr<EvaEngine::ModelData>> m_Models{};
+			std::unordered_map<int, std::shared_ptr<EvaEngine::ModelData>> m_Models{};
 		};
 	}
 }
