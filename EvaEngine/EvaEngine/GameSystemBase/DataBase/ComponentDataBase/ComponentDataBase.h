@@ -6,6 +6,7 @@
 #include <map>
 #include <memory>
 #include <stdexcept>
+#include "../../../Utility/GUIDUtility/GUIDUtility.h"
 #include "../../Base/Component/Component.h"
 #include "../../../System/DebugLog/DebugLog.h"
 #include "../../../Utility/TypeIDAssist/TypeIDAssist.h"
@@ -28,7 +29,12 @@ namespace EvaEngine {
 				componentDesc.sceneName = sceneName;
 				componentDesc.gameObject = gameObject;
 				componentDesc.hashCode = typeid(T).hash_code();
-				componentDesc.componentID = m_ComponentID;
+
+				if (GUIDUtility::Create(&componentDesc.guid, "ComponentDataBaseにて " + componentDesc.componentName + " のGUID生成に失敗しました。") == false)
+				{
+					return std::weak_ptr<T>();
+				}
+
 				std::shared_ptr<T> component_temp = std::make_shared<T>(args...);
 				component_temp->SetComponentDesc(componentDesc);
 
@@ -45,8 +51,6 @@ namespace EvaEngine {
 
 				// コンポーネントを追加(関数なども登録)
 				AddComponent(component_temp, m_Components.size());
-				// コンポーネントIDをインクリメント
-				m_ComponentID += 1;
 
 				// コンポーネントの初期関数を呼ぶ
 				component_temp->Awake();
@@ -81,7 +85,7 @@ namespace EvaEngine {
 
 			// コンポーネントの取得
 			template<class T>
-			std::weak_ptr<T> GetComponent(const UINT& gameObjectID)
+			std::weak_ptr<T> GetComponent(const GUID& gameObjectID)
 			{
 				size_t hashCode = typeid(T).hash_code();
 
@@ -140,7 +144,7 @@ namespace EvaEngine {
 
 			// コンポーネントを削除
 			template<class T>
-			void RemoveComponent(const UINT& gameObjectID)
+			void RemoveComponent(const GUID& gameObjectID)
 			{
 				size_t hashCode = typeid(T).hash_code();
 				for (int i = 0; i < m_Components.size(); ++i) {
@@ -200,7 +204,7 @@ namespace EvaEngine {
 			__int64 FindItr(const std::vector<int>& vec, int value);
 
 			// 指定されたゲームオブジェクトと指定されたIDが同じか確認する(ここにGameObjectのヘッダーを書くと循環参照が発生するためcppに逃がす)
-			bool IsGameObjectIDEquals(const std::weak_ptr<GameObject>& obj, const UINT& id);
+			bool IsGameObjectIDEquals(const std::weak_ptr<GameObject>& obj, const GUID& id);
 			bool IsGameObjectIDEquals(const std::weak_ptr<GameObject>& obj1, const std::weak_ptr<GameObjectBase>& obj2);
 
 		private:
@@ -218,8 +222,6 @@ namespace EvaEngine {
 
 			// Draw関数が記入されているコンポーネントが格納されている印字の番号を格納する配列
 			std::vector<int> m_DrawFuncNumber;
-
-			UINT m_ComponentID{};
 		};
 	}
 }

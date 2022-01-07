@@ -74,7 +74,9 @@ namespace EvaEngine {
 		// コンポーネントのハッシュ値を返す(何型のコンポーネントか識別用)
 		size_t GetHashCode() const;
 		// コンポーネントのIDを返す(固有のID)
-		UINT GetComponentID() const;
+		const GUID& GetComponentID() const;
+		// 文字列でIDを返す
+		std::string GetComponentIDString();
 		// どの関数を呼び出すかのマスクを返す
 		UINT GetFunctionMask() const;
 		// 自身が登録されている配列番号を返す
@@ -92,7 +94,7 @@ namespace EvaEngine {
 		std::weak_ptr<GameObject> m_GameObject;
 		std::weak_ptr<Transform> m_Transform;
 		size_t m_HashCode{};
-		UINT m_ComponentID{};
+		GUID m_GUID{};
 		UINT m_FunctionMask{};
 		UINT m_Index{}; // ComponentDataBaseに登録されている自身の配列番号
 		bool m_CanMultiAttach{ true };

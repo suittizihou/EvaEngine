@@ -152,6 +152,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(ProjectDir)FbxSDK\include\;$(ProjectDir)imgui\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -532,7 +533,7 @@
     <ClInclude Include="EvaEngine\GameSystemBase\Manager\DrawManager\DrawManager.h" />
     <ClInclude Include="EvaEngine\GameSystemBase\Manager\GameObjectManager\GameObjectManager.h" />
     <ClInclude Include="EvaEngine\GameSystemBase\Manager\SceneManager\SceneManager.h" />
-    <ClInclude Include="EvaEngine\Utility\GUIDCreator\GUIDCreator.h" />
+    <ClInclude Include="EvaEngine\Utility\GUIDUtility\GUIDUtility.h" />
     <ClInclude Include="imgui\backends\imgui_impl_dx11.h" />
     <ClInclude Include="imgui\backends\imgui_impl_win32.h" />
     <ClInclude Include="imgui\imconfig.h" />
@@ -628,7 +629,7 @@
     <ClCompile Include="EvaEngine\Utility\Texture\TextureLoader\TextureLoader.cpp" />
     <ClCompile Include="EvaEngine\Utility\Texture\Texture\Texture.cpp" />
     <ClCompile Include="EvaEngine\Utility\Time\TimeBase.cpp" />
-    <ClCompile Include="EvaEngine\Utility\GUIDCreator\GUIDCreator.cpp" />
+    <ClCompile Include="EvaEngine\Utility\GUIDUtility\GUIDUtility.cpp" />
     <ClCompile Include="imgui\backends\imgui_impl_dx11.cpp" />
     <ClCompile Include="imgui\backends\imgui_impl_win32.cpp" />
     <ClCompile Include="imgui\ImCurveEdit.cpp" />

@@ -214,7 +214,7 @@ __int64 ComponentDataBase::FindItr(const std::vector<int>& vec, int value)
 	return std::distance(vec.begin(), std::find(vec.begin(), vec.end(), value));
 }
 
-bool ComponentDataBase::IsGameObjectIDEquals(const std::weak_ptr<GameObject>& obj, const UINT& id)
+bool ComponentDataBase::IsGameObjectIDEquals(const std::weak_ptr<GameObject>& obj, const GUID& id)
 {
 	return obj.lock()->GetObjectID() == id;
 }
@@ -231,5 +231,4 @@ void ComponentDataBase::RemoveAllComponent()
 	m_LateUpdateFuncNumber.clear();
 	m_DrawFuncNumber.clear();
 	m_Components.clear();
-	m_ComponentID = 0;
 }

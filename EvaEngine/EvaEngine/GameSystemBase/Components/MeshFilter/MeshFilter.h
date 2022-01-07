@@ -1,14 +1,15 @@
 #pragma once
 
+#include <guiddef.h>
 #include "../../Base/Component/Component.h"
 #include "../../Manager/ModelManager/ModelManager.h"
 
 namespace EvaEngine {
 	class MeshFilter : public Component {
 	public:
-		MeshFilter(const int& modelHandle)
+		MeshFilter(const GUID& guid)
 			:Component(0U, false),
-			m_Model(ModelManager::Instance().GetModel(modelHandle))
+			m_Model(ModelManager::Instance().GetModel(guid))
 		{}
 
 		~MeshFilter() = default;

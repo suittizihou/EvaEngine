@@ -1,5 +1,6 @@
 #include "Component.h"
 #include "../GameObject/GameObject.h"
+#include "../../../Utility/GUIDUtility/GUIDUtility.h"
 
 using namespace EvaEngine;
 
@@ -21,7 +22,7 @@ void Component::SetComponentDesc(const ComponentDesc& componentDesc)
 	SetSceneName(componentDesc.sceneName);
 	m_GameObject = std::static_pointer_cast<GameObject>(componentDesc.gameObject.lock());
 	m_HashCode = componentDesc.hashCode;
-	m_ComponentID = componentDesc.componentID;
+	m_GUID = componentDesc.guid;
 
 	m_Transform = m_GameObject.lock()->GetTransform();
 }
@@ -56,9 +57,14 @@ size_t Component::GetHashCode() const
 	return m_HashCode;
 }
 
-UINT Component::GetComponentID() const
+const GUID& Component::GetComponentID() const
 {
-	return m_ComponentID;
+	return m_GUID;
+}
+
+std::string EvaEngine::Component::GetComponentIDString()
+{
+	return GUIDUtility::ToString(m_GUID);
 }
 
 UINT Component::GetFunctionMask() const

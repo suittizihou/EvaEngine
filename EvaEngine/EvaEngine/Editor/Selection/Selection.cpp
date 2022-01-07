@@ -7,7 +7,7 @@ using namespace EvaEngine::Editor;
 
 std::vector<std::weak_ptr<GameObject>> Selection::activeObjects;
 std::vector<std::weak_ptr<Transform>> Selection::activeTransforms;
-std::vector<int> Selection::activeObjectIDs;
+std::vector<GUID> Selection::activeObjectIDs;
 
 void Selection::SetActiveObject(const std::weak_ptr<GameObject>& gameObject)
 {
@@ -55,14 +55,14 @@ std::vector<std::weak_ptr<Transform>> EvaEngine::Editor::Selection::GetActiveTra
 	return activeTransforms;
 }
 
-int EvaEngine::Editor::Selection::GetActiveObjectID(const int index)
+const GUID& EvaEngine::Editor::Selection::GetActiveObjectID(const int index)
 {
-	if (activeObjectIDs.size() == 0) return 0;
+	if (activeObjectIDs.size() == 0) return GUID_NULL;
 	if (activeObjectIDs.size() >= index) return activeObjectIDs[activeObjectIDs.size() - 1];
 	return activeObjectIDs[index];
 }
 
-std::vector<int> EvaEngine::Editor::Selection::GetActiveObjectIDs()
+const std::vector<GUID>& EvaEngine::Editor::Selection::GetActiveObjectIDs()
 {
 	return activeObjectIDs;
 }

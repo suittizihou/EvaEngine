@@ -10,24 +10,24 @@ void EvaEngine::ModelManager::AddModelDataBase(const std::string& sceneName)
 	m_ModelDatas[sceneName] = std::make_shared<ModelDataBase>();
 }
 
-int EvaEngine::ModelManager::LoadModel(const std::string& fileName)
+void EvaEngine::ModelManager::LoadModel(const std::string& fileName, GUID* guid)
 {
-	return m_ModelDatas[SceneManager::GetCurrentSceneName()]->LoadModelData(fileName);
+	return m_ModelDatas[SceneManager::GetCurrentSceneName()]->LoadModelData(fileName, guid);
 }
 
-int EvaEngine::ModelManager::LoadModel(const std::shared_ptr<ModelData>& model)
+void EvaEngine::ModelManager::LoadModel(const std::shared_ptr<ModelData>& model, GUID* guid)
 {
-	return m_ModelDatas[SceneManager::GetCurrentSceneName()]->LoadModelData(model);
+	return m_ModelDatas[SceneManager::GetCurrentSceneName()]->LoadModelData(model, guid);
 }
 
-std::weak_ptr<ModelData> EvaEngine::ModelManager::GetModel(const int modelHandle)
+std::weak_ptr<ModelData> EvaEngine::ModelManager::GetModel(const GUID& guid)
 {
-	return m_ModelDatas[SceneManager::GetCurrentSceneName()]->GetModel(modelHandle);
+	return m_ModelDatas[SceneManager::GetCurrentSceneName()]->GetModel(guid);
 }
 
-void EvaEngine::ModelManager::DeleteModel(const int modelHandle)
+void EvaEngine::ModelManager::DeleteModel(const GUID& guid)
 {
-	m_ModelDatas[SceneManager::GetCurrentSceneName()]->DeleteModel(modelHandle);
+	m_ModelDatas[SceneManager::GetCurrentSceneName()]->DeleteModel(guid);
 }
 
 void EvaEngine::ModelManager::DeleteAllModel()

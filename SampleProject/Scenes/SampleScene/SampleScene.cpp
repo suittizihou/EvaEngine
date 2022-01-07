@@ -14,7 +14,8 @@ SampleScene::SampleScene(const std::string& sceneName, const UINT sceneID) :
 void SampleScene::Initialize()
 {
 	// モデルの読み込み
-	int modelHandle = ModelManager::Instance().LoadModel("TeaPot.fbx");
+	GUID modelHandle{ GUID_NULL };
+	ModelManager::Instance().LoadModel("TeaPot.fbx", &modelHandle);
 
 	// ゲームオブジェクトの生成
 	auto gameObject = Instantiate("None", "GameObject");

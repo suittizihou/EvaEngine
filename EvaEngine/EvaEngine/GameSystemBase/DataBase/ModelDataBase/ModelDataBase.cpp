@@ -1,32 +1,33 @@
 #include "ModelDataBase.h"
+#include "../../../Utility/GUIDUtility/GUIDUtility.h"
 #include "../../../Utility/ModelUtility/ModelLoader/ModelLoader.h"
 #include "../../../Utility/ModelUtility/ModelLoaderUtility/VRMModelLoader/VRMModelLoader.h"
 
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-int ModelDataBase::LoadModelData(const std::shared_ptr<EvaEngine::ModelData>& model)
+void ModelDataBase::LoadModelData(const std::shared_ptr<EvaEngine::ModelData>& model, GUID* guid)
 {
-    m_Models[modelCount] = model;
-    modelCount += 1;
-    return modelCount - 1;
+    std::string name = model->GetFileName();
+    if (GUIDUtility::Create(guid, "ModelDataBaseÇ…ÇƒÇÃGUIDê∂ê¨Ç…é∏îsÇµÇ‹ÇµÇΩÅB") == false) return;
+    m_Models[*guid] = model;
 }
 
-int ModelDataBase::LoadModelData(const std::string& fileName)
+void ModelDataBase::LoadModelData(const std::string& fileName, GUID* guid)
 {
-    return LoadModelData(ModelLoader::Load(fileName));
+    LoadModelData(ModelLoader::Load(fileName), guid);
 }
 
-std::weak_ptr<ModelData> ModelDataBase::GetModel(const int modelHandle)
+std::weak_ptr<ModelData> ModelDataBase::GetModel(const GUID& guid)
 {
     //return LoadModelDataMemory(m_Models[modelHandle]);
-    return m_Models[modelHandle];
+    return m_Models[guid];
 }
 
-void ModelDataBase::DeleteModel(const int modelHandle)
+void ModelDataBase::DeleteModel(const GUID& guid)
 {
-    m_Models[modelHandle]->Release();
-    m_Models.erase(modelHandle);
+    m_Models[guid]->Release();
+    m_Models.erase(guid);
 }
 
 void ModelDataBase::DeleteAllModel()

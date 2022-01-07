@@ -19,7 +19,7 @@ std::shared_ptr<ModelData> ModelLoader::Load(const std::string& fileName)
 
     std::string modelType = fileSplit[fileSplit.size() - 1];
 
-    std::shared_ptr<ModelData> model = std::make_shared<ModelData>();
+    std::shared_ptr<ModelData> model = std::make_shared<ModelData>(fileName);
     
     if (modelType == "fbx") {
         FBXModelLoader fbxModelLoader{};

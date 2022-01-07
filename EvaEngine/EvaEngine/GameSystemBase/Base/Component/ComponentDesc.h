@@ -1,5 +1,6 @@
 #pragma once
 
+#include <guiddef.h>
 #include "../GameObject/GameObjectBase.h"
 
 namespace EvaEngine {
@@ -8,6 +9,6 @@ namespace EvaEngine {
 		std::string sceneName{};
 		std::weak_ptr<GameObjectBase> gameObject;
 		size_t hashCode{};
-		UINT componentID{};
+		GUID guid{ GUID_NULL };
 	} ComponentDesc;
 }

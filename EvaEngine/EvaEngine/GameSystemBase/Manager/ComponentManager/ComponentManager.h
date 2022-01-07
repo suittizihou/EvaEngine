@@ -38,21 +38,21 @@ namespace EvaEngine {
 
 			// コンポーネントの取得
 			template<class T>
-			std::weak_ptr<T> GetComponent(const std::string& sceneName, const UINT& gameObjectID)
+			std::weak_ptr<T> GetComponent(const std::string& sceneName, const GUID& gameObjectID)
 			{
 				return m_ComponentList[sceneName]->GetComponent<T>(gameObjectID);
 			}
 
 			// コンポーネントの取得
 			template<class T>
-			std::weak_ptr<T> GetComponent(const std::string& sceneName, const std::weak_ptr<GameObjectBase>& gameObjectID)
+			std::weak_ptr<T> GetComponent(const std::string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject)
 			{
-				return m_ComponentList[sceneName]->GetComponent<T>(gameObjectID);
+				return m_ComponentList[sceneName]->GetComponent<T>(gameObject);
 			}
 
 			// コンポーネントを削除
 			template<class T>
-			void RemoveComponent(const std::string& sceneName, const UINT& gameObjectID)
+			void RemoveComponent(const std::string& sceneName, const GUID& gameObjectID)
 			{
 				m_ComponentList[sceneName]->RemoveComponent<T>(gameObjectID);
 			}

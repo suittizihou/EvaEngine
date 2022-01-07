@@ -2,6 +2,8 @@
 
 #include <vector>
 #include <memory>
+#include <guiddef.h>
+
 #include "../GameJobs/GameJobs.h"
 
 namespace EvaEngine {
@@ -25,7 +27,7 @@ namespace EvaEngine {
 		virtual std::vector<std::weak_ptr<Component>> GetAllComponents() = 0;
 
 		// ObjectID‚ð•Ô‚·
-		virtual UINT GetObjectID() const = 0;
+		virtual const GUID& GetObjectID() const = 0;
 		// –¼‘O‚ð•Ô‚·
 		virtual std::string GetName() const = 0;
 		// ƒ^ƒO‚ð•Ô‚·

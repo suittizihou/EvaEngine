@@ -25,8 +25,6 @@ namespace EvaEngine {
 			void RemoveAllGameObject();
 
 		private:
-			UINT m_ObjectID{};
-
 			// タグで分けず参照を保持するリスト
 			std::vector<std::weak_ptr<GameObject>> m_GameObjectReference;
 			// ゲームオブジェクトの実体を実際に所有するリスト

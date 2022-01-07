@@ -2,6 +2,7 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
+#include <guiddef.h>
 
 namespace EvaEngine {
 	class ModelData;
@@ -28,12 +29,12 @@ namespace EvaEngine {
 		void AddModelDataBase(const std::string& sceneName);
 
 		// モデルを追加
-		int LoadModel(const std::string& fileName);
-		int LoadModel(const std::shared_ptr<ModelData>& model);
+		void LoadModel(const std::string& fileName, GUID* guid);
+		void LoadModel(const std::shared_ptr<ModelData>& model, GUID* guid);
 		// モデルデータを取得
-		std::weak_ptr<ModelData> GetModel(const int modelHandle);
+		std::weak_ptr<ModelData> GetModel(const GUID& guid);
 		// モデルデータを削除
-		void DeleteModel(const int modelHandle);
+		void DeleteModel(const GUID& guid);
 		void DeleteAllModel();
 
 	private:

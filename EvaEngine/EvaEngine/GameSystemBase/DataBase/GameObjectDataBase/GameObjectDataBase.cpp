@@ -4,16 +4,18 @@
 
 #include "../../Base/GameObject/GameObject.h"
 #include "../../Components/Transform/Transform.h"
+#include "../../../Utility/GUIDUtility/GUIDUtility.h"
 
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
 std::weak_ptr<GameObject> GameObjectDataBase::Instantiate(const std::string& sceneType, const std::string& tag, const std::string& name) {
-	std::shared_ptr<GameObject> obj = std::make_shared<GameObject>(sceneType, m_ObjectID, tag, name);
+	GUID guid{ GUID_NULL };
+	if (GUIDUtility::Create(&guid, "GameObjectDataBaseÇ…Çƒ " + name + " ÇÃGUIDê∂ê¨Ç…é∏îsÇµÇ‹ÇµÇΩÅB") == false) return std::weak_ptr<GameObject>();
+	std::shared_ptr<GameObject> obj = std::make_shared<GameObject>(sceneType, guid, tag, name);
 	obj->Initialize();
 	m_GameObjectReference.push_back(obj);
 	m_GameObjectListSource[tag].push_back(obj);
-	m_ObjectID += 1;
 	return obj;
 }
 
@@ -59,5 +61,4 @@ void EvaEngine::Internal::GameObjectDataBase::GetAllGameObject(std::vector<std::
 void GameObjectDataBase::RemoveAllGameObject()
 {
 	m_GameObjectListSource.clear();
-	m_ObjectID = 0;
 }

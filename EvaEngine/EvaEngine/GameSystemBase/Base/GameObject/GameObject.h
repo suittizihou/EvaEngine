@@ -12,11 +12,11 @@ namespace EvaEngine {
 	public:
 		GameObject(
 			const std::string& sceneName = "",
-			const UINT& gameObjectID = 0,
+			const GUID& guid = GUID_NULL,
 			const std::string& tag = "",
 			const std::string& name = "") :
 			GameObjectBase(sceneName),
-			m_GameObjectID(gameObjectID),
+			m_GUID(guid),
 			m_Tag(tag),
 			m_Name(name)
 		{};
@@ -27,7 +27,7 @@ namespace EvaEngine {
 		void Initialize() override;
 
 		// ObjectIDを返す
-		UINT GetObjectID() const override;
+		const GUID& GetObjectID() const override;
 		// 名前を返す
 		std::string GetName() const override;
 		// タグを返す
@@ -55,7 +55,7 @@ namespace EvaEngine {
 		// コンポーネントの削除
 		template<class T>
 		void RemoveComponent() {
-			EvaEngine::Internal::ComponentManager::Instance().RemoveComponent<T>(GetSceneName(), m_GameObjectID);
+			EvaEngine::Internal::ComponentManager::Instance().RemoveComponent<T>(GetSceneName(), m_GUID);
 			
 			// 参照が切れたコンポーネントを配列から削除
 			for (int i = 0; i < m_Components.size(); ++i)
@@ -89,6 +89,6 @@ namespace EvaEngine {
 		std::string m_Tag{};
 		std::string m_Name{};
 		bool m_IsActive{ true };
-		UINT m_GameObjectID{};
+		GUID m_GUID{};
 	};
 }

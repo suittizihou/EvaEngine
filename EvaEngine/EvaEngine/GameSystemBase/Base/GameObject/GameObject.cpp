@@ -9,9 +9,9 @@ void GameObject::Initialize()
     m_Transform = AddComponent<Transform>();
 }
 
-UINT GameObject::GetObjectID() const
+const GUID& GameObject::GetObjectID() const
 {
-    return m_GameObjectID;
+    return m_GUID;
 }
 
 std::string GameObject::GetName() const

@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <vector>
+#include <guiddef.h>
 
 namespace EvaEngine {
 	class GameObject;
@@ -19,13 +20,13 @@ namespace EvaEngine {
 			static std::weak_ptr<Transform> GetActiveTransform(const int index = 0);
 			static std::vector<std::weak_ptr<Transform>> GetActiveTransforms();
 
-			static int GetActiveObjectID(const int index = 0);
-			static std::vector<int> GetActiveObjectIDs();
+			static const GUID& GetActiveObjectID(const int index = 0);
+			static const std::vector<GUID>& GetActiveObjectIDs();
 
 		private:
 			static std::vector<std::weak_ptr<GameObject>> activeObjects;
 			static std::vector<std::weak_ptr<Transform>> activeTransforms;
-			static std::vector<int> activeObjectIDs;
+			static std::vector<GUID> activeObjectIDs;
 		};
 	}
 }
