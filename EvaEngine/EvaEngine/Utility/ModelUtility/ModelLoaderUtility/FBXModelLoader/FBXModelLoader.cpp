@@ -19,7 +19,7 @@ void FBXModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::
     fbxsdk::FbxManager* fbx_manager = fbxsdk::FbxManager::Create();
     if (fbx_manager == nullptr)
     {
-        DebugLog::LogError(u8"FbxManager‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
+        DebugLog::LogError("FbxManager‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
         return;
     }
 
@@ -27,7 +27,7 @@ void FBXModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::
     FbxImporter* fbx_importer = FbxImporter::Create(fbx_manager, "");
     if (fbx_importer == nullptr) {
         fbx_manager->Destroy();
-        DebugLog::LogError(u8"FbxImporter‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
+        DebugLog::LogError("FbxImporter‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
         return;
     }
 
@@ -36,10 +36,11 @@ void FBXModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::
     if (fbx_scene == nullptr) {
         fbx_importer->Destroy();
         fbx_manager->Destroy();
-        DebugLog::LogError(u8"FbxScene‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
+        DebugLog::LogError("FbxScene‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
         return;
     }
 
+    auto start = std::chrono::system_clock::now();
     // File‚ğ‰Šú‰»
     fbx_importer->Initialize(fileName);
     // scene‚ÉƒCƒ“ƒ|[ƒg
@@ -47,7 +48,6 @@ void FBXModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::
 
     FbxGeometryConverter converter(fbx_manager);
 
-    auto start = std::chrono::system_clock::now();
     // ƒ|ƒŠƒSƒ“‚ğOŠpŒ`‚É‚·‚é
     converter.Triangulate(fbx_scene, true);
     auto end = std::chrono::system_clock::now();

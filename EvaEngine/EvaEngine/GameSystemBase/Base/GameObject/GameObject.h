@@ -69,7 +69,7 @@ namespace EvaEngine {
 				}
 			}
 
-			DebugLog::LogError(u8"GameObject‘¤‚ÌComponentíœ‚É¸”s‚µ‚Ü‚µ‚½B");
+			DebugLog::LogError("GameObject‘¤‚ÌComponentíœ‚É¸”s‚µ‚Ü‚µ‚½B");
 		}
 
 		// –¼‘O‚ÅŒŸõ

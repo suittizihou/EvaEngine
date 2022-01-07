@@ -30,37 +30,37 @@ HRESULT DirectX11App::Init()
 	HRESULT hr{};
 	hr = HardWareCheck();
 	if (FAILED(hr)) {
-		DebugLog::LogError(u8"Hard Ware Check Failed.");
+		DebugLog::LogError("Hard Ware Check Failed.");
 		return hr;
 	}
 
 	hr = CreateDeviceAndSwapChain();
 	if (FAILED(hr)) {
-		DebugLog::LogError(u8"Swap Chain or Device Create Failed.");
+		DebugLog::LogError("Swap Chain or Device Create Failed.");
 		return hr;
 	}
 
 	hr = CreateRasterizerState();
 	if (FAILED(hr)) {
-		DebugLog::LogError(u8"Rasterizer State Create Failed.");
+		DebugLog::LogError("Rasterizer State Create Failed.");
 		return hr;
 	}
 
 	hr = CreateRenderTargetView();
 	if (FAILED(hr)) {
-		DebugLog::LogError(u8"Render Target View Create Failed.");
+		DebugLog::LogError("Render Target View Create Failed.");
 		return hr;
 	}
 
 	hr = CreateDepthAndStencilView();
 	if (FAILED(hr)) {
-		DebugLog::LogError(u8"Depth Stencil View Create Failed.");
+		DebugLog::LogError("Depth Stencil View Create Failed.");
 		return hr;
 	}
 
 	hr = CreateConstantBuffer();
 	if (FAILED(hr)) {
-		DebugLog::LogError(u8"Constant Buffer Create Failed.");
+		DebugLog::LogError("Constant Buffer Create Failed.");
 		return hr;
 	}
 
@@ -108,7 +108,7 @@ HRESULT DirectX11App::HardWareCheck()
 	// グラフィック インターフェース ファクトリを作成
 	auto hr = CreateDXGIFactory(__uuidof(IDXGIFactory), (void**)&factory);
 	if (FAILED(hr)) {
-		DebugLog::LogError(u8"Graphic Interface Factory Create Failed.");
+		DebugLog::LogError("Graphic Interface Factory Create Failed.");
 		return hr;
 	}
 
@@ -128,11 +128,11 @@ HRESULT DirectX11App::HardWareCheck()
 
 		if (error != 0) break;
 
-		//DebugLog::Log(u8"ビデオカード名 : " + std::string(videoCardDescription, sizeof(videoCardDescription) / sizeof(videoCardDescription[0])));
+		//DebugLog::Log("ビデオカード名 : " + std::string(videoCardDescription, sizeof(videoCardDescription) / sizeof(videoCardDescription[0])));
 
 		// ビデオカードメモリを取得(MB単位)
 		int videoCardMemory = static_cast<int>(adapterDesc.DedicatedVideoMemory / 1024 / 1024);
-		//DebugLog::Log(u8"ビデオメモリー : " + videoCardMemory);
+		//DebugLog::Log("ビデオメモリー : " + videoCardMemory);
 
 		// アウトプット(モニター)に番号IDを付ける
 		hr = add->EnumOutputs(0, &adapterOutput);
@@ -141,7 +141,7 @@ HRESULT DirectX11App::HardWareCheck()
 		// DXGI_FORMAT_R8G8B8A8_UNORM の表示形式数を取得する
 		hr = adapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, NULL);
 		if (FAILED(hr)) continue;
-		//DebugLog::Log(u8"RGBA8_UNORM Count : " + numModes);
+		//DebugLog::Log("RGBA8_UNORM Count : " + numModes);
 
 		if (videoCardMemory > gpuMaxMem) {
 			gpuMaxMem = videoCardMemory;
@@ -226,7 +226,7 @@ HRESULT DirectX11App::CreateRasterizerState()
 
 	hr = DirectX11App::g_Device->CreateRasterizerState(&rasterizerDesc, &rasterizerState);
 	if (FAILED(hr)) {
-		DebugLog::LogError(u8"Rasterizer State Create Failed.");
+		DebugLog::LogError("Rasterizer State Create Failed.");
 		return hr;
 	}
 
@@ -246,14 +246,14 @@ HRESULT DirectX11App::CreateRenderTargetView()
 	// スワップチェインに用意されたバッファ(2Dテクスチャ)を取得
 	hr = g_SwapChain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
 	if (FAILED(hr)) {
-		DebugLog::LogError(u8"Buffer Texture Get Failed.");
+		DebugLog::LogError("Buffer Texture Get Failed.");
 		return hr;
 	}
 
 	// レンダーターゲットView作成
 	hr = g_Device->CreateRenderTargetView(backBuffer, NULL, &g_EditorRenderTargetView);
 	if (FAILED(hr)) {
-		DebugLog::LogError(u8"Render Target View Create Failed.");
+		DebugLog::LogError("Render Target View Create Failed.");
 		return hr;
 	}
 
@@ -287,7 +287,7 @@ HRESULT DirectX11App::CreateDepthAndStencilView()
 
 	hr = g_Device->CreateTexture2D(&textureDesc, NULL, &depthStencil);
 	if (FAILED(hr)) {
-		DebugLog::LogError(u8"Depth Stencil Texture Create Failed.");
+		DebugLog::LogError("Depth Stencil Texture Create Failed.");
 		return hr;
 	}
 
@@ -299,7 +299,7 @@ HRESULT DirectX11App::CreateDepthAndStencilView()
 
 	hr = g_Device->CreateDepthStencilView(depthStencil, &dsvDesc, &g_EditorDepthStencilView);
 	if(FAILED(hr)){
-		DebugLog::LogError(u8"Depth Stencill View Create Failed");
+		DebugLog::LogError("Depth Stencill View Create Failed");
 		return hr;
 	}
 
@@ -337,7 +337,7 @@ void DirectX11App::SetConstantBuffer(const std::weak_ptr<EvaEngine::Camera>& cam
 #if _DEBUG
 void EvaEngine::Internal::DirectX11App::ReportLiveObjects()
 {
-	OSVERSIONINFOEX OSver;
+	OSVERSIONINFOEX OSver{};
 	ULONGLONG condition = 0;
 	OSver.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
 	OSver.dwMajorVersion = 6;

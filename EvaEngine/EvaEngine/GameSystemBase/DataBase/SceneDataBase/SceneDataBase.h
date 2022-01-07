@@ -26,13 +26,13 @@ namespace EvaEngine {
 			void AddScene(const std::string& sceneName) {
 				// Editor‚Æ‚¢‚¤–¼‘O‚ÌƒV[ƒ“–¼‚Í“o˜^‚Å‚«‚È‚¢
 				if (sceneName == "Editor") {
-					DebugLog::LogError(u8"You cannot use the name ""Editor"" in the scene name.");
+					DebugLog::LogError("You cannot use the name ""Editor"" in the scene name.");
 					return;
 				}
 
 				// “¯‚¶ƒV[ƒ“–¼‚ªŠù‚É“o˜^‚³‚ê‚Ä‚¢‚ê‚Î•Ô‚·
 				if (m_Scenes.count(sceneName) >= 1) {
-					DebugLog::LogError(u8"A scene with the same name has already been registered.");
+					DebugLog::LogError("A scene with the same name has already been registered.");
 					return;
 				}
 

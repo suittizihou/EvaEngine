@@ -73,19 +73,19 @@ HRESULT EditorApp::Init()
 {
 	// ImGui‚Ì‰Šú‰»
 	if (FAILED(ImGuiSetting())) {
-		DebugLog::LogError(u8"ImGui‚Ìİ’è‚É¸”s‚µ‚Ü‚µ‚½B");
+		DebugLog::LogError("ImGui‚Ìİ’è‚É¸”s‚µ‚Ü‚µ‚½B");
 		return E_ABORT;
 	}
 
 	if (!ImGui_ImplWin32_Init(Window::g_hWnd)) {
-		DebugLog::LogError(u8"ImGui_ImplWin32_Init‚É¸”s‚µ‚Ü‚µ‚½B");
+		DebugLog::LogError("ImGui_ImplWin32_Init‚É¸”s‚µ‚Ü‚µ‚½B");
 		ImGui::DestroyContext();
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
 		return E_ABORT;
 	}
 	
 	if (!ImGui_ImplDX11_Init(EvaEngine::Internal::DirectX11App::g_Device, EvaEngine::Internal::DirectX11App::g_Context)) {
-		DebugLog::LogError(u8"ImGui_ImplDX11_Init‚É¸”s‚µ‚Ü‚µ‚½B");
+		DebugLog::LogError("ImGui_ImplDX11_Init‚É¸”s‚µ‚Ü‚µ‚½B");
 		ImGui::DestroyContext();
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
 		return E_ABORT;

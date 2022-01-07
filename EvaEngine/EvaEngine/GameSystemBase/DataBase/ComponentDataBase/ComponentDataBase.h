@@ -38,7 +38,7 @@ namespace EvaEngine {
 					for (const auto& component : gameObject.lock()->GetAllComponents()) {
 						if (component.lock()->GetHashCode() != component_temp->GetHashCode()) continue;
 
-						DebugLog::LogError(u8"Can't multi attach." + (std::string)typeid(T).name() + " : このコンポーネントは複数アタッチできません");
+						DebugLog::LogError("Can't multi attach." + (std::string)typeid(T).name() + " : このコンポーネントは複数アタッチできません");
 						return std::weak_ptr<T>();
 					}
 				}

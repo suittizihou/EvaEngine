@@ -8,17 +8,19 @@ using namespace EvaEngine::Internal;
 
 HRESULT MainApp::Init()
 {
+	setlocale(LC_ALL, "jpn");
+
 	// ウィンドウの初期化
 	HRESULT hr = WindowApp::Init();
 	if (FAILED(hr)) {
-		DebugLog::LogError(u8"Window initialize failed.");
+		DebugLog::LogError("Window initialize failed.");
 		return hr;
 	}
 
 	// DirectX11の初期化
 	hr = DirectX11App::Init();
 	if (FAILED(hr)) {
-		DebugLog::LogError(u8"DirectX initialize failed.");
+		DebugLog::LogError("DirectX initialize failed.");
 		return hr;
 	}
 
@@ -28,7 +30,7 @@ HRESULT MainApp::Init()
 	// エンジンの初期化
 	hr = EvaEngineApp::Init();
 	if (FAILED(hr)) {
-		DebugLog::LogError(u8"EvaEngine initialize failed.");
+		DebugLog::LogError("EvaEngine initialize failed.");
 		return hr;
 	}
 
@@ -54,7 +56,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance
 
 	// EvaEngineの初期化
 	if (FAILED(MainApp::Init())) {
-		EvaEngine::DebugLog::LogError(u8"EvaEngine initialize failed.");
+		EvaEngine::DebugLog::LogError("EvaEngine initialize failed.");
 		return -1;
 	}
 

@@ -3,6 +3,9 @@
 #include "../Mathf/Mathf.h"
 #include "../../../System/DebugLog/DebugLog.h"
 
+#undef small
+#undef max
+
 using namespace EvaEngine;
 
 EvaEngine::Color::Color(const float r, const float g, const float b, const float a)
@@ -83,7 +86,7 @@ float EvaEngine::Color::operator[](int index) const
         case 2: return b;
         case 3: return a;
         default:
-            DebugLog::LogError(u8"Invalid Color index(" + std::to_string(index) + ")!");
+            DebugLog::LogError("Invalid Color index(" + std::to_string(index) + ")!");
     }
 }
 
@@ -96,7 +99,7 @@ float& EvaEngine::Color::operator[](int index)
         case 2: return b;
         case 3: return a;
         default:
-            DebugLog::LogError(u8"Invalid Color index(" + std::to_string(index) + ")!");
+            DebugLog::LogError("Invalid Color index(" + std::to_string(index) + ")!");
     }
 }
 

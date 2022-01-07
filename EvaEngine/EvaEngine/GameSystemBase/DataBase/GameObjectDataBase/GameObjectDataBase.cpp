@@ -27,13 +27,13 @@ std::weak_ptr<GameObject> GameObjectDataBase::Find(const std::string& name)
 		}
 	}
 
-	DebugLog::LogError(u8"Not found : " + name + "という名前のGameObjectは存在しませんでした。");
+	DebugLog::LogError("Not found : " + name + "という名前のGameObjectは存在しませんでした。");
 }
 
 std::weak_ptr<GameObject> GameObjectDataBase::FindGameObjectWithTag(const std::string& tag)
 {
 	if (m_GameObjectListSource.count(tag) == 0) {
-		DebugLog::LogError(u8"Not found : " + tag + "というTagを持つGameObjectは存在しませんでした。");
+		DebugLog::LogError("Not found : " + tag + "というTagを持つGameObjectは存在しませんでした。");
 		return std::weak_ptr<GameObject>();
 	}
 	return *m_GameObjectListSource[tag].begin();
@@ -42,7 +42,7 @@ std::weak_ptr<GameObject> GameObjectDataBase::FindGameObjectWithTag(const std::s
 std::vector<std::weak_ptr<GameObject>> GameObjectDataBase::FindGameObjectsWithTag(const std::string& tag)
 {
 	if (m_GameObjectListSource.count(tag) == 0) {
-		DebugLog::LogError(u8"Not found : " + tag + "というTagを持つGameObjectは存在しませんでした。");
+		DebugLog::LogError("Not found : " + tag + "というTagを持つGameObjectは存在しませんでした。");
 		std::vector<std::weak_ptr<GameObject>> nullVector;
 		return nullVector;
 	}

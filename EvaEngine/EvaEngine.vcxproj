@@ -222,6 +222,7 @@
     <ClInclude Include="EvaEngine\Utility\ShaderUtility\ShaderBase\ShaderBase.h" />
     <ClInclude Include="EvaEngine\Utility\Texture\RenderTexture\RenderTexture.h" />
     <ClInclude Include="EvaEngine\Utility\Texture\Texture2D\Texture2D.h" />
+    <ClInclude Include="EvaEngine\Utility\Texture\TextureLoader\PNGLoader\PNGLoader.h" />
     <ClInclude Include="EvaEngine\Utility\Texture\TextureLoader\TextureLoader.h" />
     <ClInclude Include="EvaEngine\Utility\Texture\Texture\Texture.h" />
     <ClInclude Include="EvaEngine\Utility\TypeIDAssist\TypeIDAssist.h" />
@@ -618,8 +619,10 @@
     <ClCompile Include="EvaEngine\Utility\Math\Color\Color.cpp" />
     <ClCompile Include="EvaEngine\Utility\Math\Vector4\Vector4.cpp" />
     <ClCompile Include="EvaEngine\Utility\ModelUtility\ModelData\ModelData.cpp" />
+    <ClCompile Include="EvaEngine\Utility\StringAssist\StringAssist.cpp" />
     <ClCompile Include="EvaEngine\Utility\Texture\RenderTexture\RenderTexture.cpp" />
     <ClCompile Include="EvaEngine\Utility\Texture\Texture2D\Texture2D.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Texture\TextureLoader\PNGLoader\PNGLoader.cpp" />
     <ClCompile Include="EvaEngine\Utility\Texture\Texture\Texture.cpp" />
     <ClCompile Include="EvaEngine\Utility\Time\TimeBase.cpp" />
     <ClCompile Include="imgui\backends\imgui_impl_dx11.cpp" />
@@ -697,7 +700,7 @@
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\rapidjson.temprelease.0.0.2.20\build\native\rapidjson.temprelease.targets" Condition="Exists('..\packages\rapidjson.temprelease.0.0.2.20\build\native\rapidjson.temprelease.targets')" />
     <Import Project="..\packages\Microsoft.glTF.CPP.1.6.3.1\build\native\Microsoft.glTF.CPP.targets" Condition="Exists('..\packages\Microsoft.glTF.CPP.1.6.3.1\build\native\Microsoft.glTF.CPP.targets')" />
-    <Import Project="..\packages\directxtex_desktop_win10.2021.4.7.2\build\native\directxtex_desktop_win10.targets" Condition="Exists('..\packages\directxtex_desktop_win10.2021.4.7.2\build\native\directxtex_desktop_win10.targets')" />
+    <Import Project="..\packages\directxtex_desktop_win10.2021.11.8.1\build\native\directxtex_desktop_win10.targets" Condition="Exists('..\packages\directxtex_desktop_win10.2021.11.8.1\build\native\directxtex_desktop_win10.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -705,6 +708,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\rapidjson.temprelease.0.0.2.20\build\native\rapidjson.temprelease.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\rapidjson.temprelease.0.0.2.20\build\native\rapidjson.temprelease.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.glTF.CPP.1.6.3.1\build\native\Microsoft.glTF.CPP.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.glTF.CPP.1.6.3.1\build\native\Microsoft.glTF.CPP.targets'))" />
-    <Error Condition="!Exists('..\packages\directxtex_desktop_win10.2021.4.7.2\build\native\directxtex_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtex_desktop_win10.2021.4.7.2\build\native\directxtex_desktop_win10.targets'))" />
+    <Error Condition="!Exists('..\packages\directxtex_desktop_win10.2021.11.8.1\build\native\directxtex_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtex_desktop_win10.2021.11.8.1\build\native\directxtex_desktop_win10.targets'))" />
   </Target>
 </Project>

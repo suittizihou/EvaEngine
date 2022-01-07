@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "../../Utility/StringAssist/StringAssist.h"
 
 namespace EvaEngine {
 
@@ -11,8 +12,11 @@ namespace EvaEngine {
 	};
 
 	struct LogData {
-		LogData(LogType logType, const std::string& message) : 
-			logType{ logType }, message{ message }{}
+		LogData(LogType logType, const std::string& message)
+		{
+			this->logType = logType;
+			if (message.empty() == false) EvaEngine::StringAssist::ToUTF8(message, this->message);
+		}
 		~LogData() = default;
 
 		LogType logType{};

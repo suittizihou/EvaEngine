@@ -67,7 +67,7 @@ namespace EvaEngine {
 					std::vector<std::string> paths = StringAssist::Split(window->GetWindowPath(), "/");
 
 					if (paths.size() <= 1) {
-						DebugLog::LogError(u8"Ignoring menu item Window because it is in no submenu!");
+						DebugLog::LogError("Ignoring menu item Window because it is in no submenu!");
 						return;
 					}
 

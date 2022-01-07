@@ -14,7 +14,7 @@ void Move::Update()
 	if (Input::GetKey(KeyCode::E)) { velocity += Vector3::up(); }
 	if (Input::GetKey(KeyCode::Q)) { velocity += Vector3::down(); }
 
-	if (Input::GetKeyDown(KeyCode::Space)) DebugLog::Log(u8"Spaceキー押したで！！");
+	if (Input::GetKeyDown(KeyCode::Space)) DebugLog::Log("Spaceキー押したで！！");
 
 	transform->move(velocity * m_Speed * Time::GetDeltaTime());
 }
