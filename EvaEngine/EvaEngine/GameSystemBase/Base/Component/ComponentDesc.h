@@ -7,7 +7,7 @@ namespace EvaEngine {
 		std::string componentName{};
 		std::string sceneName{};
 		std::weak_ptr<GameObjectBase> gameObject;
-		GUID* hashCode{};
+		size_t hashCode{};
 		UINT componentID{};
 	} ComponentDesc;
 }
