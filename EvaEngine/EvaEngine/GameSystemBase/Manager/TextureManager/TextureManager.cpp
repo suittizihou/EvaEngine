@@ -6,7 +6,7 @@
 const GUID& EvaEngine::TextureManager::AddTexture(const std::string& fileName)
 {
 	GUID guid{ GUID_NULL };
-	if (GUIDCreator::Create(guid, "TextureManager‚É‚Ä " + fileName + " ‚ÌGUID¶¬‚É¸”s‚µ‚Ü‚µ‚½B")) {
+	if (GUIDCreator::Create(&guid, "TextureManager‚É‚Ä " + fileName + " ‚ÌGUID¶¬‚É¸”s‚µ‚Ü‚µ‚½B")) {
 
 	}
 
