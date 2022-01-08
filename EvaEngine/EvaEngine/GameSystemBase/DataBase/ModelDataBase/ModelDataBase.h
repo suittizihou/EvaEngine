@@ -26,7 +26,7 @@ namespace EvaEngine {
 
 		private:
 			// モデルデータ
-			std::map<GUID, std::shared_ptr<EvaEngine::ModelData>, GUIDComparer> m_Models{};
+			std::unordered_map<GUID, std::shared_ptr<EvaEngine::ModelData>> m_Models{};
 		};
 	}
 }
