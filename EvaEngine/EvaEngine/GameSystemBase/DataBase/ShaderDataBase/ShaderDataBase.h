@@ -2,6 +2,7 @@
 
 #include "../../../Define/D3D11Defines.h"
 #include "../../../Utility/ShaderUtility/ShaderBase/ShaderBase.h"
+#include "../../../Utility/GUIDUtility/GUIDUtility.h"
 #include <unordered_map>
 
 namespace EvaEngine {
@@ -23,17 +24,17 @@ namespace EvaEngine {
 			void LoadDefaultShader();
 
 			// 頂点シェーダーの追加
-			int AddVertexShader(const VertexShader& vertexShader);
+			void AddVertexShader(const VertexShader& vertexShader, GUID* guid);
 			// ピクセルシェーダーの追加
-			int AddPixelShader(const PixelShader& pixelShader);
+			void AddPixelShader(const PixelShader& pixelShader, GUID* guid);
 			// ジオメトリシェーダーの追加
-			int AddGeometryShader(const GeometryShader& geometryShader);
+			void AddGeometryShader(const GeometryShader& geometryShader, GUID* guid);
 			// コンピュートシェーダーの追加
-			int AddComputeShader(const ComputeShader& computeShader);
+			void AddComputeShader(const ComputeShader& computeShader, GUID* guid);
 			// ハルシェーダーの追加
-			int AddHullShader(const HullShader& hullShader);
+			void AddHullShader(const HullShader& hullShader, GUID* guid);
 			// ドメインシェーダーの追加
-			int AddDomainShader(const DomainShader& domainShader);
+			void AddDomainShader(const DomainShader& domainShader, GUID* guid);
 
 			// デフォルトの頂点シェーダーを取得
 			VertexShader GetDefaultVertexShader();
@@ -41,61 +42,50 @@ namespace EvaEngine {
 			PixelShader GetDefaultPixelShader();
 
 			// 頂点シェーダーの取得
-			VertexShader GetVertexShader(const int shaderHandle);
+			VertexShader GetVertexShader(const GUID& shaderHandle);
 			// ピクセルシェーダーの取得
-			PixelShader GetPixelShader(const int shaderHandle);
+			PixelShader GetPixelShader(const GUID& shaderHandle);
 			// ジオメトリシェーダーの取得
-			GeometryShader GetGeometryShader(const int shaderHandle);
+			GeometryShader GetGeometryShader(const GUID& shaderHandle);
 			// コンピュートシェーダーの取得
-			ComputeShader GetComputeShader(const int shaderHandle);
+			ComputeShader GetComputeShader(const GUID& shaderHandle);
 			// ハルシェーダーの取得
-			HullShader GetHullShader(const int shaderHandle);
+			HullShader GetHullShader(const GUID& shaderHandle);
 			// ドメインシェーダーの取得
-			DomainShader GetDomainShader(const int shaderHandle);
+			DomainShader GetDomainShader(const GUID& shaderHandle);
 
 			// 頂点シェーダーの削除
-			void DeleteVertexShader(const int shaderHandle);
+			void DeleteVertexShader(const GUID& shaderHandle);
 			// ピクセルシェーダーの削除
-			void DeletePixelShader(const int shaderHandle);
+			void DeletePixelShader(const GUID& shaderHandle);
 			// ジオメトリシェーダーの削除
-			void DeleteGeometryShader(const int shaderHandle);
+			void DeleteGeometryShader(const GUID& shaderHandle);
 			// コンピュートシェーダーの削除
-			void DeleteComputeShader(const int shaderHandle);
+			void DeleteComputeShader(const GUID& shaderHandle);
 			// ハルシェーダーの削除
-			void DeleteHullShader(const int shaderHandle);
+			void DeleteHullShader(const GUID& shaderHandle);
 			// ドメインシェーダーの削除
-			void DeleteDomainShader(const int shaderHandle);
+			void DeleteDomainShader(const GUID& shaderHandle);
 
 			// 全シェーダーリソースの解放
 			void AllDeleteShader();
 
+		private:
+			bool GUIDCreate(GUID* guid, const std::string& shaderType);
 
 		private:
-			// 頂点シェーダーのハンドル
-			int m_VertexShaderCount{ 0 };
-			// ピクセルシェーダーのハンドル
-			int m_PixelShaderCount{ 0 };
-			// ジオメトリシェーダーのハンドル
-			int m_GeometryShaderCount{ 0 };
-			// コンピュートシェーダーのハンドル
-			int m_ComputeShaderCount{ 0 };
-			// ハルシェーダーのハンドル
-			int m_HullShaderCount{ 0 };
-			// ドメインシェーダーのハンドル
-			int m_DomainShaderCount{ 0 };
-
 			// コンパイル済み頂点シェーダー
-			std::unordered_map<int, VertexShader> m_VertexShaders{};
+			std::unordered_map<GUID, VertexShader> m_VertexShaders{};
 			// コンパイル済みピクセルシェーダー
-			std::unordered_map<int, PixelShader> m_PixelShaders{};
+			std::unordered_map<GUID, PixelShader> m_PixelShaders{};
 			// コンパイル済みジオメトリシェーダー
-			std::unordered_map<int, GeometryShader> m_GeometryShaders{};
+			std::unordered_map<GUID, GeometryShader> m_GeometryShaders{};
 			// コンパイル済みコンピュートシェーダー
-			std::unordered_map<int, ComputeShader> m_ComputeShaders{};
+			std::unordered_map<GUID, ComputeShader> m_ComputeShaders{};
 			// コンパイル済みハルシェーダー
-			std::unordered_map<int, HullShader> m_HullShaders{};
+			std::unordered_map<GUID, HullShader> m_HullShaders{};
 			// コンパイル済みドメインシェーダー
-			std::unordered_map<int, DomainShader> m_DomainShaders{};
+			std::unordered_map<GUID, DomainShader> m_DomainShaders{};
 
 			VertexShader m_DefaultVertexShader{};
 			PixelShader m_DefaultPixelShader{};

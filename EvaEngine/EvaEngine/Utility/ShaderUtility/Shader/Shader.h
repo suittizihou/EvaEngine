@@ -9,22 +9,22 @@ namespace EvaEngine {
 		~Shader();
 
 		// 頂点シェーダーをセット
-		void SetVertexShader(const int shaderHandle);
+		void SetVertexShader(const GUID& shaderHandle);
 		void SetVertexShader(const Internal::VertexShader& shader);
 		// ピクセルシェーダーをセット
-		void SetPixelShader(const int shaderHandle);
+		void SetPixelShader(const GUID& shaderHandle);
 		void SetPixelShader(const Internal::PixelShader& shader);
 		// ジオメトリシェーダーをセット
-		void SetGeometryShader(const int shaderHandle);
+		void SetGeometryShader(const GUID& shaderHandle);
 		void SetGeometryShader(const Internal::GeometryShader& shader);
 		// コンピュートシェーダーをセット
-		void SetComputeShader(const int shaderHandle);
+		void SetComputeShader(const GUID& shaderHandle);
 		void SetComputeShader(const Internal::ComputeShader& shader);
 		// ハルシェーダーをセット
-		void SetHullShader(const int shaderHandle);
+		void SetHullShader(const GUID& shaderHandle);
 		void SetHullShader(const Internal::HullShader& shader);
 		// ドメインシェーダーをセット
-		void SetDomainShader(const int shaderHandle);
+		void SetDomainShader(const GUID& shaderHandle);
 		void SetDomainShader(const Internal::DomainShader& shader);
 
 		// 頂点シェーダーの取得

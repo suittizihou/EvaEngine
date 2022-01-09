@@ -8,7 +8,7 @@ using namespace EvaEngine::Internal;
 void ModelDataBase::LoadModelData(const std::shared_ptr<EvaEngine::ModelData>& model, GUID* guid)
 {
     std::string name = model->GetFileName();
-    if (GUIDUtility::Create(guid, "ModelDataBaseにてのGUID生成に失敗しました。") == false) return;
+    if (GUIDUtility::Create(guid, "ModelDataBaseにてモデルデータのGUID生成に失敗しました。") == false) return;
     m_Models[*guid] = model;
 }
 

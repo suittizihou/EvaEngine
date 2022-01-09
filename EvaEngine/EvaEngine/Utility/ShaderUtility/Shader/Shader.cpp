@@ -9,7 +9,7 @@ EvaEngine::Shader::~Shader()
 	//AllRelease();
 }
 
-void Shader::SetVertexShader(const int shaderHandle)
+void Shader::SetVertexShader(const GUID& shaderHandle)
 {
 	m_VertexShader = ShaderDataBase::Instance().GetVertexShader(shaderHandle);
 }
@@ -19,7 +19,7 @@ void EvaEngine::Shader::SetVertexShader(const VertexShader& shader)
 	m_VertexShader = shader;
 }
 
-void Shader::SetPixelShader(const int shaderHandle)
+void Shader::SetPixelShader(const GUID& shaderHandle)
 {
 	m_PixelShader = ShaderDataBase::Instance().GetPixelShader(shaderHandle);
 }
@@ -29,7 +29,7 @@ void EvaEngine::Shader::SetPixelShader(const PixelShader& shader)
 	m_PixelShader = shader;
 }
 
-void Shader::SetGeometryShader(const int shaderHandle)
+void Shader::SetGeometryShader(const GUID& shaderHandle)
 {
 	m_GeometryShader = ShaderDataBase::Instance().GetGeometryShader(shaderHandle);
 }
@@ -39,7 +39,7 @@ void EvaEngine::Shader::SetGeometryShader(const GeometryShader& shader)
 	m_GeometryShader = shader;
 }
 
-void Shader::SetComputeShader(const int shaderHandle)
+void Shader::SetComputeShader(const GUID& shaderHandle)
 {
 	m_ComputeShader = ShaderDataBase::Instance().GetComputeShader(shaderHandle);
 }
@@ -49,7 +49,7 @@ void EvaEngine::Shader::SetComputeShader(const ComputeShader& shader)
 	m_ComputeShader = shader;
 }
 
-void Shader::SetHullShader(const int shaderHandle)
+void Shader::SetHullShader(const GUID& shaderHandle)
 {
 	m_HullShader = ShaderDataBase::Instance().GetHullShader(shaderHandle);
 }
@@ -59,7 +59,7 @@ void EvaEngine::Shader::SetHullShader(const HullShader& shader)
 	m_HullShader = shader;
 }
 
-void Shader::SetDomainShader(const int shaderHandle)
+void Shader::SetDomainShader(const GUID& shaderHandle)
 {
 	m_DomainShader = ShaderDataBase::Instance().GetDomainShader(shaderHandle);
 }

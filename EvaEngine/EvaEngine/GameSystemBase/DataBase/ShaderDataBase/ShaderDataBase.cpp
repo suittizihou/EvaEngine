@@ -20,46 +20,40 @@ void ShaderDataBase::LoadDefaultShader()
     ShaderCompiler::CreatePixelShader(&m_DefaultPixelShader, "Shader/PixelShader.hlsl");
 }
 
-int ShaderDataBase::AddVertexShader(const VertexShader& vertexShader)
+void ShaderDataBase::AddVertexShader(const VertexShader& vertexShader, GUID* guid)
 {
-    m_VertexShaders[m_VertexShaderCount] = vertexShader;
-    m_VertexShaderCount += 1;
-    return m_VertexShaderCount - 1;
+    if (GUIDCreate(guid, "VertexShader")) return;
+    m_VertexShaders[*guid] = vertexShader;
 }
 
-int ShaderDataBase::AddPixelShader(const PixelShader& pixelShader)
+void ShaderDataBase::AddPixelShader(const PixelShader& pixelShader, GUID* guid)
 {
-    m_PixelShaders[m_PixelShaderCount] = pixelShader;
-    m_PixelShaderCount += 1;
-    return m_PixelShaderCount - 1;
+    if (GUIDCreate(guid, "PixelShader")) return;
+    m_PixelShaders[*guid] = pixelShader;
 }
 
-int ShaderDataBase::AddGeometryShader(const GeometryShader& geometryShader)
+void ShaderDataBase::AddGeometryShader(const GeometryShader& geometryShader, GUID* guid)
 {
-    m_GeometryShaders[m_GeometryShaderCount] = geometryShader;
-    m_GeometryShaderCount += 1;
-    return m_GeometryShaderCount - 1;
+    if (GUIDCreate(guid, "GeometryShader")) return;
+    m_GeometryShaders[*guid] = geometryShader;
 }
 
-int ShaderDataBase::AddComputeShader(const ComputeShader& computeShader)
+void ShaderDataBase::AddComputeShader(const ComputeShader& computeShader, GUID* guid)
 {
-    m_ComputeShaders[m_ComputeShaderCount] = computeShader;
-    m_ComputeShaderCount += 1;
-    return m_ComputeShaderCount - 1;
+    if (GUIDCreate(guid, "ComputeShader")) return;
+    m_ComputeShaders[*guid] = computeShader;
 }
 
-int ShaderDataBase::AddHullShader(const HullShader& hullShader)
+void ShaderDataBase::AddHullShader(const HullShader& hullShader, GUID* guid)
 {
-    m_HullShaders[m_HullShaderCount] = hullShader;
-    m_HullShaderCount += 1;
-    return m_HullShaderCount - 1;
+    if (GUIDCreate(guid, "HullShader")) return;
+    m_HullShaders[*guid] = hullShader;
 }
 
-int ShaderDataBase::AddDomainShader(const DomainShader& domainShader)
+void ShaderDataBase::AddDomainShader(const DomainShader& domainShader, GUID* guid)
 {
-    m_DomainShaders[m_DomainShaderCount] = domainShader;
-    m_DomainShaderCount += 1;
-    return m_DomainShaderCount - 1;
+    if (GUIDCreate(guid, "DomainShader")) return;
+    m_DomainShaders[*guid] = domainShader;
 }
 
 VertexShader ShaderDataBase::GetDefaultVertexShader()
@@ -72,37 +66,37 @@ PixelShader ShaderDataBase::GetDefaultPixelShader()
     return m_DefaultPixelShader;
 }
 
-VertexShader ShaderDataBase::GetVertexShader(const int shaderHandle)
+VertexShader ShaderDataBase::GetVertexShader(const GUID& shaderHandle)
 {
     return m_VertexShaders[shaderHandle];
 }
 
-PixelShader ShaderDataBase::GetPixelShader(const int shaderHandle)
+PixelShader ShaderDataBase::GetPixelShader(const GUID& shaderHandle)
 {
     return m_PixelShaders[shaderHandle];
 }
 
-GeometryShader ShaderDataBase::GetGeometryShader(const int shaderHandle)
+GeometryShader ShaderDataBase::GetGeometryShader(const GUID& shaderHandle)
 {
     return m_GeometryShaders[shaderHandle];
 }
 
-ComputeShader ShaderDataBase::GetComputeShader(const int shaderHandle)
+ComputeShader ShaderDataBase::GetComputeShader(const GUID& shaderHandle)
 {
     return m_ComputeShaders[shaderHandle];
 }
 
-HullShader ShaderDataBase::GetHullShader(const int shaderHandle)
+HullShader ShaderDataBase::GetHullShader(const GUID& shaderHandle)
 {
     return m_HullShaders[shaderHandle];
 }
 
-DomainShader ShaderDataBase::GetDomainShader(const int shaderHandle)
+DomainShader ShaderDataBase::GetDomainShader(const GUID& shaderHandle)
 {
     return m_DomainShaders[shaderHandle];
 }
 
-void ShaderDataBase::DeleteVertexShader(const int shaderHandle)
+void ShaderDataBase::DeleteVertexShader(const GUID& shaderHandle)
 {
     m_VertexShaders[shaderHandle].m_pShader->Release();
     m_VertexShaders[shaderHandle].m_pShader = nullptr;
@@ -113,7 +107,7 @@ void ShaderDataBase::DeleteVertexShader(const int shaderHandle)
     m_VertexShaders.erase(shaderHandle);
 }
 
-void ShaderDataBase::DeletePixelShader(const int shaderHandle)
+void ShaderDataBase::DeletePixelShader(const GUID& shaderHandle)
 {
     m_PixelShaders[shaderHandle].m_pShader->Release();
     m_PixelShaders[shaderHandle].m_pShader = nullptr;
@@ -122,7 +116,7 @@ void ShaderDataBase::DeletePixelShader(const int shaderHandle)
     m_PixelShaders.erase(shaderHandle);
 }
 
-void ShaderDataBase::DeleteGeometryShader(const int shaderHandle)
+void ShaderDataBase::DeleteGeometryShader(const GUID& shaderHandle)
 {
     m_GeometryShaders[shaderHandle].m_pShader->Release();
     m_GeometryShaders[shaderHandle].m_pShader = nullptr;
@@ -131,7 +125,7 @@ void ShaderDataBase::DeleteGeometryShader(const int shaderHandle)
     m_GeometryShaders.erase(shaderHandle);
 }
 
-void ShaderDataBase::DeleteComputeShader(const int shaderHandle)
+void ShaderDataBase::DeleteComputeShader(const GUID& shaderHandle)
 {
     m_ComputeShaders[shaderHandle].m_pShader->Release();
     m_ComputeShaders[shaderHandle].m_pShader = nullptr;
@@ -140,7 +134,7 @@ void ShaderDataBase::DeleteComputeShader(const int shaderHandle)
     m_ComputeShaders.erase(shaderHandle);
 }
 
-void ShaderDataBase::DeleteHullShader(const int shaderHandle)
+void ShaderDataBase::DeleteHullShader(const GUID& shaderHandle)
 {
     m_HullShaders[shaderHandle].m_pShader->Release();
     m_HullShaders[shaderHandle].m_pShader = nullptr;
@@ -149,7 +143,7 @@ void ShaderDataBase::DeleteHullShader(const int shaderHandle)
     m_HullShaders.erase(shaderHandle);
 }
 
-void ShaderDataBase::DeleteDomainShader(const int shaderHandle)
+void ShaderDataBase::DeleteDomainShader(const GUID& shaderHandle)
 {
     m_DomainShaders[shaderHandle].m_pShader->Release();
     m_DomainShaders[shaderHandle].m_pShader = nullptr;
@@ -248,4 +242,9 @@ void ShaderDataBase::AllDeleteShader()
         }
     }
     m_DomainShaders.clear();
+}
+
+bool EvaEngine::Internal::ShaderDataBase::GUIDCreate(GUID* guid, const std::string& shaderType)
+{
+    return GUIDUtility::Create(guid, "ShaderDataBase‚É‚Ä" + shaderType + "‚ÌGUID¶¬‚É¸”s‚µ‚Ü‚µ‚½B");
 }
