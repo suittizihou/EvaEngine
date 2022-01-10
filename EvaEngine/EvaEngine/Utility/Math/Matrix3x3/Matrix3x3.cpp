@@ -138,3 +138,7 @@ std::ostream& EvaEngine::operator<<(std::ostream& out, const Matrix3x3& rhs)
 	}
 	return out;
 }
+
+EvaEngine::Matrix3x3::operator DirectX::XMMATRIX() const {
+	return DirectX::XMLoadFloat3x3(&mat);
+}

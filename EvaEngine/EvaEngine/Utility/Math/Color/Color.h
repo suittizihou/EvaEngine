@@ -1,26 +1,24 @@
 #pragma once
 
 #include <string>
+#include <DirectXMath.h>
 
 namespace EvaEngine {
+    struct Vector3;
     struct Vector4;
 
     struct Color
     {
-        // Red component of the color.
-        float r{};
-        // Green component of the color.
-        float g{};
-        // Blue component of the color.
-        float b{};
-        // Alpha component of the color.
-        float a{};
-
+        union {
+            DirectX::XMFLOAT4 vec;
+            struct { float r, g, b, a; };
+            float v[4];
+        };
 
         // 指定されたr、g、b、aコンポーネントを使用して新しい色を作成します。
         Color(const float r, const float g, const float b, const float a);
         // 指定されたr、g、bコンポーネントを使用して新しい色を作成し、/ a /を1に設定します。
-        Color(const float r, const float g, const float b);
+        Color(const float r = 1.0f, const float g = 1.0f, const float b = 1.0f);
 
         // 文字列に変換します。
         std::string ToString();
@@ -71,10 +69,6 @@ namespace EvaEngine {
         Color Gamma() const;
         // 色成分値の最大値を返します
         float MaxColorComponent() const;
-        // Vector4への暗黙キャスト
-        operator Vector4() const;
-        float operator[](int index) const;
-        float& operator[](int index);
 
         // RGBをHSVに変換します
         static void RGBToHSV(const Color& rgbColor, float* H, float* S, float* V);
@@ -85,6 +79,15 @@ namespace EvaEngine {
 
             // Convert a set of HSV values to an RGB Color.
         static Color HSVToRGB(float H, float S, float V, bool hdr);
+
+        // Vector4への暗黙キャスト
+        operator Vector4() const;
+        // Vector3への暗黙キャスト
+        operator Vector3() const;
+        // XMVECTORへの暗黙キャスト
+        operator DirectX::XMVECTOR() const;
+        float operator[](int index) const;
+        float& operator[](int index);
     };
 
     // 代入演算子のオーバーロード

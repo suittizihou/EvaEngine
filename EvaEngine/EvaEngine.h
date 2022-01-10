@@ -1,5 +1,6 @@
 #pragma once
 
+#include <ImGUI/imgui.h>
 #pragma comment(lib, "EvaEngine.lib")
 
 #include "EvaEngine/App/MainApp/MainApp.h"

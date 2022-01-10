@@ -55,7 +55,7 @@ namespace EvaEngine {
 		// コンポーネントの削除
 		template<class T>
 		void RemoveComponent() {
-			EvaEngine::Internal::ComponentManager::Instance().RemoveComponent<T>(GetSceneName(), m_GUID);
+			EvaEngine::Internal::ComponentManager::Instance().RemoveComponent<T>(GetSceneName(), weak_from_this());
 			
 			// 参照が切れたコンポーネントを配列から削除
 			for (int i = 0; i < m_Components.size(); ++i)

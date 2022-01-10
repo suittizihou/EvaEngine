@@ -80,12 +80,12 @@ ID3D11Buffer* BufferCreate::CreateConstantBuffer()
 {
     D3D11_BUFFER_DESC bufferDesc{};
     ZeroMemory(&bufferDesc, sizeof(bufferDesc));
-    bufferDesc.ByteWidth = sizeof(ConstantBufferData);
+    bufferDesc.ByteWidth = ((sizeof(ConstantBufferData) + 256) & 0xFFFFFF00);
     bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 
     ID3D11Buffer* buffer{ nullptr };
     if (FAILED(DirectX11App::g_Device->CreateBuffer(&bufferDesc, nullptr, &buffer))) {
-        DebugLog::LogError("Constant Buffer Create Failed.");
+        DebugLog::ShowErrorMessageWindow("Constant Buffer Create Failed.");
         return nullptr;
     }
 

@@ -13,6 +13,11 @@ void ComponentManager::Update(const std::string& sceneName)
 	m_ComponentList[sceneName]->Update();
 }
 
+void EvaEngine::Internal::ComponentManager::ExecuteEditUpdate(const std::string& sceneName)
+{
+	m_ComponentList[sceneName]->ExecuteEditorUpdate();
+}
+
 void ComponentManager::LateUpdate(const std::string& sceneName)
 {
 	m_ComponentList[sceneName]->LateUpdate();

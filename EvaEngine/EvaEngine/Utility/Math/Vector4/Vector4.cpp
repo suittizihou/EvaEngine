@@ -332,3 +332,5 @@ EvaEngine::Vector4::operator Color() const { return Color(x, y, z, w); }
 EvaEngine::Vector4::operator Vector2() const { return Vector2(x, y); }
 
 EvaEngine::Vector4::operator Vector3() const { return Vector3(x, y, z); }
+
+EvaEngine::Vector4::operator DirectX::XMVECTOR() const { return DirectX::XMLoadFloat4(&vec); }

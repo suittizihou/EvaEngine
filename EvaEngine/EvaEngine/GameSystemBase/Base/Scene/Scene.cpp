@@ -12,6 +12,11 @@ void EvaEngine::Scene::Update() {
     ComponentManager::Instance().Update(m_SceneName);
 }
 
+void EvaEngine::Scene::ExecuteEditUpdate()
+{
+    ComponentManager::Instance().ExecuteEditUpdate(m_SceneName);
+}
+
 void EvaEngine::Scene::LateUpdate() {
     ComponentManager::Instance().LateUpdate(m_SceneName);
 }

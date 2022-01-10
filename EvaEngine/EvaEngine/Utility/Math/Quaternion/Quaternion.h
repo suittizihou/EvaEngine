@@ -1,20 +1,16 @@
 #pragma once
 
-#include "../Vector3/Vector3.h"
 #include <string>
+#include <DirectXMath.h>
+#include "../Vector3/Vector3.h"
 
 namespace EvaEngine {
-
 	// クォータニオン
 	struct Quaternion {
 		union {
-			struct {
-				float x;
-				float y;
-				float z;
-				float w;
-			};
-			float xyzw[3];
+			DirectX::XMFLOAT4 vec;
+			float v[3];
+			struct { float x, y, z, w; };
 		};
 
 		// デフォルトコンストラクタ
@@ -86,6 +82,9 @@ namespace EvaEngine {
 
 		// 比較(完全に値が一致しているか？）
 		bool equals(const Quaternion& other) const;
+
+		// XMVECTORへの暗黙キャスト
+		operator DirectX::XMVECTOR() const;
 
 	private:
 		static bool is_equal_using_dot(float dot);

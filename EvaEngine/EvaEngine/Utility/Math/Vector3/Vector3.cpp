@@ -408,3 +408,8 @@ EvaEngine::Vector3::operator Color() const
 {
 	return Color(x, y, z, 0.0f);
 }
+
+EvaEngine::Vector3::operator DirectX::XMVECTOR() const
+{
+	return DirectX::XMLoadFloat3(&vec);
+}

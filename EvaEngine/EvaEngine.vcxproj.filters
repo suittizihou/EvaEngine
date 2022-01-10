@@ -1414,10 +1414,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="EvaEngine\Shader\PixelShader.hlsl" />
-    <FxCompile Include="EvaEngine\Shader\VertexShader.hlsl" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
     <None Include="dxcompiler.dll" />
     <None Include="dxil.dll" />

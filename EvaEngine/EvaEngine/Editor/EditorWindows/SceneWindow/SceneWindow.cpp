@@ -9,6 +9,7 @@
 #if _DEBUG
 #include "../../../GameSystemBase/Base/GameObject/GameObject.h"
 #include "../../../GameSystemBase/Components/Transform/Transform.h"
+#include "../../../Setting/Window/Window.h"
 
 #include <ImGuizmo.h>
 
@@ -33,11 +34,11 @@ void SceneWindow::OnGUI()
 	auto tagetTexture = camera.lock()->targetTexture;
 	auto size = tagetTexture->GetTexelSize();
 	camera.lock()->SetViewport(windowSize.x, windowSize.y);
-	ImGui::Image((void*)tagetTexture->GetShaderResourceView(), ImVec2(windowSize.x, windowSize.y));
+	ImGui::Image((void*)tagetTexture->GetShaderResourceView(), ImVec2(size.x, size.y));
 
 	auto selectGameObject = Selection::GetActiveObject();
 	if (!selectGameObject.expired()) {
-		float* outMatrix = selectGameObject.lock()->GetTransform().lock()->world_to_local_matrix();
+		float* outMatrix = selectGameObject.lock()->GetTransform().lock()->world_to_local_matrix().m16;
 
 		//float windowWidth = (float)ImGui::GetWindowWidth();
 		//float windowHeight = (float)ImGui::GetWindowHeight();

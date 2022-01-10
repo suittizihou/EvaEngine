@@ -50,12 +50,12 @@ namespace EvaEngine {
 				return m_ComponentList[sceneName]->GetComponent<T>(gameObject);
 			}
 
-			// コンポーネントを削除
-			template<class T>
-			void RemoveComponent(const std::string& sceneName, const GUID& gameObjectID)
-			{
-				m_ComponentList[sceneName]->RemoveComponent<T>(gameObjectID);
-			}
+			//// コンポーネントを削除
+			//template<class T>
+			//void RemoveComponent(const std::string& sceneName, const GUID& gameObjectID)
+			//{
+			//	m_ComponentList[sceneName]->RemoveComponent<T>(gameObjectID);
+			//}
 
 			// コンポーネントを削除
 			template<class T>
@@ -72,6 +72,8 @@ namespace EvaEngine {
 			void FixedUpdate(const std::string& sceneName);
 			// Update関数を回す
 			void Update(const std::string& sceneName);
+			// EditorでもUpdateを回す
+			void ExecuteEditUpdate(const std::string& sceneName);
 			// LateUpdate関数を回す
 			void LateUpdate(const std::string& sceneName);
 			// Draw関数を回す

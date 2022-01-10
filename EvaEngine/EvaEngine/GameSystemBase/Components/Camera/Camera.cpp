@@ -4,6 +4,7 @@
 #include "../Transform/Transform.h"
 #include "../../../Utility/Texture/RenderTexture/RenderTexture.h"
 #include "../../Manager/SceneManager/SceneManager.h"
+#include "../../../App/DirectX11App/DirectX11App.h"
 
 using namespace DirectX;
 using namespace EvaEngine;
@@ -80,16 +81,33 @@ void EvaEngine::Camera::SetViewport(const UINT width, const UINT height)
 	{
 		static_cast<FLOAT>(0),			// ウィンドウの左端の座標
 		static_cast<FLOAT>(0),			// ウィンドウの上端の座標
-		static_cast<FLOAT>(width - 0),	// ウィンドウの横幅
-		static_cast<FLOAT>(height - 0),	// ウィンドウの縦幅
+		static_cast<FLOAT>(width),		// ウィンドウの横幅
+		static_cast<FLOAT>(height),		// ウィンドウの縦幅
 		0.0f,							// 最小深度
 		1.0f							// 最大深度
 	};
 }
 
-void EvaEngine::Camera::SetRenderTarget() const
+void EvaEngine::Camera::SetBeginSettings(ID3D11DeviceContext* command) const
 {
+	// ビューポートのセットアップ
+	command->RSSetViewports(1, &m_Viewport);
+
 	targetTexture->SetRenderTarget(clearColor);
+
+	auto cameraPos = GetTransform().lock()->position();
+	DirectX::XMStoreFloat3(
+		&Internal::DirectX11App::g_ConstantBufferData.cameraPos,
+		cameraPos);
+
+	// ビュー行列
+	DirectX::XMStoreFloat4x4(
+		&Internal::DirectX11App::g_ConstantBufferData.view, 
+		XMMatrixTranspose(m_ViewMatrix));
+	// プロジェクション行列
+	DirectX::XMStoreFloat4x4(
+		&Internal::DirectX11App::g_ConstantBufferData.projection, 
+		XMMatrixTranspose(m_ProjectionMatrix));
 }
 
 D3D11_VIEWPORT EvaEngine::Camera::GetViewport() const
@@ -125,7 +143,7 @@ XMMATRIX EvaEngine::Camera::CreateViewMatrix(const std::weak_ptr<Transform>& tra
 DirectX::XMMATRIX EvaEngine::Camera::CreateViewMatrix(const Matrix4x4& rotateMatrix, const Matrix4x4& positionMatrix)
 {
 	// ビュー行列を逆行列にして返す
-	return XMMatrixInverse(nullptr, (rotateMatrix * positionMatrix).to_XMMATRIX());
+	return XMMatrixInverse(nullptr, (rotateMatrix * positionMatrix));
 }
 
 DirectX::XMMATRIX EvaEngine::Camera::CreateProjectionMatrix(const D3D11_VIEWPORT& viewPort, const float& near, const float& far, const float& fovDegree)

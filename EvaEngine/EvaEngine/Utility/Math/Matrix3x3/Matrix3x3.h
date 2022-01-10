@@ -2,6 +2,7 @@
 
 // ostreamの先行宣言
 #include <iosfwd>
+#include "../Vector3/Vector3.h"
 
 namespace EvaEngine {
 
@@ -9,7 +10,18 @@ namespace EvaEngine {
 
 	// 行列
 	struct Matrix3x3 {
-		float m[3][3];
+
+		union {
+			DirectX::XMFLOAT3X3 mat;
+			struct {
+				float _11, _12, _13;
+				float _21, _22, _23;
+				float _31, _32, _33;
+			};
+			Vector3 v[3];
+			float m[3][3];
+			float m9[9];
+		};
 
 		// コンストラクタ
 		Matrix3x3() = default;
@@ -27,6 +39,9 @@ namespace EvaEngine {
 		static Matrix3x3 rotate(float rotation);
 		// 平行移動
 		static Matrix3x3 translate(const Vector2& position);
+
+		// XMMATRIXへの暗黙キャスト
+		operator DirectX::XMMATRIX() const;
 	};
 
 	// 行列の加算

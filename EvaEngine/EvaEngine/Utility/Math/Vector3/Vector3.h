@@ -4,6 +4,7 @@
 #undef max
 
 #include <string>
+#include <DirectXMath.h>
 
 namespace EvaEngine {
 	struct Vector2;
@@ -11,12 +12,9 @@ namespace EvaEngine {
 	struct Color;
 	struct Vector3 {
 		union {
-			struct {
-				float x;	// X component of the vector.
-				float y;	// Y component of the vector.
-				float z;	// Z component of the vector.
-			};
-			float xyz[3];
+			DirectX::XMFLOAT3 vec;
+			float v[3];
+			struct { float x, y, z; };
 		};
 		static const float kEpsilon;
 
@@ -111,6 +109,8 @@ namespace EvaEngine {
 		operator Vector4() const;
 		// Vector2への暗黙キャスト
 		operator Color() const;
+		// XMVECTORへの暗黙キャスト
+		operator DirectX::XMVECTOR() const;
 	};
 
 	// 単項演算子オーバーロード

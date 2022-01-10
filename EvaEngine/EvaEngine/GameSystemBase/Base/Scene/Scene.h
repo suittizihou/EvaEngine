@@ -25,6 +25,9 @@ namespace EvaEngine {
 		// 更新処理
 		void Update();
 
+		// Editor上でも回る更新処理
+		void ExecuteEditUpdate();
+
 		// 遅延更新処理
 		void LateUpdate();
 

@@ -30,6 +30,7 @@ namespace EvaEngine {
 		static void Log(const std::string& logMessage);
 		static void LogWarning(const std::string& warningMessage);
 		static void LogError(const std::string& errorMessage);
+		static void ShowErrorMessageWindow(const std::string& message);
 
 		static std::vector<LogData> GetLogDatas();
 		static void ClearLog();

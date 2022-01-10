@@ -142,38 +142,38 @@ namespace EvaEngine {
 					" : コンポーネントが見つかりませんでした");
 			}
 
-			// コンポーネントを削除
-			template<class T>
-			void RemoveComponent(const GUID& gameObjectID)
-			{
-				size_t hashCode = typeid(T).hash_code();
-				for (int i = 0; i < m_Components.size(); ++i) {
-					if (!IsGameObjectIDEquals(m_Components[i]->GetGameObject(), gameObjectID)) continue;
-					if (hashCode != m_Components[i]->GetHashCode()) continue;
+			//// コンポーネントを削除
+			//template<class T>
+			//void RemoveComponent(const GUID& gameObjectID)
+			//{
+			//	size_t hashCode = typeid(T).hash_code();
+			//	for (int i = 0; i < m_Components.size(); ++i) {
+			//		if (!IsGameObjectIDEquals(m_Components[i]->GetGameObject(), gameObjectID)) continue;
+			//		if (hashCode != m_Components[i]->GetHashCode()) continue;
 
-					// 消せないコンポーネントなら早期リターン
-					if (!m_Components[i]->GetCanRemove()) {
-						DebugLog::LogError(
-							u8"Can't remove component : " +
-							(std::string)typeid(T).name() +
-							" : " +
-							std::to_string(typeid(T).hash_code()) +
-							" : このコンポーネントは消せません");
-						return;
-					}
+			//		// 消せないコンポーネントなら早期リターン
+			//		if (!m_Components[i]->GetCanRemove()) {
+			//			DebugLog::LogError(
+			//				u8"Can't remove component : " +
+			//				(std::string)typeid(T).name() +
+			//				" : " +
+			//				std::to_string(typeid(T).hash_code()) +
+			//				" : このコンポーネントは消せません");
+			//			return;
+			//		}
 
 
-					// 消す対象の要素番号とFunctionMaskを渡して消す
-					RemoveComponent(i, m_Components[i]->GetFunctionMask());
-				}
+			//		// 消す対象の要素番号とFunctionMaskを渡して消す
+			//		RemoveComponent(i, m_Components[i]->GetFunctionMask());
+			//	}
 
-				DebugLog::LogError(
-					u8"Not found.: Name : " +
-					(std::string)typeid(T).name() +
-					" : " +
-					std::to_string(typeid(T).hash_code()) +
-					" : コンポーネントが見つかりませんでした");
-			}
+			//	DebugLog::LogError(
+			//		u8"Not found.: Name : " +
+			//		(std::string)typeid(T).name() +
+			//		" : " +
+			//		std::to_string(typeid(T).hash_code()) +
+			//		" : コンポーネントが見つかりませんでした");
+			//}
 
 			// 保持しているコンポーネントを全部削除
 			void RemoveAllComponent();
@@ -182,6 +182,8 @@ namespace EvaEngine {
 			void FixedUpdate();
 			// Update関数を回す
 			void Update();
+			// Update関数を回す(Editor上でも動く)
+			void ExecuteEditorUpdate();
 			// LateUpdate関数を回す
 			void LateUpdate();
 			// Draw関数を回す
@@ -216,6 +218,9 @@ namespace EvaEngine {
 
 			// Update関数が記入されているコンポーネントが格納されている印字の番号を格納する配列
 			std::vector<int> m_UpdateFuncNumber;
+
+			// Editor上でも更新されるフラグが立っているUpdate関数が記述されたコンポーネントが格納されている印字の番号を格納する配列
+			std::vector<int> m_ExecuteEditUpdateFuncNumber;
 
 			// LateUpdate関数が記入されているコンポーネントが格納されている印字の番号を格納する配列
 			std::vector<int> m_LateUpdateFuncNumber;

@@ -280,6 +280,10 @@ EvaEngine::Vector2::operator Color() const
 	return Color(x, y, 0.0f, 0.0f);
 }
 
+EvaEngine::Vector2::operator DirectX::XMVECTOR() const {
+	return DirectX::XMLoadFloat2(&vec);
+}
+
 Vector2 EvaEngine::operator-(const Vector2& v)
 {
 	return Vector2(-v.x, -v.y);

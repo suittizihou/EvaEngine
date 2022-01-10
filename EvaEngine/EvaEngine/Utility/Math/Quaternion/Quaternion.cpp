@@ -1,5 +1,6 @@
 #include <cmath>
 #include "Quaternion.h"
+#include "../Vector3/Vector3.h"
 #include "..//Mathf/Mathf.h"
 
 float kEpsilon = 0.000001f;
@@ -356,6 +357,10 @@ bool Quaternion::equals(const Quaternion& other) const
 bool Quaternion::is_equal_using_dot(float dot)
 {
 	return dot > 1.0f - kEpsilon;
+}
+
+EvaEngine::Quaternion::operator DirectX::XMVECTOR() const {
+	return DirectX::XMLoadFloat4(&vec);
 }
 
 Quaternion EvaEngine::operator-(const Quaternion& q)

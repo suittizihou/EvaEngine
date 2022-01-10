@@ -1,4 +1,5 @@
 #include "DebugLog.h"
+#include "../../Setting/Window/Window.h"
 #include <stdexcept>
 #include <iostream>
 #include <sstream>
@@ -25,6 +26,13 @@ void DebugLog::LogError(const std::string& errorMessage)
 {
 #if _DEBUG
 	m_LogDatas.push_back(LogData(LogType::Error, errorMessage));
+#endif
+}
+
+void EvaEngine::DebugLog::ShowErrorMessageWindow(const std::string& message)
+{
+#if _DEBUG
+	MessageBox(Internal::Window::g_hWnd, message.c_str(), TEXT("Error"), MB_OK);
 #endif
 }
 

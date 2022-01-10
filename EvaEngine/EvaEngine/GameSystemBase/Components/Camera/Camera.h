@@ -46,7 +46,7 @@ namespace EvaEngine {
 		// ビューポートの設定
 		void SetViewport(const UINT width, const UINT height);
 		// レンダーターゲットを設定
-		void SetRenderTarget() const;
+		void SetBeginSettings(ID3D11DeviceContext* command) const;
 
 		// ビューポートを取得
 		D3D11_VIEWPORT  GetViewport() const;

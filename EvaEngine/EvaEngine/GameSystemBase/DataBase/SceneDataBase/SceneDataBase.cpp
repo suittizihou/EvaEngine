@@ -94,6 +94,10 @@ void SceneDataBase::Update()
     m_CurrentScene.lock()->Update();
 }
 
+void SceneDataBase::ExecuteEditUpdate() {
+    m_CurrentScene.lock()->ExecuteEditUpdate();
+}
+
 void SceneDataBase::LateUpdate()
 {
     m_CurrentScene.lock()->LateUpdate();

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <DirectXMath.h>
 
 #undef max
 #undef min
@@ -12,10 +13,12 @@ namespace EvaEngine {
 
 	// 2Dベクトル
 	struct Vector2 {
-		// ベクトルのx成分
-		float x{ 0.0f };
-		// ベクトルのy成分
-		float y{ 0.0f };
+
+		union {
+			DirectX::XMFLOAT2 vec;
+			struct { float x, y; };
+			float v[2];
+		};
 
 		// デフォルトコンストラクタ
 		Vector2() = default;
@@ -94,6 +97,8 @@ namespace EvaEngine {
 		operator Vector4() const;
 		// Colorへの暗黙キャスト
 		operator Color() const;
+		// XMVECTORへの暗黙キャスト
+		operator DirectX::XMVECTOR() const;
 	};
 
 	// 単項演算子オーバーロード

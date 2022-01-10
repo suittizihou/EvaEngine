@@ -20,6 +20,7 @@ void EvaEngine::Editor::Internal::SceneView::Awake()
 
 	m_SceneCameraObj.lock()->set_parent(GetTransform(), false);
 	m_SceneCamera = m_SceneCameraObj.lock()->GetGameObject().lock()->AddComponent<Camera>();
+	m_SceneCamera.lock()->clearColor = Color::Black();
 }
 
 void EvaEngine::Editor::Internal::SceneView::Update() {

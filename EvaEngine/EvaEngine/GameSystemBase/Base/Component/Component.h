@@ -24,9 +24,10 @@ namespace EvaEngine {
 		//const UINT AWAKE				(1 << 0);
 		//const UINT START				(1 << 1);
 		const UINT FIXED_UPDATE(1 << 2);
-		const UINT UPDATE(1 << 3);
-		const UINT LATE_UPDATE(1 << 4);
-		const UINT DRAW(1 << 5);
+		const UINT EXECUTE_EDIT_UPDATE(1 << 3);
+		const UINT UPDATE(1 << 4);
+		const UINT LATE_UPDATE(1 << 5);
+		const UINT DRAW(1 << 6);
 	}
 
 	class Component : public GameJobs {

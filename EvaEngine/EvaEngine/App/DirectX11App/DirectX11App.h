@@ -6,6 +6,7 @@
 #include <dxgidebug.h>
 
 namespace EvaEngine {
+	struct Vector3;
 	class Camera;
 	
 	namespace Internal {
@@ -41,7 +42,7 @@ namespace EvaEngine {
 			// 定数バッファの作成
 			static HRESULT CreateConstantBuffer();
 			// 定数バッファのセット
-			static void SetConstantBuffer(const std::weak_ptr<Camera>& camera);
+			static void SetConstantBuffer(const std::weak_ptr<Camera>& camera, const Vector3& lightDir, const Vector3& lightColor);
 
 		public:
 			static ID3D11Device* g_Device;

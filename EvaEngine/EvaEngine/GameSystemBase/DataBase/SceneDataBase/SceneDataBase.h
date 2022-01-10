@@ -62,6 +62,7 @@ namespace EvaEngine {
 			void SceneUpdate();
 			void FixedUpdate();
 			void Update();
+			void ExecuteEditUpdate();
 			void LateUpdate();
 			void Draw(ID3D11DeviceContext* command);
 

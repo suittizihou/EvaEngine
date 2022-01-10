@@ -1,4 +1,5 @@
 #include "Color.h"
+#include "../Vector3/Vector3.h"
 #include "../Vector4/Vector4.h"
 #include "../Mathf/Mathf.h"
 #include "../../../System/DebugLog/DebugLog.h"
@@ -74,34 +75,6 @@ Color EvaEngine::Color::Linear() const { return Color(Mathf::gamma_to_linear_spa
 Color EvaEngine::Color::Gamma() const { return Color(Mathf::linear_to_gamma_space(r), Mathf::linear_to_gamma_space(g), Mathf::linear_to_gamma_space(b), a); }
 
 float EvaEngine::Color::MaxColorComponent() const { return Mathf::max(Mathf::max(r, g), b); }
-
-EvaEngine::Color::operator Vector4() const { return Vector4(r, g, b, a); }
-
-float EvaEngine::Color::operator[](int index) const
-{
-    switch (index)
-    {
-        case 0: return r;
-        case 1: return g;
-        case 2: return b;
-        case 3: return a;
-        default:
-            DebugLog::LogError("Invalid Color index(" + std::to_string(index) + ")!");
-    }
-}
-
-float& EvaEngine::Color::operator[](int index)
-{
-    switch (index)
-    {
-        case 0: return r;
-        case 1: return g;
-        case 2: return b;
-        case 3: return a;
-        default:
-            DebugLog::LogError("Invalid Color index(" + std::to_string(index) + ")!");
-    }
-}
 
 void EvaEngine::Color::RGBToHSV(const Color& rgbColor, float* H, float* S, float* V)
 {
@@ -256,6 +229,38 @@ Color EvaEngine::Color::HSVToRGB(float H, float S, float V, bool hdr)
         }
     }
     return retval;
+}
+
+EvaEngine::Color::operator Vector4() const { return Vector4(r, g, b, a); }
+
+EvaEngine::Color::operator Vector3() const { return Vector3(r, g, b); }
+
+EvaEngine::Color::operator DirectX::XMVECTOR() const { return DirectX::XMLoadFloat4(&vec); }
+
+float EvaEngine::Color::operator[](int index) const
+{
+    switch (index)
+    {
+    case 0: return r;
+    case 1: return g;
+    case 2: return b;
+    case 3: return a;
+    default:
+        DebugLog::LogError("Invalid Color index(" + std::to_string(index) + ")!");
+    }
+}
+
+float& EvaEngine::Color::operator[](int index)
+{
+    switch (index)
+    {
+    case 0: return r;
+    case 1: return g;
+    case 2: return b;
+    case 3: return a;
+    default:
+        DebugLog::LogError("Invalid Color index(" + std::to_string(index) + ")!");
+    }
 }
 
 Color& EvaEngine::operator+=(Color& lhs, const Color& rhs)

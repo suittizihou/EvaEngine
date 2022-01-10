@@ -28,6 +28,10 @@ namespace EvaEngine {
 
 			// ƒGƒ“ƒWƒ“‚ÌI—¹ˆ—
 			static void End();
+
+		private:
+			static void EditorUpdate();
+			static void RuntimeUpdate();
 		};
 	}
 }

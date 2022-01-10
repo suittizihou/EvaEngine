@@ -111,7 +111,7 @@ HRESULT ShaderCompiler::Compile(const std::string& fileName, const std::string& 
 
     setlocale(LC_CTYPE, "jpn");
     mbstowcs(ws, fileName.c_str(), 512);
-    ID3DBlob* errorBlob{ nullptr };
+    ID3DBlob* errorBlob;
     HRESULT hr = D3DCompileFromFile(ws, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, entryPath.c_str(), pTarget, compileFlags, 0, ppBlob, &errorBlob);
 
     // エラーチェック

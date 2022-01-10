@@ -1,6 +1,7 @@
 #include "ComponentDataBase.h"
 #include "../../Base/GameObject/GameObject.h"
 #include "../../Components/Camera/Camera.h"
+#include "../../Components/Transform/Transform.h"
 #include "../../Manager/DrawManager/DrawManager.h"
 #include "../../../App/EditorApp/EditorApp.h"
 #include "../../../Editor/SceneView/SceneView.h"
@@ -27,6 +28,15 @@ void ComponentDataBase::Update()
 	}
 }
 
+void EvaEngine::Internal::ComponentDataBase::ExecuteEditorUpdate()
+{
+	for (int i = 0, size = m_ExecuteEditUpdateFuncNumber.size(); i < size; ++i) {
+		if (m_Components[m_ExecuteEditUpdateFuncNumber[i]]->GetGameObject().lock()->ActiveSelf() == false) continue;
+
+		m_Components[m_ExecuteEditUpdateFuncNumber[i]]->Update();
+	}
+}
+
 void ComponentDataBase::LateUpdate()
 {
 	for (int i = 0, size = m_LateUpdateFuncNumber.size(); i < size; ++i) {
@@ -46,15 +56,17 @@ void ComponentDataBase::Draw(ID3D11DeviceContext* command) const
 	// カメラの数だけ描画する
 	auto cameras = Camera::GetAllCamera();
 	for (int cameraNum = 0, size = cameras.size(); cameraNum < size; ++cameraNum) {
-		if (cameras[cameraNum].lock()->GetGameObject().lock()->ActiveSelf() == false) continue;
+		auto camera = cameras[cameraNum].lock();
+		if (camera->GetGameObject().lock()->ActiveSelf() == false) continue;
 
 		// 描画開始処理
-		cameras[cameraNum].lock()->SetRenderTarget();
+		camera->SetBeginSettings(command);
+
 		// 描画開始
 		for (int i = 0, size = m_DrawFuncNumber.size(); i < size; ++i) {
 			if (m_Components[m_DrawFuncNumber[i]]->GetGameObject().lock()->ActiveSelf() == false) continue;
 
-			m_Components[m_DrawFuncNumber[i]]->Draw(cameras[cameraNum], command);
+			m_Components[m_DrawFuncNumber[i]]->Draw(camera, command);
 		}
 	}
 }
@@ -62,8 +74,9 @@ void ComponentDataBase::Draw(ID3D11DeviceContext* command) const
 #if _DEBUG
 void EvaEngine::Internal::ComponentDataBase::DrawSceneView(ID3D11DeviceContext* command) const
 {
-	auto sceneViewCamera = EvaEngine::Editor::Internal::EditorApp::GetSceneView().lock()->GetSceneCamera();
-	sceneViewCamera.lock()->SetRenderTarget();
+	auto sceneViewCamera = EvaEngine::Editor::Internal::EditorApp::GetSceneView().lock()->GetSceneCamera().lock();
+	sceneViewCamera->SetBeginSettings(command);
+
 	for (int i = 0, size = m_DrawFuncNumber.size(); i < size; ++i) {
 		m_Components[m_DrawFuncNumber[i]]->Draw(sceneViewCamera, command);
 	}
@@ -86,6 +99,9 @@ void ComponentDataBase::AddComponent(const std::shared_ptr<Component>& component
 	if (component->GetFunctionMask() & FunctionMask::UPDATE) {
 		m_UpdateFuncNumber.push_back(indexNum);
 	}
+	if (component->GetFunctionMask() & FunctionMask::EXECUTE_EDIT_UPDATE) {
+		m_ExecuteEditUpdateFuncNumber.push_back(indexNum);
+	}
 	// LateUpdate関数の登録
 	if (component->GetFunctionMask() & FunctionMask::LATE_UPDATE) {
 		m_LateUpdateFuncNumber.push_back(indexNum);
@@ -104,56 +120,7 @@ void ComponentDataBase::RemoveComponent(const std::weak_ptr<Component>& componen
 {
 	UINT index = component.lock()->GetIndex();
 	UINT mask = component.lock()->GetFunctionMask();
-
-	// 末尾のコンポーネントが使用している関数マスクを取得
-	UINT endElementMask = m_Components.back()->GetFunctionMask();
-
-	// 消す場所と末尾をクルっと入れ替え
-	std::iter_swap(m_Components.begin() + index, m_Components.end() - 1);
-	// 末尾を削除
-	m_Components.pop_back();
-	
-	// 現在の配列番号を設定
-	m_Components[index]->SetIndex(index);
-
-	// 削除前のコンポーネントがあった配列番号を各関数添字配列の末尾に入れる
-	// (この削除前の添字の場所(m_Components配列の場所)には削除しないコンポーネントの添字が入っている)
-	if (endElementMask & FunctionMask::FIXED_UPDATE) m_FixedUpdateFuncNumber[m_FixedUpdateFuncNumber.size() - 1] = index;
-	if (endElementMask & FunctionMask::UPDATE) m_UpdateFuncNumber[m_UpdateFuncNumber.size() - 1] = index;
-	if (endElementMask & FunctionMask::LATE_UPDATE) m_LateUpdateFuncNumber[m_LateUpdateFuncNumber.size() - 1] = index;
-	if (endElementMask & FunctionMask::DRAW) m_DrawFuncNumber[m_DrawFuncNumber.size() - 1] = index;
-
-	if (mask & FunctionMask::FIXED_UPDATE)
-	{
-		// 末尾の値を指定の場所にコピー
-		m_FixedUpdateFuncNumber[FindItr(m_FixedUpdateFuncNumber, index)] = m_FixedUpdateFuncNumber.back();
-		// 末尾を消す
-		m_FixedUpdateFuncNumber.pop_back();
-	}
-
-	if (mask & FunctionMask::UPDATE)
-	{
-		// 末尾の値を指定の場所にコピー
-		m_UpdateFuncNumber[FindItr(m_UpdateFuncNumber, index)] = m_UpdateFuncNumber.back();
-		// 末尾を消す
-		m_UpdateFuncNumber.pop_back();
-	}
-
-	if (mask & FunctionMask::LATE_UPDATE)
-	{
-		// 末尾の値を指定の場所にコピー
-		m_LateUpdateFuncNumber[FindItr(m_LateUpdateFuncNumber, index)] = m_LateUpdateFuncNumber.back();
-		// 末尾を消す
-		m_LateUpdateFuncNumber.pop_back();
-	}
-
-	if (mask & FunctionMask::DRAW)
-	{
-		// 末尾の値を指定の場所にコピー
-		m_DrawFuncNumber[FindItr(m_DrawFuncNumber, index)] = m_DrawFuncNumber.back();
-		// 末尾を消す
-		m_DrawFuncNumber.pop_back();
-	}
+	RemoveComponent(index, mask);
 }
 
 void ComponentDataBase::RemoveComponent(const UINT& index, const UINT& mask)
@@ -173,6 +140,7 @@ void ComponentDataBase::RemoveComponent(const UINT& index, const UINT& mask)
 	// (この削除前の添字の場所(m_Components配列の場所)には削除しないコンポーネントの添字が入っている)
 	if (endElementMask & FunctionMask::FIXED_UPDATE) m_FixedUpdateFuncNumber[m_FixedUpdateFuncNumber.size() - 1] = index;
 	if (endElementMask & FunctionMask::UPDATE) m_UpdateFuncNumber[m_UpdateFuncNumber.size() - 1] = index;
+	if (endElementMask & FunctionMask::EXECUTE_EDIT_UPDATE) m_ExecuteEditUpdateFuncNumber[m_ExecuteEditUpdateFuncNumber.size() - 1] = index;
 	if (endElementMask & FunctionMask::LATE_UPDATE) m_LateUpdateFuncNumber[m_LateUpdateFuncNumber.size() - 1] = index;
 	if (endElementMask & FunctionMask::DRAW) m_DrawFuncNumber[m_DrawFuncNumber.size() - 1] = index;
 
@@ -190,6 +158,13 @@ void ComponentDataBase::RemoveComponent(const UINT& index, const UINT& mask)
 		m_UpdateFuncNumber[FindItr(m_UpdateFuncNumber, index)] = m_UpdateFuncNumber.back();
 		// 末尾を消す
 		m_UpdateFuncNumber.pop_back();
+	}
+
+	if (mask & FunctionMask::EXECUTE_EDIT_UPDATE) {
+		// 末尾の値を指定の場所にコピー
+		m_ExecuteEditUpdateFuncNumber[FindItr(m_ExecuteEditUpdateFuncNumber, index)] = m_ExecuteEditUpdateFuncNumber.back();
+		// 末尾を消す
+		m_ExecuteEditUpdateFuncNumber.pop_back();
 	}
 
 	if (mask & FunctionMask::LATE_UPDATE)
@@ -228,6 +203,7 @@ void ComponentDataBase::RemoveAllComponent()
 {
 	m_FixedUpdateFuncNumber.clear();
 	m_UpdateFuncNumber.clear();
+	m_ExecuteEditUpdateFuncNumber.clear();
 	m_LateUpdateFuncNumber.clear();
 	m_DrawFuncNumber.clear();
 	m_Components.clear();

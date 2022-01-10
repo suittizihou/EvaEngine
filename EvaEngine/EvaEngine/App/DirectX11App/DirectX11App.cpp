@@ -30,51 +30,39 @@ HRESULT DirectX11App::Init()
 	HRESULT hr{};
 	hr = HardWareCheck();
 	if (FAILED(hr)) {
-		DebugLog::LogError("Hard Ware Check Failed.");
+		DebugLog::ShowErrorMessageWindow("Hard Ware Check Failed.");
 		return hr;
 	}
 
 	hr = CreateDeviceAndSwapChain();
 	if (FAILED(hr)) {
-		DebugLog::LogError("Swap Chain or Device Create Failed.");
+		DebugLog::ShowErrorMessageWindow("Swap Chain or Device Create Failed.");
 		return hr;
 	}
 
 	hr = CreateRasterizerState();
 	if (FAILED(hr)) {
-		DebugLog::LogError("Rasterizer State Create Failed.");
+		DebugLog::ShowErrorMessageWindow("Rasterizer State Create Failed.");
 		return hr;
 	}
 
 	hr = CreateRenderTargetView();
 	if (FAILED(hr)) {
-		DebugLog::LogError("Render Target View Create Failed.");
+		DebugLog::ShowErrorMessageWindow("Render Target View Create Failed.");
 		return hr;
 	}
 
 	hr = CreateDepthAndStencilView();
 	if (FAILED(hr)) {
-		DebugLog::LogError("Depth Stencil View Create Failed.");
+		DebugLog::ShowErrorMessageWindow("Depth Stencil View Create Failed.");
 		return hr;
 	}
 
 	hr = CreateConstantBuffer();
 	if (FAILED(hr)) {
-		DebugLog::LogError("Constant Buffer Create Failed.");
+		DebugLog::ShowErrorMessageWindow("Constant Buffer Create Failed.");
 		return hr;
 	}
-
-	// ライトの設定
-	DirectX::XMVECTOR light = DirectX::XMVector3Normalize(DirectX::XMVectorSet(0.0f, 0.5f, -1.0f, 0.0f));
-
-	DirectX::XMStoreFloat4(&DirectX11App::g_ConstantBufferData.lightVector, light);
-
-	// ライトのカラー設定
-	DirectX11App::g_ConstantBufferData.lightColor = DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1);
-
-	D3D11_VIEWPORT viewPort{ Window::GetViewport() };
-	// ビューポートのセットアップ
-	g_Context->RSSetViewports(1, &viewPort);
 
 	return hr;
 }
@@ -318,20 +306,23 @@ HRESULT DirectX11App::CreateConstantBuffer()
 	return S_OK;
 }
 
-void DirectX11App::SetConstantBuffer(const std::weak_ptr<EvaEngine::Camera>& camera)
+void DirectX11App::SetConstantBuffer(const std::weak_ptr<Camera>& camera, const Vector3& lightDir, const Vector3& lightColor)
 {
-	DirectX::XMVECTOR light = DirectX::XMVector3Normalize(DirectX::XMVectorSet(0.0f, 0.5f, -1.0f, 0.0f));
+	lightDir.normalized();
+	DirectX::XMVECTOR lightDirection = DirectX::XMVectorSet(lightDir.x, lightDir.y, lightDir.z, 0.0f);
+	auto cam = camera.lock();
+	auto camPos = cam->GetTransform().lock()->position();
 
-	DirectX::XMStoreFloat4x4(&g_ConstantBufferData.view, DirectX::XMMatrixTranspose(camera.lock()->GetViewMatrixDxMath()));
-	DirectX::XMStoreFloat4x4(&g_ConstantBufferData.projection, DirectX::XMMatrixTranspose(camera.lock()->GetProjectionMatrixDxMath()));
-	DirectX::XMStoreFloat4(&g_ConstantBufferData.lightVector, light);
-	DirectX::XMStoreFloat4(&g_ConstantBufferData.cameraPos, 
+	DirectX::XMStoreFloat4x4(&g_ConstantBufferData.view, DirectX::XMMatrixTranspose(cam->GetViewMatrixDxMath()));
+	DirectX::XMStoreFloat4x4(&g_ConstantBufferData.projection, DirectX::XMMatrixTranspose(cam->GetProjectionMatrixDxMath()));
+	DirectX::XMStoreFloat3(&g_ConstantBufferData.lightDirection, lightDirection);
+	DirectX::XMStoreFloat3(&g_ConstantBufferData.cameraPos, 
 		DirectX::XMVectorSet(
-		camera.lock()->GetTransform().lock()->position().x,
-		camera.lock()->GetTransform().lock()->position().y,
-		camera.lock()->GetTransform().lock()->position().z,
+		camPos.x,
+		camPos.y,
+		camPos.z,
 		0.0f));
-	g_ConstantBufferData.lightColor = DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1.0f);
+	g_ConstantBufferData.lightColor = DirectX::XMFLOAT3(0.5f, 0.5f, 0.5f);
 }
 
 #if _DEBUG

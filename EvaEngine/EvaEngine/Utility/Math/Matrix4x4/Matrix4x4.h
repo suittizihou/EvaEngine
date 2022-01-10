@@ -2,16 +2,24 @@
 
 #include <iosfwd>
 #include <DirectXMath.h>
+#include "../Vector4/Vector4.h"
 
 namespace EvaEngine {
-
 	struct Vector3;
 	struct Quaternion;
 
 	// 行列
 	struct Matrix4x4 {
 
-		union{
+		union {
+			DirectX::XMFLOAT4X4 mat;
+			struct {
+				float _11, _12, _13, _14;
+				float _21, _22, _23, _24;
+				float _31, _32, _33, _34;
+				float _41, _42, _43, _44;
+			};
+			Vector4 v[4];
 			float m[4][4];
 			float m16[16];
 		};
@@ -26,10 +34,6 @@ namespace EvaEngine {
 			float m41, float m42, float m43, float m44
 		);
 		Matrix4x4(float* matrix);
-		Matrix4x4(const Matrix4x4& matrix) { memcpy(&m16[0], &matrix.m16[0], sizeof(float) * 16); }
-
-		operator float* () { return m16; }
-		operator const float* () const { return m16; }
 
 		// ゼロ行列
 		static Matrix4x4 zero();
@@ -84,11 +88,10 @@ namespace EvaEngine {
 		// この行列を移動、回転やスケーリングする行列に設定します
 		void set_TRS(const Vector3& t, const Quaternion& r, const Vector3& s);
 
-		// Matrix4x4をDirectXMathのXMATRIXに変換する
-		DirectX::XMMATRIX to_XMMATRIX() const;
-		static DirectX::XMMATRIX to_XMMATRIX(const Matrix4x4& matrix);
 		// DirectXMathのXMATRIXをMatrix4x4に変換する
 		static Matrix4x4 to_Matrix4x4(const DirectX::XMMATRIX& matrix);
+
+		operator DirectX::XMMATRIX() const;
 	};
 
 	// 行列の加算

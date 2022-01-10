@@ -25,15 +25,15 @@ void EvaEngine::Transform::OnGUI()
 	//m_OpenedFlag = true;
 
 	Vector3 tempPos{ local_position_ };
-	m_OpenedFlag = ImGui::DragFloat3("position", tempPos.xyz, 0.05f, -FLT_MAX, +FLT_MAX);
+	m_OpenedFlag = ImGui::DragFloat3("position", tempPos.v, 0.05f, -FLT_MAX, +FLT_MAX);
 	local_position(tempPos);
 
-	internal_euler_rotation = local_euler_angles();
-	m_OpenedFlag = ImGui::DragFloat3("rotation", internal_euler_rotation.xyz, 0.05f, -FLT_MAX, +FLT_MAX);
+	//internal_euler_rotation = local_euler_angles();
+	m_OpenedFlag = ImGui::DragFloat3("rotation", internal_euler_rotation.v, 0.05f, -FLT_MAX, +FLT_MAX);
 	local_rotation(Quaternion::euler(internal_euler_rotation));
 
 	Vector3 tempScale{ local_scale_ };
-	m_OpenedFlag = ImGui::DragFloat3("scale", tempScale.xyz, 0.05f, -FLT_MAX, +FLT_MAX);
+	m_OpenedFlag = ImGui::DragFloat3("scale", tempScale.v, 0.05f, -FLT_MAX, +FLT_MAX);
 	local_scale(tempScale);
 
 	//if (changeFlag) {
@@ -53,6 +53,7 @@ void EvaEngine::Transform::OnGUI()
 
 void EvaEngine::Transform::OnClosedGUI()
 {
+	internal_euler_rotation = local_euler_angles();
 	m_OpenedFlag = false;
 }
 #endif
