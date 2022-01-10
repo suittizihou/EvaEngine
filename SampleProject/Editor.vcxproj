@@ -129,6 +129,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)EvaEngine\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -159,7 +160,9 @@
     <ClInclude Include="Editor\EditorEntry\EditorEntry.h" />
     <ClInclude Include="Scenes\GameMain\GameMain.h" />
     <ClInclude Include="Scenes\SampleScene\SampleScene.h" />
+    <ClInclude Include="Script\DirectionLight\DirectionLight.h" />
     <ClInclude Include="Script\Move\Move.h" />
+    <ClInclude Include="Script\PointLight\PointLight.h" />
     <ClInclude Include="Script\Rotate\Rotate.h" />
     <ClInclude Include="Script\SinMove\SinMove.h" />
   </ItemGroup>
@@ -167,12 +170,26 @@
     <ClCompile Include="Editor\EditorEntry\EditorEntry.cpp" />
     <ClCompile Include="Scenes\GameMain\GameMain.cpp" />
     <ClCompile Include="Scenes\SampleScene\SampleScene.cpp" />
+    <ClCompile Include="Script\DirectionLight\DirectionLight.cpp" />
     <ClCompile Include="Script\Move\Move.cpp" />
+    <ClCompile Include="Script\PointLight\PointLight.cpp" />
     <ClCompile Include="Script\Rotate\Rotate.cpp" />
     <ClCompile Include="Script\SinMove\SinMove.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shader\PixelShader.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">psMain</EntryPointName>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Shader\VertexShader.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">vsMain</EntryPointName>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

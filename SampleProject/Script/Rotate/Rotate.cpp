@@ -6,7 +6,8 @@ void Rotate::Awake()
 {
 	m_Camera = Instantiate("Main Camera").lock()->GetComponent<Transform>();
 	m_Camera.lock()->set_parent(GetTransform(), false);
-	m_Camera.lock()->GetGameObject().lock()->AddComponent<Camera>();
+	auto cam = m_Camera.lock()->GetGameObject().lock()->AddComponent<Camera>();
+	cam.lock()->clearColor = Color::Black();
 }
 
 void Rotate::Update()

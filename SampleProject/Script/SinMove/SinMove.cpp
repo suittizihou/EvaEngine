@@ -17,6 +17,7 @@ void SinMove::Awake()
 }
 
 void SinMove::Update() {
-	GetTransform().lock()->position(m_DefaultPos.x, std::sin(m_Counter) * m_SwingWidth, m_DefaultPos.z);
+	auto pos = GetTransform().lock()->position();
+	GetTransform().lock()->position(pos.x, std::sin(m_Counter) * m_SwingWidth, pos.z);
 	m_Counter += 1.0f * Time::GetDeltaTime();
 }

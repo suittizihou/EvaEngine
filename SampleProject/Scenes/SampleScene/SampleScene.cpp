@@ -2,6 +2,8 @@
 #include "../../Script/Move/Move.h"
 #include "../../Script/Rotate/Rotate.h"
 #include "../../Script/SinMove/SinMove.h"
+#include "../../Script/DirectionLight/DirectionLight.h"
+#include "../../Script/PointLight/PointLight.h"
 #include <random>
 
 using namespace EvaEngine;
@@ -14,19 +16,39 @@ SampleScene::SampleScene(const std::string& sceneName, const UINT sceneID) :
 void SampleScene::Initialize()
 {
 	// モデルの読み込み
-	GUID modelHandle{ GUID_NULL };
-	ModelManager::Instance().LoadModel("TeaPot.fbx", &modelHandle);
+	GUID teaPotmodelHandle{ GUID_NULL };
+	ModelManager::Instance().LoadModel("TeaPot.fbx", &teaPotmodelHandle);
+	GUID boxModelHandle{ GUID_NULL };
+	ModelManager::Instance().LoadModel("Box.fbx", &boxModelHandle);
+	GUID planeModelHandle{ GUID_NULL };
+	ModelManager::Instance().LoadModel("Plane.fbx", &planeModelHandle);
+
+	Instantiate("Light", "DirectionLight").lock()->AddComponent<DirectionLight>();
+	auto pointLight = Instantiate("Light", "PointLight");
+	pointLight.lock()->AddComponent<PointLight>();
+	pointLight.lock()->AddComponent<Move>(5.0f);
 
 	// ゲームオブジェクトの生成
-	auto gameObject = Instantiate("None", "GameObject");
+	auto gameObject = Instantiate("None", "Teapot");
 	// 各コンポーネントを追加
-	gameObject.lock()->AddComponent<MeshFilter>(modelHandle);
+	gameObject.lock()->AddComponent<MeshFilter>(teaPotmodelHandle);
 	gameObject.lock()->AddComponent<MeshRenderer>();
 	gameObject.lock()->AddComponent<SinMove>(2.0f, 1.0f);
+	gameObject.lock()->GetTransform().lock()->position(-1.5f, 0.0f, 0.0f);
+
+	auto box = Instantiate("None", "Box").lock();
+	box->AddComponent<MeshFilter>(boxModelHandle);
+	box->AddComponent<MeshRenderer>();
+	box->GetTransform().lock()->position(1.5f, 0.0f, 0.0f);
+
+	auto plane = Instantiate("None", "Plane").lock();
+	plane->AddComponent<MeshFilter>(planeModelHandle);
+	plane->AddComponent<MeshRenderer>();
+	plane->GetTransform().lock()->position(0.0f, -1.0f, 0.0f);
+	//plane->GetTransform().lock()->local_scale(100.0f, 100.0f, 100.0f);
 
 	auto cameraParent = Instantiate("None", "CameraParent");
 	cameraParent.lock()->GetTransform().lock()->position(Vector3(0.0f, 0.0f, -5.0f));
-	cameraParent.lock()->AddComponent<Move>(5.0f);
 	cameraParent.lock()->AddComponent<Rotate>(50.0f);
 
 	//std::random_device rand;
