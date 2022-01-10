@@ -3,9 +3,9 @@
 void DirectionLight::Update()
 {
 	// ‘¾—zŒõ‚ÌŒü‚«•ÏX
-	auto euler = GetTransform().lock()->rotation().euler_angles();
-	euler.normalize();
-	DirectX::XMStoreFloat3(&EvaEngine::Internal::DirectX11App::g_ConstantBufferData.lightDirection, euler);
+	auto forward = GetTransform().lock()->forward();
+	forward.normalize();
+	DirectX::XMStoreFloat3(&EvaEngine::Internal::DirectX11App::g_ConstantBufferData.lightDirection, forward);
 	DirectX::XMStoreFloat3(&EvaEngine::Internal::DirectX11App::g_ConstantBufferData.lightColor, m_LightColor);
 	DirectX::XMStoreFloat3(&EvaEngine::Internal::DirectX11App::g_ConstantBufferData.materialAmbient, m_AmbientColor);
 }
