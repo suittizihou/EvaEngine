@@ -165,6 +165,7 @@
     <ClInclude Include="Script\PointLight\PointLight.h" />
     <ClInclude Include="Script\Rotate\Rotate.h" />
     <ClInclude Include="Script\SinMove\SinMove.h" />
+    <ClInclude Include="Script\SpotLight\SpotLight.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Editor\EditorEntry\EditorEntry.cpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="Script\PointLight\PointLight.cpp" />
     <ClCompile Include="Script\Rotate\Rotate.cpp" />
     <ClCompile Include="Script\SinMove\SinMove.cpp" />
+    <ClCompile Include="Script\SpotLight\SpotLight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

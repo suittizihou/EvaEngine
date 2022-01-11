@@ -5,9 +5,9 @@ void DirectionLight::Update()
 	// ‘¾—zŒõ‚ÌŒü‚«•ÏX
 	auto forward = GetTransform().lock()->forward();
 	forward.normalize();
-	DirectX::XMStoreFloat3(&EvaEngine::Internal::DirectX11App::g_ConstantBufferData.lightDirection, forward);
-	DirectX::XMStoreFloat3(&EvaEngine::Internal::DirectX11App::g_ConstantBufferData.lightColor, m_LightColor);
-	DirectX::XMStoreFloat3(&EvaEngine::Internal::DirectX11App::g_ConstantBufferData.materialAmbient, m_AmbientColor);
+	EvaEngine::Internal::DirectX11App::g_ConstantBufferData.lightDirection = forward;
+	EvaEngine::Internal::DirectX11App::g_ConstantBufferData.lightColor = m_LightColor;
+	EvaEngine::Internal::DirectX11App::g_ConstantBufferData.materialAmbient = m_AmbientColor;
 }
 
 #if _DEBUG

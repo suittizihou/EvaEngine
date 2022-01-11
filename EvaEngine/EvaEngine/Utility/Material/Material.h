@@ -16,6 +16,8 @@ namespace EvaEngine {
 
 	public:
 		void Release();
+		void SetShader(const Shader& shader);
+		//void SetConstantBuffer(int size, )
 
 	public:
 		ID3D11ShaderResourceView* shaderResourcesView{ nullptr };

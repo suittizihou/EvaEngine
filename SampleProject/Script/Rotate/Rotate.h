@@ -10,6 +10,6 @@ public:
 	void Update() override;
 
 private:
-	std::weak_ptr<EvaEngine::Transform> m_Camera;
+	std::weak_ptr<EvaEngine::Transform> m_Child;
 	float m_Speed{};
 };

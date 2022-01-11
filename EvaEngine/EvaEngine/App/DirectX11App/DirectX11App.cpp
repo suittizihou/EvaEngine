@@ -308,21 +308,14 @@ HRESULT DirectX11App::CreateConstantBuffer()
 
 void DirectX11App::SetConstantBuffer(const std::weak_ptr<Camera>& camera, const Vector3& lightDir, const Vector3& lightColor)
 {
-	lightDir.normalized();
-	DirectX::XMVECTOR lightDirection = DirectX::XMVectorSet(lightDir.x, lightDir.y, lightDir.z, 0.0f);
 	auto cam = camera.lock();
 	auto camPos = cam->GetTransform().lock()->position();
 
-	DirectX::XMStoreFloat4x4(&g_ConstantBufferData.view, DirectX::XMMatrixTranspose(cam->GetViewMatrixDxMath()));
-	DirectX::XMStoreFloat4x4(&g_ConstantBufferData.projection, DirectX::XMMatrixTranspose(cam->GetProjectionMatrixDxMath()));
-	DirectX::XMStoreFloat3(&g_ConstantBufferData.lightDirection, lightDirection);
-	DirectX::XMStoreFloat3(&g_ConstantBufferData.cameraPos, 
-		DirectX::XMVectorSet(
-		camPos.x,
-		camPos.y,
-		camPos.z,
-		0.0f));
-	g_ConstantBufferData.lightColor = DirectX::XMFLOAT3(0.5f, 0.5f, 0.5f);
+	g_ConstantBufferData.view = cam->GetViewMatrix().transpose();
+	g_ConstantBufferData.projection = cam->GetProjectionMatrix().transpose();
+	g_ConstantBufferData.lightDirection = lightDir.normalized();
+	g_ConstantBufferData.cameraPos = camPos;
+	g_ConstantBufferData.lightColor = lightColor;
 }
 
 #if _DEBUG

@@ -12,5 +12,5 @@ public:
 
 private:
 	EvaEngine::Vector3 m_Color{ EvaEngine::Vector3::right()};
-	float m_Range{ 100.0f };
+	float m_Range{ 10.0f };
 };

@@ -107,8 +107,10 @@ namespace EvaEngine {
 		void parent(std::weak_ptr<Transform> parent);
 		// Transform の親を設定
 		void set_parent(std::weak_ptr<Transform> parent, bool world_position_stays = true);
-		// 子供を取得
+		// 子供達を取得
 		std::list<std::weak_ptr<Transform>> get_children() const;
+		// 子供を取得
+		std::weak_ptr<Transform> get_child(const UINT index) const;
 		// 子供の数を取得
 		int get_child_count() const;
 

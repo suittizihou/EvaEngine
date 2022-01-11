@@ -96,18 +96,12 @@ void EvaEngine::Camera::SetBeginSettings(ID3D11DeviceContext* command) const
 	targetTexture->SetRenderTarget(clearColor);
 
 	auto cameraPos = GetTransform().lock()->position();
-	DirectX::XMStoreFloat3(
-		&Internal::DirectX11App::g_ConstantBufferData.cameraPos,
-		cameraPos);
+	Internal::DirectX11App::g_ConstantBufferData.cameraPos = cameraPos;
 
 	// ビュー行列
-	DirectX::XMStoreFloat4x4(
-		&Internal::DirectX11App::g_ConstantBufferData.view, 
-		XMMatrixTranspose(m_ViewMatrix));
+	Internal::DirectX11App::g_ConstantBufferData.view = GetViewMatrix().transpose();
 	// プロジェクション行列
-	DirectX::XMStoreFloat4x4(
-		&Internal::DirectX11App::g_ConstantBufferData.projection, 
-		XMMatrixTranspose(m_ProjectionMatrix));
+	Internal::DirectX11App::g_ConstantBufferData.projection = GetProjectionMatrix().transpose();
 }
 
 D3D11_VIEWPORT EvaEngine::Camera::GetViewport() const

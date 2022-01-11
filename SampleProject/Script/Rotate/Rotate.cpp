@@ -4,10 +4,7 @@ using namespace EvaEngine;
 
 void Rotate::Awake()
 {
-	m_Camera = Instantiate("Main Camera").lock()->GetComponent<Transform>();
-	m_Camera.lock()->set_parent(GetTransform(), false);
-	auto cam = m_Camera.lock()->GetGameObject().lock()->AddComponent<Camera>();
-	cam.lock()->clearColor = Color::Black();
+	m_Child = GetTransform().lock()->get_child(0);
 }
 
 void Rotate::Update()
@@ -20,6 +17,6 @@ void Rotate::Update()
 	if (Input::GetKey(KeyCode::RightArrow)) { yAxis += Vector3::up(); }
 
 	float deltaTime = Time::GetDeltaTime();
-	m_Camera.lock()->rotate(xAxis * m_Speed * deltaTime);
+	m_Child.lock()->rotate(xAxis * m_Speed * deltaTime);
  	transform.lock()->rotate(yAxis * m_Speed * deltaTime);
 }

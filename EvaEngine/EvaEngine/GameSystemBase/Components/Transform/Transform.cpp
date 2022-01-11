@@ -1,5 +1,6 @@
 #include "Transform.h"
 #include "../../../Utility/Math/Mathf/Mathf.h"
+#include "../../Base/GameObject/GameObject.h"
 
 #if _DEBUG
 #include <imgui.h>
@@ -53,7 +54,7 @@ void EvaEngine::Transform::OnGUI()
 
 void EvaEngine::Transform::OnClosedGUI()
 {
-	internal_euler_rotation = local_euler_angles();
+	//internal_euler_rotation = local_euler_angles();
 	m_OpenedFlag = false;
 }
 #endif
@@ -321,6 +322,18 @@ void Transform::set_parent(std::weak_ptr<Transform> parent, bool world_position_
 std::list<std::weak_ptr<Transform>> EvaEngine::Transform::get_children() const
 {
 	return children_;
+}
+
+std::weak_ptr<Transform> EvaEngine::Transform::get_child(const UINT index) const
+{
+	if (index >= children_.size()) {
+		DebugLog::LogError(
+			std::to_string(index) + "番目の子供は存在しませんでした。\n" +
+			GetGameObject().lock()->GetName() + "の子供の数は" + std::to_string(children_.size()) + "です。");
+		return std::weak_ptr<Transform>();
+	}
+
+	return *std::next(children_.begin(), index);
 }
 
 int EvaEngine::Transform::get_child_count() const

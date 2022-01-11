@@ -16,9 +16,10 @@ struct PS_INPUT
     float4 col : COLOR;
     float2 uv : TEXCOORD;
     float3 worldPos : TEXCOORD1;
+    float3 normalInView : TEXCOORD2; // カメラ空間の法線
 };
 
-cbuffer ConstantBuffer
+cbuffer ConstantBuffer : register(b0)
 {
     float4x4 World; // ワールド変換行列
     float4x4 View; // ビュー変換行列
@@ -29,9 +30,12 @@ cbuffer ConstantBuffer
     float3 ptPosition; // ポイントライトの座標
     float3 ptColor; // ポイントライトの色
     float ptRange; // ポイントライトの影響範囲
+    float3 spPosition;
+    float3 spColor;
+    float spRange;
+    float3 spDirection;
+    float spAngle;
     float3 MaterialAmbient; // アンビエント
-    //float4 MaterialDiffuse; // ディフューズ
-    //float4 MaterialSpecular; // スペキュラー
     float1 Shine;            // スペキュラーの累乗回数
 }
 

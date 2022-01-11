@@ -16,12 +16,15 @@ PS_INPUT vsMain(VS_INPUT input) {
 	// 頂点の法線にワールド行列を掛け合わせて
 	// ワールド座標上での法線の向きに変換する
     // 3行3列 * 3要素の掛け算のため、平行移動は計算されない
-    output.normal = mul(World, input.normal);
+    output.normal = mul(input.normal, World);
     
     // 頂点色を指定
     output.col = input.col;
 	// Texture指定
     output.uv = input.uv;
+
+    // カメラ空間の法線を求める
+    output.normalInView = mul(output.normal, View);
     
 	return output;
 }

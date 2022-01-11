@@ -3,9 +3,9 @@
 void PointLight::Update()
 {
 	auto pos = GetTransform().lock()->position();
-	DirectX::XMStoreFloat3(&EvaEngine::Internal::DirectX11App::g_ConstantBufferData.ptPosition, pos);
+	EvaEngine::Internal::DirectX11App::g_ConstantBufferData.ptPosition = pos;
 	EvaEngine::Internal::DirectX11App::g_ConstantBufferData.ptRange = m_Range;
-	DirectX::XMStoreFloat3(&EvaEngine::Internal::DirectX11App::g_ConstantBufferData.ptColor, m_Color);
+	EvaEngine::Internal::DirectX11App::g_ConstantBufferData.ptColor = m_Color;
 }
 
 #if _DEBUG

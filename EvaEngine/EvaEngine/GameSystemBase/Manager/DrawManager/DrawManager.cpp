@@ -66,7 +66,7 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 	UINT offset = 0;
 
 	// ワールド行列
-	XMStoreFloat4x4(&DirectX11App::g_ConstantBufferData.world, DirectX::XMMatrixTranspose(transform.lock()->local_to_world_matrix()));
+	DirectX11App::g_ConstantBufferData.world = transform.lock()->local_to_world_matrix().transpose();
 
 	// メッシュ情報が格納されているMapからメッシュを取り出す
 	for (const auto& meshs : model.lock()->meshes) {

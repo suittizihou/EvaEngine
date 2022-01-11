@@ -8,8 +8,6 @@
 #include "../../../Mesh/Mesh.h"
 #include "../../../Material/Material.h"
 
-#include <chrono>
-
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
@@ -40,7 +38,6 @@ void FBXModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::
         return;
     }
 
-    auto start = std::chrono::system_clock::now();
     // Fileを初期化
     fbx_importer->Initialize(fileName);
     // sceneにインポート
@@ -50,8 +47,6 @@ void FBXModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::
 
     // ポリゴンを三角形にする
     converter.Triangulate(fbx_scene, true);
-    auto end = std::chrono::system_clock::now();
-    DebugLog::Log(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()));
 
     int materialNum = fbx_scene->GetSrcObjectCount<FbxSurfaceMaterial>();
     for (int i = 0; i < materialNum; ++i) {

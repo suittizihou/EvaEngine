@@ -12,6 +12,6 @@ public:
 #endif
 
 private:
-	EvaEngine::Vector3 m_LightColor{ EvaEngine::Vector3::one() };
-	EvaEngine::Vector3 m_AmbientColor{ EvaEngine::Vector3::one() * 0.3f };
+	EvaEngine::Vector3 m_LightColor{ EvaEngine::Vector3::one() * 0.5f };
+	EvaEngine::Vector3 m_AmbientColor{ EvaEngine::Vector3::one() * 0.1f };
 };
