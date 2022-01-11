@@ -55,6 +55,7 @@ void SampleScene::Initialize()
 	auto box = Instantiate("None", "Box").lock();
 	box->AddComponent<MeshFilter>(boxModelHandle);
 	box->AddComponent<MeshRenderer>();
+	box->AddComponent<SinMove>(2.0f, 1.0f);
 	box->GetTransform().lock()->position(1.5f, 0.0f, 0.0f);
 
 	// è∞ê∂ê¨

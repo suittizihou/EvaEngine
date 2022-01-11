@@ -1,6 +1,8 @@
 #ifndef DEFAULT_SHADER_DEFINE_HLSL
 #define DEFAULT_SHADER_DEFINE_HLSL
 
+const float PI = 3.1415926f;
+
 struct VS_INPUT
 {
     float4 pos : POSITION;
