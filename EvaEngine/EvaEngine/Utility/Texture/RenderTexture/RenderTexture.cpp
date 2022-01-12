@@ -11,6 +11,7 @@ EvaEngine::RenderTexture::RenderTexture(const UINT width, const UINT height) : T
 
 EvaEngine::RenderTexture::~RenderTexture()
 {
+	Release();
 }
 
 void EvaEngine::RenderTexture::Create()
@@ -25,29 +26,14 @@ void EvaEngine::RenderTexture::Create()
 
 void EvaEngine::RenderTexture::Release()
 {
-	if (m_Texture != nullptr) {
-		m_Texture->Release();
-		m_Texture = nullptr;
-	}
-
 	if (m_RenderTargetView != nullptr) {
 		m_RenderTargetView->Release();
 		m_RenderTargetView = nullptr;
 	}
 
-	if (m_ShaderResourceView != nullptr) {
-		m_ShaderResourceView->Release();
-		m_ShaderResourceView = nullptr;
-	}
-
 	if (m_DepthStencilView != nullptr) {
 		m_DepthStencilView->Release();
 		m_DepthStencilView = nullptr;
-	}
-
-	if (m_SamplerState != nullptr) {
-		m_SamplerState->Release();
-		m_SamplerState = nullptr;
 	}
 }
 

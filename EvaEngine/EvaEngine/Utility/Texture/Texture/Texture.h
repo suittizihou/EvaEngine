@@ -14,7 +14,7 @@ namespace EvaEngine {
 
 	public:
 		Texture(const UINT width, const UINT height);
-		virtual ~Texture() = default;
+		virtual ~Texture();
 
 		TextureType GetTextureType() const;
 		// Texture‚ÌƒTƒCƒY‚ğæ“¾
