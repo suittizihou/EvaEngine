@@ -73,7 +73,7 @@ void EvaEngine::RenderTexture::CreateTex2D(const DXGI_FORMAT& format)
 	ID3D11Texture2D* texture{ nullptr };
 	HRESULT hr = DirectX11App::g_Device->CreateTexture2D(&textureDesc, nullptr, &texture);
 	if (FAILED(hr)) {
-		DebugLog::LogError("Failed : CreateTexture2D in Texture2D");
+		DebugLog::LogError("Failed : CreateTexture2D in RenderTexture");
 		return;
 	}
 	

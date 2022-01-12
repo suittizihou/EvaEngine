@@ -4,6 +4,8 @@
 
 using namespace EvaEngine;
 
+EvaEngine::Texture::Texture(const Vector2& texelSize) : Texture(texelSize.x, texelSize.y) {}
+
 EvaEngine::Texture::Texture(const UINT width, const UINT height) : texelSize{ width , height } {
 }
 

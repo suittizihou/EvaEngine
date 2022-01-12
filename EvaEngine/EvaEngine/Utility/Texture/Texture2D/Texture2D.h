@@ -8,6 +8,9 @@ namespace EvaEngine {
 
 	class Texture2D : public Texture {
 	public:
+		Texture2D(const Vector2& texelSize);
+		Texture2D(const Vector2& texelSize, const DXGI_FORMAT& textureFormat);
+		Texture2D(const Vector2& texelSize, const D3D11_TEXTURE2D_DESC& textureDesc);
 		Texture2D(const UINT width, const UINT height);
 		Texture2D(const UINT width, const UINT height, const DXGI_FORMAT& textureFormat);
 		Texture2D(const UINT width, const UINT height, const D3D11_TEXTURE2D_DESC& textureDesc);

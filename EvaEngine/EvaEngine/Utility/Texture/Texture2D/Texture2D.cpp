@@ -4,19 +4,20 @@
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-EvaEngine::Texture2D::Texture2D(const UINT width, const UINT height) : Texture(width, height)
+EvaEngine::Texture2D::Texture2D(const Vector2& texelSize) : Texture2D(texelSize.x, texelSize.y)
 {
-	memset(&m_TextureDesc, 0, sizeof(m_TextureDesc));
-	m_TextureDesc.ArraySize = 1;
-	m_TextureDesc.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
-	m_TextureDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	m_TextureDesc.Width = width;
-	m_TextureDesc.Height = height;
-	m_TextureDesc.Usage = D3D11_USAGE_DEFAULT;
-	m_TextureDesc.SampleDesc.Count = 1;
-	m_TextureDesc.MipLevels = 1;
+}
 
-	Init();
+EvaEngine::Texture2D::Texture2D(const Vector2& texelSize, const DXGI_FORMAT& textureFormat) : Texture2D(texelSize.x, texelSize.y, textureFormat)
+{
+}
+
+EvaEngine::Texture2D::Texture2D(const Vector2& texelSize, const D3D11_TEXTURE2D_DESC& textureDesc) : Texture2D(texelSize.x, texelSize.y, textureDesc)
+{
+}
+
+EvaEngine::Texture2D::Texture2D(const UINT width, const UINT height) : Texture2D(width, height, DXGI_FORMAT_R8G8B8A8_UNORM)
+{
 }
 
 EvaEngine::Texture2D::Texture2D(const UINT width, const UINT height, const DXGI_FORMAT& textureFormat) : Texture(width, height)

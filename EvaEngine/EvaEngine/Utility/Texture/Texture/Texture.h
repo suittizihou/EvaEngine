@@ -13,6 +13,7 @@ namespace EvaEngine {
 		};
 
 	public:
+		Texture(const Vector2& texelSize);
 		Texture(const UINT width, const UINT height);
 		virtual ~Texture();
 
