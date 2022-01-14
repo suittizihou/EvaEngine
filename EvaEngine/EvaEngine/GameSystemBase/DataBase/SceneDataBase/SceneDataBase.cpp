@@ -74,6 +74,11 @@ bool EvaEngine::Internal::SceneDataBase::IsCheckExists(const std::string& sceneN
     return m_Scenes.count(sceneName) == 1;
 }
 
+size_t EvaEngine::Internal::SceneDataBase::GetSceneCount() const
+{
+    return m_Scenes.size();
+}
+
 void SceneDataBase::Initialize()
 {
     m_CurrentScene.lock()->Initialize();

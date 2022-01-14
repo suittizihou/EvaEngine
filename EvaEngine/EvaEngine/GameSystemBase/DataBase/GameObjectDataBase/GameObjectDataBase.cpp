@@ -53,9 +53,9 @@ std::vector<std::weak_ptr<GameObject>> GameObjectDataBase::FindGameObjectsWithTa
 	return objVector;
 }
 
-void EvaEngine::Internal::GameObjectDataBase::GetAllGameObject(std::vector<std::weak_ptr<GameObject>>& outputObjects)
+void EvaEngine::Internal::GameObjectDataBase::GetAllGameObject(std::vector<std::weak_ptr<GameObject>>* outputObjects)
 {
-	outputObjects = m_GameObjectReference;
+	outputObjects = &m_GameObjectReference;
 }
 
 void GameObjectDataBase::RemoveAllGameObject()

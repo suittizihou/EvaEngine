@@ -50,6 +50,7 @@ HRESULT EvaEngineApp::Init()
 
 void EvaEngineApp::Update()
 {
+	if (SceneDataBase::Instance().GetSceneCount() <= 0) return;
 #if _DEBUG
 	EditorUpdate();
 #else
@@ -59,6 +60,7 @@ void EvaEngineApp::Update()
 
 void EvaEngineApp::Draw(ID3D11DeviceContext* command)
 {
+	if (SceneDataBase::Instance().GetSceneCount() <= 0) return;
 	// •`‰æ
 	SceneDataBase::Instance().Draw(command);
 }
@@ -95,10 +97,13 @@ void EvaEngineApp::End()
 {
 	GameObjectManager::Instance().RemoveAllGameObject();
 	ComponentManager::Instance().RemoveAllComponent();
-	ModelManager::Instance().DeleteAllModel();
-	ShaderDataBase::Instance().AllDeleteShader();
-	SceneDataBase::Instance().AllDeleteScene();
 	Camera::AllDeleteCamera();
+	ShaderDataBase::Instance().AllDeleteShader();
+	
+	if (SceneDataBase::Instance().GetSceneCount() >= 1) {
+		ModelManager::Instance().DeleteAllModel();
+		SceneDataBase::Instance().AllDeleteScene();
+	}
 
 #if _DEBUG
 	EditorApp::End();

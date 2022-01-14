@@ -25,7 +25,7 @@ HRESULT MainApp::Init()
 	}
 
 	// ユーザーの初期化処理(シーンの追加などがあるためここでする)
-	GameBase::Instance()->Init();
+	EvaEngine::GameBase::Instance()->Init();
 
 	// エンジンの初期化
 	hr = EvaEngineApp::Init();

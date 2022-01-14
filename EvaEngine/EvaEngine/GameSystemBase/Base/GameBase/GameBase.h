@@ -7,7 +7,7 @@ namespace EvaEngine {
 	class GameBase {
 	public:
 		GameBase(const unsigned int windowWidth, const unsigned int windowHeight);
-		~GameBase();
+		virtual ~GameBase() = default;
 
 		/// <summary>
 		/// ゲーム開始時にやっておきたい初期化処理とかをオーバーロードして書く

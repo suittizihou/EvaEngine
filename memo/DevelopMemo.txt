@@ -9,3 +9,17 @@ missingとなる例
 なお、metaファイルの名前も一緒に変更した場合関連付けが保たれる。
 
 上記の例からファイル名とmetaファイルの名前をUnity起動時に照合し関連付けをしているものと考えられる。
+
+シェーダー関連 ======================
+定数バッファ作る
+
+MeshRenderer mesh;
+mesh->SetMaterial(material, 1); // 第一引数にマテリアル、第二にどのメッシュに対応させるか(デフォルトで0)
+
+Material material;
+material->Init(shader, constantBuffer, bufferSize);
+material->UpdateCB(constantBuffer, 0) // 第二引数はレジスタ番号
+
+ユーザーはShaderクラスとしてひとくくりに扱う
+Shader shader;
+shader->Load("", "VSMain", "PSMain");

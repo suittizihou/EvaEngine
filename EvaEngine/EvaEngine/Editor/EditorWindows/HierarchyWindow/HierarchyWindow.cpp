@@ -13,7 +13,7 @@ void EvaEngine::Editor::Internal::HierarchyWindow::OnGUI()
 {
 	if (ImGui::TreeNodeEx(SceneManager::GetCurrentSceneName().c_str(), ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_SpanAvailWidth)) {
 		std::vector<std::weak_ptr<GameObject>> gameObjects;
-		GameObjectManager::Instance().GetGameObjectDataBase(SceneManager::GetCurrentSceneName()).lock()->GetAllGameObject(gameObjects);
+		GameObjectManager::Instance().GetGameObjectDataBase(SceneManager::GetCurrentSceneName()).lock()->GetAllGameObject(&gameObjects);
 
 		m_ItemNum = 0;
 		for (int i = 0; i < gameObjects.size(); ++i) {

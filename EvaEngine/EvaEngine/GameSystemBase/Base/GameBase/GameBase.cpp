@@ -15,11 +15,6 @@ EvaEngine::GameBase::GameBase(const unsigned int windowWidth, const unsigned int
 	m_GameBase = this;
 }
 
-EvaEngine::GameBase::~GameBase()
-{
-	m_GameBase = nullptr;
-}
-
 EvaEngine::GameBase* EvaEngine::GameBase::Instance()
 {
 	return m_GameBase;

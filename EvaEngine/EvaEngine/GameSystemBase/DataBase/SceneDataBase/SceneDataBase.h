@@ -56,6 +56,8 @@ namespace EvaEngine {
 			HRESULT SceneChange();
 			// シーンが存在するかチェック
 			bool IsCheckExists(const std::string& sceneName);
+			// 登録されているシーンの数を返す
+			size_t GetSceneCount() const;
 
 			// シーンのタスクシステムを回す
 			void Initialize();

@@ -20,7 +20,7 @@ namespace EvaEngine {
 			// タグで検索してヒットしたゲームオブジェクトを全部持ってくる
 			std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
 			// 所持する全ゲームオブジェクトを返す
-			void GetAllGameObject(std::vector<std::weak_ptr<GameObject>>& outputObjects);
+			void GetAllGameObject(std::vector<std::weak_ptr<GameObject>>* outputObjects);
 			// 保持しているゲームオブジェクトを全削除
 			void RemoveAllGameObject();
 
