@@ -11,8 +11,8 @@ namespace EvaEngine {
 		RenderTexture(const UINT width, const UINT height);
 		~RenderTexture();
 	public:
-		void Create() override;
-		void Release() override;
+		void Create();
+		void Release();
 
 	public:
 		void SetRenderTarget(const Color& clearColor) const;

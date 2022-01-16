@@ -26,9 +26,9 @@ namespace EvaEngine {
 		ID3D11ShaderResourceView* GetD3DShaderResrouceView() const;
 		ID3D11SamplerState* GetD3DSamplerState() const;
 
-		virtual void Create() = 0;
+	private:
 		virtual void Release();
-
+	
 	protected:
 		Vector2 texelSize{ Vector2::zero() };
 		TextureType textureType{ TextureType::None };

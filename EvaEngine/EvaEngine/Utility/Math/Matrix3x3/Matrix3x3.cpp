@@ -116,7 +116,6 @@ Matrix3x3 EvaEngine::operator*(const Matrix3x3& lhs, const Matrix3x3 rhs)
 
 Vector2 EvaEngine::operator*(const Vector2& lhs, const Matrix3x3 rhs)
 {
-	Vector2 matrix;
 	Vector2 vec;
 	vec.x = lhs.x * rhs.m[0][0] + lhs.y * rhs.m[1][0] + rhs.m[2][0];
 	vec.y = lhs.x * rhs.m[0][1] + lhs.y * rhs.m[1][1] + rhs.m[2][1];

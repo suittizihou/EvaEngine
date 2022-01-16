@@ -11,7 +11,7 @@ namespace EvaEngine {
 	class TextureManager
 	{
 	public:
-		const GUID& AddTexture(const std::string& fileName);
+		const GUID& LoadTexture(const std::string& fileName);
 		const GUID& GetTextureGUID();
 		
 	private:

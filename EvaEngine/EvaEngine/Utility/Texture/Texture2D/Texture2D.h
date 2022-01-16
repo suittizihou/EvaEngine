@@ -21,13 +21,11 @@ namespace EvaEngine {
 		void Init();
 
 	public:
-		void Create() override;
-
 		void STDMETHODCALLTYPE GetD3DTexture2DDESC(_Out_ D3D11_TEXTURE2D_DESC* pDesc);
 		ID3D11Texture2D* GetD3DTexture2D() const;
 
-
 	private:
+		void Create();
 		void CreateTex2D(const DXGI_FORMAT& format);
 		void CreateShaderResourceView(const DXGI_FORMAT& format);
 		void CreateSamplerState(const DXGI_FORMAT& format);
