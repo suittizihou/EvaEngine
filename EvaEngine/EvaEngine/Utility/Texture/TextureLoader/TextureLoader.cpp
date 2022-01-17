@@ -19,7 +19,7 @@ bool EvaEngine::TextureLoader::LoadImage(const std::string& fileName, ID3D11Reso
 				w_FileName.c_str(),
 				texture,
 				textureView);
-
+	
 	if (FAILED(hr)) {
 		DebugLog::LogError("TextureLoader‚É‚Ä " + fileName + " ‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½B");
 		return false;

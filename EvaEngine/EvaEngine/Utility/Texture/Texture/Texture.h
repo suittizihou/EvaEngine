@@ -4,7 +4,11 @@
 #include "../../Math/Color/Color.h"
 
 namespace EvaEngine {
+	class TextureManager;
+
 	class Texture {
+		friend EvaEngine::TextureManager;
+
 	public:
 		enum class TextureType {
 			None,
@@ -27,6 +31,9 @@ namespace EvaEngine {
 		ID3D11SamplerState* GetD3DSamplerState() const;
 
 	private:
+		void SetD3DResource(ID3D11Resource* resource);
+		void SetD3DShaderResourceView(ID3D11ShaderResourceView* shaderResourceView);
+
 		virtual void Release();
 	
 	protected:

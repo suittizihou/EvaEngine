@@ -16,15 +16,13 @@ namespace EvaEngine {
 		Texture2D(const UINT width, const UINT height, const D3D11_TEXTURE2D_DESC& textureDesc);
 		~Texture2D();
 
-
-	private:
-		void Init();
-
 	public:
+		//void Apply();
 		void STDMETHODCALLTYPE GetD3DTexture2DDESC(_Out_ D3D11_TEXTURE2D_DESC* pDesc);
 		ID3D11Texture2D* GetD3DTexture2D() const;
 
 	private:
+		void Init();
 		void Create();
 		void CreateTex2D(const DXGI_FORMAT& format);
 		void CreateShaderResourceView(const DXGI_FORMAT& format);

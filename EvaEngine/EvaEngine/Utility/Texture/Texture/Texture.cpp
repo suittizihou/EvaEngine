@@ -41,6 +41,16 @@ ID3D11SamplerState* EvaEngine::Texture::GetD3DSamplerState() const
 	return m_SamplerState;
 }
 
+void EvaEngine::Texture::SetD3DResource(ID3D11Resource* resource)
+{
+	m_Texture = resource;
+}
+
+void EvaEngine::Texture::SetD3DShaderResourceView(ID3D11ShaderResourceView* shaderResourceView)
+{
+	m_ShaderResourceView = shaderResourceView;
+}
+
 void EvaEngine::Texture::Release()
 {
 	if (m_Texture != nullptr) {

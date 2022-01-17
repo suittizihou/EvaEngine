@@ -108,6 +108,10 @@ void EvaEngine::Texture2D::CreateSamplerState(const DXGI_FORMAT& format)
 }
 
 
+//void EvaEngine::Texture2D::Apply()
+//{
+//}
+
 void STDMETHODCALLTYPE Texture2D::GetD3DTexture2DDESC(_Out_ D3D11_TEXTURE2D_DESC* pDesc)
 {
 	GetD3DTexture2D()->GetDesc(pDesc);

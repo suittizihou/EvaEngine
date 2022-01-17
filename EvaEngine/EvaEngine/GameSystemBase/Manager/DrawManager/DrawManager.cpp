@@ -68,28 +68,30 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 	// ワールド行列
 	DirectX11App::g_ConstantBufferData.world = transform.lock()->local_to_world_matrix().transpose();
 
+	auto context = DirectX11App::g_Context;
+
 	// メッシュ情報が格納されているMapからメッシュを取り出す
 	for (const auto& meshs : model.lock()->meshes) {
 		// メッシュ情報が格納された配列から１メッシュずつ取り出す
 		for (auto mesh : meshs.second) {
 			// インプットレイアウトの設定
-			DirectX11App::g_Context->IASetInputLayout(ShaderDataBase::Instance().GetDefaultVertexShader().m_pInputLayout);
+			context->IASetInputLayout(ShaderDataBase::Instance().GetDefaultVertexShader().m_pInputLayout);
 			// 頂点バッファーの設定
-			DirectX11App::g_Context->IASetVertexBuffers(0, 1, mesh.GetVertexBuffer(), &strides, &offset);
+			context->IASetVertexBuffers(0, 1, mesh.GetVertexBuffer(), &strides, &offset);
 			// インデックスバッファの設定
-			DirectX11App::g_Context->IASetIndexBuffer(mesh.GetIndexBuffer(), DXGI_FORMAT_R32_UINT, 0);
+			context->IASetIndexBuffer(mesh.GetIndexBuffer(), DXGI_FORMAT_R32_UINT, 0);
 
 			// マテリアルのセット
 			//SetMaterial(&model.lock()->materials[mesh.GetMaterialName()]);
 
 			// 定数バッファの更新
-			DirectX11App::g_Context->UpdateSubresource(DirectX11App::g_ConstantBuffer, 0, NULL, &DirectX11App::g_ConstantBufferData, 0, 0);
+			context->UpdateSubresource(DirectX11App::g_ConstantBuffer, 0, NULL, &DirectX11App::g_ConstantBufferData, 0, 0);
 			// コンテキストに定数バッファを設定
-			DirectX11App::g_Context->VSSetConstantBuffers(0, 1, &DirectX11App::g_ConstantBuffer);
-			DirectX11App::g_Context->PSSetConstantBuffers(0, 1, &DirectX11App::g_ConstantBuffer);
+			context->VSSetConstantBuffers(0, 1, &DirectX11App::g_ConstantBuffer);
+			context->PSSetConstantBuffers(0, 1, &DirectX11App::g_ConstantBuffer);
 			
 			// ポリゴン描画
-			DirectX11App::g_Context->DrawIndexed(static_cast<UINT>(mesh.GetIndices().size()), 0, 0);
+			context->DrawIndexed(static_cast<UINT>(mesh.GetIndices().size()), 0, 0);
 		}
 	}
 	//end = std::chrono::system_clock::now();
