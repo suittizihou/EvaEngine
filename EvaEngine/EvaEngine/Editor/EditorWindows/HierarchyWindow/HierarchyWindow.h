@@ -16,7 +16,7 @@ namespace EvaEngine {
 				void OnGUI() override;
 
 			private:
-				void Scanning(const std::weak_ptr<GameObject>& gameObject);
+				void Scanning(const std::shared_ptr<GameObject>& gameObject);
 			
 			private:
 				int m_ItemNum{ 0 };

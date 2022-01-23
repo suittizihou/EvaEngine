@@ -17,8 +17,9 @@ void EvaEngine::Editor::Internal::HierarchyWindow::OnGUI()
 
 		m_ItemNum = 0;
 		for (int i = 0; i < gameObjects.size(); ++i) {
-			if (gameObjects[i].lock()->GetTransform().lock()->parent().lock() == nullptr) {
-				Scanning(gameObjects[i]);
+			auto obj = gameObjects[i].lock();
+			if (obj->GetTransform().lock()->parent().lock() == nullptr) {
+				Scanning(obj);
 			}
 		}
 
@@ -26,15 +27,15 @@ void EvaEngine::Editor::Internal::HierarchyWindow::OnGUI()
 	}
 }
 
-void EvaEngine::Editor::Internal::HierarchyWindow::Scanning(const std::weak_ptr<GameObject>& gameObject)
+void EvaEngine::Editor::Internal::HierarchyWindow::Scanning(const std::shared_ptr<GameObject>& gameObject)
 {
 	m_ItemNum++;
 
-	if (gameObject.lock()->GetTransform().lock()->get_child_count() <= 0) {
+	if (gameObject->GetTransform().lock()->get_child_count() <= 0) {
 
 		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_SpanAvailWidth;
 
-		ImGui::TreeNodeEx((void*)(intptr_t)m_ItemNum, flags, gameObject.lock()->GetName().c_str());
+		ImGui::TreeNodeEx((void*)(intptr_t)m_ItemNum, flags, gameObject->GetName().c_str());
 
 		if (ImGui::IsItemClicked()) {
 			Selection::SetActiveObject(gameObject);
@@ -46,7 +47,7 @@ void EvaEngine::Editor::Internal::HierarchyWindow::Scanning(const std::weak_ptr<
 	bool nodeOpen = ImGui::TreeNodeEx(
 		(void*)(intptr_t)m_ItemNum,
 		ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanAvailWidth,
-		gameObject.lock()->GetName().c_str());
+		gameObject->GetName().c_str());
 
 	if (ImGui::IsItemClicked())
 	{
@@ -54,8 +55,8 @@ void EvaEngine::Editor::Internal::HierarchyWindow::Scanning(const std::weak_ptr<
 	}
 
 	if (nodeOpen) {
-		for (const auto& child : gameObject.lock()->GetTransform().lock()->get_children()) {
-			Scanning(child.lock()->GetGameObject());
+		for (const auto& child : gameObject->GetTransform().lock()->get_children()) {
+			Scanning(child.lock()->GetGameObject().lock());
 		}
 		ImGui::TreePop();
 	}
