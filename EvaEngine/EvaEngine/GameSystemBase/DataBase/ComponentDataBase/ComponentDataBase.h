@@ -30,7 +30,7 @@ namespace EvaEngine {
 				componentDesc.gameObject = gameObject;
 				componentDesc.hashCode = typeid(T).hash_code();
 
-				if (GUIDUtility::Create(&componentDesc.guid, "ComponentDataBaseにて " + componentDesc.componentName + " のGUID生成に失敗しました。") == false)
+				if (GUIDUtility::Create(&componentDesc.guid, "ComponentDataBase  " + componentDesc.componentName + " failed to generate guid.") == false)
 				{
 					return std::weak_ptr<T>();
 				}
@@ -44,7 +44,7 @@ namespace EvaEngine {
 					for (const auto& component : gameObject.lock()->GetAllComponents()) {
 						if (component.lock()->GetHashCode() != component_temp->GetHashCode()) continue;
 
-						DebugLog::LogError(u8"Can't multi attach." + (std::string)typeid(T).name() + " : このコンポーネントは複数アタッチできません");
+						DebugLog::LogError(u8"Can't multi attach." + (std::string)typeid(T).name() + " : This component cannot be attached multiple times.");
 						return std::weak_ptr<T>();
 					}
 				}
@@ -79,7 +79,7 @@ namespace EvaEngine {
 					(std::string)typeid(T).name() +
 					" : " +
 					std::to_string(typeid(T).hash_code()) +
-					" : コンポーネントが見つかりませんでした");
+					" : Component not found.");
 				return std::weak_ptr<T>();
 			}
 
@@ -105,7 +105,7 @@ namespace EvaEngine {
 					(std::string)typeid(T).name() +
 					" : " +
 					std::to_string(typeid(T).hash_code()) +
-					" : コンポーネントが見つかりませんでした");
+					" : Component not found.");
 				return std::weak_ptr<T>();
 			}
 
@@ -125,7 +125,7 @@ namespace EvaEngine {
 							(std::string)typeid(T).name() +
 							" : " +
 							std::to_string(typeid(T).hash_code()) +
-							" : このコンポーネントは消せません");
+							" : This component cannot be removed.");
 						return;
 					}
 
@@ -139,7 +139,7 @@ namespace EvaEngine {
 					(std::string)typeid(T).name() +
 					" : " +
 					std::to_string(typeid(T).hash_code()) +
-					" : コンポーネントが見つかりませんでした");
+					" : Component not found.");
 			}
 
 			//// コンポーネントを削除
@@ -158,7 +158,7 @@ namespace EvaEngine {
 			//				(std::string)typeid(T).name() +
 			//				" : " +
 			//				std::to_string(typeid(T).hash_code()) +
-			//				" : このコンポーネントは消せません");
+			//				" : This component cannot be removed.");
 			//			return;
 			//		}
 
@@ -172,7 +172,7 @@ namespace EvaEngine {
 			//		(std::string)typeid(T).name() +
 			//		" : " +
 			//		std::to_string(typeid(T).hash_code()) +
-			//		" : コンポーネントが見つかりませんでした");
+			//		" : Component not found.");
 			//}
 
 			// 保持しているコンポーネントを全部削除

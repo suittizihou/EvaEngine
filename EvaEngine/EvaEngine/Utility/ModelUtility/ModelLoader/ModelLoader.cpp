@@ -17,7 +17,7 @@ std::shared_ptr<ModelData> ModelLoader::Load(const std::string& fileName)
 {
     std::vector<std::string> fileSplit{ StringAssist::Split(fileName, ".") };
 
-    if (fileSplit.size() == 0) DebugLog::LogError("�g���q�t���œ��͂��Ă�������");
+    if (fileSplit.size() == 0) DebugLog::LogError("Please enter with extension.");
 
     std::string modelType = fileSplit[fileSplit.size() - 1];
 
@@ -39,10 +39,10 @@ std::shared_ptr<ModelData> ModelLoader::Load(const std::string& fileName)
     }
 
     auto end = std::chrono::system_clock::now();
-    DebugLog::Log(fileName + " : ���f���ǂݍ��ݎ��� = " + std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms");
+    DebugLog::Log(fileName + " : model loading time = " + std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms.");
 
-    DebugLog::Log(fileName + " : �ǂݍ��݃��b�V���� = " + std::to_string(model->meshes.size()));
-    DebugLog::Log(fileName + " : �ǂݍ��݃}�e���A���� = " + std::to_string(model->materials.size()));
+    DebugLog::Log(fileName + " : number of loaded meshes = " + std::to_string(model->meshes.size()) + ".");
+    DebugLog::Log(fileName + " : number of loaded materials = " + std::to_string(model->materials.size()) + ".");
 
     return model;
 }
