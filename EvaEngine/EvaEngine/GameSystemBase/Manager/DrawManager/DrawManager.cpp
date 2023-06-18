@@ -1,4 +1,4 @@
-#include "DrawManager.h"
+ï»¿#include "DrawManager.h"
 #include "../../../App/DirectX11App/DirectX11App.h"
 #include "../../../Setting/Window/Window.h"
 #include "../../../Utility/Mesh/Mesh.h"
@@ -20,10 +20,10 @@ Shader DrawManager::m_Shader{};
 HRESULT DrawManager::Init()
 {
 	try {
-		// ƒfƒtƒHƒ‹ƒg‚ÌƒVƒF[ƒ_[‚ğƒ[ƒh‚·‚é
+		// ï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½ÌƒVï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½ï¿½
 		ShaderDataBase::Instance().LoadDefaultShader();
 
-		// ƒfƒtƒHƒ‹ƒg‚ÌƒVƒF[ƒ_[‚ğƒZƒbƒg‚·‚é
+		// ï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½ÌƒVï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½
 		m_Shader.SetVertexShader(ShaderDataBase::Instance().GetDefaultVertexShader());
 		m_Shader.SetPixelShader(ShaderDataBase::Instance().GetDefaultPixelShader());
 
@@ -36,23 +36,23 @@ HRESULT DrawManager::Init()
 
 void DrawManager::DrawBegin(const std::weak_ptr<Camera>& camera)
 {
-	//// DepthView‚ÆStencilView‚ÌƒNƒŠƒA
+	//// DepthViewï¿½ï¿½StencilViewï¿½ÌƒNï¿½ï¿½ï¿½A
 	//DirectX11App::g_Context->ClearDepthStencilView(
-	//	DirectX11App::g_EditorDepthStencilView.Get(),	// ƒNƒŠƒA‘ÎÛ‚ÌView
-	//	D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// ƒNƒŠƒAƒtƒ‰ƒO
-	//	1.0f,											// [“xƒNƒŠƒA’l
-	//	0);												// ƒXƒeƒ“ƒVƒ‹ƒNƒŠƒA’l
+	//	DirectX11App::g_EditorDepthStencilView.Get(),	// ï¿½Nï¿½ï¿½ï¿½Aï¿½ÎÛ‚ï¿½View
+	//	D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// ï¿½Nï¿½ï¿½ï¿½Aï¿½tï¿½ï¿½ï¿½O
+	//	1.0f,											// ï¿½[ï¿½xï¿½Nï¿½ï¿½ï¿½Aï¿½l
+	//	0);												// ï¿½Xï¿½eï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Aï¿½l
 
-	//	// ƒVƒF[ƒ_[‚ÌƒZƒbƒg
+	//	// ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ÌƒZï¿½bï¿½g
 	//Shader shader{ DrawManager::GetDefaultShader() };
 	//SetShader(&shader);
 
-	//// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg‚Ìİ’è
+	//// ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½[ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½Ìİ’ï¿½
 	//DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_EditorRenderTargetView.GetAddressOf(), DirectX11App::g_EditorDepthStencilView.Get());
 
-	//// w’èF‚Å‰æ–ÊƒNƒŠƒA
+	//// ï¿½wï¿½ï¿½Fï¿½Å‰ï¿½ÊƒNï¿½ï¿½ï¿½A
 	//float clearColor[4] = { 1.0f, 1.0f, 0.8f, 1.0f };
-	//// RenderTargetView‚ÌƒNƒŠƒA
+	//// RenderTargetViewï¿½ÌƒNï¿½ï¿½ï¿½A
 	//DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_EditorRenderTargetView.Get(), clearColor);
 
 	//camera.lock()->SetRenderTarget();
@@ -65,32 +65,32 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 	UINT strides = sizeof(VertexData);
 	UINT offset = 0;
 
-	// ƒ[ƒ‹ƒhs—ñ
+	// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½sï¿½ï¿½
 	DirectX11App::g_ConstantBufferData.world = transform.lock()->local_to_world_matrix().transpose();
 
 	auto context = DirectX11App::g_Context;
 
-	// ƒƒbƒVƒ…î•ñ‚ªŠi”[‚³‚ê‚Ä‚¢‚éMap‚©‚çƒƒbƒVƒ…‚ğæ‚èo‚·
+	// ï¿½ï¿½ï¿½bï¿½Vï¿½ï¿½ï¿½ï¿½ñ‚ªŠiï¿½[ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Mapï¿½ï¿½ï¿½çƒï¿½bï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½
 	for (const auto& meshs : model.lock()->meshes) {
-		// ƒƒbƒVƒ…î•ñ‚ªŠi”[‚³‚ê‚½”z—ñ‚©‚ç‚PƒƒbƒVƒ…‚¸‚Âæ‚èo‚·
+		// ï¿½ï¿½ï¿½bï¿½Vï¿½ï¿½ï¿½ï¿½ñ‚ªŠiï¿½[ï¿½ï¿½ï¿½ê‚½ï¿½zï¿½ñ‚©‚ï¿½Pï¿½ï¿½ï¿½bï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Âï¿½ï¿½oï¿½ï¿½
 		for (auto mesh : meshs.second) {
-			// ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg‚Ìİ’è
+			// ï¿½Cï¿½ï¿½ï¿½vï¿½bï¿½gï¿½ï¿½ï¿½Cï¿½Aï¿½Eï¿½gï¿½Ìİ’ï¿½
 			context->IASetInputLayout(ShaderDataBase::Instance().GetDefaultVertexShader().m_pInputLayout);
-			// ’¸“_ƒoƒbƒtƒ@[‚Ìİ’è
+			// ï¿½ï¿½ï¿½_ï¿½oï¿½bï¿½tï¿½@ï¿½[ï¿½Ìİ’ï¿½
 			context->IASetVertexBuffers(0, 1, mesh.GetVertexBuffer(), &strides, &offset);
-			// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìİ’è
+			// ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½oï¿½bï¿½tï¿½@ï¿½Ìİ’ï¿½
 			context->IASetIndexBuffer(mesh.GetIndexBuffer(), DXGI_FORMAT_R32_UINT, 0);
 
-			// ƒ}ƒeƒŠƒAƒ‹‚ÌƒZƒbƒg
+			// ï¿½}ï¿½eï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ÌƒZï¿½bï¿½g
 			//SetMaterial(&model.lock()->materials[mesh.GetMaterialName()]);
 
-			// ’è”ƒoƒbƒtƒ@‚ÌXV
+			// ï¿½è”ï¿½oï¿½bï¿½tï¿½@ï¿½ÌXï¿½V
 			context->UpdateSubresource(DirectX11App::g_ConstantBuffer, 0, NULL, &DirectX11App::g_ConstantBufferData, 0, 0);
-			// ƒRƒ“ƒeƒLƒXƒg‚É’è”ƒoƒbƒtƒ@‚ğİ’è
+			// ï¿½Rï¿½ï¿½ï¿½eï¿½Lï¿½Xï¿½gï¿½É’è”ï¿½oï¿½bï¿½tï¿½@ï¿½ï¿½İ’ï¿½
 			context->VSSetConstantBuffers(0, 1, &DirectX11App::g_ConstantBuffer);
 			context->PSSetConstantBuffers(0, 1, &DirectX11App::g_ConstantBuffer);
 			
-			// ƒ|ƒŠƒSƒ“•`‰æ
+			// ï¿½|ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½`ï¿½ï¿½
 			context->DrawIndexed(static_cast<UINT>(mesh.GetIndices().size()), 0, 0);
 		}
 	}
@@ -114,7 +114,7 @@ void DrawManager::SetMaterial(Material* material)
 
 void DrawManager::SetShader(Shader* shader) {
 
-	// nullptr ‚Å‚È‚¢ê‡ƒVƒF[ƒ_[‚ğƒZƒbƒg‚·‚é
+	// nullptr ï¿½Å‚È‚ï¿½ï¿½ê‡ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½
 	if (shader->GetComputeShader().m_pShader != nullptr) DirectX11App::g_Context->CSSetShader(shader->GetComputeShader().m_pShader, nullptr, 0);
 	if (shader->GetVertexShader().m_pShader != nullptr) DirectX11App::g_Context->VSSetShader(shader->GetVertexShader().m_pShader, nullptr, 0);
 	if (shader->GetHullShader().m_pShader != nullptr) DirectX11App::g_Context->HSSetShader(shader->GetHullShader().m_pShader, nullptr, 0);

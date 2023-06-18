@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "../../../Define/D3D11Defines.h"
 #include "../../Math/Vector2/Vector2.h"
 #include "../../Math/Color/Color.h"
@@ -22,9 +22,9 @@ namespace EvaEngine {
 		virtual ~Texture();
 
 		TextureType GetTextureType() const;
-		// Texture‚ÌƒTƒCƒY‚ðŽæ“¾
+		// Textureï¿½ÌƒTï¿½Cï¿½Yï¿½ï¿½ï¿½æ“¾
 		Vector2 GetTexelSize() const;
-		// ƒAƒXƒyƒNƒg”ä‚ðŽæ“¾
+		// ï¿½Aï¿½Xï¿½yï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½æ“¾
 		Vector2 GetAspect() const;
 
 		ID3D11ShaderResourceView* GetD3DShaderResrouceView() const;

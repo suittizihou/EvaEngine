@@ -1,4 +1,4 @@
-#include "Scene.h"
+﻿#include "Scene.h"
 #include "../../Manager/ComponentManager/ComponentManager.h"
 
 using namespace EvaEngine;

@@ -1,4 +1,4 @@
-#include "VRMModelLoader.h"
+ï»¿#include "VRMModelLoader.h"
 
 #include <memory>
 #include <DirectXTex.h>
@@ -14,7 +14,7 @@ using namespace EvaEngine::Internal;
 
 void VRMModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model)
 {
-    // ƒ‚ƒfƒ‹ƒf[ƒ^‚Ì“Ç‚İ‚İ
+    // ï¿½ï¿½ï¿½fï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½Ì“Ç‚İï¿½ï¿½ï¿½
     auto modelFilePath = experimental::filesystem::path(fileName);
     if (modelFilePath.is_relative())
     {
@@ -50,23 +50,23 @@ void VRMModelLoader::LoadModelGeometry(std::shared_ptr<EvaEngine::ModelData>& mo
         {
             Mesh tempMesh{};
 
-            // ’¸“_ˆÊ’uî•ñƒAƒNƒZƒbƒT‚Ìæ“¾
+            // ï¿½ï¿½ï¿½_ï¿½Ê’uï¿½ï¿½ï¿½Aï¿½Nï¿½Zï¿½bï¿½Tï¿½Ìæ“¾
             auto& idPos = meshPrimitive.GetAttributeAccessorId(ACCESSOR_POSITION);
             auto& accPos = doc.accessors.Get(idPos);
-            // –@üî•ñƒAƒNƒZƒbƒT‚Ìæ“¾
+            // ï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Nï¿½Zï¿½bï¿½Tï¿½Ìæ“¾
             auto& idNrm = meshPrimitive.GetAttributeAccessorId(ACCESSOR_NORMAL);
             auto& accNrm = doc.accessors.Get(idNrm);
-            //// ’¸“_‚ÌƒJƒ‰[ƒAƒNƒZƒbƒT‚Ìæ“¾
+            //// ï¿½ï¿½ï¿½_ï¿½ÌƒJï¿½ï¿½ï¿½[ï¿½Aï¿½Nï¿½Zï¿½bï¿½Tï¿½Ìæ“¾
             //auto& idColor = meshPrimitive.GetAttributeAccessorId(ACCESSOR_COLOR_0);
             //auto& accColor = doc.accessors.Get(idColor);
-            // ƒeƒNƒXƒ`ƒƒÀ•Wî•ñƒAƒNƒZƒbƒT‚Ìæ“¾
+            // ï¿½eï¿½Nï¿½Xï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½Aï¿½Nï¿½Zï¿½bï¿½Tï¿½Ìæ“¾
             auto& idUV = meshPrimitive.GetAttributeAccessorId(ACCESSOR_TEXCOORD_0);
             auto& accUV = doc.accessors.Get(idUV);
-            // ’¸“_ƒCƒ“ƒfƒbƒNƒX—pƒAƒNƒZƒbƒT‚Ìæ“¾
+            // ï¿½ï¿½ï¿½_ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½pï¿½Aï¿½Nï¿½Zï¿½bï¿½Tï¿½Ìæ“¾
             auto& idIndex = meshPrimitive.indicesAccessorId;
             auto& accIndex = doc.accessors.Get(idIndex);
 
-            // ƒAƒNƒZƒbƒT‚©‚çƒf[ƒ^—ñ‚ğæ“¾
+            // ï¿½Aï¿½Nï¿½Zï¿½bï¿½Tï¿½ï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½æ“¾
             auto vertPos = reader->ReadBinaryData<float>(doc, accPos);
             auto vertNrm = reader->ReadBinaryData<float>(doc, accNrm);
             //auto vertColor = reader->ReadBinaryData<float>(doc, accColor);
@@ -76,7 +76,7 @@ void VRMModelLoader::LoadModelGeometry(std::shared_ptr<EvaEngine::ModelData>& mo
             std::vector<VertexData> vertices;
             for (uint32_t i = 0; i < vertexCount; ++i)
             {
-                // ’¸“_ƒf[ƒ^‚Ì\’z
+                // ï¿½ï¿½ï¿½_ï¿½fï¿½[ï¿½^ï¿½Ì\ï¿½z
                 int vid0 = 3 * i, vid1 = 3 * i + 1, vid2 = 3 * i + 2, vid3 = 3 * i + 3;
                 int tid0 = 2 * i, tid1 = 2 * i + 1;
                 vertices.emplace_back(
@@ -89,11 +89,11 @@ void VRMModelLoader::LoadModelGeometry(std::shared_ptr<EvaEngine::ModelData>& mo
                 );
             }
 
-            // ’¸“_ƒf[ƒ^‚ğƒZƒbƒg
+            // ï¿½ï¿½ï¿½_ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½Zï¿½bï¿½g
             tempMesh.SetVertexData(vertices);
-            // ƒCƒ“ƒfƒbƒNƒXƒf[ƒ^‚ğƒZƒbƒg
+            // ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½Zï¿½bï¿½g
             tempMesh.SetIndices(reader->ReadBinaryData<uint32_t>(doc, accIndex));
-            // ƒ}ƒeƒŠƒAƒ‹ID‚ğ“o˜^
+            // ï¿½}ï¿½eï¿½ï¿½ï¿½Aï¿½ï¿½IDï¿½ï¿½oï¿½^
             tempMesh.SetMaterialName(int(doc.materials.GetIndex(meshPrimitive.materialId)));
 
             model->meshes[mesh.name].push_back(tempMesh);
@@ -106,11 +106,11 @@ void VRMModelLoader::MakeModelGeometry(std::shared_ptr<ModelData>& model)
     size_t vertexBufferSize = sizeof(VertexData);
     for (auto& meshs : model->meshes) {
         for (auto& mesh : meshs.second) {
-            // ’¸“_ƒoƒbƒtƒ@‚Ìì¬‚ÆƒZƒbƒg
+            // ï¿½ï¿½ï¿½_ï¿½oï¿½bï¿½tï¿½@ï¿½Ìì¬ï¿½ÆƒZï¿½bï¿½g
             auto vertexBuffer = BufferCreate::CreateVertexBuffer(mesh.GetVertexData(), vertexBufferSize);
             mesh.SetVertexBuffer(vertexBuffer);
 
-            // ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìì¬‚ÆƒZƒbƒg
+            // ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½oï¿½bï¿½tï¿½@ï¿½Ìì¬ï¿½ÆƒZï¿½bï¿½g
             auto indexBufferSize = UINT(sizeof(uint32_t) * mesh.GetIndices().size());
             auto indexBuffer = BufferCreate::CreateIndexBuffer(mesh.GetIndices(), indexBufferSize);
             mesh.SetIndexBuffer(indexBuffer);
@@ -149,7 +149,7 @@ void VRMModelLoader::MakeModelMaterial(std::shared_ptr<ModelData>& model)
     //        auto texObj = ModelApp::Instance().CreateTextureFromMemory(material.m_ImageData);
     //        material.texture = texObj.texture;
 
-    //        // ƒVƒF[ƒ_[ƒŠƒ\[ƒXƒrƒ…[‚Ì¶¬.
+    //        // ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½\ï¿½[ï¿½Xï¿½rï¿½ï¿½ï¿½[ï¿½Ìï¿½ï¿½ï¿½.
     //        auto descriptorIndex = ModelApp::Instance().m_SrvDescriptorBase + textureIndex;
     //        auto srvHandle = CD3DX12_CPU_DESCRIPTOR_HANDLE(
     //            model.m_HeapSrvCbv->GetCPUDescriptorHandleForHeapStart(),

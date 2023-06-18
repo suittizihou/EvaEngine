@@ -16,7 +16,7 @@ SampleScene::SampleScene(const std::string& sceneName, const UINT sceneID) :
 
 void SampleScene::Initialize()
 {
-	// ƒ‚ƒfƒ‹‚Ì“Ç‚Ýž‚Ý
+	// ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
 	GUID teaPotmodelHandle{ GUID_NULL };
 	ModelManager::Instance().LoadModel("TeaPot.fbx", &teaPotmodelHandle);
 	GUID boxModelHandle{ GUID_NULL };
@@ -24,18 +24,18 @@ void SampleScene::Initialize()
 	GUID planeModelHandle{ GUID_NULL };
 	ModelManager::Instance().LoadModel("Plane.fbx", &planeModelHandle);
 
-	// ‘¾—z¶¬
+	// å¤ªé™½ç”Ÿæˆ
 	auto dirLight = Instantiate("Light", "DirectionLight");
 	dirLight.lock()->AddComponent<DirectionLight>();
 	dirLight.lock()->GetTransform().lock()->euler_angles(30.0f, 50.0f, 0.0f);
 
-	// ƒ|ƒCƒ“ƒgƒ‰ƒCƒg¶¬
+	// ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆç”Ÿæˆ
 	auto pointLight = Instantiate("Light", "PointLight");
 	pointLight.lock()->AddComponent<PointLight>();
 	//pointLight.lock()->AddComponent<Move>(5.0f);
 	pointLight.lock()->GetTransform().lock()->position(0.0f, 5.0f, 0.0f);
 
-	// ƒXƒ|ƒbƒgƒ‰ƒCƒg¶¬
+	// ã‚¹ãƒãƒƒãƒˆãƒ©ã‚¤ãƒˆç”Ÿæˆ
 	auto spotLightParent = Instantiate("Light", "SpotLightParent");
 	auto spotLight = Instantiate("Light", "SpotLight");
 	spotLight.lock()->GetTransform().lock()->set_parent(spotLightParent.lock()->GetTransform());
@@ -43,29 +43,29 @@ void SampleScene::Initialize()
 	spotLight.lock()->AddComponent<SpotLight>();
 	spotLight.lock()->AddComponent<Move>(5.0f);
 
-	// ƒeƒB[ƒ|ƒbƒg‚Ì¶¬
+	// ãƒ†ã‚£ãƒ¼ãƒãƒƒãƒˆã®ç”Ÿæˆ
 	auto teapot = Instantiate("None", "Teapot");
-	// ŠeƒRƒ“ƒ|[ƒlƒ“ƒg‚ð’Ç‰Á
+	// å„ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’è¿½åŠ 
 	teapot.lock()->AddComponent<MeshFilter>(teaPotmodelHandle);
 	teapot.lock()->AddComponent<MeshRenderer>();
 	//teapot.lock()->AddComponent<SinMove>(2.0f, 1.0f);
 	teapot.lock()->GetTransform().lock()->position(-1.5f, 0.0f, 0.0f);
 
-	// ƒ{ƒbƒNƒX¶¬
+	// ãƒœãƒƒã‚¯ã‚¹ç”Ÿæˆ
 	auto box = Instantiate("None", "Box").lock();
 	box->AddComponent<MeshFilter>(boxModelHandle);
 	box->AddComponent<MeshRenderer>();
 	box->AddComponent<SinMove>(2.0f, 1.0f);
 	box->GetTransform().lock()->position(1.5f, 0.0f, 0.0f);
 
-	// °¶¬
+	// åºŠç”Ÿæˆ
 	auto plane = Instantiate("None", "Plane").lock();
 	plane->AddComponent<MeshFilter>(planeModelHandle);
 	plane->AddComponent<MeshRenderer>();
 	plane->GetTransform().lock()->position(0.0f, -1.0f, 0.0f);
 	plane->GetTransform().lock()->local_scale(100.0f, 1.0f, 100.0f);
 
-	// ƒJƒƒ‰¶¬
+	// ã‚«ãƒ¡ãƒ©ç”Ÿæˆ
 	auto cameraParent = Instantiate("None", "CameraParent");
 	cameraParent.lock()->GetTransform().lock()->position(Vector3(0.0f, 0.0f, -5.0f));
 	auto camera = Instantiate("Main Camera").lock()->GetComponent<Transform>();

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "../ShaderCompiler/ShaderCompiler.h"
 #include "../ShaderBase/ShaderBase.h"
 
@@ -8,36 +8,36 @@ namespace EvaEngine {
 		Shader() = default;
 		~Shader();
 
-		// ’¸“_ƒVƒF[ƒ_[‚ğƒZƒbƒg
+		// ï¿½ï¿½ï¿½_ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½Zï¿½bï¿½g
 		void SetVertexShader(const GUID& shaderHandle);
 		void SetVertexShader(const Internal::VertexShader& shader);
-		// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğƒZƒbƒg
+		// ï¿½sï¿½Nï¿½Zï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½Zï¿½bï¿½g
 		void SetPixelShader(const GUID& shaderHandle);
 		void SetPixelShader(const Internal::PixelShader& shader);
-		// ƒWƒIƒƒgƒŠƒVƒF[ƒ_[‚ğƒZƒbƒg
+		// ï¿½Wï¿½Iï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½Zï¿½bï¿½g
 		void SetGeometryShader(const GUID& shaderHandle);
 		void SetGeometryShader(const Internal::GeometryShader& shader);
-		// ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚ğƒZƒbƒg
+		// ï¿½Rï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½gï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½Zï¿½bï¿½g
 		void SetComputeShader(const GUID& shaderHandle);
 		void SetComputeShader(const Internal::ComputeShader& shader);
-		// ƒnƒ‹ƒVƒF[ƒ_[‚ğƒZƒbƒg
+		// ï¿½nï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½Zï¿½bï¿½g
 		void SetHullShader(const GUID& shaderHandle);
 		void SetHullShader(const Internal::HullShader& shader);
-		// ƒhƒƒCƒ“ƒVƒF[ƒ_[‚ğƒZƒbƒg
+		// ï¿½hï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½Zï¿½bï¿½g
 		void SetDomainShader(const GUID& shaderHandle);
 		void SetDomainShader(const Internal::DomainShader& shader);
 
-		// ’¸“_ƒVƒF[ƒ_[‚Ìæ“¾
+		// ï¿½ï¿½ï¿½_ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìæ“¾
 		Internal::VertexShader GetVertexShader();
-		// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ìæ“¾
+		// ï¿½sï¿½Nï¿½Zï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìæ“¾
 		Internal::PixelShader GetPixelShader();
-		// ƒWƒIƒƒgƒŠƒVƒF[ƒ_[‚Ìæ“¾
+		// ï¿½Wï¿½Iï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìæ“¾
 		Internal::GeometryShader GetGeometryShader();
-		// ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚Ìæ“¾
+		// ï¿½Rï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½gï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìæ“¾
 		Internal::ComputeShader GetComputeShader();
-		// ƒnƒ‹ƒVƒF[ƒ_[‚Ìæ“¾
+		// ï¿½nï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìæ“¾
 		Internal::HullShader GetHullShader();
-		// ƒhƒƒCƒ“ƒVƒF[ƒ_[‚Ìæ“¾
+		// ï¿½hï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìæ“¾
 		Internal::DomainShader GetDomainShader();
 
 	private:

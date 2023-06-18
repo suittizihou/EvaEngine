@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-// ostream‚ÌæséŒ¾
+// ostreamï¿½Ìï¿½sï¿½éŒ¾
 #include <iosfwd>
 #include "../Vector3/Vector3.h"
 
@@ -8,7 +8,7 @@ namespace EvaEngine {
 
 	struct Vector2;
 
-	// s—ñ
+	// ï¿½sï¿½ï¿½
 	struct Matrix3x3 {
 
 		union {
@@ -23,40 +23,40 @@ namespace EvaEngine {
 			float m9[9];
 		};
 
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		// ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 		Matrix3x3() = default;
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		// ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 		Matrix3x3(float m11, float m12, float m13,
 			float m21, float m22, float m23,
 			float m31, float m32, float m33);
-		// ƒ[ƒs—ñ
+		// ï¿½[ï¿½ï¿½ï¿½sï¿½ï¿½
 		static Matrix3x3 zero();
-		// ’PˆÊs—ñ
+		// ï¿½Pï¿½Êsï¿½ï¿½
 		static Matrix3x3 identity();
-		// Šg‘åk¬s—ñ
+		// ï¿½gï¿½ï¿½kï¿½ï¿½ï¿½sï¿½ï¿½
 		static Matrix3x3 scale(const Vector2& vector);
-		// ‰ñ“]
+		// ï¿½ï¿½]
 		static Matrix3x3 rotate(float rotation);
-		// •½sˆÚ“®
+		// ï¿½ï¿½ï¿½sï¿½Ú“ï¿½
 		static Matrix3x3 translate(const Vector2& position);
 
-		// XMMATRIX‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+		// XMMATRIXï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
 		operator DirectX::XMMATRIX() const;
 	};
 
-	// s—ñ‚Ì‰ÁZ
+	// ï¿½sï¿½ï¿½Ì‰ï¿½ï¿½Z
 	Matrix3x3 operator + (const Matrix3x3& lhs, const Matrix3x3 rhs);
-	// s—ñ‚ÌŒ¸Z
+	// ï¿½sï¿½ï¿½ÌŒï¿½ï¿½Z
 	Matrix3x3 operator - (const Matrix3x3& lhs, const Matrix3x3 rhs);
-	// s—ñ‚ÌƒXƒJƒ‰[”{
+	// ï¿½sï¿½ï¿½ÌƒXï¿½Jï¿½ï¿½ï¿½[ï¿½{
 	Matrix3x3 operator * (const Matrix3x3& lhs, const float rhs);
-	// s—ñ‚ÌƒXƒJƒ‰[”{
+	// ï¿½sï¿½ï¿½ÌƒXï¿½Jï¿½ï¿½ï¿½[ï¿½{
 	Matrix3x3 operator * (const float lhs, const Matrix3x3& rhs);
-	// s—ñ‚ÌæZ
+	// ï¿½sï¿½ï¿½Ìï¿½Z
 	Matrix3x3 operator * (const Matrix3x3& lhs, const Matrix3x3 rhs);
-	// s—ñ‚ÆƒxƒNƒgƒ‹‚ÌÏ
+	// ï¿½sï¿½ï¿½Æƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ìï¿½
 	Vector2 operator * (const Vector2& lhs, const Matrix3x3 rhs);
 
-	// s—ñ‚Ìo—Í
+	// ï¿½sï¿½ï¿½Ìoï¿½ï¿½
 	std::ostream& operator << (std::ostream& out, const Matrix3x3& rhs);
 }

@@ -1,4 +1,4 @@
-#include "ModelDataBase.h"
+ï»¿#include "ModelDataBase.h"
 #include "../../../Utility/ModelUtility/ModelLoader/ModelLoader.h"
 #include "../../../Utility/ModelUtility/ModelLoaderUtility/VRMModelLoader/VRMModelLoader.h"
 
@@ -8,7 +8,7 @@ using namespace EvaEngine::Internal;
 void ModelDataBase::LoadModelData(const std::shared_ptr<EvaEngine::ModelData>& model, GUID* guid)
 {
     std::string name = model->GetFileName();
-    if (GUIDUtility::Create(guid, "ModelDataBase‚É‚Äƒ‚ƒfƒ‹ƒf[ƒ^‚ÌGUID¶¬‚É¸”s‚µ‚Ü‚µ‚½B") == false) return;
+    if (GUIDUtility::Create(guid, "ModelDataBaseï¿½É‚Äƒï¿½ï¿½fï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½GUIDï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B") == false) return;
     m_Models[*guid] = model;
 }
 

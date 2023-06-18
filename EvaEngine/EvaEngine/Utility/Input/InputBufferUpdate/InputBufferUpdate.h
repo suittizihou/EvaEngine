@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <dinput.h>
 #include <array>
@@ -27,9 +27,9 @@ namespace EvaEngine {
 
 			void KeyUpdate();
 
-			// ÅV‚Ì“ü—Íó‘Ô‚ğæ“¾
+			// ï¿½ÅVï¿½Ì“ï¿½ï¿½Íï¿½Ô‚ï¿½ï¿½æ“¾
 			std::array<KeyState, INPUT_BUFFER_SIZE> GetCurrentKeyStatus();
-			// ‚PƒtƒŒ[ƒ€‘O‚Ì“ü—Íó‘Ô‚ğæ“¾
+			// ï¿½Pï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Oï¿½Ì“ï¿½ï¿½Íï¿½Ô‚ï¿½ï¿½æ“¾
 			std::array<KeyState, INPUT_BUFFER_SIZE> GetPreviousKeyStatus();
 
 		private:
@@ -38,8 +38,8 @@ namespace EvaEngine {
 
 			BYTE m_Keys[INPUT_BUFFER_SIZE]{};
 
-			std::array<KeyState, INPUT_BUFFER_SIZE> m_CurrentKeyStatus{}; // ÅV‚Ì“ü—Íó‘Ô
-			std::array<KeyState, INPUT_BUFFER_SIZE> m_PreviousKeyStatus{}; // 1ƒtƒŒ[ƒ€‘O‚Ì“ü—Íó‘Ô
+			std::array<KeyState, INPUT_BUFFER_SIZE> m_CurrentKeyStatus{}; // ï¿½ÅVï¿½Ì“ï¿½ï¿½Íï¿½ï¿½
+			std::array<KeyState, INPUT_BUFFER_SIZE> m_PreviousKeyStatus{}; // 1ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Oï¿½Ì“ï¿½ï¿½Íï¿½ï¿½
 		};
 	}
 }

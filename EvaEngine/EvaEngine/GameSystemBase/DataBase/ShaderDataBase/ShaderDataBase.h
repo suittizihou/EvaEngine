@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "../../../Define/D3D11Defines.h"
 #include "../../../Utility/ShaderUtility/ShaderBase/ShaderBase.h"
@@ -20,71 +20,71 @@ namespace EvaEngine {
 				return instance;
 			}
 
-			// ƒfƒtƒHƒ‹ƒg‚ÌƒVƒF[ƒ_[“Ç‚İ‚İ
+			// ï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½ÌƒVï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ç‚İï¿½ï¿½ï¿½
 			void LoadDefaultShader();
 
-			// ’¸“_ƒVƒF[ƒ_[‚Ì’Ç‰Á
+			// ï¿½ï¿½ï¿½_ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì’Ç‰ï¿½
 			void AddVertexShader(const VertexShader& vertexShader, GUID* guid);
-			// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ì’Ç‰Á
+			// ï¿½sï¿½Nï¿½Zï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì’Ç‰ï¿½
 			void AddPixelShader(const PixelShader& pixelShader, GUID* guid);
-			// ƒWƒIƒƒgƒŠƒVƒF[ƒ_[‚Ì’Ç‰Á
+			// ï¿½Wï¿½Iï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì’Ç‰ï¿½
 			void AddGeometryShader(const GeometryShader& geometryShader, GUID* guid);
-			// ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚Ì’Ç‰Á
+			// ï¿½Rï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½gï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì’Ç‰ï¿½
 			void AddComputeShader(const ComputeShader& computeShader, GUID* guid);
-			// ƒnƒ‹ƒVƒF[ƒ_[‚Ì’Ç‰Á
+			// ï¿½nï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì’Ç‰ï¿½
 			void AddHullShader(const HullShader& hullShader, GUID* guid);
-			// ƒhƒƒCƒ“ƒVƒF[ƒ_[‚Ì’Ç‰Á
+			// ï¿½hï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì’Ç‰ï¿½
 			void AddDomainShader(const DomainShader& domainShader, GUID* guid);
 
-			// ƒfƒtƒHƒ‹ƒg‚Ì’¸“_ƒVƒF[ƒ_[‚ğæ“¾
+			// ï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½Ì’ï¿½ï¿½_ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½æ“¾
 			VertexShader GetDefaultVertexShader();
-			// ƒfƒtƒHƒ‹ƒg‚ÌƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğæ“¾
+			// ï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½Ìƒsï¿½Nï¿½Zï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½æ“¾
 			PixelShader GetDefaultPixelShader();
 
-			// ’¸“_ƒVƒF[ƒ_[‚Ìæ“¾
+			// ï¿½ï¿½ï¿½_ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìæ“¾
 			VertexShader GetVertexShader(const GUID& shaderHandle);
-			// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ìæ“¾
+			// ï¿½sï¿½Nï¿½Zï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìæ“¾
 			PixelShader GetPixelShader(const GUID& shaderHandle);
-			// ƒWƒIƒƒgƒŠƒVƒF[ƒ_[‚Ìæ“¾
+			// ï¿½Wï¿½Iï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìæ“¾
 			GeometryShader GetGeometryShader(const GUID& shaderHandle);
-			// ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚Ìæ“¾
+			// ï¿½Rï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½gï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìæ“¾
 			ComputeShader GetComputeShader(const GUID& shaderHandle);
-			// ƒnƒ‹ƒVƒF[ƒ_[‚Ìæ“¾
+			// ï¿½nï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìæ“¾
 			HullShader GetHullShader(const GUID& shaderHandle);
-			// ƒhƒƒCƒ“ƒVƒF[ƒ_[‚Ìæ“¾
+			// ï¿½hï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìæ“¾
 			DomainShader GetDomainShader(const GUID& shaderHandle);
 
-			// ’¸“_ƒVƒF[ƒ_[‚Ìíœ
+			// ï¿½ï¿½ï¿½_ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìíœ
 			void DeleteVertexShader(const GUID& shaderHandle);
-			// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ìíœ
+			// ï¿½sï¿½Nï¿½Zï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìíœ
 			void DeletePixelShader(const GUID& shaderHandle);
-			// ƒWƒIƒƒgƒŠƒVƒF[ƒ_[‚Ìíœ
+			// ï¿½Wï¿½Iï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìíœ
 			void DeleteGeometryShader(const GUID& shaderHandle);
-			// ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚Ìíœ
+			// ï¿½Rï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½gï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìíœ
 			void DeleteComputeShader(const GUID& shaderHandle);
-			// ƒnƒ‹ƒVƒF[ƒ_[‚Ìíœ
+			// ï¿½nï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìíœ
 			void DeleteHullShader(const GUID& shaderHandle);
-			// ƒhƒƒCƒ“ƒVƒF[ƒ_[‚Ìíœ
+			// ï¿½hï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìíœ
 			void DeleteDomainShader(const GUID& shaderHandle);
 
-			// ‘SƒVƒF[ƒ_[ƒŠƒ\[ƒX‚Ì‰ğ•ú
+			// ï¿½Sï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½\ï¿½[ï¿½Xï¿½Ì‰ï¿½ï¿½
 			void AllDeleteShader();
 
 		private:
 			bool GUIDCreate(GUID* guid, const std::string& shaderType);
 
 		private:
-			// ƒRƒ“ƒpƒCƒ‹Ï‚İ’¸“_ƒVƒF[ƒ_[
+			// ï¿½Rï¿½ï¿½ï¿½pï¿½Cï¿½ï¿½ï¿½Ï‚İ’ï¿½ï¿½_ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[
 			std::unordered_map<GUID, VertexShader> m_VertexShaders{};
-			// ƒRƒ“ƒpƒCƒ‹Ï‚İƒsƒNƒZƒ‹ƒVƒF[ƒ_[
+			// ï¿½Rï¿½ï¿½ï¿½pï¿½Cï¿½ï¿½ï¿½Ï‚İƒsï¿½Nï¿½Zï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[
 			std::unordered_map<GUID, PixelShader> m_PixelShaders{};
-			// ƒRƒ“ƒpƒCƒ‹Ï‚İƒWƒIƒƒgƒŠƒVƒF[ƒ_[
+			// ï¿½Rï¿½ï¿½ï¿½pï¿½Cï¿½ï¿½ï¿½Ï‚İƒWï¿½Iï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[
 			std::unordered_map<GUID, GeometryShader> m_GeometryShaders{};
-			// ƒRƒ“ƒpƒCƒ‹Ï‚İƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[
+			// ï¿½Rï¿½ï¿½ï¿½pï¿½Cï¿½ï¿½ï¿½Ï‚İƒRï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½gï¿½Vï¿½Fï¿½[ï¿½_ï¿½[
 			std::unordered_map<GUID, ComputeShader> m_ComputeShaders{};
-			// ƒRƒ“ƒpƒCƒ‹Ï‚İƒnƒ‹ƒVƒF[ƒ_[
+			// ï¿½Rï¿½ï¿½ï¿½pï¿½Cï¿½ï¿½ï¿½Ï‚İƒnï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[
 			std::unordered_map<GUID, HullShader> m_HullShaders{};
-			// ƒRƒ“ƒpƒCƒ‹Ï‚İƒhƒƒCƒ“ƒVƒF[ƒ_[
+			// ï¿½Rï¿½ï¿½ï¿½pï¿½Cï¿½ï¿½ï¿½Ï‚İƒhï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[
 			std::unordered_map<GUID, DomainShader> m_DomainShaders{};
 
 			VertexShader m_DefaultVertexShader{};

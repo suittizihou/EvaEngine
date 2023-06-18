@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <memory>
 
@@ -18,7 +18,7 @@ namespace EvaEngine {
 		class ComponentDataBase;
 	}
 
-	// g—p‚·‚éŠÖ”‚ğ¦‚·ƒrƒbƒgƒtƒ‰ƒO
+	// ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½Öï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½rï¿½bï¿½gï¿½tï¿½ï¿½ï¿½O
 	namespace FunctionMask {
 		const UINT NONE(0 << 0);
 		//const UINT AWAKE				(1 << 0);
@@ -44,51 +44,51 @@ namespace EvaEngine {
 		virtual void Init() {}
 
 	public:
-		// Activeó‘Ô‚¶‚á‚È‚­‚Ä‚àŒÄ‚Î‚ê‚é
+		// Activeï¿½ï¿½Ô‚ï¿½ï¿½ï¿½È‚ï¿½ï¿½Ä‚ï¿½ï¿½Ä‚Î‚ï¿½ï¿½
 		virtual void Awake() {}
-		// Activeó‘Ô‚É‚È‚Á‚½‚çŒÄ‚Î‚ê‚é
+		// Activeï¿½ï¿½Ô‚É‚È‚ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚Î‚ï¿½ï¿½
 		virtual void Start() {}
-		// ŒÅ’èƒtƒŒ[ƒ€‚ÅŒÄ‚Î‚ê‚é(ì‚ê‚é‚©‚Í”÷–­)
+		// ï¿½Å’ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÅŒÄ‚Î‚ï¿½ï¿½(ï¿½ï¿½ï¿½é‚©ï¿½Í”ï¿½ï¿½ï¿½)
 		virtual void FixedUpdate() {}
-		// –ˆƒtƒŒ[ƒ€ŒÄ‚Î‚ê‚é
+		// ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ä‚Î‚ï¿½ï¿½
 		virtual void Update() {}
-		// Update‚ÌŒã‚ÉŒÄ‚Î‚ê‚é
+		// Updateï¿½ÌŒï¿½ÉŒÄ‚Î‚ï¿½ï¿½
 		virtual void LateUpdate() {}
-		// ã‹L‘S‚Ä‚Ìˆ—‚ªI‚í‚Á‚½ƒ^ƒCƒ~ƒ“ƒO‚ÅŒÄ‚Î‚ê‚é
+		// ï¿½ï¿½Lï¿½Sï¿½Ä‚Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½Cï¿½~ï¿½ï¿½ï¿½Oï¿½ÅŒÄ‚Î‚ï¿½ï¿½
 		virtual void Draw(const std::weak_ptr<Camera>& camera, ID3D11DeviceContext* command) {}
 
 #if _DEBUG
-		// Editor—p‚Ì•`‰æ
+		// Editorï¿½pï¿½Ì•`ï¿½ï¿½
 		virtual void OnGUI() {};
-		// •Â‚¶‚Ä‚¢‚éŒÄ‚Î‚ê‚éˆ—
+		// ï¿½Â‚ï¿½ï¿½Ä‚ï¿½ï¿½éï¿½Ä‚Î‚ï¿½éˆï¿½ï¿½
 		virtual void OnClosedGUI() {}
 #endif
 
-		// ‚±‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚É•R‚Ã‚¢‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚ğ•Ô‚·
+		// ï¿½ï¿½ï¿½ÌƒRï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½É•Rï¿½Ã‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½Ô‚ï¿½
 		std::weak_ptr<GameObject> GetGameObject() const;
-		// ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€‚ğ•Ô‚·
+		// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½tï¿½Hï¿½[ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½
 		std::weak_ptr<Transform> GetTransform() const;
-		// •¡”ƒAƒ^ƒbƒ`‚Å‚«‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚©•Ô‚·
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½^ï¿½bï¿½`ï¿½Å‚ï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Ô‚ï¿½
 		bool GetCanMultiAttach() const;
-		// ‚±‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚ÍÁ‚¹‚é‚©
+		// ï¿½ï¿½ï¿½ÌƒRï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½Íï¿½ï¿½ï¿½ï¿½é‚©
 		bool GetCanRemove() const;
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌƒnƒbƒVƒ…’l‚ğ•Ô‚·(‰½Œ^‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚©¯•Ê—p)
+		// ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½Ìƒnï¿½bï¿½Vï¿½ï¿½ï¿½lï¿½ï¿½Ô‚ï¿½(ï¿½ï¿½ï¿½^ï¿½ÌƒRï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Ê—p)
 		size_t GetHashCode() const;
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌID‚ğ•Ô‚·(ŒÅ—L‚ÌID)
+		// ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½IDï¿½ï¿½Ô‚ï¿½(ï¿½Å—Lï¿½ï¿½ID)
 		const GUID& GetComponentID() const;
-		// •¶š—ñ‚ÅID‚ğ•Ô‚·
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ô‚ï¿½
 		std::string GetComponentIDString();
-		// ‚Ç‚ÌŠÖ”‚ğŒÄ‚Ño‚·‚©‚Ìƒ}ƒXƒN‚ğ•Ô‚·
+		// ï¿½Ç‚ÌŠÖï¿½ï¿½ï¿½ï¿½Ä‚Ñoï¿½ï¿½ï¿½ï¿½ï¿½Ìƒ}ï¿½Xï¿½Nï¿½ï¿½Ô‚ï¿½
 		UINT GetFunctionMask() const;
-		// ©g‚ª“o˜^‚³‚ê‚Ä‚¢‚é”z—ñ”Ô†‚ğ•Ô‚·
+		// ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½oï¿½^ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½zï¿½ï¿½Ôï¿½ï¿½ï¿½Ô‚ï¿½
 		UINT GetIndex() const;
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì–¼‘O‚ğ•Ô‚·
+		// ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½Ì–ï¿½ï¿½Oï¿½ï¿½Ô‚ï¿½
 		std::string GetComponentName() const;
 
 	private:
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚É•K—v‚Èƒf[ƒ^‚ğİ’è
+		// ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½É•Kï¿½vï¿½Èƒfï¿½[ï¿½^ï¿½ï¿½İ’ï¿½
 		void SetComponentDesc(const ComponentDesc& componentDesc);
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚ª“o˜^‚³‚ê‚Ä‚¢‚é”z—ñ”Ô†‚ğİ’è
+		// ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½oï¿½^ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½zï¿½ï¿½Ôï¿½ï¿½ï¿½İ’ï¿½
 		void SetIndex(const UINT index);
 
 	private:
@@ -97,7 +97,7 @@ namespace EvaEngine {
 		size_t m_HashCode{};
 		GUID m_GUID{};
 		UINT m_FunctionMask{};
-		UINT m_Index{}; // ComponentDataBase‚É“o˜^‚³‚ê‚Ä‚¢‚é©g‚Ì”z—ñ”Ô†
+		UINT m_Index{}; // ComponentDataBaseï¿½É“oï¿½^ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é©ï¿½gï¿½Ì”zï¿½ï¿½Ôï¿½
 		bool m_CanMultiAttach{ true };
 		bool m_CanRemove{ true };
 		std::string m_ComponentName{ "None" };

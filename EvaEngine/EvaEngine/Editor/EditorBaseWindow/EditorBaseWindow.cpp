@@ -1,4 +1,4 @@
-#if _DEBUG
+ï»¿#if _DEBUG
 #include "EditorBaseWindow.h"
 #include "../../Setting/Window/Window.h"
 #include "../EditorWindowDataBase/EditorWindowDataBase.h"
@@ -51,13 +51,13 @@ void EditorBaseWindow::OnGUI() {
 
 void EvaEngine::Editor::Internal::EditorBaseWindow::DrawPlayButtons()
 {
-	// ƒ{ƒ^ƒ“‚ğWindow‚Ì’†S‚É
+	// ï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½Windowï¿½Ì’ï¿½ï¿½Sï¿½ï¿½
 	ImVec2 cursor = ImGui::GetCursorPos();
 	ImGui::InvisibleButton("##padded-text", ImVec2(EvaEngine::Internal::Window::GetViewport().Width / 2.0f, 24.0f));
 	ImVec2 final_cursor_pos = ImGui::GetCursorPos();
 	ImGui::SetCursorPos(ImVec2(cursor.x + EvaEngine::Internal::Window::GetViewport().Width / 2.0f, cursor.y + 2.0f));
 
-	// Ä¶ƒ{ƒ^ƒ“
+	// ï¿½Äï¿½ï¿½{ï¿½^ï¿½ï¿½
 	if (EditorApplication::isPlaying) ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.24f, 0.58f, 1.0f, 1.0f));
 	else ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.3f, 0.3f, 0.3f, 1.0f));
 	if (ImGui::Button("Play")) {
@@ -66,7 +66,7 @@ void EvaEngine::Editor::Internal::EditorBaseWindow::DrawPlayButtons()
 	}
 	ImGui::PopStyleColor(1);
 
-	// ˆê’â~ƒ{ƒ^ƒ“
+	// ï¿½êï¿½ï¿½~ï¿½{ï¿½^ï¿½ï¿½
 	if (EditorApplication::isPause) ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.24f, 0.58f, 1.0f, 1.0f));
 	else ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.3f, 0.3f, 0.3f, 1.0f));
 	ImGui::SameLine();
@@ -76,7 +76,7 @@ void EvaEngine::Editor::Internal::EditorBaseWindow::DrawPlayButtons()
 	}
 	ImGui::PopStyleColor(1);
 
-	// ƒXƒeƒbƒvƒ{ƒ^ƒ“
+	// ï¿½Xï¿½eï¿½bï¿½vï¿½{ï¿½^ï¿½ï¿½
 	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.3f, 0.3f, 0.3f, 1.0f));
 	ImGui::SameLine();
 	if (ImGui::Button("Step")) {
@@ -88,10 +88,10 @@ void EvaEngine::Editor::Internal::EditorBaseWindow::DrawPlayButtons()
 	}
 	ImGui::PopStyleColor(1);
 
-	ImGui::SetCursorPos(final_cursor_pos);	// ƒ{ƒ^ƒ“‚ğWindow‚Ì’†S‚É
+	ImGui::SetCursorPos(final_cursor_pos);	// ï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½Windowï¿½Ì’ï¿½ï¿½Sï¿½ï¿½
 }
 
-// “o˜^‚³‚ê‚½EditorWindow‚ÌƒpƒX‚ğƒƒjƒ…[‚É•\¦‚·‚é‚½‚ßAÄ‹A“I‚ÉŒÄ‚Ño‚µ
+// ï¿½oï¿½^ï¿½ï¿½ï¿½ê‚½EditorWindowï¿½Ìƒpï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½jï¿½ï¿½ï¿½[ï¿½É•\ï¿½ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ßAï¿½Ä‹Aï¿½Iï¿½ÉŒÄ‚Ñoï¿½ï¿½
 void EditorBaseWindow::Scanning(const std::weak_ptr<EditorWindowData>& editorWindows) {
 	
 	for (auto editorWindow : editorWindows.lock()->childDatas) {

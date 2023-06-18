@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <string>
 #include <list>
@@ -26,69 +26,69 @@ namespace EvaEngine {
 				return componentManager;
 			}
 
-			// ƒRƒ“ƒ|[ƒlƒ“ƒgƒf[ƒ^ƒx[ƒX‚ğƒV[ƒ“‚É’Ç‰Á
+			// ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½fï¿½[ï¿½^ï¿½xï¿½[ï¿½Xï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½ï¿½É’Ç‰ï¿½
 			void AddComponentDataBase(const std::string& sceneName);
 
-			// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì“o˜^
+			// ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½Ì“oï¿½^
 			template<class T, class... Args>
 			std::weak_ptr<T> AddComponent(const std::string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject, Args&& ... args)
 			{
 				return m_ComponentList[sceneName]->AddComponent<T>(sceneName, gameObject, args...);
 			}
 
-			// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìæ“¾
+			// ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½Ìæ“¾
 			template<class T>
 			std::weak_ptr<T> GetComponent(const std::string& sceneName, const GUID& gameObjectID)
 			{
 				return m_ComponentList[sceneName]->GetComponent<T>(gameObjectID);
 			}
 
-			// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìæ“¾
+			// ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½Ìæ“¾
 			template<class T>
 			std::weak_ptr<T> GetComponent(const std::string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject)
 			{
 				return m_ComponentList[sceneName]->GetComponent<T>(gameObject);
 			}
 
-			//// ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğíœ
+			//// ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½íœ
 			//template<class T>
 			//void RemoveComponent(const std::string& sceneName, const GUID& gameObjectID)
 			//{
 			//	m_ComponentList[sceneName]->RemoveComponent<T>(gameObjectID);
 			//}
 
-			// ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğíœ
+			// ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½íœ
 			template<class T>
 			void RemoveComponent(const std::string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject)
 			{
 				m_ComponentList[sceneName]->RemoveComponent<T>(gameObject);
 			}
 
-			// •Û‚µ‚Ä‚¢‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ‘S•”íœ
+			// ï¿½Ûï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½Sï¿½ï¿½ï¿½íœ
 			void RemoveAllComponent(const std::string& sceneName);
 			void RemoveAllComponent();
 
-			// FixedUpdateŠÖ”‚ğ‰ñ‚·
+			// FixedUpdateï¿½Öï¿½ï¿½ï¿½ï¿½ï¿½
 			void FixedUpdate(const std::string& sceneName);
-			// UpdateŠÖ”‚ğ‰ñ‚·
+			// Updateï¿½Öï¿½ï¿½ï¿½ï¿½ï¿½
 			void Update(const std::string& sceneName);
-			// Editor‚Å‚àUpdate‚ğ‰ñ‚·
+			// Editorï¿½Å‚ï¿½Updateï¿½ï¿½ï¿½ï¿½
 			void ExecuteEditUpdate(const std::string& sceneName);
-			// LateUpdateŠÖ”‚ğ‰ñ‚·
+			// LateUpdateï¿½Öï¿½ï¿½ï¿½ï¿½ï¿½
 			void LateUpdate(const std::string& sceneName);
-			// DrawŠÖ”‚ğ‰ñ‚·
+			// Drawï¿½Öï¿½ï¿½ï¿½ï¿½ï¿½
 			void Draw(
 				const std::string& sceneName,
 				ID3D11DeviceContext* command);
 
 #if _DEBUG
-			// Editor—p‚Ì•`‰æ
+			// Editorï¿½pï¿½Ì•`ï¿½ï¿½
 			void OnGUI(std::string& sceneName);
 #endif
 
 		private:
-			// ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌƒŠƒXƒg(first‚ÍƒV[ƒ“–¼)
-			std::unordered_map<std::string,		// ƒV[ƒ“–¼
+			// ï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½Ìƒï¿½ï¿½Xï¿½g(firstï¿½ÍƒVï¿½[ï¿½ï¿½ï¿½ï¿½)
+			std::unordered_map<std::string,		// ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½
 				std::shared_ptr<ComponentDataBase>> m_ComponentList;
 
 			UINT m_ComponentID{};

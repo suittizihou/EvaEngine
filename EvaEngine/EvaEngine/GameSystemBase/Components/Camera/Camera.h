@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <DirectXMath.h>
 #include <memory>
@@ -43,24 +43,24 @@ namespace EvaEngine {
 #endif
 
 	public:
-		// ƒrƒ…[ƒ|[ƒg‚Ìİ’è
+		// ï¿½rï¿½ï¿½ï¿½[ï¿½|ï¿½[ï¿½gï¿½Ìİ’ï¿½
 		void SetViewport(const UINT width, const UINT height);
-		// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg‚ğİ’è
+		// ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½[ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½ï¿½İ’ï¿½
 		void SetBeginSettings(ID3D11DeviceContext* command) const;
 
-		// ƒrƒ…[ƒ|[ƒg‚ğæ“¾
+		// ï¿½rï¿½ï¿½ï¿½[ï¿½|ï¿½[ï¿½gï¿½ï¿½ï¿½æ“¾
 		D3D11_VIEWPORT  GetViewport() const;
-		// ƒrƒ…[s—ñ‚ğæ“¾
+		// ï¿½rï¿½ï¿½ï¿½[ï¿½sï¿½ï¿½ï¿½ï¿½æ“¾
 		DirectX::XMMATRIX GetViewMatrixDxMath() const;
 		EvaEngine::Matrix4x4 GetViewMatrix() const;
-		// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ğæ“¾
+		// ï¿½vï¿½ï¿½ï¿½Wï¿½Fï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½æ“¾
 		DirectX::XMMATRIX GetProjectionMatrixDxMath() const;
 		EvaEngine::Matrix4x4 GetProjectionMatrix() const;
 
-		// ƒrƒ…[s—ñ‚ğì¬
+		// ï¿½rï¿½ï¿½ï¿½[ï¿½sï¿½ï¿½ï¿½ï¿½ì¬
 		DirectX::XMMATRIX CreateViewMatrix(const std::weak_ptr<Transform>& transform);
 		DirectX::XMMATRIX CreateViewMatrix(const Matrix4x4& rotateMatrix, const Matrix4x4& positionMatrix);
-		// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ğì¬
+		// ï¿½vï¿½ï¿½ï¿½Wï¿½Fï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ì¬
 		DirectX::XMMATRIX CreateProjectionMatrix(
 			const D3D11_VIEWPORT& viewPort,
 			const float& near,
@@ -83,13 +83,13 @@ namespace EvaEngine {
 		float m_Fov{};
 
 	public:
-		// ƒV[ƒ“‚É‘¶İ‚·‚éMain Cameraƒ^ƒO‚ÌCameraƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ•Ô‚·
+		// ï¿½Vï¿½[ï¿½ï¿½ï¿½É‘ï¿½ï¿½İ‚ï¿½ï¿½ï¿½Main Cameraï¿½^ï¿½Oï¿½ï¿½Cameraï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½Ô‚ï¿½
 		static std::weak_ptr<Camera> GetMainCamera();
-		// Œ»İ‚ÌƒV[ƒ“‚Ì‘SƒJƒƒ‰‚ğ•Ô‚·
+		// ï¿½ï¿½ï¿½İ‚ÌƒVï¿½[ï¿½ï¿½ï¿½Ì‘Sï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½
 		static std::vector<std::weak_ptr<Camera>> GetAllCamera();
-		// w’è‚³‚ê‚½ƒV[ƒ“‚Ì‘SƒJƒƒ‰‚ğ•Ô‚·
+		// ï¿½wï¿½è‚³ï¿½ê‚½ï¿½Vï¿½[ï¿½ï¿½ï¿½Ì‘Sï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½
 		static std::vector<std::weak_ptr<Camera>> GetAllCamera(const std::string& sceneName);
-		// ‘SƒJƒƒ‰‚Ì‰ğ•ú
+		// ï¿½Sï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Ì‰ï¿½ï¿½
 		static void AllDeleteCamera();
 
 	private:

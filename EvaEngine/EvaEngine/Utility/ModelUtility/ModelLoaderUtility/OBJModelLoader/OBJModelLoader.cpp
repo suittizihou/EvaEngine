@@ -1,4 +1,4 @@
-#include "OBJModelLoader.h"
+ï»¿#include "OBJModelLoader.h"
 #include "../../../../System/DebugLog/DebugLog.h"
 #include "../../../StringAssist/StringAssist.h"
 
@@ -18,7 +18,7 @@ void Replase(char searchChar, char replaceChar, char* buffer) {
 void OBJModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model)
 {
     if (!CreateMesh(model, fileName)) {
-        DebugLog::LogError("ƒtƒ@ƒCƒ‹–¼ : " + std::string{ fileName } + " ƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½B");
+        DebugLog::LogError("ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ : " + std::string{ fileName } + " ï¿½ï¿½ï¿½fï¿½ï¿½ï¿½Ì“Ç‚İï¿½ï¿½İ‚Éï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B");
         return;
     }
 }
@@ -39,7 +39,7 @@ bool OBJModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, co
     char buffer[LineBufferLength];
 
     while (fgets(buffer, LineBufferLength, file) != nullptr) {
-        // ƒRƒƒ“ƒg‚Í–³‹
+        // ï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Í–ï¿½ï¿½ï¿½
         if (buffer[0] == '#') continue;
 
         char* parsePoint = strchr(buffer, ' ');
@@ -47,22 +47,22 @@ bool OBJModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, co
 
         Replase('\n', '\0', buffer);
 
-        // ’¸“_ŠÖ˜A
+        // ï¿½ï¿½ï¿½_ï¿½Ö˜A
         if (buffer[0] == 'v') {
-            // ’¸“_À•W
+            // ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½W
             if (buffer[1] == ' ') {
                 ParseVKeywordTag(vertices, &parsePoint[1]);
-                // X²‚ğ”½“]‚³‚¹‚é
+                // Xï¿½ï¿½ï¿½ğ”½“]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 vertices[vertices.size() - 1].x *= -1.0f;
             }
-            // –@üÀ•W
+            // ï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½W
             else if (buffer[1] == 'n') {
                 ParseVKeywordTag(normals, &parsePoint[1]);
-                // X²‚ğ”½“]‚³‚¹‚é
+                // Xï¿½ï¿½ï¿½ğ”½“]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 normals[normals.size() - 1].x *= -1.0f;
             }
         }
-        // –Êî•ñ
+        // ï¿½Êï¿½ï¿½
         else if (buffer[0] == 'f') {
             ParseFKeywordTag(_Out_ vertexData, _Out_ indices, vertices, normals, &parsePoint[1]);
         }
@@ -126,14 +126,14 @@ void OBJModelLoader::ParseFKeywordTag(
             }
         }
 
-        // ’¸“_ƒoƒbƒtƒ@ƒŠƒXƒg‚É’Ç‰Á
+        // ï¿½ï¿½ï¿½_ï¿½oï¿½bï¿½tï¿½@ï¿½ï¿½ï¿½Xï¿½gï¿½É’Ç‰ï¿½
         outVertexData.push_back(vertexData);
 
-        // ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚É’Ç‰Á
+        // ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½oï¿½bï¿½tï¿½@ï¿½É’Ç‰ï¿½
         outIndices.push_back(static_cast<unsigned int>(outVertexData.size() - 1));
     }
 
-    // ƒ|ƒŠƒSƒ“ì¬‚Ì’¸“_‡”Ô‚ğ”½“]‚·‚é
+    // ï¿½|ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½ì¬ï¿½Ì’ï¿½ï¿½_ï¿½ï¿½ï¿½Ô‚ğ”½“]ï¿½ï¿½ï¿½ï¿½
     unsigned int size = static_cast<unsigned int>(outIndices.size());
     unsigned int temp = outIndices[size - 1];
     outIndices[size - 1] = outIndices[size - 3];

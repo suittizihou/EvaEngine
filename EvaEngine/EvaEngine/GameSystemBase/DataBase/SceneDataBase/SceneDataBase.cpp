@@ -1,4 +1,4 @@
-#include "SceneDataBase.h"
+ï»¿#include "SceneDataBase.h"
 #include "../../Manager/ComponentManager/ComponentManager.h"
 #include "../../Manager/GameObjectManager/GameObjectManager.h"
 
@@ -8,7 +8,7 @@ void SceneDataBase::LoadScene(const std::string& sceneType)
 {
     m_IsChangeScene = true;
 
-    // ‘O‚ÌƒV[ƒ“–¼‚ğ•Û
+    // ï¿½Oï¿½ÌƒVï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ûï¿½
     m_PreviousSceneName = m_CurrentSceneName;
     m_CurrentSceneName = sceneType;
 }
@@ -17,7 +17,7 @@ void SceneDataBase::LoadScene(const UINT& sceneID)
 {
     for (const auto& scene : m_Scenes) {
         if (scene.second->GetSceneID() == sceneID) {
-            // ‘O‚ÌƒV[ƒ“–¼‚ğ•Û
+            // ï¿½Oï¿½ÌƒVï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ûï¿½
             m_PreviousSceneName = m_CurrentSceneName;
             m_CurrentSceneName = scene.second->GetSceneName();
             return;
@@ -37,7 +37,7 @@ std::string SceneDataBase::GetPreviousSceneName() const
 
 HRESULT SceneDataBase::InitializeScene() {
     try {
-        // ƒV[ƒ“‚ªƒZƒbƒgƒZƒbƒg‚³‚ê‚Ä‚È‚©‚Á‚½‚çÅ‰‚É’Ç‰Á‚µ‚½ƒV[ƒ“‚ğƒ[ƒh‚·‚é
+        // ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½Ä‚È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åï¿½ï¿½É’Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½ï¿½
         if (m_CurrentSceneName.empty()) m_CurrentSceneName = m_Scenes.begin()->first;
 
         m_CurrentScene = m_Scenes[m_CurrentSceneName];
@@ -52,17 +52,17 @@ HRESULT SceneDataBase::InitializeScene() {
 
 HRESULT SceneDataBase::SceneChange()
 {
-    // ƒV[ƒ“Ø‚è‘Ö‚í‚èƒtƒ‰ƒO‚ª—§‚Á‚Ä‚¢‚È‚©‚Á‚½‚ç‘ŠúƒŠƒ^[ƒ“
+    // ï¿½Vï¿½[ï¿½ï¿½ï¿½Ø‚ï¿½Ö‚ï¿½ï¿½tï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‘ï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½[ï¿½ï¿½
     if (!m_IsChangeScene) return S_OK;
 
     m_IsChangeScene = false;
 
     if (IsCheckExists(m_CurrentSceneName) == false) {
-        DebugLog::LogError(m_CurrentSceneName + u8" ‚Í“o˜^‚³‚ê‚Ä‚¢‚È‚¢ƒV[ƒ“‚Å‚·B");
+        DebugLog::LogError(m_CurrentSceneName + u8" ï¿½Í“oï¿½^ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½Vï¿½[ï¿½ï¿½ï¿½Å‚ï¿½ï¿½B");
         return E_ABORT;
     }
 
-    // ‘O‚ÌƒV[ƒ“‚Å•Û‚µ‚Ä‚¢‚½ƒIƒuƒWƒFƒNƒg‚ÆƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ‘Síœ
+    // ï¿½Oï¿½ÌƒVï¿½[ï¿½ï¿½ï¿½Å•Ûï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ÆƒRï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½Sï¿½íœ
     ComponentManager::Instance().RemoveAllComponent(m_PreviousSceneName);
     GameObjectManager::Instance().RemoveAllGameObject(m_PreviousSceneName);
 

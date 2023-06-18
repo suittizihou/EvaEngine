@@ -1,4 +1,4 @@
-#if _DEBUG
+ï»¿#if _DEBUG
 #pragma once
 
 namespace EvaEngine {
@@ -15,7 +15,7 @@ namespace EvaEngine {
 
 			static bool isInputFreeze;
 
-			// Œ»İ‚ÌƒV[ƒ“‚ğ‚PƒtƒŒ[ƒ€‚¾‚¯i‚Ü‚¹‚é
+			// ï¿½ï¿½ï¿½İ‚ÌƒVï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½Ü‚ï¿½ï¿½ï¿½
 			static void Step();
 		};
 	}

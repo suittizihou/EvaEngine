@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "../../Define/D3D11Defines.h"
 #include <vector>
@@ -13,58 +13,58 @@ namespace EvaEngine {
 		~Mesh();
 
 	public:
-		// ’¸“_‚Ì”‚ğİ’è
+		// ï¿½ï¿½ï¿½_ï¿½Ìï¿½ï¿½ï¿½İ’ï¿½
 		void SetVertexNum(int vertexSize);
-		// ’¸“_‚Ì\‘¢‘Ì‚ğİ’è
+		// ï¿½ï¿½ï¿½_ï¿½Ì\ï¿½ï¿½ï¿½Ì‚ï¿½İ’ï¿½
 		void SetVertexData(std::vector<VertexData> vertexDatas, bool isCreateIndices = false);
-		// Še’¸“_‚ÌÀ•W‚ğİ’è
+		// ï¿½eï¿½ï¿½ï¿½_ï¿½Ìï¿½ï¿½Wï¿½ï¿½İ’ï¿½
 		void SetVertexPos(int vertexNum, float x, float y, float z);
-		// Še’¸“_‚Ì–@ü‚ğİ’è
+		// ï¿½eï¿½ï¿½ï¿½_ï¿½Ì–@ï¿½ï¿½ï¿½ï¿½İ’ï¿½
 		void SetVertexNormal(int vertexNum, float x, float y, float z);
-		// Še’¸“_‚ÌF‚ğİ’è
+		// ï¿½eï¿½ï¿½ï¿½_ï¿½ÌFï¿½ï¿½İ’ï¿½
 		void SetVertexColor(int vertexNum, float r, float g, float b, float a);
-		// Še’¸“_‚ÌUVÀ•W‚ğİ’è
+		// ï¿½eï¿½ï¿½ï¿½_ï¿½ï¿½UVï¿½ï¿½ï¿½Wï¿½ï¿½İ’ï¿½
 		void SetVertexUV(int vertexNum, float u, float v);
-		// ’¸“_ƒoƒbƒtƒ@‚Ìİ’è
+		// ï¿½ï¿½ï¿½_ï¿½oï¿½bï¿½tï¿½@ï¿½Ìİ’ï¿½
 		void SetVertexBuffer(ID3D11Buffer* vertexBuffer);
-		// ’¸“_‚ğg—p‚·‚é‡”Ô‚Ìì¬(ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@)
+		// ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½é‡ï¿½Ô‚Ìì¬(ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½oï¿½bï¿½tï¿½@)
 		std::vector<UINT> CreateIndices(const std::vector<VertexData>& vertexDatas);
-		// ’¸“_‚ğg—p‚·‚é‡”Ô‚Ìİ’è(ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@)
+		// ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½é‡ï¿½Ô‚Ìİ’ï¿½(ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½oï¿½bï¿½tï¿½@)
 		void SetIndices(std::vector<unsigned int> indices);
-		// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìİ’è
+		// ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½oï¿½bï¿½tï¿½@ï¿½Ìİ’ï¿½
 		void SetIndexBuffer(ID3D11Buffer* indexBuffer);
-		// ƒ}ƒeƒŠƒAƒ‹–¼‚Ìİ’è
+		// ï¿½}ï¿½eï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½Ìİ’ï¿½
 		void SetMaterialName(UINT materialID);
 		void SetMaterialName(std::string materialName);
 
-		// ’¸“_î•ñ‚Ìæ“¾
+		// ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½Ìæ“¾
 		std::vector<VertexData> GetVertexData();
-		// ’¸“_ƒoƒbƒtƒ@[‚Ìæ“¾
+		// ï¿½ï¿½ï¿½_ï¿½oï¿½bï¿½tï¿½@ï¿½[ï¿½Ìæ“¾
 		ID3D11Buffer* const* GetVertexBuffer();
-		// ’¸“_‚ğg—p‚·‚é‡”Ô‚Ìæ“¾(ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@)
+		// ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½é‡ï¿½Ô‚Ìæ“¾(ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½oï¿½bï¿½tï¿½@)
 		std::vector<unsigned int> GetIndices();
-		// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìæ“¾
+		// ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½oï¿½bï¿½tï¿½@ï¿½Ìæ“¾
 		ID3D11Buffer* GetIndexBuffer();
-		// ƒ}ƒeƒŠƒAƒ‹‚Ìæ“¾
+		// ï¿½}ï¿½eï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Ìæ“¾
 		std::string GetMaterialName() const;
 
 		void Release();
 
 	public:
-		// ƒƒbƒVƒ…–¼
+		// ï¿½ï¿½ï¿½bï¿½Vï¿½ï¿½ï¿½ï¿½
 		std::string name{};
 
 	private:
-		// ’¸“_ƒf[ƒ^‚Ì”z—ñ
+		// ï¿½ï¿½ï¿½_ï¿½fï¿½[ï¿½^ï¿½Ì”zï¿½ï¿½
 		std::vector<VertexData> m_Vertexs;
-		// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
+		// ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½oï¿½bï¿½tï¿½@
 		std::vector<unsigned int> m_Indices;
-		// ƒ}ƒeƒŠƒAƒ‹ID
+		// ï¿½}ï¿½eï¿½ï¿½ï¿½Aï¿½ï¿½ID
 		std::string m_MaterialName{};
 
-		// GPU—p’¸“_ƒoƒbƒtƒ@[
+		// GPUï¿½pï¿½ï¿½ï¿½_ï¿½oï¿½bï¿½tï¿½@ï¿½[
 		ID3D11Buffer* m_VertexBuffer{ nullptr };
-		// GPU—pƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@
+		// GPUï¿½pï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½oï¿½bï¿½tï¿½@
 		ID3D11Buffer* m_IndexBuffer{ nullptr };
 	};
 }

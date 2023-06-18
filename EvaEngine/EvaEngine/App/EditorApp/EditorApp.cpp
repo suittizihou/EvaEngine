@@ -1,4 +1,4 @@
-#if _DEBUG
+ï»¿#if _DEBUG
 
 #include "EditorApp.h"
 #include "../../Setting/Window/Window.h"
@@ -42,17 +42,17 @@ HRESULT EditorApp::ImGuiSetting()
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
-		// ini‚ğ¶¬‚µ‚È‚¢
+		// iniï¿½ğ¶ï¿½ï¿½ï¿½ï¿½È‚ï¿½
 		//io.IniFilename = NULL;
-		// “ú–{ŒêƒtƒHƒ“ƒg‚É‘Î‰
+		// ï¿½ï¿½ï¿½{ï¿½ï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½É‘Î‰ï¿½
 		//ImFontConfig fontConfig{};
 		//fontConfig.MergeMode = true;
 		io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\meiryo.ttc", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
-		// ƒhƒbƒLƒ“ƒO‹@”\‚ğ—LŒø‰»
+		// ï¿½hï¿½bï¿½Lï¿½ï¿½ï¿½Oï¿½@ï¿½\ï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-		// ƒ_[ƒNƒe[ƒ}‚Éİ’è
+		// ï¿½_ï¿½[ï¿½Nï¿½eï¿½[ï¿½}ï¿½Éİ’ï¿½
 		ImGui::StyleColorsDark();
 
 		ImGuiStyle& style = ImGui::GetStyle();
@@ -71,27 +71,27 @@ HRESULT EditorApp::ImGuiSetting()
 
 HRESULT EditorApp::Init()
 {
-	// ImGui‚Ì‰Šú‰»
+	// ImGuiï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
 	if (FAILED(ImGuiSetting())) {
-		DebugLog::LogError("ImGui‚Ìİ’è‚É¸”s‚µ‚Ü‚µ‚½B");
+		DebugLog::LogError("ImGuiï¿½Ìİ’ï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B");
 		return E_ABORT;
 	}
 
 	if (!ImGui_ImplWin32_Init(Window::g_hWnd)) {
-		DebugLog::LogError("ImGui_ImplWin32_Init‚É¸”s‚µ‚Ü‚µ‚½B");
+		DebugLog::LogError("ImGui_ImplWin32_Initï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B");
 		ImGui::DestroyContext();
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
 		return E_ABORT;
 	}
 	
 	if (!ImGui_ImplDX11_Init(EvaEngine::Internal::DirectX11App::g_Device, EvaEngine::Internal::DirectX11App::g_Context)) {
-		DebugLog::LogError("ImGui_ImplDX11_Init‚É¸”s‚µ‚Ü‚µ‚½B");
+		DebugLog::LogError("ImGui_ImplDX11_Initï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B");
 		ImGui::DestroyContext();
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
 		return E_ABORT;
 	}
 
-	// EditorWindow‚Ì’Ç‰Á
+	// EditorWindowï¿½Ì’Ç‰ï¿½
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::EditorBaseWindow>("");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::ConsoleWindow>("Window/General/Console");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::SceneWindow>("Window/General/Scene");
@@ -101,11 +101,11 @@ HRESULT EditorApp::Init()
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::ProjectWindow>("Window/General/Project");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::DemoWindow>("Help/DemoWindow");
 
-	// Editorê—p‚ÌManager‚ğì¬
+	// Editorï¿½ï¿½pï¿½ï¿½Managerï¿½ï¿½ï¿½ì¬
 	GameObjectManager::Instance().AddGameObjectDataBase("Editor");
 	ComponentManager::Instance().AddComponentDataBase("Editor");
 
-	// ƒV[ƒ“ƒrƒ…[‚Ìì¬
+	// ï¿½Vï¿½[ï¿½ï¿½ï¿½rï¿½ï¿½ï¿½[ï¿½Ìì¬
 	m_SceneView = GameObjectManager::Instance().Instantiate("Editor", "SceneView", "SceneView").lock()->AddComponent<SceneView>();
 	m_SceneView.lock()->GetTransform().lock()->position(0.0f, 0.0f, -5.0f);
 
@@ -119,14 +119,14 @@ void EvaEngine::Editor::Internal::EditorApp::Update()
 
 void EditorApp::DrawBegin()
 {
-	// DepthView‚ÆStencilView‚ÌƒNƒŠƒA
+	// DepthViewï¿½ï¿½StencilViewï¿½ÌƒNï¿½ï¿½ï¿½A
 	DirectX11App::g_Context->ClearDepthStencilView(
-		DirectX11App::g_EditorDepthStencilView,			// ƒNƒŠƒA‘ÎÛ‚ÌView
-		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// ƒNƒŠƒAƒtƒ‰ƒO
-		1.0f,											// [“xƒNƒŠƒA’l
-		0);												// ƒXƒeƒ“ƒVƒ‹ƒNƒŠƒA’l
+		DirectX11App::g_EditorDepthStencilView,			// ï¿½Nï¿½ï¿½ï¿½Aï¿½ÎÛ‚ï¿½View
+		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// ï¿½Nï¿½ï¿½ï¿½Aï¿½tï¿½ï¿½ï¿½O
+		1.0f,											// ï¿½[ï¿½xï¿½Nï¿½ï¿½ï¿½Aï¿½l
+		0);												// ï¿½Xï¿½eï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Aï¿½l
 
-	// ƒVƒF[ƒ_[‚ÌƒZƒbƒg
+	// ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ÌƒZï¿½bï¿½g
 	Shader shader{ DrawManager::GetDefaultShader() };
 	DrawManager::SetShader(&shader);
 
@@ -144,12 +144,12 @@ void EditorApp::DrawEnd()
 {
 	ImGui::Render();
 
-	// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg‚Ìİ’è
+	// ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½[ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½Ìİ’ï¿½
 	DirectX11App::g_Context->OMSetRenderTargets(1, &DirectX11App::g_EditorRenderTargetView, DirectX11App::g_EditorDepthStencilView);
 
-	// w’èF‚Å‰æ–ÊƒNƒŠƒA
+	// ï¿½wï¿½ï¿½Fï¿½Å‰ï¿½ÊƒNï¿½ï¿½ï¿½A
 	float clearColor[4] = { 1.0f, 1.0f, 0.8f, 1.0f };
-	// RenderTargetView‚ÌƒNƒŠƒA
+	// RenderTargetViewï¿½ÌƒNï¿½ï¿½ï¿½A
 	DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_EditorRenderTargetView, clearColor);
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
@@ -161,7 +161,7 @@ void EditorApp::DrawEnd()
 
 void EditorApp::End()
 {
-	// ImGui‚Ì‰ğ•ú
+	// ImGuiï¿½Ì‰ï¿½ï¿½
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();

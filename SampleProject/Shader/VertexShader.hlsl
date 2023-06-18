@@ -4,26 +4,26 @@ PS_INPUT vsMain(VS_INPUT input) {
     
     PS_INPUT output;
 
-	// ƒ[ƒJƒ‹À•W * ƒ[ƒ‹ƒhÀ•W•ÏŠ·s—ñ
+	// ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ * ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™å¤‰æ›è¡Œåˆ—
     output.pos = mul(input.pos, World);
     output.worldPos = output.pos;
-	// ƒ[ƒ‹ƒhÀ•W * ƒrƒ…[À•W•ÏŠ·s—ñ
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ * ãƒ“ãƒ¥ãƒ¼åº§æ¨™å¤‰æ›è¡Œåˆ—
     output.pos = mul(output.pos, View);
-	// ƒrƒ…[À•W * ƒvƒƒWƒFƒNƒVƒ‡ƒ“À•W•ÏŠ·s—ñ
+	// ãƒ“ãƒ¥ãƒ¼åº§æ¨™ * ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³åº§æ¨™å¤‰æ›è¡Œåˆ—
     output.pos = mul(output.pos, Projection);
     
     float4 normal;
-	// ’¸“_‚Ì–@ü‚Éƒ[ƒ‹ƒhs—ñ‚ğŠ|‚¯‡‚í‚¹‚Ä
-	// ƒ[ƒ‹ƒhÀ•Wã‚Å‚Ì–@ü‚ÌŒü‚«‚É•ÏŠ·‚·‚é
-    // 3s3—ñ * 3—v‘f‚ÌŠ|‚¯Z‚Ì‚½‚ßA•½sˆÚ“®‚ÍŒvZ‚³‚ê‚È‚¢
+	// é ‚ç‚¹ã®æ³•ç·šã«ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã‚’æ›ã‘åˆã‚ã›ã¦
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ä¸Šã§ã®æ³•ç·šã®å‘ãã«å¤‰æ›ã™ã‚‹
+    // 3è¡Œ3åˆ— * 3è¦ç´ ã®æ›ã‘ç®—ã®ãŸã‚ã€å¹³è¡Œç§»å‹•ã¯è¨ˆç®—ã•ã‚Œãªã„
     output.normal = mul(input.normal, World);
     
-    // ’¸“_F‚ğw’è
+    // é ‚ç‚¹è‰²ã‚’æŒ‡å®š
     output.col = input.col;
-	// Texturew’è
+	// TextureæŒ‡å®š
     output.uv = input.uv;
 
-    // ƒJƒƒ‰‹óŠÔ‚Ì–@ü‚ğ‹‚ß‚é
+    // ã‚«ãƒ¡ãƒ©ç©ºé–“ã®æ³•ç·šã‚’æ±‚ã‚ã‚‹
     output.normalInView = mul(output.normal, View);
     
 	return output;

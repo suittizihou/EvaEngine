@@ -1,4 +1,4 @@
-#include "Texture2D.h"
+﻿#include "Texture2D.h"
 #include "../../../App/DirectX11App/DirectX11App.h"
 
 using namespace EvaEngine;

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <functional>
 #include <list>
@@ -17,12 +17,12 @@ namespace EvaEngine {
 		GameJobs() {};
 		virtual ~GameJobs() = default;
 
-		// ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ì’Ç‰Á
+		// ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Ì’Ç‰ï¿½
 		std::weak_ptr<GameObject> Instantiate(const std::string& tag = "None", const std::string& name = "GameObject");
 
-		// Š‘®‚·‚éƒV[ƒ“–¼‚ğİ’è
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ’ï¿½
 		void SetSceneName(const std::string& sceneType);
-		// Š‘®‚·‚éƒV[ƒ“–¼‚ğ•Ô‚·
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½
 		std::string GetSceneName();
 
 	private:

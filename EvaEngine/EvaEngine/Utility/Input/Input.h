@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "KeyCode.h"
 
@@ -9,13 +9,13 @@ namespace EvaEngine {
 		~Input() = default;
 	public:
 
-		// ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
+		// ï¿½Lï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©
 		static bool GetKey(const KeyCode& keyCode);
-		// ƒL[‚ğ‰Ÿ‚µ‚½uŠÔ
+		// ï¿½Lï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½
 		static bool GetKeyDown(const KeyCode& keyCode);
-		// ƒL[‚ğ—£‚µ‚½uŠÔ
+		// ï¿½Lï¿½[ï¿½ğ—£‚ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½
 		static bool GetKeyUp(const KeyCode& keyCode);
-		// ƒL[‚ª‰Ÿ‚³‚ê‚½uŠÔ‚©—£‚³‚ê‚½uŠÔ‚©
+		// ï¿½Lï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½uï¿½Ô‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½uï¿½Ô‚ï¿½
 		static bool GetKeyDownOrUpCheck(const KeyCode& keyCode, const KeyState& keyState);
 	};
 }

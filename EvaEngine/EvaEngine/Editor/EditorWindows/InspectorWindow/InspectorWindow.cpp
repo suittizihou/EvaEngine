@@ -1,4 +1,4 @@
-#if _DEBUG
+ï»¿#if _DEBUG
 #include "InspectorWindow.h"
 #include "../../../GameSystemBase/Manager/GameObjectManager/GameObjectManager.h"
 #include "../../../GameSystemBase/Manager/ComponentManager/ComponentManager.h"
@@ -20,7 +20,7 @@ void EvaEngine::Editor::Internal::InspectorWindow::OnGUI()
 				ImGui::TreePop();
 			}
 			else {
-				// •Â‚¶‚Ä‚¢‚éŽžŒÄ‚Ô
+				// ï¿½Â‚ï¿½ï¿½Ä‚ï¿½ï¿½éŽžï¿½Ä‚ï¿½
 				component.lock()->OnClosedGUI();
 			}
 			m_ItemNum++;

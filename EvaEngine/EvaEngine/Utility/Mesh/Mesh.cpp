@@ -1,4 +1,4 @@
-#include "Mesh.h"
+ï»¿#include "Mesh.h"
 #include "../BufferCreate/BufferCreate.h"
 #include <cmath>
 
@@ -22,10 +22,10 @@ void Mesh::SetVertexData(std::vector<VertexData> vertexDatas, bool isCreateIndic
 	
 	m_Vertexs = vertexDatas;
 
-	// ’¸“_ƒoƒbƒtƒ@‚ğì¬‚µ‚ÄƒZƒbƒg
+	// ï¿½ï¿½ï¿½_ï¿½oï¿½bï¿½tï¿½@ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½ÄƒZï¿½bï¿½g
 	m_VertexBuffer = EvaEngine::Internal::BufferCreate::CreateVertexBuffer(m_Vertexs, sizeof(VertexData));
 	
-	// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìì¬‚ğ‚·‚é‚È‚ç‚·‚é
+	// ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½oï¿½bï¿½tï¿½@ï¿½Ìì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ç‚·ï¿½ï¿½
 	if (isCreateIndices) {
 		m_Indices = CreateIndices(m_Vertexs);
 		m_IndexBuffer = EvaEngine::Internal::BufferCreate::CreateIndexBuffer(m_Indices, sizeof(UINT));
@@ -61,7 +61,7 @@ std::vector<UINT> Mesh::CreateIndices(const std::vector<VertexData>& vertexDatas
 {
 	std::vector<UINT> indices;
 	int polyCount = static_cast<int>(std::ceil(static_cast<float>(vertexDatas.size()) / 3.0f));
-	// ƒ|ƒŠƒSƒ“‚Ì”‚¾‚¯˜A”Ô‚Å•Û‘¶
+	// ï¿½|ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½Ô‚Å•Û‘ï¿½
 	for (int i = 0; i < polyCount; i++) {
 		indices.push_back(i * 3 + 2);
 		indices.push_back(i * 3 + 1);

@@ -1,4 +1,4 @@
-#include "Window.h"
+ï»¿#include "Window.h"
 
 using namespace EvaEngine::Internal;
 
@@ -17,11 +17,11 @@ D3D11_VIEWPORT Window::GetViewport()
 {
 	return D3D11_VIEWPORT
 	{
-		static_cast<FLOAT>(g_WindowLeft),					// ƒEƒBƒ“ƒhƒE‚Ì¶’[‚ÌÀ•W
-		static_cast<FLOAT>(g_WindowTop),					// ƒEƒBƒ“ƒhƒE‚Ìã’[‚ÌÀ•W
-		static_cast<FLOAT>(g_WindowRight - g_WindowLeft),	// ƒEƒBƒ“ƒhƒE‚Ì‰¡•
-		static_cast<FLOAT>(g_WindowBottom - g_WindowTop),	// ƒEƒBƒ“ƒhƒE‚Ìc•
-		0.0f,												// Å¬[“x
-		1.0f												// Å‘å[“x
+		static_cast<FLOAT>(g_WindowLeft),					// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Ìï¿½ï¿½[ï¿½Ìï¿½ï¿½W
+		static_cast<FLOAT>(g_WindowTop),					// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Ìï¿½[ï¿½Ìï¿½ï¿½W
+		static_cast<FLOAT>(g_WindowRight - g_WindowLeft),	// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Ì‰ï¿½ï¿½ï¿½
+		static_cast<FLOAT>(g_WindowBottom - g_WindowTop),	// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Ìcï¿½ï¿½
+		0.0f,												// ï¿½Åï¿½ï¿½[ï¿½x
+		1.0f												// ï¿½Å‘ï¿½[ï¿½x
 	};
 }

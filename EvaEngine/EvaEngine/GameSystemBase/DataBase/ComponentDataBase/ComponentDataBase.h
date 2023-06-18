@@ -20,7 +20,7 @@ namespace EvaEngine {
 			ComponentDataBase() = default;
 			~ComponentDataBase() = default;
 
-			// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì“o˜^
+			// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ç™»éŒ²
 			template<class T, class... Args>
 			std::weak_ptr<T> AddComponent(const std::string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject, Args&& ... args)
 			{
@@ -30,7 +30,7 @@ namespace EvaEngine {
 				componentDesc.gameObject = gameObject;
 				componentDesc.hashCode = typeid(T).hash_code();
 
-				if (GUIDUtility::Create(&componentDesc.guid, "ComponentDataBase‚É‚Ä " + componentDesc.componentName + " ‚ÌGUID¶¬‚É¸”s‚µ‚Ü‚µ‚½B") == false)
+				if (GUIDUtility::Create(&componentDesc.guid, "ComponentDataBaseã«ã¦ " + componentDesc.componentName + " ã®GUIDç”Ÿæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚") == false)
 				{
 					return std::weak_ptr<T>();
 				}
@@ -38,39 +38,39 @@ namespace EvaEngine {
 				std::shared_ptr<T> component_temp = std::make_shared<T>(args...);
 				component_temp->SetComponentDesc(componentDesc);
 
-				// •¡”ƒAƒ^ƒbƒ`‚Å‚«‚È‚¢ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìê‡
+				// è¤‡æ•°ã‚¢ã‚¿ãƒƒãƒã§ããªã„ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å ´åˆ
 				if (!component_temp->GetCanMultiAttach()) {
-					// “¯‚¶ƒRƒ“ƒ|[ƒlƒ“ƒg‚ª–³‚¢‚©ƒ`ƒFƒbƒN
+					// åŒã˜ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒç„¡ã„ã‹ãƒã‚§ãƒƒã‚¯
 					for (const auto& component : gameObject.lock()->GetAllComponents()) {
 						if (component.lock()->GetHashCode() != component_temp->GetHashCode()) continue;
 
-						DebugLog::LogError(u8"Can't multi attach." + (std::string)typeid(T).name() + " : ‚±‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚Í•¡”ƒAƒ^ƒbƒ`‚Å‚«‚Ü‚¹‚ñ");
+						DebugLog::LogError(u8"Can't multi attach." + (std::string)typeid(T).name() + " : ã“ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã¯è¤‡æ•°ã‚¢ã‚¿ãƒƒãƒã§ãã¾ã›ã‚“");
 						return std::weak_ptr<T>();
 					}
 				}
 
-				// ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ’Ç‰Á(ŠÖ”‚È‚Ç‚à“o˜^)
+				// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’è¿½åŠ (é–¢æ•°ãªã©ã‚‚ç™»éŒ²)
 				AddComponent(component_temp, m_Components.size());
 
-				// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì‰ŠúŠÖ”‚ğŒÄ‚Ô
+				// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®åˆæœŸé–¢æ•°ã‚’å‘¼ã¶
 				component_temp->Awake();
 				component_temp->Start();
 
 
-				// QÆ‚ğ•Ô‚·
+				// å‚ç…§ã‚’è¿”ã™
 				return component_temp;
 			}
 
-			// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìæ“¾
+			// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å–å¾—
 			template<class T>
 			std::weak_ptr<T> GetComponent(const std::weak_ptr<GameObjectBase>& gameObject)
 			{
 				size_t hashCode = typeid(T).hash_code();
 
 				for (const auto& component : gameObject.lock()->GetAllComponents()) {
-					// w’è‚µ‚½ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÆƒnƒbƒVƒ…’l‚ªˆá‚¤ê‡‚ÍƒRƒ“ƒeƒBƒjƒ…[
+					// æŒ‡å®šã—ãŸã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã¨ãƒãƒƒã‚·ãƒ¥å€¤ãŒé•ã†å ´åˆã¯ã‚³ãƒ³ãƒ†ã‚£ãƒ‹ãƒ¥ãƒ¼
 					if (hashCode != component.lock()->GetHashCode()) continue;
-					// dynamic_cast‚ğg—p‚µ‚Ä‚¢‚È‚¢‚Ì‚ÍŒ^•ÏŠ·ƒ`ƒFƒbƒN‚É‚æ‚é‘¬“x’á‰º‚ğ–h‚®‚½‚ß
+					// dynamic_castã‚’ä½¿ç”¨ã—ã¦ã„ãªã„ã®ã¯å‹å¤‰æ›ãƒã‚§ãƒƒã‚¯ã«ã‚ˆã‚‹é€Ÿåº¦ä½ä¸‹ã‚’é˜²ããŸã‚
 					return std::static_pointer_cast<T>(component.lock());
 				}
 
@@ -79,24 +79,24 @@ namespace EvaEngine {
 					(std::string)typeid(T).name() +
 					" : " +
 					std::to_string(typeid(T).hash_code()) +
-					" : ƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½");
+					" : ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ");
 				return std::weak_ptr<T>();
 			}
 
-			// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìæ“¾
+			// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å–å¾—
 			template<class T>
 			std::weak_ptr<T> GetComponent(const GUID& gameObjectID)
 			{
 				size_t hashCode = typeid(T).hash_code();
 
-				// ƒRƒ“ƒ|[ƒlƒ“ƒgŒŸõ
+				// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆæ¤œç´¢
 				for (int i = 0; i < m_Components.size(); ++i) {
-					// ƒQ[ƒ€ƒIƒuƒWƒFƒNƒgID‚ªˆá‚¤ê‡‚ÍƒXƒLƒbƒv
+					// ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆIDãŒé•ã†å ´åˆã¯ã‚¹ã‚­ãƒƒãƒ—
 					if (!IsGameObjectIDEquals(m_Components[i]->GetGameObject(), gameObjectID)) continue;
 
-					// w’è‚µ‚½ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÆƒnƒbƒVƒ…’l‚ªˆá‚¤ê‡‚ÍƒRƒ“ƒeƒBƒjƒ…[
+					// æŒ‡å®šã—ãŸã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã¨ãƒãƒƒã‚·ãƒ¥å€¤ãŒé•ã†å ´åˆã¯ã‚³ãƒ³ãƒ†ã‚£ãƒ‹ãƒ¥ãƒ¼
 					if (hashCode != m_Components[i]->GetHashCode()) continue;
-					// dynamic_cast‚ğg—p‚µ‚Ä‚¢‚È‚¢‚Ì‚ÍŒ^•ÏŠ·ƒ`ƒFƒbƒN‚É‚æ‚é‘¬“x’á‰º‚ğ–h‚®‚½‚ß
+					// dynamic_castã‚’ä½¿ç”¨ã—ã¦ã„ãªã„ã®ã¯å‹å¤‰æ›ãƒã‚§ãƒƒã‚¯ã«ã‚ˆã‚‹é€Ÿåº¦ä½ä¸‹ã‚’é˜²ããŸã‚
 					return std::static_pointer_cast<T>(m_Components[i]);
 				}
 
@@ -105,11 +105,11 @@ namespace EvaEngine {
 					(std::string)typeid(T).name() +
 					" : " +
 					std::to_string(typeid(T).hash_code()) +
-					" : ƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½");
+					" : ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ");
 				return std::weak_ptr<T>();
 			}
 
-			// ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğíœ
+			// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å‰Šé™¤
 			template<class T>
 			void RemoveComponent(const std::weak_ptr<GameObjectBase>& gameObject)
 			{
@@ -118,18 +118,18 @@ namespace EvaEngine {
 				for (const auto& component : gameObject.lock()->GetAllComponents()) {
 					if (hashCode != component.lock()->GetHashCode()) continue;
 
-					// Á‚¹‚È‚¢ƒRƒ“ƒ|[ƒlƒ“ƒg‚È‚ç‘ŠúƒŠƒ^[ƒ“
+					// æ¶ˆã›ãªã„ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãªã‚‰æ—©æœŸãƒªã‚¿ãƒ¼ãƒ³
 					if (!component.lock()->GetCanRemove()) {
 						DebugLog::LogError(
 							u8"Can't remove component : " +
 							(std::string)typeid(T).name() +
 							" : " +
 							std::to_string(typeid(T).hash_code()) +
-							" : ‚±‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚ÍÁ‚¹‚Ü‚¹‚ñ");
+							" : ã“ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã¯æ¶ˆã›ã¾ã›ã‚“");
 						return;
 					}
 
-					// ÀÛ‚ÉÁ‚·
+					// å®Ÿéš›ã«æ¶ˆã™
 					RemoveComponent(component);
 					return;
 				}
@@ -139,10 +139,10 @@ namespace EvaEngine {
 					(std::string)typeid(T).name() +
 					" : " +
 					std::to_string(typeid(T).hash_code()) +
-					" : ƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½");
+					" : ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ");
 			}
 
-			//// ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğíœ
+			//// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å‰Šé™¤
 			//template<class T>
 			//void RemoveComponent(const GUID& gameObjectID)
 			//{
@@ -151,19 +151,19 @@ namespace EvaEngine {
 			//		if (!IsGameObjectIDEquals(m_Components[i]->GetGameObject(), gameObjectID)) continue;
 			//		if (hashCode != m_Components[i]->GetHashCode()) continue;
 
-			//		// Á‚¹‚È‚¢ƒRƒ“ƒ|[ƒlƒ“ƒg‚È‚ç‘ŠúƒŠƒ^[ƒ“
+			//		// æ¶ˆã›ãªã„ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãªã‚‰æ—©æœŸãƒªã‚¿ãƒ¼ãƒ³
 			//		if (!m_Components[i]->GetCanRemove()) {
 			//			DebugLog::LogError(
 			//				u8"Can't remove component : " +
 			//				(std::string)typeid(T).name() +
 			//				" : " +
 			//				std::to_string(typeid(T).hash_code()) +
-			//				" : ‚±‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚ÍÁ‚¹‚Ü‚¹‚ñ");
+			//				" : ã“ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã¯æ¶ˆã›ã¾ã›ã‚“");
 			//			return;
 			//		}
 
 
-			//		// Á‚·‘ÎÛ‚Ì—v‘f”Ô†‚ÆFunctionMask‚ğ“n‚µ‚ÄÁ‚·
+			//		// æ¶ˆã™å¯¾è±¡ã®è¦ç´ ç•ªå·ã¨FunctionMaskã‚’æ¸¡ã—ã¦æ¶ˆã™
 			//		RemoveComponent(i, m_Components[i]->GetFunctionMask());
 			//	}
 
@@ -172,60 +172,60 @@ namespace EvaEngine {
 			//		(std::string)typeid(T).name() +
 			//		" : " +
 			//		std::to_string(typeid(T).hash_code()) +
-			//		" : ƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½");
+			//		" : ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ");
 			//}
 
-			// •Û‚µ‚Ä‚¢‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ‘S•”íœ
+			// ä¿æŒã—ã¦ã„ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å…¨éƒ¨å‰Šé™¤
 			void RemoveAllComponent();
 
-			// FixedUpdateŠÖ”‚ğ‰ñ‚·
+			// FixedUpdateé–¢æ•°ã‚’å›ã™
 			void FixedUpdate();
-			// UpdateŠÖ”‚ğ‰ñ‚·
+			// Updateé–¢æ•°ã‚’å›ã™
 			void Update();
-			// UpdateŠÖ”‚ğ‰ñ‚·(Editorã‚Å‚à“®‚­)
+			// Updateé–¢æ•°ã‚’å›ã™(Editorä¸Šã§ã‚‚å‹•ã)
 			void ExecuteEditorUpdate();
-			// LateUpdateŠÖ”‚ğ‰ñ‚·
+			// LateUpdateé–¢æ•°ã‚’å›ã™
 			void LateUpdate();
-			// DrawŠÖ”‚ğ‰ñ‚·
+			// Drawé–¢æ•°ã‚’å›ã™
 			void Draw(ID3D11DeviceContext* command) const;
 #if _DEBUG
-			// ƒV[ƒ“ƒrƒ…[—p•`‰æŠÖ”
+			// ã‚·ãƒ¼ãƒ³ãƒ“ãƒ¥ãƒ¼ç”¨æç”»é–¢æ•°
 			void DrawSceneView(ID3D11DeviceContext* command) const;
-			// Component‚ÌOnGUI‚ğŒÄ‚Ño‚·—p
+			// Componentã®OnGUIã‚’å‘¼ã³å‡ºã™ç”¨
 			void OnGUI();
 #endif
 
 		private:
-			// ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ’Ç‰Á
+			// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’è¿½åŠ 
 			void AddComponent(const std::shared_ptr<Component>& component, const int indexNum);
 
-			// Á‚·ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğŒã‚ë‚É‚Á‚Ä‚Á‚½‚èÁ‚·”‚ğƒJƒEƒ“ƒg‚µ‚½‚è
+			// æ¶ˆã™ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å¾Œã‚ã«æŒã£ã¦ã£ãŸã‚Šæ¶ˆã™æ•°ã‚’ã‚«ã‚¦ãƒ³ãƒˆã—ãŸã‚Š
 			void RemoveComponent(const std::weak_ptr<Component>& component);
 			void RemoveComponent(const UINT& index, const UINT& mask);
-			// w’è‚Ì”š‚É‡‚Á‚½•”•ª‚Ì—v‘f”Ô†‚ğæ“¾‚·‚é
+			// æŒ‡å®šã®æ•°å­—ã«åˆã£ãŸéƒ¨åˆ†ã®è¦ç´ ç•ªå·ã‚’å–å¾—ã™ã‚‹
 			__int64 FindItr(const std::vector<int>& vec, int value);
 
-			// w’è‚³‚ê‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Æw’è‚³‚ê‚½ID‚ª“¯‚¶‚©Šm”F‚·‚é(‚±‚±‚ÉGameObject‚Ìƒwƒbƒ_[‚ğ‘‚­‚ÆzŠÂQÆ‚ª”­¶‚·‚é‚½‚ßcpp‚É“¦‚ª‚·)
+			// æŒ‡å®šã•ã‚ŒãŸã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨æŒ‡å®šã•ã‚ŒãŸIDãŒåŒã˜ã‹ç¢ºèªã™ã‚‹(ã“ã“ã«GameObjectã®ãƒ˜ãƒƒãƒ€ãƒ¼ã‚’æ›¸ãã¨å¾ªç’°å‚ç…§ãŒç™ºç”Ÿã™ã‚‹ãŸã‚cppã«é€ƒãŒã™)
 			bool IsGameObjectIDEquals(const std::weak_ptr<GameObject>& obj, const GUID& id);
 			bool IsGameObjectIDEquals(const std::weak_ptr<GameObject>& obj1, const std::weak_ptr<GameObjectBase>& obj2);
 
 		private:
-			// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìƒf[ƒ^
+			// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ãƒ‡ãƒ¼ã‚¿
 			std::vector<std::shared_ptr<Component>> m_Components;
 
-			// FixedUpdateŠÖ”‚ª‹L“ü‚³‚ê‚Ä‚¢‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŠi”[‚³‚ê‚Ä‚¢‚éˆóš‚Ì”Ô†‚ğŠi”[‚·‚é”z—ñ
+			// FixedUpdateé–¢æ•°ãŒè¨˜å…¥ã•ã‚Œã¦ã„ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹å°å­—ã®ç•ªå·ã‚’æ ¼ç´ã™ã‚‹é…åˆ—
 			std::vector<int> m_FixedUpdateFuncNumber;
 
-			// UpdateŠÖ”‚ª‹L“ü‚³‚ê‚Ä‚¢‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŠi”[‚³‚ê‚Ä‚¢‚éˆóš‚Ì”Ô†‚ğŠi”[‚·‚é”z—ñ
+			// Updateé–¢æ•°ãŒè¨˜å…¥ã•ã‚Œã¦ã„ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹å°å­—ã®ç•ªå·ã‚’æ ¼ç´ã™ã‚‹é…åˆ—
 			std::vector<int> m_UpdateFuncNumber;
 
-			// Editorã‚Å‚àXV‚³‚ê‚éƒtƒ‰ƒO‚ª—§‚Á‚Ä‚¢‚éUpdateŠÖ”‚ª‹Lq‚³‚ê‚½ƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŠi”[‚³‚ê‚Ä‚¢‚éˆóš‚Ì”Ô†‚ğŠi”[‚·‚é”z—ñ
+			// Editorä¸Šã§ã‚‚æ›´æ–°ã•ã‚Œã‚‹ãƒ•ãƒ©ã‚°ãŒç«‹ã£ã¦ã„ã‚‹Updateé–¢æ•°ãŒè¨˜è¿°ã•ã‚ŒãŸã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹å°å­—ã®ç•ªå·ã‚’æ ¼ç´ã™ã‚‹é…åˆ—
 			std::vector<int> m_ExecuteEditUpdateFuncNumber;
 
-			// LateUpdateŠÖ”‚ª‹L“ü‚³‚ê‚Ä‚¢‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŠi”[‚³‚ê‚Ä‚¢‚éˆóš‚Ì”Ô†‚ğŠi”[‚·‚é”z—ñ
+			// LateUpdateé–¢æ•°ãŒè¨˜å…¥ã•ã‚Œã¦ã„ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹å°å­—ã®ç•ªå·ã‚’æ ¼ç´ã™ã‚‹é…åˆ—
 			std::vector<int> m_LateUpdateFuncNumber;
 
-			// DrawŠÖ”‚ª‹L“ü‚³‚ê‚Ä‚¢‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚ªŠi”[‚³‚ê‚Ä‚¢‚éˆóš‚Ì”Ô†‚ğŠi”[‚·‚é”z—ñ
+			// Drawé–¢æ•°ãŒè¨˜å…¥ã•ã‚Œã¦ã„ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹å°å­—ã®ç•ªå·ã‚’æ ¼ç´ã™ã‚‹é…åˆ—
 			std::vector<int> m_DrawFuncNumber;
 		};
 	}

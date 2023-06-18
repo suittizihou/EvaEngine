@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <iosfwd>
 #include <DirectXMath.h>
@@ -8,7 +8,7 @@ namespace EvaEngine {
 	struct Vector3;
 	struct Quaternion;
 
-	// s—ñ
+	// ï¿½sï¿½ï¿½
 	struct Matrix4x4 {
 
 		union {
@@ -24,9 +24,9 @@ namespace EvaEngine {
 			float m16[16];
 		};
 
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		// ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 		Matrix4x4() = default;
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		// ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 		Matrix4x4(
 			float m11, float m12, float m13, float m14,
 			float m21, float m22, float m23, float m24,
@@ -35,78 +35,78 @@ namespace EvaEngine {
 		);
 		Matrix4x4(float* matrix);
 
-		// ƒ[ƒs—ñ
+		// ï¿½[ï¿½ï¿½ï¿½sï¿½ï¿½
 		static Matrix4x4 zero();
-		// ’PˆÊs—ñ
+		// ï¿½Pï¿½Êsï¿½ï¿½
 		static Matrix4x4 identity();
-		// ‹ts—ñ
+		// ï¿½tï¿½sï¿½ï¿½
 		static Matrix4x4 inverse(const Matrix4x4& m);
-		// Šg‘åk¬
+		// ï¿½gï¿½ï¿½kï¿½ï¿½
 		static Matrix4x4 scale(const Vector3& vector);
-		// ƒNƒH[ƒ^ƒjƒIƒ“‚©‚ç‰ñ“]s—ñ‚ğ‹‚ß‚é
+		// ï¿½Nï¿½Hï¿½[ï¿½^ï¿½jï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½]ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
 		static Matrix4x4 rotate(const Quaternion& q);
-		// x²‰ñ“]
+		// xï¿½ï¿½ï¿½ï¿½]
 		static Matrix4x4 rotate_x(float degree);
-		// y²‰ñ“]
+		// yï¿½ï¿½ï¿½ï¿½]
 		static Matrix4x4 rotate_y(float degree);
-		// z²‰ñ“]
+		// zï¿½ï¿½ï¿½ï¿½]
 		static Matrix4x4 rotate_z(float degree);
-		// •½sˆÚ“®
+		// ï¿½ï¿½ï¿½sï¿½Ú“ï¿½
 		static Matrix4x4 translate(const Vector3& position);
 
-		// ‹–ì•ÏŠ·s—ñ
+		// ï¿½ï¿½ï¿½ï¿½ÏŠï¿½ï¿½sï¿½ï¿½
 		static Matrix4x4 look_at(const Vector3& eye, const Vector3& at, const Vector3& up);
-		// “§‹•ÏŠ·s—ñ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ÏŠï¿½ï¿½sï¿½ï¿½
 		static Matrix4x4 perspective(float fov, float aspect, float znear, float zfar);
 
-		// À•W•ÏŠ·
+		// ï¿½ï¿½ï¿½Wï¿½ÏŠï¿½
 		Vector3 multply_point(const Vector3& point) const;
-		// À•W•ÏŠ·(‚‘¬)
+		// ï¿½ï¿½ï¿½Wï¿½ÏŠï¿½(ï¿½ï¿½ï¿½ï¿½)
 		Vector3 multiply_point4x3(const Vector3& point) const;
-		// ƒxƒNƒgƒ‹•ÏŠ·(•½sˆÚ“®s—ñ‚È‚µ)
+		// ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ÏŠï¿½(ï¿½ï¿½ï¿½sï¿½Ú“ï¿½ï¿½sï¿½ï¿½È‚ï¿½)
 		Vector3 multiply_vector(const Vector3& point) const;
 
-		// ƒXƒP[ƒ‹’l‚ğæ“¾
+		// ï¿½Xï¿½Pï¿½[ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½æ“¾
 		Vector3 scale() const;
-		// ‘O•ûŒüƒxƒNƒgƒ‹
+		// ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½
 		Vector3 forward() const;
-		// ¶•û–@ƒxƒNƒgƒ‹
+		// ï¿½ï¿½ï¿½ï¿½ï¿½@ï¿½xï¿½Nï¿½gï¿½ï¿½
 		Vector3 left() const;
-		// ã•ûŒüƒxƒNƒgƒ‹
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½
 		Vector3 upward() const;
-		// À•W‚ğæ“¾
+		// ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½æ“¾
 		Vector3 position() const;
-		// ‰ñ“]‚Ìæ“¾(‰ñ“]s—ñ‚©‚çƒNƒH[ƒ^ƒjƒIƒ“‚É•ÏŠ·)
+		// ï¿½ï¿½]ï¿½Ìæ“¾(ï¿½ï¿½]ï¿½sï¿½ñ‚©‚ï¿½Nï¿½Hï¿½[ï¿½^ï¿½jï¿½Iï¿½ï¿½ï¿½É•ÏŠï¿½)
 		Quaternion rotation() const;
 
-		// ‚±‚Ìs—ñ‚Ì‹ts—ñ
+		// ï¿½ï¿½ï¿½Ìsï¿½ï¿½Ì‹tï¿½sï¿½ï¿½
 		Matrix4x4 inverse() const;
-		// ‚±‚Ìs—ñ‚Ì“]’us—ñ
+		// ï¿½ï¿½ï¿½Ìsï¿½ï¿½Ì“]ï¿½uï¿½sï¿½ï¿½
 		Matrix4x4 transpose() const;
-		// ˆÚ“®A‰ñ“]‚âƒXƒP[ƒŠƒ“ƒO‚·‚és—ñ‚ğ‹‚ß‚é
+		// ï¿½Ú“ï¿½ï¿½Aï¿½ï¿½]ï¿½ï¿½Xï¿½Pï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
 		static Matrix4x4 TRS(const Vector3& t, const Quaternion& r, const Vector3& s);
-		// ‚±‚Ìs—ñ‚ğˆÚ“®A‰ñ“]‚âƒXƒP[ƒŠƒ“ƒO‚·‚és—ñ‚Éİ’è‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½Ìsï¿½ï¿½ï¿½ï¿½Ú“ï¿½ï¿½Aï¿½ï¿½]ï¿½ï¿½Xï¿½Pï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½sï¿½ï¿½Éİ’è‚µï¿½Ü‚ï¿½
 		void set_TRS(const Vector3& t, const Quaternion& r, const Vector3& s);
 
-		// DirectXMath‚ÌXMATRIX‚ğMatrix4x4‚É•ÏŠ·‚·‚é
+		// DirectXMathï¿½ï¿½XMATRIXï¿½ï¿½Matrix4x4ï¿½É•ÏŠï¿½ï¿½ï¿½ï¿½ï¿½
 		static Matrix4x4 to_Matrix4x4(const DirectX::XMMATRIX& matrix);
 
 		operator DirectX::XMMATRIX() const;
 	};
 
-	// s—ñ‚Ì‰ÁZ
+	// ï¿½sï¿½ï¿½Ì‰ï¿½ï¿½Z
 	Matrix4x4 operator + (const Matrix4x4& lhs, const Matrix4x4& rhs);
-	// s—ñ‚ÌŒ¸Z
+	// ï¿½sï¿½ï¿½ÌŒï¿½ï¿½Z
 	Matrix4x4 operator - (const Matrix4x4& lhs, const Matrix4x4& rhs);
-	// s—ñ‚ÌƒXƒJƒ‰[”{
+	// ï¿½sï¿½ï¿½ÌƒXï¿½Jï¿½ï¿½ï¿½[ï¿½{
 	Matrix4x4 operator * (const Matrix4x4& lhs, float rhs);
-	// s—ñ‚ÌƒXƒJƒ‰[”{ 
+	// ï¿½sï¿½ï¿½ÌƒXï¿½Jï¿½ï¿½ï¿½[ï¿½{ 
 	Matrix4x4 operator * (float lhs, const Matrix4x4& rhs);
-	// s—ñ‚ÌæZ
+	// ï¿½sï¿½ï¿½Ìï¿½Z
 	Matrix4x4 operator * (const Matrix4x4& lhs, const Matrix4x4& rhs);
-	// s—ñ‚ÆƒxƒNƒgƒ‹‚ÌÏ
+	// ï¿½sï¿½ï¿½Æƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ìï¿½
 	Vector3 operator * (const Vector3& lhs, const Matrix4x4& rhs);
 
-	// s—ñ‚Ìo—Í
+	// ï¿½sï¿½ï¿½Ìoï¿½ï¿½
 	std::ostream& operator << (std::ostream& lhs, const Matrix4x4& rhs);
 }

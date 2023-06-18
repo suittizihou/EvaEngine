@@ -1,4 +1,4 @@
-#ifndef HAS_METHOD_CHECK_H_
+﻿#ifndef HAS_METHOD_CHECK_H_
 #define HAS_METHOD_CHECK_H_
 
 #include <type_traits>

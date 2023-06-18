@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <string>
 #include <DirectXMath.h>
@@ -11,7 +11,7 @@ namespace EvaEngine {
 	struct Vector4;
 	struct Color;
 
-	// 2DƒxƒNƒgƒ‹
+	// 2Dï¿½xï¿½Nï¿½gï¿½ï¿½
 	struct Vector2 {
 
 		union {
@@ -20,97 +20,97 @@ namespace EvaEngine {
 			float v[2];
 		};
 
-		// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		// ï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 		Vector2() = default;
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		// ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 		Vector2(float x, float y);
 
-		// Vector2(0, 0) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector2(0, 0) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector2 zero();
-		// Vector2(1, 1) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector2(1, 1) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector2 one();
-		// Vector2(0, 1) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector2(0, 1) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector2 up();
-		// Vector2(0, -1) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector2(0, -1) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector2 down();
-		// Vector2(-1, 0) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector2(-1, 0) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector2 left();
-		// Vector2(1, 0) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector2(1, 0) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector2 right();
 
-		// ƒxƒNƒgƒ‹‚Ì’·‚³i“Ç‚İæ‚èê—pj
+		// ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ì’ï¿½ï¿½ï¿½ï¿½iï¿½Ç‚İï¿½ï¿½ï¿½pï¿½j
 		float magnitude() const;
-		// magnitude ‚ğ 1 ‚Æ‚µ‚½ƒxƒNƒgƒ‹i“Ç‚İæ‚èê—pj
+		// magnitude ï¿½ï¿½ 1 ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½iï¿½Ç‚İï¿½ï¿½ï¿½pï¿½j
 		Vector2 normalized() const;
-		//@ƒxƒNƒgƒ‹‚Ì 2 æ‚Ì’·‚³‚ğ•Ô‚µ‚Ü‚·i“Ç‚İæ‚èê—pj
+		//ï¿½@ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ 2 ï¿½ï¿½Ì’ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½iï¿½Ç‚İï¿½ï¿½ï¿½pï¿½j
 		float sqr_magnitude() const;
 
-		// [0] ‚â[1] ‚ğg—p‚µ‚Ä x ‚â y ¬•ª‚ÉƒAƒNƒZƒX‚µ‚Ü‚·
+		// [0] ï¿½ï¿½[1] ï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½ x ï¿½ï¿½ y ï¿½ï¿½ï¿½ï¿½ï¿½ÉƒAï¿½Nï¿½Zï¿½Xï¿½ï¿½ï¿½Ü‚ï¿½
 		float operator[](int index) const;
 		float& operator[](int index);
 
-		// ‚Q‚Â‚ÌƒxƒNƒgƒ‹‚ª“™‚µ‚¢‚©H
+		// ï¿½Qï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½H
 		bool equals(const Vector2& other);
-		// magnitude ‚ğ 1 ‚Æ‚µ‚½ƒxƒNƒgƒ‹‚ğì¬‚µ‚Ü‚·
+		// magnitude ï¿½ï¿½ 1 ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½
 		void normalize();
-		// Šù‘¶‚Ì Vector2 ‚É x ‚Æ y ‚Ì¬•ª‚ğİ’è‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Vector2 ï¿½ï¿½ x ï¿½ï¿½ y ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½İ’è‚µï¿½Ü‚ï¿½
 		void set(float x, float y);
-		// ƒxƒNƒgƒ‹‚Ì’l‚ğŒ©‚â‚·‚­ƒtƒH[ƒ}ƒbƒg‚³‚ê‚½•¶š—ñ
+		// ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ì’lï¿½ï¿½ï¿½ï¿½ï¿½â‚·ï¿½ï¿½ï¿½tï¿½Hï¿½[ï¿½}ï¿½bï¿½gï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		std::string to_string() const;
 
-		// 2‚Â‚ÌƒxƒNƒgƒ‹‚Ì‚È‚·Šp‚ğ•Ô‚µ‚Ü‚·
+		// 2ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ì‚È‚ï¿½ï¿½pï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static float angle(const Vector2& from, const Vector2& to);
-		// ‘å‚«‚³‚ğ maxLength ‚Ü‚Å‚É§ŒÀ‚µ‚½ vector ‚ÌƒRƒs[‚ğ•Ô‚µ‚Ü‚·
+		// ï¿½å‚«ï¿½ï¿½ï¿½ï¿½ maxLength ï¿½Ü‚Å‚Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ vector ï¿½ÌƒRï¿½sï¿½[ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static Vector2 clamp_magnitude(const Vector2& vector, float max_length);
-		// a ‚Æ b ‚ÌŠÔ‚Ì‹——£‚ğ•Ô‚µ‚Ü‚·
+		// a ï¿½ï¿½ b ï¿½ÌŠÔ‚Ì‹ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static float distance(const Vector2& a, const Vector2& b);
-		// 2 ‚Â‚ÌƒxƒNƒgƒ‹‚Ì“àÏ
+		// 2 ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ì“ï¿½ï¿½ï¿½
 		static float dot(const Vector2& lhs, const Vector2& rhs);
 
-		// 2‚ÂƒxƒNƒgƒ‹a‚Æb‚ÌüŒ`•âŠÔ‚µ‚Ü‚·B
+		// 2ï¿½Âƒxï¿½Nï¿½gï¿½ï¿½aï¿½ï¿½bï¿½Ìï¿½ï¿½`ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
 		static Vector2 lerp(const Vector2& a, const Vector2& b, float t);
-		// 2‚ÂƒxƒNƒgƒ‹a ‚Æ b ‚ÌüŒ`•âŠÔ‚µ‚Ü‚·B
+		// 2ï¿½Âƒxï¿½Nï¿½gï¿½ï¿½a ï¿½ï¿½ b ï¿½Ìï¿½ï¿½`ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
 		static Vector2 lerp_unclamped(const Vector2& a, const Vector2& b, float t);
-		// 2‚Â‚ÌƒxƒNƒgƒ‹‚ÅŠe¬•ª‚Ìˆê”Ô‘å‚«‚È’l‚ğg—p‚µ‚ÄƒxƒNƒgƒ‹‚ğì¬‚µ‚Ü‚·
+		// 2ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ÅŠeï¿½ï¿½ï¿½ï¿½ï¿½Ìˆï¿½Ô‘å‚«ï¿½È’lï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½Äƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector2 max(const Vector2& lhs, const Vector2& rhs);
-		// 2 ‚Â‚ÌƒxƒNƒgƒ‹‚ÅŠe¬•ª‚Ìˆê”Ô¬‚³‚È’l‚ğg—p‚µ‚ÄƒxƒNƒgƒ‹‚ğì¬‚µ‚Ü‚·
+		// 2 ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ÅŠeï¿½ï¿½ï¿½ï¿½ï¿½Ìˆï¿½Ôï¿½ï¿½ï¿½ï¿½È’lï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½Äƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector2 min(const Vector2& lhs, const Vector2& rhs);
-		// Œ»İ‚ÌˆÊ’u current ‚©‚ç target ‚ÉŒü‚¯‚ÄˆÚ“®‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½İ‚ÌˆÊ’u current ï¿½ï¿½ï¿½ï¿½ target ï¿½ÉŒï¿½ï¿½ï¿½ï¿½ÄˆÚ“ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector2 move_towards(const Vector2& current, const Vector2& target,
 			float max_distance_delta);
-		// ‚±‚Ì2DƒxƒNƒgƒ‹‚É‚’¼‚È2DƒxƒNƒgƒ‹‚ğ•Ô‚µ‚Ü‚·B
-		// ³‚ÌY²‚ªã‚ª‚é2DÀ•WŒn‚Å‚ÍAŒ‹‰Ê‚Íí‚É”½Œv‰ñ‚è‚É90“x‰ñ“]‚µ‚Ü‚·B
+		// ï¿½ï¿½ï¿½ï¿½2Dï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½2Dï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
+		// ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½ï¿½ï¿½ï¿½ã‚ªï¿½ï¿½2Dï¿½ï¿½ï¿½Wï¿½nï¿½Å‚ÍAï¿½ï¿½ï¿½Ê‚Íï¿½É”ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½90ï¿½xï¿½ï¿½]ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
 		static Vector2 perpendicular(Vector2 inDirection);
-		// –@ü‚ğŠî€‚É‚µ‚ÄƒxƒNƒgƒ‹‚Ì”½Ë‚µ‚½ƒxƒNƒgƒ‹‚ğæ“¾‚µ‚Ü‚·
+		// ï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½î€ï¿½É‚ï¿½ï¿½Äƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ì”ï¿½ï¿½Ë‚ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector2 reflect(const Vector2& inDirection, const Vector2& inNormal);
-		// 2‚Â‚ÌƒxƒNƒgƒ‹‚ÌŠe¬•ª‚ğæZ‚µ‚Ü‚·
+		// 2ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ÌŠeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector2 scale(const Vector2& a, const Vector2& b);
 		// Returns the signed angle in degrees between from and to.
 		static float signed_angle(const Vector2& from, const Vector2& to);
-		// –Ú“I’n‚ÉŒü‚©‚Á‚ÄŠÔ‚ÌŒo‰ß‚Æ‚Æ‚à‚É™X‚ÉƒxƒNƒgƒ‹‚ğ•Ï‰»‚³‚¹‚Ü‚·
+		// ï¿½Ú“Iï¿½nï¿½ÉŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äï¿½ï¿½Ô‚ÌŒoï¿½ß‚Æ‚Æ‚ï¿½ï¿½Éï¿½ï¿½Xï¿½Éƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Ï‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 		Vector2 smooth_damp(const Vector2& current, const Vector2& target,
 			Vector2& currentVelocity, float smooth_time, float max_speed, float delta_time);
 
-		// Vector3‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+		// Vector3ï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
 		operator Vector3() const;
-		// Vector4‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+		// Vector4ï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
 		operator Vector4() const;
-		// Color‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+		// Colorï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
 		operator Color() const;
-		// XMVECTOR‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+		// XMVECTORï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
 		operator DirectX::XMVECTOR() const;
 	};
 
-	// ’P€‰‰ZqƒI[ƒo[ƒ[ƒh
+	// ï¿½Pï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½qï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½h
 	Vector2 operator - (const Vector2& v);
 
-	// ‘ã“ü‰‰ZqƒI[ƒo[ƒ[ƒh
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½qï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½h
 	Vector2& operator += (Vector2& lhs, const Vector2& rhs);
 	Vector2& operator -= (Vector2& lhs, const Vector2& rhs);
 	Vector2& operator *= (Vector2& lhs, float rhs);
 	Vector2& operator /= (Vector2& lhs, float rhs);
 
-	// ‚Q€‰‰ZqƒI[ƒo[ƒ[ƒh
+	// ï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½qï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½h
 	Vector2 operator + (const Vector2& lhs, const Vector2& rhs);
 	Vector2 operator - (const Vector2& lhs, const Vector2& rhs);
 	Vector2 operator * (const Vector2& lhs, float rhs);

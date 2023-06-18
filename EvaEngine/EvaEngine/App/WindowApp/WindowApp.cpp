@@ -1,4 +1,4 @@
-#include "WindowApp.h"
+ï»¿#include "WindowApp.h"
 #include "../../Setting/Window/Window.h"
 #include "../../Utility/Input/InputBufferUpdate/InputBufferUpdate.h"
 #include "../../Utility/Input/Input.h"
@@ -39,9 +39,9 @@ HRESULT WindowApp::Init()
 {
     HRESULT hr{};
 
-    // COMƒ‰ƒCƒuƒ‰ƒŠ‚ğ‰Šú‰»‚·‚é‚à‚Ì(COM‚Æ‚ÍƒRƒ“ƒ|[ƒlƒ“ƒgEƒIƒuƒWƒFƒNƒgEƒ‚ƒfƒ‹‚Ì—ª)
-    // COMƒ‰ƒCƒuƒ‰ƒŠ‚ğg‚¤‚Ég‚¤ƒXƒŒƒbƒh‚Å­‚È‚­‚Æ‚à‚P‰ñ‚ÍÀs‚·‚é•K—v‚ª‚ ‚éB
-    // D3DŠÖ˜A‚ÌF‚ñ‚ÈƒNƒ‰ƒX‚ª‚±‚ÌCOM‚ğ—˜—p‚µ‚ÄÀ‘•‚³‚ê‚Ä‚¨‚èA‚±‚ê‚ğ‚·‚é•K—v‚ª‚ ‚é
+    // COMï¿½ï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(COMï¿½Æ‚ÍƒRï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½Eï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Eï¿½ï¿½ï¿½fï¿½ï¿½ï¿½Ì—ï¿½)
+    // COMï¿½ï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Égï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½bï¿½hï¿½Åï¿½ï¿½È‚ï¿½ï¿½Æ‚ï¿½ï¿½Pï¿½ï¿½Íï¿½ï¿½sï¿½ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
+    // D3Dï¿½Ö˜Aï¿½ÌFï¿½ï¿½ÈƒNï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½COMï¿½ğ—˜—pï¿½ï¿½ï¿½Äï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     hr = CoInitializeEx(NULL, COINIT_MULTITHREADED);
 
     if (FAILED(hr)) {
@@ -73,7 +73,7 @@ HRESULT WindowApp::Init()
 
     RECT rect = { 0,0, static_cast<LONG>(Window::g_WindowRight), static_cast<LONG>(Window::g_WindowBottom) };
 
-    // ƒEƒBƒ“ƒhƒE‚ğ¶¬
+    // ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½ğ¶ï¿½
     Window::g_hWnd = CreateWindow(
         Window::g_WindowName.c_str(),
         Window::g_WindowName.c_str(),
@@ -131,31 +131,31 @@ int WindowApp::Update()
             }
         }
         else {
-            // “ü—Íˆ—
+            // ï¿½ï¿½ï¿½Íï¿½ï¿½ï¿½
             InputBufferUpdate::Instance().KeyUpdate();
 
-            // DeltaTime‚ğXV
+            // DeltaTimeï¿½ï¿½ï¿½Xï¿½V
             Internal::TimeBase::UpdateDeltaTime();
 
-            // ƒGƒ“ƒWƒ“‚ÌXVˆ—
+            // ï¿½Gï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½ÌXï¿½Vï¿½ï¿½ï¿½ï¿½
             EvaEngineApp::Update();
 
 #if _DEBUG
-            // EditorŠÖ˜A‚ÌXV
+            // Editorï¿½Ö˜Aï¿½ÌXï¿½V
             EvaEngineApp::UpdateEditor();
-            // EditorŠÖ˜A‚Ì•`‰æ
+            // Editorï¿½Ö˜Aï¿½Ì•`ï¿½ï¿½
             EvaEngineApp::DrawEditor();
 #endif
 
-            // ƒGƒ“ƒWƒ“‚Ì•`‰æˆ—
+            // ï¿½Gï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½Ì•`ï¿½æˆï¿½ï¿½
             EvaEngineApp::Draw(DirectX11App::g_Context);
 
-            // ƒGƒ“ƒWƒ“‚ÌƒtƒŒ[ƒ€I—¹ˆ—
+            // ï¿½Gï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½Ìƒtï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             EvaEngineApp::FrameEnd();
         }
     }
 
-    // ƒGƒ“ƒWƒ“‚ÌI—¹ˆ—
+    // ï¿½Gï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½ÌIï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     EvaEngineApp::End();
 
     return static_cast<int>(msg.wParam);

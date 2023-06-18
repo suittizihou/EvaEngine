@@ -1,4 +1,4 @@
-#include "BufferCreate.h"
+ï»¿#include "BufferCreate.h"
 #include "../Mesh/Mesh.h"
 #include "../ModelUtility/ModelData/ConstantBufferData.h"
 
@@ -6,8 +6,8 @@ using namespace EvaEngine::Internal;
 
 ID3D11Buffer* BufferCreate::CreateVertexBuffer(const std::vector<VertexData>& vertices, size_t strides)
 {
-	// ’¸“_ƒoƒbƒtƒ@‚Ìì¬
-	// ’¸“_ƒoƒbƒtƒ@‚Æ‚ÍƒVƒXƒeƒ€ƒƒ‚ƒŠŠOA‚·‚È‚í‚¿GPU‘¤‚É‚ ‚éƒƒ‚ƒŠ‚É’¸“_ƒf[ƒ^‚ğ”z’u‚·‚é‚½‚ß‚Ì‚à‚Ì
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã¨ã¯ã‚·ã‚¹ãƒ†ãƒ ãƒ¡ãƒ¢ãƒªå¤–ã€ã™ãªã‚ã¡GPUå´ã«ã‚ã‚‹ãƒ¡ãƒ¢ãƒªã«é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿ã‚’é…ç½®ã™ã‚‹ãŸã‚ã®ã‚‚ã®
 	D3D11_BUFFER_DESC bufferDesc{};
 	ZeroMemory(&bufferDesc, sizeof(bufferDesc));
 	bufferDesc.ByteWidth = static_cast<UINT>(strides * vertices.size());
@@ -32,7 +32,7 @@ bool BufferCreate::SetVertexBuffer(std::map<std::string, std::vector<Mesh>>& mes
     size_t strides = sizeof(VertexData);
 	for (auto& meshs : meshMap) {
 		for (auto& mesh : meshs.second) {
-			// ’¸“_ƒoƒbƒtƒ@‚Ìì¬
+			// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
             mesh.SetVertexBuffer(CreateVertexBuffer(mesh.GetVertexData(), strides));
 		}
 	}
@@ -42,8 +42,8 @@ bool BufferCreate::SetVertexBuffer(std::map<std::string, std::vector<Mesh>>& mes
 
 ID3D11Buffer* BufferCreate::CreateIndexBuffer(const std::vector<UINT>& indices, size_t strides)
 {
-    // ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìì¬
-    // ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Æ‚ÍA’¸“_d•¡•ª‚Ì–³‘Ê‚ğÈ‚­‚½‚ß‚Ì‚à‚Ì
+    // ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
+    // ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã¨ã¯ã€é ‚ç‚¹é‡è¤‡åˆ†ã®ç„¡é§„ã‚’çœããŸã‚ã®ã‚‚ã®
     D3D11_BUFFER_DESC bufferDesc{};
     ZeroMemory(&bufferDesc, sizeof(bufferDesc));
     bufferDesc.ByteWidth = static_cast<UINT>(strides * indices.size());
@@ -68,7 +68,7 @@ bool BufferCreate::SetIndexBuffer(std::map<std::string, std::vector<Mesh>>& mesh
     UINT strides = sizeof(UINT);
     for (auto& meshs : meshMap) {
         for (auto& mesh : meshs.second) {
-            // ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@[‚Ìİ’è
+            // ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãƒ¼ã®è¨­å®š
             mesh.SetIndexBuffer(CreateIndexBuffer(mesh.GetIndices(), strides));
         }
     }

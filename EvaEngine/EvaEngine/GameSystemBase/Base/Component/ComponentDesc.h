@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <guiddef.h>
 #include "../GameObject/GameObjectBase.h"

@@ -1,4 +1,4 @@
-#include "TextureManager.h"
+ï»¿#include "TextureManager.h"
 #include "../../../System/DebugLog/DebugLog.h"
 #include "../../../Utility/Texture/Texture/Texture.h"
 #include "../../../Utility/Texture/TextureLoader/TextureLoader.h"
@@ -8,7 +8,7 @@
 void EvaEngine::TextureManager::LoadTexture(const std::string& fileName, GUID* guid)
 {
 	*guid = GUID_NULL;
-	if (GUIDUtility::Create(guid, "TextureManager‚É‚Ä " + fileName + " ‚ÌGUID¶¬‚É¸”s‚µ‚Ü‚µ‚½B")) {
+	if (GUIDUtility::Create(guid, "TextureManagerï¿½É‚ï¿½ " + fileName + " ï¿½ï¿½GUIDï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B")) {
 		return;
 	}
 	
@@ -19,7 +19,7 @@ void EvaEngine::TextureManager::LoadTexture(const std::string& fileName, GUID* g
 
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> tex{ nullptr };
 	if (FAILED(tempTex.As(&tex))) {
-		DebugLog::LogError("TextureManager‚É‚ÄID3D11Resources‚©‚çID3D11Texture2D‚ÌAsŠÖ”‚ğ—p‚¢‚½ƒCƒ“ƒ^[ƒtƒF[ƒXæ“¾‚É¸”s‚µ‚Ü‚µ‚½B");
+		DebugLog::LogError("TextureManagerï¿½É‚ï¿½ID3D11Resourcesï¿½ï¿½ï¿½ï¿½ID3D11Texture2Dï¿½ï¿½Asï¿½Öï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½[ï¿½Xï¿½æ“¾ï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B");
 		return;
 	}
 

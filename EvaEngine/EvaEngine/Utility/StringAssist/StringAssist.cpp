@@ -1,4 +1,4 @@
-#include "StringAssist.h"
+ï»¿#include "StringAssist.h"
 #include "../../System/DebugLog/DebugLog.h"
 
 std::vector<std::string> EvaEngine::StringAssist::Split(std::string str, const std::string& del) {
@@ -61,7 +61,7 @@ void EvaEngine::StringAssist::Split(char split_char, char* buffer, std::vector<s
     }
 }
 
-// ƒƒCƒh•¶š‚©‚çƒ}ƒ‹ƒ`ƒoƒCƒg•¶š‚Ö‚Ì•ÏŠ·
+// ï¿½ï¿½ï¿½Cï¿½hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½}ï¿½ï¿½ï¿½`ï¿½oï¿½Cï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Ö‚Ì•ÏŠï¿½
 void EvaEngine::StringAssist::ToString(const std::wstring& src, std::string& dest) {
     std::size_t converted{};
     std::vector<char> temp(src.size() * sizeof(wchar_t) + 1, '\0');
@@ -73,7 +73,7 @@ void EvaEngine::StringAssist::ToString(const std::wstring& src, std::string& des
     dest = std::string(temp.begin(), temp.end());
 }
 
-// ƒ}ƒ‹ƒ`ƒoƒCƒg•¶š‚©‚çƒƒCƒh•¶š‚Ö‚Ì•ÏŠ·
+// ï¿½}ï¿½ï¿½ï¿½`ï¿½oï¿½Cï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½çƒï¿½Cï¿½hï¿½ï¿½ï¿½ï¿½ï¿½Ö‚Ì•ÏŠï¿½
 void EvaEngine::StringAssist::ToWString(const std::string& src, std::wstring& dest) {
     std::size_t converted{};
     std::vector<wchar_t> temp(src.size() * sizeof(char) + 1, L'\0');
@@ -85,7 +85,7 @@ void EvaEngine::StringAssist::ToWString(const std::string& src, std::wstring& de
     dest = std::wstring(temp.begin(), temp.end());
 }
 
-// Shift-JIS‚©‚çUTF-8
+// Shift-JISï¿½ï¿½ï¿½ï¿½UTF-8
 void EvaEngine::StringAssist::ToUTF8(const std::string& src, std::string& dest) {
     std::wstring temp{};
     ToWString(src, temp);

@@ -1,4 +1,4 @@
-#include "PNGLoader.h"
+﻿#include "PNGLoader.h"
 #include <DirectXTex.h>
 #include "../../../StringAssist/StringAssist.h"
 

@@ -7,7 +7,7 @@ public:
 	DirectionLight() : MonoBehaviour(EvaEngine::FunctionMask::EXECUTE_EDIT_UPDATE) {}
 	void Update() override;
 #if _DEBUG
-	// Editor—p‚Ì•`‰æŠÖ”
+	// Editorç”¨ã®æç”»é–¢æ•°
 	void OnGUI() override;
 #endif
 

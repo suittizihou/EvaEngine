@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "../../../GameSystemBase/Base/Component/Component.h"
 #include "../../../Utility/Math/Vector3/Vector3.h"
@@ -8,135 +8,135 @@
 #include <list>
 
 namespace EvaEngine {
-	// ƒgƒ‰ƒ“ƒXƒtƒH[ƒ€ƒNƒ‰ƒX
+	// ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½tï¿½Hï¿½[ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½X
 	class Transform : public Component, public std::enable_shared_from_this<Transform> {
 	public:
-		// À•WŒn‚Ìw’è
+		// ï¿½ï¿½ï¿½Wï¿½nï¿½Ìwï¿½ï¿½
 		enum class Space {
-			Self,   // ƒ[ƒJƒ‹À•WŒn
-			World   // ƒ[ƒ‹ƒhÀ•WŒn
+			Self,   // ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½n
+			World   // ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Wï¿½n
 		};
 
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		// ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 		Transform() :
 			Component(FunctionMask::NONE, false, false) {};
 
 #if _DEBUG
-		// Editor—p‚Ì•`‰æŠÖ”
+		// Editorï¿½pï¿½Ì•`ï¿½ï¿½Öï¿½
 		void OnGUI() override;
 		void OnClosedGUI() override;
 #endif
-		// ƒfƒXƒgƒ‰ƒNƒ^
+		// ï¿½fï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 		~Transform();
-		// ƒ[ƒ‹ƒh‹óŠÔ‚Ì Transform ‚ÌÂ² ‘O‚ğæ“¾
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ Transform ï¿½ÌÂï¿½ ï¿½Oï¿½ï¿½ï¿½æ“¾
 		Vector3 forward() const;
-		// ƒ[ƒ‹ƒh‹óŠÔ‚Ì Transform ‚ÌÂ² ‘O‚ğİ’è
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ Transform ï¿½ÌÂï¿½ ï¿½Oï¿½ï¿½İ’ï¿½
 		void forward(const Vector3& value);
-		// ƒ[ƒ‹ƒh‹óŠÔ‚Ì Transform ‚ÌÂ² Œã‚ğæ“¾
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ Transform ï¿½ÌÂï¿½ ï¿½ï¿½ï¿½ï¿½æ“¾
 		Vector3 back() const;
-		// ƒ[ƒ‹ƒh‹óŠÔ‚Ì Transform ‚ÌÔ² ‰E‚ğæ“¾
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ Transform ï¿½ÌÔï¿½ ï¿½Eï¿½ï¿½ï¿½æ“¾
 		Vector3 right() const;
-		// ƒ[ƒ‹ƒh‹óŠÔ‚Ì Transform ‚ÌÔ² ‰E‚ğİ’è
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ Transform ï¿½ÌÔï¿½ ï¿½Eï¿½ï¿½İ’ï¿½
 		void right(const Vector3& value);
-		// ƒ[ƒ‹ƒh‹óŠÔ‚Ì Transform ‚ÌÔ² ¶‚ğæ“¾
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ Transform ï¿½ÌÔï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
 		Vector3 left() const;
-		// ƒ[ƒ‹ƒh‹óŠÔ‚Ì Transform ‚Ì—Î² ã‚ğæ“¾
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ Transform ï¿½Ì—Îï¿½ ï¿½ï¿½ï¿½ï¿½æ“¾
 		Vector3 up() const;
-		// ƒ[ƒ‹ƒh‹óŠÔ‚Ì Transform ‚Ì—Î² ã‚ğİ’è
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ Transform ï¿½Ì—Îï¿½ ï¿½ï¿½ï¿½İ’ï¿½
 		void up(const Vector3& value);
-		// ƒ[ƒ‹ƒh‹óŠÔ‚Ì Transform ‚Ì—Î² ‰º‚ğæ“¾
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ Transform ï¿½Ì—Îï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
 		Vector3 down() const;
-		// ƒIƒuƒWƒFƒNƒg‚ÌƒOƒ[ƒoƒ‹ƒXƒP[ƒ‹‚ğæ“¾
+		// ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ÌƒOï¿½ï¿½ï¿½[ï¿½oï¿½ï¿½ï¿½Xï¿½Pï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
 		Vector3 lossy_scale() const;
-		// ƒ[ƒ‹ƒh‹óŠÔ‚Ì Transform ‚ÌˆÊ’u‚ğæ“¾
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ Transform ï¿½ÌˆÊ’uï¿½ï¿½ï¿½æ“¾
 		Vector3 position() const;
-		// ƒ[ƒ‹ƒh‹óŠÔ‚Ì Transform ‚ÌˆÊ’u‚ğİ’è
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ Transform ï¿½ÌˆÊ’uï¿½ï¿½İ’ï¿½
 		void position(const Vector3& value);
 		void position(float x, float y, float z);
-		// ƒ[ƒ‹ƒh‹óŠÔ‚Å‚ÌˆÚ“®
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚Å‚ÌˆÚ“ï¿½
 		void move(const Vector3& velocity);
 		void move(float x, float y, float z);
-		// e‚Ì Transform ƒIƒuƒWƒFƒNƒg‚©‚çVelocity•ªˆÚ“®
+		// ï¿½eï¿½ï¿½ Transform ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Velocityï¿½ï¿½ï¿½Ú“ï¿½
 		void local_move(const Vector3& velocity);
-		// Quaternion ‚Æ‚µ‚Ä•Û‘¶‚³‚ê‚éƒ[ƒ‹ƒh‹óŠÔ‚Å‚Ì Transform ‚Ì‰ñ“]‚ğæ“¾
+		// Quaternion ï¿½Æ‚ï¿½ï¿½Ä•Û‘ï¿½ï¿½ï¿½ï¿½ï¿½éƒï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚Å‚ï¿½ Transform ï¿½Ì‰ï¿½]ï¿½ï¿½ï¿½æ“¾
 		Quaternion rotation() const;
-		// Quaternion ‚Æ‚µ‚Ä•Û‘¶‚³‚ê‚éƒ[ƒ‹ƒh‹óŠÔ‚Å‚Ì Transform ‚Ì‰ñ“]‚ğİ’è
+		// Quaternion ï¿½Æ‚ï¿½ï¿½Ä•Û‘ï¿½ï¿½ï¿½ï¿½ï¿½éƒï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚Å‚ï¿½ Transform ï¿½Ì‰ï¿½]ï¿½ï¿½İ’ï¿½
 		void rotation(const Quaternion& value);
-		// ƒIƒCƒ‰[Šp‚Æ‚µ‚Ä‚ÌŠp“x‚ğæ“¾
+		// ï¿½Iï¿½Cï¿½ï¿½ï¿½[ï¿½pï¿½Æ‚ï¿½ï¿½Ä‚ÌŠpï¿½xï¿½ï¿½ï¿½æ“¾
 		Vector3 euler_angles() const;
-		// ƒIƒCƒ‰[Šp‚Æ‚µ‚Ä‚ÌŠp“x‚ğİ’è
+		// ï¿½Iï¿½Cï¿½ï¿½ï¿½[ï¿½pï¿½Æ‚ï¿½ï¿½Ä‚ÌŠpï¿½xï¿½ï¿½İ’ï¿½
 		void euler_angles(const Vector3& value);
 		void euler_angles(float x, float y, float z);
 
-		// ‘ÎÛ‚Ì Transform ‚ğİ’è‚µA‚»‚Ì•ûŒü‚Ö‚ÆŒü‚©‚¹‚Ü‚·
+		// ï¿½ÎÛ‚ï¿½ Transform ï¿½ï¿½İ’è‚µï¿½Aï¿½ï¿½ï¿½Ì•ï¿½ï¿½ï¿½ï¿½Ö‚ÆŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 		void look_at(const Transform& target, const Vector3& world_up = Vector3{ 0.0f, 1.0f, 0.0f });
 		void look_at(const Vector3& target, const Vector3& world_up = Vector3{ 0.0f, 1.0f, 0.0f });
-		// Z ²‚Åeulers.z “x‰ñ“]AX²‚Å euler.x “x‰ñ“]AY²‚Åeulers.y “x‰ñ“]‚µ‚Ü‚·(‡”Ô‚Íà–¾‚µ‚½‡)
+		// Z ï¿½ï¿½ï¿½ï¿½eulers.z ï¿½xï¿½ï¿½]ï¿½AXï¿½ï¿½ï¿½ï¿½ euler.x ï¿½xï¿½ï¿½]ï¿½AYï¿½ï¿½ï¿½ï¿½eulers.y ï¿½xï¿½ï¿½]ï¿½ï¿½ï¿½Ü‚ï¿½(ï¿½ï¿½ï¿½Ô‚Íï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 		void rotate(const Vector3& eulers, Space relative_to = Space::Self);
 		void rotate(float x, float y, float z, Space relative_to = Space::Self);
-		// axis ²‚Ìü‚è‚É angle “xA‰ñ“]‚µ‚Ü‚·
+		// axis ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ angle ï¿½xï¿½Aï¿½ï¿½]ï¿½ï¿½ï¿½Ü‚ï¿½
 		void rotate(const Vector3& axis, float angle, Space relative_to = Space::Self);
-		// ƒ[ƒ‹ƒhÀ•W‚Ì point ‚ğ’†S‚Æ‚µ‚½²(axis)‚Å angle “x‰ñ“]‚³‚¹‚Ü‚·
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Wï¿½ï¿½ point ï¿½ğ’†Sï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½(axis)ï¿½ï¿½ angle ï¿½xï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 		void rotate_around(const Vector3& point, const Vector3& axis, float angle);
 
-		// translation ‚Ì•ûŒü‚Æ‹——£‚ÉˆÚ“®‚µ‚Ü‚·
+		// translation ï¿½Ì•ï¿½ï¿½ï¿½ï¿½Æ‹ï¿½ï¿½ï¿½ï¿½ÉˆÚ“ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 		void translate(const Vector3& translation, Space relative_to = Space::Self);
 
-		// ƒ[ƒJƒ‹À•W‚©‚çƒ[ƒ‹ƒhÀ•W‚Ö•ÏŠ·‚µ‚½s—ñ
+		// ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½çƒï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Wï¿½Ö•ÏŠï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½
 		Matrix4x4 local_to_world_matrix() const;
-		// ƒ[ƒ‹ƒhÀ•W‚©‚çƒ[ƒJƒ‹À•W‚Ö•ÏŠ·‚µ‚½s—ñ
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½çƒï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Ö•ÏŠï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½
 		Matrix4x4 world_to_local_matrix() const;
 
-		// ƒ[ƒJƒ‹‹óŠÔ‚©‚çƒ[ƒ‹ƒh‹óŠÔ‚Ö position ‚ğ•ÏŠ·‚µ‚Ü‚·B(ƒXƒP[ƒ‹E‰ñ“]E•½sˆÚ“®j
+		// ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½çƒï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ position ï¿½ï¿½ÏŠï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B(ï¿½Xï¿½Pï¿½[ï¿½ï¿½ï¿½Eï¿½ï¿½]ï¿½Eï¿½ï¿½ï¿½sï¿½Ú“ï¿½ï¿½j
 		Vector3 transform_point(const Vector3& position) const;
-		// ƒ[ƒJƒ‹‹óŠÔ‚©‚çƒ[ƒ‹ƒh‹óŠÔ‚Ö vector ‚ğ•ÏŠ·‚µ‚Ü‚·B(ƒXƒP[ƒ‹E‰ñ“]j
+		// ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½çƒï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ vector ï¿½ï¿½ÏŠï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B(ï¿½Xï¿½Pï¿½[ï¿½ï¿½ï¿½Eï¿½ï¿½]ï¿½j
 		Vector3 transform_vector(const Vector3& vector) const;
-		// ƒ[ƒJƒ‹‹óŠÔ‚©‚çƒ[ƒ‹ƒh‹óŠÔ‚Ö direction ‚ğ•ÏŠ·‚µ‚Ü‚·(‰ñ“]j
+		// ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½çƒï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ direction ï¿½ï¿½ÏŠï¿½ï¿½ï¿½ï¿½Ü‚ï¿½(ï¿½ï¿½]ï¿½j
 		Vector3 transform_direction(const Vector3& direction) const;
 
-		// ƒ[ƒ‹ƒh‹óŠÔ‚©‚çƒ[ƒJƒ‹‹óŠÔ‚Ö position ‚ğ•ÏŠ·‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ï¿½çƒï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ position ï¿½ï¿½ÏŠï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 		Vector3 inverse_transform_point(const Vector3& position) const;
-		// ƒ[ƒ‹ƒh‹óŠÔ‚©‚çƒ[ƒJƒ‹‹óŠÔ‚Ö vector ‚ğ•ÏŠ·‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ï¿½çƒï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ vector ï¿½ï¿½ÏŠï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 		Vector3 inverse_transform_vector(const Vector3& vector) const;
-		// ƒ[ƒ‹ƒh‹óŠÔ‚©‚çƒ[ƒJƒ‹‹óŠÔ‚Ö direction ‚ğ•ÏŠ·‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ï¿½çƒï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ direction ï¿½ï¿½ÏŠï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 		Vector3 inverse_transform_direction(const Vector3& direction) const;
 
-		// Transform ‚Ìe‚ğæ“¾
+		// Transform ï¿½Ìeï¿½ï¿½ï¿½æ“¾
 		std::weak_ptr<Transform> parent() const;
-		// Transform ‚Ìe‚ğİ’è
+		// Transform ï¿½Ìeï¿½ï¿½İ’ï¿½
 		void parent(std::weak_ptr<Transform> parent);
-		// Transform ‚Ìe‚ğİ’è
+		// Transform ï¿½Ìeï¿½ï¿½İ’ï¿½
 		void set_parent(std::weak_ptr<Transform> parent, bool world_position_stays = true);
-		// q‹Ÿ’B‚ğæ“¾
+		// ï¿½qï¿½ï¿½ï¿½Bï¿½ï¿½ï¿½æ“¾
 		std::list<std::weak_ptr<Transform>> get_children() const;
-		// q‹Ÿ‚ğæ“¾
+		// ï¿½qï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
 		std::weak_ptr<Transform> get_child(const UINT index) const;
-		// q‹Ÿ‚Ì”‚ğæ“¾
+		// ï¿½qï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½æ“¾
 		int get_child_count() const;
 
-		// e‚Ì Transform ƒIƒuƒWƒFƒNƒg‚©‚çŒ©‚½‘Š‘Î“I‚ÈƒXƒP[ƒ‹‚ğæ“¾
+		// ï¿½eï¿½ï¿½ Transform ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½çŒ©ï¿½ï¿½ï¿½ï¿½ï¿½Î“Iï¿½ÈƒXï¿½Pï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
 		Vector3 local_scale() const;
-		// e‚Ì Transform ƒIƒuƒWƒFƒNƒg‚©‚çŒ©‚½‘Š‘Î“I‚ÈƒXƒP[ƒ‹‚ğİ’è
+		// ï¿½eï¿½ï¿½ Transform ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½çŒ©ï¿½ï¿½ï¿½ï¿½ï¿½Î“Iï¿½ÈƒXï¿½Pï¿½[ï¿½ï¿½ï¿½ï¿½İ’ï¿½
 		void local_scale(const Vector3& value);
 		void local_scale(float x, float y, float z);
-		// e‚Ì Transform ƒIƒuƒWƒFƒNƒg‚©‚çŒ©‚½‘Š‘Î“I‚ÈˆÊ’u‚ğæ“¾
+		// ï¿½eï¿½ï¿½ Transform ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½çŒ©ï¿½ï¿½ï¿½ï¿½ï¿½Î“Iï¿½ÈˆÊ’uï¿½ï¿½ï¿½æ“¾
 		Vector3 local_position() const;
-		// e‚Ì Transform ƒIƒuƒWƒFƒNƒg‚©‚çŒ©‚½‘Š‘Î“I‚ÈˆÊ’u‚ğİ’è
+		// ï¿½eï¿½ï¿½ Transform ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½çŒ©ï¿½ï¿½ï¿½ï¿½ï¿½Î“Iï¿½ÈˆÊ’uï¿½ï¿½İ’ï¿½
 		void local_position(const Vector3& value);
 		void local_position(float x, float y, float z);
-		// e‚Ì Transform ƒIƒuƒWƒFƒNƒg‚©‚çŒ©‚½‘Š‘Î“I‚È‰ñ“]‚ğæ“¾
+		// ï¿½eï¿½ï¿½ Transform ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½çŒ©ï¿½ï¿½ï¿½ï¿½ï¿½Î“Iï¿½È‰ï¿½]ï¿½ï¿½ï¿½æ“¾
 		Quaternion local_rotation() const;
-		// e‚Ì Transform ƒIƒuƒWƒFƒNƒg‚©‚çŒ©‚½‘Š‘Î“I‚È‰ñ“]‚ğİ’è
+		// ï¿½eï¿½ï¿½ Transform ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½çŒ©ï¿½ï¿½ï¿½ï¿½ï¿½Î“Iï¿½È‰ï¿½]ï¿½ï¿½İ’ï¿½
 		void local_rotation(const Quaternion& value);
 		void local_rotation(float x, float y, float z, float w);
-		// e‚Ì Transform ƒIƒuƒWƒFƒNƒg‚©‚çŒ©‚½‘Š‘Î“I‚ÈƒIƒCƒ‰[Šp‚Æ‚µ‚Ä‚Ì‰ñ“]’l‚ğæ“¾
+		// ï¿½eï¿½ï¿½ Transform ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½çŒ©ï¿½ï¿½ï¿½ï¿½ï¿½Î“Iï¿½ÈƒIï¿½Cï¿½ï¿½ï¿½[ï¿½pï¿½Æ‚ï¿½ï¿½Ä‚Ì‰ï¿½]ï¿½lï¿½ï¿½ï¿½æ“¾
 		Vector3 local_euler_angles() const;
-		// e‚Ì Transform ƒIƒuƒWƒFƒNƒg‚©‚çŒ©‚½‘Š‘Î“I‚ÈƒIƒCƒ‰[Šp‚Æ‚µ‚Ä‚Ì‰ñ“]’l‚ğİ’è
+		// ï¿½eï¿½ï¿½ Transform ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½çŒ©ï¿½ï¿½ï¿½ï¿½ï¿½Î“Iï¿½ÈƒIï¿½Cï¿½ï¿½ï¿½[ï¿½pï¿½Æ‚ï¿½ï¿½Ä‚Ì‰ï¿½]ï¿½lï¿½ï¿½İ’ï¿½
 		void local_euler_angles(const Vector3& value);
 		void local_euler_angles(float x, float y, float z);
-		// ‚·‚×‚Ä‚ÌqƒIƒuƒWƒFƒNƒg‚ğeƒIƒuƒWƒFƒNƒg‚©‚çØ‚è—£‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½×‚Ä‚Ìqï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½eï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Ø‚è—£ï¿½ï¿½ï¿½Ü‚ï¿½
 		void detach_children();
-		// e‚Ì Transform ‚©‚çØ‚è—£‚·
+		// ï¿½eï¿½ï¿½ Transform ï¿½ï¿½ï¿½ï¿½Ø‚è—£ï¿½ï¿½
 		void detach_parent();
 
 	private:
@@ -153,29 +153,29 @@ namespace EvaEngine {
 		void internal_local_scale(const Vector3& value);
 		void internal_local_scale(float x, float y, float z);
 
-		// ƒ[ƒ‹ƒhÀ•WŒn‚ÌXV
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Wï¿½nï¿½ÌXï¿½V
 		void update_world_transform(const std::weak_ptr<Transform>& parent);
 
 	private:
-		// ƒ|ƒWƒVƒ‡ƒ“ (ƒ[ƒ‹ƒhÀ•WŒn)
+		// ï¿½|ï¿½Wï¿½Vï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Wï¿½n)
 		Vector3 position_{ 0.0f, 0.0f, 0.0f };
-		// ‰ñ“] (ƒ[ƒ‹ƒhÀ•WŒn)
+		// ï¿½ï¿½] (ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Wï¿½n)
 		Quaternion rotation_{ 0.0f, 0.0f, 0.0f, 1.0f };
-		// ƒXƒP[ƒ‹ (ƒ[ƒ‹ƒhÀ•WŒn)
+		// ï¿½Xï¿½Pï¿½[ï¿½ï¿½ (ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Wï¿½n)
 		Vector3 scale_{ 1.0f, 1.0f, 1.0f };
 
-		// ƒ|ƒWƒVƒ‡ƒ“ (ƒ[ƒJƒ‹À•WŒn)
+		// ï¿½|ï¿½Wï¿½Vï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½n)
 		Vector3 local_position_{ 0.0f, 0.0f, 0.0f };
-		// ‰ñ“] (ƒ[ƒJƒ‹À•WŒn)
+		// ï¿½ï¿½] (ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½n)
 		Quaternion local_rotation_{ 0.0f, 0.0f, 0.0f, 1.0f };
-		// ƒXƒP[ƒ‹ (ƒ[ƒJƒ‹À•WŒn)
+		// ï¿½Xï¿½Pï¿½[ï¿½ï¿½ (ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½n)
 		Vector3 local_scale_{ 1.0f, 1.0f, 1.0f };
 
 		Vector3 internal_euler_rotation{ 0.0f, 0.0f, 0.0f };
 
-		// e‚Ìƒgƒ‰ƒ“ƒXƒtƒH[ƒ€
+		// ï¿½eï¿½Ìƒgï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½tï¿½Hï¿½[ï¿½ï¿½
 		std::weak_ptr<Transform> parent_;
-		// q‚Ìƒgƒ‰ƒ“ƒXƒtƒH[ƒ€
+		// ï¿½qï¿½Ìƒgï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½tï¿½Hï¿½[ï¿½ï¿½
 		std::list<std::weak_ptr<Transform>> children_;
 
 		bool m_OpenedFlag{ false };

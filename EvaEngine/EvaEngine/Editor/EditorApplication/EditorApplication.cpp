@@ -1,4 +1,4 @@
-#if _DEBUG
+﻿#if _DEBUG
 #include "EditorApplication.h"
 #include "../../GameSystemBase/Manager/SceneManager/SceneManager.h"
 #include "../../GameSystemBase/Manager/ComponentManager/ComponentManager.h"

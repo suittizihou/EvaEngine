@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <DirectXMath.h>
 
@@ -9,27 +9,27 @@ namespace EvaEngine {
 	namespace Internal {
 //#pragma pack(16)
 		struct ConstantBufferData {
-			Matrix4x4 world;				// ƒ[ƒ‹ƒhs—ñ
-			Matrix4x4 view;				// ƒrƒ…[s—ñ
-			Matrix4x4 projection;			// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
-			Vector3	cameraPos;			// ƒJƒƒ‰À•W
+			Matrix4x4 world;				// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½sï¿½ï¿½
+			Matrix4x4 view;				// ï¿½rï¿½ï¿½ï¿½[ï¿½sï¿½ï¿½
+			Matrix4x4 projection;			// ï¿½vï¿½ï¿½ï¿½Wï¿½Fï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½
+			Vector3	cameraPos;			// ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½W
 			float pad1;
-			Vector3	lightDirection;		// ƒ‰ƒCƒg‚ÌŒü‚«
+			Vector3	lightDirection;		// ï¿½ï¿½ï¿½Cï¿½gï¿½ÌŒï¿½ï¿½ï¿½
 			float pad2;
-			Vector3   lightColor;			// ƒ‰ƒCƒg‚ÌF
+			Vector3   lightColor;			// ï¿½ï¿½ï¿½Cï¿½gï¿½ÌF
 			float pad3;
-			Vector3 ptPosition;			// ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ÌÀ•W
+			Vector3 ptPosition;			// ï¿½|ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Cï¿½gï¿½Ìï¿½ï¿½W
 			float pad4;
-			Vector3 ptColor;				// ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ÌF
-			float ptRange;							// ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚Ì‰e‹¿”ÍˆÍ
+			Vector3 ptColor;				// ï¿½|ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Cï¿½gï¿½ÌF
+			float ptRange;							// ï¿½|ï¿½Cï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Cï¿½gï¿½Ì‰eï¿½ï¿½ï¿½Íˆï¿½
 			Vector3 spPosition;
 			float pad5;
 			Vector3 spColor;
 			float spRange;
 			Vector3 spDirection;
 			float spAngle;
-			Vector3	materialAmbient;	// ‰e‚ÌF
-			float shine = 20.0f;		// ‚Â‚â
+			Vector3	materialAmbient;	// ï¿½eï¿½ÌF
+			float shine = 20.0f;		// ï¿½Â‚ï¿½
 		};
 //#pragma pack()
 	}

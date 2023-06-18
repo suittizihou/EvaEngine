@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #undef min
 #undef max
@@ -18,111 +18,111 @@ namespace EvaEngine {
 		};
 		static const float kEpsilon;
 
-		// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		// ï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 		Vector3() = default;
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		// ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 		Vector3(float x, float y, float z);
 
 
-		// Vector3(0, 0, 0) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector3(0, 0, 0) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector3 zero() { return Vector3(0.0f, 0.0f, 0.0f); }
-		// Vector3(1, 1, 1) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector3(1, 1, 1) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector3 one() { return Vector3(1.0f, 1.0f, 1.0f); }
-		// Vector3(0, 1, 0) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector3(0, 1, 0) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector3 up() { return Vector3(0.0f, 1.0f, 0.0f); }
-		// Vector3(0, -1, 0) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector3(0, -1, 0) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector3 down() { return Vector3(0.0f, -1.0f, 0.0f); }
-		// Vector3(-1, 0, 0) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector3(-1, 0, 0) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector3 left() { return Vector3(-1.0f, 0.0f, 0.0f); }
-		// Vector3(1, 0, 0) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector3(1, 0, 0) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector3 right() { return Vector3(1.0f, 0.0f, 0.0f); }
-		// Vector3(0, 0, 1) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector3(0, 0, 1) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector3 forward() { return Vector3(0.0f, 0.0f, 1.0f); }
-		// Vector3(0, 0, -1) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector3(0, 0, -1) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector3 back() { return Vector3(0.0f, 0.0f, -1.0f); }
 
-		// ƒxƒNƒgƒ‹‚Ì’·‚³
+		// ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ì’ï¿½ï¿½ï¿½
 		float magnitude() const;
-		// magnitude ‚ğ 1 ‚Æ‚µ‚½ƒxƒNƒgƒ‹
+		// magnitude ï¿½ï¿½ 1 ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½
 		Vector3 normalized() const;
-		// ƒxƒNƒgƒ‹‚Ì2æ‚Ì’·‚³
+		// ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½Ì’ï¿½ï¿½ï¿½
 		float sqr_magnitude() const;
-		// [0] ‚â[1] ‚ğg—p‚µ‚Ä x ‚â y ¬•ª‚ÉƒAƒNƒZƒX‚µ‚Ü‚·
+		// [0] ï¿½ï¿½[1] ï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½ x ï¿½ï¿½ y ï¿½ï¿½ï¿½ï¿½ï¿½ÉƒAï¿½Nï¿½Zï¿½Xï¿½ï¿½ï¿½Ü‚ï¿½
 		float operator[](int index) const;
 		float& operator[](int index);
 
 		// Returns true if the given vector is exactly equal to this vector.
 		bool equals(const Vector3& other) const;
-		// magnitude ‚ğ 1 ‚Æ‚µ‚½ƒxƒNƒgƒ‹‚ğì¬‚µ‚Ü‚·
+		// magnitude ï¿½ï¿½ 1 ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½
 		void normalize();
-		// 2‚Â‚ÌƒxƒNƒgƒ‹‚ÌŠe¬•ª‚ğæZ‚µ‚Ü‚·
+		// 2ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ÌŠeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½Ü‚ï¿½
 		void scale(const Vector3& v);
-		// Šù‘¶‚Ì Vector3 ‚É xAyAz ‚Ì¬•ª‚ğİ’è‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Vector3 ï¿½ï¿½ xï¿½Ayï¿½Az ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½İ’è‚µï¿½Ü‚ï¿½
 		void set(float new_x, float new_y, float new_z);
-		// ƒxƒNƒgƒ‹‚Ì’l‚ğŒ©‚â‚·‚­ƒtƒH[ƒ}ƒbƒg‚³‚ê‚½•¶š—ñ
+		// ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ì’lï¿½ï¿½ï¿½ï¿½ï¿½â‚·ï¿½ï¿½ï¿½tï¿½Hï¿½[ï¿½}ï¿½bï¿½gï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		std::string to_string() const;
 
-		// 2“_ŠÔifrom ‚Æ toj‚ÌŠp“x‚ğ•Ô‚µ‚Ü‚·
+		// 2ï¿½_ï¿½Ôifrom ï¿½ï¿½ toï¿½jï¿½ÌŠpï¿½xï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static float angle(const Vector3& from, const Vector3& to);
-		// ‘å‚«‚³‚ğmax_length‚Ü‚Å‚É§ŒÀ‚µ‚½ vector ‚ÌƒRƒs[‚ğ•Ô‚µ‚Ü‚·
+		// ï¿½å‚«ï¿½ï¿½ï¿½ï¿½max_lengthï¿½Ü‚Å‚Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ vector ï¿½ÌƒRï¿½sï¿½[ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static Vector3 clamp_magnitude(const Vector3& vector, float max_length);
-		// 2‚Â‚ÌƒxƒNƒgƒ‹‚ÌŠOÏ
+		// 2ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ÌŠOï¿½ï¿½
 		static Vector3 cross(const Vector3& lhs, const Vector3& rhs);
-		// a ‚Æ b ‚ÌŠÔ‚Ì‹——£‚ğ•Ô‚µ‚Ü‚·
+		// a ï¿½ï¿½ b ï¿½ÌŠÔ‚Ì‹ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static float distance(const Vector3& a, const Vector3 b);
-		// 2‚Â‚ÌƒxƒNƒgƒ‹‚Ì“àÏ
+		// 2ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ì“ï¿½ï¿½ï¿½
 		static float dot(const Vector3& lhs, const Vector3& rhs);
 
-		// ’¼üã‚É‚ ‚é 2 ‚Â‚ÌƒxƒNƒgƒ‹ŠÔ‚ğ•âŠÔ‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ 2 ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static Vector3 lerp(const Vector3& a, const Vector3& b, float t);
-		// ’¼üã‚É‚ ‚é 2 ‚Â‚ÌƒxƒNƒgƒ‹ŠÔ‚ğ•âŠÔ‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ 2 ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static Vector3 lerp_unclamped(const Vector3& a, const Vector3& b, float t);
-		// 2‚Â‚ÌƒxƒNƒgƒ‹‚ÅŠe¬•ª‚Ìˆê”Ô‘å‚«‚È’l‚ğg—p‚µ‚ÄƒxƒNƒgƒ‹‚ğì¬‚µ‚Ü‚·
+		// 2ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ÅŠeï¿½ï¿½ï¿½ï¿½ï¿½Ìˆï¿½Ô‘å‚«ï¿½È’lï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½Äƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector3 max(const Vector3& lhs, const Vector3& rhs);
-		// 2‚Â‚ÌƒxƒNƒgƒ‹‚ÅŠe¬•ª‚Ìˆê”Ô¬‚³‚È’l‚ğg—p‚µ‚ÄƒxƒNƒgƒ‹‚ğì¬‚µ‚Ü‚·
+		// 2ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ÅŠeï¿½ï¿½ï¿½ï¿½ï¿½Ìˆï¿½Ôï¿½ï¿½ï¿½ï¿½È’lï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½Äƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector3 min(const Vector3& lhs, const Vector3& rhs);
 
-		// Œ»İ‚ÌˆÊ’u current ‚©‚ç target ‚ÉŒü‚¯‚ÄˆÚ“®‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½İ‚ÌˆÊ’u current ï¿½ï¿½ï¿½ï¿½ target ï¿½ÉŒï¿½ï¿½ï¿½ï¿½ÄˆÚ“ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector3 move_towards(const Vector3& current, const Vector3& target,
 			float max_distance_delta);
-		// magnitude ‚ğ 1 ‚Æ‚µ‚½ƒxƒNƒgƒ‹‚ğì¬‚µ‚Ü‚·
+		// magnitude ï¿½ï¿½ 1 ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector3 normalize(const Vector3& value);
 
-		// ƒxƒNƒgƒ‹‚ğ•Ê‚ÌƒxƒNƒgƒ‹‚É“Š‰e‚µ‚Ü‚·
+		// ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Ê‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½É“ï¿½ï¿½eï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector3 project(const Vector3& vector, const Vector3& onNormal);
-		// •½–Ê‚É‚’¼‚È–@üƒxƒNƒgƒ‹‚É‚æ‚Á‚Ä’è‹`‚³‚ê‚é•½–Êã‚ÉƒxƒNƒgƒ‹‚ğË‰e‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½Ê‚Éï¿½ï¿½ï¿½ï¿½È–@ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½Ä’ï¿½`ï¿½ï¿½ï¿½ï¿½é•½ï¿½Êï¿½Éƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Ë‰eï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector3 project_on_plane(const Vector3& vector, const Vector3& planeNormal);
-		// –@ü‚Å’è‹`‚³‚ê‚½•½–Ê‚ÅƒxƒNƒgƒ‹‚ğ”½Ë‚µ‚Ü‚·
+		// ï¿½@ï¿½ï¿½ï¿½Å’ï¿½`ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½Ê‚Åƒxï¿½Nï¿½gï¿½ï¿½ï¿½ğ”½Ë‚ï¿½ï¿½Ü‚ï¿½
 		static Vector3 reflect(const Vector3& inDirection, const Vector3& inNormal);
-		// 2‚Â‚ÌƒxƒNƒgƒ‹‚ÌŠe¬•ª‚ğæZ‚µ‚Ü‚·
+		// 2ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ÌŠeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector3 scale(const Vector3& a, const Vector3& b);
-		// 2“_ŠÔifrom ‚Æ toj‚Ì•„†•t‚«Šp“x‚ğ•Ô‚µ‚Ü‚·
+		// 2ï¿½_ï¿½Ôifrom ï¿½ï¿½ toï¿½jï¿½Ì•ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½pï¿½xï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static float signed_angle(const Vector3& from, const Vector3& to, const Vector3& axis = up());
 
-		// –Ú“I’n‚ÉŒü‚©‚Á‚ÄŠÔ‚ÌŒo‰ß‚Æ‚Æ‚à‚É™X‚ÉƒxƒNƒgƒ‹‚ğ•Ï‰»‚³‚¹‚Ü‚·
+		// ï¿½Ú“Iï¿½nï¿½ÉŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äï¿½ï¿½Ô‚ÌŒoï¿½ß‚Æ‚Æ‚ï¿½ï¿½Éï¿½ï¿½Xï¿½Éƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Ï‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector3 smooth_damp(const Vector3& current, const Vector3& target,
 			Vector3& currentVelocity, float smoothTime, float maxSpeed, float deltaTime);
 
-		// Vector2‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+		// Vector2ï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
 		operator Vector2() const;
-		// Vector2‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+		// Vector2ï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
 		operator Vector4() const;
-		// Vector2‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+		// Vector2ï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
 		operator Color() const;
-		// XMVECTOR‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+		// XMVECTORï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
 		operator DirectX::XMVECTOR() const;
 	};
 
-	// ’P€‰‰ZqƒI[ƒo[ƒ[ƒh
+	// ï¿½Pï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½qï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½h
 	Vector3 operator - (const Vector3& v);
 
-	// ‘ã“ü‰‰ZqƒI[ƒo[ƒ[ƒh
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½qï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½h
 	Vector3& operator += (Vector3& lhs, const Vector3& rhs);
 	Vector3& operator -= (Vector3& lhs, const Vector3& rhs);
 	Vector3& operator *= (Vector3& lhs, float rhs);
 	Vector3& operator /= (Vector3& lhs, float rhs);
 
-	// ‚Q€‰‰ZqƒI[ƒo[ƒ[ƒh
+	// ï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½qï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½h
 	Vector3 operator + (const Vector3& lhs, const Vector3& rhs);
 	Vector3 operator - (const Vector3& lhs, const Vector3& rhs);
 	Vector3 operator * (const Vector3& lhs, float rhs);

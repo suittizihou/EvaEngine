@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <DirectXMath.h>
 #include "../../App/DirectX11App/DirectX11App.h"
@@ -10,15 +10,15 @@ namespace EvaEngine {
 			BufferCreate() = default;
 			~BufferCreate() = default;
 		public:
-			// ’¸“_ƒoƒbƒtƒ@‚Ìì¬
+			// ï¿½ï¿½ï¿½_ï¿½oï¿½bï¿½tï¿½@ï¿½Ìì¬
 			static ID3D11Buffer* CreateVertexBuffer(const std::vector<VertexData>& vertices, size_t strides);
-			// ’¸“_ƒoƒbƒtƒ@‚ğƒZƒbƒg‚·‚é
+			// ï¿½ï¿½ï¿½_ï¿½oï¿½bï¿½tï¿½@ï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½
 			static bool SetVertexBuffer(std::map<std::string, std::vector<Mesh>>& meshMap);
-			// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìì¬
+			// ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½oï¿½bï¿½tï¿½@ï¿½Ìì¬
 			static ID3D11Buffer* CreateIndexBuffer(const std::vector<UINT>& indices, size_t strides);
-			// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ğƒZƒbƒg‚·‚é
+			// ï¿½Cï¿½ï¿½ï¿½fï¿½bï¿½Nï¿½Xï¿½oï¿½bï¿½tï¿½@ï¿½ï¿½ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½ï¿½
 			static bool SetIndexBuffer(std::map<std::string, std::vector<Mesh>>& meshMap);
-			// ’è”ƒoƒbƒtƒ@‚Ìì¬
+			// ï¿½è”ï¿½oï¿½bï¿½tï¿½@ï¿½Ìì¬
 			static ID3D11Buffer* CreateConstantBuffer();
 		};
 	}

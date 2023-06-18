@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "../../Base/Scene/Scene.h"
 #include "../../DataBase/SceneDataBase/SceneDataBase.h"
@@ -12,20 +12,20 @@ namespace EvaEngine {
 		typedef unsigned int UINT;
 
 	public:
-		// ƒV[ƒ“‚Ì’Ç‰Á
+		// ï¿½Vï¿½[ï¿½ï¿½ï¿½Ì’Ç‰ï¿½
 		template<class T>
 		static void AddScene(const std::string& sceneName) {
 			static_assert(std::is_base_of<Scene, T>::value == true, "The argument does not inherit from Scene.");
 			EvaEngine::Internal::SceneDataBase::Instance().AddScene<T>(sceneName);
 		}
 
-		// ƒV[ƒ“‚Ìƒ[ƒh
+		// ï¿½Vï¿½[ï¿½ï¿½ï¿½Ìƒï¿½ï¿½[ï¿½h
 		static void LoadScene(const std::string& sceneName);
 		static void LoadScene(const UINT& sceneID);
 
-		// Œ»İ‚ÌƒV[ƒ“–¼‚ğæ“¾
+		// ï¿½ï¿½ï¿½İ‚ÌƒVï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
 		static std::string GetCurrentSceneName();
-		// ‘O‚ÌƒV[ƒ“–¼‚ğ‚ğæ“¾
+		// ï¿½Oï¿½ÌƒVï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
 		static std::string GetPreviousSceneName();
 	};
 }

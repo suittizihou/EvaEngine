@@ -1,4 +1,4 @@
-#include "TextureLoader.h"
+ï»¿#include "TextureLoader.h"
 #include "../Texture/Texture.h"
 #include "../../../App/DirectX11App/DirectX11App.h"
 #include "../../../GameSystemBase/Manager/TextureManager/TextureManager.h"
@@ -21,7 +21,7 @@ bool EvaEngine::TextureLoader::LoadImage(const std::string& fileName, ID3D11Reso
 				textureView);
 	
 	if (FAILED(hr)) {
-		DebugLog::LogError("TextureLoader‚É‚Ä " + fileName + " ‚Ì“Ç‚İ‚İ‚É¸”s‚µ‚Ü‚µ‚½B");
+		DebugLog::LogError("TextureLoaderï¿½É‚ï¿½ " + fileName + " ï¿½Ì“Ç‚İï¿½ï¿½İ‚Éï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B");
 		return false;
 	}
 	

@@ -1,4 +1,4 @@
-#if _DEBUG
+ï»¿#if _DEBUG
 #pragma once
 
 namespace ImGuizmo {
@@ -13,7 +13,7 @@ namespace EvaEngine {
 				~EditorCommand() = default;
 			public:
 
-				// Transform‚Ì•ÒW‚ğGUI‚Ås‚¦‚é‚æ‚¤‚É‚·‚éŠÖ”
+				// Transformï¿½Ì•ÒWï¿½ï¿½GUIï¿½Åsï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚ï¿½ï¿½ï¿½Öï¿½
 				static void EditTransform(float* cameraView, float* cameraProjection, float* matrix, bool editTransformDecomposition, float camDistance = 8.0f);
 
 			private:

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <list>
 #include <memory>
@@ -13,21 +13,21 @@ namespace EvaEngine {
 			~GameObjectDataBase() = default;
 
 			std::weak_ptr<GameObject> Instantiate(const std::string& sceneName, const std::string& tag = "None", const std::string& name = "GameObject");
-			// –¼‘O‚ÅŒŸõ
+			// åå‰ã§æ¤œç´¢
 			std::weak_ptr<GameObject> Find(const std::string& name);
-			// ƒ^ƒO‚ÅŒŸõ‚µ‚ÄƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğˆê‚Â‚Á‚Ä‚­‚é
+			// ã‚¿ã‚°ã§æ¤œç´¢ã—ã¦ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä¸€ã¤æŒã£ã¦ãã‚‹
 			std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
-			// ƒ^ƒO‚ÅŒŸõ‚µ‚Äƒqƒbƒg‚µ‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ‘S•”‚Á‚Ä‚­‚é
+			// ã‚¿ã‚°ã§æ¤œç´¢ã—ã¦ãƒ’ãƒƒãƒˆã—ãŸã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å…¨éƒ¨æŒã£ã¦ãã‚‹
 			std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
-			// Š‚·‚é‘SƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ•Ô‚·
+			// æ‰€æŒã™ã‚‹å…¨ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¿”ã™
 			void GetAllGameObject(std::vector<std::weak_ptr<GameObject>>* outputObjects);
-			// •Û‚µ‚Ä‚¢‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ‘Síœ
+			// ä¿æŒã—ã¦ã„ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å…¨å‰Šé™¤
 			void RemoveAllGameObject();
 
 		private:
-			// ƒ^ƒO‚Å•ª‚¯‚¸QÆ‚ğ•Û‚·‚éƒŠƒXƒg
+			// ã‚¿ã‚°ã§åˆ†ã‘ãšå‚ç…§ã‚’ä¿æŒã™ã‚‹ãƒªã‚¹ãƒˆ
 			std::vector<std::weak_ptr<GameObject>> m_GameObjectReference;
-			// ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ÌÀ‘Ì‚ğÀÛ‚ÉŠ—L‚·‚éƒŠƒXƒg
+			// ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å®Ÿä½“ã‚’å®Ÿéš›ã«æ‰€æœ‰ã™ã‚‹ãƒªã‚¹ãƒˆ
 			std::unordered_map<std::string,	// Tag 
 				std::vector<std::shared_ptr<GameObject>>> m_GameObjectListSource;
 

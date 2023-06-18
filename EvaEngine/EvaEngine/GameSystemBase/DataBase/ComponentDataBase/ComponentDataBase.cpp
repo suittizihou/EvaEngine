@@ -1,4 +1,4 @@
-#include "ComponentDataBase.h"
+ï»¿#include "ComponentDataBase.h"
 #include "../../Base/GameObject/GameObject.h"
 #include "../../Components/Camera/Camera.h"
 #include "../../Components/Transform/Transform.h"
@@ -49,20 +49,20 @@ void ComponentDataBase::LateUpdate()
 void ComponentDataBase::Draw(ID3D11DeviceContext* command) const
 {
 #if _DEBUG
-	// ƒV[ƒ“ƒrƒ…[‚Ì•`‰æ
+	// ã‚·ãƒ¼ãƒ³ãƒ“ãƒ¥ãƒ¼ã®æç”»
 	DrawSceneView(command);
 #endif
 
-	// ƒJƒƒ‰‚Ì”‚¾‚¯•`‰æ‚·‚é
+	// ã‚«ãƒ¡ãƒ©ã®æ•°ã ã‘æç”»ã™ã‚‹
 	auto cameras = Camera::GetAllCamera();
 	for (int cameraNum = 0, size = cameras.size(); cameraNum < size; ++cameraNum) {
 		auto camera = cameras[cameraNum].lock();
 		if (camera->GetGameObject().lock()->ActiveSelf() == false) continue;
 
-		// •`‰æŠJnˆ—
+		// æç”»é–‹å§‹å‡¦ç†
 		camera->SetBeginSettings(command);
 
-		// •`‰æŠJn
+		// æç”»é–‹å§‹
 		for (int i = 0, size = m_DrawFuncNumber.size(); i < size; ++i) {
 			if (m_Components[m_DrawFuncNumber[i]]->GetGameObject().lock()->ActiveSelf() == false) continue;
 
@@ -91,28 +91,28 @@ void ComponentDataBase::OnGUI()
 #endif
 
 void ComponentDataBase::AddComponent(const std::shared_ptr<Component>& component, const int indexNum) {
-	// FixedUpdateŠÖ”‚Ì“o˜^
+	// FixedUpdateé–¢æ•°ã®ç™»éŒ²
 	if (component->GetFunctionMask() & FunctionMask::FIXED_UPDATE) {
 		m_FixedUpdateFuncNumber.push_back(indexNum);
 	}
-	// UpdateŠÖ”‚Ì“o˜^
+	// Updateé–¢æ•°ã®ç™»éŒ²
 	if (component->GetFunctionMask() & FunctionMask::UPDATE) {
 		m_UpdateFuncNumber.push_back(indexNum);
 	}
 	if (component->GetFunctionMask() & FunctionMask::EXECUTE_EDIT_UPDATE) {
 		m_ExecuteEditUpdateFuncNumber.push_back(indexNum);
 	}
-	// LateUpdateŠÖ”‚Ì“o˜^
+	// LateUpdateé–¢æ•°ã®ç™»éŒ²
 	if (component->GetFunctionMask() & FunctionMask::LATE_UPDATE) {
 		m_LateUpdateFuncNumber.push_back(indexNum);
 	}
-	// DrawŠÖ”‚Ì“o˜^
+	// Drawé–¢æ•°ã®ç™»éŒ²
 	if (component->GetFunctionMask() & FunctionMask::DRAW) {
 		m_DrawFuncNumber.push_back(indexNum);
 	}
-	// ©g‚ª“o˜^‚³‚ê‚Ä‚¢‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì”z—ñ”Ô†‚ğİ’è
+	// è‡ªèº«ãŒç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®é…åˆ—ç•ªå·ã‚’è¨­å®š
 	component->SetIndex(indexNum);
-	// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì“o˜^
+	// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ç™»éŒ²
 	m_Components.push_back(component);
 }
 
@@ -125,19 +125,19 @@ void ComponentDataBase::RemoveComponent(const std::weak_ptr<Component>& componen
 
 void ComponentDataBase::RemoveComponent(const UINT& index, const UINT& mask)
 {
-	// ––”ö‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚ªg—p‚µ‚Ä‚¢‚éŠÖ”ƒ}ƒXƒN‚ğæ“¾
+	// æœ«å°¾ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒä½¿ç”¨ã—ã¦ã„ã‚‹é–¢æ•°ãƒã‚¹ã‚¯ã‚’å–å¾—
 	UINT endElementMask = m_Components.back()->GetFunctionMask();
 
-	// Á‚·êŠ‚Æ––”ö‚ğƒNƒ‹‚Á‚Æ“ü‚ê‘Ö‚¦
+	// æ¶ˆã™å ´æ‰€ã¨æœ«å°¾ã‚’ã‚¯ãƒ«ã£ã¨å…¥ã‚Œæ›¿ãˆ
 	std::iter_swap(m_Components.begin() + index, m_Components.end() - 1);
-	// ––”ö‚ğíœ
+	// æœ«å°¾ã‚’å‰Šé™¤
 	m_Components.pop_back();
 	
-	// Œ»İ‚Ì”z—ñ”Ô†‚ğİ’è
+	// ç¾åœ¨ã®é…åˆ—ç•ªå·ã‚’è¨­å®š
 	m_Components[index]->SetIndex(index);
 
-	// íœ‘O‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚ª‚ ‚Á‚½”z—ñ”Ô†‚ğŠeŠÖ”“Yš”z—ñ‚Ì––”ö‚É“ü‚ê‚é
-	// (‚±‚Ìíœ‘O‚Ì“Yš‚ÌêŠ(m_Components”z—ñ‚ÌêŠ)‚É‚Ííœ‚µ‚È‚¢ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì“Yš‚ª“ü‚Á‚Ä‚¢‚é)
+	// å‰Šé™¤å‰ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒã‚ã£ãŸé…åˆ—ç•ªå·ã‚’å„é–¢æ•°æ·»å­—é…åˆ—ã®æœ«å°¾ã«å…¥ã‚Œã‚‹
+	// (ã“ã®å‰Šé™¤å‰ã®æ·»å­—ã®å ´æ‰€(m_Componentsé…åˆ—ã®å ´æ‰€)ã«ã¯å‰Šé™¤ã—ãªã„ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®æ·»å­—ãŒå…¥ã£ã¦ã„ã‚‹)
 	if (endElementMask & FunctionMask::FIXED_UPDATE) m_FixedUpdateFuncNumber[m_FixedUpdateFuncNumber.size() - 1] = index;
 	if (endElementMask & FunctionMask::UPDATE) m_UpdateFuncNumber[m_UpdateFuncNumber.size() - 1] = index;
 	if (endElementMask & FunctionMask::EXECUTE_EDIT_UPDATE) m_ExecuteEditUpdateFuncNumber[m_ExecuteEditUpdateFuncNumber.size() - 1] = index;
@@ -146,40 +146,40 @@ void ComponentDataBase::RemoveComponent(const UINT& index, const UINT& mask)
 
 	if (mask & FunctionMask::FIXED_UPDATE)
 	{
-		// ––”ö‚Ì’l‚ğw’è‚ÌêŠ‚ÉƒRƒs[
+		// æœ«å°¾ã®å€¤ã‚’æŒ‡å®šã®å ´æ‰€ã«ã‚³ãƒ”ãƒ¼
 		m_FixedUpdateFuncNumber[FindItr(m_FixedUpdateFuncNumber, index)] = m_FixedUpdateFuncNumber.back();
-		// ––”ö‚ğÁ‚·
+		// æœ«å°¾ã‚’æ¶ˆã™
 		m_FixedUpdateFuncNumber.pop_back();
 	}
 
 	if (mask & FunctionMask::UPDATE)
 	{
-		// ––”ö‚Ì’l‚ğw’è‚ÌêŠ‚ÉƒRƒs[
+		// æœ«å°¾ã®å€¤ã‚’æŒ‡å®šã®å ´æ‰€ã«ã‚³ãƒ”ãƒ¼
 		m_UpdateFuncNumber[FindItr(m_UpdateFuncNumber, index)] = m_UpdateFuncNumber.back();
-		// ––”ö‚ğÁ‚·
+		// æœ«å°¾ã‚’æ¶ˆã™
 		m_UpdateFuncNumber.pop_back();
 	}
 
 	if (mask & FunctionMask::EXECUTE_EDIT_UPDATE) {
-		// ––”ö‚Ì’l‚ğw’è‚ÌêŠ‚ÉƒRƒs[
+		// æœ«å°¾ã®å€¤ã‚’æŒ‡å®šã®å ´æ‰€ã«ã‚³ãƒ”ãƒ¼
 		m_ExecuteEditUpdateFuncNumber[FindItr(m_ExecuteEditUpdateFuncNumber, index)] = m_ExecuteEditUpdateFuncNumber.back();
-		// ––”ö‚ğÁ‚·
+		// æœ«å°¾ã‚’æ¶ˆã™
 		m_ExecuteEditUpdateFuncNumber.pop_back();
 	}
 
 	if (mask & FunctionMask::LATE_UPDATE)
 	{
-		// ––”ö‚Ì’l‚ğw’è‚ÌêŠ‚ÉƒRƒs[
+		// æœ«å°¾ã®å€¤ã‚’æŒ‡å®šã®å ´æ‰€ã«ã‚³ãƒ”ãƒ¼
 		m_LateUpdateFuncNumber[FindItr(m_LateUpdateFuncNumber, index)] = m_LateUpdateFuncNumber.back();
-		// ––”ö‚ğÁ‚·
+		// æœ«å°¾ã‚’æ¶ˆã™
 		m_LateUpdateFuncNumber.pop_back();
 	}
 
 	if (mask & FunctionMask::DRAW)
 	{
-		// ––”ö‚Ì’l‚ğw’è‚ÌêŠ‚ÉƒRƒs[
+		// æœ«å°¾ã®å€¤ã‚’æŒ‡å®šã®å ´æ‰€ã«ã‚³ãƒ”ãƒ¼
 		m_DrawFuncNumber[FindItr(m_DrawFuncNumber, index)] = m_DrawFuncNumber.back();
-		// ––”ö‚ğÁ‚·
+		// æœ«å°¾ã‚’æ¶ˆã™
 		m_DrawFuncNumber.pop_back();
 	}
 }

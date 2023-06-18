@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 
 #include <string>
 #include <DirectXMath.h>
 #include "../Vector3/Vector3.h"
 
 namespace EvaEngine {
-	// ƒNƒH[ƒ^ƒjƒIƒ“
+	// ï¿½Nï¿½Hï¿½[ï¿½^ï¿½jï¿½Iï¿½ï¿½
 	struct Quaternion {
 		union {
 			DirectX::XMFLOAT4 vec;
@@ -13,77 +13,77 @@ namespace EvaEngine {
 			struct { float x, y, z, w; };
 		};
 
-		// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		// ï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 		Quaternion() = default;
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		// ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 		Quaternion(float x, float y, float z, float w = 1.0f);
 
-		// ’PˆÊƒNƒH[ƒ^ƒjƒIƒ“
+		// ï¿½Pï¿½ÊƒNï¿½Hï¿½[ï¿½^ï¿½jï¿½Iï¿½ï¿½
 		static Quaternion identity();
-		// ³‹K‰»
+		// ï¿½ï¿½ï¿½Kï¿½ï¿½
 		Quaternion normalized() const;
-		// [0] ‚â[1] ‚ğg—p‚µ‚Ä x ‚â y ¬•ª‚ÉƒAƒNƒZƒX‚µ‚Ü‚·
+		// [0] ï¿½ï¿½[1] ï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½ x ï¿½ï¿½ y ï¿½ï¿½ï¿½ï¿½ï¿½ÉƒAï¿½Nï¿½Zï¿½Xï¿½ï¿½ï¿½Ü‚ï¿½
 		float operator[](int index) const;
 		float& operator[](int index);
 
-		// Šù‘¶‚Ì Quaternion ‚É xAyAzAw ‚Ì¬•ª‚ğİ’è‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Quaternion ï¿½ï¿½ xï¿½Ayï¿½Azï¿½Aw ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½İ’è‚µï¿½Ü‚ï¿½
 		void set(float newX, float newY, float newZ, float newW);
-		// ƒNƒH[ƒ^“ñƒIƒ“‚Ì’l‚ğŒ©‚â‚·‚­‚µ‚½•¶š—ñ‚ğ•Ô‚µ‚Ü‚·B
+		// ï¿½Nï¿½Hï¿½[ï¿½^ï¿½ï¿½Iï¿½ï¿½ï¿½Ì’lï¿½ï¿½ï¿½ï¿½ï¿½â‚·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
 		std::string to_string() const;
 
-		// 2 ‚Â‚Ì‰ñ“] a ‚Æ b ŠÔ‚ÌŠp“x‚ğ•Ô‚µ‚Ü‚·B
+		// 2 ï¿½Â‚Ì‰ï¿½] a ï¿½ï¿½ b ï¿½Ô‚ÌŠpï¿½xï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
 		static float angle(const Quaternion& a, const Quaternion& b);
 		static Vector3 internal_make_positive(Vector3 euler);
-		// axis ‚Ìü‚è‚ğ angle “x‰ñ“]‚·‚é‰ñ“]‚ğì¬‚µ‚Ü‚·B
+		// axis ï¿½Ìï¿½ï¿½ï¿½ï¿½ angle ï¿½xï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
 		static Quaternion angle_axis(float angle, const Vector3& axis);
-		// 2 ‚Â‚Ì‰ñ“]‚Ì“àÏ‚ğ•Ô‚µ‚Ü‚·B
+		// 2 ï¿½Â‚Ì‰ï¿½]ï¿½Ì“ï¿½ï¿½Ï‚ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
 		static float dot(const Quaternion& a, const Quaternion& b);
 
-		// ‹tƒNƒH[ƒ^ƒjƒIƒ“‚ğ•Ô‚µ‚Ü‚·
+		// ï¿½tï¿½Nï¿½Hï¿½[ï¿½^ï¿½jï¿½Iï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static Quaternion inverse(const Quaternion& rotation);
-		// ³‹K‰»‚µ‚½ƒNƒH[ƒ^ƒjƒIƒ“‚ğ•Ô‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½Hï¿½[ï¿½^ï¿½jï¿½Iï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static Quaternion normalize(const Quaternion& q);
 
 		float length() const;
 
-		//@a ‚Æ b ‚ÌŠÔ‚ğ t ‚Å‹…ó‚É•âŠÔ‚µ‚Ü‚·Bƒpƒ‰ƒ[ƒ^[ t ‚ÍA[0, 1] ‚Ì”ÍˆÍ‚Å‚·B
+		//ï¿½@a ï¿½ï¿½ b ï¿½ÌŠÔ‚ï¿½ t ï¿½Å‹ï¿½ï¿½ï¿½É•ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½Bï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½[ t ï¿½ÍA[0, 1] ï¿½Ì”ÍˆÍ‚Å‚ï¿½ï¿½B
 		static Quaternion slerp(const Quaternion& a, const Quaternion& b, float t);
-		// a ‚Æ b ‚ÌŠÔ‚ğ t ‚Å‹…ó‚É•âŠÔ‚µ‚Ü‚·Bƒpƒ‰ƒ[ƒ^[ t ‚ÍAŒÀ‚ç‚ê‚Ä‚¢‚Ü‚¹‚ñB
+		// a ï¿½ï¿½ b ï¿½ÌŠÔ‚ï¿½ t ï¿½Å‹ï¿½ï¿½ï¿½É•ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½Bï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½[ t ï¿½ÍAï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B
 		static Quaternion slerp_unclamped(const Quaternion& a, const Quaternion& b, float t);
 
-		// ‰ñ“]‚ğƒIƒCƒ‰[Šp‚Ì’l‚Å•Ô‚µ‚Ü‚·
+		// ï¿½ï¿½]ï¿½ï¿½ï¿½Iï¿½Cï¿½ï¿½ï¿½[ï¿½pï¿½Ì’lï¿½Å•Ô‚ï¿½ï¿½Ü‚ï¿½
 		Vector3 euler_angles() const;
-		// ƒIƒCƒ‰[Šp‚ğƒNƒH[ƒ^ƒjƒIƒ“‚É•ÏŠ·‚µ‚Ä©g‚É‘ã“ü
+		// ï¿½Iï¿½Cï¿½ï¿½ï¿½[ï¿½pï¿½ï¿½ï¿½Nï¿½Hï¿½[ï¿½^ï¿½jï¿½Iï¿½ï¿½ï¿½É•ÏŠï¿½ï¿½ï¿½ï¿½Äï¿½ï¿½gï¿½É‘ï¿½ï¿½
 		void euler_angles(const Vector3& value);
 
 
-		// fromDirection ‚©‚ç toDirection ‚Ö‚Ì‰ñ“]‚ğì¬‚µ‚Ü‚·
+		// fromDirection ï¿½ï¿½ï¿½ï¿½ toDirection ï¿½Ö‚Ì‰ï¿½]ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½
 		void set_from_to_rotation(const Vector3& fromDirection, const Vector3& toDirection);
-		// w’è‚³‚ê‚½ forward ‚Æ upwards •ûŒü‚É‰ñ“]‚µ‚Ü‚·
+		// ï¿½wï¿½è‚³ï¿½ê‚½ forward ï¿½ï¿½ upwards ï¿½ï¿½ï¿½ï¿½ï¿½É‰ï¿½]ï¿½ï¿½ï¿½Ü‚ï¿½
 		void set_look_rotation(const Vector3& view, const Vector3& up = Vector3::up());
-		// ‰ñ“]‚ğÀ•W‚É‘Î‚·‚éŠp“x‚Ì’l (AngleAxis) ‚É•ÏŠ·‚µ‚Ü‚·B
+		// ï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½É‘Î‚ï¿½ï¿½ï¿½pï¿½xï¿½Ì’l (AngleAxis) ï¿½É•ÏŠï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
 		void to_angle_axis(float& angle, Vector3& axis);
 
-		// z²‚ğ’†S‚Éz“xAx²‚ğ’†S‚Éx“xAy²‚ğ’†S‚Éy“x‰ñ“]‚·‚é‰ñ“]‚ğ•Ô‚µ‚Ü‚·B
+		// zï¿½ï¿½ï¿½ğ’†Sï¿½ï¿½zï¿½xï¿½Axï¿½ï¿½ï¿½ğ’†Sï¿½ï¿½xï¿½xï¿½Ayï¿½ï¿½ï¿½ğ’†Sï¿½ï¿½yï¿½xï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½]ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
 		static Quaternion euler(float x, float y, float z);
 		static Quaternion euler(const Vector3& euler);
-		// fromDirection ‚©‚ç toDirection ‚Ö‚Ì‰ñ“]‚ğì¬‚µ‚Ü‚·B
+		// fromDirection ï¿½ï¿½ï¿½ï¿½ toDirection ï¿½Ö‚Ì‰ï¿½]ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
 		static Quaternion from_to_rotation(const Vector3& fromDirection,
 			const Vector3& toDirection);
-		// w’è‚³‚ê‚½ forward ‚Æ upwards •ûŒü‚É‰ñ“]‚µ‚Ü‚·
+		// ï¿½wï¿½è‚³ï¿½ê‚½ forward ï¿½ï¿½ upwards ï¿½ï¿½ï¿½ï¿½ï¿½É‰ï¿½]ï¿½ï¿½ï¿½Ü‚ï¿½
 		static Quaternion look_rotation(const Vector3& view, const Vector3& up = Vector3::up());
-		// from ‚©‚ç to ‚Ö‚Ì‰ñ“]‚ğ“¾‚Ü‚·
+		// from ï¿½ï¿½ï¿½ï¿½ to ï¿½Ö‚Ì‰ï¿½]ï¿½ğ“¾‚Ü‚ï¿½
 		static Quaternion rotate_towards(const Quaternion& from,
 			const Quaternion& to, float maxDegreesDelta);
-		//@a ‚Æ b ‚ÌŠÔ‚ğ t ‚ÅüŒ`‚É•âŠÔ‚µ‚Ü‚·Bƒpƒ‰ƒ[ƒ^[ t ‚ÍA[0, 1] ‚Ì”ÍˆÍ‚Å‚·B
+		//ï¿½@a ï¿½ï¿½ b ï¿½ÌŠÔ‚ï¿½ t ï¿½Åï¿½ï¿½`ï¿½É•ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½Bï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½[ t ï¿½ÍA[0, 1] ï¿½Ì”ÍˆÍ‚Å‚ï¿½ï¿½B
 		static Quaternion lerp(const Quaternion& a, const Quaternion& b, float t);
-		// a ‚Æ b ‚ÌŠÔ‚ğ t ‚ÅüŒ`‚É•âŠÔ‚µ‚Ü‚·Bƒpƒ‰ƒ[ƒ^[ t ‚ÍAŒÀ‚ç‚ê‚Ä‚¢‚Ü‚¹‚ñB
+		// a ï¿½ï¿½ b ï¿½ÌŠÔ‚ï¿½ t ï¿½Åï¿½ï¿½`ï¿½É•ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½Bï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½[ t ï¿½ÍAï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½B
 		static Quaternion lerp_unclamped(const Quaternion& a, const Quaternion& b, float t);
 
-		// ”äŠr(Š®‘S‚É’l‚ªˆê’v‚µ‚Ä‚¢‚é‚©Hj
+		// ï¿½ï¿½r(ï¿½ï¿½ï¿½Sï¿½É’lï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½Hï¿½j
 		bool equals(const Quaternion& other) const;
 
-		// XMVECTOR‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+		// XMVECTORï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
 		operator DirectX::XMVECTOR() const;
 
 	private:
@@ -93,7 +93,7 @@ namespace EvaEngine {
 		static const float k_epsilon;
 	};
 
-	// ‰‰ZqƒI[ƒo[ƒ[ƒh
+	// ï¿½ï¿½ï¿½Zï¿½qï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½h
 	Quaternion operator - (const Quaternion& q);
 	Quaternion operator + (const Quaternion& lhs, const Quaternion& rhs);
 	Quaternion operator - (const Quaternion& lhs, const Quaternion& rhs);

@@ -1,4 +1,4 @@
-#include "Vector3.h"
+ï»¿#include "Vector3.h"
 #include "../Vector2/Vector2.h"
 #include "../Vector4/Vector4.h"
 #include "../Color/Color.h"
@@ -40,7 +40,7 @@ float Vector3::operator[](int index) const
 	case 1: return y;
 	case 2: return z;
 	default:
-		throw std::range_error("”z—ñ‚Ì‹«ŠEŠO");
+		throw std::range_error("ï¿½zï¿½ï¿½Ì‹ï¿½ï¿½Eï¿½O");
 	}
 }
 
@@ -51,7 +51,7 @@ float& Vector3::operator[](int index)
 	case 1: return y;
 	case 2:	return z;
 	default:
-		throw std::range_error("”z—ñ‚Ì‹«ŠEŠO");
+		throw std::range_error("ï¿½zï¿½ï¿½Ì‹ï¿½ï¿½Eï¿½O");
 	}
 }
 

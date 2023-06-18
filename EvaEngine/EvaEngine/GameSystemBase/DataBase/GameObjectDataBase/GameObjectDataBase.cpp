@@ -1,4 +1,4 @@
-#include "GameObjectDataBase.h"
+ï»¿#include "GameObjectDataBase.h"
 
 #include <stdexcept>
 
@@ -11,7 +11,7 @@ using namespace EvaEngine::Internal;
 
 std::weak_ptr<GameObject> GameObjectDataBase::Instantiate(const std::string& sceneType, const std::string& tag, const std::string& name) {
 	GUID guid{ GUID_NULL };
-	if (GUIDUtility::Create(&guid, "GameObjectDataBase‚É‚Ä " + name + " ‚ÌGUID¶¬‚É¸”s‚µ‚Ü‚µ‚½B") == false) return std::weak_ptr<GameObject>();
+	if (GUIDUtility::Create(&guid, "GameObjectDataBaseã«ã¦ " + name + " ã®GUIDç”Ÿæˆã«å¤±æ•—ã—ã¾ã—ãŸã€‚") == false) return std::weak_ptr<GameObject>();
 	std::shared_ptr<GameObject> obj = std::make_shared<GameObject>(sceneType, guid, tag, name);
 	obj->Initialize();
 	m_GameObjectReference.push_back(obj);
@@ -29,13 +29,13 @@ std::weak_ptr<GameObject> GameObjectDataBase::Find(const std::string& name)
 		}
 	}
 
-	DebugLog::LogError("Not found : " + name + "‚Æ‚¢‚¤–¼‘O‚ÌGameObject‚Í‘¶İ‚µ‚Ü‚¹‚ñ‚Å‚µ‚½B");
+	DebugLog::LogError("Not found : " + name + "ã¨ã„ã†åå‰ã®GameObjectã¯å­˜åœ¨ã—ã¾ã›ã‚“ã§ã—ãŸã€‚");
 }
 
 std::weak_ptr<GameObject> GameObjectDataBase::FindGameObjectWithTag(const std::string& tag)
 {
 	if (m_GameObjectListSource.count(tag) == 0) {
-		DebugLog::LogError("Not found : " + tag + "‚Æ‚¢‚¤Tag‚ğ‚ÂGameObject‚Í‘¶İ‚µ‚Ü‚¹‚ñ‚Å‚µ‚½B");
+		DebugLog::LogError("Not found : " + tag + "ã¨ã„ã†Tagã‚’æŒã¤GameObjectã¯å­˜åœ¨ã—ã¾ã›ã‚“ã§ã—ãŸã€‚");
 		return std::weak_ptr<GameObject>();
 	}
 	return *m_GameObjectListSource[tag].begin();
@@ -44,7 +44,7 @@ std::weak_ptr<GameObject> GameObjectDataBase::FindGameObjectWithTag(const std::s
 std::vector<std::weak_ptr<GameObject>> GameObjectDataBase::FindGameObjectsWithTag(const std::string& tag)
 {
 	if (m_GameObjectListSource.count(tag) == 0) {
-		DebugLog::LogError("Not found : " + tag + "‚Æ‚¢‚¤Tag‚ğ‚ÂGameObject‚Í‘¶İ‚µ‚Ü‚¹‚ñ‚Å‚µ‚½B");
+		DebugLog::LogError("Not found : " + tag + "ã¨ã„ã†Tagã‚’æŒã¤GameObjectã¯å­˜åœ¨ã—ã¾ã›ã‚“ã§ã—ãŸã€‚");
 		std::vector<std::weak_ptr<GameObject>> nullVector;
 		return nullVector;
 	}

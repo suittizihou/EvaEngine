@@ -1,4 +1,4 @@
-#include "Camera.h"
+ï»¿#include "Camera.h"
 #include "../../../Setting/Window/Window.h"
 #include "../../Base/GameObject/GameObject.h"
 #include "../Transform/Transform.h"
@@ -41,11 +41,11 @@ EvaEngine::Camera::Camera(
 
 EvaEngine::Camera::~Camera()
 {
-	// QÆæ‚ªnull‚É‚È‚Á‚Ä‚é‚à‚Ì‚ğÁ‚·
+	// ï¿½Qï¿½Ææ‚ªnullï¿½É‚È‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½
 	for (auto& camera : m_Cameras) {
 		for (int i = 0; i < camera.second.size(); ++i) {
 			if (camera.second[i].expired()) {
-				// Á‚·•”•ª‚Æ––”ö‚Ì•”•ª‚ğƒNƒ‹‚Á‚Æ“ü‚ê‘Ö‚¦
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ–ï¿½ï¿½ï¿½ï¿½Ì•ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½Æ“ï¿½ï¿½ï¿½Ö‚ï¿½
 				std::iter_swap(camera.second.begin() + i, camera.second.end() - 1);
 				camera.second.pop_back();
 				return;
@@ -68,10 +68,10 @@ void EvaEngine::Camera::Awake()
 
 void EvaEngine::Camera::Update()
 {
-	// ƒrƒ…[s—ñ‚ğì¬‚µİ’è
+	// ï¿½rï¿½ï¿½ï¿½[ï¿½sï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½İ’ï¿½
 	m_ViewMatrix = CreateViewMatrix(GetTransform());
 
-	// ‹‘ä‚Ìì¬
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìì¬
 	m_ProjectionMatrix = CreateProjectionMatrix(m_Viewport, m_Near, m_Far, m_Fov);
 }
 
@@ -79,18 +79,18 @@ void EvaEngine::Camera::SetViewport(const UINT width, const UINT height)
 {
 	m_Viewport = D3D11_VIEWPORT
 	{
-		static_cast<FLOAT>(0),			// ƒEƒBƒ“ƒhƒE‚Ì¶’[‚ÌÀ•W
-		static_cast<FLOAT>(0),			// ƒEƒBƒ“ƒhƒE‚Ìã’[‚ÌÀ•W
-		static_cast<FLOAT>(width),		// ƒEƒBƒ“ƒhƒE‚Ì‰¡•
-		static_cast<FLOAT>(height),		// ƒEƒBƒ“ƒhƒE‚Ìc•
-		0.0f,							// Å¬[“x
-		1.0f							// Å‘å[“x
+		static_cast<FLOAT>(0),			// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Ìï¿½ï¿½[ï¿½Ìï¿½ï¿½W
+		static_cast<FLOAT>(0),			// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Ìï¿½[ï¿½Ìï¿½ï¿½W
+		static_cast<FLOAT>(width),		// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Ì‰ï¿½ï¿½ï¿½
+		static_cast<FLOAT>(height),		// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Ìcï¿½ï¿½
+		0.0f,							// ï¿½Åï¿½ï¿½[ï¿½x
+		1.0f							// ï¿½Å‘ï¿½[ï¿½x
 	};
 }
 
 void EvaEngine::Camera::SetBeginSettings(ID3D11DeviceContext* command) const
 {
-	// ƒrƒ…[ƒ|[ƒg‚ÌƒZƒbƒgƒAƒbƒv
+	// ï¿½rï¿½ï¿½ï¿½[ï¿½|ï¿½[ï¿½gï¿½ÌƒZï¿½bï¿½gï¿½Aï¿½bï¿½v
 	command->RSSetViewports(1, &m_Viewport);
 
 	targetTexture->SetRenderTarget(clearColor);
@@ -98,9 +98,9 @@ void EvaEngine::Camera::SetBeginSettings(ID3D11DeviceContext* command) const
 	auto cameraPos = GetTransform().lock()->position();
 	Internal::DirectX11App::g_ConstantBufferData.cameraPos = cameraPos;
 
-	// ƒrƒ…[s—ñ
+	// ï¿½rï¿½ï¿½ï¿½[ï¿½sï¿½ï¿½
 	Internal::DirectX11App::g_ConstantBufferData.view = GetViewMatrix().transpose();
-	// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
+	// ï¿½vï¿½ï¿½ï¿½Wï¿½Fï¿½Nï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½
 	Internal::DirectX11App::g_ConstantBufferData.projection = GetProjectionMatrix().transpose();
 }
 
@@ -136,7 +136,7 @@ XMMATRIX EvaEngine::Camera::CreateViewMatrix(const std::weak_ptr<Transform>& tra
 
 DirectX::XMMATRIX EvaEngine::Camera::CreateViewMatrix(const Matrix4x4& rotateMatrix, const Matrix4x4& positionMatrix)
 {
-	// ƒrƒ…[s—ñ‚ğ‹ts—ñ‚É‚µ‚Ä•Ô‚·
+	// ï¿½rï¿½ï¿½ï¿½[ï¿½sï¿½ï¿½ï¿½ï¿½tï¿½sï¿½ï¿½É‚ï¿½ï¿½Ä•Ô‚ï¿½
 	return XMMatrixInverse(nullptr, (rotateMatrix * positionMatrix));
 }
 
@@ -155,7 +155,7 @@ std::weak_ptr<EvaEngine::Camera> EvaEngine::Camera::GetMainCamera()
 		}
 	}
 
-	// Œ©‚Â‚©‚ç‚È‚©‚Á‚½‚ç‹ó‚Ìweak_ptr‚ğ•Ô‚·
+	// ï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½weak_ptrï¿½ï¿½Ô‚ï¿½
 	return std::weak_ptr<Camera>();
 }
 

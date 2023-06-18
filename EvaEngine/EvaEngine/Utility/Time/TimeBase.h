@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <chrono>
 
 namespace EvaEngine {
@@ -7,7 +7,7 @@ namespace EvaEngine {
 			TimeBase() = default;
 			~TimeBase() = default;
 		public:
-			// DeltaTime‚ğZo‚·‚é(¡‚ÌŠÔ‚Æ‘O‚ÌŠÔ‚Æ‚Ì·•ª‚ğZo)
+			// DeltaTimeï¿½ï¿½ï¿½Zï¿½oï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½Ìï¿½ï¿½Ô‚Æ‘Oï¿½Ìï¿½ï¿½Ô‚Æ‚Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½o)
 			static void UpdateDeltaTime();
 			static float GetDeltaTime();
 

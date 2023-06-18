@@ -13,7 +13,7 @@ void Move::Update()
 	if (Input::GetKey(KeyCode::S)) { velocity += transform->back(); }
 	if (Input::GetKey(KeyCode::E)) { velocity += Vector3::up(); }
 	if (Input::GetKey(KeyCode::Q)) { velocity += Vector3::down(); }
-
-	if (Input::GetKeyDown(KeyCode::Space)) DebugLog::Log("SpaceƒL[‰Ÿ‚µ‚½‚æI");
+	
+	if (Input::GetKeyDown(KeyCode::Space)) DebugLog::Log("Spaceã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã‚ˆ!");
 	transform->move(velocity * m_Speed * Time::GetDeltaTime());
 }

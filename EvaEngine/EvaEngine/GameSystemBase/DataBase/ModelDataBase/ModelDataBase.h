@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <memory>
 #include <unordered_map>
 #include <guiddef.h>
@@ -12,20 +12,20 @@ namespace EvaEngine {
 			ModelDataBase() = default;
 			~ModelDataBase() = default;
 
-			// ƒ‚ƒfƒ‹ƒf[ƒ^‚ğ’Ç‰Á‚·‚é
+			// ï¿½ï¿½ï¿½fï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 			void LoadModelData(const std::shared_ptr<EvaEngine::ModelData>& model, GUID* guid);
 			void LoadModelData(const std::string& fileName, GUID* guid);
-			// ƒ‚ƒfƒ‹ƒf[ƒ^‚ğæ“¾
+			// ï¿½ï¿½ï¿½fï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½æ“¾
 			std::weak_ptr<ModelData> GetModel(const GUID& guid);
-			// ƒ‚ƒfƒ‹ƒf[ƒ^‚ğƒƒ‚ƒŠ‚©‚çÁ‚·
+			// ï¿½ï¿½ï¿½fï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			void DeleteModel(const GUID& guid);
-			// ‘Sƒ‚ƒfƒ‹ƒf[ƒ^‚ğƒƒ‚ƒŠ‚©‚çÁ‚·
+			// ï¿½Sï¿½ï¿½ï¿½fï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			void DeleteAllModel();
-			//// ƒƒ‚ƒŠ‚Éƒ‚ƒfƒ‹‚Ìƒf[ƒ^‚ğ“Ç‚İ‚Ş
+			//// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éƒï¿½ï¿½fï¿½ï¿½ï¿½Ìƒfï¿½[ï¿½^ï¿½ï¿½Ç‚İï¿½ï¿½ï¿½
 			//ModelData LoadModelDataMemory(const std::shared_ptr<EvaEngine::ModelData>& model);
 
 		private:
-			// ƒ‚ƒfƒ‹ƒf[ƒ^
+			// ï¿½ï¿½ï¿½fï¿½ï¿½ï¿½fï¿½[ï¿½^
 			std::unordered_map<GUID, std::shared_ptr<EvaEngine::ModelData>> m_Models{};
 		};
 	}

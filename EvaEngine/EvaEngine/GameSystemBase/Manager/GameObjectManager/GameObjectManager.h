@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <list>
 #include <memory>
@@ -23,22 +23,22 @@ namespace EvaEngine {
 				return gameObjectManager;
 			}
 
-			// ƒQ[ƒ€ƒIƒuƒWƒFƒNƒgƒf[ƒ^ƒx[ƒX‚ğƒV[ƒ“‚É’Ç‰Á
+			// ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½fï¿½[ï¿½^ï¿½xï¿½[ï¿½Xï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½ï¿½É’Ç‰ï¿½
 			void AddGameObjectDataBase(const std::string& sceneName);
 
-			// w’è‚µ‚½ƒV[ƒ“‚ÉƒIƒuƒWƒFƒNƒg‚ğ¶¬
+			// ï¿½wï¿½è‚µï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½ï¿½ÉƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ğ¶ï¿½
 			std::weak_ptr<GameObject> Instantiate(const std::string& sceneName, const std::string& tag, const std::string& name);
-			// –¼‘O‚ÅŒŸõ
+			// ï¿½ï¿½ï¿½Oï¿½ÅŒï¿½ï¿½ï¿½
 			std::weak_ptr<GameObject> Find(const std::string& sceneName, const std::string& name);
-			// ƒ^ƒO‚ÅŒŸõ‚µ‚ÄƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğˆê‚Â‚Á‚Ä‚­‚é
+			// ï¿½^ï¿½Oï¿½ÅŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄƒQï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Âï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
 			std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& sceneName, const std::string& tag);
-			// ƒ^ƒO‚ÅŒŸõ‚µ‚Äƒqƒbƒg‚µ‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ‘S•”‚Á‚Ä‚­‚é
+			// ï¿½^ï¿½Oï¿½ÅŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äƒqï¿½bï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
 			std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& sceneName, const std::string& tag);
-			// w’è‚µ‚½ƒV[ƒ“‚ÌGameObjectDataBase‚ğæ“¾
+			// ï¿½wï¿½è‚µï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½GameObjectDataBaseï¿½ï¿½ï¿½æ“¾
 			std::weak_ptr<GameObjectDataBase> GetGameObjectDataBase(const std::string& sceneName);
-			// •Û‚µ‚Ä‚¢‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ‘Síœ
+			// ï¿½Ûï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½Sï¿½íœ
 			void RemoveAllGameObject(const std::string& sceneName);
-			// •Û‚µ‚Ä‚¢‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ‘Síœ
+			// ï¿½Ûï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½Sï¿½íœ
 			void RemoveAllGameObject();
 
 		private:

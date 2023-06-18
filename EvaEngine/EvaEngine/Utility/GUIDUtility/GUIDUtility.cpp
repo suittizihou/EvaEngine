@@ -1,4 +1,4 @@
-#include "GUIDUtility.h"
+﻿#include "GUIDUtility.h"
 #include <combaseapi.h>
 #include <rpc.h>
 #include "../../System/DebugLog/DebugLog.h"

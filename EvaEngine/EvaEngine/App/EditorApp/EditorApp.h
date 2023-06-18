@@ -1,4 +1,4 @@
-#if _DEBUG
+ï»¿#if _DEBUG
 #pragma once
 
 #include <d3d11.h>
@@ -21,26 +21,26 @@ namespace EvaEngine {
 				~EditorApp() = default;
 			public:
 
-				// ‰Šú‰»
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				static HRESULT Init();
 
-				// Editor‚ÌXVˆ—
+				// Editorï¿½ÌXï¿½Vï¿½ï¿½ï¿½ï¿½
 				static void Update();
 
-				// Editor•`‰æ‘O€”õ
+				// Editorï¿½`ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½
 				static void DrawBegin();
-				// Editor•`‰æˆ—
+				// Editorï¿½`ï¿½æˆï¿½ï¿½
 				static void Draw();
-				// Editor•`‰æI—¹
+				// Editorï¿½`ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½
 				static void DrawEnd();
 
-				// EditorI—¹ˆ—
+				// Editorï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				static void End();
 
 				static std::weak_ptr<EvaEngine::Editor::Internal::SceneView> GetSceneView();
 
 			private:
-				// ImGui‚Ìİ’è‚ğs‚¤
+				// ImGuiï¿½Ìİ’ï¿½ï¿½ï¿½sï¿½ï¿½
 				static HRESULT ImGuiSetting();
 
 			private:

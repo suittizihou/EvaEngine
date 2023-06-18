@@ -1,16 +1,16 @@
 #include "DefaultShaderDefine.hlsl"
 
-Texture2D Texture : register(t0); // Texture‚ğƒXƒƒbƒg0‚Ì0”Ô–Ú‚ÌƒeƒNƒXƒ`ƒƒƒŒƒWƒXƒ^‚Éİ’è
-SamplerState Sampler : register(s0); // Sampler‚ğƒXƒƒbƒg0‚Ì0”Ô–Ú‚ÌƒTƒ“ƒvƒ‰ƒŒƒWƒXƒ^‚Éİ’è
+Texture2D Texture : register(t0); // Textureã‚’ã‚¹ãƒ­ãƒƒãƒˆ0ã®0ç•ªç›®ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¬ã‚¸ã‚¹ã‚¿ã«è¨­å®š
+SamplerState Sampler : register(s0); // Samplerã‚’ã‚¹ãƒ­ãƒƒãƒˆ0ã®0ç•ªç›®ã®ã‚µãƒ³ãƒ—ãƒ©ãƒ¬ã‚¸ã‚¹ã‚¿ã«è¨­å®š
 
-// LambertŠgU”½ËŒõ‚ğŒvZ‚·‚é
+// Lambertæ‹¡æ•£åå°„å…‰ã‚’è¨ˆç®—ã™ã‚‹
 float3 CalcLambertDiffuse(float3 lightDirection, float3 lightColor, float3 normal)
 {
     float t = max(0.0f, (dot(normal, lightDirection) * -1.0f));
     return lightColor * t;
 }
 
-// Phong‹¾–Ê”½ËŒõ‚ğŒvZ‚·‚é
+// Phongé¡é¢åå°„å…‰ã‚’è¨ˆç®—ã™ã‚‹
 float3 CalcPhongSpecular(float3 lightDirection, float3 lightColor, float3 worldPos, float3 normal)
 {
     float3 refVec = reflect(lightDirection, normal);
@@ -27,7 +27,7 @@ float3 CalcLigFromDirectionLight(PS_INPUT input)
     return diffDirection + specDirection;
 }
 
-// ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚É‚æ‚é”½ËŒõ‚ğŒvZ
+// ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã«ã‚ˆã‚‹åå°„å…‰ã‚’è¨ˆç®—
 float3 CalcLigFromPointLight(PS_INPUT input)
 {
     float3 ligDir = input.worldPos - ptPosition;
@@ -42,7 +42,7 @@ float3 CalcLigFromPointLight(PS_INPUT input)
     return diffPoint + specPoint;
 }
 
-// ƒXƒ|ƒbƒgƒ‰ƒCƒg‚É‚æ‚é”½ËŒõ‚ğŒvZ
+// ã‚¹ãƒãƒƒãƒˆãƒ©ã‚¤ãƒˆã«ã‚ˆã‚‹åå°„å…‰ã‚’è¨ˆç®—
 float3 CalcLigFromSpotLight(PS_INPUT input)
 {
     float3 ligDir = input.worldPos - spPosition;
@@ -74,16 +74,16 @@ float3 CalcLigFromLimLight(PS_INPUT input)
 
 float4 psMain(PS_INPUT input) : SV_TARGET
 {    
-    // ‘¾—zŒõ‚ğŒvZ
+    // å¤ªé™½å…‰ã‚’è¨ˆç®—
     float3 dirLig = CalcLigFromDirectionLight(input);
-    // ƒ|ƒCƒ“ƒgƒ‰ƒCƒg‚ğŒvZ
+    // ãƒã‚¤ãƒ³ãƒˆãƒ©ã‚¤ãƒˆã‚’è¨ˆç®—
     float3 pointLig = CalcLigFromPointLight(input);
-    // ƒXƒ|ƒbƒgƒ‰ƒCƒg‚ğŒvZ
+    // ã‚¹ãƒãƒƒãƒˆãƒ©ã‚¤ãƒˆã‚’è¨ˆç®—
     float3 spotLig = CalcLigFromSpotLight(input);
-    // ƒŠƒ€ƒ‰ƒCƒg‚ğŒvZ
+    // ãƒªãƒ ãƒ©ã‚¤ãƒˆã‚’è¨ˆç®—
     float3 limColor = CalcLigFromLimLight(input);
     
-    // ƒ‰ƒCƒgŒø‰Ê‚ğ‡Z
+    // ãƒ©ã‚¤ãƒˆåŠ¹æœã‚’åˆç®—
     float3 lig = dirLig + pointLig + spotLig + limColor + MaterialAmbient;
     
     float4 outputColor = (float4)1;

@@ -1,4 +1,4 @@
-#include "DebugLog.h"
+﻿#include "DebugLog.h"
 #include "../../Setting/Window/Window.h"
 #include <stdexcept>
 #include <iostream>

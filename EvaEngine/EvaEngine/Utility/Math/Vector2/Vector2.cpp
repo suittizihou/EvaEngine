@@ -1,4 +1,4 @@
-#include "Vector2.h"
+ï»¿#include "Vector2.h"
 #include "../Vector3/Vector3.h"
 #include "../Vector4/Vector4.h"
 #include "../Color/Color.h"
@@ -69,7 +69,7 @@ float Vector2::operator[](int index) const
 	case 0: return x;
 	case 1: return y;
 	default:
-		throw "”z—ñ‚Ì‹«ŠEŠO";
+		throw "ï¿½zï¿½ï¿½Ì‹ï¿½ï¿½Eï¿½O";
 	}
 }
 
@@ -79,7 +79,7 @@ float& Vector2::operator[](int index)
 	case 0: return x;
 	case 1: return y;
 	default:
-		throw "”z—ñ‚Ì‹«ŠEŠO";
+		throw "ï¿½zï¿½ï¿½Ì‹ï¿½ï¿½Eï¿½O";
 	}
 }
 

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "../Texture/Texture.h"
 
@@ -29,7 +29,7 @@ namespace EvaEngine {
 		void CreateSamplerState(const DXGI_FORMAT& format);
 
 	private:
-		// 2ŸŒ³ƒeƒNƒXƒ`ƒƒ‚Ìİ’è
+		// 2ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½Nï¿½Xï¿½`ï¿½ï¿½ï¿½Ìİ’ï¿½
 		D3D11_TEXTURE2D_DESC m_TextureDesc{};
 	};
 }

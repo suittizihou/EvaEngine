@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "../../Base/Component/Component.h"
 #include "../../../Utility/Input/Input.h"
@@ -16,11 +16,11 @@ namespace EvaEngine {
 			const bool canRemove = true);
 		virtual ~MonoBehaviour() = default;
 
-		// –¼‘O‚ÅŒŸõ
+		// ï¿½ï¿½ï¿½Oï¿½ÅŒï¿½ï¿½ï¿½
 		std::weak_ptr<GameObject> Find(const std::string& name);
-		// ƒ^ƒO‚ÅŒŸõ‚µ‚ÄƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğˆê‚Â‚Á‚Ä‚­‚é
+		// ï¿½^ï¿½Oï¿½ÅŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄƒQï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Âï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
 		std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
-		// ƒ^ƒO‚ÅŒŸõ‚µ‚Äƒqƒbƒg‚µ‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ‘S•”‚Á‚Ä‚­‚é
+		// ï¿½^ï¿½Oï¿½ÅŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äƒqï¿½bï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
 		std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
 
 #if _DEBUG

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <DirectXMath.h>
 #include <iostream>
@@ -16,7 +16,7 @@ namespace EvaEngine {
 	public:
 		MeshRenderer();
 
-		~MeshRenderer() { std::cout << "ƒfƒXƒgƒ‰ƒNƒ^" << std::endl; }
+		~MeshRenderer() { std::cout << "ï¿½fï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^" << std::endl; }
 
 		void Awake() override;
 		void Draw(const std::weak_ptr<Camera>& camera, ID3D11DeviceContext* command) override;

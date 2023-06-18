@@ -1,4 +1,4 @@
-#include "EvaEngineApp.h"
+ï»¿#include "EvaEngineApp.h"
 #include "../EditorApp/EditorApp.h"
 #include "../../Setting/Window/Window.h"
 #include "../DirectX11App/DirectX11App.h"
@@ -22,26 +22,26 @@ HRESULT EvaEngineApp::Init()
 {
 	HRESULT hr{};
 
-	// •`‰æƒ}ƒl[ƒWƒƒ[‚Ì‰Šú‰»
+	// ï¿½`ï¿½ï¿½}ï¿½lï¿½[ï¿½Wï¿½ï¿½ï¿½[ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
 	hr = DrawManager::Init();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("DrawManager‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½B");
+		DebugLog::ShowErrorMessageWindow("DrawManagerï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B");
 		return hr;
 	}
 
 #if _DEBUG
-	// Editor‚Ì‰Šú‰»
+	// Editorï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
 	hr = EditorApp::Init();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("Editor‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½B");
+		DebugLog::ShowErrorMessageWindow("Editorï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B");
 		return hr;
 	}
 #endif
 
-	// ƒV[ƒ“‚Ì‰Šú‰»
+	// ï¿½Vï¿½[ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
 	hr = SceneDataBase::Instance().SceneChange();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("ƒV[ƒ“‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½B");
+		DebugLog::ShowErrorMessageWindow("ï¿½Vï¿½[ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B");
 		return hr;
 	}
 
@@ -61,7 +61,7 @@ void EvaEngineApp::Update()
 void EvaEngineApp::Draw(ID3D11DeviceContext* command)
 {
 	if (SceneDataBase::Instance().GetSceneCount() <= 0) return;
-	// •`‰æ
+	// ï¿½`ï¿½ï¿½
 	SceneDataBase::Instance().Draw(command);
 }
 
@@ -73,13 +73,13 @@ void EvaEngine::Internal::EvaEngineApp::UpdateEditor()
 
 void EvaEngineApp::DrawEditor()
 {
-	// Editor‚Ì•`‰æŠJnˆ—
+	// Editorï¿½Ì•`ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½
 	EditorApp::DrawBegin();
 
-	// Editor‚Ì•`‰æˆ—
+	// Editorï¿½Ì•`ï¿½æˆï¿½ï¿½
 	EditorApp::Draw();
 	
-	// Editor•`‰æI—¹ˆ—
+	// Editorï¿½`ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	EditorApp::DrawEnd();
 }
 #endif
@@ -89,7 +89,7 @@ void EvaEngineApp::FrameEnd()
 	DrawManager::DrawEnd();	// SwapChain->Present
 
 	if (FAILED(SceneDataBase::Instance().SceneChange())) {
-		DebugLog::LogError("ƒV[ƒ“‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½B");
+		DebugLog::LogError("ï¿½Vï¿½[ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B");
 	}
 }
 
@@ -115,7 +115,7 @@ void EvaEngine::Internal::EvaEngineApp::EditorUpdate()
 	bool isPlaying = EvaEngine::Editor::EditorApplication::isPlaying && (EvaEngine::Editor::EditorApplication::isPause == false);
 
 	if (isPlaying) {
-		// ƒQ[ƒ€©‘Ì‚ÌƒAƒbƒvƒf[ƒg’†‚ÍƒQ[ƒ€ƒEƒBƒ“ƒhƒE‚ªƒAƒNƒeƒBƒuo‚È‚¢‚Æ“ü—Í‚ğó‚¯•t‚¯‚È‚¢‚æ‚¤‚É‚·‚é
+		// ï¿½Qï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ÌƒAï¿½bï¿½vï¿½fï¿½[ï¿½gï¿½ï¿½ï¿½ÍƒQï¿½[ï¿½ï¿½ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½ï¿½ï¿½Aï¿½Nï¿½eï¿½Bï¿½uï¿½oï¿½È‚ï¿½ï¿½Æ“ï¿½ï¿½Í‚ï¿½ï¿½ó‚¯•tï¿½ï¿½ï¿½È‚ï¿½ï¿½æ‚¤ï¿½É‚ï¿½ï¿½ï¿½
 		EvaEngine::Editor::EditorApplication::isInputFreeze = !EvaEngine::Editor::EditorApplication::gameWindowIsActive;
 
 		SceneDataBase::Instance().SceneUpdate();
@@ -128,7 +128,7 @@ void EvaEngine::Internal::EvaEngineApp::EditorUpdate()
 	if (isPlaying) {
 		SceneDataBase::Instance().LateUpdate();
 
-		// ƒQ[ƒ€©‘Ì‚ÌƒAƒbƒvƒf[ƒg‚ğ”²‚¯‚½‚ç“ü—Íó‘Ô‚ğ–ß‚·
+		// ï¿½Qï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ÌƒAï¿½bï¿½vï¿½fï¿½[ï¿½gï¿½ğ”²‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íï¿½Ô‚ï¿½ß‚ï¿½
 		EvaEngine::Editor::EditorApplication::isInputFreeze = false;
 	}
 }

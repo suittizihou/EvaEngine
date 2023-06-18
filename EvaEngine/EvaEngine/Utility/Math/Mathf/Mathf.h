@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <cmath>
 #include <limits>
@@ -9,62 +9,62 @@
 namespace EvaEngine {
 	struct Mathf {
 	public:
-		// ‰~ü—¦
+		// ï¿½~ï¿½ï¿½ï¿½ï¿½
 		static float pi() {
 			return 3.14159265358979f;
 		}
-		// “x‚©‚çƒ‰ƒWƒAƒ“‚É•ÏŠ·‚·‚é’è”
+		// ï¿½xï¿½ï¿½ï¿½çƒ‰ï¿½Wï¿½Aï¿½ï¿½ï¿½É•ÏŠï¿½ï¿½ï¿½ï¿½ï¿½è”
 		static float deg_to_rad() {
 			return  pi() * 2.0f / 360.0f;
 		}
-		// ƒ‰ƒWƒAƒ“‚©‚ç“x‚É•ÏŠ·‚·‚é’è”
+		// ï¿½ï¿½ï¿½Wï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½É•ÏŠï¿½ï¿½ï¿½ï¿½ï¿½è”
 		static float rad_to_deg() {
 			return 1.0f / deg_to_rad();
 		}
-		// f ‚Ì•„†‚ğ•Ô‚µ‚Ü‚·
+		// f ï¿½Ì•ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static float sign(float f) {
 			return f >= 0.0f ? 1.0f : -1.0f;
 		}
-		// –³ŒÀ‘å‚ğ•\Œ»‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 		static float infinity() {
 			return std::numeric_limits<float>::infinity();
 		}
-		// •‰‚Ì–³ŒÀ‘å‚ğ•\Œ»‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½Ì–ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 		static float negative_infinity() {
 			return -std::numeric_limits<float>::infinity();
 		}
-		// —^‚¦‚ç‚ê‚½Å¬ float ’l‚ÆÅ‘å float ’l‚Ì”ÍˆÍ‚É’l‚ğ§ŒÀ‚µ‚Ü‚·B
+		// ï¿½^ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Åï¿½ float ï¿½lï¿½ÆÅ‘ï¿½ float ï¿½lï¿½Ì”ÍˆÍ‚É’lï¿½ğ§Œï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
 		static float clamp(float value, float min, float max) {
 			return (value < min) ? min : (value > max) ? max : value;
 		}
-		// 0 ‚Æ 1 ‚ÌŠÔ‚É’l‚ğ§ŒÀ‚µA‚»‚Ì’l‚ğ•Ô‚µ‚Ü‚·B
+		// 0 ï¿½ï¿½ 1 ï¿½ÌŠÔ‚É’lï¿½ğ§Œï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Ì’lï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
 		static float clamp01(float value) {
 			return clamp(value, 0.0f, 1.0f);
 		}
-		// current ‚©‚ç target ‚Ü‚ÅAmaxDelta ‚ÌƒXƒs[ƒh‚ÅˆÚ“®‚µ‚Ü‚·
+		// current ï¿½ï¿½ï¿½ï¿½ target ï¿½Ü‚ÅAmaxDelta ï¿½ÌƒXï¿½sï¿½[ï¿½hï¿½ÅˆÚ“ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 		static float move_towards(float current, float target, float max_delta) {
 			if (std::abs(target - current) <= max_delta)
 				return target;
 			return current + sign(target - current) * max_delta;
 		}
-		// ˆø” x ˆÈ‰º‚ÅÅ‘å‚Ì®”’l‚ğ“¾‚Ü‚·Bi°ŠÖ”j
+		// ï¿½ï¿½ï¿½ï¿½ x ï¿½È‰ï¿½ï¿½ÅÅ‘ï¿½Ìï¿½ï¿½ï¿½ï¿½lï¿½ğ“¾‚Ü‚ï¿½ï¿½Bï¿½iï¿½ï¿½ï¿½Öï¿½ï¿½j
 		static float floor(const float value) {
 			return std::floor(value);
 		}
-		// Å‘å’l‚ğ•Ô‚·
+		// ï¿½Å‘ï¿½lï¿½ï¿½Ô‚ï¿½
 		static float max(float a, float b) { return a > b ? a : b; }
-		// Å¬’l‚ğ•Ô‚·
+		// ï¿½Åï¿½ï¿½lï¿½ï¿½Ô‚ï¿½
 		static float min(float a, float b) { return (a >= b) ? b : a; }
-		// Å‘åŒö–ñ”‚ğ•Ô‚·
+		// ï¿½Å‘ï¿½ï¿½ï¿½ñ”‚ï¿½Ô‚ï¿½
 		static int gcd(int a, int b) {
 			if (b == 0) return a;
 			else return gcd(b, a % b);
 		}
-		// Å¬Œö–ñ”‚ğ•Ô‚·
+		// ï¿½Åï¿½ï¿½ï¿½ï¿½ñ”‚ï¿½Ô‚ï¿½
 		static int lcm(int a, int b) {
 			return a * b / gcd(a, b);
 		}
-		// ƒKƒ“ƒ} (sRGB) ‚©‚çƒŠƒjƒA‚ÌF‹óŠÔ‚Ö’l‚ğ•ÏŠ·‚µ‚Ü‚·B
+		// ï¿½Kï¿½ï¿½ï¿½} (sRGB) ï¿½ï¿½ï¿½çƒŠï¿½jï¿½Aï¿½ÌFï¿½ï¿½Ô‚Ö’lï¿½ï¿½ÏŠï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
 		static float gamma_to_linear_space(const float value) {
 			if (value <= 0.04045f)
 				return value / 12.92f;
@@ -73,7 +73,7 @@ namespace EvaEngine {
 			else
 				return pow(value, 2.2f);
 		}
-		// ƒŠƒjƒA‚©‚çƒKƒ“ƒ} (sRGB) ‚ÌF‹óŠÔ‚Ö’l‚ğ•ÏŠ·‚µ‚Ü‚·B
+		// ï¿½ï¿½ï¿½jï¿½Aï¿½ï¿½ï¿½ï¿½Kï¿½ï¿½ï¿½} (sRGB) ï¿½ÌFï¿½ï¿½Ô‚Ö’lï¿½ï¿½ÏŠï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
 		static float linear_to_gamma_space(const float value) {
 			if (value <= 0.0f)
 				return 0.0f;

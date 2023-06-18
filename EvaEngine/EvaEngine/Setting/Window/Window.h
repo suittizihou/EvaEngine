@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <Windows.h>
 #include <string>
 #include <d3d11.h>
@@ -9,29 +9,29 @@ namespace EvaEngine {
 			Window() = default;
 			~Window() = default;
 		public:
-			// DirectX11‚ÅŽg‚¤Viewport‚É‚µ‚Ä•Ô‚·
+			// DirectX11ï¿½ÅŽgï¿½ï¿½Viewportï¿½É‚ï¿½ï¿½Ä•Ô‚ï¿½
 			static D3D11_VIEWPORT GetViewport();
 
 		public:
-			// ƒEƒBƒ“ƒhƒE–¼
+			// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½ï¿½
 			static const std::string g_WindowName;
-			// ƒEƒBƒ“ƒhƒE‚Ì¶’[
+			// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Ìï¿½ï¿½[
 			static UINT g_WindowLeft;
-			// ƒEƒBƒ“ƒhƒE‚Ì‰E’[
+			// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Ì‰Eï¿½[
 			static UINT g_WindowRight;
-			// ƒEƒBƒ“ƒhƒE‚Ìã’[
+			// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Ìï¿½[
 			static UINT g_WindowTop;
-			// ƒEƒBƒ“ƒhƒE‚Ì‰º’[
+			// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Ì‰ï¿½ï¿½[
 			static UINT g_WindowBottom;
-			// ‰æ–Ê‚ÌƒŠƒtƒŒƒbƒVƒ…ƒŒ[ƒg
+			// ï¿½ï¿½Ê‚Ìƒï¿½ï¿½tï¿½ï¿½ï¿½bï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½g
 			static UINT g_FPS;
-			// ƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹(ƒAƒvƒŠƒP[ƒVƒ‡ƒ“Ž©‘Ì‚ðŽ¦‚·’l)
+			// ï¿½Cï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½Xï¿½nï¿½ï¿½ï¿½hï¿½ï¿½(ï¿½Aï¿½vï¿½ï¿½ï¿½Pï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½l)
 			static HINSTANCE g_hInstance;
-			// ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹(ƒEƒBƒ“ƒhƒEŽ©‘Ì‚ðŽ¦‚·’l)
+			// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½nï¿½ï¿½ï¿½hï¿½ï¿½(ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½l)
 			static HWND g_hWnd;
-			// ƒEƒCƒ“ƒhƒE‚ð‚Ç‚Ì‚æ‚¤‚É•\Ž¦‚·‚é‚©‚ðŽ¦‚·’è”
+			// ï¿½Eï¿½Cï¿½ï¿½ï¿½hï¿½Eï¿½ï¿½ï¿½Ç‚Ì‚æ‚¤ï¿½É•\ï¿½ï¿½ï¿½ï¿½ï¿½é‚©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½è”
 			static int g_nCmdShow;
-			// ƒEƒBƒ“ƒhƒE‚ÌŠeƒpƒ‰ƒ[ƒ^‚ð‚Ü‚Æ‚ß‚é\‘¢‘Ì
+			// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½ÌŠeï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½ï¿½ï¿½Ü‚Æ‚ß‚ï¿½\ï¿½ï¿½ï¿½ï¿½
 			static WNDCLASSEX g_wc;
 		};
 	}

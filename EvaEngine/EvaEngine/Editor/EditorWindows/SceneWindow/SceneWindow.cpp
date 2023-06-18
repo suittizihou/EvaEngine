@@ -26,10 +26,10 @@ void SceneWindow::OnGUI()
 {
 	EditorApplication::sceneWindowIsActive = ImGui::IsWindowFocused(ImGuiFocusedFlags_RootWindow);
 
-	// �V�[���r���[�̕`��
+	// シーンビューの描画
 	auto windowSize = ImGui::GetWindowSize();
 	auto sceneView = EditorApp::GetSceneView();
-	// SceneWindow���A�N�e�B�u�łȂ��ꍇ�͑���s�\
+	// SceneWindowがアクティブでない場合は操作不可能
 	auto camera = sceneView.lock()->GetSceneCamera();
 	auto tagetTexture = camera.lock()->targetTexture;
 	auto size = tagetTexture->GetTexelSize();

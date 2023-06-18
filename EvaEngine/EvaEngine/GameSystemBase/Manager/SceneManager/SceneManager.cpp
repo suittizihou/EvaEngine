@@ -1,4 +1,4 @@
-#include "SceneManager.h"
+﻿#include "SceneManager.h"
 #include "../../DataBase/SceneDataBase/SceneDataBase.h"
 
 using namespace EvaEngine;

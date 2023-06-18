@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../StringAssist/StringAssist.h"
 
 #undef GetClassName

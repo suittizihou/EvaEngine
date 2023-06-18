@@ -1,4 +1,4 @@
-#include "Transform.h"
+ï»¿#include "Transform.h"
 #include "../../../Utility/Math/Mathf/Mathf.h"
 #include "../../Base/GameObject/GameObject.h"
 
@@ -11,9 +11,9 @@ using namespace EvaEngine;
 
 Transform::~Transform()
 {
-	// qƒIƒuƒWƒFƒNƒg‚ğØ‚è—£‚·
+	// ï¿½qï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½Ø‚è—£ï¿½ï¿½
 	detach_children();
-	// eƒIƒuƒWƒFƒNƒg‚©‚çØ‚è—£‚·
+	// ï¿½eï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Ø‚è—£ï¿½ï¿½
 	detach_parent();
 }
 
@@ -38,7 +38,7 @@ void EvaEngine::Transform::OnGUI()
 	local_scale(tempScale);
 
 	//if (changeFlag) {
-	//	// ƒ[ƒ‹ƒh‹óŠÔ‚ğXV
+	//	// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ï¿½Xï¿½V
 	//	update_world_transform(parent_);
 	//}
 	//Matrix4x4 matrix{ local_to_world_matrix() };
@@ -239,8 +239,8 @@ Matrix4x4 Transform::world_to_local_matrix() const
 
 Vector3 Transform::transform_point(const Vector3& position) const
 {
-	// ŒvZ‡”Ô
-	// Šg‘åk¬ -> ‰ñ“] -> •½sˆÚ“®
+	// ï¿½vï¿½Zï¿½ï¿½ï¿½ï¿½
+	// ï¿½gï¿½ï¿½kï¿½ï¿½ -> ï¿½ï¿½] -> ï¿½ï¿½ï¿½sï¿½Ú“ï¿½
 	return rotation_ * Vector3::scale(position, scale_) + position_;
 }
 
@@ -293,25 +293,25 @@ void Transform::parent(std::weak_ptr<Transform> parent)
 
 void Transform::set_parent(std::weak_ptr<Transform> parent, bool world_position_stays)
 {
-	// Œ»İ‚Ìe‚©‚çØ‚è—£‚·
+	// ï¿½ï¿½ï¿½İ‚Ìeï¿½ï¿½ï¿½ï¿½Ø‚è—£ï¿½ï¿½
 	detach_parent();
-	// V‚µ‚¢e‚ğİ’è
+	// ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½eï¿½ï¿½İ’ï¿½
 	parent_ = parent;
 	if (!parent_.expired()) {
 		if (world_position_stays) {
-			// Œ»İ‚Ìƒ[ƒ‹ƒh‹óŠÔ‚ğ•Û‚Â‚©H
+			// ï¿½ï¿½ï¿½İ‚Ìƒï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½Û‚Â‚ï¿½ï¿½H
 			local_rotation_ = Quaternion::inverse(parent_.lock()->rotation()) * rotation_;
 			local_position_ = parent_.lock()->inverse_transform_point(position_);
 		}
 		else {
-			// Œ»İ‚Ìƒ[ƒJƒ‹‹óŠÔ‚ğXV‚¹‚¸‚Éƒ[ƒ‹ƒh‹óŠÔ‚ğXV
+			// ï¿½ï¿½ï¿½İ‚Ìƒï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Éƒï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ï¿½Xï¿½V
 			update_world_transform(parent_);
 		}
-		// ©•ª©g‚ğe‚Ìq‚É“o˜^
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½eï¿½Ìqï¿½É“oï¿½^
 		parent.lock()->children_.push_back(weak_from_this());
 	}
 	else {
-		// e‚ª‚¢‚È‚¯‚ê‚ÎAƒ[ƒJƒ‹‹óŠÔ‚Íƒ[ƒ‹ƒh‹óŠÔ‚Æ“¯‚¶
+		// ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ÎAï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½Ô‚Íƒï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚Æ“ï¿½ï¿½ï¿½
 		local_rotation_ = rotation_;
 		local_position_ = position_;
 		local_scale_ = scale_;
@@ -328,8 +328,8 @@ std::weak_ptr<Transform> EvaEngine::Transform::get_child(const UINT index) const
 {
 	if (index >= children_.size()) {
 		DebugLog::LogError(
-			std::to_string(index) + "”Ô–Ú‚Ìq‹Ÿ‚Í‘¶İ‚µ‚Ü‚¹‚ñ‚Å‚µ‚½B\n" +
-			GetGameObject().lock()->GetName() + "‚Ìq‹Ÿ‚Ì”‚Í" + std::to_string(children_.size()) + "‚Å‚·B");
+			std::to_string(index) + "ï¿½Ô–Ú‚Ìqï¿½ï¿½ï¿½Í‘ï¿½ï¿½İ‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½B\n" +
+			GetGameObject().lock()->GetName() + "ï¿½Ìqï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½" + std::to_string(children_.size()) + "ï¿½Å‚ï¿½ï¿½B");
 		return std::weak_ptr<Transform>();
 	}
 
@@ -349,7 +349,7 @@ Vector3 Transform::local_scale() const
 void Transform::local_scale(const Vector3& value)
 {
 	local_scale_ = value;
-	// ƒ[ƒ‹ƒh‹óŠÔ‚ğXV
+	// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ï¿½Xï¿½V
 	update_world_transform(parent_);
 }
 
@@ -366,7 +366,7 @@ Vector3 Transform::local_position() const
 void Transform::local_position(const Vector3& value)
 {
 	local_position_ = value;
-	// ƒ[ƒ‹ƒh‹óŠÔ‚ğXV
+	// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ï¿½Xï¿½V
 	update_world_transform(parent_);
 }
 
@@ -383,7 +383,7 @@ Quaternion Transform::local_rotation() const
 void Transform::local_rotation(const Quaternion& value)
 {
 	local_rotation_ = value;
-	// ƒ[ƒ‹ƒh‹óŠÔ‚ğXV
+	// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ï¿½ï¿½Xï¿½V
 	update_world_transform(parent_);
 }
 
@@ -409,7 +409,7 @@ void EvaEngine::Transform::local_euler_angles(float x, float y, float z)
 
 void Transform::detach_children()
 {
-	// ©g‚Ìe‚ğq‚Ìe‚É•ÏX‚·‚é
+	// ï¿½ï¿½ï¿½gï¿½Ìeï¿½ï¿½ï¿½qï¿½Ìeï¿½É•ÏXï¿½ï¿½ï¿½ï¿½
 	for (auto child : children_) {
 		child.lock()->parent(parent_);
 	}
@@ -418,7 +418,7 @@ void Transform::detach_children()
 void Transform::detach_parent()
 {
 	if (!parent_.expired()) {
-		// e‚ÌƒŠƒXƒg‚©‚ç©g‚ğíœ
+		// ï¿½eï¿½Ìƒï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½ç©ï¿½gï¿½ï¿½ï¿½íœ
 		std::weak_ptr<Transform> wp = weak_from_this();
 		parent_.lock()->children_.remove_if([wp](std::weak_ptr<Transform> p) {
 			std::shared_ptr<Transform> swp = wp.lock();
@@ -496,18 +496,18 @@ void EvaEngine::Transform::internal_local_scale(float x, float y, float z)
 void Transform::update_world_transform(const std::weak_ptr<Transform>& parent)
 {
 	if (parent.lock().get() != nullptr) {
-		// ƒ[ƒ‹ƒh‹óŠÔ‚ÌXV
+		// ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½Ô‚ÌXï¿½V
 		position_ = parent.lock()->transform_point(local_position_);
 		rotation_ = parent.lock()->rotation_ * local_rotation_;
 		scale_ = Vector3::scale(parent.lock()->scale_, local_scale_);
 	}
 	else {
-		// e‚ª‚¢‚È‚¯‚ê‚Îƒ[ƒJƒ‹À•W‚Æƒ[ƒ‹ƒhÀ•W‚Í“¯‚¶
+		// ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½Îƒï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Æƒï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Wï¿½Í“ï¿½ï¿½ï¿½
 		position_ = local_position_;
 		rotation_ = local_rotation_;
 		scale_ = local_scale_;
 	}
-	// q‹Ÿ‚Ìƒ[ƒ‹ƒhÀ•W‚ğXV
+	// ï¿½qï¿½ï¿½ï¿½Ìƒï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½Xï¿½V
 	for (auto child : children_) {
 		child.lock()->update_world_transform(weak_from_this());
 	}

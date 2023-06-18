@@ -1,12 +1,12 @@
-#pragma once
+ï»¿#pragma once
 
 #include <DirectXMath.h>
 
 namespace EvaEngine {
 	struct VertexData {
-		DirectX::XMFLOAT3 position{};		// À•W(x, y, z)
-		DirectX::XMFLOAT3 normal{};		// –@ü
-		DirectX::XMFLOAT4 color{ 1.0f, 1.0f, 1.0f, 1.0f };		// ’¸“_ƒJƒ‰[
-		DirectX::XMFLOAT2 uv{};		// ƒeƒNƒXƒ`ƒƒÀ•W(u, v)
+		DirectX::XMFLOAT3 position{};		// ï¿½ï¿½ï¿½W(x, y, z)
+		DirectX::XMFLOAT3 normal{};		// ï¿½@ï¿½ï¿½
+		DirectX::XMFLOAT4 color{ 1.0f, 1.0f, 1.0f, 1.0f };		// ï¿½ï¿½ï¿½_ï¿½Jï¿½ï¿½ï¿½[
+		DirectX::XMFLOAT2 uv{};		// ï¿½eï¿½Nï¿½Xï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½W(u, v)
 	};
 }

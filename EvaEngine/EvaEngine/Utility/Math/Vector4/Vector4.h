@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #undef min
 #undef max
@@ -21,91 +21,91 @@ namespace EvaEngine {
 
 		static const float kEpsilon;
 
-		// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		// ï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 		Vector4() = default;
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		// ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^
 		Vector4(float x, float y, float z, float w);
 
 
-		// Vector4(0, 0, 0, 0) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector4(0, 0, 0, 0) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector4 zero() { return Vector4(0.0f, 0.0f, 0.0f, 0.0f); }
-		// Vector4(1, 1, 1, 1) ‚Æ“¯‚¶ˆÓ–¡
+		// Vector4(1, 1, 1, 1) ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
 		static Vector4 one() { return Vector4(1.0f, 1.0f, 1.0f, 1.0f); }
 
-		// ƒxƒNƒgƒ‹‚Ì’·‚³
+		// ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ì’ï¿½ï¿½ï¿½
 		float magnitude() const;
-		// magnitude ‚ğ 1 ‚Æ‚µ‚½ƒxƒNƒgƒ‹
+		// magnitude ï¿½ï¿½ 1 ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½
 		Vector4 normalized() const;
-		// ƒxƒNƒgƒ‹‚Ì2æ‚Ì’·‚³
+		// ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½Ì’ï¿½ï¿½ï¿½
 		float sqr_magnitude() const;
-		// [0] ‚â[1] ‚ğg—p‚µ‚ÄŠe¬•ª‚ÉƒAƒNƒZƒX‚µ‚Ü‚·
+		// [0] ï¿½ï¿½[1] ï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½ÄŠeï¿½ï¿½ï¿½ï¿½ï¿½ÉƒAï¿½Nï¿½Zï¿½Xï¿½ï¿½ï¿½Ü‚ï¿½
 		float operator[](int index) const;
 		float& operator[](int index);
 
 		// Returns true if the given vector is exactly equal to this vector.
 		bool equals(const Vector4& other) const;
-		// magnitude ‚ğ 1 ‚Æ‚µ‚½ƒxƒNƒgƒ‹‚ğì¬‚µ‚Ü‚·
+		// magnitude ï¿½ï¿½ 1 ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½
 		void normalize();
-		// 2‚Â‚ÌƒxƒNƒgƒ‹‚ÌŠe¬•ª‚ğæZ‚µ‚Ü‚·
+		// 2ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ÌŠeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½Ü‚ï¿½
 		void scale(const Vector4& v);
-		// Šù‘¶‚Ì Vector4 ‚É xAyAz, w ‚Ì¬•ª‚ğİ’è‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Vector4 ï¿½ï¿½ xï¿½Ayï¿½Az, w ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½İ’è‚µï¿½Ü‚ï¿½
 		void set(float new_x, float new_y, float new_z, float new_w);
-		// ƒxƒNƒgƒ‹‚Ì’l‚ğŒ©‚â‚·‚­ƒtƒH[ƒ}ƒbƒg‚³‚ê‚½•¶š—ñ
+		// ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ì’lï¿½ï¿½ï¿½ï¿½ï¿½â‚·ï¿½ï¿½ï¿½tï¿½Hï¿½[ï¿½}ï¿½bï¿½gï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		std::string to_string() const;
 
-		// 2“_ŠÔifrom ‚Æ toj‚ÌŠp“x‚ğ•Ô‚µ‚Ü‚·
+		// 2ï¿½_ï¿½Ôifrom ï¿½ï¿½ toï¿½jï¿½ÌŠpï¿½xï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static float angle(const Vector4& from, const Vector4& to);
-		// ‘å‚«‚³‚ğmax_length‚Ü‚Å‚É§ŒÀ‚µ‚½ vector ‚ÌƒRƒs[‚ğ•Ô‚µ‚Ü‚·
+		// ï¿½å‚«ï¿½ï¿½ï¿½ï¿½max_lengthï¿½Ü‚Å‚Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ vector ï¿½ÌƒRï¿½sï¿½[ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static Vector4 clamp_magnitude(const Vector4& vector, float max_length);
-		// a ‚Æ b ‚ÌŠÔ‚Ì‹——£‚ğ•Ô‚µ‚Ü‚·
+		// a ï¿½ï¿½ b ï¿½ÌŠÔ‚Ì‹ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static float distance(const Vector4& a, const Vector4 b);
-		// 2‚Â‚ÌƒxƒNƒgƒ‹‚Ì“àÏ
+		// 2ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ì“ï¿½ï¿½ï¿½
 		static float dot(const Vector4& lhs, const Vector4& rhs);
 
-		// ’¼üã‚É‚ ‚é 2 ‚Â‚ÌƒxƒNƒgƒ‹ŠÔ‚ğ•âŠÔ‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ 2 ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static Vector4 lerp(const Vector4& a, const Vector4& b, float t);
-		// ’¼üã‚É‚ ‚é 2 ‚Â‚ÌƒxƒNƒgƒ‹ŠÔ‚ğ•âŠÔ‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ 2 ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
 		static Vector4 lerp_unclamped(const Vector4& a, const Vector4& b, float t);
-		// 2‚Â‚ÌƒxƒNƒgƒ‹‚ÅŠe¬•ª‚Ìˆê”Ô‘å‚«‚È’l‚ğg—p‚µ‚ÄƒxƒNƒgƒ‹‚ğì¬‚µ‚Ü‚·
+		// 2ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ÅŠeï¿½ï¿½ï¿½ï¿½ï¿½Ìˆï¿½Ô‘å‚«ï¿½È’lï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½Äƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector4 max(const Vector4& lhs, const Vector4& rhs);
-		// 2‚Â‚ÌƒxƒNƒgƒ‹‚ÅŠe¬•ª‚Ìˆê”Ô¬‚³‚È’l‚ğg—p‚µ‚ÄƒxƒNƒgƒ‹‚ğì¬‚µ‚Ü‚·
+		// 2ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ÅŠeï¿½ï¿½ï¿½ï¿½ï¿½Ìˆï¿½Ôï¿½ï¿½ï¿½ï¿½È’lï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½Äƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector4 min(const Vector4& lhs, const Vector4& rhs);
 
-		// Œ»İ‚ÌˆÊ’u current ‚©‚ç target ‚ÉŒü‚¯‚ÄˆÚ“®‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½İ‚ÌˆÊ’u current ï¿½ï¿½ï¿½ï¿½ target ï¿½ÉŒï¿½ï¿½ï¿½ï¿½ÄˆÚ“ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector4 move_towards(const Vector4& current, const Vector4& target,
 			float max_distance_delta);
-		// magnitude ‚ğ 1 ‚Æ‚µ‚½ƒxƒNƒgƒ‹‚ğì¬‚µ‚Ü‚·
+		// magnitude ï¿½ï¿½ 1 ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector4 normalize(const Vector4& value);
 
-		// ƒxƒNƒgƒ‹‚ğ•Ê‚ÌƒxƒNƒgƒ‹‚É“Š‰e‚µ‚Ü‚·
+		// ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Ê‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½É“ï¿½ï¿½eï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector4 project(const Vector4& vector, const Vector4& onNormal);
-		// •½–Ê‚É‚’¼‚È–@üƒxƒNƒgƒ‹‚É‚æ‚Á‚Ä’è‹`‚³‚ê‚é•½–Êã‚ÉƒxƒNƒgƒ‹‚ğË‰e‚µ‚Ü‚·
+		// ï¿½ï¿½ï¿½Ê‚Éï¿½ï¿½ï¿½ï¿½È–@ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½Ä’ï¿½`ï¿½ï¿½ï¿½ï¿½é•½ï¿½Êï¿½Éƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Ë‰eï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector4 project_on_plane(const Vector4& vector, const Vector4& planeNormal);
-		// –@ü‚Å’è‹`‚³‚ê‚½•½–Ê‚ÅƒxƒNƒgƒ‹‚ğ”½Ë‚µ‚Ü‚·
+		// ï¿½@ï¿½ï¿½ï¿½Å’ï¿½`ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½Ê‚Åƒxï¿½Nï¿½gï¿½ï¿½ï¿½ğ”½Ë‚ï¿½ï¿½Ü‚ï¿½
 		static Vector4 reflect(const Vector4& inDirection, const Vector4& inNormal);
-		// 2‚Â‚ÌƒxƒNƒgƒ‹‚ÌŠe¬•ª‚ğæZ‚µ‚Ü‚·
+		// 2ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ÌŠeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½Ü‚ï¿½
 		static Vector4 scale(const Vector4& a, const Vector4& b);
 
-		// Color‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+		// Colorï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
 		operator Color() const;
-		// Vector2‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+		// Vector2ï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
 		operator Vector2() const;
-		// Vector3‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+		// Vector3ï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
 		operator Vector3() const;
-		// XMVECTOR‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+		// XMVECTORï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
 		operator DirectX::XMVECTOR() const;
 	};
 
-	// ’P€‰‰ZqƒI[ƒo[ƒ[ƒh
+	// ï¿½Pï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½qï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½h
 	Vector4 operator - (const Vector4& v);
 
-	// ‘ã“ü‰‰ZqƒI[ƒo[ƒ[ƒh
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½qï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½h
 	Vector4& operator += (Vector4& lhs, const Vector4& rhs);
 	Vector4& operator -= (Vector4& lhs, const Vector4& rhs);
 	Vector4& operator *= (Vector4& lhs, float rhs);
 	Vector4& operator /= (Vector4& lhs, float rhs);
 
-	// ‚Q€‰‰ZqƒI[ƒo[ƒ[ƒh
+	// ï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½qï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½h
 	Vector4 operator + (const Vector4& lhs, const Vector4& rhs);
 	Vector4 operator - (const Vector4& lhs, const Vector4& rhs);
 	Vector4 operator * (const Vector4& lhs, float rhs);

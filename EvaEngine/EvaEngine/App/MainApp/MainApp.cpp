@@ -1,4 +1,4 @@
-#include "MainApp.h"
+ï»¿#include "MainApp.h"
 #include "../WindowApp/WindowApp.h"
 #include "../DirectX11App/DirectX11App.h"
 #include "../EvaEngineApp/EvaEngineApp.h"
@@ -10,24 +10,24 @@ HRESULT MainApp::Init()
 {
 	setlocale(LC_ALL, "jpn");
 
-	// ƒEƒBƒ“ƒhƒE‚Ì‰Šú‰»
+	// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
 	HRESULT hr = WindowApp::Init();
 	if (FAILED(hr)) {
 		DebugLog::ShowErrorMessageWindow("Window initialize failed.");
 		return hr;
 	}
 
-	// DirectX11‚Ì‰Šú‰»
+	// DirectX11ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
 	hr = DirectX11App::Init();
 	if (FAILED(hr)) {
 		DebugLog::ShowErrorMessageWindow("DirectX initialize failed.");
 		return hr;
 	}
 
-	// ƒ†[ƒU[‚Ì‰Šú‰»ˆ—(ƒV[ƒ“‚Ì’Ç‰Á‚È‚Ç‚ª‚ ‚é‚½‚ß‚±‚±‚Å‚·‚é)
+	// ï¿½ï¿½ï¿½[ï¿½Uï¿½[ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½Vï¿½[ï¿½ï¿½ï¿½Ì’Ç‰ï¿½ï¿½È‚Ç‚ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ß‚ï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½)
 	EvaEngine::GameBase::Instance()->Init();
 
-	// ƒGƒ“ƒWƒ“‚Ì‰Šú‰»
+	// ï¿½Gï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
 	hr = EvaEngineApp::Init();
 	if (FAILED(hr)) {
 		DebugLog::ShowErrorMessageWindow("EvaEngine initialize failed.");
@@ -47,26 +47,26 @@ int MainApp::Run()
 
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
 #if _DEBUG
-	// ƒƒ‚ƒŠƒŠ[ƒNŒŸo
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½Nï¿½ï¿½ï¿½o
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 	
 	EvaEngine::Internal::Window::g_hInstance = hInstance;
 	EvaEngine::Internal::Window::g_nCmdShow = nCmdShow;
 
-	// EvaEngine‚Ì‰Šú‰»
+	// EvaEngineï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
 	if (FAILED(MainApp::Init())) {
 		EvaEngine::DebugLog::ShowErrorMessageWindow("EvaEngine initialize failed.");
 		return -1;
 	}
 
-	// ƒƒbƒZ[ƒWƒ‹[ƒv
+	// ï¿½ï¿½ï¿½bï¿½Zï¿½[ï¿½Wï¿½ï¿½ï¿½[ï¿½v
 	int result = MainApp::Run();
 
 	DirectX11App::Release();
 #if _DEBUG
 	DirectX11App::ReportLiveObjects();
-	// ƒfƒoƒbƒO‚Ég‚Á‚½ƒIƒuƒWƒFƒNƒg‚ğ‰ğ•ú
+	// ï¿½fï¿½oï¿½bï¿½Oï¿½Égï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½
 	DirectX11App::DebugRelease();
 #endif
 

@@ -1,4 +1,4 @@
-#include "RenderTexture.h"
+ï»¿#include "RenderTexture.h"
 
 #include "../../../App/DirectX11App/DirectX11App.h"
 #include "../Texture2D/Texture2D.h"
@@ -39,16 +39,16 @@ void EvaEngine::RenderTexture::Release()
 
 void EvaEngine::RenderTexture::SetRenderTarget(const Color& clearColor) const
 {
-	// ƒ|ƒŠƒSƒ“‚Ì¶¬•û–@‚Ìw’è
+	// ï¿½|ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½@ï¿½Ìwï¿½ï¿½
 	DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	
-	// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg‚ğİ’è
+	// ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½[ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½ï¿½İ’ï¿½
 	DirectX11App::g_Context->OMSetRenderTargets(1, &m_RenderTargetView, m_DepthStencilView);
 
-	// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg‚ğƒNƒŠƒA
+	// ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½[ï¿½^ï¿½[ï¿½Qï¿½bï¿½gï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½A
 	float color[4] = { clearColor.r, clearColor.g, clearColor.b, clearColor.a };
 	DirectX11App::g_Context->ClearRenderTargetView(m_RenderTargetView, color);
-	// [“xƒXƒeƒ“ƒVƒ‹ƒoƒbƒtƒ@‚ğƒNƒŠƒA
+	// ï¿½[ï¿½xï¿½Xï¿½eï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½oï¿½bï¿½tï¿½@ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½A
 	DirectX11App::g_Context->ClearDepthStencilView(m_DepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
@@ -111,7 +111,7 @@ void EvaEngine::RenderTexture::CreateShaderResourceView(const DXGI_FORMAT& forma
 
 void EvaEngine::RenderTexture::CreateDepthStencilView()
 {
-	// [“xƒXƒeƒ“ƒVƒ‹ƒoƒbƒtƒ@‚Ìì¬
+	// ï¿½[ï¿½xï¿½Xï¿½eï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½oï¿½bï¿½tï¿½@ï¿½Ìì¬
 	D3D11_TEXTURE2D_DESC textureDesc{};
 	ZeroMemory(&textureDesc, sizeof(D3D11_TEXTURE2D_DESC));
 	textureDesc.Width = static_cast<UINT>(texelSize.x);

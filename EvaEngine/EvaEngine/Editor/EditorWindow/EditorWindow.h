@@ -1,4 +1,4 @@
-#if _DEBUG
+ï»¿#if _DEBUG
 #pragma once
 #include <string>
 #include <vector>
@@ -77,23 +77,23 @@ namespace EvaEngine {
 			virtual void Init() override {};
 
 		public:
-			// ŠJnˆ—
+			// ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½
 			void virtual Begin() override
 			{
 				ImGui::SetNextWindowSize(ImVec2(m_WindowSize.x, m_WindowSize.y), ImGuiCond_FirstUseEver);
 				ImGui::Begin(m_WindowName.c_str(), &isOpen, windowFlags, &m_Loaded);
 			}
-			// •`‰æˆ—
+			// ï¿½`ï¿½æˆï¿½ï¿½
 			void virtual OnGUI() override {};
-			// I—¹ˆ—
+			// ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			void virtual End() override { ImGui::End(); };
 
 		public:
-			// Window–¼‚ğæ“¾
+			// Windowï¿½ï¿½ï¿½ï¿½ï¿½æ“¾
 			std::string GetWindowName() const override { return m_WindowName; };
-			// WindowPath‚ğæ“¾
+			// WindowPathï¿½ï¿½ï¿½æ“¾
 			std::string GetWindowPath() const override { return m_WindowPath; };
-			// WindowSize‚ğæ“¾
+			// WindowSizeï¿½ï¿½ï¿½æ“¾
 			Vector2 GetWindowSize() const override { return m_WindowSize; };
 			
 		public:

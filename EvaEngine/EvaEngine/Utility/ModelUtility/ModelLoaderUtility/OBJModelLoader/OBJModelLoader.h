@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "../../ModelData/VertexData.h"
 #include "../ModelLoadBase.h"

@@ -1,4 +1,4 @@
-#include <stdexcept>
+ï»¿#include <stdexcept>
 #include <string>
 #include <fbxsdk.h>
 
@@ -13,39 +13,39 @@ using namespace EvaEngine::Internal;
 
 void FBXModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model)
 {
-    // FbxManagerì¬
+    // FbxManagerä½œæˆ
     fbxsdk::FbxManager* fbx_manager = fbxsdk::FbxManager::Create();
     if (fbx_manager == nullptr)
     {
-        DebugLog::LogError("FbxManager‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
+        DebugLog::LogError("FbxManagerã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ");
         return;
     }
 
-    // FbxImporterì¬
+    // FbxImporterä½œæˆ
     FbxImporter* fbx_importer = FbxImporter::Create(fbx_manager, "");
     if (fbx_importer == nullptr) {
         fbx_manager->Destroy();
-        DebugLog::LogError("FbxImporter‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
+        DebugLog::LogError("FbxImporterã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ");
         return;
     }
 
-    // FbxScene‚ğ¶¬
+    // FbxSceneä½œæˆ
     fbxsdk::FbxScene* fbx_scene = fbxsdk::FbxScene::Create(fbx_manager, "");
     if (fbx_scene == nullptr) {
         fbx_importer->Destroy();
         fbx_manager->Destroy();
-        DebugLog::LogError("FbxScene‚Ìì¬‚É¸”s‚µ‚Ü‚µ‚½");
+        DebugLog::LogError("FbxSceneã®ä½œæˆã«å¤±æ•—ã—ã¾ã—ãŸ");
         return;
     }
 
-    // File‚ğ‰Šú‰»
+    // Fileã‚’åˆæœŸåŒ–
     fbx_importer->Initialize(fileName);
-    // scene‚ÉƒCƒ“ƒ|[ƒg
+    // sceneã«ã‚¤ãƒ³ãƒãƒ¼ãƒˆ
     fbx_importer->Import(fbx_scene);
 
     FbxGeometryConverter converter(fbx_manager);
 
-    // ƒ|ƒŠƒSƒ“‚ğOŠpŒ`‚É‚·‚é
+    // ãƒãƒªã‚´ãƒ³ã‚’ä¸‰è§’å½¢ã«ã™ã‚‹
     converter.Triangulate(fbx_scene, true);
 
     int materialNum = fbx_scene->GetSrcObjectCount<FbxSurfaceMaterial>();
@@ -55,20 +55,20 @@ void FBXModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::
 
 
     std::map<std::string, FbxNode*> mesh_node_list;
-    // ƒƒbƒVƒ…Node‚ğ’T‚·
+    // ãƒ¡ãƒƒã‚·ãƒ¥Nodeã‚’æ¢ã™
     FindMeshNode(fbx_scene->GetRootNode(), mesh_node_list);
 
     for (auto data : mesh_node_list) {
-        // meshì¬
+        // meshä½œæˆ
         CreateMesh(model, data.first.c_str(), data.second->GetMesh());
     }
 
-    // ŠÖ˜A‚·‚é‚·‚×‚Ä‚ÌƒIƒuƒWƒFƒNƒg‚ª‰ğ•ú‚³‚ê‚é
-    // ƒCƒ“ƒ|[ƒ^\‰ğ•ú
+    // é–¢é€£ã™ã‚‹å…¨ã¦ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒè§£æ”¾ã•ã‚Œã‚‹
+    // ã‚¤ãƒ³ãƒãƒ¼ã‚¿â€•è§£æ”¾
     fbx_importer->Destroy();
-    // ƒV[ƒ“‰ğ•ú
+    // ã‚·ãƒ¼ãƒ³è§£æ”¾
     fbx_scene->Destroy();
-    // ƒ}ƒl[ƒWƒƒ‰ğ•ú
+    // ãƒãƒãƒ¼ã‚¸ãƒ£è§£æ”¾
     fbx_manager->Destroy();
 }
 
@@ -126,18 +126,18 @@ void FBXModelLoader::LoadMaterial(std::shared_ptr<EvaEngine::ModelData>& model, 
 
     model->materials[material->GetName()] = tempMaterial;
 
-    // ƒeƒNƒXƒ`ƒƒ“Ç‚İ‚İ
-    // DiffuseƒvƒƒpƒeƒB‚ğæ“¾
+    // ãƒ†ã‚¯ã‚¹ãƒãƒ£èª­ã¿è¾¼ã¿
+    // Diffuseãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’å–å¾—
     prop = material->FindProperty(FbxSurfaceMaterial::sDiffuse);
     FbxFileTexture* texture = nullptr;
     std::string keyword;
     int textureNum = prop.GetSrcObjectCount<FbxFileTexture>();
     if (textureNum > 0) {
-        // prop‚©‚çFbxFileTexture‚ğæ“¾
+        // propã‹ã‚‰FbxFileTextureã‚’å–å¾—
         texture = prop.GetSrcObject<FbxFileTexture>(0);
     }
     else {
-        // FbxLaveredTexture‚©‚çFbxFileTexture‚ğæ“¾
+        // FbxLaveredTextureã‹ã‚‰FbxFileTextureã‚’å–å¾—
         int layerNum = prop.GetSrcObjectCount<FbxLayeredTexture>();
         if (layerNum > 0) {
             texture = prop.GetSrcObject<FbxFileTexture>(0);
@@ -146,7 +146,7 @@ void FBXModelLoader::LoadMaterial(std::shared_ptr<EvaEngine::ModelData>& model, 
 
     if (texture != nullptr &&
         LoadTexture(model, texture, keyword)) {
-        // “Ç‚İ‚ñ‚¾ƒeƒNƒXƒ`ƒƒ‚Æƒ}ƒeƒŠƒAƒ‹‚ÌŠÖŒW‚ğ•Û
+        // èª­ã¿è¾¼ã‚“ã ãƒ†ã‚¯ã‚¹ãƒãƒ£ã¨ãƒãƒ†ãƒªã‚¢ãƒ«ã®é–¢ä¿‚ã‚’ä¿æŒ
 
     }
 }
@@ -162,7 +162,7 @@ void FBXModelLoader::FindMeshNode(fbxsdk::FbxNode* node, std::map<std::string, f
     {
         FbxNodeAttribute* attribute = node->GetNodeAttributeByIndex(i);
 
-        // Attribute‚ªƒƒbƒVƒ…‚È‚ç’Ç‰Á
+        // AttributeãŒãƒ¡ãƒƒã‚·ãƒ¥ãªã‚‰è¿½åŠ 
         if (attribute->GetAttributeType() == FbxNodeAttribute::EType::eMesh)
         {
             list[node->GetName()] = node;
@@ -178,25 +178,25 @@ void FBXModelLoader::FindMeshNode(fbxsdk::FbxNode* node, std::map<std::string, f
 
 bool FBXModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, const char* node_name, fbxsdk::FbxMesh* mesh)
 {
-    // ’¸“_ƒoƒbƒtƒ@‚Ìæ“¾
+    // é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®å–å¾—
     fbxsdk::FbxVector4* vertices = mesh->GetControlPoints();
-    // ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìæ“¾
+    // ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®å–å¾—
     int* indices = mesh->GetPolygonVertices();
-    // ’¸“_À•W‚Ì”‚Ìæ“¾
+    // é ‚ç‚¹åº§æ¨™ã®æ•°ã®å–å¾—
     int polygon_vertex_count = mesh->GetPolygonVertexCount();
     
     std::vector<VertexData> vertexData(polygon_vertex_count);
 
-    // GetPolygonVertexCount => ’¸“_”
+    // GetPolygonVertexCount => é ‚ç‚¹æ•°
     for (int i = 0; i < polygon_vertex_count; ++i) {
-        // ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚©‚ç’¸“_”Ô†‚ğæ“¾
+        // ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‹ã‚‰é ‚ç‚¹ç•ªå·ã‚’å–å¾—
         int index = indices[i];
         VertexData vertex{};
         vertex.position.x = (float)-vertices[index][0];
         vertex.position.y = (float)vertices[index][1];
         vertex.position.z = (float)vertices[index][2];
 
-        // ’¸“_À•WƒŠƒXƒg‚©‚çÀ•W‚ğæ“¾‚·‚é
+        // é ‚ç‚¹åº§æ¨™ãƒªã‚¹ãƒˆã‹ã‚‰åº§æ¨™ã‚’å–å¾—ã™ã‚‹
         vertexData[i] = vertex;
     }
 
@@ -205,21 +205,21 @@ bool FBXModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, co
     }
 
     fbxsdk::FbxArray<fbxsdk::FbxVector4> normals;
-    // –@üƒŠƒXƒg‚Ìæ“¾
+    // æ³•ç·šãƒªã‚¹ãƒˆã®å–å¾—
     mesh->GetPolygonVertexNormals(normals);
 
-    // –@üİ’è
+    // æ³•ç·šè¨­å®š
     for (int i = 0; i < normals.Size(); ++i) {
-        // ’¸“_–@üƒŠƒXƒg‚©‚ç–@ü‚ğæ“¾‚·‚é
+        // é ‚ç‚¹æ³•ç·šãƒªã‚¹ãƒˆã‹ã‚‰æ³•ç·šã‚’å–å¾—ã™ã‚‹
         vertexData[i].normal = DirectX::XMFLOAT3((float)-normals[i][0], (float)normals[i][1], (float)normals[i][2]);
     }
 
-    // ƒ|ƒŠƒSƒ“”‚Ìæ“¾
+    // ãƒãƒªã‚´ãƒ³æ•°ã®å–å¾—
     int polygon_count = mesh->GetPolygonCount();
 
     std::vector<unsigned int> tempIndices(polygon_count * 3);
     int polygonIndexNum = 0;
-    // ƒ|ƒŠƒSƒ“‚Ì”‚¾‚¯˜A”Ô‚Æ‚µ‚Ä•Û‘¶‚·‚é
+    // ãƒãƒªã‚´ãƒ³ã®æ•°ã ã‘é€£ç•ªã¨ã—ã¦ä¿å­˜ã™ã‚‹
     for (int i = 0; i < polygon_count; ++i) {
         tempIndices[polygonIndexNum] = i * 3 + 2;
         polygonIndexNum++;
@@ -233,12 +233,12 @@ bool FBXModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, co
 
     Mesh tempMesh{};
     tempMesh.SetVertexData(vertexData);
-    // ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚ğƒZƒbƒg
+    // ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã‚’ã‚»ãƒƒãƒˆ
     tempMesh.SetIndices(tempIndices);
-    // –¼‘O‚ğƒZƒbƒg
+    // åå‰ã‚’ã‚»ãƒƒãƒˆ
     tempMesh.name = node_name;
 
-    // ’¸“_î•ñ‚ÌƒZƒbƒg
+    // é ‚ç‚¹æƒ…å ±ã®ã‚»ãƒƒãƒˆ
     model->meshes[node_name].push_back(tempMesh);
 
     mesh->Destroy();

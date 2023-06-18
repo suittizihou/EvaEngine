@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <string>
 #include <DirectXMath.h>
@@ -15,62 +15,62 @@ namespace EvaEngine {
             float v[4];
         };
 
-        // w’è‚³‚ê‚½rAgAbAaƒRƒ“ƒ|[ƒlƒ“ƒg‚ğg—p‚µ‚ÄV‚µ‚¢F‚ğì¬‚µ‚Ü‚·B
+        // ï¿½wï¿½è‚³ï¿½ê‚½rï¿½Agï¿½Abï¿½Aaï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½ÄVï¿½ï¿½ï¿½ï¿½ï¿½Fï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
         Color(const float r, const float g, const float b, const float a);
-        // w’è‚³‚ê‚½rAgAbƒRƒ“ƒ|[ƒlƒ“ƒg‚ğg—p‚µ‚ÄV‚µ‚¢F‚ğì¬‚µA/ a /‚ğ1‚Éİ’è‚µ‚Ü‚·B
+        // ï¿½wï¿½è‚³ï¿½ê‚½rï¿½Agï¿½Abï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½ÄVï¿½ï¿½ï¿½ï¿½ï¿½Fï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½A/ a /ï¿½ï¿½1ï¿½Éİ’è‚µï¿½Ü‚ï¿½ï¿½B
         Color(const float r = 1.0f, const float g = 1.0f, const float b = 1.0f);
 
-        // •¶š—ñ‚É•ÏŠ·‚µ‚Ü‚·B
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É•ÏŠï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
         std::string ToString();
 
-        // “™‚µ‚¢‚©”äŠr‚µ‚Ü‚·B
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½rï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
         bool Equals(const Color& other);
 
-        // F/ a /‚Æ/ b /‚ÌŠÔ‚ğ/ t /‚Å•âŠÔ‚µ‚Ü‚·B
+        // ï¿½F/ a /ï¿½ï¿½/ b /ï¿½ÌŠÔ‚ï¿½/ t /ï¿½Å•ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
         static Color Lerp(Color a, Color b, float t);
-        // •âŠÔŠÖ”‚ğƒNƒ‰ƒ“ƒv‚¹‚¸‚ÉAF / a / ‚Æ / b / ‚ÌŠÔ‚ğ / t / ‚Å•âŠÔ‚µ‚Ü‚·B
+        // ï¿½ï¿½ÔŠÖï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ÉAï¿½F / a / ï¿½ï¿½ / b / ï¿½ÌŠÔ‚ï¿½ / t / ï¿½Å•ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
         static Color LerpUnclamped(Color a, Color b, float t);
 
-        // RGBƒRƒ“ƒ|[ƒlƒ“ƒg‚ªæZ‚³‚ê‚Ä‚¢‚é‚ªAƒAƒ‹ƒtƒ@‚Í•ÏX‚³‚ê‚Ä‚¢‚È‚¢V‚µ‚¢F‚ğ•Ô‚µ‚Ü‚·B
+        // RGBï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚ªï¿½Aï¿½Aï¿½ï¿½ï¿½tï¿½@ï¿½Í•ÏXï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Fï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
         Color RGBMultiplied(float multiplier);
-        // RGBƒRƒ“ƒ|[ƒlƒ“ƒg‚ªæZ‚³‚ê‚Ä‚¢‚é‚ªAƒAƒ‹ƒtƒ@‚Í•ÏX‚³‚ê‚Ä‚¢‚È‚¢V‚µ‚¢F‚ğ•Ô‚µ‚Ü‚·B
+        // RGBï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚ªï¿½Aï¿½Aï¿½ï¿½ï¿½tï¿½@ï¿½Í•ÏXï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Fï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
         Color AlphaMultiplied(float multiplier);
-        //  RGBƒRƒ“ƒ|[ƒlƒ“ƒg‚ªæZ‚³‚ê‚Ä‚¢‚é‚ªAƒAƒ‹ƒtƒ@‚Í•ÏX‚³‚ê‚Ä‚¢‚È‚¢V‚µ‚¢F‚ğ•Ô‚µ‚Ü‚·B
+        //  RGBï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚ªï¿½Aï¿½Aï¿½ï¿½ï¿½tï¿½@ï¿½Í•ÏXï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Fï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
         Color RGBMultiplied(Color multiplier);
 
-        // RGBA(1, 0, 0, 1)‚Æ“¯‚¶ˆÓ–¡
+        // RGBA(1, 0, 0, 1)ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
         static Color Red();
-        // RGBA(0, 1, 0, 1)‚Æ“¯‚¶ˆÓ–¡
+        // RGBA(0, 1, 0, 1)ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
         static Color Green();
-        // RGBA(0, 0, 1, 1)‚Æ“¯‚¶ˆÓ–¡
+        // RGBA(0, 0, 1, 1)ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
         static Color Blue();
-        // RGBA(1, 1, 1, 1)‚Æ“¯‚¶ˆÓ–¡
+        // RGBA(1, 1, 1, 1)ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
         static Color White();
-        // RGBA(0, 0, 0, 1)‚Æ“¯‚¶ˆÓ–¡
+        // RGBA(0, 0, 0, 1)ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
         static Color Black();
-        // RGBA(1, 0.92, 0.016, 1)‚Æ“¯‚¶ˆÓ–¡
+        // RGBA(1, 0.92, 0.016, 1)ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
         static Color Yellow();
-        // RGBA(0, 1, 1, 1)‚Æ“¯‚¶ˆÓ–¡
+        // RGBA(0, 1, 1, 1)ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
         static Color Cyan();
-        // RGBA(1, 0, 1, 1)‚Æ“¯‚¶ˆÓ–¡
+        // RGBA(1, 0, 1, 1)ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
         static Color Magenta();
-        // RGBA(0.5, 0.5, 0.5, 1)‚Æ“¯‚¶ˆÓ–¡
+        // RGBA(0.5, 0.5, 0.5, 1)ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
         static Color Gray();
-        // RGBA(0.5, 0.5, 0.5, 1)‚Æ“¯‚¶ˆÓ–¡
+        // RGBA(0.5, 0.5, 0.5, 1)ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
         static Color Grey();
-        // RGBA(0, 0, 0, 0)‚Æ“¯‚¶ˆÓ–¡
+        // RGBA(0, 0, 0, 0)ï¿½Æ“ï¿½ï¿½ï¿½ï¿½Ó–ï¿½
         static Color Clear();
 
-        // ƒOƒŒ[ƒXƒP[ƒ‹‚ğ•Ô‚µ‚Ü‚·B
+        // ï¿½Oï¿½ï¿½ï¿½[ï¿½Xï¿½Pï¿½[ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
         float GrayScale();
-        // sRGBƒJƒ‰[‚ÌüŒ`’l‚ğ•Ô‚µ‚Ü‚·B
+        // sRGBï¿½Jï¿½ï¿½ï¿½[ï¿½Ìï¿½ï¿½`ï¿½lï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
         Color Linear() const;
-        // ƒKƒ“ƒ}ƒJ[ƒu‚ª“K—p‚³‚ê‚½F‚Ìƒo[ƒWƒ‡ƒ“‚ğ•Ô‚µ‚Ü‚·B
+        // ï¿½Kï¿½ï¿½ï¿½}ï¿½Jï¿½[ï¿½uï¿½ï¿½ï¿½Kï¿½pï¿½ï¿½ï¿½ê‚½ï¿½Fï¿½Ìƒoï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½ï¿½B
         Color Gamma() const;
-        // F¬•ª’l‚ÌÅ‘å’l‚ğ•Ô‚µ‚Ü‚·
+        // ï¿½Fï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ÌÅ‘ï¿½lï¿½ï¿½Ô‚ï¿½ï¿½Ü‚ï¿½
         float MaxColorComponent() const;
 
-        // RGB‚ğHSV‚É•ÏŠ·‚µ‚Ü‚·
+        // RGBï¿½ï¿½HSVï¿½É•ÏŠï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
         static void RGBToHSV(const Color& rgbColor, float* H, float* S, float* V);
 
         static void RGBToHSVHelper(float offset, float dominantcolor, float colorone, float colortwo, float* H, float* S, float* V);
@@ -80,23 +80,23 @@ namespace EvaEngine {
             // Convert a set of HSV values to an RGB Color.
         static Color HSVToRGB(float H, float S, float V, bool hdr);
 
-        // Vector4‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+        // Vector4ï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
         operator Vector4() const;
-        // Vector3‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+        // Vector3ï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
         operator Vector3() const;
-        // XMVECTOR‚Ö‚ÌˆÃ–ÙƒLƒƒƒXƒg
+        // XMVECTORï¿½Ö‚ÌˆÃ–ÙƒLï¿½ï¿½ï¿½Xï¿½g
         operator DirectX::XMVECTOR() const;
         float operator[](int index) const;
         float& operator[](int index);
     };
 
-    // ‘ã“ü‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½qï¿½ÌƒIï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½h
     Color& operator += (Color& lhs, const Color& rhs);
     Color& operator -= (Color& lhs, const Color& rhs);
     Color& operator *= (Color& lhs, float rhs);
     Color& operator /= (Color& lhs, float rhs);
 
-    // ‚Q€‰‰ZqƒI[ƒo[ƒ[ƒh
+    // ï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½qï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½h
     Color operator+(const Color& lhs, const Color& rhs);
     Color operator-(const Color& lhs, const Color& rhs);
     Color operator*(const Color& lhs, const Color& rhs);
@@ -104,7 +104,7 @@ namespace EvaEngine {
     Color operator*(float lhs, const Color& rhs);
     Color operator/(const Color& lhs, float rhs);
 
-    // ”äŠr‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh
+    // ï¿½ï¿½rï¿½ï¿½ï¿½Zï¿½qï¿½ÌƒIï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½h
     bool operator == (const Color& lhs, const Color& rhs);
     bool operator != (const Color& lhs, const Color& rhs);
 }

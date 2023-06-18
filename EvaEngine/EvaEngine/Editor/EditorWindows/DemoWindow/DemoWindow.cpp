@@ -1,4 +1,4 @@
-#if _DEBUG
+﻿#if _DEBUG
 #include "DemoWindow.h"
 
 void EvaEngine::Editor::Internal::DemoWindow::OnGUI()

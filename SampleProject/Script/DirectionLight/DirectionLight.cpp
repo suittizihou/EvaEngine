@@ -2,7 +2,7 @@
 
 void DirectionLight::Update()
 {
-	// ‘¾—zŒõ‚ÌŒü‚«•ÏX
+	// å¤ªé™½å…‰ã®å‘ãå¤‰æ›´
 	auto forward = GetTransform().lock()->forward();
 	forward.normalize();
 	EvaEngine::Internal::DirectX11App::g_ConstantBufferData.lightDirection = forward;
@@ -13,13 +13,13 @@ void DirectionLight::Update()
 #if _DEBUG
 void DirectionLight::OnGUI()
 {
-	// ‘¾—zŒõ‚ÌƒJƒ‰[İ’è
+	// å¤ªé™½å…‰ã®ã‚«ãƒ©ãƒ¼è¨­å®š
 	ImGui::ColorPicker3("LightColor", m_LightColor.v);
 
-	// ƒAƒ“ƒrƒGƒ“ƒgF
+	// ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆè‰²
 	ImGui::ColorPicker3("Ambient", m_AmbientColor.v);
 
-	// ‘¾—zŒõ‚ÉŠÖŒW‚È‚¢‚¯‚ÇƒeƒJƒŠ‹ï‡‚Ì’²ß
+	// å¤ªé™½å…‰ã«é–¢ä¿‚ãªã„ã‘ã©ãƒ†ã‚«ãƒªå…·åˆã®èª¿ç¯€
 	ImGui::DragFloat("Shine", &EvaEngine::Internal::DirectX11App::g_ConstantBufferData.shine, 0.05f, -FLT_MAX, +FLT_MAX);
 }
 #endif

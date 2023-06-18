@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #if _DEBUG
 #define _CRTDBG_MAP_ALLOC
@@ -17,13 +17,13 @@ namespace EvaEngine {
 		public:
 
 			/// <summary>
-			/// ƒEƒBƒ“ƒhƒEADirectXAƒQ[ƒ€ƒGƒ“ƒWƒ“‚Ì‰Šú‰»‚ð‘S•”‚â‚é
+			/// ï¿½Eï¿½Bï¿½ï¿½ï¿½hï¿½Eï¿½ADirectXï¿½Aï¿½Qï¿½[ï¿½ï¿½ï¿½Gï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½
 			/// </summary>
 			/// <returns></returns>
 			static HRESULT Init();
 
 			/// <summary>
-			/// ƒƒCƒ“ƒ‹[ƒv‚É“ü‚é
+			/// ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½vï¿½É“ï¿½ï¿½ï¿½
 			/// </summary>
 			/// <returns></returns>
 			static int Run();

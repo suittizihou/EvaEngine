@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "GameObjectBase.h"
 #include "../../Manager/ComponentManager/ComponentManager.h"
@@ -23,19 +23,19 @@ namespace EvaEngine {
 
 		~GameObject() = default;
 
-		// ‰Šú‰»ˆ—
+		// åˆæœŸåŒ–å‡¦ç†
 		void Initialize() override;
 
-		// ObjectID‚ğ•Ô‚·
+		// ObjectIDã‚’è¿”ã™
 		const GUID& GetObjectID() const override;
-		// –¼‘O‚ğ•Ô‚·
+		// åå‰ã‚’è¿”ã™
 		std::string GetName() const override;
-		// ƒ^ƒO‚ğ•Ô‚·
+		// ã‚¿ã‚°ã‚’è¿”ã™
 		std::string GetTag() const override;
-		// Transform‚ğ•Ô‚·
+		// Transformã‚’è¿”ã™
 		std::weak_ptr<Transform> GetTransform();
 
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì“o˜^
+		// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ç™»éŒ²
 		template<class T, class... Args>
 		std::weak_ptr<T> AddComponent(Args&& ... args) {
 			static_assert(std::is_base_of<Component, T>::value == true, "The argument does not inherit from Component.");
@@ -44,7 +44,7 @@ namespace EvaEngine {
 			return component;
 		}
 
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìæ“¾
+		// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å–å¾—
 		template<class T>
 		std::weak_ptr<T> GetComponent() {
 			return EvaEngine::Internal::ComponentManager::Instance().GetComponent<T>(GetSceneName(), GetGameObject());
@@ -52,35 +52,35 @@ namespace EvaEngine {
 
 		std::vector<std::weak_ptr<Component>> GetAllComponents() override { return m_Components; };
 
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìíœ
+		// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å‰Šé™¤
 		template<class T>
 		void RemoveComponent() {
 			EvaEngine::Internal::ComponentManager::Instance().RemoveComponent<T>(GetSceneName(), weak_from_this());
 			
-			// QÆ‚ªØ‚ê‚½ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ”z—ñ‚©‚çíœ
+			// å‚ç…§ãŒåˆ‡ã‚ŒãŸã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’é…åˆ—ã‹ã‚‰å‰Šé™¤
 			for (int i = 0; i < m_Components.size(); ++i)
 			{
 				if (m_Components[i].expired()) {
-					// Á‚·êŠ‚Æ––”ö‚ğƒNƒ‹‚Á‚Æ“ü‚ê‘Ö‚¦
+					// æ¶ˆã™å ´æ‰€ã¨æœ«å°¾ã‚’ã‚¯ãƒ«ã£ã¨å…¥ã‚Œæ›¿ãˆ
 					std::iter_swap(m_Components.begin() + i, m_Components.end() - 1);
-					// ––”ö‚ğíœ
+					// æœ«å°¾ã‚’å‰Šé™¤
 					m_Components.pop_back();
 					return;
 				}
 			}
 
-			DebugLog::LogError("GameObject‘¤‚ÌComponentíœ‚É¸”s‚µ‚Ü‚µ‚½B");
+			DebugLog::LogError("GameObjectå´ã®Componentå‰Šé™¤ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 		}
 
-		// –¼‘O‚ÅŒŸõ
+		// åå‰ã§æ¤œç´¢
 		std::weak_ptr<GameObject> Find(const std::string& name);
-		// ƒ^ƒO‚ÅŒŸõ‚µ‚ÄƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğˆê‚Â‚Á‚Ä‚­‚é
+		// ã‚¿ã‚°ã§æ¤œç´¢ã—ã¦ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä¸€ã¤æŒã£ã¦ãã‚‹
 		std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
-		// ƒ^ƒO‚ÅŒŸõ‚µ‚Äƒqƒbƒg‚µ‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ‘S•”‚Á‚Ä‚­‚é
+		// ã‚¿ã‚°ã§æ¤œç´¢ã—ã¦ãƒ’ãƒƒãƒˆã—ãŸã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å…¨éƒ¨æŒã£ã¦ãã‚‹
 		std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
-		// ƒIƒuƒWƒFƒNƒg‚ÌƒAƒNƒeƒBƒuó‘Ô‚ğİ’è
+		// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¢ã‚¯ãƒ†ã‚£ãƒ–çŠ¶æ…‹ã‚’è¨­å®š
 		void SetActive(const bool active);
-		// ƒIƒuƒWƒFƒNƒg‚ÌƒAƒNƒeƒBƒuó‘Ô‚ğæ“¾
+		// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¢ã‚¯ãƒ†ã‚£ãƒ–çŠ¶æ…‹ã‚’å–å¾—
 		bool ActiveSelf() const;
 
 	private:

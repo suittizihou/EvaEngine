@@ -1,4 +1,4 @@
-#include "ModelLoader.h"
+ï»¿#include "ModelLoader.h"
 #include "../..//StringAssist/StringAssist.h"
 #include "../../../GameSystemBase/DataBase/ModelDataBase/ModelDataBase.h"
 
@@ -17,7 +17,7 @@ std::shared_ptr<ModelData> ModelLoader::Load(const std::string& fileName)
 {
     std::vector<std::string> fileSplit{ StringAssist::Split(fileName, ".") };
 
-    if (fileSplit.size() == 0) DebugLog::LogError("Šg’£q•t‚«‚Å“ü—Í‚µ‚Ä‚­‚¾‚³‚¢");
+    if (fileSplit.size() == 0) DebugLog::LogError("ï¿½gï¿½ï¿½ï¿½qï¿½tï¿½ï¿½ï¿½Å“ï¿½ï¿½Í‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 
     std::string modelType = fileSplit[fileSplit.size() - 1];
 
@@ -39,10 +39,10 @@ std::shared_ptr<ModelData> ModelLoader::Load(const std::string& fileName)
     }
 
     auto end = std::chrono::system_clock::now();
-    DebugLog::Log(fileName + " : ƒ‚ƒfƒ‹“Ç‚İ‚İŠÔ = " + std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms");
+    DebugLog::Log(fileName + " : ï¿½ï¿½ï¿½fï¿½ï¿½ï¿½Ç‚İï¿½ï¿½İï¿½ï¿½ï¿½ = " + std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms");
 
-    DebugLog::Log(fileName + " : “Ç‚İ‚İƒƒbƒVƒ…” = " + std::to_string(model->meshes.size()));
-    DebugLog::Log(fileName + " : “Ç‚İ‚İƒ}ƒeƒŠƒAƒ‹” = " + std::to_string(model->materials.size()));
+    DebugLog::Log(fileName + " : ï¿½Ç‚İï¿½ï¿½İƒï¿½ï¿½bï¿½Vï¿½ï¿½ï¿½ï¿½ = " + std::to_string(model->meshes.size()));
+    DebugLog::Log(fileName + " : ï¿½Ç‚İï¿½ï¿½İƒ}ï¿½eï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ = " + std::to_string(model->materials.size()));
 
     return model;
 }

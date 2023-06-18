@@ -1,4 +1,4 @@
-#include "Matrix4x4.h"
+ï»¿#include "Matrix4x4.h"
 #include "../Vector3/Vector3.h"
 #include "..//Quaternion/Quaternion.h"
 #include <iostream>
@@ -55,7 +55,7 @@ Matrix4x4 Matrix4x4::inverse(const Matrix4x4& m)
 	float b5 = m.m[2][2] * m.m[3][3] - m.m[2][3] * m.m[3][2];
 	float det = a0 * b5 - a1 * b4 + a2 * b3 + a3 * b2 - a4 * b1 + a5 * b0;
 	if (det == 0.0f) {
-		return m; // ‹ts—ñ‚ª‘¶İ‚µ‚È‚¢!
+		return m; // ï¿½tï¿½sï¿½ñ‚ª‘ï¿½ï¿½İ‚ï¿½ï¿½È‚ï¿½!
 	}
 	float invDet = 1.0f / det;
 	Matrix4x4 result = {

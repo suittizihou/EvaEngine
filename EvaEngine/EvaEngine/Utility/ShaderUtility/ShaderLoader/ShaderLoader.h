@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <string>
 #include "../../../Define/D3D11Defines.h"
@@ -13,17 +13,17 @@ namespace EvaEngine {
 		~ShaderLoader() = default;
 
 	public:
-		// ’¸“_ƒVƒF[ƒ_[‚Ì“Ç‚İ‚İ
+		// ï¿½ï¿½ï¿½_ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì“Ç‚İï¿½ï¿½ï¿½
 		static void VertexShaderLoad(GUID* guid, const std::string& fileName, const D3D11_INPUT_ELEMENT_DESC* layout, const UINT arraySize, const std::string& entryPoint = "vsMain");
-		// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ì“Ç‚İ‚İ
+		// ï¿½sï¿½Nï¿½Zï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì“Ç‚İï¿½ï¿½ï¿½
 		static void PixelShaderLoad(GUID* guid, const std::string& fileName, const std::string& entryPoint = "psMain");
-		// ƒWƒIƒƒgƒŠƒVƒF[ƒ_[‚Ì“Ç‚İ‚İ
+		// ï¿½Wï¿½Iï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì“Ç‚İï¿½ï¿½ï¿½
 		static void GeometryShaderLoad(GUID* guid, const std::string& fileName, const std::string& entryPoint = "gsMain");
-		// ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚Ì“Ç‚İ‚İ
+		// ï¿½Rï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½gï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì“Ç‚İï¿½ï¿½ï¿½
 		static void ComputeShaderLoad(GUID* guid, const std::string& fileName, const std::string& entryPoint = "csMain");
-		// ƒnƒ‹ƒVƒF[ƒ_[‚Ì“Ç‚İ‚İ
+		// ï¿½nï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì“Ç‚İï¿½ï¿½ï¿½
 		static void HullShaderLoad(GUID* guid, const std::string& fileName, const std::string& entryPoint = "hsMain");
-		// ƒhƒƒCƒ“ƒVƒF[ƒ_[‚Ì“Ç‚İ‚İ
+		// ï¿½hï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì“Ç‚İï¿½ï¿½ï¿½
 		static void DomainShaderLoad(GUID* guid, const std::string& fileName, const std::string& entryPoint = "dsMain");
 	};
 }

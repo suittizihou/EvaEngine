@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "../../Base/Scene/Scene.h"
 
@@ -21,16 +21,16 @@ namespace EvaEngine {
 				return instance;
 			}
 
-			// ƒV[ƒ“‚Ì’Ç‰Á
+			// ï¿½Vï¿½[ï¿½ï¿½ï¿½Ì’Ç‰ï¿½
 			template<class T>
 			void AddScene(const std::string& sceneName) {
-				// Editor‚Æ‚¢‚¤–¼‘O‚ÌƒV[ƒ“–¼‚Í“o˜^‚Å‚«‚È‚¢
+				// Editorï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ÌƒVï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Í“oï¿½^ï¿½Å‚ï¿½ï¿½È‚ï¿½
 				if (sceneName == "Editor") {
 					DebugLog::LogError("You cannot use the name ""Editor"" in the scene name.");
 					return;
 				}
 
-				// “¯‚¶ƒV[ƒ“–¼‚ªŠù‚É“o˜^‚³‚ê‚Ä‚¢‚ê‚Î•Ô‚·
+				// ï¿½ï¿½ï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É“oï¿½^ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Î•Ô‚ï¿½
 				if (m_Scenes.count(sceneName) >= 1) {
 					DebugLog::LogError("A scene with the same name has already been registered.");
 					return;
@@ -43,23 +43,23 @@ namespace EvaEngine {
 				ModelManager::Instance().AddModelDataBase(sceneName);
 			}
 
-			// ƒV[ƒ“‚Ìƒ[ƒh
+			// ï¿½Vï¿½[ï¿½ï¿½ï¿½Ìƒï¿½ï¿½[ï¿½h
 			void LoadScene(const std::string& sceneName);
 			void LoadScene(const UINT& sceneID);
-			// ¡‚ÌƒV[ƒ“–¼‚ğ•Ô‚·
+			// ï¿½ï¿½ï¿½ÌƒVï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½
 			std::string GetCurrentSceneName() const;
-			// ‘O‚ÌƒV[ƒ“–¼‚ğ•Ô‚·
+			// ï¿½Oï¿½ÌƒVï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô‚ï¿½
 			std::string GetPreviousSceneName() const;
-			// ƒV[ƒ“‚Ì‰Šú‰»‚ğs‚¤
+			// ï¿½Vï¿½[ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½
 			HRESULT InitializeScene();
-			// ƒV[ƒ“‚ğ•Ï‚¦‚é
+			// ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½Ï‚ï¿½ï¿½ï¿½
 			HRESULT SceneChange();
-			// ƒV[ƒ“‚ª‘¶İ‚·‚é‚©ƒ`ƒFƒbƒN
+			// ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ‚ï¿½ï¿½é‚©ï¿½`ï¿½Fï¿½bï¿½N
 			bool IsCheckExists(const std::string& sceneName);
-			// “o˜^‚³‚ê‚Ä‚¢‚éƒV[ƒ“‚Ì”‚ğ•Ô‚·
+			// ï¿½oï¿½^ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½Ô‚ï¿½
 			size_t GetSceneCount() const;
 
-			// ƒV[ƒ“‚Ìƒ^ƒXƒNƒVƒXƒeƒ€‚ğ‰ñ‚·
+			// ï¿½Vï¿½[ï¿½ï¿½ï¿½Ìƒ^ï¿½Xï¿½Nï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			void Initialize();
 			void SceneUpdate();
 			void FixedUpdate();

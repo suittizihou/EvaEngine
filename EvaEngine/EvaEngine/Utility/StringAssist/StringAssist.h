@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <Windows.h>
 #include <iostream>
@@ -14,11 +14,11 @@ namespace EvaEngine {
         static std::vector<std::string> Split(std::string str, const std::string& del);
 
         static void Split(char split_char, char* buffer, std::vector<std::string>& out);
-        // ƒƒCƒh•¶š‚©‚çƒ}ƒ‹ƒ`ƒoƒCƒg•¶š‚Ö‚Ì•ÏŠ·
+        // ï¿½ï¿½ï¿½Cï¿½hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½}ï¿½ï¿½ï¿½`ï¿½oï¿½Cï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Ö‚Ì•ÏŠï¿½
         static void ToString(const std::wstring& src, std::string& dest);
-        // ƒ}ƒ‹ƒ`ƒoƒCƒg•¶š‚©‚çƒƒCƒh•¶š‚Ö‚Ì•ÏŠ·
+        // ï¿½}ï¿½ï¿½ï¿½`ï¿½oï¿½Cï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½çƒï¿½Cï¿½hï¿½ï¿½ï¿½ï¿½ï¿½Ö‚Ì•ÏŠï¿½
         static void ToWString(const std::string& src, std::wstring& dest);
-        // Shift-JIS‚©‚çUTF-8
+        // Shift-JISï¿½ï¿½ï¿½ï¿½UTF-8
         static void ToUTF8(const std::string& src, std::string& dest);
 
     private:

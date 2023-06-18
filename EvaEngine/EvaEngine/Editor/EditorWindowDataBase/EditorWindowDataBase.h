@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #if _DEBUG
 #include <vector>
 #include <memory>
@@ -14,7 +14,7 @@ namespace EvaEngine {
 
 			class EditorWindowData {
 			public:
-				// ƒpƒX(ŠK‘w‚²‚Æ)
+				// ï¿½pï¿½X(ï¿½Kï¿½wï¿½ï¿½ï¿½ï¿½)
 				std::string windowPath;
 
 				bool AddChildWindow(
@@ -22,35 +22,35 @@ namespace EvaEngine {
 					const int pathIndex,
 					const std::shared_ptr<EditorWindowBase> window) {
 
-					// ŠK‘w–¼‚ªˆá‚¤ê‡ƒŠƒ^[ƒ“
+					// ï¿½Kï¿½wï¿½ï¿½ï¿½ï¿½ï¿½á‚¤ï¿½ê‡ï¿½ï¿½ï¿½^ï¿½[ï¿½ï¿½
 					if (windowPath != paths[pathIndex]) return false;
-					// ÅŒã‚ÌŠK‘w‚È‚ç’Ç‰Á
+					// ï¿½ÅŒï¿½ÌŠKï¿½wï¿½È‚ï¿½Ç‰ï¿½
 					if (paths.size() - 1 == pathIndex) { editorWindows.push_back(window); return true; }
 
 					for (auto child : childDatas) {
-						// ÅŒã‚ÌŠK‘w‚Å‚È‚¢‚È‚çX‚ÉŠK‘w‚ği‚Ş
+						// ï¿½ÅŒï¿½ÌŠKï¿½wï¿½Å‚È‚ï¿½ï¿½È‚ï¿½Xï¿½ÉŠKï¿½wï¿½ï¿½iï¿½ï¿½
 						if (child->AddChildWindow(paths, pathIndex + 1, window)) {
 							return true;
 						}
 					}
 
-					// ‚Ç‚ê‚É‚à“–‚Ä‚Í‚Ü‚ç‚È‚¢ê‡V‚µ‚¢‚à‚Ì‚Æ‚µ‚ÄV‹K’Ç‰Á
+					// ï¿½Ç‚ï¿½É‚ï¿½ï¿½ï¿½ï¿½Ä‚Í‚Ü‚ï¿½È‚ï¿½ï¿½ê‡ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚Æ‚ï¿½ï¿½ÄVï¿½Kï¿½Ç‰ï¿½
 					auto child = std::make_shared< EditorWindowData>();
 					bool lastIndex = (paths.size() - 1 == pathIndex + 1);
 					child->windowPath = paths[pathIndex + 1];
 					if(lastIndex)  child->editorWindows.push_back(window);
 					childDatas.push_back(child);
 					
-					// ÅŒã‚ÌŠK‘w‚Å‚È‚¢‚È‚çŒp‘±
+					// ï¿½ÅŒï¿½ÌŠKï¿½wï¿½Å‚È‚ï¿½ï¿½È‚ï¿½pï¿½ï¿½
 					if(!lastIndex) child->AddChildWindow(paths, pathIndex + 1, window);
 
 					return true;
 				}
 
-				// q‹Ÿ‚ÌŠK‘w
+				// ï¿½qï¿½ï¿½ï¿½ÌŠKï¿½w
 				std::vector<std::shared_ptr<EditorWindowData>> childDatas;
 
-				// ‚±‚ÌŠK‘w‚É‚ ‚éEditorWindow‚ğŠi”[‚·‚é
+				// ï¿½ï¿½ï¿½ÌŠKï¿½wï¿½É‚ï¿½ï¿½ï¿½EditorWindowï¿½ï¿½ï¿½iï¿½[ï¿½ï¿½ï¿½ï¿½
 				std::vector<std::shared_ptr<Editor::EditorWindowBase>> editorWindows;
 			};
 
@@ -73,17 +73,17 @@ namespace EvaEngine {
 
 					window->Init();
 
-					// “¯‚¶ƒpƒX‚È‚ç“¯‚¶ŠK‘w‚É’Ç‰Á
+					// ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Xï¿½È‚ç“¯ï¿½ï¿½ï¿½Kï¿½wï¿½É’Ç‰ï¿½
 					for (int i = 0; i < m_EditorWindows.size(); ++i) 
 					{
-						// eŠK‘w‚ª‚ ‚ê‚Î‚»‚Ìq‹Ÿ‚É’Ç‰Á‚µ‚Ä‚¢‚­
+						// ï¿½eï¿½Kï¿½wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½ï¿½Ìqï¿½ï¿½ï¿½É’Ç‰ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
 						if (m_EditorWindows[i]->windowPath == paths[0]) {
 							m_EditorWindows[i]->AddChildWindow(paths, 0, window);
 							return;
 						}
 					}
 
-					// eŠK‘w‚ª–³‚¯‚ê‚ÎV‚µ‚­’Ç‰Á
+					// ï¿½eï¿½Kï¿½wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎVï¿½ï¿½ï¿½ï¿½ï¿½Ç‰ï¿½
 					std::shared_ptr<EditorWindowData> windowData = std::make_shared<EditorWindowData>();
 					windowData->windowPath = paths[0];
 					windowData->AddChildWindow(paths, 0, window);
@@ -95,10 +95,10 @@ namespace EvaEngine {
 					std::shared_ptr<Editor::EditorWindow<EditorBaseWindow>> window = std::make_shared<EditorBaseWindow>(windowPath, this);
 					std::vector<std::string> paths = StringAssist::Split(window->GetWindowPath(), "/");
 
-					// Šù‚É“o˜^Ï‚İ‚Å‚ ‚ê‚Î•Ô‚·
+					// ï¿½ï¿½ï¿½É“oï¿½^ï¿½Ï‚İ‚Å‚ï¿½ï¿½ï¿½Î•Ô‚ï¿½
 					if (m_EditorWindows[0]->editorWindows.size() == 1) return;
 
-					// •K‚¸Å‰‚É’Ç‰Á
+					// ï¿½Kï¿½ï¿½ï¿½Åï¿½ï¿½É’Ç‰ï¿½
 					m_EditorWindows[0]->AddChildWindow(paths, 0, window);
 				}
 

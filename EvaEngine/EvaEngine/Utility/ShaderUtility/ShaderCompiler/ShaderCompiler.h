@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <string>
 #include "../../../Define/D3D11Defines.h"
 
@@ -16,23 +16,23 @@ namespace EvaEngine {
 			~ShaderCompiler() = default;
 
 		public:
-			// ’¸“_ƒVƒF[ƒ_[‚ğì¬
+			// ï¿½ï¿½ï¿½_ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½ì¬
 			static HRESULT CreateVertexShader(VertexShader* shader, const D3D11_INPUT_ELEMENT_DESC* layout, const UINT arraySize, const std::string& fileName, const std::string& entrypath = "vsMain", bool error = true);
-			// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğì¬
+			// ï¿½sï¿½Nï¿½Zï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½ì¬
 			static HRESULT CreatePixelShader(PixelShader* shader, const std::string& fileName, const std::string& entrypath = "psMain", bool error = true);
-			// ƒWƒIƒƒgƒŠƒVƒF[ƒ_[‚ğì¬
+			// ï¿½Wï¿½Iï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½ì¬
 			static HRESULT CreateGeometryShader(GeometryShader* shader, const std::string& fileName, const std::string& entrypath = "gsMain", bool error = true);
-			// ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚ğì¬
+			// ï¿½Rï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½gï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½ì¬
 			static HRESULT CreateComputeShader(ComputeShader* shader, const std::string& fileName, const std::string& entrypath = "gsMain", bool error = true);
-			// ƒnƒ‹ƒVƒF[ƒ_[‚ğì¬
+			// ï¿½nï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½ì¬
 			static HRESULT CreateHullShader(HullShader* shader, const std::string& fileName, const std::string& entrypath = "hsMain", bool error = true);
-			// ƒhƒƒCƒ“ƒVƒF[ƒ_[‚ğì¬
+			// ï¿½hï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½ì¬
 			static HRESULT CreateDomainShader(DomainShader* shader, const std::string& fileName, const std::string& entrypath = "dsMain", bool error = true);
 
 		private:
-			// ƒZƒ}ƒ“ƒeƒBƒNƒX‚ÌƒZƒbƒg‚È‚Ç‚ğ‚·‚é’¸“_ƒŒƒCƒAƒEƒg‚ğì¬
+			// ï¿½Zï¿½}ï¿½ï¿½ï¿½eï¿½Bï¿½Nï¿½Xï¿½ÌƒZï¿½bï¿½gï¿½È‚Ç‚ï¿½ï¿½ï¿½ï¿½é’¸ï¿½_ï¿½ï¿½ï¿½Cï¿½Aï¿½Eï¿½gï¿½ï¿½ï¿½ì¬
 			static HRESULT CreateInputLayout(VertexShader* shader, const D3D11_INPUT_ELEMENT_DESC* layout, const UINT arraySize);
-			// ƒVƒF[ƒ_[‚ÌƒRƒ“ƒpƒCƒ‹
+			// ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ÌƒRï¿½ï¿½ï¿½pï¿½Cï¿½ï¿½
 			static HRESULT Compile(const std::string& fileName, const std::string& entryPath, const LPCSTR& pTarget, ID3DBlob** blob, bool error = true);
 		};
 	}

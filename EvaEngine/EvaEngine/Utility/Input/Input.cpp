@@ -1,4 +1,4 @@
-#include "Input.h"
+ï»¿#include "Input.h"
 #include "InputBufferUpdate/InputBufferUpdate.h"
 #include "../../Editor/EditorApplication/EditorApplication.h"
 
@@ -7,7 +7,7 @@ using namespace EvaEngine;
 bool Input::GetKey(const KeyCode& keyCode)
 {
 #if _DEBUG
-	// “ü—Í‚ðŽó‚¯•t‚¯‚È‚¢ƒtƒ‰ƒO‚ª—§‚Á‚Ä‚¢‚éŽž‚Ífalse
+	// ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ó‚¯•tï¿½ï¿½ï¿½È‚ï¿½ï¿½tï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éŽžï¿½ï¿½false
 	if (EvaEngine::Editor::EditorApplication::isInputFreeze) return false;
 #endif
 
@@ -27,7 +27,7 @@ bool Input::GetKeyUp(const KeyCode& keyCode)
 bool Input::GetKeyDownOrUpCheck(const KeyCode& keyCode, const KeyState& keyState)
 {
 #if _DEBUG
-	// “ü—Í‚ðŽó‚¯•t‚¯‚È‚¢ƒtƒ‰ƒO‚ª—§‚Á‚Ä‚¢‚éŽž‚Ífalse
+	// ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ó‚¯•tï¿½ï¿½ï¿½È‚ï¿½ï¿½tï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éŽžï¿½ï¿½false
 	if (EvaEngine::Editor::EditorApplication::isInputFreeze) return false;
 #endif
 

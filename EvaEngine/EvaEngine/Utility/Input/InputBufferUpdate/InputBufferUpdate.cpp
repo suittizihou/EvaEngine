@@ -1,36 +1,36 @@
-#include "InputBufferUpdate.h"
+ï»¿#include "InputBufferUpdate.h"
 #include <stdexcept>
 
 using namespace EvaEngine::Internal;
 
 InputBufferUpdate::InputBufferUpdate()
 {
-	// IDirectInput8ƒCƒ“ƒ^[ƒtƒFƒCƒX‚ÌŽæ“¾
+	// IDirectInput8ï¿½Cï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½Cï¿½Xï¿½ÌŽæ“¾
 	HRESULT hr = DirectInput8Create(GetModuleHandle(NULL), DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&m_pInputInterface, nullptr);
 
 	if (FAILED(hr)) {
-		throw std::runtime_error("IDirectInput8ƒCƒ“ƒ^[ƒtƒFƒCƒX‚ÌŽæ“¾‚ÉŽ¸”s");
+		throw std::runtime_error("IDirectInput8ï¿½Cï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½Cï¿½Xï¿½ÌŽæ“¾ï¿½ÉŽï¿½ï¿½s");
 	}
 
-	// IDirectInputDevice8ƒCƒ“ƒ^[ƒtƒFƒCƒX‚ÌŽæ“¾
+	// IDirectInputDevice8ï¿½Cï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½Cï¿½Xï¿½ÌŽæ“¾
 	hr = m_pInputInterface->CreateDevice(GUID_SysKeyboard, &m_pKeyDevice, nullptr);
 	if (FAILED(hr)) {
-		throw std::runtime_error("IDirectInputDevice8ƒCƒ“ƒ^[ƒtƒFƒCƒX‚ÌŽæ“¾‚ÉŽ¸”s");
+		throw std::runtime_error("IDirectInputDevice8ï¿½Cï¿½ï¿½ï¿½^ï¿½[ï¿½tï¿½Fï¿½Cï¿½Xï¿½ÌŽæ“¾ï¿½ÉŽï¿½ï¿½s");
 	}
 
-	// ƒfƒoƒCƒX‚ÌƒtƒH[ƒ}ƒbƒg‚ÌÝ’è
+	// ï¿½fï¿½oï¿½Cï¿½Xï¿½Ìƒtï¿½Hï¿½[ï¿½}ï¿½bï¿½gï¿½ÌÝ’ï¿½
 	hr = m_pKeyDevice->SetDataFormat(&c_dfDIKeyboard);
 	if (FAILED(hr)) {
-		throw std::runtime_error("ƒfƒoƒCƒX‚ÌƒtƒH[ƒ}ƒbƒg‚ÌÝ’è‚ÉŽ¸”s");
+		throw std::runtime_error("ï¿½fï¿½oï¿½Cï¿½Xï¿½Ìƒtï¿½Hï¿½[ï¿½}ï¿½bï¿½gï¿½ÌÝ’ï¿½ÉŽï¿½ï¿½s");
 	}
 
-	// ‹¦’²ƒ‚[ƒh‚ÌÝ’è
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½ÌÝ’ï¿½
 	hr = m_pKeyDevice->SetCooperativeLevel(GetActiveWindow(), DISCL_BACKGROUND | DISCL_NONEXCLUSIVE);
 	if (FAILED(hr)) {
-		throw std::runtime_error("‹¦’²ƒ‚[ƒh‚ÌÝ’è‚ÉŽ¸”s");
+		throw std::runtime_error("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½ÌÝ’ï¿½ÉŽï¿½ï¿½s");
 	}
 
-	// ƒfƒoƒCƒX‚ÌŽæ“¾ŠJŽn
+	// ï¿½fï¿½oï¿½Cï¿½Xï¿½ÌŽæ“¾ï¿½Jï¿½n
 	m_pKeyDevice->Acquire();
 }
 
@@ -47,15 +47,15 @@ InputBufferUpdate::~InputBufferUpdate()
 void InputBufferUpdate::KeyUpdate()
 {
 	HRESULT hr;
-	// ƒL[ƒ{[ƒhƒfƒoƒCƒX‚ÌƒQƒbƒ^[
+	// ï¿½Lï¿½[ï¿½{ï¿½[ï¿½hï¿½fï¿½oï¿½Cï¿½Xï¿½ÌƒQï¿½bï¿½^ï¿½[
 	hr = m_pKeyDevice->GetDeviceState(INPUT_BUFFER_SIZE, &m_Keys);
 
 	if (SUCCEEDED(hr)) {
 
-		// ‘OƒtƒŒ[ƒ€‚Ì“ü—Íó‘Ô‚ðƒRƒs[
+		// ï¿½Oï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì“ï¿½ï¿½Íï¿½Ô‚ï¿½ï¿½Rï¿½sï¿½[
 		m_PreviousKeyStatus = m_CurrentKeyStatus;
 
-		// “ü—Í‚³‚ê‚Ä‚¢‚éƒ{ƒ^ƒ“‚ÍDownƒXƒe[ƒg‚ÉA‚»‚¤‚¶‚á‚È‚¢ƒ{ƒ^ƒ“‚ÍUpƒXƒe[ƒg‚É
+		// ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½Downï¿½Xï¿½eï¿½[ï¿½gï¿½ÉAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½Upï¿½Xï¿½eï¿½[ï¿½gï¿½ï¿½
 		for (int index = 0; index < INPUT_BUFFER_SIZE; ++index) {
 			if (m_Keys[index] & 0x80)
 			{

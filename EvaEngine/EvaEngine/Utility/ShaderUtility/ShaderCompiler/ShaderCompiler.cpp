@@ -1,4 +1,4 @@
-#pragma warning(disable : 4996)
+ï»¿#pragma warning(disable : 4996)
 
 #include "ShaderCompiler.h"
 #include <Windows.h>
@@ -102,7 +102,7 @@ HRESULT ShaderCompiler::CreateInputLayout(VertexShader* shader, const D3D11_INPU
 HRESULT ShaderCompiler::Compile(const std::string& fileName, const std::string& entryPath, const LPCSTR& pTarget, ID3DBlob** ppBlob, bool error)
 {
 #if defined(_DEBUG)
-    // ƒOƒ‰ƒtƒBƒbƒNƒfƒoƒbƒOƒc[ƒ‹‚É‚æ‚éƒVƒF[ƒ_[‚ÌƒfƒoƒbƒO‚ð—LŒø‚É‚·‚é
+    // ï¿½Oï¿½ï¿½ï¿½tï¿½Bï¿½bï¿½Nï¿½fï¿½oï¿½bï¿½Oï¿½cï¿½[ï¿½ï¿½ï¿½É‚ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìƒfï¿½oï¿½bï¿½Oï¿½ï¿½Lï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
     UINT compileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
 #else
     UINT compileFlags = 0;
@@ -114,10 +114,10 @@ HRESULT ShaderCompiler::Compile(const std::string& fileName, const std::string& 
     ID3DBlob* errorBlob;
     HRESULT hr = D3DCompileFromFile(ws, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, entryPath.c_str(), pTarget, compileFlags, 0, ppBlob, &errorBlob);
 
-    // ƒGƒ‰[ƒ`ƒFƒbƒN
+    // ï¿½Gï¿½ï¿½ï¿½[ï¿½`ï¿½Fï¿½bï¿½N
     if (FAILED(hr)) {
         if (error) {
-            // ƒGƒ‰[ƒƒbƒZ[ƒW‚ðo—Í
+            // ï¿½Gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½bï¿½Zï¿½[ï¿½Wï¿½ï¿½ï¿½oï¿½ï¿½
             if (errorBlob != nullptr && error) {
                 DebugLog::LogError((char*)errorBlob->GetBufferPointer());
                 return hr;

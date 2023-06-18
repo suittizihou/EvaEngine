@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "../../Manager/GameObjectManager/GameObjectManager.h"
 #include "../../../GameSystemBase/Components/ComponentHeaders.h"
@@ -13,45 +13,45 @@ namespace EvaEngine {
 		virtual ~Scene() = default;
 
 	public:
-		// ƒV[ƒ“‚Ì‰Šú‰»
+		// ï¿½Vï¿½[ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
 		virtual void Initialize() = 0;
 
-		// ƒV[ƒ“‚ÌƒAƒbƒvƒf[ƒg
+		// ï¿½Vï¿½[ï¿½ï¿½ï¿½ÌƒAï¿½bï¿½vï¿½fï¿½[ï¿½g
 		virtual void SceneUpdate() = 0;
 
-		// ŒÅ’èXVˆ—
+		// ï¿½Å’ï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½
 		void FixedUpdate();
 
-		// XVˆ—
+		// ï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½
 		void Update();
 
-		// Editorã‚Å‚à‰ñ‚éXVˆ—
+		// Editorï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½
 		void ExecuteEditUpdate();
 
-		// ’x‰„XVˆ—
+		// ï¿½xï¿½ï¿½ï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½
 		void LateUpdate();
 
-		// •`‰æˆ—
+		// ï¿½`ï¿½æˆï¿½ï¿½
 		void Draw(ID3D11DeviceContext* command);
 
 #if _DEBUG
-		// Editor—p‚Ì•`‰æˆ—
+		// Editorï¿½pï¿½Ì•`ï¿½æˆï¿½ï¿½
 		void OnGUI();
 #endif
 
-		// –¼‘O‚ÅŒŸõ
+		// ï¿½ï¿½ï¿½Oï¿½ÅŒï¿½ï¿½ï¿½
 		std::weak_ptr<GameObject> Find(const std::string& name);
-		// ƒ^ƒO‚ÅŒŸõ‚µ‚ÄƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğˆê‚Â‚Á‚Ä‚­‚é
+		// ï¿½^ï¿½Oï¿½ÅŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄƒQï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½Âï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
 		std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
-		// ƒ^ƒO‚ÅŒŸõ‚µ‚Äƒqƒbƒg‚µ‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ‘S•”‚Á‚Ä‚­‚é
+		// ï¿½^ï¿½Oï¿½ÅŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äƒqï¿½bï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
 		std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
 
-		// ƒV[ƒ“–¼‚Ìæ“¾
+		// ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Ìæ“¾
 		std::string GetSceneName() const;
-		// ƒV[ƒ“‚ÌID‚ğæ“¾
+		// ï¿½Vï¿½[ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½ï¿½æ“¾
 		UINT GetSceneID() const;
 
-		// ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ì’Ç‰Á
+		// ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Ì’Ç‰ï¿½
 		std::weak_ptr<GameObject> Instantiate(const std::string& tag = "None", const std::string& name = "GameObject");
 
 	protected:

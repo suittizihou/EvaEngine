@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "../../../Define/D3D11Defines.h"
 #include "../../../Utility/ModelUtility/ModelData/ModelData.h"
@@ -13,27 +13,27 @@ namespace EvaEngine {
 			DrawManager() = default;
 			~DrawManager() = default;
 		public:
-			// ‰Šú‰»
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			static HRESULT Init();
 
-			// •`‰æŠJn
+			// ï¿½`ï¿½ï¿½Jï¿½n
 			static void DrawBegin(const std::weak_ptr<Camera>& camera);
-			// •`‰æ
+			// ï¿½`ï¿½ï¿½
 			static void Draw(
 				const std::weak_ptr<Camera>& camera,
 				const std::weak_ptr<Transform>& transform,
 				const std::weak_ptr<ModelData>& model);
 
-			// •`‰æI—¹
+			// ï¿½`ï¿½ï¿½Iï¿½ï¿½
 			static void DrawEnd();
 
-			// ƒ}ƒeƒŠƒAƒ‹‚Ìİ’è
+			// ï¿½}ï¿½eï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Ìİ’ï¿½
 			static void SetMaterial(Material* material);
 
-			// ƒVƒF[ƒ_[‚Ìİ’è
+			// ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ìİ’ï¿½
 			static void SetShader(Shader* shader);
 			static void SetShader(Material* material);
-			// •`‰æ‚·‚é‚½‚ß‚É•K—v‚È‰ŠúƒVƒF[ƒ_[‚ğæ“¾
+			// ï¿½`ï¿½æ‚·ï¿½é‚½ï¿½ß‚É•Kï¿½vï¿½Èï¿½ï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½æ“¾
 			static Shader GetDefaultShader();
 
 		private:

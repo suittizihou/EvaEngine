@@ -1,4 +1,4 @@
-#include "ShaderDataBase.h"
+ï»¿#include "ShaderDataBase.h"
 #include "../../../Utility/ShaderUtility/ShaderCompiler/ShaderCompiler.h"
 
 using namespace EvaEngine::Internal;
@@ -154,14 +154,14 @@ void ShaderDataBase::DeleteDomainShader(const GUID& shaderHandle)
 
 void ShaderDataBase::AllDeleteShader()
 {
-    // ƒfƒtƒHƒ‹ƒgƒVƒF[ƒ_[‚Ì‰ğ•ú
+    // ï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì‰ï¿½ï¿½
     if (m_DefaultVertexShader.m_pShader != nullptr) { m_DefaultVertexShader.m_pShader->Release(); m_DefaultVertexShader.m_pShader = nullptr; }
     if (m_DefaultVertexShader.m_pShaderCode != nullptr) { m_DefaultVertexShader.m_pShaderCode->Release(); m_DefaultVertexShader.m_pShaderCode = nullptr; }
     if (m_DefaultVertexShader.m_pInputLayout != nullptr) { m_DefaultVertexShader.m_pInputLayout->Release(); m_DefaultVertexShader.m_pInputLayout = nullptr; }
     if (m_DefaultPixelShader.m_pShader != nullptr) { m_DefaultPixelShader.m_pShader->Release(); m_DefaultPixelShader.m_pShader = nullptr; }
     if (m_DefaultPixelShader.m_pShaderCode != nullptr) { m_DefaultPixelShader.m_pShaderCode->Release(); m_DefaultPixelShader.m_pShaderCode = nullptr; }
 
-	// ’¸“_ƒVƒF[ƒ_[‚Ì‰ğ•ú
+	// ï¿½ï¿½ï¿½_ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì‰ï¿½ï¿½
 	for (auto& shader : m_VertexShaders) {
             if (shader.second.m_pShader != nullptr) {
                 shader.second.m_pShader->Release();
@@ -178,7 +178,7 @@ void ShaderDataBase::AllDeleteShader()
     }
     m_VertexShaders.clear();
 
-	// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ì‰ğ•ú
+	// ï¿½sï¿½Nï¿½Zï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì‰ï¿½ï¿½
     for (auto& shader : m_PixelShaders) {
         if (shader.second.m_pShader != nullptr) {
             shader.second.m_pShader->Release();
@@ -191,7 +191,7 @@ void ShaderDataBase::AllDeleteShader()
     }
     m_PixelShaders.clear();
 
-	// ƒWƒIƒƒgƒŠƒVƒF[ƒ_[‚Ì‰ğ•ú
+	// ï¿½Wï¿½Iï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì‰ï¿½ï¿½
 	for (auto& shader : m_GeometryShaders) {
         if (shader.second.m_pShader != nullptr) {
             shader.second.m_pShader->Release();
@@ -204,7 +204,7 @@ void ShaderDataBase::AllDeleteShader()
     }
     m_GeometryShaders.clear();
 
-	// ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚Ì‰ğ•ú
+	// ï¿½Rï¿½ï¿½ï¿½sï¿½ï¿½ï¿½[ï¿½gï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì‰ï¿½ï¿½
 	for (auto& shader : m_ComputeShaders) {
         if (shader.second.m_pShader != nullptr) {
             shader.second.m_pShader->Release();
@@ -217,7 +217,7 @@ void ShaderDataBase::AllDeleteShader()
     }
     m_ComputeShaders.clear();
 
-	// ƒnƒ‹ƒVƒF[ƒ_[‚Ì‰ğ•ú
+	// ï¿½nï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì‰ï¿½ï¿½
 	for (auto& shader : m_HullShaders) {
         if (shader.second.m_pShader != nullptr) {
             shader.second.m_pShader->Release();
@@ -230,7 +230,7 @@ void ShaderDataBase::AllDeleteShader()
     }
     m_HullShaders.clear();
 
-	// ƒhƒƒCƒ“ƒVƒF[ƒ_[‚Ì‰ğ•ú
+	// ï¿½hï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Vï¿½Fï¿½[ï¿½_ï¿½[ï¿½Ì‰ï¿½ï¿½
 	for (auto& shader : m_DomainShaders) {
         if (shader.second.m_pShader != nullptr) {
             shader.second.m_pShader->Release();
@@ -246,5 +246,5 @@ void ShaderDataBase::AllDeleteShader()
 
 bool EvaEngine::Internal::ShaderDataBase::GUIDCreate(GUID* guid, const std::string& shaderType)
 {
-    return GUIDUtility::Create(guid, "ShaderDataBase‚É‚Ä" + shaderType + "‚ÌGUID¶¬‚É¸”s‚µ‚Ü‚µ‚½B");
+    return GUIDUtility::Create(guid, "ShaderDataBaseï¿½É‚ï¿½" + shaderType + "ï¿½ï¿½GUIDï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B");
 }

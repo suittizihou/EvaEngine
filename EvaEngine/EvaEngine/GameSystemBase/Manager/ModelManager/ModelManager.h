@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <string>
 #include <memory>
 #include <unordered_map>
@@ -25,15 +25,15 @@ namespace EvaEngine {
 			return modelManager;
 		}
 
-		// ƒ‚ƒfƒ‹ƒf[ƒ^ƒx[ƒX‚ğƒV[ƒ“‚É’Ç‰Á
+		// ï¿½ï¿½ï¿½fï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½xï¿½[ï¿½Xï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½ï¿½É’Ç‰ï¿½
 		void AddModelDataBase(const std::string& sceneName);
 
-		// ƒ‚ƒfƒ‹‚ğ’Ç‰Á
+		// ï¿½ï¿½ï¿½fï¿½ï¿½ï¿½ï¿½Ç‰ï¿½
 		void LoadModel(const std::string& fileName, GUID* guid);
 		void LoadModel(const std::shared_ptr<ModelData>& model, GUID* guid);
-		// ƒ‚ƒfƒ‹ƒf[ƒ^‚ğæ“¾
+		// ï¿½ï¿½ï¿½fï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½æ“¾
 		std::weak_ptr<ModelData> GetModel(const GUID& guid);
-		// ƒ‚ƒfƒ‹ƒf[ƒ^‚ğíœ
+		// ï¿½ï¿½ï¿½fï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½íœ
 		void DeleteModel(const GUID& guid);
 		void DeleteAllModel();
 

@@ -1,4 +1,4 @@
-#include <cmath>
+ï»¿#include <cmath>
 #include "Quaternion.h"
 #include "../Vector3/Vector3.h"
 #include "..//Mathf/Mathf.h"
@@ -37,7 +37,7 @@ float Quaternion::operator[](int index) const
 	case 2: return z;
 	case 3: return w;
 	default:
-		throw "”z—ñ‚Ì‹«ŠEŠO";
+		throw "ï¿½zï¿½ï¿½Ì‹ï¿½ï¿½Eï¿½O";
 	}
 }
 
@@ -49,7 +49,7 @@ float& Quaternion::operator[](int index)
 	case 2: return z;
 	case 3: return w;
 	default:
-		throw "”z—ñ‚Ì‹«ŠEŠO";
+		throw "ï¿½zï¿½ï¿½Ì‹ï¿½ï¿½Eï¿½O";
 	}
 }
 
@@ -237,14 +237,14 @@ Quaternion Quaternion::euler(const Vector3& euler)
 
 Quaternion Quaternion::from_to_rotation(const Vector3& fromDirection, const Vector3& toDirection)
 {
-	// 2ƒxƒNƒgƒ‹ŠÔ‚ÌŠp“x‚ğ‹‚ß‚é
+	// 2ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ô‚ÌŠpï¿½xï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
 	float angle = Vector3::angle(fromDirection, toDirection);
 	if (angle < kEpsilon) {
 		return identity();
 	}
-	// ‰ñ“]‚Ì²‚ğŒvZ
+	// ï¿½ï¿½]ï¿½Ìï¿½ï¿½ï¿½ï¿½vï¿½Z
 	Vector3 axis = Vector3::cross(fromDirection, toDirection);
-	// ‰ñ“]‚Ì²‚ª‚Å‚«‚È‚©‚Á‚½ê‡‚Ì•â³
+	// ï¿½ï¿½]ï¿½Ìï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½Ì•â³
 	if (axis.sqr_magnitude() < (kEpsilon * kEpsilon)) {
 		axis = Vector3::cross(Vector3{ 0.0f, 0.0f, 1.0f }, fromDirection);
 		if (axis.sqr_magnitude() < (kEpsilon * kEpsilon)) {
@@ -256,20 +256,20 @@ Quaternion Quaternion::from_to_rotation(const Vector3& fromDirection, const Vect
 
 Quaternion Quaternion::look_rotation(const Vector3& view, const Vector3& up)
 {
-	// ‘O•û‚ÌƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+	// ï¿½Oï¿½ï¿½ï¿½Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
 	Vector3 forward = Vector3::normalize(view);
 	if (forward.sqr_magnitude() < (kEpsilon * kEpsilon)) {
 		forward = Vector3{ 0.0f, 0.0f, 1.0f };
 	}
-	// ‰Eè•ûŒü‚ÌƒxƒNƒgƒ‹‚ğ‹‚ß‚é (OpenGL‚Ì‚æ‚¤‚È‰EèÀ•WŒn‚Å‚Í¶è•ûŒü)
+	// ï¿½Eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½ (OpenGLï¿½Ì‚æ‚¤ï¿½È‰Eï¿½ï¿½ï¿½ï¿½Wï¿½nï¿½Å‚Íï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 	Vector3 right = Vector3::cross(up, forward);
 	if (right.sqr_magnitude() < (kEpsilon * kEpsilon)) {
 		right = Vector3{ 1.0f, 0.0f, 0.0f };
 	}
-	// ã•ûŒü‚ÌƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
 	Vector3 upwards = Vector3::cross(forward, right);
 	upwards.normalize();
-	// ‰Eè•ûŒü‚ÌƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+	// ï¿½Eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½
 	right = Vector3::cross(upwards, forward);
 	Quaternion result;
 	float radicand = right.x + upwards.y + forward.z;

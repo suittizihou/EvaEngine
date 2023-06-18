@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 
 namespace EvaEngine {
 	/// <summary>
-	/// ‚¢‚í‚ä‚éƒGƒ“ƒgƒŠ[ƒ|ƒCƒ“ƒg‚Ì‚æ‚¤‚ÈƒNƒ‰ƒXBInit‚ğƒI[ƒo[ƒ[ƒh‚µ‚ÄƒV[ƒ“‚ğ“o˜^‚µ‚½‚è‚·‚é‚Ì‚Ég‚¤B
+	/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Gï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½|ï¿½Cï¿½ï¿½ï¿½gï¿½Ì‚æ‚¤ï¿½ÈƒNï¿½ï¿½ï¿½Xï¿½BInitï¿½ï¿½ï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½ÄƒVï¿½[ï¿½ï¿½ï¿½ï¿½oï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½è‚·ï¿½ï¿½Ì‚Égï¿½ï¿½ï¿½B
 	/// </summary>
 	class GameBase {
 	public:
@@ -10,14 +10,14 @@ namespace EvaEngine {
 		virtual ~GameBase() = default;
 
 		/// <summary>
-		/// ƒQ[ƒ€ŠJn‚É‚â‚Á‚Ä‚¨‚«‚½‚¢‰Šú‰»ˆ—‚Æ‚©‚ğƒI[ƒo[ƒ[ƒh‚µ‚Ä‘‚­
+		/// ï¿½Qï¿½[ï¿½ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½Iï¿½[ï¿½oï¿½[ï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½Äï¿½ï¿½ï¿½
 		/// </summary>
 		virtual void Init() = 0;
 
 		static GameBase* Instance();
 
 	private:
-		// ƒRƒs[‹Ö~
+		// ï¿½Rï¿½sï¿½[ï¿½Ö~
 		GameBase(const GameBase& other) = delete;
 		GameBase& operator=(const GameBase& other) = delete;
 
