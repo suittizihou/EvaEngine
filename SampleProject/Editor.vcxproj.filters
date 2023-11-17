@@ -42,9 +42,6 @@
     <ClInclude Include="Script\SpotLight\SpotLight.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Script\Test\Test.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Editor\EditorEntry\EditorEntry.cpp">
@@ -72,9 +69,6 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Script\SpotLight\SpotLight.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Script\Test\Test.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
