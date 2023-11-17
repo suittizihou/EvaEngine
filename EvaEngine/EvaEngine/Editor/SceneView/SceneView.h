@@ -1,4 +1,4 @@
-﻿#if _DEBUG
+#if _DEBUG
 #pragma once
 #include <memory>
 #include "../../GameSystemBase/Base/Component/Component.h"
@@ -17,7 +17,7 @@ namespace EvaEngine {
 				void Awake() override;
 				void Update() override;
 
-				// �V�[���r���[�Ŏg�p���Ă�J�������擾
+				// シーンビューで使用してるカメラを取得
 				std::weak_ptr<Camera> GetSceneCamera();
 
 			private:

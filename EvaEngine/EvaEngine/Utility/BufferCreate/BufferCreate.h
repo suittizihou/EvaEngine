@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <DirectXMath.h>
 #include "../../App/DirectX11App/DirectX11App.h"
@@ -10,15 +10,15 @@ namespace EvaEngine {
 			BufferCreate() = default;
 			~BufferCreate() = default;
 		public:
-			// ���_�o�b�t�@�̍쐬
+			// 頂点バッファの作成
 			static ID3D11Buffer* CreateVertexBuffer(const std::vector<VertexData>& vertices, size_t strides);
-			// ���_�o�b�t�@���Z�b�g����
+			// 頂点バッファをセットする
 			static bool SetVertexBuffer(std::map<std::string, std::vector<Mesh>>& meshMap);
-			// �C���f�b�N�X�o�b�t�@�̍쐬
+			// インデックスバッファの作成
 			static ID3D11Buffer* CreateIndexBuffer(const std::vector<UINT>& indices, size_t strides);
-			// �C���f�b�N�X�o�b�t�@���Z�b�g����
+			// インデックスバッファをセットする
 			static bool SetIndexBuffer(std::map<std::string, std::vector<Mesh>>& meshMap);
-			// �萔�o�b�t�@�̍쐬
+			// 定数バッファの作成
 			static ID3D11Buffer* CreateConstantBuffer();
 		};
 	}

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <d3d11.h>
 #pragma comment(lib,"d3d11.lib")
 
@@ -29,7 +29,7 @@ namespace EvaEngine {
 			ID3DBlob* m_pShaderCode{ nullptr };
 		};
 
-		// ���_�V�F�[�_�[
+		// 頂点シェーダー
 		class VertexShader : public Internal::ShaderBase<ID3D11VertexShader> {
 		public:
 			VertexShader() = default;
@@ -37,28 +37,28 @@ namespace EvaEngine {
 			ID3D11InputLayout* m_pInputLayout{ nullptr };
 		};
 
-		// �s�N�Z���V�F�[�_�[
+		// ピクセルシェーダー
 		class PixelShader : public Internal::ShaderBase<ID3D11PixelShader> {
 		public:
 			PixelShader() = default;
 			~PixelShader() = default;
 		};
 
-		// �W�I���g���V�F�[�_�[
+		// ジオメトリシェーダー
 		class GeometryShader : public Internal::ShaderBase<ID3D11GeometryShader> {
 		public:
 			GeometryShader() = default;
 			~GeometryShader() = default;
 		};
 
-		// �R���s���[�g�V�F�[�_�[
+		// コンピュートシェーダー
 		class ComputeShader : public Internal::ShaderBase<ID3D11ComputeShader> {
 		public:
 			ComputeShader() = default;
 			~ComputeShader() = default;
 		};
 
-		// �n���V�F�[�_�[
+		// ハルシェーダー
 		class HullShader : public Internal::ShaderBase<ID3D11HullShader> {
 		public:
 			HullShader() = default;
@@ -66,7 +66,7 @@ namespace EvaEngine {
 		};
 
 
-		// �h���C���V�F�[�_�[
+		// ドメインシェーダー
 		class DomainShader : public Internal::ShaderBase<ID3D11DomainShader> {
 		public:
 			DomainShader() = default;

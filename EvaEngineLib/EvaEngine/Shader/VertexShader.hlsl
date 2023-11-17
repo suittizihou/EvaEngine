@@ -1,4 +1,4 @@
-struct VS_INPUT
+ï»¿struct VS_INPUT
 {
     float4 pos : POSITION;
     float4 nor : NORMAL;
@@ -16,42 +16,42 @@ struct VS_OUT
 
 cbuffer ConstantBuffer
 {
-    float4x4 World; // ƒ[ƒ‹ƒh•ÏŠ·s—ñ
-    float4x4 View; // ƒrƒ…[•ÏŠ·s—ñ
-    float4x4 Projection; // “§‹Ë‰e•ÏŠ·s—ñ
-    float4 CameraPos; // ƒJƒƒ‰À•W
-    float4 LightVector; // ƒ‰ƒCƒg•ûŒü
-    float4 LightColor; // ƒ‰ƒCƒgƒJƒ‰[
-    float4 MaterialAmbient; // ƒAƒ“ƒrƒGƒ“ƒg
-    float4 MaterialDiffuse; // ƒfƒBƒtƒ…[ƒY
-    float4 MaterialSpecular; // ƒXƒyƒLƒ…ƒ‰[
+    float4x4 World; // ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›è¡Œåˆ—
+    float4x4 View; // ãƒ“ãƒ¥ãƒ¼å¤‰æ›è¡Œåˆ—
+    float4x4 Projection; // é€è¦–å°„å½±å¤‰æ›è¡Œåˆ—
+    float4 CameraPos; // ã‚«ãƒ¡ãƒ©åº§æ¨™
+    float4 LightVector; // ãƒ©ã‚¤ãƒˆæ–¹å‘
+    float4 LightColor; // ãƒ©ã‚¤ãƒˆã‚«ãƒ©ãƒ¼
+    float4 MaterialAmbient; // ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆ
+    float4 MaterialDiffuse; // ãƒ‡ã‚£ãƒ•ãƒ¥ãƒ¼ã‚º
+    float4 MaterialSpecular; // ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒ¼
 }
 
 VS_OUT vsMain(VS_INPUT input) {
     
     VS_OUT output;
 
-	// ƒ[ƒJƒ‹À•W * ƒ[ƒ‹ƒhÀ•W•ÏŠ·s—ñ
+	// ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ * ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™å¤‰æ›è¡Œåˆ—
     output.pos = mul(input.pos, World);
-	// ƒ[ƒ‹ƒhÀ•W * ƒrƒ…[À•W•ÏŠ·s—ñ
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ * ãƒ“ãƒ¥ãƒ¼åº§æ¨™å¤‰æ›è¡Œåˆ—
     output.pos = mul(output.pos, View);
-	// ƒrƒ…[À•W * ƒvƒƒWƒFƒNƒVƒ‡ƒ“À•W•ÏŠ·s—ñ
+	// ãƒ“ãƒ¥ãƒ¼åº§æ¨™ * ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³åº§æ¨™å¤‰æ›è¡Œåˆ—
     output.pos = mul(output.pos, Projection);
     
     float4 normal;
-	// ˆÚ“®‚ªŒvZ‚É”½‰f‚³‚¹‚È‚¢
+	// ç§»å‹•ãŒè¨ˆç®—ã«åæ˜ ã•ã›ãªã„
     input.nor.w = 0.0;
-	// ’¸“_‚Ì–@ü‚Éƒ[ƒ‹ƒhs—ñ‚ğŠ|‚¯‡‚í‚¹‚Ä
-	// ƒ[ƒ‹ƒhÀ•Wã‚Å‚Ì–@ü‚ÌŒü‚«‚É•ÏŠ·‚·‚é
+	// é ‚ç‚¹ã®æ³•ç·šã«ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã‚’æ›ã‘åˆã‚ã›ã¦
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ä¸Šã§ã®æ³•ç·šã®å‘ãã«å¤‰æ›ã™ã‚‹
     normal = mul(input.nor, World).xyzw;
     normal = normalize(normal);
-    // saturate => ˆø”‚Åw’è‚µ‚½’l‚ğ0`1ŠÔ‚Å‚Ì”ÍˆÍ‚Éû‚ß‚é
-	// dot => “àÏŒvZ
+    // saturate => å¼•æ•°ã§æŒ‡å®šã—ãŸå€¤ã‚’0ï½1é–“ã§ã®ç¯„å›²ã«åã‚ã‚‹
+	// dot => å†…ç©è¨ˆç®—
     output.nor = saturate(dot(normal, LightVector));
     
-    // ’¸“_F‚ğw’è
+    // é ‚ç‚¹è‰²ã‚’æŒ‡å®š
     output.col = input.col;
-	// Texturew’è
+	// TextureæŒ‡å®š
     output.uv = input.uv;
     
 	return output;

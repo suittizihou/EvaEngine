@@ -1,4 +1,4 @@
-﻿#include "Window.h"
+#include "Window.h"
 
 using namespace EvaEngine::Internal;
 
@@ -17,11 +17,11 @@ D3D11_VIEWPORT Window::GetViewport()
 {
 	return D3D11_VIEWPORT
 	{
-		static_cast<FLOAT>(g_WindowLeft),					// �E�B���h�E�̍��[�̍��W
-		static_cast<FLOAT>(g_WindowTop),					// �E�B���h�E�̏�[�̍��W
-		static_cast<FLOAT>(g_WindowRight - g_WindowLeft),	// �E�B���h�E�̉���
-		static_cast<FLOAT>(g_WindowBottom - g_WindowTop),	// �E�B���h�E�̏c��
-		0.0f,												// �ŏ��[�x
-		1.0f												// �ő�[�x
+		static_cast<FLOAT>(g_WindowLeft),					// ウィンドウの左端の座標
+		static_cast<FLOAT>(g_WindowTop),					// ウィンドウの上端の座標
+		static_cast<FLOAT>(g_WindowRight - g_WindowLeft),	// ウィンドウの横幅
+		static_cast<FLOAT>(g_WindowBottom - g_WindowTop),	// ウィンドウの縦幅
+		0.0f,												// 最小深度
+		1.0f												// 最大深度
 	};
 }

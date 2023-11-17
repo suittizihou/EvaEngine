@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "../../../GameSystemBase/Base/Component/Component.h"
 #include "../../../Utility/Math/Vector3/Vector3.h"
@@ -8,135 +8,135 @@
 #include <list>
 
 namespace EvaEngine {
-	// �g�����X�t�H�[���N���X
+	// トランスフォームクラス
 	class Transform : public Component, public std::enable_shared_from_this<Transform> {
 	public:
-		// ���W�n�̎w��
+		// 座標系の指定
 		enum class Space {
-			Self,   // ���[�J�����W�n
-			World   // ���[���h���W�n
+			Self,   // ローカル座標系
+			World   // ワールド座標系
 		};
 
-		// �R���X�g���N�^
+		// コンストラクタ
 		Transform() :
 			Component(FunctionMask::NONE, false, false) {};
 
 #if _DEBUG
-		// Editor�p�̕`��֐�
+		// Editor用の描画関数
 		void OnGUI() override;
 		void OnClosedGUI() override;
 #endif
-		// �f�X�g���N�^
+		// デストラクタ
 		~Transform();
-		// ���[���h��Ԃ� Transform �̐� �O���擾
+		// ワールド空間の Transform の青軸 前を取得
 		Vector3 forward() const;
-		// ���[���h��Ԃ� Transform �̐� �O��ݒ�
+		// ワールド空間の Transform の青軸 前を設定
 		void forward(const Vector3& value);
-		// ���[���h��Ԃ� Transform �̐� ����擾
+		// ワールド空間の Transform の青軸 後を取得
 		Vector3 back() const;
-		// ���[���h��Ԃ� Transform �̐Ԏ� �E���擾
+		// ワールド空間の Transform の赤軸 右を取得
 		Vector3 right() const;
-		// ���[���h��Ԃ� Transform �̐Ԏ� �E��ݒ�
+		// ワールド空間の Transform の赤軸 右を設定
 		void right(const Vector3& value);
-		// ���[���h��Ԃ� Transform �̐Ԏ� �����擾
+		// ワールド空間の Transform の赤軸 左を取得
 		Vector3 left() const;
-		// ���[���h��Ԃ� Transform �̗Ύ� ����擾
+		// ワールド空間の Transform の緑軸 上を取得
 		Vector3 up() const;
-		// ���[���h��Ԃ� Transform �̗Ύ� ���ݒ�
+		// ワールド空間の Transform の緑軸 上を設定
 		void up(const Vector3& value);
-		// ���[���h��Ԃ� Transform �̗Ύ� �����擾
+		// ワールド空間の Transform の緑軸 下を取得
 		Vector3 down() const;
-		// �I�u�W�F�N�g�̃O���[�o���X�P�[�����擾
+		// オブジェクトのグローバルスケールを取得
 		Vector3 lossy_scale() const;
-		// ���[���h��Ԃ� Transform �̈ʒu���擾
+		// ワールド空間の Transform の位置を取得
 		Vector3 position() const;
-		// ���[���h��Ԃ� Transform �̈ʒu��ݒ�
+		// ワールド空間の Transform の位置を設定
 		void position(const Vector3& value);
 		void position(float x, float y, float z);
-		// ���[���h��Ԃł̈ړ�
+		// ワールド空間での移動
 		void move(const Vector3& velocity);
 		void move(float x, float y, float z);
-		// �e�� Transform �I�u�W�F�N�g����Velocity���ړ�
+		// 親の Transform オブジェクトからVelocity分移動
 		void local_move(const Vector3& velocity);
-		// Quaternion �Ƃ��ĕۑ�����郏�[���h��Ԃł� Transform �̉�]���擾
+		// Quaternion として保存されるワールド空間での Transform の回転を取得
 		Quaternion rotation() const;
-		// Quaternion �Ƃ��ĕۑ�����郏�[���h��Ԃł� Transform �̉�]��ݒ�
+		// Quaternion として保存されるワールド空間での Transform の回転を設定
 		void rotation(const Quaternion& value);
-		// �I�C���[�p�Ƃ��Ă̊p�x���擾
+		// オイラー角としての角度を取得
 		Vector3 euler_angles() const;
-		// �I�C���[�p�Ƃ��Ă̊p�x��ݒ�
+		// オイラー角としての角度を設定
 		void euler_angles(const Vector3& value);
 		void euler_angles(float x, float y, float z);
 
-		// �Ώۂ� Transform ��ݒ肵�A���̕����ւƌ������܂�
+		// 対象の Transform を設定し、その方向へと向かせます
 		void look_at(const Transform& target, const Vector3& world_up = Vector3{ 0.0f, 1.0f, 0.0f });
 		void look_at(const Vector3& target, const Vector3& world_up = Vector3{ 0.0f, 1.0f, 0.0f });
-		// Z ����eulers.z �x��]�AX���� euler.x �x��]�AY����eulers.y �x��]���܂�(���Ԃ͐���������)
+		// Z 軸でeulers.z 度回転、X軸で euler.x 度回転、Y軸でeulers.y 度回転します(順番は説明した順)
 		void rotate(const Vector3& eulers, Space relative_to = Space::Self);
 		void rotate(float x, float y, float z, Space relative_to = Space::Self);
-		// axis ���̎���� angle �x�A��]���܂�
+		// axis 軸の周りに angle 度、回転します
 		void rotate(const Vector3& axis, float angle, Space relative_to = Space::Self);
-		// ���[���h���W�� point �𒆐S�Ƃ�����(axis)�� angle �x��]�����܂�
+		// ワールド座標の point を中心とした軸(axis)で angle 度回転させます
 		void rotate_around(const Vector3& point, const Vector3& axis, float angle);
 
-		// translation �̕����Ƌ����Ɉړ����܂�
+		// translation の方向と距離に移動します
 		void translate(const Vector3& translation, Space relative_to = Space::Self);
 
-		// ���[�J�����W���烏�[���h���W�֕ϊ������s��
+		// ローカル座標からワールド座標へ変換した行列
 		Matrix4x4 local_to_world_matrix() const;
-		// ���[���h���W���烍�[�J�����W�֕ϊ������s��
+		// ワールド座標からローカル座標へ変換した行列
 		Matrix4x4 world_to_local_matrix() const;
 
-		// ���[�J����Ԃ��烏�[���h��Ԃ� position ��ϊ����܂��B(�X�P�[���E��]�E���s�ړ��j
+		// ローカル空間からワールド空間へ position を変換します。(スケール・回転・平行移動）
 		Vector3 transform_point(const Vector3& position) const;
-		// ���[�J����Ԃ��烏�[���h��Ԃ� vector ��ϊ����܂��B(�X�P�[���E��]�j
+		// ローカル空間からワールド空間へ vector を変換します。(スケール・回転）
 		Vector3 transform_vector(const Vector3& vector) const;
-		// ���[�J����Ԃ��烏�[���h��Ԃ� direction ��ϊ����܂�(��]�j
+		// ローカル空間からワールド空間へ direction を変換します(回転）
 		Vector3 transform_direction(const Vector3& direction) const;
 
-		// ���[���h��Ԃ��烍�[�J����Ԃ� position ��ϊ����܂�
+		// ワールド空間からローカル空間へ position を変換します
 		Vector3 inverse_transform_point(const Vector3& position) const;
-		// ���[���h��Ԃ��烍�[�J����Ԃ� vector ��ϊ����܂�
+		// ワールド空間からローカル空間へ vector を変換します
 		Vector3 inverse_transform_vector(const Vector3& vector) const;
-		// ���[���h��Ԃ��烍�[�J����Ԃ� direction ��ϊ����܂�
+		// ワールド空間からローカル空間へ direction を変換します
 		Vector3 inverse_transform_direction(const Vector3& direction) const;
 
-		// Transform �̐e���擾
+		// Transform の親を取得
 		std::weak_ptr<Transform> parent() const;
-		// Transform �̐e��ݒ�
+		// Transform の親を設定
 		void parent(std::weak_ptr<Transform> parent);
-		// Transform �̐e��ݒ�
+		// Transform の親を設定
 		void set_parent(std::weak_ptr<Transform> parent, bool world_position_stays = true);
-		// �q���B���擾
+		// 子供達を取得
 		std::list<std::weak_ptr<Transform>> get_children() const;
-		// �q�����擾
+		// 子供を取得
 		std::weak_ptr<Transform> get_child(const UINT index) const;
-		// �q���̐����擾
+		// 子供の数を取得
 		int get_child_count() const;
 
-		// �e�� Transform �I�u�W�F�N�g���猩�����ΓI�ȃX�P�[�����擾
+		// 親の Transform オブジェクトから見た相対的なスケールを取得
 		Vector3 local_scale() const;
-		// �e�� Transform �I�u�W�F�N�g���猩�����ΓI�ȃX�P�[����ݒ�
+		// 親の Transform オブジェクトから見た相対的なスケールを設定
 		void local_scale(const Vector3& value);
 		void local_scale(float x, float y, float z);
-		// �e�� Transform �I�u�W�F�N�g���猩�����ΓI�Ȉʒu���擾
+		// 親の Transform オブジェクトから見た相対的な位置を取得
 		Vector3 local_position() const;
-		// �e�� Transform �I�u�W�F�N�g���猩�����ΓI�Ȉʒu��ݒ�
+		// 親の Transform オブジェクトから見た相対的な位置を設定
 		void local_position(const Vector3& value);
 		void local_position(float x, float y, float z);
-		// �e�� Transform �I�u�W�F�N�g���猩�����ΓI�ȉ�]���擾
+		// 親の Transform オブジェクトから見た相対的な回転を取得
 		Quaternion local_rotation() const;
-		// �e�� Transform �I�u�W�F�N�g���猩�����ΓI�ȉ�]��ݒ�
+		// 親の Transform オブジェクトから見た相対的な回転を設定
 		void local_rotation(const Quaternion& value);
 		void local_rotation(float x, float y, float z, float w);
-		// �e�� Transform �I�u�W�F�N�g���猩�����ΓI�ȃI�C���[�p�Ƃ��Ẳ�]�l���擾
+		// 親の Transform オブジェクトから見た相対的なオイラー角としての回転値を取得
 		Vector3 local_euler_angles() const;
-		// �e�� Transform �I�u�W�F�N�g���猩�����ΓI�ȃI�C���[�p�Ƃ��Ẳ�]�l��ݒ�
+		// 親の Transform オブジェクトから見た相対的なオイラー角としての回転値を設定
 		void local_euler_angles(const Vector3& value);
 		void local_euler_angles(float x, float y, float z);
-		// ���ׂĂ̎q�I�u�W�F�N�g��e�I�u�W�F�N�g����؂藣���܂�
+		// すべての子オブジェクトを親オブジェクトから切り離します
 		void detach_children();
-		// �e�� Transform ����؂藣��
+		// 親の Transform から切り離す
 		void detach_parent();
 
 	private:
@@ -153,29 +153,29 @@ namespace EvaEngine {
 		void internal_local_scale(const Vector3& value);
 		void internal_local_scale(float x, float y, float z);
 
-		// ���[���h���W�n�̍X�V
+		// ワールド座標系の更新
 		void update_world_transform(const std::weak_ptr<Transform>& parent);
 
 	private:
-		// �|�W�V���� (���[���h���W�n)
+		// ポジション (ワールド座標系)
 		Vector3 position_{ 0.0f, 0.0f, 0.0f };
-		// ��] (���[���h���W�n)
+		// 回転 (ワールド座標系)
 		Quaternion rotation_{ 0.0f, 0.0f, 0.0f, 1.0f };
-		// �X�P�[�� (���[���h���W�n)
+		// スケール (ワールド座標系)
 		Vector3 scale_{ 1.0f, 1.0f, 1.0f };
 
-		// �|�W�V���� (���[�J�����W�n)
+		// ポジション (ローカル座標系)
 		Vector3 local_position_{ 0.0f, 0.0f, 0.0f };
-		// ��] (���[�J�����W�n)
+		// 回転 (ローカル座標系)
 		Quaternion local_rotation_{ 0.0f, 0.0f, 0.0f, 1.0f };
-		// �X�P�[�� (���[�J�����W�n)
+		// スケール (ローカル座標系)
 		Vector3 local_scale_{ 1.0f, 1.0f, 1.0f };
 
 		Vector3 internal_euler_rotation{ 0.0f, 0.0f, 0.0f };
 
-		// �e�̃g�����X�t�H�[��
+		// 親のトランスフォーム
 		std::weak_ptr<Transform> parent_;
-		// �q�̃g�����X�t�H�[��
+		// 子のトランスフォーム
 		std::list<std::weak_ptr<Transform>> children_;
 
 		bool m_OpenedFlag{ false };

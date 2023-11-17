@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <Windows.h>
 #include <string>
 #include <d3d11.h>
@@ -7,27 +7,27 @@ namespace EvaEngine {
 
 	class Window {
 	public:
-		// DirectX11‚ÅŽg‚¤Viewport‚É‚µ‚Ä•Ô‚·
+		// DirectX11ã§ä½¿ã†Viewportã«ã—ã¦è¿”ã™
 		static D3D11_VIEWPORT GetViewport();
 
 	public:
-		// ƒEƒBƒ“ƒhƒE–¼
+		// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å
 		static const std::string g_WindowName;
-		// ƒEƒBƒ“ƒhƒE‚Ì¶’[
+		// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å·¦ç«¯
 		static UINT g_WindowLeft;
-		// ƒEƒBƒ“ƒhƒE‚Ì‰E’[
+		// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å³ç«¯
 		static UINT g_WindowRight;
-		// ƒEƒBƒ“ƒhƒE‚Ìã’[
+		// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä¸Šç«¯
 		static UINT g_WindowTop;
-		// ƒEƒBƒ“ƒhƒE‚Ì‰º’[
+		// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä¸‹ç«¯
 		static UINT g_WindowBottom;
-		// ‰æ–Ê‚ÌƒŠƒtƒŒƒbƒVƒ…ƒŒ[ƒg
+		// ç”»é¢ã®ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒ¬ãƒ¼ãƒˆ
 		static UINT g_FPS;
-		// ƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹(ƒAƒvƒŠƒP[ƒVƒ‡ƒ“Ž©‘Ì‚ðŽ¦‚·’l)
+		// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«(ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³è‡ªä½“ã‚’ç¤ºã™å€¤)
 		static HINSTANCE g_hInstance;
-		// ƒEƒBƒ“ƒhƒEƒnƒ“ƒhƒ‹(ƒEƒBƒ“ƒhƒEŽ©‘Ì‚ðŽ¦‚·’l)
+		// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«(ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦è‡ªä½“ã‚’ç¤ºã™å€¤)
 		static HWND g_hWnd;
-		// ƒEƒCƒ“ƒhƒE‚ð‚Ç‚Ì‚æ‚¤‚É•\Ž¦‚·‚é‚©‚ðŽ¦‚·’è”
+		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’ã©ã®ã‚ˆã†ã«è¡¨ç¤ºã™ã‚‹ã‹ã‚’ç¤ºã™å®šæ•°
 		static int g_nCmdShow;
 	};
 }

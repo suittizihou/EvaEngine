@@ -1,4 +1,4 @@
-﻿#include "Camera.h"
+#include "Camera.h"
 #include "../../../Setting/Window/Window.h"
 #include "../../Base/GameObject/GameObject.h"
 #include "../Transform/Transform.h"
@@ -41,11 +41,11 @@ EvaEngine::Camera::Camera(
 
 EvaEngine::Camera::~Camera()
 {
-	// �Q�Ɛ悪null�ɂȂ��Ă���̂�����
+	// 参照先がnullになってるものを消す
 	for (auto& camera : m_Cameras) {
 		for (int i = 0; i < camera.second.size(); ++i) {
 			if (camera.second[i].expired()) {
-				// ���������Ɩ����̕������N�����Ɠ���ւ�
+				// 消す部分と末尾の部分をクルっと入れ替え
 				std::iter_swap(camera.second.begin() + i, camera.second.end() - 1);
 				camera.second.pop_back();
 				return;
@@ -68,10 +68,10 @@ void EvaEngine::Camera::Awake()
 
 void EvaEngine::Camera::Update()
 {
-	// �r���[�s����쐬���ݒ�
+	// ビュー行列を作成し設定
 	m_ViewMatrix = CreateViewMatrix(GetTransform());
 
-	// ������̍쐬
+	// 視錐台の作成
 	m_ProjectionMatrix = CreateProjectionMatrix(m_Viewport, m_Near, m_Far, m_Fov);
 }
 
@@ -79,18 +79,18 @@ void EvaEngine::Camera::SetViewport(const UINT width, const UINT height)
 {
 	m_Viewport = D3D11_VIEWPORT
 	{
-		static_cast<FLOAT>(0),			// �E�B���h�E�̍��[�̍��W
-		static_cast<FLOAT>(0),			// �E�B���h�E�̏�[�̍��W
-		static_cast<FLOAT>(width),		// �E�B���h�E�̉���
-		static_cast<FLOAT>(height),		// �E�B���h�E�̏c��
-		0.0f,							// �ŏ��[�x
-		1.0f							// �ő�[�x
+		static_cast<FLOAT>(0),			// ウィンドウの左端の座標
+		static_cast<FLOAT>(0),			// ウィンドウの上端の座標
+		static_cast<FLOAT>(width),		// ウィンドウの横幅
+		static_cast<FLOAT>(height),		// ウィンドウの縦幅
+		0.0f,							// 最小深度
+		1.0f							// 最大深度
 	};
 }
 
 void EvaEngine::Camera::SetBeginSettings(ID3D11DeviceContext* command) const
 {
-	// �r���[�|�[�g�̃Z�b�g�A�b�v
+	// ビューポートのセットアップ
 	command->RSSetViewports(1, &m_Viewport);
 
 	targetTexture->SetRenderTarget(clearColor);
@@ -98,9 +98,9 @@ void EvaEngine::Camera::SetBeginSettings(ID3D11DeviceContext* command) const
 	auto cameraPos = GetTransform().lock()->position();
 	Internal::DirectX11App::g_ConstantBufferData.cameraPos = cameraPos;
 
-	// �r���[�s��
+	// ビュー行列
 	Internal::DirectX11App::g_ConstantBufferData.view = GetViewMatrix().transpose();
-	// �v���W�F�N�V�����s��
+	// プロジェクション行列
 	Internal::DirectX11App::g_ConstantBufferData.projection = GetProjectionMatrix().transpose();
 }
 
@@ -136,7 +136,7 @@ XMMATRIX EvaEngine::Camera::CreateViewMatrix(const std::weak_ptr<Transform>& tra
 
 DirectX::XMMATRIX EvaEngine::Camera::CreateViewMatrix(const Matrix4x4& rotateMatrix, const Matrix4x4& positionMatrix)
 {
-	// �r���[�s����t�s��ɂ��ĕԂ�
+	// ビュー行列を逆行列にして返す
 	return XMMatrixInverse(nullptr, (rotateMatrix * positionMatrix));
 }
 
@@ -155,7 +155,7 @@ std::weak_ptr<EvaEngine::Camera> EvaEngine::Camera::GetMainCamera()
 		}
 	}
 
-	// ������Ȃ���������weak_ptr��Ԃ�
+	// 見つからなかったら空のweak_ptrを返す
 	return std::weak_ptr<Camera>();
 }
 

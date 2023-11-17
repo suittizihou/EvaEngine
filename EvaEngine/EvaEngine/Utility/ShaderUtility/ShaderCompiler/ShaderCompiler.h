@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <string>
 #include "../../../Define/D3D11Defines.h"
 
@@ -16,23 +16,23 @@ namespace EvaEngine {
 			~ShaderCompiler() = default;
 
 		public:
-			// ���_�V�F�[�_�[���쐬
+			// 頂点シェーダーを作成
 			static HRESULT CreateVertexShader(VertexShader* shader, const D3D11_INPUT_ELEMENT_DESC* layout, const UINT arraySize, const std::string& fileName, const std::string& entrypath = "vsMain", bool error = true);
-			// �s�N�Z���V�F�[�_�[���쐬
+			// ピクセルシェーダーを作成
 			static HRESULT CreatePixelShader(PixelShader* shader, const std::string& fileName, const std::string& entrypath = "psMain", bool error = true);
-			// �W�I���g���V�F�[�_�[���쐬
+			// ジオメトリシェーダーを作成
 			static HRESULT CreateGeometryShader(GeometryShader* shader, const std::string& fileName, const std::string& entrypath = "gsMain", bool error = true);
-			// �R���s���[�g�V�F�[�_�[���쐬
+			// コンピュートシェーダーを作成
 			static HRESULT CreateComputeShader(ComputeShader* shader, const std::string& fileName, const std::string& entrypath = "gsMain", bool error = true);
-			// �n���V�F�[�_�[���쐬
+			// ハルシェーダーを作成
 			static HRESULT CreateHullShader(HullShader* shader, const std::string& fileName, const std::string& entrypath = "hsMain", bool error = true);
-			// �h���C���V�F�[�_�[���쐬
+			// ドメインシェーダーを作成
 			static HRESULT CreateDomainShader(DomainShader* shader, const std::string& fileName, const std::string& entrypath = "dsMain", bool error = true);
 
 		private:
-			// �Z�}���e�B�N�X�̃Z�b�g�Ȃǂ����钸�_���C�A�E�g���쐬
+			// セマンティクスのセットなどをする頂点レイアウトを作成
 			static HRESULT CreateInputLayout(VertexShader* shader, const D3D11_INPUT_ELEMENT_DESC* layout, const UINT arraySize);
-			// �V�F�[�_�[�̃R���p�C��
+			// シェーダーのコンパイル
 			static HRESULT Compile(const std::string& fileName, const std::string& entryPath, const LPCSTR& pTarget, ID3DBlob** blob, bool error = true);
 		};
 	}

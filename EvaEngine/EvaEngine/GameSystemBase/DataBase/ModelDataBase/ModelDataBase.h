@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <memory>
 #include <unordered_map>
 #include <guiddef.h>
@@ -12,20 +12,20 @@ namespace EvaEngine {
 			ModelDataBase() = default;
 			~ModelDataBase() = default;
 
-			// ���f���f�[�^��ǉ�����
+			// モデルデータを追加する
 			void LoadModelData(const std::shared_ptr<EvaEngine::ModelData>& model, GUID* guid);
 			void LoadModelData(const std::string& fileName, GUID* guid);
-			// ���f���f�[�^���擾
+			// モデルデータを取得
 			std::weak_ptr<ModelData> GetModel(const GUID& guid);
-			// ���f���f�[�^���������������
+			// モデルデータをメモリから消す
 			void DeleteModel(const GUID& guid);
-			// �S���f���f�[�^���������������
+			// 全モデルデータをメモリから消す
 			void DeleteAllModel();
-			//// �������Ƀ��f���̃f�[�^��ǂݍ���
+			//// メモリにモデルのデータを読み込む
 			//ModelData LoadModelDataMemory(const std::shared_ptr<EvaEngine::ModelData>& model);
 
 		private:
-			// ���f���f�[�^
+			// モデルデータ
 			std::unordered_map<GUID, std::shared_ptr<EvaEngine::ModelData>> m_Models{};
 		};
 	}

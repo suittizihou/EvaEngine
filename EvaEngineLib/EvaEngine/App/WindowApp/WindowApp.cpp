@@ -35,9 +35,9 @@ HRESULT WindowApp::Init()
 {
     HRESULT hr{};
 
-    // COMƒ‰ƒCƒuƒ‰ƒŠ‚ð‰Šú‰»‚·‚é‚à‚Ì(COM‚Æ‚ÍƒRƒ“ƒ|[ƒlƒ“ƒgEƒIƒuƒWƒFƒNƒgEƒ‚ƒfƒ‹‚Ì—ª)
-    // COMƒ‰ƒCƒuƒ‰ƒŠ‚ðŽg‚¤Žž‚ÉŽg‚¤ƒXƒŒƒbƒh‚Å­‚È‚­‚Æ‚à‚P‰ñ‚ÍŽÀs‚·‚é•K—v‚ª‚ ‚éB
-    // D3DŠÖ˜A‚ÌF‚ñ‚ÈƒNƒ‰ƒX‚ª‚±‚ÌCOM‚ð—˜—p‚µ‚ÄŽÀ‘•‚³‚ê‚Ä‚¨‚èA‚±‚ê‚ð‚·‚é•K—v‚ª‚ ‚é
+    // COMãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’åˆæœŸåŒ–ã™ã‚‹ã‚‚ã®(COMã¨ã¯ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãƒ»ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ»ãƒ¢ãƒ‡ãƒ«ã®ç•¥)
+    // COMãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’ä½¿ã†æ™‚ã«ä½¿ã†ã‚¹ãƒ¬ãƒƒãƒ‰ã§å°‘ãªãã¨ã‚‚ï¼‘å›žã¯å®Ÿè¡Œã™ã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚
+    // D3Dé–¢é€£ã®è‰²ã‚“ãªã‚¯ãƒ©ã‚¹ãŒã“ã®COMã‚’åˆ©ç”¨ã—ã¦å®Ÿè£…ã•ã‚Œã¦ãŠã‚Šã€ã“ã‚Œã‚’ã™ã‚‹å¿…è¦ãŒã‚ã‚‹
     hr = CoInitializeEx(NULL, COINIT_MULTITHREADED);
 
     if (FAILED(hr)) {
@@ -67,7 +67,7 @@ HRESULT WindowApp::Init()
 
     RECT rect = { 0,0, static_cast<LONG>(Window::g_WindowRight), static_cast<LONG>(Window::g_WindowBottom) };
 
-    // ƒEƒBƒ“ƒhƒE‚ð¶¬
+    // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ç”Ÿæˆ
     Window::g_hWnd = CreateWindow(
         Window::g_WindowName.c_str(),
         Window::g_WindowName.c_str(),

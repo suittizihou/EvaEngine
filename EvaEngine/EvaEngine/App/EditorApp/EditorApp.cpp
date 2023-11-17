@@ -1,4 +1,4 @@
-﻿#if _DEBUG
+#if _DEBUG
 
 #include "EditorApp.h"
 #include "../../Setting/Window/Window.h"
@@ -42,17 +42,17 @@ HRESULT EditorApp::ImGuiSetting()
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
-		// ini�𐶐����Ȃ�
+		// iniを生成しない
 		//io.IniFilename = NULL;
-		// ���{��t�H���g�ɑΉ�
+		// 日本語フォントに対応
 		//ImFontConfig fontConfig{};
 		//fontConfig.MergeMode = true;
 		io.Fonts->AddFontFromFileTTF("C:\\Windows\\Fonts\\meiryo.ttc", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
-		// �h�b�L���O�@�\��L����
+		// ドッキング機能を有効化
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-		// �_�[�N�e�[�}�ɐݒ�
+		// ダークテーマに設定
 		ImGui::StyleColorsDark();
 
 		ImGuiStyle& style = ImGui::GetStyle();
@@ -71,27 +71,27 @@ HRESULT EditorApp::ImGuiSetting()
 
 HRESULT EditorApp::Init()
 {
-	// ImGui�̏�����
+	// ImGuiの初期化
 	if (FAILED(ImGuiSetting())) {
-		DebugLog::LogError("ImGui�̐ݒ�Ɏ��s���܂����B");
+		DebugLog::LogError("ImGuiの設定に失敗しました。");
 		return E_ABORT;
 	}
 
 	if (!ImGui_ImplWin32_Init(Window::g_hWnd)) {
-		DebugLog::LogError("ImGui_ImplWin32_Init�Ɏ��s���܂����B");
+		DebugLog::LogError("ImGui_ImplWin32_Initに失敗しました。");
 		ImGui::DestroyContext();
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
 		return E_ABORT;
 	}
 	
 	if (!ImGui_ImplDX11_Init(EvaEngine::Internal::DirectX11App::g_Device, EvaEngine::Internal::DirectX11App::g_Context)) {
-		DebugLog::LogError("ImGui_ImplDX11_Init�Ɏ��s���܂����B");
+		DebugLog::LogError("ImGui_ImplDX11_Initに失敗しました。");
 		ImGui::DestroyContext();
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
 		return E_ABORT;
 	}
 
-	// EditorWindow�̒ǉ�
+	// EditorWindowの追加
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::EditorBaseWindow>("");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::ConsoleWindow>("Window/General/Console");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::SceneWindow>("Window/General/Scene");
@@ -101,11 +101,11 @@ HRESULT EditorApp::Init()
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::ProjectWindow>("Window/General/Project");
 	m_EditorWindows.CreateEditorWindow<Editor::Internal::DemoWindow>("Help/DemoWindow");
 
-	// Editor��p��Manager���쐬
+	// Editor専用のManagerを作成
 	GameObjectManager::Instance().AddGameObjectDataBase("Editor");
 	ComponentManager::Instance().AddComponentDataBase("Editor");
 
-	// �V�[���r���[�̍쐬
+	// シーンビューの作成
 	m_SceneView = GameObjectManager::Instance().Instantiate("Editor", "SceneView", "SceneView").lock()->AddComponent<SceneView>();
 	m_SceneView.lock()->GetTransform().lock()->position(0.0f, 0.0f, -5.0f);
 
@@ -119,14 +119,14 @@ void EvaEngine::Editor::Internal::EditorApp::Update()
 
 void EditorApp::DrawBegin()
 {
-	// DepthView��StencilView�̃N���A
+	// DepthViewとStencilViewのクリア
 	DirectX11App::g_Context->ClearDepthStencilView(
-		DirectX11App::g_EditorDepthStencilView,			// �N���A�Ώۂ�View
-		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// �N���A�t���O
-		1.0f,											// �[�x�N���A�l
-		0);												// �X�e���V���N���A�l
+		DirectX11App::g_EditorDepthStencilView,			// クリア対象のView
+		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// クリアフラグ
+		1.0f,											// 深度クリア値
+		0);												// ステンシルクリア値
 
-	// �V�F�[�_�[�̃Z�b�g
+	// シェーダーのセット
 	Shader shader{ DrawManager::GetDefaultShader() };
 	DrawManager::SetShader(&shader);
 
@@ -144,12 +144,12 @@ void EditorApp::DrawEnd()
 {
 	ImGui::Render();
 
-	// �����_�[�^�[�Q�b�g�̐ݒ�
+	// レンダーターゲットの設定
 	DirectX11App::g_Context->OMSetRenderTargets(1, &DirectX11App::g_EditorRenderTargetView, DirectX11App::g_EditorDepthStencilView);
 
-	// �w��F�ŉ�ʃN���A
+	// 指定色で画面クリア
 	float clearColor[4] = { 1.0f, 1.0f, 0.8f, 1.0f };
-	// RenderTargetView�̃N���A
+	// RenderTargetViewのクリア
 	DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_EditorRenderTargetView, clearColor);
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
@@ -161,7 +161,7 @@ void EditorApp::DrawEnd()
 
 void EditorApp::End()
 {
-	// ImGui�̉��
+	// ImGuiの解放
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();

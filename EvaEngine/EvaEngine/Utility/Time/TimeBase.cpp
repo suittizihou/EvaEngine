@@ -1,4 +1,4 @@
-﻿#include "TimeBase.h"
+#include "TimeBase.h"
 #include <chrono>
 
 float EvaEngine::Internal::TimeBase::m_DeltaTime{};

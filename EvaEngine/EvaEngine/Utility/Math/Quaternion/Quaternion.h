@@ -1,11 +1,11 @@
-﻿#pragma once
+#pragma once
 
 #include <string>
 #include <DirectXMath.h>
 #include "../Vector3/Vector3.h"
 
 namespace EvaEngine {
-	// �N�H�[�^�j�I��
+	// クォータニオン
 	struct Quaternion {
 		union {
 			DirectX::XMFLOAT4 vec;
@@ -13,77 +13,77 @@ namespace EvaEngine {
 			struct { float x, y, z, w; };
 		};
 
-		// �f�t�H���g�R���X�g���N�^
+		// デフォルトコンストラクタ
 		Quaternion() = default;
-		// �R���X�g���N�^
+		// コンストラクタ
 		Quaternion(float x, float y, float z, float w = 1.0f);
 
-		// �P�ʃN�H�[�^�j�I��
+		// 単位クォータニオン
 		static Quaternion identity();
-		// ���K��
+		// 正規化
 		Quaternion normalized() const;
-		// [0] ��[1] ���g�p���� x �� y �����ɃA�N�Z�X���܂�
+		// [0] や[1] を使用して x や y 成分にアクセスします
 		float operator[](int index) const;
 		float& operator[](int index);
 
-		// ������ Quaternion �� x�Ay�Az�Aw �̐�����ݒ肵�܂�
+		// 既存の Quaternion に x、y、z、w の成分を設定します
 		void set(float newX, float newY, float newZ, float newW);
-		// �N�H�[�^��I���̒l�����₷�������������Ԃ��܂��B
+		// クォータ二オンの値を見やすくした文字列を返します。
 		std::string to_string() const;
 
-		// 2 �̉�] a �� b �Ԃ̊p�x��Ԃ��܂��B
+		// 2 つの回転 a と b 間の角度を返します。
 		static float angle(const Quaternion& a, const Quaternion& b);
 		static Vector3 internal_make_positive(Vector3 euler);
-		// axis �̎���� angle �x��]�����]���쐬���܂��B
+		// axis の周りを angle 度回転する回転を作成します。
 		static Quaternion angle_axis(float angle, const Vector3& axis);
-		// 2 �̉�]�̓��ς�Ԃ��܂��B
+		// 2 つの回転の内積を返します。
 		static float dot(const Quaternion& a, const Quaternion& b);
 
-		// �t�N�H�[�^�j�I����Ԃ��܂�
+		// 逆クォータニオンを返します
 		static Quaternion inverse(const Quaternion& rotation);
-		// ���K�������N�H�[�^�j�I����Ԃ��܂�
+		// 正規化したクォータニオンを返します
 		static Quaternion normalize(const Quaternion& q);
 
 		float length() const;
 
-		//�@a �� b �̊Ԃ� t �ŋ���ɕ�Ԃ��܂��B�p�����[�^�[ t �́A[0, 1] �͈̔͂ł��B
+		//　a と b の間を t で球状に補間します。パラメーター t は、[0, 1] の範囲です。
 		static Quaternion slerp(const Quaternion& a, const Quaternion& b, float t);
-		// a �� b �̊Ԃ� t �ŋ���ɕ�Ԃ��܂��B�p�����[�^�[ t �́A�����Ă��܂���B
+		// a と b の間を t で球状に補間します。パラメーター t は、限られていません。
 		static Quaternion slerp_unclamped(const Quaternion& a, const Quaternion& b, float t);
 
-		// ��]���I�C���[�p�̒l�ŕԂ��܂�
+		// 回転をオイラー角の値で返します
 		Vector3 euler_angles() const;
-		// �I�C���[�p���N�H�[�^�j�I���ɕϊ����Ď��g�ɑ��
+		// オイラー角をクォータニオンに変換して自身に代入
 		void euler_angles(const Vector3& value);
 
 
-		// fromDirection ���� toDirection �ւ̉�]���쐬���܂�
+		// fromDirection から toDirection への回転を作成します
 		void set_from_to_rotation(const Vector3& fromDirection, const Vector3& toDirection);
-		// �w�肳�ꂽ forward �� upwards �����ɉ�]���܂�
+		// 指定された forward と upwards 方向に回転します
 		void set_look_rotation(const Vector3& view, const Vector3& up = Vector3::up());
-		// ��]�����W�ɑ΂���p�x�̒l (AngleAxis) �ɕϊ����܂��B
+		// 回転を座標に対する角度の値 (AngleAxis) に変換します。
 		void to_angle_axis(float& angle, Vector3& axis);
 
-		// z���𒆐S��z�x�Ax���𒆐S��x�x�Ay���𒆐S��y�x��]�����]��Ԃ��܂��B
+		// z軸を中心にz度、x軸を中心にx度、y軸を中心にy度回転する回転を返します。
 		static Quaternion euler(float x, float y, float z);
 		static Quaternion euler(const Vector3& euler);
-		// fromDirection ���� toDirection �ւ̉�]���쐬���܂��B
+		// fromDirection から toDirection への回転を作成します。
 		static Quaternion from_to_rotation(const Vector3& fromDirection,
 			const Vector3& toDirection);
-		// �w�肳�ꂽ forward �� upwards �����ɉ�]���܂�
+		// 指定された forward と upwards 方向に回転します
 		static Quaternion look_rotation(const Vector3& view, const Vector3& up = Vector3::up());
-		// from ���� to �ւ̉�]�𓾂܂�
+		// from から to への回転を得ます
 		static Quaternion rotate_towards(const Quaternion& from,
 			const Quaternion& to, float maxDegreesDelta);
-		//�@a �� b �̊Ԃ� t �Ő��`�ɕ�Ԃ��܂��B�p�����[�^�[ t �́A[0, 1] �͈̔͂ł��B
+		//　a と b の間を t で線形に補間します。パラメーター t は、[0, 1] の範囲です。
 		static Quaternion lerp(const Quaternion& a, const Quaternion& b, float t);
-		// a �� b �̊Ԃ� t �Ő��`�ɕ�Ԃ��܂��B�p�����[�^�[ t �́A�����Ă��܂���B
+		// a と b の間を t で線形に補間します。パラメーター t は、限られていません。
 		static Quaternion lerp_unclamped(const Quaternion& a, const Quaternion& b, float t);
 
-		// ��r(���S�ɒl����v���Ă��邩�H�j
+		// 比較(完全に値が一致しているか？）
 		bool equals(const Quaternion& other) const;
 
-		// XMVECTOR�ւ̈ÖكL���X�g
+		// XMVECTORへの暗黙キャスト
 		operator DirectX::XMVECTOR() const;
 
 	private:
@@ -93,7 +93,7 @@ namespace EvaEngine {
 		static const float k_epsilon;
 	};
 
-	// ���Z�q�I�[�o�[���[�h
+	// 演算子オーバーロード
 	Quaternion operator - (const Quaternion& q);
 	Quaternion operator + (const Quaternion& lhs, const Quaternion& rhs);
 	Quaternion operator - (const Quaternion& lhs, const Quaternion& rhs);

@@ -1,4 +1,4 @@
-﻿#if _DEBUG
+#if _DEBUG
 #include "EditorBaseWindow.h"
 #include "../../Setting/Window/Window.h"
 #include "../EditorWindowDataBase/EditorWindowDataBase.h"
@@ -51,13 +51,13 @@ void EditorBaseWindow::OnGUI() {
 
 void EvaEngine::Editor::Internal::EditorBaseWindow::DrawPlayButtons()
 {
-	// �{�^����Window�̒��S��
+	// ボタンをWindowの中心に
 	ImVec2 cursor = ImGui::GetCursorPos();
 	ImGui::InvisibleButton("##padded-text", ImVec2(EvaEngine::Internal::Window::GetViewport().Width / 2.0f, 24.0f));
 	ImVec2 final_cursor_pos = ImGui::GetCursorPos();
 	ImGui::SetCursorPos(ImVec2(cursor.x + EvaEngine::Internal::Window::GetViewport().Width / 2.0f, cursor.y + 2.0f));
 
-	// �Đ��{�^��
+	// 再生ボタン
 	if (EditorApplication::isPlaying) ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.24f, 0.58f, 1.0f, 1.0f));
 	else ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.3f, 0.3f, 0.3f, 1.0f));
 	if (ImGui::Button("Play")) {
@@ -66,7 +66,7 @@ void EvaEngine::Editor::Internal::EditorBaseWindow::DrawPlayButtons()
 	}
 	ImGui::PopStyleColor(1);
 
-	// �ꎞ��~�{�^��
+	// 一時停止ボタン
 	if (EditorApplication::isPause) ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.24f, 0.58f, 1.0f, 1.0f));
 	else ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.3f, 0.3f, 0.3f, 1.0f));
 	ImGui::SameLine();
@@ -76,7 +76,7 @@ void EvaEngine::Editor::Internal::EditorBaseWindow::DrawPlayButtons()
 	}
 	ImGui::PopStyleColor(1);
 
-	// �X�e�b�v�{�^��
+	// ステップボタン
 	ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.3f, 0.3f, 0.3f, 1.0f));
 	ImGui::SameLine();
 	if (ImGui::Button("Step")) {
@@ -88,10 +88,10 @@ void EvaEngine::Editor::Internal::EditorBaseWindow::DrawPlayButtons()
 	}
 	ImGui::PopStyleColor(1);
 
-	ImGui::SetCursorPos(final_cursor_pos);	// �{�^����Window�̒��S��
+	ImGui::SetCursorPos(final_cursor_pos);	// ボタンをWindowの中心に
 }
 
-// �o�^���ꂽEditorWindow�̃p�X�����j���[�ɕ\�����邽�߁A�ċA�I�ɌĂяo��
+// 登録されたEditorWindowのパスをメニューに表示するため、再帰的に呼び出し
 void EditorBaseWindow::Scanning(const std::weak_ptr<EditorWindowData>& editorWindows) {
 	
 	for (auto editorWindow : editorWindows.lock()->childDatas) {

@@ -1,4 +1,4 @@
-﻿#include "Shader.h"
+#include "Shader.h"
 #include "../../../GameSystemBase/DataBase/ShaderDataBase/ShaderDataBase.h"
 
 using namespace EvaEngine;

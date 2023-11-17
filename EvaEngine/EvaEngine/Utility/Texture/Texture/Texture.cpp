@@ -1,12 +1,13 @@
-﻿#include "Texture.h"
+#include "Texture.h"
 #include "../../Math/Mathf/Mathf.h"
 #include "../../../App/DirectX11App/DirectX11App.h"
+#include <cmath>
 
 using namespace EvaEngine;
 
-EvaEngine::Texture::Texture(const Vector2& texelSize) : Texture(texelSize.x, texelSize.y) {}
+EvaEngine::Texture::Texture(const Vector2Int& texelSize) : Texture(texelSize.x, texelSize.y) {}
 
-EvaEngine::Texture::Texture(const UINT width, const UINT height) : texelSize{ width , height } {
+EvaEngine::Texture::Texture(const int width, const int height) : texelSize{ std::max(width,0) , std::max(height, 0) } {
 }
 
 EvaEngine::Texture::~Texture()
@@ -19,16 +20,16 @@ Texture::TextureType EvaEngine::Texture::GetTextureType() const
 	return textureType;
 }
 
-Vector2 Texture::GetTexelSize() const
+Vector2Int Texture::GetTexelSize() const
 {
 	return texelSize;
 }
 
-Vector2 EvaEngine::Texture::GetAspect() const
+Vector2Int EvaEngine::Texture::GetAspect() const
 {
 	int gcd = Mathf::gcd(static_cast<int>(texelSize.x), static_cast<int>(texelSize.y));
-	if (gcd == 0) return Vector2();
-	return Vector2(texelSize.x / gcd, texelSize.y / gcd);
+	if (gcd == 0) return Vector2Int();
+	return Vector2Int(texelSize.x / gcd, texelSize.y / gcd);
 }
 
 ID3D11ShaderResourceView* EvaEngine::Texture::GetD3DShaderResrouceView() const

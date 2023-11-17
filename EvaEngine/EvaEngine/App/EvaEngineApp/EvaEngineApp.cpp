@@ -1,4 +1,4 @@
-﻿#include "EvaEngineApp.h"
+#include "EvaEngineApp.h"
 #include "../EditorApp/EditorApp.h"
 #include "../../Setting/Window/Window.h"
 #include "../DirectX11App/DirectX11App.h"
@@ -22,26 +22,26 @@ HRESULT EvaEngineApp::Init()
 {
 	HRESULT hr{};
 
-	// �`��}�l�[�W���[�̏�����
+	// 描画マネージャーの初期化
 	hr = DrawManager::Init();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("DrawManager�̏������Ɏ��s���܂����B");
+		DebugLog::ShowErrorMessageWindow("DrawManagerの初期化に失敗しました。");
 		return hr;
 	}
 
 #if _DEBUG
-	// Editor�̏�����
+	// Editorの初期化
 	hr = EditorApp::Init();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("Editor�̏������Ɏ��s���܂����B");
+		DebugLog::ShowErrorMessageWindow("Editorの初期化に失敗しました。");
 		return hr;
 	}
 #endif
 
-	// �V�[���̏�����
+	// シーンの初期化
 	hr = SceneDataBase::Instance().SceneChange();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("�V�[���̏������Ɏ��s���܂����B");
+		DebugLog::ShowErrorMessageWindow("シーンの初期化に失敗しました。");
 		return hr;
 	}
 
@@ -61,7 +61,7 @@ void EvaEngineApp::Update()
 void EvaEngineApp::Draw(ID3D11DeviceContext* command)
 {
 	if (SceneDataBase::Instance().GetSceneCount() <= 0) return;
-	// �`��
+	// 描画
 	SceneDataBase::Instance().Draw(command);
 }
 
@@ -73,13 +73,13 @@ void EvaEngine::Internal::EvaEngineApp::UpdateEditor()
 
 void EvaEngineApp::DrawEditor()
 {
-	// Editor�̕`��J�n����
+	// Editorの描画開始処理
 	EditorApp::DrawBegin();
 
-	// Editor�̕`�揈��
+	// Editorの描画処理
 	EditorApp::Draw();
 	
-	// Editor�`��I������
+	// Editor描画終了処理
 	EditorApp::DrawEnd();
 }
 #endif
@@ -89,7 +89,7 @@ void EvaEngineApp::FrameEnd()
 	DrawManager::DrawEnd();	// SwapChain->Present
 
 	if (FAILED(SceneDataBase::Instance().SceneChange())) {
-		DebugLog::LogError("�V�[���̏������Ɏ��s���܂����B");
+		DebugLog::LogError("シーンの初期化に失敗しました。");
 	}
 }
 
@@ -115,7 +115,7 @@ void EvaEngine::Internal::EvaEngineApp::EditorUpdate()
 	bool isPlaying = EvaEngine::Editor::EditorApplication::isPlaying && (EvaEngine::Editor::EditorApplication::isPause == false);
 
 	if (isPlaying) {
-		// �Q�[�����̂̃A�b�v�f�[�g���̓Q�[���E�B���h�E���A�N�e�B�u�o�Ȃ��Ɠ��͂��󂯕t���Ȃ��悤�ɂ���
+		// ゲーム自体のアップデート中はゲームウィンドウがアクティブ出ないと入力を受け付けないようにする
 		EvaEngine::Editor::EditorApplication::isInputFreeze = !EvaEngine::Editor::EditorApplication::gameWindowIsActive;
 
 		SceneDataBase::Instance().SceneUpdate();
@@ -128,7 +128,7 @@ void EvaEngine::Internal::EvaEngineApp::EditorUpdate()
 	if (isPlaying) {
 		SceneDataBase::Instance().LateUpdate();
 
-		// �Q�[�����̂̃A�b�v�f�[�g�𔲂�������͏�Ԃ�߂�
+		// ゲーム自体のアップデートを抜けたら入力状態を戻す
 		EvaEngine::Editor::EditorApplication::isInputFreeze = false;
 	}
 }

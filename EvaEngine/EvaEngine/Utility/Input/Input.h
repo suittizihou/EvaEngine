@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "KeyCode.h"
 
@@ -9,13 +9,13 @@ namespace EvaEngine {
 		~Input() = default;
 	public:
 
-		// �L�[��������Ă��邩
+		// キーが押されているか
 		static bool GetKey(const KeyCode& keyCode);
-		// �L�[���������u��
+		// キーを押した瞬間
 		static bool GetKeyDown(const KeyCode& keyCode);
-		// �L�[�𗣂����u��
+		// キーを離した瞬間
 		static bool GetKeyUp(const KeyCode& keyCode);
-		// �L�[�������ꂽ�u�Ԃ������ꂽ�u�Ԃ�
+		// キーが押された瞬間か離された瞬間か
 		static bool GetKeyDownOrUpCheck(const KeyCode& keyCode, const KeyState& keyState);
 	};
 }

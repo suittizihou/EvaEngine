@@ -1,8 +1,8 @@
-﻿#pragma once
+#pragma once
 
 namespace EvaEngine {
 	/// <summary>
-	/// ������G���g���[�|�C���g�̂悤�ȃN���X�BInit���I�[�o�[���[�h���ăV�[����o�^�����肷��̂Ɏg���B
+	/// いわゆるエントリーポイントのようなクラス。Initをオーバーロードしてシーンを登録したりするのに使う。
 	/// </summary>
 	class GameBase {
 	public:
@@ -10,14 +10,14 @@ namespace EvaEngine {
 		virtual ~GameBase() = default;
 
 		/// <summary>
-		/// �Q�[���J�n���ɂ���Ă������������������Ƃ����I�[�o�[���[�h���ď���
+		/// ゲーム開始時にやっておきたい初期化処理とかをオーバーロードして書く
 		/// </summary>
 		virtual void Init() = 0;
 
 		static GameBase* Instance();
 
 	private:
-		// �R�s�[�֎~
+		// コピー禁止
 		GameBase(const GameBase& other) = delete;
 		GameBase& operator=(const GameBase& other) = delete;
 

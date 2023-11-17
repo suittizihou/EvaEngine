@@ -10,29 +10,29 @@ namespace EvaEngine {
 
 	class DrawManager {
 	public:
-		// ‰Šú‰»
+		// åˆæœŸåŒ–
 		static HRESULT Init();
 
-		// •`‰æŠJn
+		// æç”»é–‹å§‹
 		static void DrawBegin();
-		// •`‰æ
+		// æç”»
 		static void Draw(
 			const std::weak_ptr<Camera>& camera,
 			const std::weak_ptr<Transform>& transform,
 			ModelData& model);
 
-		// •`‰æI—¹
+		// æç”»çµ‚äº†
 		static void DrawEnd();
 
-		// ƒ}ƒeƒŠƒAƒ‹‚Ìİ’è
+		// ãƒãƒ†ãƒªã‚¢ãƒ«ã®è¨­å®š
 		static void SetMaterial(Material& material);
-		// ’¸“_ƒŒƒCƒAƒEƒg‚Ìİ’è
+		// é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®è¨­å®š
 		static void SetVertexLayout();
 
-		// ƒVƒF[ƒ_[‚Ìİ’è
+		// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®è¨­å®š
 		static void SetShader(Shader& shader);
 		static void SetShader(Material& material);
-		// •`‰æ‚·‚é‚½‚ß‚É•K—v‚È‰ŠúƒVƒF[ƒ_[‚ğæ“¾
+		// æç”»ã™ã‚‹ãŸã‚ã«å¿…è¦ãªåˆæœŸã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’å–å¾—
 		static Shader GetDefaultShader();
 
 	private:

@@ -12,17 +12,17 @@ namespace EvaEngine {
 		typedef unsigned int UINT;
 
 	public:
-		// ƒV[ƒ“‚Ì’Ç‰Á
+		// ã‚·ãƒ¼ãƒ³ã®è¿½åŠ 
 		template<class T>
 		static void AddScene(const std::string& sceneName) {
 			SceneDataBase::Instance().AddScene<T>(sceneName);
 		}
 
-		// ƒV[ƒ“‚Ìƒ[ƒh
+		// ã‚·ãƒ¼ãƒ³ã®ãƒ­ãƒ¼ãƒ‰
 		static void LoadScene(const std::string& sceneName);
 		static void LoadScene(const UINT& sceneName);
 
-		// Œ»İ‚ÌƒV[ƒ“‚ğæ“¾
+		// ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ã‚’å–å¾—
 		static std::string GetCurrentScene();
 	};
 }

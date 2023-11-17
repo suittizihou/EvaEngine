@@ -37,10 +37,10 @@ void Camera::Awake()
 
 void Camera::Update()
 {
-	// ƒrƒ…[s—ñ‚ğì¬‚µİ’è
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’ä½œæˆã—è¨­å®š
 	m_ViewMatrix = CreateViewMatrix(GetTransform());
 
-	// ‹‘ä‚Ìì¬
+	// è¦–éŒå°ã®ä½œæˆ
 	m_ProjectionMatrix = CreateProjectionMatrix(Window::GetViewport(), m_Near, m_Far, m_Fov);
 }
 
@@ -66,10 +66,10 @@ XMMATRIX Camera::CreateViewMatrix(const std::weak_ptr<Transform>& transform)
 
 DirectX::XMMATRIX Camera::CreateViewMatrix(const Matrix4x4& rotateMatrix, const Matrix4x4& positionMatrix)
 {
-	// ƒrƒ…[s—ñ‚ğ‹‚ß‚é(‚Ü‚¾‹ts—ñ‚ğ‚µ‚Ä‚È‚¢)
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’æ±‚ã‚ã‚‹(ã¾ã é€†è¡Œåˆ—ã‚’ã—ã¦ãªã„)
 	Matrix4x4 viewMatrix = rotateMatrix * positionMatrix;
 
-	// DirectXMath‚Ìs—ñ‚É•ÏŠ·‚µ‹ts—ñ‚É‚µ‚Ä•Ô‚·
+	// DirectXMathã®è¡Œåˆ—ã«å¤‰æ›ã—é€†è¡Œåˆ—ã«ã—ã¦è¿”ã™
 	return XMMatrixInverse(nullptr,
 		XMMATRIX(
 			viewMatrix.m[0][0], viewMatrix.m[0][1], viewMatrix.m[0][2], viewMatrix.m[0][3],

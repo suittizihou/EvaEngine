@@ -1,4 +1,4 @@
-﻿#if _DEBUG
+#if _DEBUG
 #include "HierarchyWindow.h"
 #include "../../../GameSystemBase/Manager/GameObjectManager/GameObjectManager.h"
 #include "../../../GameSystemBase/Manager/ComponentManager/ComponentManager.h"

@@ -18,12 +18,12 @@ namespace EvaEngine {
 		GameJobs() {};
 		virtual ~GameJobs() = default;
 
-		// ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ì’Ç‰Á
+		// ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®è¿½åŠ 
 		std::weak_ptr<GameObject> AddGameObject();
 
-		// Š‘®‚·‚éƒV[ƒ“‚ğİ’è
+		// æ‰€å±ã™ã‚‹ã‚·ãƒ¼ãƒ³ã‚’è¨­å®š
 		void SetSceneName(const std::string& sceneType);
-		// Š‘®‚·‚éƒV[ƒ“‚ğ•Ô‚·
+		// æ‰€å±ã™ã‚‹ã‚·ãƒ¼ãƒ³ã‚’è¿”ã™
 		std::string GetSceneType();
 
 	private:

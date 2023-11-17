@@ -1,0 +1,3 @@
+root=true
+[*.{cpp,h}]
+charset=utf-8

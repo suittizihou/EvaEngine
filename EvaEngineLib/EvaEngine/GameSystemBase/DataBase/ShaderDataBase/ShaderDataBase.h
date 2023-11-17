@@ -18,81 +18,81 @@ namespace EvaEngine {
 			return instance;
 		}
 
-		// ƒfƒtƒHƒ‹ƒg‚ÌƒVƒF[ƒ_[“Ç‚İ‚İ
+		// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼èª­ã¿è¾¼ã¿
 		void LoadDefaultShader();
 
-		// ’¸“_ƒVƒF[ƒ_[‚Ì’Ç‰Á
+		// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®è¿½åŠ 
 		int AddVertexShader(ID3D11VertexShader* vertexShader);
-		// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ì’Ç‰Á
+		// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®è¿½åŠ 
 		int AddPixelShader(ID3D11PixelShader* pixelShader);
-		// ƒWƒIƒƒgƒŠƒVƒF[ƒ_[‚Ì’Ç‰Á
+		// ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®è¿½åŠ 
 		int AddGeometryShader(ID3D11GeometryShader* geometryShader);
-		// ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚Ì’Ç‰Á
+		// ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®è¿½åŠ 
 		int AddComputeShader(ID3D11ComputeShader* computeShader);
-		// ƒnƒ‹ƒVƒF[ƒ_[‚Ì’Ç‰Á
+		// ãƒãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®è¿½åŠ 
 		int AddHullShader(ID3D11HullShader* hullShader);
-		// ƒhƒƒCƒ“ƒVƒF[ƒ_[‚Ì’Ç‰Á
+		// ãƒ‰ãƒ¡ã‚¤ãƒ³ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®è¿½åŠ 
 		int AddDomainShader(ID3D11DomainShader* domainShader);
 
-		// ƒfƒtƒHƒ‹ƒg‚Ì’¸“_ƒVƒF[ƒ_[‚ğæ“¾
+		// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’å–å¾—
 		ID3D11VertexShader* GetDefaultVertexShader();
-		// ƒfƒtƒHƒ‹ƒg‚ÌƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚ğæ“¾
+		// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’å–å¾—
 		ID3D11PixelShader* GetDefaultPixelShader();
 
-		// ’¸“_ƒVƒF[ƒ_[‚Ìæ“¾
+		// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å–å¾—
 		ID3D11VertexShader* GetVertexShader(const int shaderHandle);
-		// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ìæ“¾
+		// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å–å¾—
 		ID3D11PixelShader* GetPixelShader(const int shaderHandle);
-		// ƒWƒIƒƒgƒŠƒVƒF[ƒ_[‚Ìæ“¾
+		// ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å–å¾—
 		ID3D11GeometryShader* GetGeometryShader(const int shaderHandle);
-		// ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚Ìæ“¾
+		// ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å–å¾—
 		ID3D11ComputeShader* GetComputeShader(const int shaderHandle);
-		// ƒnƒ‹ƒVƒF[ƒ_[‚Ìæ“¾
+		// ãƒãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å–å¾—
 		ID3D11HullShader* GetHullShader(const int shaderHandle);
-		// ƒhƒƒCƒ“ƒVƒF[ƒ_[‚Ìæ“¾
+		// ãƒ‰ãƒ¡ã‚¤ãƒ³ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å–å¾—
 		ID3D11DomainShader* GetDomainShader(const int shaderHandle);
 
-		// ’¸“_ƒVƒF[ƒ_[‚Ìíœ
+		// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å‰Šé™¤
 		void DeleteVertexShader(const int shaderHandle);
-		// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ìíœ
+		// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å‰Šé™¤
 		void DeletePixelShader(const int shaderHandle);
-		// ƒWƒIƒƒgƒŠƒVƒF[ƒ_[‚Ìíœ
+		// ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å‰Šé™¤
 		void DeleteGeometryShader(const int shaderHandle);
-		// ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚Ìíœ
+		// ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å‰Šé™¤
 		void DeleteComputeShader(const int shaderHandle);
-		// ƒnƒ‹ƒVƒF[ƒ_[‚Ìíœ
+		// ãƒãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å‰Šé™¤
 		void DeleteHullShader(const int shaderHandle);
-		// ƒhƒƒCƒ“ƒVƒF[ƒ_[‚Ìíœ
+		// ãƒ‰ãƒ¡ã‚¤ãƒ³ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®å‰Šé™¤
 		void DeleteDomainShader(const int shaderHandle);
 
-		// ‘SƒVƒF[ƒ_[ƒŠƒ\[ƒX‚Ì‰ğ•ú
+		// å…¨ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ã®è§£æ”¾
 		void DeleteAllShader();
 
 	private:
-		// ’¸“_ƒVƒF[ƒ_[‚Ìƒnƒ“ƒhƒ‹
+		// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒãƒ³ãƒ‰ãƒ«
 		int m_VertexShaderCount{ 0 };
-		// ƒsƒNƒZƒ‹ƒVƒF[ƒ_[‚Ìƒnƒ“ƒhƒ‹
+		// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒãƒ³ãƒ‰ãƒ«
 		int m_PixelShaderCount{ 0 };
-		// ƒWƒIƒƒgƒŠƒVƒF[ƒ_[‚Ìƒnƒ“ƒhƒ‹
+		// ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒãƒ³ãƒ‰ãƒ«
 		int m_GeometryShaderCount{ 0 };
-		// ƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[‚Ìƒnƒ“ƒhƒ‹
+		// ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒãƒ³ãƒ‰ãƒ«
 		int m_ComputeShaderCount{ 0 };
-		// ƒnƒ‹ƒVƒF[ƒ_[‚Ìƒnƒ“ƒhƒ‹
+		// ãƒãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒãƒ³ãƒ‰ãƒ«
 		int m_HullShaderCount{ 0 };
-		// ƒhƒƒCƒ“ƒVƒF[ƒ_[‚Ìƒnƒ“ƒhƒ‹
+		// ãƒ‰ãƒ¡ã‚¤ãƒ³ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒãƒ³ãƒ‰ãƒ«
 		int m_DomainShaderCount{ 0 };
 
-		// ƒRƒ“ƒpƒCƒ‹Ï‚İ’¸“_ƒVƒF[ƒ_[
+		// ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 		std::map<int, ID3D11VertexShader*> m_VertexShaders{};
-		// ƒRƒ“ƒpƒCƒ‹Ï‚İƒsƒNƒZƒ‹ƒVƒF[ƒ_[
+		// ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 		std::map<int, ID3D11PixelShader*> m_PixelShaders{};
-		// ƒRƒ“ƒpƒCƒ‹Ï‚İƒWƒIƒƒgƒŠƒVƒF[ƒ_[
+		// ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿ã‚¸ã‚ªãƒ¡ãƒˆãƒªã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 		std::map<int, ID3D11GeometryShader*> m_GeometryShaders{};
-		// ƒRƒ“ƒpƒCƒ‹Ï‚İƒRƒ“ƒsƒ…[ƒgƒVƒF[ƒ_[
+		// ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ãƒˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 		std::map<int, ID3D11ComputeShader*> m_ComputeShaders{};
-		// ƒRƒ“ƒpƒCƒ‹Ï‚İƒnƒ‹ƒVƒF[ƒ_[
+		// ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿ãƒãƒ«ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 		std::map<int, ID3D11HullShader*> m_HullShaders{};
-		// ƒRƒ“ƒpƒCƒ‹Ï‚İƒhƒƒCƒ“ƒVƒF[ƒ_[
+		// ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«æ¸ˆã¿ãƒ‰ãƒ¡ã‚¤ãƒ³ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼
 		std::map<int, ID3D11DomainShader*> m_DomainShaders{};
 
 		ID3D11VertexShader* m_DefaultVertexShader{ nullptr };

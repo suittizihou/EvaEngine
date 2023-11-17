@@ -16,13 +16,13 @@ Shader DrawManager::m_Shader{};
 HRESULT DrawManager::Init()
 {
 	try {
-		// ’¸“_ƒŒƒCƒAƒEƒg‚ğİ’è
+		// é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’è¨­å®š
 		DrawManager::SetVertexLayout();
 
-		// ƒfƒtƒHƒ‹ƒg‚ÌƒVƒF[ƒ_[‚ğƒ[ƒh‚·‚é
+		// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
 		ShaderDataBase::Instance().LoadDefaultShader();
 
-		// ƒfƒtƒHƒ‹ƒg‚ÌƒVƒF[ƒ_[‚ğƒZƒbƒg‚·‚é
+		// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
 		m_Shader.SetVertexShader(ShaderDataBase::Instance().GetDefaultVertexShader());
 		m_Shader.SetPixelShader(ShaderDataBase::Instance().GetDefaultPixelShader());
 
@@ -35,21 +35,21 @@ HRESULT DrawManager::Init()
 
 void DrawManager::DrawBegin()
 {
-	// ƒ|ƒŠƒSƒ“‚Ì¶¬•û–@‚Ìw’è
+	// ãƒãƒªã‚´ãƒ³ã®ç”Ÿæˆæ–¹æ³•ã®æŒ‡å®š
 	DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	// w’èF‚Å‰æ–ÊƒNƒŠƒA
+	// æŒ‡å®šè‰²ã§ç”»é¢ã‚¯ãƒªã‚¢
 	float clearColor[4] = { 1.0f, 1.0f, 0.8f, 1.0f };
 
-	// RenderTargetView‚ÌƒNƒŠƒA
+	// RenderTargetViewã®ã‚¯ãƒªã‚¢
 	DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_RenderTargetView.Get(), clearColor);
 
-	// DepthView‚ÆStencilView‚ÌƒNƒŠƒA
+	// DepthViewã¨StencilViewã®ã‚¯ãƒªã‚¢
 	DirectX11App::g_Context->ClearDepthStencilView(
-		DirectX11App::g_DepthStencilView.Get(),			// ƒNƒŠƒA‘ÎÛ‚ÌView
-		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// ƒNƒŠƒAƒtƒ‰ƒO
-		1.0f,											// [“xƒNƒŠƒA’l
-		0);												// ƒXƒeƒ“ƒVƒ‹ƒNƒŠƒA’l
+		DirectX11App::g_DepthStencilView.Get(),			// ã‚¯ãƒªã‚¢å¯¾è±¡ã®View
+		D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// ã‚¯ãƒªã‚¢ãƒ•ãƒ©ã‚°
+		1.0f,											// æ·±åº¦ã‚¯ãƒªã‚¢å€¤
+		0);												// ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ã‚¯ãƒªã‚¢å€¤
 }
 
 void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<Transform>& transform, ModelData& model)
@@ -66,37 +66,37 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 		matrix.m[3][0], matrix.m[3][1], matrix.m[3][2], matrix.m[3][3]
 	};
 
-	// ƒ[ƒ‹ƒhs—ñ
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
 	XMStoreFloat4x4(&DirectX11App::g_ConstantBufferData.world, XMMatrixTranspose(worldMatrix));
-	// ƒrƒ…[s—ñ
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
 	DirectX::XMStoreFloat4x4(&DirectX11App::g_ConstantBufferData.view, XMMatrixTranspose(camera.lock()->GetViewMatrix()));
-	// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
+	// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—
 	DirectX::XMStoreFloat4x4(&DirectX11App::g_ConstantBufferData.projection, XMMatrixTranspose(camera.lock()->GetProjectionMatrix()));
-	// ƒJƒƒ‰‚ÌÀ•W‚ğƒZƒbƒg
+	// ã‚«ãƒ¡ãƒ©ã®åº§æ¨™ã‚’ã‚»ãƒƒãƒˆ
 	Vector3 cameraPos = camera.lock()->GetTransform().lock()->position();
 	DirectX::XMStoreFloat4(&DirectX11App::g_ConstantBufferData.cameraPos, DirectX::XMVectorSet(cameraPos.x, cameraPos.y, cameraPos.z, 0.0f));
 
-	// ƒƒbƒVƒ…î•ñ‚ªŠi”[‚³‚ê‚Ä‚¢‚éMap‚©‚çƒƒbƒVƒ…‚ğæ‚èo‚·
+	// ãƒ¡ãƒƒã‚·ãƒ¥æƒ…å ±ãŒæ ¼ç´ã•ã‚Œã¦ã„ã‚‹Mapã‹ã‚‰ãƒ¡ãƒƒã‚·ãƒ¥ã‚’å–ã‚Šå‡ºã™
 	for (const auto& meshs : model.meshes) {
-		// ƒƒbƒVƒ…î•ñ‚ªŠi”[‚³‚ê‚½”z—ñ‚©‚ç‚PƒƒbƒVƒ…‚¸‚Âæ‚èo‚·
+		// ãƒ¡ãƒƒã‚·ãƒ¥æƒ…å ±ãŒæ ¼ç´ã•ã‚ŒãŸé…åˆ—ã‹ã‚‰ï¼‘ãƒ¡ãƒƒã‚·ãƒ¥ãšã¤å–ã‚Šå‡ºã™
 		for (auto mesh : meshs.second) {
-			// ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg‚Ìİ’è
+			// ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®è¨­å®š
 			DirectX11App::g_Context->IASetInputLayout(m_InputLayout.Get());
-			// ’¸“_ƒoƒbƒtƒ@[‚Ìİ’è
+			// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ¼ã®è¨­å®š
 			DirectX11App::g_Context->IASetVertexBuffers(0, 1, mesh.GetVertexBuffer(), &strides, &offset);
-			// ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ìİ’è
+			// ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
 			DirectX11App::g_Context->IASetIndexBuffer(mesh.GetIndexBuffer(), DXGI_FORMAT_R32_UINT, 0);
 
-			// ƒ}ƒeƒŠƒAƒ‹‚ÌƒZƒbƒg
+			// ãƒãƒ†ãƒªã‚¢ãƒ«ã®ã‚»ãƒƒãƒˆ
 			SetMaterial(model.materials[mesh.GetMaterialName()]);
 
-			// ’è”ƒoƒbƒtƒ@‚ÌXV
+			// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®æ›´æ–°
 			DirectX11App::g_Context->UpdateSubresource(DirectX11App::g_ConstantBuffer.Get(), 0, NULL, &DirectX11App::g_ConstantBufferData, 0, 0);
-			// ƒRƒ“ƒeƒLƒXƒg‚É’è”ƒoƒbƒtƒ@‚ğİ’è
+			// ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆã«å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’è¨­å®š
 			DirectX11App::g_Context->VSSetConstantBuffers(0, 1, DirectX11App::g_ConstantBuffer.GetAddressOf());
 			DirectX11App::g_Context->PSSetConstantBuffers(0, 1, DirectX11App::g_ConstantBuffer.GetAddressOf());
 
-			// ƒ|ƒŠƒSƒ“•`‰æ
+			// ãƒãƒªã‚´ãƒ³æç”»
 			DirectX11App::g_Context->DrawIndexed(static_cast<UINT>(mesh.GetIndices().size()), 0, 0);
 		}
 	}
@@ -118,7 +118,7 @@ void DrawManager::SetMaterial(Material& material)
 
 void DrawManager::SetShader(Shader& shader) {
 
-	// nullptr ‚Å‚È‚¢ê‡ƒVƒF[ƒ_[‚ğƒZƒbƒg‚·‚é
+	// nullptr ã§ãªã„å ´åˆã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
 	if (shader.GetComputeShader() != nullptr) DirectX11App::g_Context->CSSetShader(shader.GetComputeShader(), nullptr, 0);
 	if (shader.GetVertexShader() != nullptr) DirectX11App::g_Context->VSSetShader(shader.GetVertexShader(), nullptr, 0);
 	if (shader.GetHullShader() != nullptr) DirectX11App::g_Context->HSSetShader(shader.GetHullShader(), nullptr, 0);
@@ -146,6 +146,6 @@ void DrawManager::SetVertexLayout()
 	{ "TEXCOORD",   0, DXGI_FORMAT_R32G32_FLOAT,        0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0}
 	};
 
-	// ’¸“_ƒŒƒCƒAƒEƒg‚ğƒZƒbƒg
+	// é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’ã‚»ãƒƒãƒˆ
 	m_InputLayout.Attach(ShaderCompiler::CreateVertexLayout(elem, 4, "Shader/VertexShader.hlsl", "vsMain"));
 }

@@ -59,16 +59,16 @@ HRESULT DirectX11App::Init()
 		return hr;
 	}
 
-	// ƒ‰ƒCƒg‚Ìİ’è
+	// ãƒ©ã‚¤ãƒˆã®è¨­å®š
 	DirectX::XMVECTOR light = DirectX::XMVector3Normalize(DirectX::XMVectorSet(0.0f, 0.5f, -1.0f, 0.0f));
 
 	DirectX::XMStoreFloat4(&DirectX11App::g_ConstantBufferData.lightVector, light);
 
-	// ƒ‰ƒCƒg‚ÌƒJƒ‰[İ’è
+	// ãƒ©ã‚¤ãƒˆã®ã‚«ãƒ©ãƒ¼è¨­å®š
 	DirectX11App::g_ConstantBufferData.lightColor = DirectX::XMFLOAT4(0.5f, 0.5f, 0.5f, 1);
 
 	D3D11_VIEWPORT viewPort{ Window::GetViewport() };
-	// ƒrƒ…[ƒ|[ƒg‚ÌƒZƒbƒgƒAƒbƒv
+	// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã®ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—
 	g_Context->RSSetViewports(1, &viewPort);
 
 	return hr;
@@ -82,7 +82,7 @@ HRESULT DirectX11App::HardWareCheck()
 	size_t stringLength{};
 	DXGI_ADAPTER_DESC adapterDesc{};
 
-	// ƒOƒ‰ƒtƒBƒbƒN ƒCƒ“ƒ^[ƒtƒF[ƒX ƒtƒ@ƒNƒgƒŠ‚ğì¬
+	// ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ ãƒ•ã‚¡ã‚¯ãƒˆãƒªã‚’ä½œæˆ
 	auto hr = CreateDXGIFactory(__uuidof(IDXGIFactory), (void**)&factory);
 	if (FAILED(hr)) {
 		DebugLog::LogError("Graphic Interface Factory Create Failed.");
@@ -91,7 +91,7 @@ HRESULT DirectX11App::HardWareCheck()
 
 	int gpuNumber{};
 	int gpuMaxMem{};
-	// ˆê”Ô‹­‚¢GPUƒAƒ_ƒvƒ^‚ğŒŸõ(‘SƒAƒ_ƒvƒ^‚ÌŒŸõ‚ğ‚©‚¯‚ÄVRAM‚ªˆê”Ô‘½‚¢ƒAƒ_ƒvƒ^‚ğæ“¾)
+	// ä¸€ç•ªå¼·ã„GPUã‚¢ãƒ€ãƒ—ã‚¿ã‚’æ¤œç´¢(å…¨ã‚¢ãƒ€ãƒ—ã‚¿ã®æ¤œç´¢ã‚’ã‹ã‘ã¦VRAMãŒä¸€ç•ªå¤šã„ã‚¢ãƒ€ãƒ—ã‚¿ã‚’å–å¾—)
 	for (int adapterNum = 0; factory->EnumAdapters(adapterNum, &m_Adapter) != DXGI_ERROR_NOT_FOUND; ++adapterNum) {
 		IDXGIAdapter* add{ nullptr };
 		hr = factory->EnumAdapters(adapterNum, &add);
@@ -100,22 +100,22 @@ HRESULT DirectX11App::HardWareCheck()
 		hr = add->GetDesc(&adapterDesc);
 
 		char videoCardDescription[128];
-		// ƒrƒfƒIƒJ[ƒh–¼‚ğæ“¾
+		// ãƒ“ãƒ‡ã‚ªã‚«ãƒ¼ãƒ‰åã‚’å–å¾—
 		int error = wcstombs_s(&stringLength, videoCardDescription, 128, adapterDesc.Description, 128);
 
 		if (error != 0) break;
 
-		DebugLog::Log("ƒrƒfƒIƒJ[ƒh–¼ : " + std::string(videoCardDescription, sizeof(videoCardDescription) / sizeof(videoCardDescription[0])));
+		DebugLog::Log("ãƒ“ãƒ‡ã‚ªã‚«ãƒ¼ãƒ‰å : " + std::string(videoCardDescription, sizeof(videoCardDescription) / sizeof(videoCardDescription[0])));
 
-		// ƒrƒfƒIƒJ[ƒhƒƒ‚ƒŠ‚ğæ“¾(MB’PˆÊ)
+		// ãƒ“ãƒ‡ã‚ªã‚«ãƒ¼ãƒ‰ãƒ¡ãƒ¢ãƒªã‚’å–å¾—(MBå˜ä½)
 		int videoCardMemory = static_cast<int>(adapterDesc.DedicatedVideoMemory / 1024 / 1024);
-		DebugLog::Log("ƒrƒfƒIƒƒ‚ƒŠ[ : " + videoCardMemory);
+		DebugLog::Log("ãƒ“ãƒ‡ã‚ªãƒ¡ãƒ¢ãƒªãƒ¼ : " + videoCardMemory);
 
-		// ƒAƒEƒgƒvƒbƒg(ƒ‚ƒjƒ^[)‚É”Ô†ID‚ğ•t‚¯‚é
+		// ã‚¢ã‚¦ãƒˆãƒ—ãƒƒãƒˆ(ãƒ¢ãƒ‹ã‚¿ãƒ¼)ã«ç•ªå·IDã‚’ä»˜ã‘ã‚‹
 		hr = add->EnumOutputs(0, &adapterOutput);
 		if (FAILED(hr)) continue;
 
-		// DXGI_FORMAT_R8G8B8A8_UNORM ‚Ì•\¦Œ`®”‚ğæ“¾‚·‚é
+		// DXGI_FORMAT_R8G8B8A8_UNORM ã®è¡¨ç¤ºå½¢å¼æ•°ã‚’å–å¾—ã™ã‚‹
 		hr = adapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, NULL);
 		if (FAILED(hr)) continue;
 		DebugLog::Log("RGBA8_UNORM Count : " + numModes);
@@ -128,12 +128,12 @@ HRESULT DirectX11App::HardWareCheck()
 		add->Release();
 		add = nullptr;
 
-		// ƒAƒ_ƒvƒ^ƒAƒEƒgƒvƒbƒg‚ğ‰ğ•ú
+		// ã‚¢ãƒ€ãƒ—ã‚¿ã‚¢ã‚¦ãƒˆãƒ—ãƒƒãƒˆã‚’è§£æ”¾
 		adapterOutput->Release();
 		adapterOutput = nullptr;
 	}
 
-	// ƒOƒ‰ƒtƒBƒbƒN ƒCƒ“ƒ^[ƒtƒF[ƒX ƒAƒ_ƒvƒ^[‚ğì¬
+	// ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ ã‚¢ãƒ€ãƒ—ã‚¿ãƒ¼ã‚’ä½œæˆ
 	hr = factory->EnumAdapters(gpuNumber, &m_Adapter);
 	if (FAILED(hr)) return hr;
 
@@ -150,7 +150,7 @@ HRESULT DirectX11App::CreateDeviceAndSwapChain()
 	cdev_flags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
-	// ƒXƒƒbƒvƒ`ƒFƒCƒ“İ’è
+	// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³è¨­å®š
 	DXGI_SWAP_CHAIN_DESC sd{};
 	ZeroMemory(&sd, sizeof(DXGI_SWAP_CHAIN_DESC));
 	sd.BufferCount = 1;
@@ -169,7 +169,7 @@ HRESULT DirectX11App::CreateDeviceAndSwapChain()
 	HRESULT hr{};
 	D3D_FEATURE_LEVEL featureLevels{};
 
-	// DirectX11ƒfƒoƒCƒX‚ÆƒXƒƒbƒvƒ`ƒFƒCƒ“ì¬
+	// DirectX11ãƒ‡ãƒã‚¤ã‚¹ã¨ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ä½œæˆ
 	hr = D3D11CreateDeviceAndSwapChain(
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
@@ -184,7 +184,7 @@ HRESULT DirectX11App::CreateDeviceAndSwapChain()
 		&featureLevels, 
 		&g_Context);
 
-	// ƒAƒ_ƒvƒ^[‚Ì‰ğ•ú
+	// ã‚¢ãƒ€ãƒ—ã‚¿ãƒ¼ã®è§£æ”¾
 	m_Adapter->Release();
 	m_Adapter = nullptr;
 
@@ -207,7 +207,7 @@ HRESULT DirectX11App::CreateRasterizerState()
 		return hr;
 	}
 
-	// ƒ‰ƒXƒ^ƒ‰ƒCƒU[ƒXƒe[ƒg‚ğƒZƒbƒg
+	// ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ãƒ¼ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ã‚»ãƒƒãƒˆ
 	DirectX11App::g_Context->RSSetState(rasterizerState);
 	rasterizerState->Release();
 	rasterizerState = nullptr;
@@ -220,21 +220,21 @@ HRESULT DirectX11App::CreateRenderTargetView()
 	HRESULT hr{};
 	ID3D11Texture2D* backBuffer{ nullptr };
 
-	// ƒXƒƒbƒvƒ`ƒFƒCƒ“‚É—pˆÓ‚³‚ê‚½ƒoƒbƒtƒ@(2DƒeƒNƒXƒ`ƒƒ)‚ğæ“¾
+	// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã«ç”¨æ„ã•ã‚ŒãŸãƒãƒƒãƒ•ã‚¡(2Dãƒ†ã‚¯ã‚¹ãƒãƒ£)ã‚’å–å¾—
 	hr = g_SwapChain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
 	if (FAILED(hr)) {
 		DebugLog::LogError("Buffer Texture Get Failed.");
 		return hr;
 	}
 
-	// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgViewì¬
+	// ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆViewä½œæˆ
 	hr = g_Device->CreateRenderTargetView(backBuffer, NULL, g_RenderTargetView.GetAddressOf());
 	if (FAILED(hr)) {
 		DebugLog::LogError("Render Target View Create Failed.");
 		return hr;
 	}
 
-	// g‚¢I‚í‚Á‚½‚à‚Ì‚ğ‰ğ•ú
+	// ä½¿ã„çµ‚ã‚ã£ãŸã‚‚ã®ã‚’è§£æ”¾
 	backBuffer->Release();
 	backBuffer = nullptr;
 
@@ -245,7 +245,7 @@ HRESULT DirectX11App::CreateDepthAndStencilView()
 {
 	HRESULT hr{};
 
-	// [“xƒXƒeƒ“ƒVƒ‹ƒoƒbƒtƒ@‚Ìì¬
+	// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 	D3D11_TEXTURE2D_DESC textureDesc{};
 	ZeroMemory(&textureDesc, sizeof(D3D11_TEXTURE2D_DESC));
 	textureDesc.Width = static_cast<UINT>(Window::GetViewport().Width);

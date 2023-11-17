@@ -1,4 +1,4 @@
-﻿#include "OBJModelLoader.h"
+#include "OBJModelLoader.h"
 #include "../../../../System/DebugLog/DebugLog.h"
 #include "../../../StringAssist/StringAssist.h"
 
@@ -18,7 +18,7 @@ void Replase(char searchChar, char replaceChar, char* buffer) {
 void OBJModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model)
 {
     if (!CreateMesh(model, fileName)) {
-        DebugLog::LogError("�t�@�C���� : " + std::string{ fileName } + " ���f���̓ǂݍ��݂Ɏ��s���܂����B");
+        DebugLog::LogError("ファイル名 : " + std::string{ fileName } + " モデルの読み込みに失敗しました。");
         return;
     }
 }
@@ -39,7 +39,7 @@ bool OBJModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, co
     char buffer[LineBufferLength];
 
     while (fgets(buffer, LineBufferLength, file) != nullptr) {
-        // �R�����g�͖���
+        // コメントは無視
         if (buffer[0] == '#') continue;
 
         char* parsePoint = strchr(buffer, ' ');
@@ -47,22 +47,22 @@ bool OBJModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, co
 
         Replase('\n', '\0', buffer);
 
-        // ���_�֘A
+        // 頂点関連
         if (buffer[0] == 'v') {
-            // ���_���W
+            // 頂点座標
             if (buffer[1] == ' ') {
                 ParseVKeywordTag(vertices, &parsePoint[1]);
-                // X���𔽓]������
+                // X軸を反転させる
                 vertices[vertices.size() - 1].x *= -1.0f;
             }
-            // �@�����W
+            // 法線座標
             else if (buffer[1] == 'n') {
                 ParseVKeywordTag(normals, &parsePoint[1]);
-                // X���𔽓]������
+                // X軸を反転させる
                 normals[normals.size() - 1].x *= -1.0f;
             }
         }
-        // �ʏ��
+        // 面情報
         else if (buffer[0] == 'f') {
             ParseFKeywordTag(_Out_ vertexData, _Out_ indices, vertices, normals, &parsePoint[1]);
         }
@@ -126,14 +126,14 @@ void OBJModelLoader::ParseFKeywordTag(
             }
         }
 
-        // ���_�o�b�t�@���X�g�ɒǉ�
+        // 頂点バッファリストに追加
         outVertexData.push_back(vertexData);
 
-        // �C���f�b�N�X�o�b�t�@�ɒǉ�
+        // インデックスバッファに追加
         outIndices.push_back(static_cast<unsigned int>(outVertexData.size() - 1));
     }
 
-    // �|���S���쐬�̒��_���Ԃ𔽓]����
+    // ポリゴン作成の頂点順番を反転する
     unsigned int size = static_cast<unsigned int>(outIndices.size());
     unsigned int temp = outIndices[size - 1];
     outIndices[size - 1] = outIndices[size - 3];

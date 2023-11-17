@@ -18,7 +18,7 @@ namespace EvaEngine {
 			const std::weak_ptr<MeshFilter>& meshFilter,
 			const std::weak_ptr<Camera>& camera);
 
-		~MeshRenderer() { std::cout << "デストラクタ" << std::endl; }
+		~MeshRenderer() { std::cout << "繝�繧ｹ繝医Λ繧ｯ繧ｿ" << std::endl; }
 
 		void Awake() override;
 		void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) override;

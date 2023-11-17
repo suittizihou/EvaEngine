@@ -1,4 +1,4 @@
-﻿#include "ComponentDataBase.h"
+#include "ComponentDataBase.h"
 #include "../../Base/GameObject/GameObject.h"
 #include "../../Components/Camera/Camera.h"
 #include "../../Components/Transform/Transform.h"

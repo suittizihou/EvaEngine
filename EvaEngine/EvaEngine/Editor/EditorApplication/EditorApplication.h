@@ -1,4 +1,4 @@
-﻿#if _DEBUG
+#if _DEBUG
 #pragma once
 
 namespace EvaEngine {
@@ -15,7 +15,7 @@ namespace EvaEngine {
 
 			static bool isInputFreeze;
 
-			// ���݂̃V�[�����P�t���[�������i�܂���
+			// 現在のシーンを１フレームだけ進ませる
 			static void Step();
 		};
 	}

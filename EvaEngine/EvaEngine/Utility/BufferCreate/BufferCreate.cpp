@@ -1,4 +1,4 @@
-﻿#include "BufferCreate.h"
+#include "BufferCreate.h"
 #include "../Mesh/Mesh.h"
 #include "../ModelUtility/ModelData/ConstantBufferData.h"
 

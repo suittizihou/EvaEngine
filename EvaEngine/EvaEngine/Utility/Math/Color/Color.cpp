@@ -1,4 +1,4 @@
-﻿#include "Color.h"
+#include "Color.h"
 #include "../Vector3/Vector3.h"
 #include "../Vector4/Vector4.h"
 #include "../Mathf/Mathf.h"

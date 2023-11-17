@@ -1,4 +1,4 @@
-﻿#include "WindowApp.h"
+#include "WindowApp.h"
 #include "../../Setting/Window/Window.h"
 #include "../../Utility/Input/InputBufferUpdate/InputBufferUpdate.h"
 #include "../../Utility/Input/Input.h"
@@ -39,9 +39,9 @@ HRESULT WindowApp::Init()
 {
     HRESULT hr{};
 
-    // COM���C�u�������������������(COM�Ƃ̓R���|�[�l���g�E�I�u�W�F�N�g�E���f���̗�)
-    // COM���C�u�������g�����Ɏg���X���b�h�ŏ��Ȃ��Ƃ��P��͎��s����K�v������B
-    // D3D�֘A�̐F��ȃN���X������COM�𗘗p���Ď�������Ă���A���������K�v������
+    // COMライブラリを初期化するもの(COMとはコンポーネント・オブジェクト・モデルの略)
+    // COMライブラリを使う時に使うスレッドで少なくとも１回は実行する必要がある。
+    // D3D関連の色んなクラスがこのCOMを利用して実装されており、これをする必要がある
     hr = CoInitializeEx(NULL, COINIT_MULTITHREADED);
 
     if (FAILED(hr)) {
@@ -73,7 +73,7 @@ HRESULT WindowApp::Init()
 
     RECT rect = { 0,0, static_cast<LONG>(Window::g_WindowRight), static_cast<LONG>(Window::g_WindowBottom) };
 
-    // �E�B���h�E�𐶐�
+    // ウィンドウを生成
     Window::g_hWnd = CreateWindow(
         Window::g_WindowName.c_str(),
         Window::g_WindowName.c_str(),
@@ -131,31 +131,31 @@ int WindowApp::Update()
             }
         }
         else {
-            // ���͏���
+            // 入力処理
             InputBufferUpdate::Instance().KeyUpdate();
 
-            // DeltaTime���X�V
+            // DeltaTimeを更新
             Internal::TimeBase::UpdateDeltaTime();
 
-            // �G���W���̍X�V����
+            // エンジンの更新処理
             EvaEngineApp::Update();
 
 #if _DEBUG
-            // Editor�֘A�̍X�V
+            // Editor関連の更新
             EvaEngineApp::UpdateEditor();
-            // Editor�֘A�̕`��
+            // Editor関連の描画
             EvaEngineApp::DrawEditor();
 #endif
 
-            // �G���W���̕`�揈��
+            // エンジンの描画処理
             EvaEngineApp::Draw(DirectX11App::g_Context);
 
-            // �G���W���̃t���[���I��������
+            // エンジンのフレーム終了時処理
             EvaEngineApp::FrameEnd();
         }
     }
 
-    // �G���W���̏I��������
+    // エンジンの終了時処理
     EvaEngineApp::End();
 
     return static_cast<int>(msg.wParam);

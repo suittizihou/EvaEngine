@@ -1,4 +1,4 @@
-﻿#include "ModelData.h"
+#include "ModelData.h"
 
 void EvaEngine::ModelData::Release()
 {

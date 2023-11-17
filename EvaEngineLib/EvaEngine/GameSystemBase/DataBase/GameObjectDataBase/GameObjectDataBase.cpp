@@ -25,13 +25,13 @@ std::weak_ptr<GameObject> GameObjectDataBase::Find(const std::string& name)
 		}
 	}
 
-	throw std::runtime_error("Not found : " + name + "‚Æ‚¢‚¤–¼‘O‚ÌGameObject‚Í‘¶İ‚µ‚Ü‚¹‚ñ‚Å‚µ‚½B");
+	throw std::runtime_error("Not found : " + name + "ã¨ã„ã†åå‰ã®GameObjectã¯å­˜åœ¨ã—ã¾ã›ã‚“ã§ã—ãŸã€‚");
 }
 
 std::weak_ptr<GameObject> GameObjectDataBase::FindGameObjectWithTag(const std::string& tag)
 {
 	if (m_GameObjectList.count(tag) == 0) {
-		throw std::runtime_error("Not found : " + tag + "‚Æ‚¢‚¤Tag‚ğ‚ÂGameObject‚Í‘¶İ‚µ‚Ü‚¹‚ñ‚Å‚µ‚½B");
+		throw std::runtime_error("Not found : " + tag + "ã¨ã„ã†Tagã‚’æŒã¤GameObjectã¯å­˜åœ¨ã—ã¾ã›ã‚“ã§ã—ãŸã€‚");
 		return std::weak_ptr<GameObject>();
 	}
 	return *m_GameObjectList[tag].begin();
@@ -40,7 +40,7 @@ std::weak_ptr<GameObject> GameObjectDataBase::FindGameObjectWithTag(const std::s
 std::vector<std::weak_ptr<GameObject>> GameObjectDataBase::FindGameObjectsWithTag(const std::string& tag)
 {
 	if (m_GameObjectList.count(tag) == 0) {
-		throw std::runtime_error("Not found : " + tag + "‚Æ‚¢‚¤Tag‚ğ‚ÂGameObject‚Í‘¶İ‚µ‚Ü‚¹‚ñ‚Å‚µ‚½B");
+		throw std::runtime_error("Not found : " + tag + "ã¨ã„ã†Tagã‚’æŒã¤GameObjectã¯å­˜åœ¨ã—ã¾ã›ã‚“ã§ã—ãŸã€‚");
 		std::vector<std::weak_ptr<GameObject>> nullVector;
 		return nullVector;
 	}

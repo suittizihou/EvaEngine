@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <vector>
 #include <memory>
@@ -18,19 +18,19 @@ namespace EvaEngine {
 		};
 		virtual ~GameObjectBase() = default;
 
-		// ����������
+		// 初期化処理
 		virtual void Initialize() = 0;
 
-		// ���g��weak_ptr��Ԃ�
+		// 自身のweak_ptrを返す
 		std::weak_ptr<GameObjectBase> GetGameObject() { return shared_from_this(); }
-		// �������Ă���S�R���|�[�l���g��Ԃ�
+		// 所持している全コンポーネントを返す
 		virtual std::vector<std::weak_ptr<Component>> GetAllComponents() = 0;
 
-		// ObjectID��Ԃ�
+		// ObjectIDを返す
 		virtual const GUID& GetObjectID() const = 0;
-		// ���O��Ԃ�
+		// 名前を返す
 		virtual std::string GetName() const = 0;
-		// �^�O��Ԃ�
+		// タグを返す
 		virtual std::string GetTag() const = 0;
 	};
 }

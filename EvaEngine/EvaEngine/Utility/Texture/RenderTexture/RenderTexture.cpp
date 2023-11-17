@@ -1,11 +1,11 @@
-﻿#include "RenderTexture.h"
+#include "RenderTexture.h"
 
 #include "../../../App/DirectX11App/DirectX11App.h"
 #include "../Texture2D/Texture2D.h"
 
 using namespace EvaEngine::Internal;
 
-EvaEngine::RenderTexture::RenderTexture(const UINT width, const UINT height) : Texture(width, height)
+EvaEngine::RenderTexture::RenderTexture(const int width, const int height) : Texture(width, height)
 {
 }
 
@@ -39,16 +39,16 @@ void EvaEngine::RenderTexture::Release()
 
 void EvaEngine::RenderTexture::SetRenderTarget(const Color& clearColor) const
 {
-	// �|���S���̐������@�̎w��
+	// ポリゴンの生成方法の指定
 	DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	
-	// �����_�[�^�[�Q�b�g��ݒ�
+	// レンダーターゲットを設定
 	DirectX11App::g_Context->OMSetRenderTargets(1, &m_RenderTargetView, m_DepthStencilView);
 
-	// �����_�[�^�[�Q�b�g���N���A
+	// レンダーターゲットをクリア
 	float color[4] = { clearColor.r, clearColor.g, clearColor.b, clearColor.a };
 	DirectX11App::g_Context->ClearRenderTargetView(m_RenderTargetView, color);
-	// �[�x�X�e���V���o�b�t�@���N���A
+	// 深度ステンシルバッファをクリア
 	DirectX11App::g_Context->ClearDepthStencilView(m_DepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
@@ -111,7 +111,7 @@ void EvaEngine::RenderTexture::CreateShaderResourceView(const DXGI_FORMAT& forma
 
 void EvaEngine::RenderTexture::CreateDepthStencilView()
 {
-	// �[�x�X�e���V���o�b�t�@�̍쐬
+	// 深度ステンシルバッファの作成
 	D3D11_TEXTURE2D_DESC textureDesc{};
 	ZeroMemory(&textureDesc, sizeof(D3D11_TEXTURE2D_DESC));
 	textureDesc.Width = static_cast<UINT>(texelSize.x);

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <memory>
 #include "../Texture/Texture.h"
@@ -8,7 +8,7 @@ namespace EvaEngine {
 
 	class RenderTexture : public Texture {
 	public:
-		RenderTexture(const UINT width, const UINT height);
+		RenderTexture(const int width, const int height);
 		~RenderTexture();
 	public:
 		void Create();

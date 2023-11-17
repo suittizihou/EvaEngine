@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <dinput.h>
 #include <array>
@@ -27,9 +27,9 @@ namespace EvaEngine {
 
 			void KeyUpdate();
 
-			// �ŐV�̓��͏�Ԃ��擾
+			// 最新の入力状態を取得
 			std::array<KeyState, INPUT_BUFFER_SIZE> GetCurrentKeyStatus();
-			// �P�t���[���O�̓��͏�Ԃ��擾
+			// １フレーム前の入力状態を取得
 			std::array<KeyState, INPUT_BUFFER_SIZE> GetPreviousKeyStatus();
 
 		private:
@@ -38,8 +38,8 @@ namespace EvaEngine {
 
 			BYTE m_Keys[INPUT_BUFFER_SIZE]{};
 
-			std::array<KeyState, INPUT_BUFFER_SIZE> m_CurrentKeyStatus{}; // �ŐV�̓��͏��
-			std::array<KeyState, INPUT_BUFFER_SIZE> m_PreviousKeyStatus{}; // 1�t���[���O�̓��͏��
+			std::array<KeyState, INPUT_BUFFER_SIZE> m_CurrentKeyStatus{}; // 最新の入力状態
+			std::array<KeyState, INPUT_BUFFER_SIZE> m_PreviousKeyStatus{}; // 1フレーム前の入力状態
 		};
 	}
 }

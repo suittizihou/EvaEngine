@@ -26,13 +26,13 @@ std::string SceneDataBase::GetCurrentSceneType()
 
 HRESULT SceneDataBase::InitializeScene() {
     try {
-        // ƒV[ƒ“‚ªƒZƒbƒgƒZƒbƒg‚³‚ê‚Ä‚È‚©‚Á‚½‚çÅ‰‚É’Ç‰Á‚µ‚½ƒV[ƒ“‚ğƒ[ƒh‚·‚é
+        // ã‚·ãƒ¼ãƒ³ãŒã‚»ãƒƒãƒˆã‚»ãƒƒãƒˆã•ã‚Œã¦ãªã‹ã£ãŸã‚‰æœ€åˆã«è¿½åŠ ã—ãŸã‚·ãƒ¼ãƒ³ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
         if (m_CurrentSceneName.empty()) m_CurrentSceneName = m_Scenes.begin()->first;
 
         m_CurrentScene = m_Scenes[m_CurrentSceneName];
         Initialize();
 
-        // ¡‚ÌƒV[ƒ“‚ğ•Û
+        // ä»Šã®ã‚·ãƒ¼ãƒ³ã‚’ä¿æŒ
         m_PreviousSceneName = m_CurrentSceneName;
 
         return S_OK;
@@ -44,10 +44,10 @@ HRESULT SceneDataBase::InitializeScene() {
 
 void SceneDataBase::SceneChange()
 {
-    // ‘O‚ÌƒV[ƒ“‚Æ¡‚ÌƒV[ƒ“‚ª“¯‚¶‚È‚ç‘ŠúƒŠƒ^[ƒ“
+    // å‰ã®ã‚·ãƒ¼ãƒ³ã¨ä»Šã®ã‚·ãƒ¼ãƒ³ãŒåŒã˜ãªã‚‰æ—©æœŸãƒªã‚¿ãƒ¼ãƒ³
     if (m_CurrentSceneName == m_PreviousSceneName) return;
 
-    // ‘O‚ÌƒV[ƒ“‚Å•Û‚µ‚Ä‚¢‚½ƒIƒuƒWƒFƒNƒg‚ÆƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ‘Síœ
+    // å‰ã®ã‚·ãƒ¼ãƒ³ã§ä¿æŒã—ã¦ã„ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã¨ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å…¨å‰Šé™¤
     ComponentManager::Instance().RemoveAllComponent(m_PreviousSceneName);
     GameObjectManager::Instance().RemoveAllGameObject(m_PreviousSceneName);
 

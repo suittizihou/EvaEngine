@@ -1,4 +1,4 @@
-#include "Window.h"
+ï»¿#include "Window.h"
 
 using namespace EvaEngine;
 
@@ -16,11 +16,11 @@ D3D11_VIEWPORT Window::GetViewport()
 {
 	return D3D11_VIEWPORT
 	{
-		static_cast<FLOAT>(g_WindowLeft),					// ƒEƒBƒ“ƒhƒE‚Ì¶’[‚ÌÀ•W
-		static_cast<FLOAT>(g_WindowTop),					// ƒEƒBƒ“ƒhƒE‚Ìã’[‚ÌÀ•W
-		static_cast<FLOAT>(g_WindowRight - g_WindowLeft),	// ƒEƒBƒ“ƒhƒE‚Ì‰¡•
-		static_cast<FLOAT>(g_WindowBottom - g_WindowTop),	// ƒEƒBƒ“ƒhƒE‚Ìc•
-		0.0f,												// Å¬[“x
-		1.0f												// Å‘å[“x
+		static_cast<FLOAT>(g_WindowLeft),					// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å·¦ç«¯ã®åº§æ¨™
+		static_cast<FLOAT>(g_WindowTop),					// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ä¸Šç«¯ã®åº§æ¨™
+		static_cast<FLOAT>(g_WindowRight - g_WindowLeft),	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®æ¨ªå¹…
+		static_cast<FLOAT>(g_WindowBottom - g_WindowTop),	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ç¸¦å¹…
+		0.0f,												// æœ€å°æ·±åº¦
+		1.0f												// æœ€å¤§æ·±åº¦
 	};
 }

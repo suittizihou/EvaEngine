@@ -1,4 +1,4 @@
-﻿#include "VRMModelLoader.h"
+#include "VRMModelLoader.h"
 
 #include <memory>
 #include <DirectXTex.h>
@@ -14,7 +14,7 @@ using namespace EvaEngine::Internal;
 
 void VRMModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model)
 {
-    // ���f���f�[�^�̓ǂݍ���
+    // モデルデータの読み込み
     auto modelFilePath = experimental::filesystem::path(fileName);
     if (modelFilePath.is_relative())
     {
@@ -50,23 +50,23 @@ void VRMModelLoader::LoadModelGeometry(std::shared_ptr<EvaEngine::ModelData>& mo
         {
             Mesh tempMesh{};
 
-            // ���_�ʒu���A�N�Z�b�T�̎擾
+            // 頂点位置情報アクセッサの取得
             auto& idPos = meshPrimitive.GetAttributeAccessorId(ACCESSOR_POSITION);
             auto& accPos = doc.accessors.Get(idPos);
-            // �@�����A�N�Z�b�T�̎擾
+            // 法線情報アクセッサの取得
             auto& idNrm = meshPrimitive.GetAttributeAccessorId(ACCESSOR_NORMAL);
             auto& accNrm = doc.accessors.Get(idNrm);
-            //// ���_�̃J���[�A�N�Z�b�T�̎擾
+            //// 頂点のカラーアクセッサの取得
             //auto& idColor = meshPrimitive.GetAttributeAccessorId(ACCESSOR_COLOR_0);
             //auto& accColor = doc.accessors.Get(idColor);
-            // �e�N�X�`�����W���A�N�Z�b�T�̎擾
+            // テクスチャ座標情報アクセッサの取得
             auto& idUV = meshPrimitive.GetAttributeAccessorId(ACCESSOR_TEXCOORD_0);
             auto& accUV = doc.accessors.Get(idUV);
-            // ���_�C���f�b�N�X�p�A�N�Z�b�T�̎擾
+            // 頂点インデックス用アクセッサの取得
             auto& idIndex = meshPrimitive.indicesAccessorId;
             auto& accIndex = doc.accessors.Get(idIndex);
 
-            // �A�N�Z�b�T����f�[�^����擾
+            // アクセッサからデータ列を取得
             auto vertPos = reader->ReadBinaryData<float>(doc, accPos);
             auto vertNrm = reader->ReadBinaryData<float>(doc, accNrm);
             //auto vertColor = reader->ReadBinaryData<float>(doc, accColor);
@@ -76,7 +76,7 @@ void VRMModelLoader::LoadModelGeometry(std::shared_ptr<EvaEngine::ModelData>& mo
             std::vector<VertexData> vertices;
             for (uint32_t i = 0; i < vertexCount; ++i)
             {
-                // ���_�f�[�^�̍\�z
+                // 頂点データの構築
                 int vid0 = 3 * i, vid1 = 3 * i + 1, vid2 = 3 * i + 2, vid3 = 3 * i + 3;
                 int tid0 = 2 * i, tid1 = 2 * i + 1;
                 vertices.emplace_back(
@@ -89,11 +89,11 @@ void VRMModelLoader::LoadModelGeometry(std::shared_ptr<EvaEngine::ModelData>& mo
                 );
             }
 
-            // ���_�f�[�^���Z�b�g
+            // 頂点データをセット
             tempMesh.SetVertexData(vertices);
-            // �C���f�b�N�X�f�[�^���Z�b�g
+            // インデックスデータをセット
             tempMesh.SetIndices(reader->ReadBinaryData<uint32_t>(doc, accIndex));
-            // �}�e���A��ID��o�^
+            // マテリアルIDを登録
             tempMesh.SetMaterialName(int(doc.materials.GetIndex(meshPrimitive.materialId)));
 
             model->meshes[mesh.name].push_back(tempMesh);
@@ -106,11 +106,11 @@ void VRMModelLoader::MakeModelGeometry(std::shared_ptr<ModelData>& model)
     size_t vertexBufferSize = sizeof(VertexData);
     for (auto& meshs : model->meshes) {
         for (auto& mesh : meshs.second) {
-            // ���_�o�b�t�@�̍쐬�ƃZ�b�g
+            // 頂点バッファの作成とセット
             auto vertexBuffer = BufferCreate::CreateVertexBuffer(mesh.GetVertexData(), vertexBufferSize);
             mesh.SetVertexBuffer(vertexBuffer);
 
-            // �C���f�b�N�X�o�b�t�@�̍쐬�ƃZ�b�g
+            // インデックスバッファの作成とセット
             auto indexBufferSize = UINT(sizeof(uint32_t) * mesh.GetIndices().size());
             auto indexBuffer = BufferCreate::CreateIndexBuffer(mesh.GetIndices(), indexBufferSize);
             mesh.SetIndexBuffer(indexBuffer);
@@ -149,7 +149,7 @@ void VRMModelLoader::MakeModelMaterial(std::shared_ptr<ModelData>& model)
     //        auto texObj = ModelApp::Instance().CreateTextureFromMemory(material.m_ImageData);
     //        material.texture = texObj.texture;
 
-    //        // �V�F�[�_�[���\�[�X�r���[�̐���.
+    //        // シェーダーリソースビューの生成.
     //        auto descriptorIndex = ModelApp::Instance().m_SrvDescriptorBase + textureIndex;
     //        auto srvHandle = CD3DX12_CPU_DESCRIPTOR_HANDLE(
     //            model.m_HeapSrvCbv->GetCPUDescriptorHandleForHeapStart(),

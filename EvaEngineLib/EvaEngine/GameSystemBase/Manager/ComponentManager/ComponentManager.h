@@ -26,46 +26,46 @@ namespace EvaEngine {
 			return componentManager;
 		}
 
-		// ƒRƒ“ƒ|[ƒlƒ“ƒgƒf[ƒ^ƒx[ƒX‚ğƒV[ƒ“‚É’Ç‰Á
+		// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‚’ã‚·ãƒ¼ãƒ³ã«è¿½åŠ 
 		void AddComponentDataBase(const std::string& sceneName);
 
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì“o˜^
+		// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ç™»éŒ²
 		template<class T, class... Args>
 		std::weak_ptr<T> AddComponent(const std::string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject, Args&& ... args)
 		{
 			return m_ComponentList[sceneName]->AddComponent<T>(sceneName, gameObject, args...);
 		}
 
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìæ“¾
+		// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å–å¾—
 		template<class T>
 		std::weak_ptr<T> GetComponent(const std::string& sceneName, const UINT& gameObjectID)
 		{
 			return m_ComponentList[sceneName]->GetComponent<T>(gameObjectID);
 		}
 
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğíœ
+		// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å‰Šé™¤
 		template<class T>
 		void RemoveComponent(const std::string& sceneName, const UINT& gameObjectID)
 		{
 			m_ComponentList[sceneName]->RemoveComponent<T>(gameObjectID);
 		}
 
-		// •Û‚µ‚Ä‚¢‚éƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ‘S•”íœ
+		// ä¿æŒã—ã¦ã„ã‚‹ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å…¨éƒ¨å‰Šé™¤
 		void RemoveAllComponent(const std::string& sceneName);
 
-		// FixedUpdateŠÖ”‚ğ‰ñ‚·
+		// FixedUpdateé–¢æ•°ã‚’å›ã™
 		void FixedUpdate(const std::string& sceneName);
-		// UpdateŠÖ”‚ğ‰ñ‚·
+		// Updateé–¢æ•°ã‚’å›ã™
 		void Update(const std::string& sceneName);
-		// LateUpdateŠÖ”‚ğ‰ñ‚·
+		// LateUpdateé–¢æ•°ã‚’å›ã™
 		void LateUpdate(const std::string& sceneName);
-		// DrawŠÖ”‚ğ‰ñ‚·
+		// Drawé–¢æ•°ã‚’å›ã™
 		void Draw(
 			const std::string& sceneName,
 			const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command);
 
 	private:
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌƒŠƒXƒg(first‚ÍƒIƒuƒWƒFƒNƒgID)
+		// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ãƒªã‚¹ãƒˆ(firstã¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆID)
 		std::map<std::string,		// GameObjectID
 			std::shared_ptr<ComponentDataBase>> m_ComponentList;
 

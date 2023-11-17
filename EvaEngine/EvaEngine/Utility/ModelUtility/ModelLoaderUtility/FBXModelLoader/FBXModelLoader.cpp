@@ -1,4 +1,4 @@
-﻿#include <stdexcept>
+#include <stdexcept>
 #include <string>
 #include <fbxsdk.h>
 

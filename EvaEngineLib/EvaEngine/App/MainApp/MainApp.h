@@ -15,13 +15,13 @@ namespace EvaEngine {
 		}
 
 		/// <summary>
-		/// ƒEƒBƒ“ƒhƒEADirectXAƒQ[ƒ€ƒGƒ“ƒWƒ“‚Ì‰Šú‰»‚ð‘S•”‚â‚é
+		/// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã€DirectXã€ã‚²ãƒ¼ãƒ ã‚¨ãƒ³ã‚¸ãƒ³ã®åˆæœŸåŒ–ã‚’å…¨éƒ¨ã‚„ã‚‹
 		/// </summary>
 		/// <returns></returns>
 		bool Init();
 
 		/// <summary>
-		/// ƒƒCƒ“ƒ‹[ƒv‚É“ü‚é
+		/// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã«å…¥ã‚‹
 		/// </summary>
 		/// <returns></returns>
 		int Run();

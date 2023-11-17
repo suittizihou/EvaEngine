@@ -1,4 +1,4 @@
-﻿#if _DEBUG
+#if _DEBUG
 #include "ConsoleWindow.h"
 #include "../../../System/DebugLog/DebugLog.h"
 #include <iostream>

@@ -9,7 +9,7 @@ namespace EvaEngine {
 
 	class Transform;
 
-	// �g�p����֐��������r�b�g�t���O
+	// 使用する関数を示すビットフラグ
 	namespace FunctionMask {
 		const UINT NONE(0 << 0);
 		//const UINT AWAKE				(1 << 0);
@@ -29,35 +29,35 @@ namespace EvaEngine {
 		virtual ~Component() = default;
 
 	public:
-		// Active��Ԃ���Ȃ��Ă��Ă΂��
+		// Active状態じゃなくても呼ばれる
 		virtual void Awake() {}
-		// Active��ԂɂȂ�����Ă΂��
+		// Active状態になったら呼ばれる
 		virtual void Start() {}
-		// �Œ�t���[���ŌĂ΂��(���邩�͔���)
+		// 固定フレームで呼ばれる(作れるかは微妙)
 		virtual void FixedUpdate() {}
-		// ���t���[���Ă΂��
+		// 毎フレーム呼ばれる
 		virtual void Update() {}
-		// Update�̌�ɌĂ΂��
+		// Updateの後に呼ばれる
 		virtual void LateUpdate() {}
-		// ��L�S�Ă̏������I������^�C�~���O�ŌĂ΂��
+		// 上記全ての処理が終わったタイミングで呼ばれる
 		virtual void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command) {}
 
-		// �R���|�[�l���g�ɕK�v�ȃf�[�^��ݒ�
+		// コンポーネントに必要なデータを設定
 		void SetComponentDesc(const ComponentDesc& componentDesc);
 
-		// ���̃R���|�[�l���g�ɕR�Â��Ă���I�u�W�F�N�g��Ԃ�
+		// このコンポーネントに紐づいているオブジェクトを返す
 		std::weak_ptr<GameObject> GetGameObject() const;
-		// �g�����X�t�H�[����Ԃ�
+		// トランスフォームを返す
 		std::weak_ptr<Transform> GetTransform() const;
-		// �����A�^�b�`�ł���R���|�[�l���g���Ԃ�
+		// 複数アタッチできるコンポーネントか返す
 		bool GetCanMultiAttach() const;
-		// ���̃R���|�[�l���g�͏����邩
+		// このコンポーネントは消せるか
 		bool GetCanRemove() const;
-		// �R���|�[�l���g�̃n�b�V���l��Ԃ�(���^�̃R���|�[�l���g�����ʗp)
+		// コンポーネントのハッシュ値を返す(何型のコンポーネントか識別用)
 		size_t GetHashCode() const;
-		// �R���|�[�l���g��ID��Ԃ�(�ŗL��ID)
+		// コンポーネントのIDを返す(固有のID)
 		UINT GetComponentID() const;
-		// �ǂ̊֐����Ăяo�����̃}�X�N��Ԃ�
+		// どの関数を呼び出すかのマスクを返す
 		UINT GetFunctionMask() const;
 
 	private:

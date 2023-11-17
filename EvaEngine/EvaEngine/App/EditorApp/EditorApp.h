@@ -1,4 +1,4 @@
-﻿#if _DEBUG
+#if _DEBUG
 #pragma once
 
 #include <d3d11.h>
@@ -21,26 +21,26 @@ namespace EvaEngine {
 				~EditorApp() = default;
 			public:
 
-				// ������
+				// 初期化
 				static HRESULT Init();
 
-				// Editor�̍X�V����
+				// Editorの更新処理
 				static void Update();
 
-				// Editor�`��O����
+				// Editor描画前準備
 				static void DrawBegin();
-				// Editor�`�揈��
+				// Editor描画処理
 				static void Draw();
-				// Editor�`��I����
+				// Editor描画終了時
 				static void DrawEnd();
 
-				// Editor�I��������
+				// Editor終了時処理
 				static void End();
 
 				static std::weak_ptr<EvaEngine::Editor::Internal::SceneView> GetSceneView();
 
 			private:
-				// ImGui�̐ݒ���s��
+				// ImGuiの設定を行う
 				static HRESULT ImGuiSetting();
 
 			private:

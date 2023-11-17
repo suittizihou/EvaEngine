@@ -1,4 +1,4 @@
-struct PS_INPUT
+ï»¿struct PS_INPUT
 {
 	float4 pos : SV_POSITION;
     float4 nor : NORMAL;
@@ -8,19 +8,19 @@ struct PS_INPUT
 
 cbuffer ConstantBuffer
 {
-    float4x4 World; // ƒ[ƒ‹ƒh•ÏŠ·s—ñ
-    float4x4 View; // ƒrƒ…[•ÏŠ·s—ñ
-    float4x4 Projection; // “§‹Ë‰e•ÏŠ·s—ñ
-    float4 CameraPos; // ƒJƒƒ‰À•W
-    float4 LightVector; // ƒ‰ƒCƒg•ûŒü
-    float4 LightColor; // ƒ‰ƒCƒgƒJƒ‰[
-    float4 MaterialAmbient; // ƒAƒ“ƒrƒGƒ“ƒg
-    float4 MaterialDiffuse; // ƒfƒBƒtƒ…[ƒY
-    float4 MaterialSpecular; // ƒXƒyƒLƒ…ƒ‰[
+    float4x4 World; // ãƒ¯ãƒ¼ãƒ«ãƒ‰å¤‰æ›è¡Œåˆ—
+    float4x4 View; // ãƒ“ãƒ¥ãƒ¼å¤‰æ›è¡Œåˆ—
+    float4x4 Projection; // é€è¦–å°„å½±å¤‰æ›è¡Œåˆ—
+    float4 CameraPos; // ã‚«ãƒ¡ãƒ©åº§æ¨™
+    float4 LightVector; // ãƒ©ã‚¤ãƒˆæ–¹å‘
+    float4 LightColor; // ãƒ©ã‚¤ãƒˆã‚«ãƒ©ãƒ¼
+    float4 MaterialAmbient; // ã‚¢ãƒ³ãƒ“ã‚¨ãƒ³ãƒˆ
+    float4 MaterialDiffuse; // ãƒ‡ã‚£ãƒ•ãƒ¥ãƒ¼ã‚º
+    float4 MaterialSpecular; // ã‚¹ãƒšã‚­ãƒ¥ãƒ©ãƒ¼
 }
 
-Texture2D Texture : register(t0[0]); // Texture‚ğƒXƒƒbƒg0‚Ì0”Ô–Ú‚ÌƒeƒNƒXƒ`ƒƒƒŒƒWƒXƒ^‚Éİ’è
-SamplerState Sampler : register(s0[0]); // Sampler‚ğƒXƒƒbƒg0‚Ì0”Ô–Ú‚ÌƒTƒ“ƒvƒ‰ƒŒƒWƒXƒ^‚Éİ’è
+Texture2D Texture : register(t0[0]); // Textureã‚’ã‚¹ãƒ­ãƒƒãƒˆ0ã®0ç•ªç›®ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¬ã‚¸ã‚¹ã‚¿ã«è¨­å®š
+SamplerState Sampler : register(s0[0]); // Samplerã‚’ã‚¹ãƒ­ãƒƒãƒˆ0ã®0ç•ªç›®ã®ã‚µãƒ³ãƒ—ãƒ©ãƒ¬ã‚¸ã‚¹ã‚¿ã«è¨­å®š
 
 float4 psMain(PS_INPUT input) : SV_TARGET
 {    

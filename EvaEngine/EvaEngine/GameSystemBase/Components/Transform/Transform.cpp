@@ -1,4 +1,4 @@
-﻿#include "Transform.h"
+#include "Transform.h"
 #include "../../../Utility/Math/Mathf/Mathf.h"
 #include "../../Base/GameObject/GameObject.h"
 
@@ -11,9 +11,9 @@ using namespace EvaEngine;
 
 Transform::~Transform()
 {
-	// �q�I�u�W�F�N�g��؂藣��
+	// 子オブジェクトを切り離す
 	detach_children();
-	// �e�I�u�W�F�N�g����؂藣��
+	// 親オブジェクトから切り離す
 	detach_parent();
 }
 
@@ -38,7 +38,7 @@ void EvaEngine::Transform::OnGUI()
 	local_scale(tempScale);
 
 	//if (changeFlag) {
-	//	// ���[���h��Ԃ��X�V
+	//	// ワールド空間を更新
 	//	update_world_transform(parent_);
 	//}
 	//Matrix4x4 matrix{ local_to_world_matrix() };
@@ -239,8 +239,8 @@ Matrix4x4 Transform::world_to_local_matrix() const
 
 Vector3 Transform::transform_point(const Vector3& position) const
 {
-	// �v�Z����
-	// �g��k�� -> ��] -> ���s�ړ�
+	// 計算順番
+	// 拡大縮小 -> 回転 -> 平行移動
 	return rotation_ * Vector3::scale(position, scale_) + position_;
 }
 
@@ -293,25 +293,25 @@ void Transform::parent(std::weak_ptr<Transform> parent)
 
 void Transform::set_parent(std::weak_ptr<Transform> parent, bool world_position_stays)
 {
-	// ���݂̐e����؂藣��
+	// 現在の親から切り離す
 	detach_parent();
-	// �V�����e��ݒ�
+	// 新しい親を設定
 	parent_ = parent;
 	if (!parent_.expired()) {
 		if (world_position_stays) {
-			// ���݂̃��[���h��Ԃ�ۂ��H
+			// 現在のワールド空間を保つか？
 			local_rotation_ = Quaternion::inverse(parent_.lock()->rotation()) * rotation_;
 			local_position_ = parent_.lock()->inverse_transform_point(position_);
 		}
 		else {
-			// ���݂̃��[�J����Ԃ��X�V�����Ƀ��[���h��Ԃ��X�V
+			// 現在のローカル空間を更新せずにワールド空間を更新
 			update_world_transform(parent_);
 		}
-		// �������g��e�̎q�ɓo�^
+		// 自分自身を親の子に登録
 		parent.lock()->children_.push_back(weak_from_this());
 	}
 	else {
-		// �e�����Ȃ���΁A���[�J����Ԃ̓��[���h��ԂƓ���
+		// 親がいなければ、ローカル空間はワールド空間と同じ
 		local_rotation_ = rotation_;
 		local_position_ = position_;
 		local_scale_ = scale_;
@@ -328,8 +328,8 @@ std::weak_ptr<Transform> EvaEngine::Transform::get_child(const UINT index) const
 {
 	if (index >= children_.size()) {
 		DebugLog::LogError(
-			std::to_string(index) + "�Ԗڂ̎q���͑��݂��܂���ł����B\n" +
-			GetGameObject().lock()->GetName() + "�̎q���̐���" + std::to_string(children_.size()) + "�ł��B");
+			std::to_string(index) + "番目の子供は存在しませんでした。\n" +
+			GetGameObject().lock()->GetName() + "の子供の数は" + std::to_string(children_.size()) + "です。");
 		return std::weak_ptr<Transform>();
 	}
 
@@ -349,7 +349,7 @@ Vector3 Transform::local_scale() const
 void Transform::local_scale(const Vector3& value)
 {
 	local_scale_ = value;
-	// ���[���h��Ԃ��X�V
+	// ワールド空間を更新
 	update_world_transform(parent_);
 }
 
@@ -366,7 +366,7 @@ Vector3 Transform::local_position() const
 void Transform::local_position(const Vector3& value)
 {
 	local_position_ = value;
-	// ���[���h��Ԃ��X�V
+	// ワールド空間を更新
 	update_world_transform(parent_);
 }
 
@@ -383,7 +383,7 @@ Quaternion Transform::local_rotation() const
 void Transform::local_rotation(const Quaternion& value)
 {
 	local_rotation_ = value;
-	// ���[���h��Ԃ��X�V
+	// ワールド空間を更新
 	update_world_transform(parent_);
 }
 
@@ -409,7 +409,7 @@ void EvaEngine::Transform::local_euler_angles(float x, float y, float z)
 
 void Transform::detach_children()
 {
-	// ���g�̐e���q�̐e�ɕύX����
+	// 自身の親を子の親に変更する
 	for (auto child : children_) {
 		child.lock()->parent(parent_);
 	}
@@ -418,7 +418,7 @@ void Transform::detach_children()
 void Transform::detach_parent()
 {
 	if (!parent_.expired()) {
-		// �e�̃��X�g���玩�g���폜
+		// 親のリストから自身を削除
 		std::weak_ptr<Transform> wp = weak_from_this();
 		parent_.lock()->children_.remove_if([wp](std::weak_ptr<Transform> p) {
 			std::shared_ptr<Transform> swp = wp.lock();
@@ -496,18 +496,18 @@ void EvaEngine::Transform::internal_local_scale(float x, float y, float z)
 void Transform::update_world_transform(const std::weak_ptr<Transform>& parent)
 {
 	if (parent.lock().get() != nullptr) {
-		// ���[���h��Ԃ̍X�V
+		// ワールド空間の更新
 		position_ = parent.lock()->transform_point(local_position_);
 		rotation_ = parent.lock()->rotation_ * local_rotation_;
 		scale_ = Vector3::scale(parent.lock()->scale_, local_scale_);
 	}
 	else {
-		// �e�����Ȃ���΃��[�J�����W�ƃ��[���h���W�͓���
+		// 親がいなければローカル座標とワールド座標は同じ
 		position_ = local_position_;
 		rotation_ = local_rotation_;
 		scale_ = local_scale_;
 	}
-	// �q���̃��[���h���W���X�V
+	// 子供のワールド座標を更新
 	for (auto child : children_) {
 		child.lock()->update_world_transform(weak_from_this());
 	}

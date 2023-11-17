@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <string>
 #include <memory>
 #include <unordered_map>
@@ -25,15 +25,15 @@ namespace EvaEngine {
 			return modelManager;
 		}
 
-		// ���f���f�[�^�x�[�X���V�[���ɒǉ�
+		// モデルデータベースをシーンに追加
 		void AddModelDataBase(const std::string& sceneName);
 
-		// ���f����ǉ�
+		// モデルを追加
 		void LoadModel(const std::string& fileName, GUID* guid);
 		void LoadModel(const std::shared_ptr<ModelData>& model, GUID* guid);
-		// ���f���f�[�^���擾
+		// モデルデータを取得
 		std::weak_ptr<ModelData> GetModel(const GUID& guid);
-		// ���f���f�[�^���폜
+		// モデルデータを削除
 		void DeleteModel(const GUID& guid);
 		void DeleteAllModel();
 

@@ -20,7 +20,7 @@ namespace EvaEngine {
 			return instance;
 		}
 
-		// ƒV[ƒ“‚Ì’Ç‰Á
+		// ã‚·ãƒ¼ãƒ³ã®è¿½åŠ 
 		template<class T>
 		void AddScene(const std::string& sceneName) {
 			std::shared_ptr<T> scene = std::make_shared<T>(sceneName, m_Scenes.size());
@@ -29,17 +29,17 @@ namespace EvaEngine {
 			GameObjectManager::Instance().AddGameObjectDataBase(sceneName);
 		}
 
-		// ƒV[ƒ“‚Ìƒ[ƒh
+		// ã‚·ãƒ¼ãƒ³ã®ãƒ­ãƒ¼ãƒ‰
 		void LoadScene(const std::string& sceneName);
 		void LoadScene(const UINT& sceneID);
-		// ¡‚ÌƒV[ƒ“‚ÌType‚ğ•Ô‚·
+		// ä»Šã®ã‚·ãƒ¼ãƒ³ã®Typeã‚’è¿”ã™
 		std::string GetCurrentSceneType();
-		// ƒV[ƒ“‚Ì‰Šú‰»‚ğs‚¤
+		// ã‚·ãƒ¼ãƒ³ã®åˆæœŸåŒ–ã‚’è¡Œã†
 		HRESULT InitializeScene();
-		// ƒV[ƒ“‚ğ•Ï‚¦‚é
+		// ã‚·ãƒ¼ãƒ³ã‚’å¤‰ãˆã‚‹
 		void SceneChange();
 
-		// ƒV[ƒ“‚Ìƒ^ƒXƒNƒVƒXƒeƒ€‚ğ‰ñ‚·
+		// ã‚·ãƒ¼ãƒ³ã®ã‚¿ã‚¹ã‚¯ã‚·ã‚¹ãƒ†ãƒ ã‚’å›ã™
 		void Initialize();
 		void SceneUpdate();
 		void FixedUpdate();

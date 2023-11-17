@@ -1,4 +1,4 @@
-﻿#include "DrawManager.h"
+#include "DrawManager.h"
 #include "../../../App/DirectX11App/DirectX11App.h"
 #include "../../../Setting/Window/Window.h"
 #include "../../../Utility/Mesh/Mesh.h"
@@ -20,10 +20,10 @@ Shader DrawManager::m_Shader{};
 HRESULT DrawManager::Init()
 {
 	try {
-		// �f�t�H���g�̃V�F�[�_�[�����[�h����
+		// デフォルトのシェーダーをロードする
 		ShaderDataBase::Instance().LoadDefaultShader();
 
-		// �f�t�H���g�̃V�F�[�_�[���Z�b�g����
+		// デフォルトのシェーダーをセットする
 		m_Shader.SetVertexShader(ShaderDataBase::Instance().GetDefaultVertexShader());
 		m_Shader.SetPixelShader(ShaderDataBase::Instance().GetDefaultPixelShader());
 
@@ -36,23 +36,23 @@ HRESULT DrawManager::Init()
 
 void DrawManager::DrawBegin(const std::weak_ptr<Camera>& camera)
 {
-	//// DepthView��StencilView�̃N���A
+	//// DepthViewとStencilViewのクリア
 	//DirectX11App::g_Context->ClearDepthStencilView(
-	//	DirectX11App::g_EditorDepthStencilView.Get(),	// �N���A�Ώۂ�View
-	//	D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// �N���A�t���O
-	//	1.0f,											// �[�x�N���A�l
-	//	0);												// �X�e���V���N���A�l
+	//	DirectX11App::g_EditorDepthStencilView.Get(),	// クリア対象のView
+	//	D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,		// クリアフラグ
+	//	1.0f,											// 深度クリア値
+	//	0);												// ステンシルクリア値
 
-	//	// �V�F�[�_�[�̃Z�b�g
+	//	// シェーダーのセット
 	//Shader shader{ DrawManager::GetDefaultShader() };
 	//SetShader(&shader);
 
-	//// �����_�[�^�[�Q�b�g�̐ݒ�
+	//// レンダーターゲットの設定
 	//DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_EditorRenderTargetView.GetAddressOf(), DirectX11App::g_EditorDepthStencilView.Get());
 
-	//// �w��F�ŉ�ʃN���A
+	//// 指定色で画面クリア
 	//float clearColor[4] = { 1.0f, 1.0f, 0.8f, 1.0f };
-	//// RenderTargetView�̃N���A
+	//// RenderTargetViewのクリア
 	//DirectX11App::g_Context->ClearRenderTargetView(DirectX11App::g_EditorRenderTargetView.Get(), clearColor);
 
 	//camera.lock()->SetRenderTarget();
@@ -65,32 +65,32 @@ void DrawManager::Draw(const std::weak_ptr<Camera>& camera, const std::weak_ptr<
 	UINT strides = sizeof(VertexData);
 	UINT offset = 0;
 
-	// ���[���h�s��
+	// ワールド行列
 	DirectX11App::g_ConstantBufferData.world = transform.lock()->local_to_world_matrix().transpose();
 
 	auto context = DirectX11App::g_Context;
 
-	// ���b�V����񂪊i�[����Ă���Map���烁�b�V�������o��
+	// メッシュ情報が格納されているMapからメッシュを取り出す
 	for (const auto& meshs : model.lock()->meshes) {
-		// ���b�V����񂪊i�[���ꂽ�z�񂩂�P���b�V�������o��
+		// メッシュ情報が格納された配列から１メッシュずつ取り出す
 		for (auto mesh : meshs.second) {
-			// �C���v�b�g���C�A�E�g�̐ݒ�
+			// インプットレイアウトの設定
 			context->IASetInputLayout(ShaderDataBase::Instance().GetDefaultVertexShader().m_pInputLayout);
-			// ���_�o�b�t�@�[�̐ݒ�
+			// 頂点バッファーの設定
 			context->IASetVertexBuffers(0, 1, mesh.GetVertexBuffer(), &strides, &offset);
-			// �C���f�b�N�X�o�b�t�@�̐ݒ�
+			// インデックスバッファの設定
 			context->IASetIndexBuffer(mesh.GetIndexBuffer(), DXGI_FORMAT_R32_UINT, 0);
 
-			// �}�e���A���̃Z�b�g
+			// マテリアルのセット
 			//SetMaterial(&model.lock()->materials[mesh.GetMaterialName()]);
 
-			// �萔�o�b�t�@�̍X�V
+			// 定数バッファの更新
 			context->UpdateSubresource(DirectX11App::g_ConstantBuffer, 0, NULL, &DirectX11App::g_ConstantBufferData, 0, 0);
-			// �R���e�L�X�g�ɒ萔�o�b�t�@��ݒ�
+			// コンテキストに定数バッファを設定
 			context->VSSetConstantBuffers(0, 1, &DirectX11App::g_ConstantBuffer);
 			context->PSSetConstantBuffers(0, 1, &DirectX11App::g_ConstantBuffer);
 			
-			// �|���S���`��
+			// ポリゴン描画
 			context->DrawIndexed(static_cast<UINT>(mesh.GetIndices().size()), 0, 0);
 		}
 	}
@@ -114,7 +114,7 @@ void DrawManager::SetMaterial(Material* material)
 
 void DrawManager::SetShader(Shader* shader) {
 
-	// nullptr �łȂ��ꍇ�V�F�[�_�[���Z�b�g����
+	// nullptr でない場合シェーダーをセットする
 	if (shader->GetComputeShader().m_pShader != nullptr) DirectX11App::g_Context->CSSetShader(shader->GetComputeShader().m_pShader, nullptr, 0);
 	if (shader->GetVertexShader().m_pShader != nullptr) DirectX11App::g_Context->VSSetShader(shader->GetVertexShader().m_pShader, nullptr, 0);
 	if (shader->GetHullShader().m_pShader != nullptr) DirectX11App::g_Context->HSSetShader(shader->GetHullShader().m_pShader, nullptr, 0);

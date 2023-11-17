@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <list>
 #include <memory>
@@ -23,22 +23,22 @@ namespace EvaEngine {
 				return gameObjectManager;
 			}
 
-			// �Q�[���I�u�W�F�N�g�f�[�^�x�[�X���V�[���ɒǉ�
+			// ゲームオブジェクトデータベースをシーンに追加
 			void AddGameObjectDataBase(const std::string& sceneName);
 
-			// �w�肵���V�[���ɃI�u�W�F�N�g�𐶐�
+			// 指定したシーンにオブジェクトを生成
 			std::weak_ptr<GameObject> Instantiate(const std::string& sceneName, const std::string& tag, const std::string& name);
-			// ���O�Ō���
+			// 名前で検索
 			std::weak_ptr<GameObject> Find(const std::string& sceneName, const std::string& name);
-			// �^�O�Ō������ăQ�[���I�u�W�F�N�g��������Ă���
+			// タグで検索してゲームオブジェクトを一つ持ってくる
 			std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& sceneName, const std::string& tag);
-			// �^�O�Ō������ăq�b�g�����Q�[���I�u�W�F�N�g��S�������Ă���
+			// タグで検索してヒットしたゲームオブジェクトを全部持ってくる
 			std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& sceneName, const std::string& tag);
-			// �w�肵���V�[����GameObjectDataBase���擾
+			// 指定したシーンのGameObjectDataBaseを取得
 			std::weak_ptr<GameObjectDataBase> GetGameObjectDataBase(const std::string& sceneName);
-			// �ێ����Ă���Q�[���I�u�W�F�N�g��S�폜
+			// 保持しているゲームオブジェクトを全削除
 			void RemoveAllGameObject(const std::string& sceneName);
-			// �ێ����Ă���Q�[���I�u�W�F�N�g��S�폜
+			// 保持しているゲームオブジェクトを全削除
 			void RemoveAllGameObject();
 
 		private:

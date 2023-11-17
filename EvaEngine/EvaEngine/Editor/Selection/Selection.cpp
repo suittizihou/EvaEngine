@@ -1,4 +1,4 @@
-﻿#include "Selection.h"
+#include "Selection.h"
 #include "../../GameSystemBase/Base/GameObject/GameObject.h"
 #include "../../GameSystemBase/Components/Transform/Transform.h"
 

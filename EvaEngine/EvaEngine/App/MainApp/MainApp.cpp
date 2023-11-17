@@ -1,4 +1,4 @@
-﻿#include "MainApp.h"
+#include "MainApp.h"
 #include "../WindowApp/WindowApp.h"
 #include "../DirectX11App/DirectX11App.h"
 #include "../EvaEngineApp/EvaEngineApp.h"
@@ -10,24 +10,24 @@ HRESULT MainApp::Init()
 {
 	setlocale(LC_ALL, "jpn");
 
-	// �E�B���h�E�̏�����
+	// ウィンドウの初期化
 	HRESULT hr = WindowApp::Init();
 	if (FAILED(hr)) {
 		DebugLog::ShowErrorMessageWindow("Window initialize failed.");
 		return hr;
 	}
 
-	// DirectX11�̏�����
+	// DirectX11の初期化
 	hr = DirectX11App::Init();
 	if (FAILED(hr)) {
 		DebugLog::ShowErrorMessageWindow("DirectX initialize failed.");
 		return hr;
 	}
 
-	// ���[�U�[�̏���������(�V�[���̒ǉ��Ȃǂ����邽�߂����ł���)
+	// ユーザーの初期化処理(シーンの追加などがあるためここでする)
 	EvaEngine::GameBase::Instance()->Init();
 
-	// �G���W���̏�����
+	// エンジンの初期化
 	hr = EvaEngineApp::Init();
 	if (FAILED(hr)) {
 		DebugLog::ShowErrorMessageWindow("EvaEngine initialize failed.");
@@ -47,26 +47,26 @@ int MainApp::Run()
 
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
 #if _DEBUG
-	// ���������[�N���o
+	// メモリリーク検出
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 	
 	EvaEngine::Internal::Window::g_hInstance = hInstance;
 	EvaEngine::Internal::Window::g_nCmdShow = nCmdShow;
 
-	// EvaEngine�̏�����
+	// EvaEngineの初期化
 	if (FAILED(MainApp::Init())) {
 		EvaEngine::DebugLog::ShowErrorMessageWindow("EvaEngine initialize failed.");
 		return -1;
 	}
 
-	// ���b�Z�[�W���[�v
+	// メッセージループ
 	int result = MainApp::Run();
 
 	DirectX11App::Release();
 #if _DEBUG
 	DirectX11App::ReportLiveObjects();
-	// �f�o�b�O�Ɏg�����I�u�W�F�N�g�����
+	// デバッグに使ったオブジェクトを解放
 	DirectX11App::DebugRelease();
 #endif
 

@@ -1,4 +1,4 @@
-﻿#include "MeshRenderer.h"
+#include "MeshRenderer.h"
 
 #include <iterator>
 

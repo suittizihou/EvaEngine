@@ -1,4 +1,4 @@
-﻿#if _DEBUG
+#if _DEBUG
 #pragma once
 
 namespace ImGuizmo {
@@ -13,7 +13,7 @@ namespace EvaEngine {
 				~EditorCommand() = default;
 			public:
 
-				// Transform�̕ҏW��GUI�ōs����悤�ɂ���֐�
+				// Transformの編集をGUIで行えるようにする関数
 				static void EditTransform(float* cameraView, float* cameraProjection, float* matrix, bool editTransformDecomposition, float camDistance = 8.0f);
 
 			private:

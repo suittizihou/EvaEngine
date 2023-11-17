@@ -1,4 +1,4 @@
-﻿#include "ShaderDataBase.h"
+#include "ShaderDataBase.h"
 #include "../../../Utility/ShaderUtility/ShaderCompiler/ShaderCompiler.h"
 
 using namespace EvaEngine::Internal;
@@ -154,14 +154,14 @@ void ShaderDataBase::DeleteDomainShader(const GUID& shaderHandle)
 
 void ShaderDataBase::AllDeleteShader()
 {
-    // �f�t�H���g�V�F�[�_�[�̉��
+    // デフォルトシェーダーの解放
     if (m_DefaultVertexShader.m_pShader != nullptr) { m_DefaultVertexShader.m_pShader->Release(); m_DefaultVertexShader.m_pShader = nullptr; }
     if (m_DefaultVertexShader.m_pShaderCode != nullptr) { m_DefaultVertexShader.m_pShaderCode->Release(); m_DefaultVertexShader.m_pShaderCode = nullptr; }
     if (m_DefaultVertexShader.m_pInputLayout != nullptr) { m_DefaultVertexShader.m_pInputLayout->Release(); m_DefaultVertexShader.m_pInputLayout = nullptr; }
     if (m_DefaultPixelShader.m_pShader != nullptr) { m_DefaultPixelShader.m_pShader->Release(); m_DefaultPixelShader.m_pShader = nullptr; }
     if (m_DefaultPixelShader.m_pShaderCode != nullptr) { m_DefaultPixelShader.m_pShaderCode->Release(); m_DefaultPixelShader.m_pShaderCode = nullptr; }
 
-	// ���_�V�F�[�_�[�̉��
+	// 頂点シェーダーの解放
 	for (auto& shader : m_VertexShaders) {
             if (shader.second.m_pShader != nullptr) {
                 shader.second.m_pShader->Release();
@@ -178,7 +178,7 @@ void ShaderDataBase::AllDeleteShader()
     }
     m_VertexShaders.clear();
 
-	// �s�N�Z���V�F�[�_�[�̉��
+	// ピクセルシェーダーの解放
     for (auto& shader : m_PixelShaders) {
         if (shader.second.m_pShader != nullptr) {
             shader.second.m_pShader->Release();
@@ -191,7 +191,7 @@ void ShaderDataBase::AllDeleteShader()
     }
     m_PixelShaders.clear();
 
-	// �W�I���g���V�F�[�_�[�̉��
+	// ジオメトリシェーダーの解放
 	for (auto& shader : m_GeometryShaders) {
         if (shader.second.m_pShader != nullptr) {
             shader.second.m_pShader->Release();
@@ -204,7 +204,7 @@ void ShaderDataBase::AllDeleteShader()
     }
     m_GeometryShaders.clear();
 
-	// �R���s���[�g�V�F�[�_�[�̉��
+	// コンピュートシェーダーの解放
 	for (auto& shader : m_ComputeShaders) {
         if (shader.second.m_pShader != nullptr) {
             shader.second.m_pShader->Release();
@@ -217,7 +217,7 @@ void ShaderDataBase::AllDeleteShader()
     }
     m_ComputeShaders.clear();
 
-	// �n���V�F�[�_�[�̉��
+	// ハルシェーダーの解放
 	for (auto& shader : m_HullShaders) {
         if (shader.second.m_pShader != nullptr) {
             shader.second.m_pShader->Release();
@@ -230,7 +230,7 @@ void ShaderDataBase::AllDeleteShader()
     }
     m_HullShaders.clear();
 
-	// �h���C���V�F�[�_�[�̉��
+	// ドメインシェーダーの解放
 	for (auto& shader : m_DomainShaders) {
         if (shader.second.m_pShader != nullptr) {
             shader.second.m_pShader->Release();
@@ -246,5 +246,5 @@ void ShaderDataBase::AllDeleteShader()
 
 bool EvaEngine::Internal::ShaderDataBase::GUIDCreate(GUID* guid, const std::string& shaderType)
 {
-    return GUIDUtility::Create(guid, "ShaderDataBase�ɂ�" + shaderType + "��GUID�����Ɏ��s���܂����B");
+    return GUIDUtility::Create(guid, "ShaderDataBaseにて" + shaderType + "のGUID生成に失敗しました。");
 }

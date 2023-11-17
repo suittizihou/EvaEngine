@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "../../Base/Scene/Scene.h"
 
@@ -21,16 +21,16 @@ namespace EvaEngine {
 				return instance;
 			}
 
-			// �V�[���̒ǉ�
+			// シーンの追加
 			template<class T>
 			void AddScene(const std::string& sceneName) {
-				// Editor�Ƃ������O�̃V�[�����͓o�^�ł��Ȃ�
+				// Editorという名前のシーン名は登録できない
 				if (sceneName == "Editor") {
 					DebugLog::LogError("You cannot use the name ""Editor"" in the scene name.");
 					return;
 				}
 
-				// �����V�[���������ɓo�^����Ă���ΕԂ�
+				// 同じシーン名が既に登録されていれば返す
 				if (m_Scenes.count(sceneName) >= 1) {
 					DebugLog::LogError("A scene with the same name has already been registered.");
 					return;
@@ -43,23 +43,23 @@ namespace EvaEngine {
 				ModelManager::Instance().AddModelDataBase(sceneName);
 			}
 
-			// �V�[���̃��[�h
+			// シーンのロード
 			void LoadScene(const std::string& sceneName);
 			void LoadScene(const UINT& sceneID);
-			// ���̃V�[������Ԃ�
+			// 今のシーン名を返す
 			std::string GetCurrentSceneName() const;
-			// �O�̃V�[������Ԃ�
+			// 前のシーン名を返す
 			std::string GetPreviousSceneName() const;
-			// �V�[���̏��������s��
+			// シーンの初期化を行う
 			HRESULT InitializeScene();
-			// �V�[����ς���
+			// シーンを変える
 			HRESULT SceneChange();
-			// �V�[�������݂��邩�`�F�b�N
+			// シーンが存在するかチェック
 			bool IsCheckExists(const std::string& sceneName);
-			// �o�^����Ă���V�[���̐���Ԃ�
+			// 登録されているシーンの数を返す
 			size_t GetSceneCount() const;
 
-			// �V�[���̃^�X�N�V�X�e������
+			// シーンのタスクシステムを回す
 			void Initialize();
 			void SceneUpdate();
 			void FixedUpdate();

@@ -1,36 +1,36 @@
-﻿#include "InputBufferUpdate.h"
+#include "InputBufferUpdate.h"
 #include <stdexcept>
 
 using namespace EvaEngine::Internal;
 
 InputBufferUpdate::InputBufferUpdate()
 {
-	// IDirectInput8�C���^�[�t�F�C�X�̎擾
+	// IDirectInput8インターフェイスの取得
 	HRESULT hr = DirectInput8Create(GetModuleHandle(NULL), DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&m_pInputInterface, nullptr);
 
 	if (FAILED(hr)) {
-		throw std::runtime_error("IDirectInput8�C���^�[�t�F�C�X�̎擾�Ɏ��s");
+		throw std::runtime_error("IDirectInput8インターフェイスの取得に失敗");
 	}
 
-	// IDirectInputDevice8�C���^�[�t�F�C�X�̎擾
+	// IDirectInputDevice8インターフェイスの取得
 	hr = m_pInputInterface->CreateDevice(GUID_SysKeyboard, &m_pKeyDevice, nullptr);
 	if (FAILED(hr)) {
-		throw std::runtime_error("IDirectInputDevice8�C���^�[�t�F�C�X�̎擾�Ɏ��s");
+		throw std::runtime_error("IDirectInputDevice8インターフェイスの取得に失敗");
 	}
 
-	// �f�o�C�X�̃t�H�[�}�b�g�̐ݒ�
+	// デバイスのフォーマットの設定
 	hr = m_pKeyDevice->SetDataFormat(&c_dfDIKeyboard);
 	if (FAILED(hr)) {
-		throw std::runtime_error("�f�o�C�X�̃t�H�[�}�b�g�̐ݒ�Ɏ��s");
+		throw std::runtime_error("デバイスのフォーマットの設定に失敗");
 	}
 
-	// �������[�h�̐ݒ�
+	// 協調モードの設定
 	hr = m_pKeyDevice->SetCooperativeLevel(GetActiveWindow(), DISCL_BACKGROUND | DISCL_NONEXCLUSIVE);
 	if (FAILED(hr)) {
-		throw std::runtime_error("�������[�h�̐ݒ�Ɏ��s");
+		throw std::runtime_error("協調モードの設定に失敗");
 	}
 
-	// �f�o�C�X�̎擾�J�n
+	// デバイスの取得開始
 	m_pKeyDevice->Acquire();
 }
 
@@ -47,15 +47,15 @@ InputBufferUpdate::~InputBufferUpdate()
 void InputBufferUpdate::KeyUpdate()
 {
 	HRESULT hr;
-	// �L�[�{�[�h�f�o�C�X�̃Q�b�^�[
+	// キーボードデバイスのゲッター
 	hr = m_pKeyDevice->GetDeviceState(INPUT_BUFFER_SIZE, &m_Keys);
 
 	if (SUCCEEDED(hr)) {
 
-		// �O�t���[���̓��͏�Ԃ��R�s�[
+		// 前フレームの入力状態をコピー
 		m_PreviousKeyStatus = m_CurrentKeyStatus;
 
-		// ���͂���Ă���{�^����Down�X�e�[�g�ɁA��������Ȃ��{�^����Up�X�e�[�g��
+		// 入力されているボタンはDownステートに、そうじゃないボタンはUpステートに
 		for (int index = 0; index < INPUT_BUFFER_SIZE; ++index) {
 			if (m_Keys[index] & 0x80)
 			{

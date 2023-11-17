@@ -5,9 +5,9 @@ using namespace EvaEngine;
 
 Transform::~Transform()
 {
-	// ŽqƒIƒuƒWƒFƒNƒg‚ðØ‚è—£‚·
+	// å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’åˆ‡ã‚Šé›¢ã™
 	detach_children();
-	// eƒIƒuƒWƒFƒNƒg‚©‚çØ‚è—£‚·
+	// è¦ªã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰åˆ‡ã‚Šé›¢ã™
 	detach_parent();
 }
 
@@ -176,8 +176,8 @@ Matrix4x4 Transform::world_to_local_matrix() const
 
 Vector3 Transform::transform_point(const Vector3& position) const
 {
-	// ŒvŽZ‡”Ô
-	// Šg‘åk¬ -> ‰ñ“] -> •½sˆÚ“®
+	// è¨ˆç®—é †ç•ª
+	// æ‹¡å¤§ç¸®å° -> å›žè»¢ -> å¹³è¡Œç§»å‹•
 	return rotation_ * Vector3::scale(position, scale_) + position_;
 }
 
@@ -230,25 +230,25 @@ void Transform::parent(Transform* parent)
 
 void Transform::set_parent(Transform* parent, bool world_position_stays)
 {
-	// Œ»Ý‚Ìe‚©‚çØ‚è—£‚·
+	// ç¾åœ¨ã®è¦ªã‹ã‚‰åˆ‡ã‚Šé›¢ã™
 	detach_parent();
-	// V‚µ‚¢e‚ðÝ’è
+	// æ–°ã—ã„è¦ªã‚’è¨­å®š
 	parent_ = parent;
 	if (parent_ != nullptr) {
 		if (world_position_stays) {
-			// Œ»Ý‚Ìƒ[ƒ‹ƒh‹óŠÔ‚ð•Û‚Â‚©H
+			// ç¾åœ¨ã®ãƒ¯ãƒ¼ãƒ«ãƒ‰ç©ºé–“ã‚’ä¿ã¤ã‹ï¼Ÿ
 			local_rotation_ = Quaternion::inverse(parent_->rotation()) * rotation_;
 			local_position_ = parent_->inverse_transform_point(position_);
 		}
 		else {
-			// Œ»Ý‚Ìƒ[ƒJƒ‹‹óŠÔ‚ðXV‚¹‚¸‚Éƒ[ƒ‹ƒh‹óŠÔ‚ðXV
+			// ç¾åœ¨ã®ãƒ­ãƒ¼ã‚«ãƒ«ç©ºé–“ã‚’æ›´æ–°ã›ãšã«ãƒ¯ãƒ¼ãƒ«ãƒ‰ç©ºé–“ã‚’æ›´æ–°
 			update_world_transform(parent_);
 		}
-		// Ž©•ªŽ©g‚ðe‚ÌŽq‚É“o˜^
+		// è‡ªåˆ†è‡ªèº«ã‚’è¦ªã®å­ã«ç™»éŒ²
 		parent->children_.push_back(this);
 	}
 	else {
-		// e‚ª‚¢‚È‚¯‚ê‚ÎAƒ[ƒJƒ‹‹óŠÔ‚Íƒ[ƒ‹ƒh‹óŠÔ‚Æ“¯‚¶
+		// è¦ªãŒã„ãªã‘ã‚Œã°ã€ãƒ­ãƒ¼ã‚«ãƒ«ç©ºé–“ã¯ãƒ¯ãƒ¼ãƒ«ãƒ‰ç©ºé–“ã¨åŒã˜
 		local_rotation_ = rotation_;
 		local_position_ = position_;
 		local_scale_ = scale_;
@@ -264,7 +264,7 @@ Vector3 Transform::local_scale() const
 void Transform::local_scale(const Vector3& value)
 {
 	local_scale_ = value;
-	// ƒ[ƒ‹ƒh‹óŠÔ‚ðXV
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰ç©ºé–“ã‚’æ›´æ–°
 	update_world_transform(parent_);
 }
 
@@ -276,7 +276,7 @@ Vector3 Transform::local_position() const
 void Transform::local_position(const Vector3& value)
 {
 	local_position_ = value;
-	// ƒ[ƒ‹ƒh‹óŠÔ‚ðXV
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰ç©ºé–“ã‚’æ›´æ–°
 	update_world_transform(parent_);
 }
 
@@ -288,7 +288,7 @@ Quaternion Transform::local_rotation() const
 void Transform::local_rotation(const Quaternion& value)
 {
 	local_rotation_ = value;
-	// ƒ[ƒ‹ƒh‹óŠÔ‚ðXV
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰ç©ºé–“ã‚’æ›´æ–°
 	update_world_transform(parent_);
 }
 
@@ -304,7 +304,7 @@ void Transform::local_euler_angles(const Vector3& value)
 
 void Transform::detach_children()
 {
-	// Ž©g‚Ìe‚ðŽq‚Ìe‚É•ÏX‚·‚é
+	// è‡ªèº«ã®è¦ªã‚’å­ã®è¦ªã«å¤‰æ›´ã™ã‚‹
 	for (auto child : children_) {
 		child->parent(parent_);
 	}
@@ -313,7 +313,7 @@ void Transform::detach_children()
 void Transform::detach_parent()
 {
 	if (parent_ != nullptr) {
-		// e‚ÌƒŠƒXƒg‚©‚çŽ©g‚ðíœ
+		// è¦ªã®ãƒªã‚¹ãƒˆã‹ã‚‰è‡ªèº«ã‚’å‰Šé™¤
 		parent_->children_.remove(this);
 		parent_ = nullptr;
 	}
@@ -322,18 +322,18 @@ void Transform::detach_parent()
 void Transform::update_world_transform(const Transform* parent)
 {
 	if (parent != nullptr) {
-		// ƒ[ƒ‹ƒh‹óŠÔ‚ÌXV
+		// ãƒ¯ãƒ¼ãƒ«ãƒ‰ç©ºé–“ã®æ›´æ–°
 		position_ = parent->transform_point(local_position_);
 		rotation_ = parent->rotation_ * local_rotation_;
 		scale_ = Vector3::scale(parent->scale_, local_scale_);
 	}
 	else {
-		// e‚ª‚¢‚È‚¯‚ê‚Îƒ[ƒJƒ‹À•W‚Æƒ[ƒ‹ƒhÀ•W‚Í“¯‚¶
+		// è¦ªãŒã„ãªã‘ã‚Œã°ãƒ­ãƒ¼ã‚«ãƒ«åº§æ¨™ã¨ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã¯åŒã˜
 		position_ = local_position_;
 		rotation_ = local_rotation_;
 		scale_ = local_scale_;
 	}
-	// Žq‹Ÿ‚Ìƒ[ƒ‹ƒhÀ•W‚ðXV
+	// å­ä¾›ã®ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’æ›´æ–°
 	for (auto child : children_) {
 		child->update_world_transform(this);
 	}

@@ -1,4 +1,4 @@
-﻿#include "ModelLoader.h"
+#include "ModelLoader.h"
 #include "../..//StringAssist/StringAssist.h"
 #include "../../../GameSystemBase/DataBase/ModelDataBase/ModelDataBase.h"
 

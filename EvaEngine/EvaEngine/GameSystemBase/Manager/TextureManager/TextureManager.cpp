@@ -1,4 +1,4 @@
-﻿#include "TextureManager.h"
+#include "TextureManager.h"
 #include "../../../System/DebugLog/DebugLog.h"
 #include "../../../Utility/Texture/Texture/Texture.h"
 #include "../../../Utility/Texture/TextureLoader/TextureLoader.h"
@@ -8,7 +8,7 @@
 void EvaEngine::TextureManager::LoadTexture(const std::string& fileName, GUID* guid)
 {
 	*guid = GUID_NULL;
-	if (GUIDUtility::Create(guid, "TextureManager�ɂ� " + fileName + " ��GUID�����Ɏ��s���܂����B")) {
+	if (GUIDUtility::Create(guid, "TextureManagerにて " + fileName + " のGUID生成に失敗しました。")) {
 		return;
 	}
 	
@@ -19,7 +19,7 @@ void EvaEngine::TextureManager::LoadTexture(const std::string& fileName, GUID* g
 
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> tex{ nullptr };
 	if (FAILED(tempTex.As(&tex))) {
-		DebugLog::LogError("TextureManager�ɂ�ID3D11Resources����ID3D11Texture2D��As�֐���p�����C���^�[�t�F�[�X�擾�Ɏ��s���܂����B");
+		DebugLog::LogError("TextureManagerにてID3D11ResourcesからID3D11Texture2DのAs関数を用いたインターフェース取得に失敗しました。");
 		return;
 	}
 

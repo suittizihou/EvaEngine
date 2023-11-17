@@ -1,4 +1,4 @@
-﻿#include <cmath>
+#include <cmath>
 #include "Quaternion.h"
 #include "../Vector3/Vector3.h"
 #include "..//Mathf/Mathf.h"
@@ -37,7 +37,7 @@ float Quaternion::operator[](int index) const
 	case 2: return z;
 	case 3: return w;
 	default:
-		throw "�z��̋��E�O";
+		throw "配列の境界外";
 	}
 }
 
@@ -49,7 +49,7 @@ float& Quaternion::operator[](int index)
 	case 2: return z;
 	case 3: return w;
 	default:
-		throw "�z��̋��E�O";
+		throw "配列の境界外";
 	}
 }
 
@@ -237,14 +237,14 @@ Quaternion Quaternion::euler(const Vector3& euler)
 
 Quaternion Quaternion::from_to_rotation(const Vector3& fromDirection, const Vector3& toDirection)
 {
-	// 2�x�N�g���Ԃ̊p�x�����߂�
+	// 2ベクトル間の角度を求める
 	float angle = Vector3::angle(fromDirection, toDirection);
 	if (angle < kEpsilon) {
 		return identity();
 	}
-	// ��]�̎����v�Z
+	// 回転の軸を計算
 	Vector3 axis = Vector3::cross(fromDirection, toDirection);
-	// ��]�̎����ł��Ȃ������ꍇ�̕␳
+	// 回転の軸ができなかった場合の補正
 	if (axis.sqr_magnitude() < (kEpsilon * kEpsilon)) {
 		axis = Vector3::cross(Vector3{ 0.0f, 0.0f, 1.0f }, fromDirection);
 		if (axis.sqr_magnitude() < (kEpsilon * kEpsilon)) {
@@ -256,20 +256,20 @@ Quaternion Quaternion::from_to_rotation(const Vector3& fromDirection, const Vect
 
 Quaternion Quaternion::look_rotation(const Vector3& view, const Vector3& up)
 {
-	// �O���̃x�N�g�������߂�
+	// 前方のベクトルを求める
 	Vector3 forward = Vector3::normalize(view);
 	if (forward.sqr_magnitude() < (kEpsilon * kEpsilon)) {
 		forward = Vector3{ 0.0f, 0.0f, 1.0f };
 	}
-	// �E������̃x�N�g�������߂� (OpenGL�̂悤�ȉE����W�n�ł͍������)
+	// 右手方向のベクトルを求める (OpenGLのような右手座標系では左手方向)
 	Vector3 right = Vector3::cross(up, forward);
 	if (right.sqr_magnitude() < (kEpsilon * kEpsilon)) {
 		right = Vector3{ 1.0f, 0.0f, 0.0f };
 	}
-	// ������̃x�N�g�������߂�
+	// 上方向のベクトルを求める
 	Vector3 upwards = Vector3::cross(forward, right);
 	upwards.normalize();
-	// �E������̃x�N�g�������߂�
+	// 右手方向のベクトルを求める
 	right = Vector3::cross(upwards, forward);
 	Quaternion result;
 	float radicand = right.x + upwards.y + forward.z;

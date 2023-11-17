@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "../../../Define/D3D11Defines.h"
 #include "../../../Utility/ShaderUtility/ShaderBase/ShaderBase.h"
@@ -20,71 +20,71 @@ namespace EvaEngine {
 				return instance;
 			}
 
-			// �f�t�H���g�̃V�F�[�_�[�ǂݍ���
+			// デフォルトのシェーダー読み込み
 			void LoadDefaultShader();
 
-			// ���_�V�F�[�_�[�̒ǉ�
+			// 頂点シェーダーの追加
 			void AddVertexShader(const VertexShader& vertexShader, GUID* guid);
-			// �s�N�Z���V�F�[�_�[�̒ǉ�
+			// ピクセルシェーダーの追加
 			void AddPixelShader(const PixelShader& pixelShader, GUID* guid);
-			// �W�I���g���V�F�[�_�[�̒ǉ�
+			// ジオメトリシェーダーの追加
 			void AddGeometryShader(const GeometryShader& geometryShader, GUID* guid);
-			// �R���s���[�g�V�F�[�_�[�̒ǉ�
+			// コンピュートシェーダーの追加
 			void AddComputeShader(const ComputeShader& computeShader, GUID* guid);
-			// �n���V�F�[�_�[�̒ǉ�
+			// ハルシェーダーの追加
 			void AddHullShader(const HullShader& hullShader, GUID* guid);
-			// �h���C���V�F�[�_�[�̒ǉ�
+			// ドメインシェーダーの追加
 			void AddDomainShader(const DomainShader& domainShader, GUID* guid);
 
-			// �f�t�H���g�̒��_�V�F�[�_�[���擾
+			// デフォルトの頂点シェーダーを取得
 			VertexShader GetDefaultVertexShader();
-			// �f�t�H���g�̃s�N�Z���V�F�[�_�[���擾
+			// デフォルトのピクセルシェーダーを取得
 			PixelShader GetDefaultPixelShader();
 
-			// ���_�V�F�[�_�[�̎擾
+			// 頂点シェーダーの取得
 			VertexShader GetVertexShader(const GUID& shaderHandle);
-			// �s�N�Z���V�F�[�_�[�̎擾
+			// ピクセルシェーダーの取得
 			PixelShader GetPixelShader(const GUID& shaderHandle);
-			// �W�I���g���V�F�[�_�[�̎擾
+			// ジオメトリシェーダーの取得
 			GeometryShader GetGeometryShader(const GUID& shaderHandle);
-			// �R���s���[�g�V�F�[�_�[�̎擾
+			// コンピュートシェーダーの取得
 			ComputeShader GetComputeShader(const GUID& shaderHandle);
-			// �n���V�F�[�_�[�̎擾
+			// ハルシェーダーの取得
 			HullShader GetHullShader(const GUID& shaderHandle);
-			// �h���C���V�F�[�_�[�̎擾
+			// ドメインシェーダーの取得
 			DomainShader GetDomainShader(const GUID& shaderHandle);
 
-			// ���_�V�F�[�_�[�̍폜
+			// 頂点シェーダーの削除
 			void DeleteVertexShader(const GUID& shaderHandle);
-			// �s�N�Z���V�F�[�_�[�̍폜
+			// ピクセルシェーダーの削除
 			void DeletePixelShader(const GUID& shaderHandle);
-			// �W�I���g���V�F�[�_�[�̍폜
+			// ジオメトリシェーダーの削除
 			void DeleteGeometryShader(const GUID& shaderHandle);
-			// �R���s���[�g�V�F�[�_�[�̍폜
+			// コンピュートシェーダーの削除
 			void DeleteComputeShader(const GUID& shaderHandle);
-			// �n���V�F�[�_�[�̍폜
+			// ハルシェーダーの削除
 			void DeleteHullShader(const GUID& shaderHandle);
-			// �h���C���V�F�[�_�[�̍폜
+			// ドメインシェーダーの削除
 			void DeleteDomainShader(const GUID& shaderHandle);
 
-			// �S�V�F�[�_�[���\�[�X�̉��
+			// 全シェーダーリソースの解放
 			void AllDeleteShader();
 
 		private:
 			bool GUIDCreate(GUID* guid, const std::string& shaderType);
 
 		private:
-			// �R���p�C���ςݒ��_�V�F�[�_�[
+			// コンパイル済み頂点シェーダー
 			std::unordered_map<GUID, VertexShader> m_VertexShaders{};
-			// �R���p�C���ς݃s�N�Z���V�F�[�_�[
+			// コンパイル済みピクセルシェーダー
 			std::unordered_map<GUID, PixelShader> m_PixelShaders{};
-			// �R���p�C���ς݃W�I���g���V�F�[�_�[
+			// コンパイル済みジオメトリシェーダー
 			std::unordered_map<GUID, GeometryShader> m_GeometryShaders{};
-			// �R���p�C���ς݃R���s���[�g�V�F�[�_�[
+			// コンパイル済みコンピュートシェーダー
 			std::unordered_map<GUID, ComputeShader> m_ComputeShaders{};
-			// �R���p�C���ς݃n���V�F�[�_�[
+			// コンパイル済みハルシェーダー
 			std::unordered_map<GUID, HullShader> m_HullShaders{};
-			// �R���p�C���ς݃h���C���V�F�[�_�[
+			// コンパイル済みドメインシェーダー
 			std::unordered_map<GUID, DomainShader> m_DomainShaders{};
 
 			VertexShader m_DefaultVertexShader{};

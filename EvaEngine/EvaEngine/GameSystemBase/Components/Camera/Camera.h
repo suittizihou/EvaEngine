@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <DirectXMath.h>
 #include <memory>
@@ -43,24 +43,24 @@ namespace EvaEngine {
 #endif
 
 	public:
-		// �r���[�|�[�g�̐ݒ�
+		// ビューポートの設定
 		void SetViewport(const UINT width, const UINT height);
-		// �����_�[�^�[�Q�b�g��ݒ�
+		// レンダーターゲットを設定
 		void SetBeginSettings(ID3D11DeviceContext* command) const;
 
-		// �r���[�|�[�g���擾
+		// ビューポートを取得
 		D3D11_VIEWPORT  GetViewport() const;
-		// �r���[�s����擾
+		// ビュー行列を取得
 		DirectX::XMMATRIX GetViewMatrixDxMath() const;
 		EvaEngine::Matrix4x4 GetViewMatrix() const;
-		// �v���W�F�N�V�����s����擾
+		// プロジェクション行列を取得
 		DirectX::XMMATRIX GetProjectionMatrixDxMath() const;
 		EvaEngine::Matrix4x4 GetProjectionMatrix() const;
 
-		// �r���[�s����쐬
+		// ビュー行列を作成
 		DirectX::XMMATRIX CreateViewMatrix(const std::weak_ptr<Transform>& transform);
 		DirectX::XMMATRIX CreateViewMatrix(const Matrix4x4& rotateMatrix, const Matrix4x4& positionMatrix);
-		// �v���W�F�N�V�����s����쐬
+		// プロジェクション行列を作成
 		DirectX::XMMATRIX CreateProjectionMatrix(
 			const D3D11_VIEWPORT& viewPort,
 			const float& near,
@@ -83,13 +83,13 @@ namespace EvaEngine {
 		float m_Fov{};
 
 	public:
-		// �V�[���ɑ��݂���Main Camera�^�O��Camera�R���|�[�l���g��Ԃ�
+		// シーンに存在するMain CameraタグのCameraコンポーネントを返す
 		static std::weak_ptr<Camera> GetMainCamera();
-		// ���݂̃V�[���̑S�J������Ԃ�
+		// 現在のシーンの全カメラを返す
 		static std::vector<std::weak_ptr<Camera>> GetAllCamera();
-		// �w�肳�ꂽ�V�[���̑S�J������Ԃ�
+		// 指定されたシーンの全カメラを返す
 		static std::vector<std::weak_ptr<Camera>> GetAllCamera(const std::string& sceneName);
-		// �S�J�����̉��
+		// 全カメラの解放
 		static void AllDeleteCamera();
 
 	private:

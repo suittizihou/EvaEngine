@@ -14,17 +14,17 @@ namespace EvaEngine {
 		};
 		virtual ~GameObjectBase() = default;
 
-		// 初期化処理
+		// 蛻晄悄蛹門�ｦ逅�
 		virtual void Initialize() = 0;
 
-		// 自身のweak_ptrを返す
+		// 閾ｪ霄ｫ縺ｮweak_ptr繧定ｿ斐☆
 		std::weak_ptr<GameObjectBase> GetGameObject() { return shared_from_this(); }
 
-		// ObjectIDを返す
+		// ObjectID繧定ｿ斐☆
 		virtual UINT GetObjectID() const = 0;
-		// 名前を返す
+		// 蜷榊燕繧定ｿ斐☆
 		virtual std::string GetName() const = 0;
-		// タグを返す
+		// 繧ｿ繧ｰ繧定ｿ斐☆
 		virtual std::string GetTag() const = 0;
 	};
 }

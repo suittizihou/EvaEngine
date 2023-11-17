@@ -130,6 +130,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)EvaEngine\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -166,6 +167,7 @@
     <ClInclude Include="Script\Rotate\Rotate.h" />
     <ClInclude Include="Script\SinMove\SinMove.h" />
     <ClInclude Include="Script\SpotLight\SpotLight.h" />
+    <ClInclude Include="Script\Test\Test.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Editor\EditorEntry\EditorEntry.cpp" />
@@ -177,6 +179,7 @@
     <ClCompile Include="Script\Rotate\Rotate.cpp" />
     <ClCompile Include="Script\SinMove\SinMove.cpp" />
     <ClCompile Include="Script\SpotLight\SpotLight.cpp" />
+    <ClCompile Include="Script\Test\Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

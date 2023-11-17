@@ -1,4 +1,4 @@
-﻿#if _DEBUG
+#if _DEBUG
 #include "EditorWindowDataBase.h"
 #include "../EditorWindow/EditorWindow.h"
 

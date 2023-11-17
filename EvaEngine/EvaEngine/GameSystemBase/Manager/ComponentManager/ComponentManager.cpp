@@ -1,4 +1,4 @@
-﻿#include "ComponentManager.h"
+#include "ComponentManager.h"
 #include "../../Base/GameObject/GameObject.h"
 
 using namespace EvaEngine::Internal;

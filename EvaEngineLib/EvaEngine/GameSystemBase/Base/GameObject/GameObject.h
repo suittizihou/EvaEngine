@@ -22,41 +22,41 @@ namespace EvaEngine {
 
 		~GameObject() = default;
 
-		// ‰Šú‰»ˆ—
+		// åˆæœŸåŒ–å‡¦ç†
 		void Initialize() override;
 
-		// ObjectID‚ğ•Ô‚·
+		// ObjectIDã‚’è¿”ã™
 		UINT GetObjectID() const override;
-		// –¼‘O‚ğ•Ô‚·
+		// åå‰ã‚’è¿”ã™
 		std::string GetName() const override;
-		// ƒ^ƒO‚ğ•Ô‚·
+		// ã‚¿ã‚°ã‚’è¿”ã™
 		std::string GetTag() const override;
-		// Transform‚ğ•Ô‚·
+		// Transformã‚’è¿”ã™
 		std::weak_ptr<Transform> GetTransform();
 
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì“o˜^
+		// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®ç™»éŒ²
 		template<class T, class... Args>
 		std::weak_ptr<T> AddComponent(Args&& ... args) {
 			return ComponentManager::Instance().AddComponent<T>(GetSceneType(), GetGameObject(), args...);
 		}
 
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìæ“¾
+		// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å–å¾—
 		template<class T>
 		std::weak_ptr<T> GetComponent() {
 			return ComponentManager::Instance().GetComponent<T>(GetSceneType(), m_GameObjectID);
 		}
 
-		// ƒRƒ“ƒ|[ƒlƒ“ƒg‚Ìíœ
+		// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®å‰Šé™¤
 		template<class T>
 		void RemoveComponent() {
 			ComponentManager::Instance().RemoveComponent<T>(GetSceneType(), m_GameObjectID);
 		}
 
-		// –¼‘O‚ÅŒŸõ
+		// åå‰ã§æ¤œç´¢
 		std::weak_ptr<GameObject> Find(const std::string& name);
-		// ƒ^ƒO‚ÅŒŸõ‚µ‚ÄƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğˆê‚Â‚Á‚Ä‚­‚é
+		// ã‚¿ã‚°ã§æ¤œç´¢ã—ã¦ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä¸€ã¤æŒã£ã¦ãã‚‹
 		std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
-		// ƒ^ƒO‚ÅŒŸõ‚µ‚Äƒqƒbƒg‚µ‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ‘S•”‚Á‚Ä‚­‚é
+		// ã‚¿ã‚°ã§æ¤œç´¢ã—ã¦ãƒ’ãƒƒãƒˆã—ãŸã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å…¨éƒ¨æŒã£ã¦ãã‚‹
 		std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
 
 	private:

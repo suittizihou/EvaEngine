@@ -1,4 +1,4 @@
-﻿#include "Mesh.h"
+#include "Mesh.h"
 #include "../BufferCreate/BufferCreate.h"
 #include <cmath>
 
@@ -22,10 +22,10 @@ void Mesh::SetVertexData(std::vector<VertexData> vertexDatas, bool isCreateIndic
 	
 	m_Vertexs = vertexDatas;
 
-	// ���_�o�b�t�@���쐬���ăZ�b�g
+	// 頂点バッファを作成してセット
 	m_VertexBuffer = EvaEngine::Internal::BufferCreate::CreateVertexBuffer(m_Vertexs, sizeof(VertexData));
 	
-	// �C���f�b�N�X�o�b�t�@�̍쐬������Ȃ炷��
+	// インデックスバッファの作成をするならする
 	if (isCreateIndices) {
 		m_Indices = CreateIndices(m_Vertexs);
 		m_IndexBuffer = EvaEngine::Internal::BufferCreate::CreateIndexBuffer(m_Indices, sizeof(UINT));
@@ -61,7 +61,7 @@ std::vector<UINT> Mesh::CreateIndices(const std::vector<VertexData>& vertexDatas
 {
 	std::vector<UINT> indices;
 	int polyCount = static_cast<int>(std::ceil(static_cast<float>(vertexDatas.size()) / 3.0f));
-	// �|���S���̐������A�Ԃŕۑ�
+	// ポリゴンの数だけ連番で保存
 	for (int i = 0; i < polyCount; i++) {
 		indices.push_back(i * 3 + 2);
 		indices.push_back(i * 3 + 1);

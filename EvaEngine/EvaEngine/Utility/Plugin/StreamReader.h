@@ -1,4 +1,4 @@
-﻿#ifndef STREAM_READER_H_
+#ifndef STREAM_READER_H_
 #define STREAM_READER_H_
 
 #include <GLTFSDK/GLTF.h>

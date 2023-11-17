@@ -1,4 +1,4 @@
-﻿#include "Matrix3x3.h"
+#include "Matrix3x3.h"
 #include "../Vector2/Vector2.h"
 #include <iostream>
 #include  <cmath>

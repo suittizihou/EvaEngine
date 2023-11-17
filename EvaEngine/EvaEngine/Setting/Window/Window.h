@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <Windows.h>
 #include <string>
 #include <d3d11.h>
@@ -9,29 +9,29 @@ namespace EvaEngine {
 			Window() = default;
 			~Window() = default;
 		public:
-			// DirectX11�Ŏg��Viewport�ɂ��ĕԂ�
+			// DirectX11で使うViewportにして返す
 			static D3D11_VIEWPORT GetViewport();
 
 		public:
-			// �E�B���h�E��
+			// ウィンドウ名
 			static const std::string g_WindowName;
-			// �E�B���h�E�̍��[
+			// ウィンドウの左端
 			static UINT g_WindowLeft;
-			// �E�B���h�E�̉E�[
+			// ウィンドウの右端
 			static UINT g_WindowRight;
-			// �E�B���h�E�̏�[
+			// ウィンドウの上端
 			static UINT g_WindowTop;
-			// �E�B���h�E�̉��[
+			// ウィンドウの下端
 			static UINT g_WindowBottom;
-			// ��ʂ̃��t���b�V�����[�g
+			// 画面のリフレッシュレート
 			static UINT g_FPS;
-			// �C���X�^���X�n���h��(�A�v���P�[�V�������̂������l)
+			// インスタンスハンドル(アプリケーション自体を示す値)
 			static HINSTANCE g_hInstance;
-			// �E�B���h�E�n���h��(�E�B���h�E���̂������l)
+			// ウィンドウハンドル(ウィンドウ自体を示す値)
 			static HWND g_hWnd;
-			// �E�C���h�E���ǂ̂悤�ɕ\�����邩�������萔
+			// ウインドウをどのように表示するかを示す定数
 			static int g_nCmdShow;
-			// �E�B���h�E�̊e�p�����[�^���܂Ƃ߂�\����
+			// ウィンドウの各パラメータをまとめる構造体
 			static WNDCLASSEX g_wc;
 		};
 	}

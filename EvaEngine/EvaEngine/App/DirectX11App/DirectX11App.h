@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "../../Define/D3D11Defines.h"
 #include "../../System/DebugLog/DebugLog.h"
 #include "../../Utility/ModelUtility/ModelData/ConstantBufferData.h"

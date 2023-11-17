@@ -1,4 +1,4 @@
-﻿#include "Vector3.h"
+#include "Vector3.h"
 #include "../Vector2/Vector2.h"
 #include "../Vector4/Vector4.h"
 #include "../Color/Color.h"
@@ -40,7 +40,7 @@ float Vector3::operator[](int index) const
 	case 1: return y;
 	case 2: return z;
 	default:
-		throw std::range_error("�z��̋��E�O");
+		throw std::range_error("配列の境界外");
 	}
 }
 
@@ -51,7 +51,7 @@ float& Vector3::operator[](int index)
 	case 1: return y;
 	case 2:	return z;
 	default:
-		throw std::range_error("�z��̋��E�O");
+		throw std::range_error("配列の境界外");
 	}
 }
 

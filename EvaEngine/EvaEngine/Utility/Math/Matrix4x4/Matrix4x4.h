@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <iosfwd>
 #include <DirectXMath.h>
@@ -8,7 +8,7 @@ namespace EvaEngine {
 	struct Vector3;
 	struct Quaternion;
 
-	// �s��
+	// 行列
 	struct Matrix4x4 {
 
 		union {
@@ -24,9 +24,9 @@ namespace EvaEngine {
 			float m16[16];
 		};
 
-		// �R���X�g���N�^
+		// コンストラクタ
 		Matrix4x4() = default;
-		// �R���X�g���N�^
+		// コンストラクタ
 		Matrix4x4(
 			float m11, float m12, float m13, float m14,
 			float m21, float m22, float m23, float m24,
@@ -35,78 +35,78 @@ namespace EvaEngine {
 		);
 		Matrix4x4(float* matrix);
 
-		// �[���s��
+		// ゼロ行列
 		static Matrix4x4 zero();
-		// �P�ʍs��
+		// 単位行列
 		static Matrix4x4 identity();
-		// �t�s��
+		// 逆行列
 		static Matrix4x4 inverse(const Matrix4x4& m);
-		// �g��k��
+		// 拡大縮小
 		static Matrix4x4 scale(const Vector3& vector);
-		// �N�H�[�^�j�I�������]�s������߂�
+		// クォータニオンから回転行列を求める
 		static Matrix4x4 rotate(const Quaternion& q);
-		// x����]
+		// x軸回転
 		static Matrix4x4 rotate_x(float degree);
-		// y����]
+		// y軸回転
 		static Matrix4x4 rotate_y(float degree);
-		// z����]
+		// z軸回転
 		static Matrix4x4 rotate_z(float degree);
-		// ���s�ړ�
+		// 平行移動
 		static Matrix4x4 translate(const Vector3& position);
 
-		// ����ϊ��s��
+		// 視野変換行列
 		static Matrix4x4 look_at(const Vector3& eye, const Vector3& at, const Vector3& up);
-		// �����ϊ��s��
+		// 透視変換行列
 		static Matrix4x4 perspective(float fov, float aspect, float znear, float zfar);
 
-		// ���W�ϊ�
+		// 座標変換
 		Vector3 multply_point(const Vector3& point) const;
-		// ���W�ϊ�(����)
+		// 座標変換(高速)
 		Vector3 multiply_point4x3(const Vector3& point) const;
-		// �x�N�g���ϊ�(���s�ړ��s��Ȃ�)
+		// ベクトル変換(平行移動行列なし)
 		Vector3 multiply_vector(const Vector3& point) const;
 
-		// �X�P�[���l���擾
+		// スケール値を取得
 		Vector3 scale() const;
-		// �O�����x�N�g��
+		// 前方向ベクトル
 		Vector3 forward() const;
-		// �����@�x�N�g��
+		// 左方法ベクトル
 		Vector3 left() const;
-		// ������x�N�g��
+		// 上方向ベクトル
 		Vector3 upward() const;
-		// ���W���擾
+		// 座標を取得
 		Vector3 position() const;
-		// ��]�̎擾(��]�s�񂩂�N�H�[�^�j�I���ɕϊ�)
+		// 回転の取得(回転行列からクォータニオンに変換)
 		Quaternion rotation() const;
 
-		// ���̍s��̋t�s��
+		// この行列の逆行列
 		Matrix4x4 inverse() const;
-		// ���̍s��̓]�u�s��
+		// この行列の転置行列
 		Matrix4x4 transpose() const;
-		// �ړ��A��]��X�P�[�����O����s������߂�
+		// 移動、回転やスケーリングする行列を求める
 		static Matrix4x4 TRS(const Vector3& t, const Quaternion& r, const Vector3& s);
-		// ���̍s����ړ��A��]��X�P�[�����O����s��ɐݒ肵�܂�
+		// この行列を移動、回転やスケーリングする行列に設定します
 		void set_TRS(const Vector3& t, const Quaternion& r, const Vector3& s);
 
-		// DirectXMath��XMATRIX��Matrix4x4�ɕϊ�����
+		// DirectXMathのXMATRIXをMatrix4x4に変換する
 		static Matrix4x4 to_Matrix4x4(const DirectX::XMMATRIX& matrix);
 
 		operator DirectX::XMMATRIX() const;
 	};
 
-	// �s��̉��Z
+	// 行列の加算
 	Matrix4x4 operator + (const Matrix4x4& lhs, const Matrix4x4& rhs);
-	// �s��̌��Z
+	// 行列の減算
 	Matrix4x4 operator - (const Matrix4x4& lhs, const Matrix4x4& rhs);
-	// �s��̃X�J���[�{
+	// 行列のスカラー倍
 	Matrix4x4 operator * (const Matrix4x4& lhs, float rhs);
-	// �s��̃X�J���[�{ 
+	// 行列のスカラー倍 
 	Matrix4x4 operator * (float lhs, const Matrix4x4& rhs);
-	// �s��̏�Z
+	// 行列の乗算
 	Matrix4x4 operator * (const Matrix4x4& lhs, const Matrix4x4& rhs);
-	// �s��ƃx�N�g���̐�
+	// 行列とベクトルの積
 	Vector3 operator * (const Vector3& lhs, const Matrix4x4& rhs);
 
-	// �s��̏o��
+	// 行列の出力
 	std::ostream& operator << (std::ostream& lhs, const Matrix4x4& rhs);
 }

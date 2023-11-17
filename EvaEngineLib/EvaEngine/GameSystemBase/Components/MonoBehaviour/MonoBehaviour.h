@@ -16,11 +16,11 @@ namespace EvaEngine {
 			const bool canRemove = true);
 		virtual ~MonoBehaviour() = default;
 
-		// 名前で検索
+		// 蜷榊燕縺ｧ讀懃ｴ｢
 		std::weak_ptr<GameObject> Find(const std::string& name);
-		// タグで検索してゲームオブジェクトを一つ持ってくる
+		// 繧ｿ繧ｰ縺ｧ讀懃ｴ｢縺励※繧ｲ繝ｼ繝繧ｪ繝悶ず繧ｧ繧ｯ繝医ｒ荳縺､謖√▲縺ｦ縺上ｋ
 		std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
-		// タグで検索してヒットしたゲームオブジェクトを全部持ってくる
+		// 繧ｿ繧ｰ縺ｧ讀懃ｴ｢縺励※繝偵ャ繝医＠縺溘ご繝ｼ繝繧ｪ繝悶ず繧ｧ繧ｯ繝医ｒ蜈ｨ驛ｨ謖√▲縺ｦ縺上ｋ
 		std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
 
 	private:

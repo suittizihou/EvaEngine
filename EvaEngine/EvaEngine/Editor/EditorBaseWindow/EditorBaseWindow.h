@@ -1,4 +1,4 @@
-﻿#if _DEBUG
+#if _DEBUG
 #pragma once
 #include "../EditorWindow/EditorWindow.h"
 

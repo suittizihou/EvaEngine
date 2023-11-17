@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <GLTFSDK/GLTF.h>
 #include "../ShaderUtility/Shader/Shader.h"

@@ -1,4 +1,4 @@
-﻿#include "DirectX11App.h"
+#include "DirectX11App.h"
 #include "../../Setting/Window/Window.h"
 #include "../../Utility/BufferCreate/BufferCreate.h"
 

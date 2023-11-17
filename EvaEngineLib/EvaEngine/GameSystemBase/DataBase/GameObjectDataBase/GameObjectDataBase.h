@@ -13,13 +13,13 @@ namespace EvaEngine {
 		~GameObjectDataBase() = default;
 
 		std::weak_ptr<GameObject> AddGameObject(const std::string& sceneName, const std::string& tag = "None", const std::string& name = "GameObject");
-		// 名前で検索
+		// 蜷榊燕縺ｧ讀懃ｴ｢
 		std::weak_ptr<GameObject> Find(const std::string& name);
-		// タグで検索してゲームオブジェクトを一つ持ってくる
+		// 繧ｿ繧ｰ縺ｧ讀懃ｴ｢縺励※繧ｲ繝ｼ繝繧ｪ繝悶ず繧ｧ繧ｯ繝医ｒ荳縺､謖√▲縺ｦ縺上ｋ
 		std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
-		// タグで検索してヒットしたゲームオブジェクトを全部持ってくる
+		// 繧ｿ繧ｰ縺ｧ讀懃ｴ｢縺励※繝偵ャ繝医＠縺溘ご繝ｼ繝繧ｪ繝悶ず繧ｧ繧ｯ繝医ｒ蜈ｨ驛ｨ謖√▲縺ｦ縺上ｋ
 		std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
-		// 保持しているゲームオブジェクトを全削除
+		// 菫晄戟縺励※縺�繧九ご繝ｼ繝繧ｪ繝悶ず繧ｧ繧ｯ繝医ｒ蜈ｨ蜑企勁
 		void RemoveAllGameObject();
 
 	private:

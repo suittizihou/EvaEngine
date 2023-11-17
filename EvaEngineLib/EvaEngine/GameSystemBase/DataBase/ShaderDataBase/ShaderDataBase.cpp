@@ -143,7 +143,7 @@ void ShaderDataBase::DeleteDomainShader(const int shaderHandle)
 
 void ShaderDataBase::DeleteAllShader()
 {
-	// 頂点シェーダーの解放
+	// 鬆らせ繧ｷ繧ｧ繝ｼ繝繝ｼ縺ｮ隗｣謾ｾ
 	for (auto& shader : m_VertexShaders) {
         if (shader.second != nullptr) {
 		    shader.second->Release();
@@ -152,7 +152,7 @@ void ShaderDataBase::DeleteAllShader()
 	}
     m_VertexShaders.clear();
 
-	// ピクセルシェーダーの解放
+	// 繝斐け繧ｻ繝ｫ繧ｷ繧ｧ繝ｼ繝繝ｼ縺ｮ隗｣謾ｾ
 	for (auto& shader : m_PixelShaders) {
         if (shader.second != nullptr) {
             shader.second->Release();
@@ -161,7 +161,7 @@ void ShaderDataBase::DeleteAllShader()
     }
     m_PixelShaders.clear();
 
-	// ジオメトリシェーダーの解放
+	// 繧ｸ繧ｪ繝｡繝医Μ繧ｷ繧ｧ繝ｼ繝繝ｼ縺ｮ隗｣謾ｾ
 	for (auto& shader : m_GeometryShaders) {
         if (shader.second != nullptr) {
             shader.second->Release();
@@ -170,7 +170,7 @@ void ShaderDataBase::DeleteAllShader()
     }
     m_GeometryShaders.clear();
 
-	// コンピュートシェーダーの解放
+	// 繧ｳ繝ｳ繝斐Η繝ｼ繝医す繧ｧ繝ｼ繝繝ｼ縺ｮ隗｣謾ｾ
 	for (auto& shader : m_ComputeShaders) {
         if (shader.second != nullptr) {
             shader.second->Release();
@@ -179,7 +179,7 @@ void ShaderDataBase::DeleteAllShader()
     }
     m_ComputeShaders.clear();
 
-	// ハルシェーダーの解放
+	// 繝上Ν繧ｷ繧ｧ繝ｼ繝繝ｼ縺ｮ隗｣謾ｾ
 	for (auto& shader : m_HullShaders) {
         if (shader.second != nullptr) {
             shader.second->Release();
@@ -188,7 +188,7 @@ void ShaderDataBase::DeleteAllShader()
     }
     m_HullShaders.clear();
 
-	// ドメインシェーダーの解放
+	// 繝峨Γ繧､繝ｳ繧ｷ繧ｧ繝ｼ繝繝ｼ縺ｮ隗｣謾ｾ
 	for (auto& shader : m_DomainShaders) {
         if (shader.second != nullptr) {
             shader.second->Release();

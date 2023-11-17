@@ -22,19 +22,19 @@ namespace EvaEngine {
 			return gameObjectManager;
 		}
 
-		// ƒQ[ƒ€ƒIƒuƒWƒFƒNƒgƒf[ƒ^ƒx[ƒX‚ðƒV[ƒ“‚É’Ç‰Á
+		// ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã‚’ã‚·ãƒ¼ãƒ³ã«è¿½åŠ 
 		void AddGameObjectDataBase(const std::string& sceneName);
 
 		std::weak_ptr<GameObject> AddGameObject(const std::string& sceneName, const std::string& tag, const std::string& name);
-		// –¼‘O‚ÅŒŸõ
+		// åå‰ã§æ¤œç´¢
 		std::weak_ptr<GameObject> Find(const std::string& sceneName, const std::string& name);
-		// ƒ^ƒO‚ÅŒŸõ‚µ‚ÄƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ðˆê‚ÂŽ‚Á‚Ä‚­‚é
+		// ã‚¿ã‚°ã§æ¤œç´¢ã—ã¦ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä¸€ã¤æŒã£ã¦ãã‚‹
 		std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& sceneName, const std::string& tag);
-		// ƒ^ƒO‚ÅŒŸõ‚µ‚Äƒqƒbƒg‚µ‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ð‘S•”Ž‚Á‚Ä‚­‚é
+		// ã‚¿ã‚°ã§æ¤œç´¢ã—ã¦ãƒ’ãƒƒãƒˆã—ãŸã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å…¨éƒ¨æŒã£ã¦ãã‚‹
 		std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& sceneName, const std::string& tag);
-		// •ÛŽ‚µ‚Ä‚¢‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ð‘Síœ
+		// ä¿æŒã—ã¦ã„ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å…¨å‰Šé™¤
 		void RemoveAllGameObject(const std::string& sceneName);
-		// •ÛŽ‚µ‚Ä‚¢‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ð‘Síœ
+		// ä¿æŒã—ã¦ã„ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å…¨å‰Šé™¤
 		void RemoveAllGameObject();
 
 	private:

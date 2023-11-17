@@ -1,26 +1,26 @@
-﻿#include "Texture2D.h"
+#include "Texture2D.h"
 #include "../../../App/DirectX11App/DirectX11App.h"
 
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-EvaEngine::Texture2D::Texture2D(const Vector2& texelSize) : Texture2D(texelSize.x, texelSize.y)
+EvaEngine::Texture2D::Texture2D(const Vector2Int& texelSize) : Texture2D(texelSize.x, texelSize.y)
 {
 }
 
-EvaEngine::Texture2D::Texture2D(const Vector2& texelSize, const DXGI_FORMAT& textureFormat) : Texture2D(texelSize.x, texelSize.y, textureFormat)
+EvaEngine::Texture2D::Texture2D(const Vector2Int& texelSize, const DXGI_FORMAT& textureFormat) : Texture2D(texelSize.x, texelSize.y, textureFormat)
 {
 }
 
-EvaEngine::Texture2D::Texture2D(const Vector2& texelSize, const D3D11_TEXTURE2D_DESC& textureDesc) : Texture2D(texelSize.x, texelSize.y, textureDesc)
+EvaEngine::Texture2D::Texture2D(const Vector2Int& texelSize, const D3D11_TEXTURE2D_DESC& textureDesc) : Texture2D(texelSize.x, texelSize.y, textureDesc)
 {
 }
 
-EvaEngine::Texture2D::Texture2D(const UINT width, const UINT height) : Texture2D(width, height, DXGI_FORMAT_R8G8B8A8_UNORM)
+EvaEngine::Texture2D::Texture2D(const int width, const int height) : Texture2D(width, height, DXGI_FORMAT_R8G8B8A8_UNORM)
 {
 }
 
-EvaEngine::Texture2D::Texture2D(const UINT width, const UINT height, const DXGI_FORMAT& textureFormat) : Texture(width, height)
+EvaEngine::Texture2D::Texture2D(const int width, const int height, const DXGI_FORMAT& textureFormat) : Texture(width, height)
 {
 	memset(&m_TextureDesc, 0, sizeof(m_TextureDesc));
 	m_TextureDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -37,7 +37,7 @@ EvaEngine::Texture2D::Texture2D(const UINT width, const UINT height, const DXGI_
 	Init();
 }
 
-EvaEngine::Texture2D::Texture2D(const UINT width, const UINT height, const D3D11_TEXTURE2D_DESC& textureDesc) : Texture(width, height)
+EvaEngine::Texture2D::Texture2D(const int width, const int height, const D3D11_TEXTURE2D_DESC& textureDesc) : Texture(width, height)
 {
 	this->m_TextureDesc = textureDesc;
 	Init();

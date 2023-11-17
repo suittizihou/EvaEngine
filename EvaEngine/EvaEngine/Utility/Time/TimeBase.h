@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <chrono>
 
 namespace EvaEngine {
@@ -7,7 +7,7 @@ namespace EvaEngine {
 			TimeBase() = default;
 			~TimeBase() = default;
 		public:
-			// DeltaTime���Z�o����(���̎��ԂƑO�̎��ԂƂ̍������Z�o)
+			// DeltaTimeを算出する(今の時間と前の時間との差分を算出)
 			static void UpdateDeltaTime();
 			static float GetDeltaTime();
 

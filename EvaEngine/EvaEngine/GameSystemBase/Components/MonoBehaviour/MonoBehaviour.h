@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "../../Base/Component/Component.h"
 #include "../../../Utility/Input/Input.h"
@@ -16,11 +16,11 @@ namespace EvaEngine {
 			const bool canRemove = true);
 		virtual ~MonoBehaviour() = default;
 
-		// ���O�Ō���
+		// 名前で検索
 		std::weak_ptr<GameObject> Find(const std::string& name);
-		// �^�O�Ō������ăQ�[���I�u�W�F�N�g��������Ă���
+		// タグで検索してゲームオブジェクトを一つ持ってくる
 		std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
-		// �^�O�Ō������ăq�b�g�����Q�[���I�u�W�F�N�g��S�������Ă���
+		// タグで検索してヒットしたゲームオブジェクトを全部持ってくる
 		std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
 
 #if _DEBUG

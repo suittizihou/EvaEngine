@@ -1,4 +1,4 @@
-﻿#include "Vector4.h"
+#include "Vector4.h"
 #include "../Vector2/Vector2.h"
 #include "../Vector3/Vector3.h"
 #include "../Color/Color.h"
@@ -41,7 +41,7 @@ float Vector4::operator[](int index) const
 	case 2: return z;
 	case 3: return w;
 	default:
-		throw std::range_error("�z��̋��E�O");
+		throw std::range_error("配列の境界外");
 	}
 }
 
@@ -53,7 +53,7 @@ float& Vector4::operator[](int index)
 	case 2:	return z;
 	case 3:	return w;
 	default:
-		throw std::range_error("�z��̋��E�O");
+		throw std::range_error("配列の境界外");
 	}
 }
 

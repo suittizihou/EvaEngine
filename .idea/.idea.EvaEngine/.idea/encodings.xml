@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise">
+    <file url="file://$PROJECT_DIR$/EvaEngine/EvaEngine/App/DirectX11App/DirectX11App.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/EvaEngine/EvaEngine/App/DirectX11App/DirectX11App.h" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/EvaEngine/EvaEngine/Editor/EditorWindows/SceneWindow/SceneWindow.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/EvaEngine/EvaEngine/GameSystemBase/DataBase/ComponentDataBase/ComponentDataBase.h" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/EvaEngine/EvaEngine/GameSystemBase/DataBase/GameObjectDataBase/GameObjectDataBase.h" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/EvaEngine/EvaEngine/Utility/BufferCreate/BufferCreate.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/EvaEngine/EvaEngine/Utility/BufferCreate/BufferCreate.h" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SampleProject/Scenes/GameMain/GameMain.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SampleProject/Scenes/SampleScene/SampleScene.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SampleProject/Script/DirectionLight/DirectionLight.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SampleProject/Script/DirectionLight/DirectionLight.h" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SampleProject/Script/Move/Move.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SampleProject/Shader/PixelShader.hlsl" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SampleProject/Shader/VertexShader.hlsl" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

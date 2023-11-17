@@ -1,4 +1,4 @@
-﻿#include "GameObjectDataBase.h"
+#include "GameObjectDataBase.h"
 
 #include <stdexcept>
 

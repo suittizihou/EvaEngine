@@ -153,6 +153,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)FbxSDK\include\;$(ProjectDir)imgui\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -218,6 +219,8 @@
     <ClInclude Include="EvaEngine\GameSystemBase\Manager\ModelManager\ModelManager.h" />
     <ClInclude Include="EvaEngine\Utility\Math\Color\Color.h" />
     <ClInclude Include="EvaEngine\Utility\Math\Math.h" />
+    <ClInclude Include="EvaEngine\Utility\Math\Vector2Int\Vector2Int.h" />
+    <ClInclude Include="EvaEngine\Utility\Math\Vector3Int\Vector3Int.h" />
     <ClInclude Include="EvaEngine\Utility\Math\Vector4\Vector4.h" />
     <ClInclude Include="EvaEngine\Utility\Plugin\StreamReader.h" />
     <ClInclude Include="EvaEngine\Utility\ShaderUtility\ShaderBase\ShaderBase.h" />
@@ -620,6 +623,8 @@
     <ClCompile Include="EvaEngine\GameSystemBase\Manager\SceneManager\SceneManager.cpp" />
     <ClCompile Include="EvaEngine\Utility\Material\Material.cpp" />
     <ClCompile Include="EvaEngine\Utility\Math\Color\Color.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Math\Vector2Int\Vector2Int.cpp" />
+    <ClCompile Include="EvaEngine\Utility\Math\Vector3Int\Vector3Int.cpp" />
     <ClCompile Include="EvaEngine\Utility\Math\Vector4\Vector4.cpp" />
     <ClCompile Include="EvaEngine\Utility\ModelUtility\ModelData\ModelData.cpp" />
     <ClCompile Include="EvaEngine\Utility\StringAssist\StringAssist.cpp" />

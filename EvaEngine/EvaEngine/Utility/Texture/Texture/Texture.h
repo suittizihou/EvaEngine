@@ -1,6 +1,6 @@
-﻿#pragma once
+#pragma once
 #include "../../../Define/D3D11Defines.h"
-#include "../../Math/Vector2/Vector2.h"
+#include "../../Math/Vector2Int/Vector2Int.h"
 #include "../../Math/Color/Color.h"
 
 namespace EvaEngine {
@@ -17,15 +17,15 @@ namespace EvaEngine {
 		};
 
 	public:
-		Texture(const Vector2& texelSize);
-		Texture(const UINT width, const UINT height);
+		Texture(const Vector2Int& texelSize);
+		Texture(const int width, const int height);
 		virtual ~Texture();
 
 		TextureType GetTextureType() const;
-		// Texture�̃T�C�Y���擾
-		Vector2 GetTexelSize() const;
-		// �A�X�y�N�g����擾
-		Vector2 GetAspect() const;
+		// Textureのサイズを取得
+		Vector2Int GetTexelSize() const;
+		// アスペクト比を取得
+		Vector2Int GetAspect() const;
 
 		ID3D11ShaderResourceView* GetD3DShaderResrouceView() const;
 		ID3D11SamplerState* GetD3DSamplerState() const;
@@ -37,7 +37,7 @@ namespace EvaEngine {
 		virtual void Release();
 	
 	protected:
-		Vector2 texelSize{ Vector2::zero() };
+		Vector2Int texelSize{ Vector2Int::zero() };
 		TextureType textureType{ TextureType::None };
 
 		ID3D11Resource* m_Texture{ nullptr };

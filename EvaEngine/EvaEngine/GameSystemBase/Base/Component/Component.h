@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <memory>
 
@@ -18,7 +18,7 @@ namespace EvaEngine {
 		class ComponentDataBase;
 	}
 
-	// �g�p����֐��������r�b�g�t���O
+	// 使用する関数を示すビットフラグ
 	namespace FunctionMask {
 		const UINT NONE(0 << 0);
 		//const UINT AWAKE				(1 << 0);
@@ -44,51 +44,51 @@ namespace EvaEngine {
 		virtual void Init() {}
 
 	public:
-		// Active��Ԃ���Ȃ��Ă��Ă΂��
+		// Active状態じゃなくても呼ばれる
 		virtual void Awake() {}
-		// Active��ԂɂȂ�����Ă΂��
+		// Active状態になったら呼ばれる
 		virtual void Start() {}
-		// �Œ�t���[���ŌĂ΂��(���邩�͔���)
+		// 固定フレームで呼ばれる(作れるかは微妙)
 		virtual void FixedUpdate() {}
-		// ���t���[���Ă΂��
+		// 毎フレーム呼ばれる
 		virtual void Update() {}
-		// Update�̌�ɌĂ΂��
+		// Updateの後に呼ばれる
 		virtual void LateUpdate() {}
-		// ��L�S�Ă̏������I������^�C�~���O�ŌĂ΂��
+		// 上記全ての処理が終わったタイミングで呼ばれる
 		virtual void Draw(const std::weak_ptr<Camera>& camera, ID3D11DeviceContext* command) {}
 
 #if _DEBUG
-		// Editor�p�̕`��
+		// Editor用の描画
 		virtual void OnGUI() {};
-		// ���Ă��鎞�Ă΂�鏈��
+		// 閉じている時呼ばれる処理
 		virtual void OnClosedGUI() {}
 #endif
 
-		// ���̃R���|�[�l���g�ɕR�Â��Ă���I�u�W�F�N�g��Ԃ�
+		// このコンポーネントに紐づいているオブジェクトを返す
 		std::weak_ptr<GameObject> GetGameObject() const;
-		// �g�����X�t�H�[����Ԃ�
+		// トランスフォームを返す
 		std::weak_ptr<Transform> GetTransform() const;
-		// �����A�^�b�`�ł���R���|�[�l���g���Ԃ�
+		// 複数アタッチできるコンポーネントか返す
 		bool GetCanMultiAttach() const;
-		// ���̃R���|�[�l���g�͏����邩
+		// このコンポーネントは消せるか
 		bool GetCanRemove() const;
-		// �R���|�[�l���g�̃n�b�V���l��Ԃ�(���^�̃R���|�[�l���g�����ʗp)
+		// コンポーネントのハッシュ値を返す(何型のコンポーネントか識別用)
 		size_t GetHashCode() const;
-		// �R���|�[�l���g��ID��Ԃ�(�ŗL��ID)
+		// コンポーネントのIDを返す(固有のID)
 		const GUID& GetComponentID() const;
-		// �������ID��Ԃ�
+		// 文字列でIDを返す
 		std::string GetComponentIDString();
-		// �ǂ̊֐����Ăяo�����̃}�X�N��Ԃ�
+		// どの関数を呼び出すかのマスクを返す
 		UINT GetFunctionMask() const;
-		// ���g���o�^����Ă���z��ԍ���Ԃ�
+		// 自身が登録されている配列番号を返す
 		UINT GetIndex() const;
-		// �R���|�[�l���g�̖��O��Ԃ�
+		// コンポーネントの名前を返す
 		std::string GetComponentName() const;
 
 	private:
-		// �R���|�[�l���g�ɕK�v�ȃf�[�^��ݒ�
+		// コンポーネントに必要なデータを設定
 		void SetComponentDesc(const ComponentDesc& componentDesc);
-		// �R���|�[�l���g���o�^����Ă���z��ԍ���ݒ�
+		// コンポーネントが登録されている配列番号を設定
 		void SetIndex(const UINT index);
 
 	private:
@@ -97,7 +97,7 @@ namespace EvaEngine {
 		size_t m_HashCode{};
 		GUID m_GUID{};
 		UINT m_FunctionMask{};
-		UINT m_Index{}; // ComponentDataBase�ɓo�^����Ă��鎩�g�̔z��ԍ�
+		UINT m_Index{}; // ComponentDataBaseに登録されている自身の配列番号
 		bool m_CanMultiAttach{ true };
 		bool m_CanRemove{ true };
 		std::string m_ComponentName{ "None" };

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #if _DEBUG
 #include <vector>
 #include <memory>
@@ -14,7 +14,7 @@ namespace EvaEngine {
 
 			class EditorWindowData {
 			public:
-				// �p�X(�K�w����)
+				// パス(階層ごと)
 				std::string windowPath;
 
 				bool AddChildWindow(
@@ -22,35 +22,35 @@ namespace EvaEngine {
 					const int pathIndex,
 					const std::shared_ptr<EditorWindowBase> window) {
 
-					// �K�w�����Ⴄ�ꍇ���^�[��
+					// 階層名が違う場合リターン
 					if (windowPath != paths[pathIndex]) return false;
-					// �Ō�̊K�w�Ȃ�ǉ�
+					// 最後の階層なら追加
 					if (paths.size() - 1 == pathIndex) { editorWindows.push_back(window); return true; }
 
 					for (auto child : childDatas) {
-						// �Ō�̊K�w�łȂ��Ȃ�X�ɊK�w��i��
+						// 最後の階層でないなら更に階層を進む
 						if (child->AddChildWindow(paths, pathIndex + 1, window)) {
 							return true;
 						}
 					}
 
-					// �ǂ�ɂ����Ă͂܂�Ȃ��ꍇ�V�������̂Ƃ��ĐV�K�ǉ�
+					// どれにも当てはまらない場合新しいものとして新規追加
 					auto child = std::make_shared< EditorWindowData>();
 					bool lastIndex = (paths.size() - 1 == pathIndex + 1);
 					child->windowPath = paths[pathIndex + 1];
 					if(lastIndex)  child->editorWindows.push_back(window);
 					childDatas.push_back(child);
 					
-					// �Ō�̊K�w�łȂ��Ȃ�p��
+					// 最後の階層でないなら継続
 					if(!lastIndex) child->AddChildWindow(paths, pathIndex + 1, window);
 
 					return true;
 				}
 
-				// �q���̊K�w
+				// 子供の階層
 				std::vector<std::shared_ptr<EditorWindowData>> childDatas;
 
-				// ���̊K�w�ɂ���EditorWindow���i�[����
+				// この階層にあるEditorWindowを格納する
 				std::vector<std::shared_ptr<Editor::EditorWindowBase>> editorWindows;
 			};
 
@@ -73,17 +73,17 @@ namespace EvaEngine {
 
 					window->Init();
 
-					// �����p�X�Ȃ瓯���K�w�ɒǉ�
+					// 同じパスなら同じ階層に追加
 					for (int i = 0; i < m_EditorWindows.size(); ++i) 
 					{
-						// �e�K�w������΂��̎q���ɒǉ����Ă���
+						// 親階層があればその子供に追加していく
 						if (m_EditorWindows[i]->windowPath == paths[0]) {
 							m_EditorWindows[i]->AddChildWindow(paths, 0, window);
 							return;
 						}
 					}
 
-					// �e�K�w��������ΐV�����ǉ�
+					// 親階層が無ければ新しく追加
 					std::shared_ptr<EditorWindowData> windowData = std::make_shared<EditorWindowData>();
 					windowData->windowPath = paths[0];
 					windowData->AddChildWindow(paths, 0, window);
@@ -95,10 +95,10 @@ namespace EvaEngine {
 					std::shared_ptr<Editor::EditorWindow<EditorBaseWindow>> window = std::make_shared<EditorBaseWindow>(windowPath, this);
 					std::vector<std::string> paths = StringAssist::Split(window->GetWindowPath(), "/");
 
-					// ���ɓo�^�ς݂ł���ΕԂ�
+					// 既に登録済みであれば返す
 					if (m_EditorWindows[0]->editorWindows.size() == 1) return;
 
-					// �K���ŏ��ɒǉ�
+					// 必ず最初に追加
 					m_EditorWindows[0]->AddChildWindow(paths, 0, window);
 				}
 

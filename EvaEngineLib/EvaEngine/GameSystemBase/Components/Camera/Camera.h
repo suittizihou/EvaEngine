@@ -30,17 +30,17 @@ namespace EvaEngine {
 		void Update() override;
 
 	public:
-		// ƒrƒ…[ƒ|[ƒg‚ğæ“¾
+		// ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆã‚’å–å¾—
 		D3D11_VIEWPORT  GetViewport() const;
-		// ƒrƒ…[s—ñ‚ğæ“¾
+		// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’å–å¾—
 		DirectX::XMMATRIX GetViewMatrix() const;
-		// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ğæ“¾
+		// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã‚’å–å¾—
 		DirectX::XMMATRIX GetProjectionMatrix() const;
 
-		// ƒrƒ…[s—ñ‚ğì¬
+		// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’ä½œæˆ
 		DirectX::XMMATRIX CreateViewMatrix(const std::weak_ptr<Transform>& transform);
 		DirectX::XMMATRIX CreateViewMatrix(const Matrix4x4& rotateMatrix, const Matrix4x4& positionMatrix);
-		// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ğì¬
+		// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã‚’ä½œæˆ
 		DirectX::XMMATRIX CreateProjectionMatrix(
 			const D3D11_VIEWPORT& viewPort,
 			const float& near,

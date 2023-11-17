@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <d3d11.h>
 
@@ -8,25 +8,25 @@ namespace EvaEngine {
 			EvaEngineApp() = default;
 			~EvaEngineApp() = default;
 		public:
-			// ����������
+			// 初期化処理
 			static HRESULT Init();
 
-			// �X�V����
+			// 更新処理
 			static void Update();
-			// �`�揈��
+			// 描画処理
 			static void Draw(ID3D11DeviceContext* command);
 
 #if _DEBUG
-			// Editor�֘A�̍X�V
+			// Editor関連の更新
 			static void UpdateEditor();
-			// Editor�֘A�̕`��
+			// Editor関連の描画
 			static void DrawEditor();
 #endif
 
-			// �t���[���I��������
+			// フレーム終了時処理
 			static void FrameEnd();
 
-			// �G���W���̏I��������
+			// エンジンの終了時処理
 			static void End();
 
 		private:

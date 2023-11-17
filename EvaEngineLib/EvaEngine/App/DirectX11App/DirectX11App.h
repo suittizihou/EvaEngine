@@ -9,23 +9,23 @@ namespace EvaEngine {
 
 	class DirectX11App {
 	public:
-		// DirectX‚Ì‰Šú‰»
+		// DirectXã®åˆæœŸåŒ–
 		static HRESULT Init();
 
 	private:
-		// ƒn[ƒhƒEƒFƒA‚Ìƒ`ƒFƒbƒN(‚Â‚æ‚Â‚æGPU‚ğŒ©‚Â‚¯‚Ä‚»‚ÌGPU‚ğg‚¤‚æ‚¤‚É‚·‚é)
+		// ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢ã®ãƒã‚§ãƒƒã‚¯(ã¤ã‚ˆã¤ã‚ˆGPUã‚’è¦‹ã¤ã‘ã¦ãã®GPUã‚’ä½¿ã†ã‚ˆã†ã«ã™ã‚‹)
 		static HRESULT HardWareCheck();
-		// ƒfƒoƒCƒX‚ÆƒXƒƒbƒvƒ`ƒFƒCƒ“‚Ìì¬
+		// ãƒ‡ãƒã‚¤ã‚¹ã¨ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³ã®ä½œæˆ
 		static HRESULT CreateDeviceAndSwapChain();
-		// ƒ‰ƒXƒ^ƒ‰ƒCƒU‚Ìì¬
+		// ãƒ©ã‚¹ã‚¿ãƒ©ã‚¤ã‚¶ã®ä½œæˆ
 		static HRESULT CreateRasterizerState();
-		// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg‚Ìì¬
+		// ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ä½œæˆ
 		static HRESULT CreateRenderTargetView();
-		// [“xƒXƒeƒ“ƒVƒ‹ƒrƒ…[‚Ìì¬
+		// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 		static HRESULT CreateDepthAndStencilView();
-		// ’è”ƒoƒbƒtƒ@‚Ìì¬
+		// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 		static HRESULT CreateConstantBuffer();
-		// ’è”ƒoƒbƒtƒ@‚ÌƒZƒbƒg
+		// å®šæ•°ãƒãƒƒãƒ•ã‚¡ã®ã‚»ãƒƒãƒˆ
 		static void SetConstantBuffer(const std::weak_ptr<Camera>& camera);
 
 	public:

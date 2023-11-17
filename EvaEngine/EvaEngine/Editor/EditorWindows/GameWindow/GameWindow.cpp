@@ -1,4 +1,4 @@
-﻿#if _DEBUG
+#if _DEBUG
 #include "GameWindow.h"
 #include "../../../GameSystemBase/Components/Camera/Camera.h"
 #include "../../../Utility/Texture/RenderTexture/RenderTexture.h"
@@ -17,13 +17,13 @@ void EvaEngine::Editor::Internal::GameWindow::OnGUI()
 
 	auto windowSize = ImGui::GetWindowSize();
 
-	// �S�J���������擾���A�e�N�X�`���Ƃ���GameWindow�ɕ`��
+	// 全カメラ情報を取得し、テクスチャとしてGameWindowに描画
 	auto cameras = Camera::GetAllCamera();
 	for (int i = 0; i < cameras.size(); ++i) {
 		auto tagetTexture = cameras[i].lock()->targetTexture;
 		auto size = tagetTexture->GetTexelSize();
 		cameras[i].lock()->SetViewport(size.x, size.y);
-		// �A�X�y�N�g���ۂ�
+		// アスペクト比を保つ
 		windowSize.y = windowSize.x / size.x * size.y;
 		ImGui::Image((void*)tagetTexture->GetShaderResourceView(), ImVec2(windowSize.x, windowSize.y));
 	}

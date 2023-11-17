@@ -6,24 +6,24 @@
 
 bool EvaEngine::MainApp::Init()
 {
-	// ƒEƒBƒ“ƒhƒE‚Ì‰Šú‰»
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®åˆæœŸåŒ–
 	HRESULT hr = WindowApp::Init();
 	if (FAILED(hr)) {
 		DebugLog::LogError("Window initialize failed.");
 		return false;
 	}
 
-	// DirectX11‚Ì‰Šú‰»
+	// DirectX11ã®åˆæœŸåŒ–
 	hr = DirectX11App::Init();
 	if (FAILED(hr)) {
 		DebugLog::LogError("DirectX initialize failed.");
 		return false;
 	}
 
-	// ƒ†[ƒU[‚Ì‰Šú‰»ˆ—(ƒV[ƒ“‚Ì’Ç‰Á‚È‚Ç‚ª‚ ‚é‚½‚ß‚±‚±‚Å‚·‚é)
+	// ãƒ¦ãƒ¼ã‚¶ãƒ¼ã®åˆæœŸåŒ–å‡¦ç†(ã‚·ãƒ¼ãƒ³ã®è¿½åŠ ãªã©ãŒã‚ã‚‹ãŸã‚ã“ã“ã§ã™ã‚‹)
 	GameBase::Instance()->Init();
 
-	// ƒGƒ“ƒWƒ“‚Ì‰Šú‰»
+	// ã‚¨ãƒ³ã‚¸ãƒ³ã®åˆæœŸåŒ–
 	hr = EvaEngineApp::Instance().Init();
 	if (FAILED(hr)) {
 		DebugLog::LogError("EvaEngine initialize failed.");
@@ -51,14 +51,14 @@ int EvaEngine::MainApp::Run()
 
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow) {
 #if _DEBUG
-	// ƒƒ‚ƒŠƒŠ[ƒNŒŸo
+	// ãƒ¡ãƒ¢ãƒªãƒªãƒ¼ã‚¯æ¤œå‡º
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
 	EvaEngine::Window::g_hInstance = hInstance;
 	EvaEngine::Window::g_nCmdShow = nCmdShow;
 
-	// EvaEngine‚Ì‰Šú‰»
+	// EvaEngineã®åˆæœŸåŒ–
 	if (FAILED(EvaEngine::MainApp::Instance().Init())) {
 		EvaEngine::DebugLog::LogError("EvaEngine initialize failed.");
 		return -1;
@@ -66,6 +66,6 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance
 
 	int result = EvaEngine::MainApp::Instance().Run();
 
-	// ƒƒbƒZ[ƒWƒ‹[ƒv
+	// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ«ãƒ¼ãƒ—
 	return result;
 }

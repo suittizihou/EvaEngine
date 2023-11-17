@@ -9,7 +9,7 @@
 using namespace EvaEngine;
 
 EvaEngineApp::~EvaEngineApp() {
-	// ‘SƒVƒF[ƒ_[‚ÌƒŠƒ\[ƒX‚ğ‰ğ•ú
+	// å…¨ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒªã‚½ãƒ¼ã‚¹ã‚’è§£æ”¾
 	ShaderDataBase::Instance().DeleteAllShader();
 }
 
@@ -19,14 +19,14 @@ HRESULT EvaEngineApp::Init()
 
 	hr = DrawManager::Init();
 	if (FAILED(hr)) {
-		DebugLog::LogError("DrawManager‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½B");
+		DebugLog::LogError("DrawManagerã®åˆæœŸåŒ–ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 		return hr;
 	}
 
-	// ƒV[ƒ“‚Ì‰Šú‰»
+	// ã‚·ãƒ¼ãƒ³ã®åˆæœŸåŒ–
 	hr = SceneDataBase::Instance().InitializeScene();
 	if (FAILED(hr)) {
-		DebugLog::LogError("ƒV[ƒ“‚Ì‰Šú‰»‚É¸”s‚µ‚Ü‚µ‚½B");
+		DebugLog::LogError("ã‚·ãƒ¼ãƒ³ã®åˆæœŸåŒ–ã«å¤±æ•—ã—ã¾ã—ãŸã€‚");
 		return hr;
 	}
 
@@ -43,22 +43,22 @@ void EvaEngineApp::Update()
 
 void EvaEngineApp::Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
 {
-	// •`‰æŠJnˆ—
+	// æç”»é–‹å§‹å‡¦ç†
 	DrawManager::DrawBegin();
 
-	// ƒ|ƒŠƒSƒ“‚Ìí—Ş
+	// ãƒãƒªã‚´ãƒ³ã®ç¨®é¡
 	DirectX11App::g_Context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	// ƒVƒF[ƒ_[‚ÌƒZƒbƒg
+	// ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚»ãƒƒãƒˆ
 	Shader shader{ DrawManager::GetDefaultShader() };
 	DrawManager::SetShader(shader);
-	// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg‚Ìİ’è
+	// ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®è¨­å®š
 	DirectX11App::g_Context->OMSetRenderTargets(1, DirectX11App::g_RenderTargetView.GetAddressOf(), DirectX11App::g_DepthStencilView.Get());
 
-	// •`‰æ
+	// æç”»
 	SceneDataBase::Instance().Draw(command);
 
-	// •`‰æI—¹ˆ—
+	// æç”»çµ‚äº†å‡¦ç†
 	DrawManager::DrawEnd();
 }
 

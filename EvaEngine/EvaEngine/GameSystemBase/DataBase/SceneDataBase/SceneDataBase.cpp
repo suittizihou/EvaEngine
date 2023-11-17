@@ -1,4 +1,4 @@
-﻿#include "SceneDataBase.h"
+#include "SceneDataBase.h"
 #include "../../Manager/ComponentManager/ComponentManager.h"
 #include "../../Manager/GameObjectManager/GameObjectManager.h"
 
@@ -8,7 +8,7 @@ void SceneDataBase::LoadScene(const std::string& sceneType)
 {
     m_IsChangeScene = true;
 
-    // �O�̃V�[������ێ�
+    // 前のシーン名を保持
     m_PreviousSceneName = m_CurrentSceneName;
     m_CurrentSceneName = sceneType;
 }
@@ -17,7 +17,7 @@ void SceneDataBase::LoadScene(const UINT& sceneID)
 {
     for (const auto& scene : m_Scenes) {
         if (scene.second->GetSceneID() == sceneID) {
-            // �O�̃V�[������ێ�
+            // 前のシーン名を保持
             m_PreviousSceneName = m_CurrentSceneName;
             m_CurrentSceneName = scene.second->GetSceneName();
             return;
@@ -37,7 +37,7 @@ std::string SceneDataBase::GetPreviousSceneName() const
 
 HRESULT SceneDataBase::InitializeScene() {
     try {
-        // �V�[�����Z�b�g�Z�b�g����ĂȂ�������ŏ��ɒǉ������V�[�������[�h����
+        // シーンがセットセットされてなかったら最初に追加したシーンをロードする
         if (m_CurrentSceneName.empty()) m_CurrentSceneName = m_Scenes.begin()->first;
 
         m_CurrentScene = m_Scenes[m_CurrentSceneName];
@@ -52,17 +52,17 @@ HRESULT SceneDataBase::InitializeScene() {
 
 HRESULT SceneDataBase::SceneChange()
 {
-    // �V�[���؂�ւ��t���O�������Ă��Ȃ������瑁�����^�[��
+    // シーン切り替わりフラグが立っていなかったら早期リターン
     if (!m_IsChangeScene) return S_OK;
 
     m_IsChangeScene = false;
 
     if (IsCheckExists(m_CurrentSceneName) == false) {
-        DebugLog::LogError(m_CurrentSceneName + u8" �͓o�^����Ă��Ȃ��V�[���ł��B");
+        DebugLog::LogError(m_CurrentSceneName + u8" は登録されていないシーンです。");
         return E_ABORT;
     }
 
-    // �O�̃V�[���ŕێ����Ă����I�u�W�F�N�g�ƃR���|�[�l���g��S�폜
+    // 前のシーンで保持していたオブジェクトとコンポーネントを全削除
     ComponentManager::Instance().RemoveAllComponent(m_PreviousSceneName);
     GameObjectManager::Instance().RemoveAllGameObject(m_PreviousSceneName);
 

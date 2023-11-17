@@ -14,46 +14,46 @@ namespace EvaEngine {
 		virtual ~Scene() = default;
 
 	public:
-		// ƒV[ƒ“‚Ì‰Šú‰»
+		// ã‚·ãƒ¼ãƒ³ã®åˆæœŸåŒ–
 		virtual void Initialize() = 0;
 
-		// ƒV[ƒ“‚ÌƒAƒbƒvƒf[ƒg
+		// ã‚·ãƒ¼ãƒ³ã®ã‚¢ãƒƒãƒ—ãƒ‡ãƒ¼ãƒˆ
 		virtual void SceneUpdate() = 0;
 
-		// ŒÅ’èXVˆ—
+		// å›ºå®šæ›´æ–°å‡¦ç†
 		void FixedUpdate() {
 			ComponentManager::Instance().FixedUpdate(m_SceneName);
 		}
 
-		// XVˆ—
+		// æ›´æ–°å‡¦ç†
 		void Update() {
 			ComponentManager::Instance().Update(m_SceneName);
 		};
 
-		// ’x‰„XVˆ—
+		// é…å»¶æ›´æ–°å‡¦ç†
 		void LateUpdate() {
 			ComponentManager::Instance().LateUpdate(m_SceneName);
 		}
 
-		// •`‰æˆ—
+		// æç”»å‡¦ç†
 		void Draw(const Microsoft::WRL::ComPtr<ID3D11DeviceContext>& command)
 		{
 			ComponentManager::Instance().Draw(m_SceneName, command);
 		};
 
-		// –¼‘O‚ÅŒŸõ
+		// åå‰ã§æ¤œç´¢
 		std::weak_ptr<GameObject> Find(const std::string& name);
-		// ƒ^ƒO‚ÅŒŸõ‚µ‚ÄƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğˆê‚Â‚Á‚Ä‚­‚é
+		// ã‚¿ã‚°ã§æ¤œç´¢ã—ã¦ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä¸€ã¤æŒã£ã¦ãã‚‹
 		std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
-		// ƒ^ƒO‚ÅŒŸõ‚µ‚Äƒqƒbƒg‚µ‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ‘S•”‚Á‚Ä‚­‚é
+		// ã‚¿ã‚°ã§æ¤œç´¢ã—ã¦ãƒ’ãƒƒãƒˆã—ãŸã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å…¨éƒ¨æŒã£ã¦ãã‚‹
 		std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
 
-		// ƒV[ƒ“–¼‚Ìæ“¾
+		// ã‚·ãƒ¼ãƒ³åã®å–å¾—
 		std::string GetSceneName() const;
-		// ƒV[ƒ“‚ÌID‚ğæ“¾
+		// ã‚·ãƒ¼ãƒ³ã®IDã‚’å–å¾—
 		UINT GetSceneID() const;
 
-		// ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚Ì’Ç‰Á
+		// ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®è¿½åŠ 
 		std::weak_ptr<GameObject> AddGameObject(const std::string& tag = "None", const std::string& name = "GameObject");
 
 	protected:

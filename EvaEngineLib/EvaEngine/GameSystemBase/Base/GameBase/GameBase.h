@@ -2,7 +2,7 @@
 
 namespace EvaEngine {
 	/// <summary>
-	/// ‚¢‚í‚ä‚éƒGƒ“ƒgƒŠ[ƒ|ƒCƒ“ƒg‚Ì‚æ‚¤‚ÈƒNƒ‰ƒXBInit‚ðƒI[ƒo[ƒ[ƒh‚µ‚ÄƒV[ƒ“‚ð“o˜^‚µ‚½‚è‚·‚é‚Ì‚ÉŽg‚¤B
+	/// ã„ã‚ã‚†ã‚‹ã‚¨ãƒ³ãƒˆãƒªãƒ¼ãƒã‚¤ãƒ³ãƒˆã®ã‚ˆã†ãªã‚¯ãƒ©ã‚¹ã€‚Initã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰ã—ã¦ã‚·ãƒ¼ãƒ³ã‚’ç™»éŒ²ã—ãŸã‚Šã™ã‚‹ã®ã«ä½¿ã†ã€‚
 	/// </summary>
 	class GameBase {
 	public:
@@ -10,7 +10,7 @@ namespace EvaEngine {
 		~GameBase();
 
 		/// <summary>
-		/// ƒQ[ƒ€ŠJŽnŽž‚É‚â‚Á‚Ä‚¨‚«‚½‚¢‰Šú‰»ˆ—‚Æ‚©‚ðƒI[ƒo[ƒ[ƒh‚µ‚Ä‘‚­
+		/// ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã«ã‚„ã£ã¦ãŠããŸã„åˆæœŸåŒ–å‡¦ç†ã¨ã‹ã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰ã—ã¦æ›¸ã
 		/// </summary>
 		virtual void Init() = 0;
 

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <string>
 #include "../../../Define/D3D11Defines.h"
@@ -13,17 +13,17 @@ namespace EvaEngine {
 		~ShaderLoader() = default;
 
 	public:
-		// ���_�V�F�[�_�[�̓ǂݍ���
+		// 頂点シェーダーの読み込み
 		static void VertexShaderLoad(GUID* guid, const std::string& fileName, const D3D11_INPUT_ELEMENT_DESC* layout, const UINT arraySize, const std::string& entryPoint = "vsMain");
-		// �s�N�Z���V�F�[�_�[�̓ǂݍ���
+		// ピクセルシェーダーの読み込み
 		static void PixelShaderLoad(GUID* guid, const std::string& fileName, const std::string& entryPoint = "psMain");
-		// �W�I���g���V�F�[�_�[�̓ǂݍ���
+		// ジオメトリシェーダーの読み込み
 		static void GeometryShaderLoad(GUID* guid, const std::string& fileName, const std::string& entryPoint = "gsMain");
-		// �R���s���[�g�V�F�[�_�[�̓ǂݍ���
+		// コンピュートシェーダーの読み込み
 		static void ComputeShaderLoad(GUID* guid, const std::string& fileName, const std::string& entryPoint = "csMain");
-		// �n���V�F�[�_�[�̓ǂݍ���
+		// ハルシェーダーの読み込み
 		static void HullShaderLoad(GUID* guid, const std::string& fileName, const std::string& entryPoint = "hsMain");
-		// �h���C���V�F�[�_�[�̓ǂݍ���
+		// ドメインシェーダーの読み込み
 		static void DomainShaderLoad(GUID* guid, const std::string& fileName, const std::string& entryPoint = "dsMain");
 	};
 }

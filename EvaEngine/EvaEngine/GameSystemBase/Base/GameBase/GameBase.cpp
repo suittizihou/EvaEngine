@@ -1,4 +1,4 @@
-﻿#include "GameBase.h"
+#include "GameBase.h"
 //#include "../../../System/DebugLog/DebugLog.h"
 #include "../../../Setting/Window/Window.h"
 #include "../../../App/WindowApp/WindowApp.h"

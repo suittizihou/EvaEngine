@@ -17,19 +17,19 @@ namespace EvaEngine {
 			return instance;
 		}
 
-		// ƒ‚ƒfƒ‹ƒf[ƒ^‚ğ’Ç‰Á‚·‚é
+		// ãƒ¢ãƒ‡ãƒ«ãƒ‡ãƒ¼ã‚¿ã‚’è¿½åŠ ã™ã‚‹
 		int AddModelData(const ModelData& model);
-		// ƒ‚ƒfƒ‹ƒf[ƒ^‚ğæ“¾
+		// ãƒ¢ãƒ‡ãƒ«ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
 		ModelData GetModel(const int modelHandle);
-		// ƒ‚ƒfƒ‹ƒf[ƒ^‚ğƒƒ‚ƒŠ‚©‚çÁ‚·
+		// ãƒ¢ãƒ‡ãƒ«ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ¡ãƒ¢ãƒªã‹ã‚‰æ¶ˆã™
 		void DeleteModel(const int modelHandle);
-		// ƒƒ‚ƒŠ‚Éƒ‚ƒfƒ‹‚Ìƒf[ƒ^‚ğ“Ç‚İ‚Ş
+		// ãƒ¡ãƒ¢ãƒªã«ãƒ¢ãƒ‡ãƒ«ã®ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€
 		ModelData LoadModelDataMemory(const ModelData& model);
 
 	private:
-		// ƒ‚ƒfƒ‹ƒf[ƒ^‚Ìƒnƒ“ƒhƒ‹
+		// ãƒ¢ãƒ‡ãƒ«ãƒ‡ãƒ¼ã‚¿ã®ãƒãƒ³ãƒ‰ãƒ«
 		int modelCount{ 0 };
-		// ƒ‚ƒfƒ‹ƒf[ƒ^
+		// ãƒ¢ãƒ‡ãƒ«ãƒ‡ãƒ¼ã‚¿
 		std::map<int, ModelData> m_Models{};
 	};
 }

@@ -1,4 +1,4 @@
-﻿#pragma warning(disable : 4996)
+#pragma warning(disable : 4996)
 
 #include "ShaderCompiler.h"
 #include <Windows.h>
@@ -102,7 +102,7 @@ HRESULT ShaderCompiler::CreateInputLayout(VertexShader* shader, const D3D11_INPU
 HRESULT ShaderCompiler::Compile(const std::string& fileName, const std::string& entryPath, const LPCSTR& pTarget, ID3DBlob** ppBlob, bool error)
 {
 #if defined(_DEBUG)
-    // �O���t�B�b�N�f�o�b�O�c�[���ɂ��V�F�[�_�[�̃f�o�b�O��L���ɂ���
+    // グラフィックデバッグツールによるシェーダーのデバッグを有効にする
     UINT compileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
 #else
     UINT compileFlags = 0;
@@ -114,10 +114,10 @@ HRESULT ShaderCompiler::Compile(const std::string& fileName, const std::string& 
     ID3DBlob* errorBlob;
     HRESULT hr = D3DCompileFromFile(ws, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, entryPath.c_str(), pTarget, compileFlags, 0, ppBlob, &errorBlob);
 
-    // �G���[�`�F�b�N
+    // エラーチェック
     if (FAILED(hr)) {
         if (error) {
-            // �G���[���b�Z�[�W���o��
+            // エラーメッセージを出力
             if (errorBlob != nullptr && error) {
                 DebugLog::LogError((char*)errorBlob->GetBufferPointer());
                 return hr;

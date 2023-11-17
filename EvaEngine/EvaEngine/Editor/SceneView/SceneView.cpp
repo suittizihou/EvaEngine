@@ -1,4 +1,4 @@
-﻿#if _DEBUG
+#if _DEBUG
 #include "SceneView.h"
 #include "../../GameSystemBase/Base/GameObject/GameObject.h"
 #include "../../GameSystemBase/Manager/GameObjectManager/GameObjectManager.h"
@@ -25,10 +25,10 @@ void EvaEngine::Editor::Internal::SceneView::Awake()
 
 void EvaEngine::Editor::Internal::SceneView::Update() {
 
-	// SceneWindow����A�N�e�B�u�̎��͕Ԃ�
+	// SceneWindowが非アクティブの時は返す
 	if (EvaEngine::Editor::EditorApplication::sceneWindowIsActive == false) return;
 
-	// �ړ�
+	// 移動
 	Vector3 velocity{};
 	auto transform = GetTransform().lock();
 	float deltaTime = Time::GetDeltaTime();
@@ -42,7 +42,7 @@ void EvaEngine::Editor::Internal::SceneView::Update() {
 
 	transform->move(velocity * m_MoveSpeed * deltaTime);
 
-	// ��]
+	// 回転
 	Vector3 xAxis{}, yAxis{};
 	if (Input::GetKey(KeyCode::UpArrow)) { xAxis += Vector3::left(); }
 	if (Input::GetKey(KeyCode::DownArrow)) { xAxis += Vector3::right(); }

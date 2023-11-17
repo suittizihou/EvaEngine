@@ -1,4 +1,4 @@
-﻿#include "StringAssist.h"
+#include "StringAssist.h"
 #include "../../System/DebugLog/DebugLog.h"
 
 std::vector<std::string> EvaEngine::StringAssist::Split(std::string str, const std::string& del) {
@@ -61,7 +61,7 @@ void EvaEngine::StringAssist::Split(char split_char, char* buffer, std::vector<s
     }
 }
 
-// ���C�h��������}���`�o�C�g�����ւ̕ϊ�
+// ワイド文字からマルチバイト文字への変換
 void EvaEngine::StringAssist::ToString(const std::wstring& src, std::string& dest) {
     std::size_t converted{};
     std::vector<char> temp(src.size() * sizeof(wchar_t) + 1, '\0');
@@ -73,7 +73,7 @@ void EvaEngine::StringAssist::ToString(const std::wstring& src, std::string& des
     dest = std::string(temp.begin(), temp.end());
 }
 
-// �}���`�o�C�g�������烏�C�h�����ւ̕ϊ�
+// マルチバイト文字からワイド文字への変換
 void EvaEngine::StringAssist::ToWString(const std::string& src, std::wstring& dest) {
     std::size_t converted{};
     std::vector<wchar_t> temp(src.size() * sizeof(char) + 1, L'\0');
@@ -85,7 +85,7 @@ void EvaEngine::StringAssist::ToWString(const std::string& src, std::wstring& de
     dest = std::wstring(temp.begin(), temp.end());
 }
 
-// Shift-JIS����UTF-8
+// Shift-JISからUTF-8
 void EvaEngine::StringAssist::ToUTF8(const std::string& src, std::string& dest) {
     std::wstring temp{};
     ToWString(src, temp);
