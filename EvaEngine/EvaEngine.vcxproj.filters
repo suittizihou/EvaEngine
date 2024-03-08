@@ -1170,6 +1170,9 @@
     <ClInclude Include="EvaEngine\Utility\Math\Vector3Int\Vector3Int.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxsurfacematerialutils.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

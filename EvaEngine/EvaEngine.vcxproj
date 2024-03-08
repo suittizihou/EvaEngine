@@ -73,22 +73,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>$(ProjectDir)FbxSDK\lib\vs2017\x64\release\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)FbxSDK\lib\vs2022\x64\release\;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)EvaEngineLib\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(ProjectDir)FbxSDK\lib\vs2017\x86\debug\</LibraryPath>
+    <LibraryPath>$(ProjectDir)FbxSDK\lib\vs2022\x86\debug\</LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(ProjectDir)FbxSDK\lib\vs2017\x64\debug\</LibraryPath>
+    <LibraryPath>$(ProjectDir)FbxSDK\lib\vs2022\x64\debug\</LibraryPath>
     <OutDir>$(SolutionDir)EvaEngineLib\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>$(ProjectDir)FbxSDK\lib\vs2017\x86\release\</LibraryPath>
+    <LibraryPath>$(ProjectDir)FbxSDK\lib\vs2022\x86\release\</LibraryPath>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -103,6 +103,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(ProjectDir)FbxSDK\include\;$(ProjectDir)imgui\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -129,6 +130,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(ProjectDir)FbxSDK\include\;$(ProjectDir)imgui\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -179,6 +181,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(ProjectDir)FbxSDK\include\;$(ProjectDir)imgui\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -442,6 +445,7 @@
     <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxshadingconventions.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxsurfacelambert.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxsurfacematerial.h" />
+    <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxsurfacematerialutils.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxsurfacephong.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk\scene\shading\fbxtexture.h" />
     <ClInclude Include="FbxSDK\include\fbxsdk\utils\fbxclonemanager.h" />

@@ -24,6 +24,7 @@ void FBXModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::
     // FbxImporter作成
     FbxImporter* fbx_importer = FbxImporter::Create(fbx_manager, "");
     if (fbx_importer == nullptr) {
+        
         fbx_manager->Destroy();
         DebugLog::LogError("FbxImporterの作成に失敗しました");
         return;
