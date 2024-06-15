@@ -18,7 +18,7 @@ void EvaEngine::Editor::Internal::HierarchyWindow::OnGUI()
 		m_ItemNum = 0;
 		for (int i = 0; i < gameObjects.size(); ++i) {
 			auto obj = gameObjects[i].lock();
-			if (obj->GetTransform().lock()->parent().lock() == nullptr) {
+			if (obj != nullptr && obj->GetTransform().lock()->parent().lock() == nullptr) {
 				Scanning(obj);
 			}
 		}
