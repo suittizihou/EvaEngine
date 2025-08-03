@@ -12,7 +12,7 @@ namespace EvaEngine {
 		static std::string GetClassName() {
 			auto temp = StringAssist::Split(typeid(T).name(), "::");
 			if (temp.size() <= 1) temp = StringAssist::Split(typeid(T).name(), " ");
-			return reinterpret_cast<const char*>(&temp[temp.size() - 1]);
+			return reinterpret_cast<const char*>(temp[temp.size() - 1].c_str());
 		}
 
 		static std::u8string GetClassNameU8() {

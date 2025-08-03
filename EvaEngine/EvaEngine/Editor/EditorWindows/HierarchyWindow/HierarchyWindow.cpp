@@ -35,7 +35,7 @@ void EvaEngine::Editor::Internal::HierarchyWindow::Scanning(const std::shared_pt
 
 		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_SpanAvailWidth;
 
-		ImGui::TreeNodeEx((void*)(intptr_t)m_ItemNum, flags, reinterpret_cast<const char*>(gameObject->GetName().data()));
+		ImGui::TreeNodeEx((void*)(intptr_t)m_ItemNum, flags, reinterpret_cast<const char*>(gameObject->GetName().c_str()));
 
 		if (ImGui::IsItemClicked()) {
 			Selection::SetActiveObject(gameObject);
@@ -47,7 +47,7 @@ void EvaEngine::Editor::Internal::HierarchyWindow::Scanning(const std::shared_pt
 	bool nodeOpen = ImGui::TreeNodeEx(
 		(void*)(intptr_t)m_ItemNum,
 		ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanAvailWidth,
-		reinterpret_cast<const char*>(gameObject->GetName().data()));
+		reinterpret_cast<const char*>(gameObject->GetName().c_str()));
 
 	if (ImGui::IsItemClicked())
 	{
