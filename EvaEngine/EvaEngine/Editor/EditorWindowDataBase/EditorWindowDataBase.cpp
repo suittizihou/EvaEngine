@@ -42,7 +42,7 @@ void EvaEngine::Editor::Internal::EditorWindowDataBase::DrawWindow(const std::sh
 	}
 }
 
-bool EditorWindowDataBase::CheckEquals(const std::vector<std::string>& lhs, const std::vector<std::string>& rhs) {
+bool EditorWindowDataBase::CheckEquals(const std::vector<std::u8string>& lhs, const std::vector<std::u8string>& rhs) {
 	if (lhs.size() == rhs.size()) {
 		for (int i = 0; i < lhs.size(); ++i) {
 			if (lhs[i] != rhs[i]) {

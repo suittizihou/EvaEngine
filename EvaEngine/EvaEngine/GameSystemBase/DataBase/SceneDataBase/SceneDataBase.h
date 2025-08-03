@@ -23,16 +23,16 @@ namespace EvaEngine {
 
 			// シーンの追加
 			template<class T>
-			void AddScene(const std::string& sceneName) {
+			void AddScene(const std::u8string& sceneName) {
 				// Editorという名前のシーン名は登録できない
-				if (sceneName == "Editor") {
-					DebugLog::LogError("You cannot use the name ""Editor"" in the scene name.");
+				if (sceneName == u8"Editor") {
+					DebugLog::LogError(u8"You cannot use the name ""Editor"" in the scene name.");
 					return;
 				}
 
 				// 同じシーン名が既に登録されていれば返す
 				if (m_Scenes.count(sceneName) >= 1) {
-					DebugLog::LogError("A scene with the same name has already been registered.");
+					DebugLog::LogError(u8"A scene with the same name has already been registered.");
 					return;
 				}
 
@@ -44,18 +44,18 @@ namespace EvaEngine {
 			}
 
 			// シーンのロード
-			void LoadScene(const std::string& sceneName);
+			void LoadScene(const std::u8string& sceneName);
 			void LoadScene(const UINT& sceneID);
 			// 今のシーン名を返す
-			std::string GetCurrentSceneName() const;
+			std::u8string GetCurrentSceneName() const;
 			// 前のシーン名を返す
-			std::string GetPreviousSceneName() const;
+			std::u8string GetPreviousSceneName() const;
 			// シーンの初期化を行う
 			HRESULT InitializeScene();
 			// シーンを変える
 			HRESULT SceneChange();
 			// シーンが存在するかチェック
-			bool IsCheckExists(const std::string& sceneName);
+			bool IsCheckExists(const std::u8string& sceneName);
 			// 登録されているシーンの数を返す
 			size_t GetSceneCount() const;
 
@@ -77,10 +77,10 @@ namespace EvaEngine {
 
 		private:
 			bool m_IsChangeScene{};
-			std::string m_CurrentSceneName{};
-			std::string m_PreviousSceneName{};
+			std::u8string m_CurrentSceneName{};
+			std::u8string m_PreviousSceneName{};
 			std::weak_ptr<Scene> m_CurrentScene;
-			std::unordered_map<std::string, std::shared_ptr<Scene>> m_Scenes;
+			std::unordered_map<std::u8string, std::shared_ptr<Scene>> m_Scenes;
 		};
 	}
 }

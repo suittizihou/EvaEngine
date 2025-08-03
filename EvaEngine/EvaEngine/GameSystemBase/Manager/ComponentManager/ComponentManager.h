@@ -27,25 +27,25 @@ namespace EvaEngine {
 			}
 
 			// コンポーネントデータベースをシーンに追加
-			void AddComponentDataBase(const std::string& sceneName);
+			void AddComponentDataBase(const std::u8string& sceneName);
 
 			// コンポーネントの登録
 			template<class T, class... Args>
-			std::weak_ptr<T> AddComponent(const std::string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject, Args&& ... args)
+			std::weak_ptr<T> AddComponent(const std::u8string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject, Args&& ... args)
 			{
 				return m_ComponentList[sceneName]->AddComponent<T>(sceneName, gameObject, args...);
 			}
 
 			// コンポーネントの取得
 			template<class T>
-			std::weak_ptr<T> GetComponent(const std::string& sceneName, const GUID& gameObjectID)
+			std::weak_ptr<T> GetComponent(const std::u8string& sceneName, const GUID& gameObjectID)
 			{
 				return m_ComponentList[sceneName]->GetComponent<T>(gameObjectID);
 			}
 
 			// コンポーネントの取得
 			template<class T>
-			std::weak_ptr<T> GetComponent(const std::string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject)
+			std::weak_ptr<T> GetComponent(const std::u8string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject)
 			{
 				return m_ComponentList[sceneName]->GetComponent<T>(gameObject);
 			}
@@ -59,36 +59,36 @@ namespace EvaEngine {
 
 			// コンポーネントを削除
 			template<class T>
-			void RemoveComponent(const std::string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject)
+			void RemoveComponent(const std::u8string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject)
 			{
 				m_ComponentList[sceneName]->RemoveComponent<T>(gameObject);
 			}
 
 			// 保持しているコンポーネントを全部削除
-			void RemoveAllComponent(const std::string& sceneName);
+			void RemoveAllComponent(const std::u8string& sceneName);
 			void RemoveAllComponent();
 
 			// FixedUpdate関数を回す
-			void FixedUpdate(const std::string& sceneName);
+			void FixedUpdate(const std::u8string& sceneName);
 			// Update関数を回す
-			void Update(const std::string& sceneName);
+			void Update(const std::u8string& sceneName);
 			// EditorでもUpdateを回す
-			void ExecuteEditUpdate(const std::string& sceneName);
+			void ExecuteEditUpdate(const std::u8string& sceneName);
 			// LateUpdate関数を回す
-			void LateUpdate(const std::string& sceneName);
+			void LateUpdate(const std::u8string& sceneName);
 			// Draw関数を回す
 			void Draw(
-				const std::string& sceneName,
+				const std::u8string& sceneName,
 				ID3D11DeviceContext* command);
 
 #if _DEBUG
 			// Editor用の描画
-			void OnGUI(std::string& sceneName);
+			void OnGUI(std::u8string& sceneName);
 #endif
 
 		private:
 			// コンポーネントのリスト(firstはシーン名)
-			std::unordered_map<std::string,		// シーン名
+			std::unordered_map<std::u8string,		// シーン名
 				std::shared_ptr<ComponentDataBase>> m_ComponentList;
 
 			UINT m_ComponentID{};

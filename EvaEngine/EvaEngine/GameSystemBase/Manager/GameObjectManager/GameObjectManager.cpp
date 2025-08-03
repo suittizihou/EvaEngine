@@ -8,37 +8,37 @@
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-void GameObjectManager::AddGameObjectDataBase(const std::string& sceneName)
+void GameObjectManager::AddGameObjectDataBase(const std::u8string& sceneName)
 {
 	m_GameObjectList[sceneName] = std::make_shared<GameObjectDataBase>();
 }
 
-std::weak_ptr<GameObject> GameObjectManager::Instantiate(const std::string& sceneName, const std::string& tag, const std::string& name) {
+std::weak_ptr<GameObject> GameObjectManager::Instantiate(const std::u8string& sceneName, const std::string& tag, const std::u8string& name) {
 	return m_GameObjectList[sceneName]->Instantiate(sceneName, tag, name);
 }
 
-std::weak_ptr<GameObject> GameObjectManager::Find(const std::string& sceneName, const std::string& name)
+std::weak_ptr<GameObject> GameObjectManager::Find(const std::u8string& sceneName, const std::u8string& name)
 {
 	return m_GameObjectList[sceneName]->Find(name);
 }
 
-std::weak_ptr<GameObject> GameObjectManager::FindGameObjectWithTag(const std::string& sceneName, const std::string& tag)
+std::weak_ptr<GameObject> GameObjectManager::FindGameObjectWithTag(const std::u8string& sceneName, const std::string& tag)
 {
 	return m_GameObjectList[sceneName]->FindGameObjectWithTag(tag);
 }
 
-std::vector<std::weak_ptr<GameObject>> GameObjectManager::FindGameObjectsWithTag(const std::string& sceneName, const std::string& tag)
+std::vector<std::weak_ptr<GameObject>> GameObjectManager::FindGameObjectsWithTag(const std::u8string& sceneName, const std::string& tag)
 {
 	return m_GameObjectList[sceneName]->FindGameObjectsWithTag(tag);
 }
 
-std::weak_ptr<GameObjectDataBase> EvaEngine::Internal::GameObjectManager::GetGameObjectDataBase(const std::string& sceneName)
+std::weak_ptr<GameObjectDataBase> EvaEngine::Internal::GameObjectManager::GetGameObjectDataBase(const std::u8string& sceneName)
 {
 	if (m_GameObjectList.count(sceneName) == 0) return std::weak_ptr<GameObjectDataBase>();
 	return m_GameObjectList[sceneName];
 }
 
-void GameObjectManager::RemoveAllGameObject(const std::string& sceneName)
+void GameObjectManager::RemoveAllGameObject(const std::u8string& sceneName)
 {
 	if (m_GameObjectList.count(sceneName) == 0) return;
 	m_GameObjectList[sceneName]->RemoveAllGameObject();

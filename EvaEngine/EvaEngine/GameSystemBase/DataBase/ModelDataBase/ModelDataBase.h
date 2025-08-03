@@ -14,7 +14,7 @@ namespace EvaEngine {
 
 			// モデルデータを追加する
 			void LoadModelData(const std::shared_ptr<EvaEngine::ModelData>& model, GUID* guid);
-			void LoadModelData(const std::string& fileName, GUID* guid);
+			void LoadModelData(const std::u8string& fileName, GUID* guid);
 			// モデルデータを取得
 			std::weak_ptr<ModelData> GetModel(const GUID& guid);
 			// モデルデータをメモリから消す

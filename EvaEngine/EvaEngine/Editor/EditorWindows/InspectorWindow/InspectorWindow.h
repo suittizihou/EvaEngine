@@ -8,7 +8,7 @@ namespace EvaEngine {
 		namespace Internal {
 			class InspectorWindow : public EditorWindow<InspectorWindow> {
 			public:
-				InspectorWindow(const std::string& windowPath) : 
+				InspectorWindow(const std::u8string& windowPath) :
 					EditorWindow<InspectorWindow>(windowPath) {};
 				~InspectorWindow() = default;
 				

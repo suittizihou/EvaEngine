@@ -3,46 +3,46 @@
 
 using namespace EvaEngine::Internal;
 
-void ComponentManager::FixedUpdate(const std::string& sceneName)
+void ComponentManager::FixedUpdate(const std::u8string& sceneName)
 {
 	m_ComponentList[sceneName]->FixedUpdate();
 }
 
-void ComponentManager::Update(const std::string& sceneName)
+void ComponentManager::Update(const std::u8string& sceneName)
 {
 	m_ComponentList[sceneName]->Update();
 }
 
-void EvaEngine::Internal::ComponentManager::ExecuteEditUpdate(const std::string& sceneName)
+void EvaEngine::Internal::ComponentManager::ExecuteEditUpdate(const std::u8string& sceneName)
 {
 	m_ComponentList[sceneName]->ExecuteEditorUpdate();
 }
 
-void ComponentManager::LateUpdate(const std::string& sceneName)
+void ComponentManager::LateUpdate(const std::u8string& sceneName)
 {
 	m_ComponentList[sceneName]->LateUpdate();
 }
 
 void ComponentManager::Draw(
-	const std::string& sceneName, 
+	const std::u8string& sceneName,
 	ID3D11DeviceContext* command)
 {
 	m_ComponentList[sceneName]->Draw(command);
 }
 
 #if _DEBUG
-void ComponentManager::OnGUI(std::string& sceneName)
+void ComponentManager::OnGUI(std::u8string& sceneName)
 {
 	m_ComponentList[sceneName]->OnGUI();
 }
 #endif
 
-void ComponentManager::AddComponentDataBase(const std::string& sceneName)
+void ComponentManager::AddComponentDataBase(const std::u8string& sceneName)
 {
 	m_ComponentList[sceneName] = std::make_shared<ComponentDataBase>();
 }
 
-void ComponentManager::RemoveAllComponent(const std::string& sceneName)
+void ComponentManager::RemoveAllComponent(const std::u8string& sceneName)
 {
 	if (m_ComponentList.count(sceneName) == 0) return;
 	m_ComponentList[sceneName]->RemoveAllComponent();

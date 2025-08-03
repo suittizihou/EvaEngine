@@ -13,36 +13,36 @@
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-std::shared_ptr<ModelData> ModelLoader::Load(const std::string& fileName)
+std::shared_ptr<ModelData> ModelLoader::Load(const std::u8string& fileName)
 {
-    std::vector<std::string> fileSplit{ StringAssist::Split(fileName, ".") };
+    std::vector<std::u8string> fileSplit{ StringAssist::Split(fileName, u8".") };
 
-    if (fileSplit.size() == 0) DebugLog::LogError("Please enter with extension.");
+    if (fileSplit.size() == 0) DebugLog::LogError(u8"Please enter with extension.");
 
-    std::string modelType = fileSplit[fileSplit.size() - 1];
+    std::u8string modelType = fileSplit[fileSplit.size() - 1];
 
     std::shared_ptr<ModelData> model = std::make_shared<ModelData>(fileName);
     
     auto start = std::chrono::system_clock::now();
 
-    if (modelType == "fbx") {
+    if (modelType == u8"fbx") {
         FBXModelLoader fbxModelLoader{};
-        fbxModelLoader.LoadModel(fileName.c_str(), model);
+        fbxModelLoader.LoadModel(fileName, model);
     }
-    else if (modelType == "vrm") {
+    else if (modelType == u8"vrm") {
         VRMModelLoader vrmModelLoader{};
-        vrmModelLoader.LoadModel(fileName.c_str(), model);
+        vrmModelLoader.LoadModel(fileName, model);
     }
-    else if (modelType == "obj") {
+    else if (modelType == u8"obj") {
         OBJModelLoader objModelLoader{};
-        objModelLoader.LoadModel(fileName.c_str(), model);
+        objModelLoader.LoadModel(fileName, model);
     }
 
     auto end = std::chrono::system_clock::now();
-    DebugLog::Log(fileName + " : model loading time = " + std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms.");
+    DebugLog::Log(fileName + u8" : model loading time = " + StringAssist::to_u8string(std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count()) + "ms."));
 
-    DebugLog::Log(fileName + " : number of loaded meshes = " + std::to_string(model->meshes.size()) + ".");
-    DebugLog::Log(fileName + " : number of loaded materials = " + std::to_string(model->materials.size()) + ".");
+    DebugLog::Log(fileName + u8" : number of loaded meshes = " + StringAssist::to_u8string(std::to_string(model->meshes.size()) + "."));
+    DebugLog::Log(fileName + u8" : number of loaded materials = " + StringAssist::to_u8string(std::to_string(model->materials.size()) + "."));
 
     return model;
 }

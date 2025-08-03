@@ -8,7 +8,7 @@ namespace EvaEngine {
 		namespace Internal {
 			class SceneWindow : public EditorWindow<SceneWindow> {
 			public:
-				SceneWindow(const std::string& windowPath);
+				SceneWindow(const std::u8string& windowPath);
 				~SceneWindow() = default;
 
 				void OnGUI() override;

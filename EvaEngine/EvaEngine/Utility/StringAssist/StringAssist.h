@@ -11,17 +11,21 @@ namespace EvaEngine {
         ~StringAssist() = default;
     public:
 
-        static std::vector<std::string> Split(std::string str, const std::string& del);
+        static std::vector<std::u8string> Split(std::u8string str, const std::u8string& del);
+        static std::vector<std::u8string> Split(std::string str, const std::string& del);
 
-        static void Split(char split_char, char* buffer, std::vector<std::string>& out);
+		// UTF-8文字列からワイド文字列への変換
+        static std::u8string to_u8string(const std::string& str);
+
+        static void Split(char split_char, char* buffer, std::vector<std::u8string>& out);
         // ワイド文字からマルチバイト文字への変換
-        static void ToString(const std::wstring& src, std::string& dest);
+        static void ToString(const std::wstring& src, std::u8string& dest);
         // マルチバイト文字からワイド文字への変換
-        static void ToWString(const std::string& src, std::wstring& dest);
+        static void ToWString(const std::u8string& src, std::wstring& dest);
         // Shift-JISからUTF-8
-        static void ToUTF8(const std::string& src, std::string& dest);
+        static void ToUTF8(const std::u8string& src, std::u8string& dest);
 
     private:
-        static void ToUTF8String(const std::wstring& src, std::string& dest);
+        static void ToUTF8String(const std::wstring& src, std::u8string& dest);
     };
 }

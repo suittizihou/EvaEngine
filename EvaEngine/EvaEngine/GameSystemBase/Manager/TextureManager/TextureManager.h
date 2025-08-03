@@ -11,7 +11,7 @@ namespace EvaEngine {
 	class TextureManager
 	{
 	public:
-		void LoadTexture(const std::string& fileName, GUID* guid);
+		void LoadTexture(const std::u8string& fileName, GUID* guid);
 		std::weak_ptr<Texture> GetTextureGUID(const GUID& guid);
 		
 	private:

@@ -10,7 +10,7 @@ using namespace DirectX;
 using namespace EvaEngine;
 using namespace FunctionMask;
 
-std::unordered_map<std::string, std::vector<std::weak_ptr<EvaEngine::Camera>>> EvaEngine::Camera::m_Cameras;
+std::unordered_map<std::u8string, std::vector<std::weak_ptr<EvaEngine::Camera>>> EvaEngine::Camera::m_Cameras;
 
 EvaEngine::Camera::Camera(
 	const D3D11_VIEWPORT& viewPort,
@@ -164,7 +164,7 @@ std::vector<std::weak_ptr<EvaEngine::Camera>> EvaEngine::Camera::GetAllCamera()
 	return m_Cameras[SceneManager::GetCurrentSceneName()];
 }
 
-std::vector<std::weak_ptr<Camera>> EvaEngine::Camera::GetAllCamera(const std::string& sceneName)
+std::vector<std::weak_ptr<Camera>> EvaEngine::Camera::GetAllCamera(const std::u8string& sceneName)
 {
 	if (m_Cameras.count(sceneName) == 0) return std::vector<std::weak_ptr<Camera>>();
 	return m_Cameras[sceneName];

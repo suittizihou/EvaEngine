@@ -12,7 +12,7 @@ using namespace std;
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-void VRMModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model)
+void VRMModelLoader::LoadModel(const std::u8string& fileName, std::shared_ptr<EvaEngine::ModelData>& model)
 {
     // モデルデータの読み込み
     auto modelFilePath = experimental::filesystem::path(fileName);

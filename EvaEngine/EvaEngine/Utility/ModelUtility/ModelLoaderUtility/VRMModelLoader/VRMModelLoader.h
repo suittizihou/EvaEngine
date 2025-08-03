@@ -21,7 +21,7 @@ namespace EvaEngine {
 
 			VRMModelLoader() = default;
 			~VRMModelLoader() = default;
-			void LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model) override;
+			void LoadModel(const std::u8string& fileName, std::shared_ptr<EvaEngine::ModelData>& model) override;
 			std::shared_ptr<EvaEngine::ModelData> MakeModelDataMemory(std::shared_ptr<EvaEngine::ModelData>& model);
 
 		private:

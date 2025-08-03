@@ -246,5 +246,5 @@ void ShaderDataBase::AllDeleteShader()
 
 bool EvaEngine::Internal::ShaderDataBase::GUIDCreate(GUID* guid, const std::string& shaderType)
 {
-    return GUIDUtility::Create(guid, "ShaderDataBaseにて" + shaderType + "のGUID生成に失敗しました。");
+    return GUIDUtility::Create(guid, StringAssist::to_u8string("ShaderDataBaseにて" + shaderType + "のGUID生成に失敗しました。"));
 }

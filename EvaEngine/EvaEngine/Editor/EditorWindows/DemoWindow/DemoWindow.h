@@ -8,7 +8,7 @@ namespace EvaEngine {
 		namespace Internal {
 			class DemoWindow : public EditorWindow<DemoWindow> {
 			public:
-				DemoWindow(const std::string& windowPath) : EditorWindow<DemoWindow>(windowPath) {};
+				DemoWindow(const std::u8string& windowPath) : EditorWindow<DemoWindow>(windowPath) {};
 				~DemoWindow() = default;
 
 				void Begin() override {};

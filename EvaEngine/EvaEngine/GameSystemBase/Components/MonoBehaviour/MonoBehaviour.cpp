@@ -13,7 +13,7 @@ MonoBehaviour::MonoBehaviour(
 {
 }
 
-std::weak_ptr<GameObject> MonoBehaviour::Find(const std::string& name)
+std::weak_ptr<GameObject> MonoBehaviour::Find(const std::u8string& name)
 {
     return EvaEngine::Internal::GameObjectManager::Instance().Find(GetSceneName(), name);
 }

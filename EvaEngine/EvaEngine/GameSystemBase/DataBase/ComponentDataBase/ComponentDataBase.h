@@ -22,7 +22,7 @@ namespace EvaEngine {
 
 			// コンポーネントの登録
 			template<class T, class... Args>
-			std::weak_ptr<T> AddComponent(const std::string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject, Args&& ... args)
+			std::weak_ptr<T> AddComponent(const std::u8string& sceneName, const std::weak_ptr<GameObjectBase>& gameObject, Args&& ... args)
 			{
 				ComponentDesc componentDesc{};
 				componentDesc.componentName = TypeIDAssist<T>::GetClassName();
@@ -30,7 +30,7 @@ namespace EvaEngine {
 				componentDesc.gameObject = gameObject;
 				componentDesc.hashCode = typeid(T).hash_code();
 
-				if (GUIDUtility::Create(&componentDesc.guid, "ComponentDataBase  " + componentDesc.componentName + " failed to generate guid.") == false)
+				if (GUIDUtility::Create(&componentDesc.guid, StringAssist::to_u8string("ComponentDataBase  " + componentDesc.componentName + " failed to generate guid.")) == false)
 				{
 					return std::weak_ptr<T>();
 				}
@@ -44,7 +44,7 @@ namespace EvaEngine {
 					for (const auto& component : gameObject.lock()->GetAllComponents()) {
 						if (component.lock()->GetHashCode() != component_temp->GetHashCode()) continue;
 
-						DebugLog::LogError(u8"Can't multi attach." + (std::string)typeid(T).name() + " : This component cannot be attached multiple times.");
+						DebugLog::LogError(StringAssist::to_u8string("Can't multi attach." + (std::string)typeid(T).name() + " : This component cannot be attached multiple times."));
 						return std::weak_ptr<T>();
 					}
 				}
@@ -75,11 +75,12 @@ namespace EvaEngine {
 				}
 
 				DebugLog::LogError(
-					u8"Not found. : Name : " +
+					StringAssist::to_u8string(
+					"Not found. : Name : " +
 					(std::string)typeid(T).name() +
 					" : " +
 					std::to_string(typeid(T).hash_code()) +
-					" : Component not found.");
+					" : Component not found."));
 				return std::weak_ptr<T>();
 			}
 
@@ -101,11 +102,12 @@ namespace EvaEngine {
 				}
 
 				DebugLog::LogError(
-					u8"Not found. : Name : " +
+					StringAssist::to_u8string(
+					"Not found. : Name : " +
 					(std::string)typeid(T).name() +
 					" : " +
 					std::to_string(typeid(T).hash_code()) +
-					" : Component not found.");
+					" : Component not found."));
 				return std::weak_ptr<T>();
 			}
 
@@ -121,11 +123,12 @@ namespace EvaEngine {
 					// 消せないコンポーネントなら早期リターン
 					if (!component.lock()->GetCanRemove()) {
 						DebugLog::LogError(
-							u8"Can't remove component : " +
+							StringAssist::to_u8string(
+							"Can't remove component : " +
 							(std::string)typeid(T).name() +
 							" : " +
 							std::to_string(typeid(T).hash_code()) +
-							" : This component cannot be removed.");
+							" : This component cannot be removed."));
 						return;
 					}
 
@@ -135,11 +138,12 @@ namespace EvaEngine {
 				}
 
 				DebugLog::LogError(
-					u8"Not found.: Name : " +
+					StringAssist::to_u8string(
+					"Not found.: Name : " +
 					(std::string)typeid(T).name() +
 					" : " +
 					std::to_string(typeid(T).hash_code()) +
-					" : Component not found.");
+					" : Component not found."));
 			}
 
 			//// コンポーネントを削除

@@ -6,7 +6,7 @@
 
 using namespace EvaEngine::Editor::Internal;
 
-ConsoleWindow::ConsoleWindow(const std::string& windowPath) :
+ConsoleWindow::ConsoleWindow(const std::u8string& windowPath) :
 	EditorWindow(windowPath)
 {
 }
@@ -37,15 +37,15 @@ void ConsoleWindow::OnGUI()
 		switch (log.logType) {
 
 		case LogType::Normal:
-			ImGui::TextColored(ImColor(1.0f, 1.0f, 1.0f), logs[i].message.c_str());
+			ImGui::TextColored(ImColor(1.0f, 1.0f, 1.0f), reinterpret_cast<const char*>(logs[i].message.c_str()));
 			break;
 
 		case LogType::Warning:
-			ImGui::TextColored(ImColor(1.0f, 1.0f, 0.0f), logs[i].message.c_str());
+			ImGui::TextColored(ImColor(1.0f, 1.0f, 0.0f), reinterpret_cast<const char*>(logs[i].message.c_str()));
 			break;
 
 		default:
-			ImGui::TextColored(ImColor(1.0f, 0.0f, 0.0f), logs[i].message.c_str());
+			ImGui::TextColored(ImColor(1.0f, 0.0f, 0.0f), reinterpret_cast<const char*>(logs[i].message.c_str()));
 			break;
 		}
 	}

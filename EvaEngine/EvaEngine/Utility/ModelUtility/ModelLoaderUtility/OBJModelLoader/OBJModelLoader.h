@@ -8,10 +8,10 @@ namespace EvaEngine {
 		class OBJModelLoader : public ModelLoadBase {
 		public:
 
-			void LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model) override;
+			void LoadModel(const std::u8string& fileName, std::shared_ptr<EvaEngine::ModelData>& model) override;
 
 		private:
-			bool CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, const char* fileName);
+			bool CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, const std::u8string& fileName);
 			void ParseVKeywordTag(std::vector<DirectX::XMFLOAT3>& data, char* buffer);
 
 			void ParseFKeywordTag(

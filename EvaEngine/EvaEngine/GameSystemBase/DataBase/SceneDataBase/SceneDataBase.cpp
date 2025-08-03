@@ -4,7 +4,7 @@
 
 using namespace EvaEngine::Internal;
 
-void SceneDataBase::LoadScene(const std::string& sceneType)
+void SceneDataBase::LoadScene(const std::u8string& sceneType)
 {
     m_IsChangeScene = true;
 
@@ -25,12 +25,12 @@ void SceneDataBase::LoadScene(const UINT& sceneID)
     }
 }
 
-std::string SceneDataBase::GetCurrentSceneName() const
+std::u8string SceneDataBase::GetCurrentSceneName() const
 {
     return m_CurrentSceneName;
 }
 
-std::string SceneDataBase::GetPreviousSceneName() const
+std::u8string SceneDataBase::GetPreviousSceneName() const
 {
     return m_PreviousSceneName;
 }
@@ -69,7 +69,7 @@ HRESULT SceneDataBase::SceneChange()
     return InitializeScene();
 }
 
-bool EvaEngine::Internal::SceneDataBase::IsCheckExists(const std::string& sceneName)
+bool EvaEngine::Internal::SceneDataBase::IsCheckExists(const std::u8string& sceneName)
 {
     return m_Scenes.count(sceneName) == 1;
 }

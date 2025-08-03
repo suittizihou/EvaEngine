@@ -9,9 +9,9 @@
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-std::weak_ptr<GameObject> GameObjectDataBase::Instantiate(const std::string& sceneType, const std::string& tag, const std::string& name) {
+std::weak_ptr<GameObject> GameObjectDataBase::Instantiate(const std::u8string& sceneType, const std::string& tag, const std::u8string& name) {
 	GUID guid{ GUID_NULL };
-	if (GUIDUtility::Create(&guid, "GameObjectDataBaseにて " + name + " のGUID生成に失敗しました。") == false) return std::weak_ptr<GameObject>();
+	if (GUIDUtility::Create(&guid, u8"GameObjectDataBaseにて " + name + u8" のGUID生成に失敗しました。") == false) return std::weak_ptr<GameObject>();
 	std::shared_ptr<GameObject> obj = std::make_shared<GameObject>(sceneType, guid, tag, name);
 	obj->Initialize();
 	m_GameObjectReference.push_back(obj);
@@ -19,7 +19,7 @@ std::weak_ptr<GameObject> GameObjectDataBase::Instantiate(const std::string& sce
 	return obj;
 }
 
-std::weak_ptr<GameObject> GameObjectDataBase::Find(const std::string& name)
+std::weak_ptr<GameObject> GameObjectDataBase::Find(const std::u8string& name)
 {
 	for (const auto& objects : m_GameObjectListSource) {
 		for (const auto& obj : objects.second) {
@@ -29,13 +29,13 @@ std::weak_ptr<GameObject> GameObjectDataBase::Find(const std::string& name)
 		}
 	}
 
-	DebugLog::LogError("Not found : " + name + "という名前のGameObjectは存在しませんでした。");
+	DebugLog::LogError(u8"Not found : " + name + u8"という名前のGameObjectは存在しませんでした。");
 }
 
 std::weak_ptr<GameObject> GameObjectDataBase::FindGameObjectWithTag(const std::string& tag)
 {
 	if (m_GameObjectListSource.count(tag) == 0) {
-		DebugLog::LogError("Not found : " + tag + "というTagを持つGameObjectは存在しませんでした。");
+		DebugLog::LogError(u8"Not found : " + StringAssist::to_u8string(tag) + u8"というTagを持つGameObjectは存在しませんでした。");
 		return std::weak_ptr<GameObject>();
 	}
 	return *m_GameObjectListSource[tag].begin();
@@ -44,7 +44,7 @@ std::weak_ptr<GameObject> GameObjectDataBase::FindGameObjectWithTag(const std::s
 std::vector<std::weak_ptr<GameObject>> GameObjectDataBase::FindGameObjectsWithTag(const std::string& tag)
 {
 	if (m_GameObjectListSource.count(tag) == 0) {
-		DebugLog::LogError("Not found : " + tag + "というTagを持つGameObjectは存在しませんでした。");
+		DebugLog::LogError(u8"Not found : " + StringAssist::to_u8string(tag) + u8"というTagを持つGameObjectは存在しませんでした。");
 		std::vector<std::weak_ptr<GameObject>> nullVector;
 		return nullVector;
 	}

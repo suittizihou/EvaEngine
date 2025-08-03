@@ -15,18 +15,18 @@ void Replase(char searchChar, char replaceChar, char* buffer) {
     }
 }
 
-void OBJModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model)
+void OBJModelLoader::LoadModel(const std::u8string& fileName, std::shared_ptr<EvaEngine::ModelData>& model)
 {
     if (!CreateMesh(model, fileName)) {
-        DebugLog::LogError("ファイル名 : " + std::string{ fileName } + " モデルの読み込みに失敗しました。");
+        DebugLog::LogError(u8"ファイル名 : " + fileName + u8" モデルの読み込みに失敗しました。");
         return;
     }
 }
 
-bool OBJModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, const char* fileName)
+bool OBJModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, const std::u8string& fileName)
 {
     FILE* file{ nullptr };
-    fopen_s(&file, fileName, "r");
+    fopen_s(&file, reinterpret_cast<const char*>(fileName.c_str()), "r");
 
     if (file == nullptr) return false;
 
@@ -78,14 +78,14 @@ bool OBJModelLoader::CreateMesh(std::shared_ptr<EvaEngine::ModelData>& model, co
 
 void OBJModelLoader::ParseVKeywordTag(std::vector<DirectX::XMFLOAT3>& data, char* buffer)
 {
-    std::vector<std::string> splitStrings;
+    std::vector<std::u8string> splitStrings;
     StringAssist::Split(' ', buffer, splitStrings);
 
     int count{};
     float values[3] = { 0.0f };
 
-    for (std::string str : splitStrings) {
-        values[count] = static_cast<float>(atof(str.c_str()));
+    for (std::u8string str : splitStrings) {
+        values[count] = static_cast<float>(atof(reinterpret_cast<const char*>(&str)));
         count += 1;
     }
 
@@ -103,7 +103,7 @@ void OBJModelLoader::ParseFKeywordTag(
     int vertexInfo[3] = {
         -1, -1, -1
     };
-    std::vector<std::string> spaceSplit;
+    std::vector<std::u8string> spaceSplit;
     StringAssist::Split(' ', buffer, spaceSplit);
 
     for (int i = 0; i < spaceSplit.size(); ++i) {
@@ -143,12 +143,12 @@ void OBJModelLoader::ParseFKeywordTag(
 void OBJModelLoader::ParseShashKeywordTag(int* list, char* buffer)
 {
     int counter{};
-    std::vector<std::string> slashSplit;
+    std::vector<std::u8string> slashSplit;
     StringAssist::Split('/', buffer, slashSplit);
 
-    for (std::string str : slashSplit) {
+    for (std::u8string str : slashSplit) {
         if (str.size() > 0) {
-            list[counter] = atoi(str.c_str()) - 1;
+            list[counter] = atoi(reinterpret_cast<const char*>(&str)) - 1;
         }
         counter += 1;
     }

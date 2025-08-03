@@ -73,40 +73,40 @@ HRESULT EditorApp::Init()
 {
 	// ImGuiの初期化
 	if (FAILED(ImGuiSetting())) {
-		DebugLog::LogError("ImGuiの設定に失敗しました。");
+		DebugLog::LogError(u8"ImGuiの設定に失敗しました。");
 		return E_ABORT;
 	}
 
 	if (!ImGui_ImplWin32_Init(Window::g_hWnd)) {
-		DebugLog::LogError("ImGui_ImplWin32_Initに失敗しました。");
+		DebugLog::LogError(u8"ImGui_ImplWin32_Initに失敗しました。");
 		ImGui::DestroyContext();
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
 		return E_ABORT;
 	}
 	
 	if (!ImGui_ImplDX11_Init(EvaEngine::Internal::DirectX11App::g_Device, EvaEngine::Internal::DirectX11App::g_Context)) {
-		DebugLog::LogError("ImGui_ImplDX11_Initに失敗しました。");
+		DebugLog::LogError(u8"ImGui_ImplDX11_Initに失敗しました。");
 		ImGui::DestroyContext();
 		UnregisterClass(Window::g_wc.lpszClassName, Window::g_wc.hInstance);
 		return E_ABORT;
 	}
 
 	// EditorWindowの追加
-	m_EditorWindows.CreateEditorWindow<Editor::Internal::EditorBaseWindow>("");
-	m_EditorWindows.CreateEditorWindow<Editor::Internal::ConsoleWindow>("Window/General/Console");
-	m_EditorWindows.CreateEditorWindow<Editor::Internal::SceneWindow>("Window/General/Scene");
-	m_EditorWindows.CreateEditorWindow<Editor::Internal::GameWindow>("Window/General/Game");
-	m_EditorWindows.CreateEditorWindow<Editor::Internal::HierarchyWindow>("Window/General/Hierarchy");
-	m_EditorWindows.CreateEditorWindow<Editor::Internal::InspectorWindow>("Window/General/Inspector");
-	m_EditorWindows.CreateEditorWindow<Editor::Internal::ProjectWindow>("Window/General/Project");
-	m_EditorWindows.CreateEditorWindow<Editor::Internal::DemoWindow>("Help/DemoWindow");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::EditorBaseWindow>(u8"");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::ConsoleWindow>(u8"Window/General/Console");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::SceneWindow>(u8"Window/General/Scene");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::GameWindow>(u8"Window/General/Game");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::HierarchyWindow>(u8"Window/General/Hierarchy");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::InspectorWindow>(u8"Window/General/Inspector");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::ProjectWindow>(u8"Window/General/Project");
+	m_EditorWindows.CreateEditorWindow<Editor::Internal::DemoWindow>(u8"Help/DemoWindow");
 
 	// Editor専用のManagerを作成
-	GameObjectManager::Instance().AddGameObjectDataBase("Editor");
-	ComponentManager::Instance().AddComponentDataBase("Editor");
+	GameObjectManager::Instance().AddGameObjectDataBase(u8"Editor");
+	ComponentManager::Instance().AddComponentDataBase(u8"Editor");
 
 	// シーンビューの作成
-	m_SceneView = GameObjectManager::Instance().Instantiate("Editor", "SceneView", "SceneView").lock()->AddComponent<SceneView>();
+	m_SceneView = GameObjectManager::Instance().Instantiate(u8"Editor", "SceneView", u8"SceneView").lock()->AddComponent<SceneView>();
 	m_SceneView.lock()->GetTransform().lock()->position(0.0f, 0.0f, -5.0f);
 
 	return S_OK;

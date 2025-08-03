@@ -11,18 +11,18 @@
 namespace EvaEngine {
 	class ModelData {
 	public:
-		ModelData(const std::string& fileName) : m_FileName{ fileName } {};
+		ModelData(const std::u8string& fileName) : m_FileName{ fileName } {};
 		~ModelData() = default;
 
 	public:
 		void Release();
-		std::string GetFileName() const;
+		std::u8string  GetFileName() const;
 
 	public:
 		std::map<std::string, std::vector<Mesh>> meshes;
 		std::map<std::string, Material> materials;
 
 	private:
-		std::string m_FileName{};
+		std::u8string m_FileName{};
 	};
 }

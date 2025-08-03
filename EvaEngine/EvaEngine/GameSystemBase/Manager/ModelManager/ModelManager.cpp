@@ -5,12 +5,12 @@
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-void EvaEngine::ModelManager::AddModelDataBase(const std::string& sceneName)
+void EvaEngine::ModelManager::AddModelDataBase(const std::u8string& sceneName)
 {
 	m_ModelDatas[sceneName] = std::make_shared<ModelDataBase>();
 }
 
-void EvaEngine::ModelManager::LoadModel(const std::string& fileName, GUID* guid)
+void EvaEngine::ModelManager::LoadModel(const std::u8string& fileName, GUID* guid)
 {
 	return m_ModelDatas[SceneManager::GetCurrentSceneName()]->LoadModelData(fileName, guid);
 }

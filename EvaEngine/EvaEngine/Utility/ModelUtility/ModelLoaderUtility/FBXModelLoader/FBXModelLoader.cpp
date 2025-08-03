@@ -11,22 +11,22 @@
 using namespace EvaEngine;
 using namespace EvaEngine::Internal;
 
-void FBXModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model)
+void FBXModelLoader::LoadModel(const std::u8string& fileName, std::shared_ptr<EvaEngine::ModelData>& model)
 {
     // FbxManager作成
     fbxsdk::FbxManager* fbx_manager = fbxsdk::FbxManager::Create();
     if (fbx_manager == nullptr)
     {
-        DebugLog::LogError("FbxManagerの作成に失敗しました");
+        DebugLog::LogError(u8"FbxManagerの作成に失敗しました");
         return;
     }
 
     // FbxImporter作成
-    FbxImporter* fbx_importer = FbxImporter::Create(fbx_manager, "");
+    fbxsdk::FbxImporter* fbx_importer = fbxsdk::FbxImporter::Create(fbx_manager, "");
     if (fbx_importer == nullptr) {
         
         fbx_manager->Destroy();
-        DebugLog::LogError("FbxImporterの作成に失敗しました");
+        DebugLog::LogError(u8"FbxImporterの作成に失敗しました");
         return;
     }
 
@@ -35,12 +35,12 @@ void FBXModelLoader::LoadModel(const char* fileName, std::shared_ptr<EvaEngine::
     if (fbx_scene == nullptr) {
         fbx_importer->Destroy();
         fbx_manager->Destroy();
-        DebugLog::LogError("FbxSceneの作成に失敗しました");
+        DebugLog::LogError(u8"FbxSceneの作成に失敗しました");
         return;
     }
 
     // Fileを初期化
-    fbx_importer->Initialize(fileName);
+    fbx_importer->Initialize(reinterpret_cast<const char*>(fileName.c_str()));
     // sceneにインポート
     fbx_importer->Import(fbx_scene);
 

@@ -30,37 +30,37 @@ HRESULT DirectX11App::Init()
 	HRESULT hr{};
 	hr = HardWareCheck();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("Hard Ware Check Failed.");
+		DebugLog::ShowErrorMessageWindow(u8"Hard Ware Check Failed.");
 		return hr;
 	}
 
 	hr = CreateDeviceAndSwapChain();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("Swap Chain or Device Create Failed.");
+		DebugLog::ShowErrorMessageWindow(u8"Swap Chain or Device Create Failed.");
 		return hr;
 	}
 
 	hr = CreateRasterizerState();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("Rasterizer State Create Failed.");
+		DebugLog::ShowErrorMessageWindow(u8"Rasterizer State Create Failed.");
 		return hr;
 	}
 
 	hr = CreateRenderTargetView();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("Render Target View Create Failed.");
+		DebugLog::ShowErrorMessageWindow(u8"Render Target View Create Failed.");
 		return hr;
 	}
 
 	hr = CreateDepthAndStencilView();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("Depth Stencil View Create Failed.");
+		DebugLog::ShowErrorMessageWindow(u8"Depth Stencil View Create Failed.");
 		return hr;
 	}
 
 	hr = CreateConstantBuffer();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("Constant Buffer Create Failed.");
+		DebugLog::ShowErrorMessageWindow(u8"Constant Buffer Create Failed.");
 		return hr;
 	}
 
@@ -96,7 +96,7 @@ HRESULT DirectX11App::HardWareCheck()
 	// グラフィック インターフェース ファクトリを作成
 	auto hr = CreateDXGIFactory(__uuidof(IDXGIFactory), (void**)&factory);
 	if (FAILED(hr)) {
-		DebugLog::LogError("Graphic Interface Factory Create Failed.");
+		DebugLog::LogError(u8"Graphic Interface Factory Create Failed.");
 		return hr;
 	}
 
@@ -214,7 +214,7 @@ HRESULT DirectX11App::CreateRasterizerState()
 
 	hr = DirectX11App::g_Device->CreateRasterizerState(&rasterizerDesc, &rasterizerState);
 	if (FAILED(hr)) {
-		DebugLog::LogError("Rasterizer State Create Failed.");
+		DebugLog::LogError(u8"Rasterizer State Create Failed.");
 		return hr;
 	}
 
@@ -234,14 +234,14 @@ HRESULT DirectX11App::CreateRenderTargetView()
 	// スワップチェインに用意されたバッファ(2Dテクスチャ)を取得
 	hr = g_SwapChain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
 	if (FAILED(hr)) {
-		DebugLog::LogError("Buffer Texture Get Failed.");
+		DebugLog::LogError(u8"Buffer Texture Get Failed.");
 		return hr;
 	}
 
 	// レンダーターゲットView作成
 	hr = g_Device->CreateRenderTargetView(backBuffer, NULL, &g_EditorRenderTargetView);
 	if (FAILED(hr)) {
-		DebugLog::LogError("Render Target View Create Failed.");
+		DebugLog::LogError(u8"Render Target View Create Failed.");
 		return hr;
 	}
 
@@ -275,7 +275,7 @@ HRESULT DirectX11App::CreateDepthAndStencilView()
 
 	hr = g_Device->CreateTexture2D(&textureDesc, NULL, &depthStencil);
 	if (FAILED(hr)) {
-		DebugLog::LogError("Depth Stencil Texture Create Failed.");
+		DebugLog::LogError(u8"Depth Stencil Texture Create Failed.");
 		return hr;
 	}
 
@@ -287,7 +287,7 @@ HRESULT DirectX11App::CreateDepthAndStencilView()
 
 	hr = g_Device->CreateDepthStencilView(depthStencil, &dsvDesc, &g_EditorDepthStencilView);
 	if(FAILED(hr)){
-		DebugLog::LogError("Depth Stencill View Create Failed");
+		DebugLog::LogError(u8"Depth Stencill View Create Failed");
 		return hr;
 	}
 

@@ -18,15 +18,15 @@ namespace EvaEngine {
 		virtual ~GameJobs() = default;
 
 		// ゲームオブジェクトの追加
-		std::weak_ptr<GameObject> Instantiate(const std::string& tag = "None", const std::string& name = "GameObject");
+		std::weak_ptr<GameObject> Instantiate(const std::string& tag = "None", const std::u8string& name = u8"GameObject");
 
 		// 所属するシーン名を設定
-		void SetSceneName(const std::string& sceneType);
+		void SetSceneName(const std::u8string& sceneType);
 		// 所属するシーン名を返す
-		std::string GetSceneName();
+		std::u8string GetSceneName();
 
 	private:
-		std::string m_SceneName{};
+		std::u8string m_SceneName{};
 
 	private:
 		GameJobs(const GameJobs&);

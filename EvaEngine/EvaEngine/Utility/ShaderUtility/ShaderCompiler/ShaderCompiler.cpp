@@ -16,7 +16,7 @@ HRESULT ShaderCompiler::CreateVertexShader(VertexShader* shader, const D3D11_INP
 
     hr = DirectX11App::g_Device->CreateVertexShader(shader->m_pShaderCode->GetBufferPointer(), shader->m_pShaderCode->GetBufferSize(), NULL, &shader->m_pShader);
     if (FAILED(hr)) {
-        DebugLog::LogError("VertexShader Create Failed.");
+        DebugLog::LogError(u8"VertexShader Create Failed.");
         return hr;
     }
 
@@ -31,7 +31,7 @@ HRESULT ShaderCompiler::CreatePixelShader(PixelShader* shader, const std::string
 
     hr = DirectX11App::g_Device->CreatePixelShader(shader->m_pShaderCode->GetBufferPointer(), shader->m_pShaderCode->GetBufferSize(), nullptr, &shader->m_pShader);
     if (FAILED(hr)) {
-        DebugLog::LogError("PixelShader Create Failed.");
+        DebugLog::LogError(u8"PixelShader Create Failed.");
         return hr;
     }
 
@@ -44,7 +44,7 @@ HRESULT ShaderCompiler::CreateGeometryShader(GeometryShader* shader, const std::
 
     hr = DirectX11App::g_Device->CreateGeometryShader(shader->m_pShaderCode->GetBufferPointer(), shader->m_pShaderCode->GetBufferSize(), nullptr, &shader->m_pShader);
     if (FAILED(hr)) {
-        DebugLog::LogError("GeometryShader Create Failed.");
+        DebugLog::LogError(u8"GeometryShader Create Failed.");
         return hr;
     }
 
@@ -57,7 +57,7 @@ HRESULT ShaderCompiler::CreateComputeShader(ComputeShader* shader, const std::st
 
     hr = DirectX11App::g_Device->CreateComputeShader(shader->m_pShaderCode->GetBufferPointer(), shader->m_pShaderCode->GetBufferSize(), nullptr, &shader->m_pShader);
     if (FAILED(hr)) {
-        DebugLog::LogError("ComputeShader Create Failed.");
+        DebugLog::LogError(u8"ComputeShader Create Failed.");
         return hr;
     }
 
@@ -70,7 +70,7 @@ HRESULT ShaderCompiler::CreateHullShader(HullShader* shader, const std::string& 
 
     hr = DirectX11App::g_Device->CreateHullShader(shader->m_pShaderCode->GetBufferPointer(), shader->m_pShaderCode->GetBufferSize(), nullptr, &shader->m_pShader);
     if (FAILED(hr)) {
-        DebugLog::LogError("HullShader Create Failed.");
+        DebugLog::LogError(u8"HullShader Create Failed.");
         return hr;
     }
 
@@ -83,7 +83,7 @@ HRESULT ShaderCompiler::CreateDomainShader(DomainShader* shader, const std::stri
 
     hr = DirectX11App::g_Device->CreateDomainShader(shader->m_pShaderCode->GetBufferPointer(), shader->m_pShaderCode->GetBufferSize(), nullptr, &shader->m_pShader);
     if (FAILED(hr)) {
-        DebugLog::LogError("DomainShader Create Failed.");
+        DebugLog::LogError(u8"DomainShader Create Failed.");
         return hr;
     }
 
@@ -93,7 +93,7 @@ HRESULT ShaderCompiler::CreateDomainShader(DomainShader* shader, const std::stri
 HRESULT ShaderCompiler::CreateInputLayout(VertexShader* shader, const D3D11_INPUT_ELEMENT_DESC* layout, const UINT arraySize) {
     HRESULT hr = DirectX11App::g_Device->CreateInputLayout(layout, arraySize, shader->m_pShaderCode->GetBufferPointer(), shader->m_pShaderCode->GetBufferSize(), &shader->m_pInputLayout);
     if (FAILED(hr)) {
-        DebugLog::LogError("Input Layout Create Failed.");
+        DebugLog::LogError(u8"Input Layout Create Failed.");
         return hr;
     }
     return hr;
@@ -119,16 +119,16 @@ HRESULT ShaderCompiler::Compile(const std::string& fileName, const std::string& 
         if (error) {
             // エラーメッセージを出力
             if (errorBlob != nullptr && error) {
-                DebugLog::LogError((char*)errorBlob->GetBufferPointer());
+                DebugLog::LogError(StringAssist::to_u8string((const char*)errorBlob->GetBufferPointer()));
                 return hr;
             }
         }
         else {
             std::string er = (char*)errorBlob->GetBufferPointer();
             if (er.find("entrypoint not found") == std::string::npos)
-                DebugLog::LogError((char*)errorBlob->GetBufferPointer());
+                DebugLog::LogError(StringAssist::to_u8string((const char*)errorBlob->GetBufferPointer()));
 
-            DebugLog::LogError(fileName + "(" + entryPath + ") is Not found");
+            DebugLog::LogError(StringAssist::to_u8string(fileName + "(" + entryPath + ") is Not found"));
             return hr;
         }
     }

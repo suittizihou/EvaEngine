@@ -2,7 +2,7 @@
 
 using namespace EvaEngine;
 
-GameMain::GameMain(const std::string& sceneName, const UINT sceneID) :
+GameMain::GameMain(const std::u8string& sceneName, const UINT sceneID) :
 	Scene(sceneName, sceneID)
 {
 

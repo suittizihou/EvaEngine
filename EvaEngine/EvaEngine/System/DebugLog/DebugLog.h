@@ -12,25 +12,28 @@ namespace EvaEngine {
 	};
 
 	struct LogData {
-		LogData(LogType logType, const std::string& message)
+		LogData(LogType logType, const std::u8string& message)
 		{
 			this->logType = logType;
-			if (message.empty() == false) EvaEngine::StringAssist::ToUTF8(message, this->message);
+			if (message.empty() == false)
+			{
+				this->message = message;
+			}
 		}
 		~LogData() = default;
 
 		LogType logType{};
-		std::string message{};
+		std::u8string message{};
 	};
 
 	class DebugLog {
 		DebugLog() = default;
 		~DebugLog() = default;
 	public:
-		static void Log(const std::string& logMessage);
-		static void LogWarning(const std::string& warningMessage);
-		static void LogError(const std::string& errorMessage);
-		static void ShowErrorMessageWindow(const std::string& message);
+		static void Log(const std::u8string& logMessage);
+		static void LogWarning(const std::u8string& warningMessage);
+		static void LogError(const std::u8string& errorMessage);
+		static void ShowErrorMessageWindow(const std::u8string& message);
 
 		static std::vector<LogData> GetLogDatas();
 		static void ClearLog();

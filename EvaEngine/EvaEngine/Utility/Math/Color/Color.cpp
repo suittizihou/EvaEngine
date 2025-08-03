@@ -246,7 +246,7 @@ float EvaEngine::Color::operator[](int index) const
     case 2: return b;
     case 3: return a;
     default:
-        DebugLog::LogError("Invalid Color index(" + std::to_string(index) + ")!");
+        DebugLog::LogError(StringAssist::to_u8string("Invalid Color index(" + std::to_string(index) + ")!"));
     }
 }
 
@@ -259,7 +259,7 @@ float& EvaEngine::Color::operator[](int index)
     case 2: return b;
     case 3: return a;
     default:
-        DebugLog::LogError("Invalid Color index(" + std::to_string(index) + ")!");
+        DebugLog::LogError(StringAssist::to_u8string("Invalid Color index(" + std::to_string(index) + ")!"));
     }
 }
 

@@ -22,7 +22,7 @@ namespace EvaEngine {
 	class GUIDUtility
 	{
 	public:
-		static bool Create(GUID* dest, const std::string& errorMessage);
+		static bool Create(GUID* dest, const std::u8string& errorMessage);
 		static std::string ToString(const GUID& src);
 	};
 }

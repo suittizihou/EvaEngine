@@ -328,8 +328,8 @@ std::weak_ptr<Transform> EvaEngine::Transform::get_child(const UINT index) const
 {
 	if (index >= children_.size()) {
 		DebugLog::LogError(
-			std::to_string(index) + "番目の子供は存在しませんでした。\n" +
-			GetGameObject().lock()->GetName() + "の子供の数は" + std::to_string(children_.size()) + "です。");
+			StringAssist::to_u8string(std::to_string(index)) + u8"番目の子供は存在しませんでした。\n" +
+			GetGameObject().lock()->GetName() + u8"の子供の数は" + StringAssist::to_u8string(std::to_string(children_.size())) + u8"です。");
 		return std::weak_ptr<Transform>();
 	}
 

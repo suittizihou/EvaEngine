@@ -27,7 +27,7 @@ namespace EvaEngine {
 			FBXModelLoader() = default;
 			~FBXModelLoader() = default;
 
-			void LoadModel(const char* fileName, std::shared_ptr<EvaEngine::ModelData>& model) override;
+			void LoadModel(const std::u8string& fileName, std::shared_ptr<EvaEngine::ModelData>& model) override;
 			void LoadMaterial(std::shared_ptr<EvaEngine::ModelData>& model, fbxsdk::FbxSurfaceMaterial* material);
 			bool LoadTexture(std::shared_ptr<EvaEngine::ModelData>& model, fbxsdk::FbxFileTexture* texture, std::string& keyword);
 			void FindMeshNode(fbxsdk::FbxNode* node, std::map<std::string, fbxsdk::FbxNode*>& list);

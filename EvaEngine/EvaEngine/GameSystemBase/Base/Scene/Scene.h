@@ -6,7 +6,7 @@
 namespace EvaEngine {
 	class Scene {
 	public:
-		Scene(const std::string& sceneName, const UINT sceneID) : 
+		Scene(const std::u8string& sceneName, const UINT sceneID) :
 			m_SceneName{ sceneName },
 			m_SceneID{ sceneID }
 		{};
@@ -40,22 +40,22 @@ namespace EvaEngine {
 #endif
 
 		// 名前で検索
-		std::weak_ptr<GameObject> Find(const std::string& name);
+		std::weak_ptr<GameObject> Find(const std::u8string& name);
 		// タグで検索してゲームオブジェクトを一つ持ってくる
 		std::weak_ptr<GameObject> FindGameObjectWithTag(const std::string& tag);
 		// タグで検索してヒットしたゲームオブジェクトを全部持ってくる
 		std::vector<std::weak_ptr<GameObject>> FindGameObjectsWithTag(const std::string& tag);
 
 		// シーン名の取得
-		std::string GetSceneName() const;
+		std::u8string GetSceneName() const;
 		// シーンのIDを取得
 		UINT GetSceneID() const;
 
 		// ゲームオブジェクトの追加
-		std::weak_ptr<GameObject> Instantiate(const std::string& tag = "None", const std::string& name = "GameObject");
+		std::weak_ptr<GameObject> Instantiate(const std::string& tag = "None", const std::u8string& name = u8"GameObject");
 
 	protected:
-		std::string m_SceneName{};
+		std::u8string m_SceneName{};
 		UINT m_SceneID{};
 	};
 }

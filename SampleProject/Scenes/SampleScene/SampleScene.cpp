@@ -9,7 +9,7 @@
 
 using namespace EvaEngine;
 
-SampleScene::SampleScene(const std::string& sceneName, const UINT sceneID) :
+SampleScene::SampleScene(const std::u8string& sceneName, const UINT sceneID) :
 	Scene(sceneName, sceneID)
 {
 }
@@ -18,33 +18,33 @@ void SampleScene::Initialize()
 {
 	// モデルの読み込み
 	GUID teaPotmodelHandle{ GUID_NULL };
-	ModelManager::Instance().LoadModel("TeaPot.fbx", &teaPotmodelHandle);
+	ModelManager::Instance().LoadModel(u8"TeaPot.fbx", &teaPotmodelHandle);
 	GUID boxModelHandle{ GUID_NULL };
-	ModelManager::Instance().LoadModel("Box.fbx", &boxModelHandle);
+	ModelManager::Instance().LoadModel(u8"Box.fbx", &boxModelHandle);
 	GUID planeModelHandle{ GUID_NULL };
-	ModelManager::Instance().LoadModel("Plane.fbx", &planeModelHandle);
+	ModelManager::Instance().LoadModel(u8"Plane.fbx", &planeModelHandle);
 
 	// 太陽生成
-	auto dirLight = Instantiate("Light", "DirectionLight");
+	auto dirLight = Instantiate("Light", u8"DirectionLight");
 	dirLight.lock()->AddComponent<DirectionLight>();
 	dirLight.lock()->GetTransform().lock()->euler_angles(30.0f, 50.0f, 0.0f);
 
 	// ポイントライト生成
-	auto pointLight = Instantiate("Light", "PointLight");
+	auto pointLight = Instantiate("Light", u8"PointLight");
 	pointLight.lock()->AddComponent<PointLight>();
 	//pointLight.lock()->AddComponent<Move>(5.0f);
 	pointLight.lock()->GetTransform().lock()->position(0.0f, 5.0f, 0.0f);
 
 	// スポットライト生成
-	auto spotLightParent = Instantiate("Light", "SpotLightParent");
-	auto spotLight = Instantiate("Light", "SpotLight");
+	auto spotLightParent = Instantiate("Light", u8"SpotLightParent");
+	auto spotLight = Instantiate("Light", u8"SpotLight");
 	spotLight.lock()->GetTransform().lock()->set_parent(spotLightParent.lock()->GetTransform());
 	spotLightParent.lock()->AddComponent<Rotate>(50.0f);
 	spotLight.lock()->AddComponent<SpotLight>();
 	spotLight.lock()->AddComponent<Move>(5.0f);
 
 	// ティーポットの生成
-	auto teapot = Instantiate("None", "Teapot");
+	auto teapot = Instantiate("None", u8"Teapot");
 	// 各コンポーネントを追加
 	teapot.lock()->AddComponent<MeshFilter>(teaPotmodelHandle);
 	teapot.lock()->AddComponent<MeshRenderer>();
@@ -52,21 +52,21 @@ void SampleScene::Initialize()
 	teapot.lock()->GetTransform().lock()->position(-1.5f, 0.0f, 0.0f);
 
 	// ボックス生成
-	auto box = Instantiate("None", "Box").lock();
+	auto box = Instantiate("None", u8"Box").lock();
 	box->AddComponent<MeshFilter>(boxModelHandle);
 	box->AddComponent<MeshRenderer>();
 	box->AddComponent<SinMove>(2.0f, 1.0f);
 	box->GetTransform().lock()->position(1.5f, 0.0f, 0.0f);
 
 	// 床生成
-	auto plane = Instantiate("None", "Plane").lock();
+	auto plane = Instantiate("None", u8"Plane").lock();
 	plane->AddComponent<MeshFilter>(planeModelHandle);
 	plane->AddComponent<MeshRenderer>();
 	plane->GetTransform().lock()->position(0.0f, -1.0f, 0.0f);
 	plane->GetTransform().lock()->local_scale(100.0f, 1.0f, 100.0f);
 
 	// カメラ生成
-	auto cameraParent = Instantiate("None", "CameraParent");
+	auto cameraParent = Instantiate("None", u8"CameraParent");
 	cameraParent.lock()->GetTransform().lock()->position(Vector3(0.0f, 0.0f, -5.0f));
 	auto camera = Instantiate("Main Camera").lock()->GetComponent<Transform>();
 	camera.lock()->set_parent(cameraParent.lock()->GetTransform(), false);
@@ -94,6 +94,6 @@ void SampleScene::Initialize()
 void SampleScene::SceneUpdate()
 {
 	if (Input::GetKeyDown(KeyCode::B)) {
-		SceneManager::LoadScene("GameMain");
+		SceneManager::LoadScene(u8"GameMain");
 	}
 }

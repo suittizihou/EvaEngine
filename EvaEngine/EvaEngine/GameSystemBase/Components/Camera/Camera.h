@@ -88,11 +88,11 @@ namespace EvaEngine {
 		// 現在のシーンの全カメラを返す
 		static std::vector<std::weak_ptr<Camera>> GetAllCamera();
 		// 指定されたシーンの全カメラを返す
-		static std::vector<std::weak_ptr<Camera>> GetAllCamera(const std::string& sceneName);
+		static std::vector<std::weak_ptr<Camera>> GetAllCamera(const std::u8string& sceneName);
 		// 全カメラの解放
 		static void AllDeleteCamera();
 
 	private:
-		static std::unordered_map<std::string, std::vector<std::weak_ptr<Camera>>> m_Cameras;
+		static std::unordered_map<std::u8string, std::vector<std::weak_ptr<Camera>>> m_Cameras;
 	};
 }

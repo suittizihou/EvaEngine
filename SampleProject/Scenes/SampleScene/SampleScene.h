@@ -3,7 +3,7 @@
 
 class SampleScene : public EvaEngine::Scene {
 public:
-	SampleScene(const std::string& sceneName, const UINT sceneID);
+	SampleScene(const std::u8string& sceneName, const UINT sceneID);
 
 	void Initialize() override;
 	void SceneUpdate() override;

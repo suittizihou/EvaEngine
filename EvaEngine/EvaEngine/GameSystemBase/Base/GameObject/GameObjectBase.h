@@ -11,7 +11,7 @@ namespace EvaEngine {
 
 	class GameObjectBase : public GameJobs, public std::enable_shared_from_this<GameObjectBase> {
 	public:
-		GameObjectBase(const std::string& sceneName) :
+		GameObjectBase(const std::u8string& sceneName) :
 			GameJobs()
 		{
 			SetSceneName(sceneName);
@@ -29,7 +29,7 @@ namespace EvaEngine {
 		// ObjectIDを返す
 		virtual const GUID& GetObjectID() const = 0;
 		// 名前を返す
-		virtual std::string GetName() const = 0;
+		virtual std::u8string GetName() const = 0;
 		// タグを返す
 		virtual std::string GetTag() const = 0;
 	};

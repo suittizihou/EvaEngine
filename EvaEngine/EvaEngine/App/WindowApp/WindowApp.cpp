@@ -45,7 +45,7 @@ HRESULT WindowApp::Init()
     hr = CoInitializeEx(NULL, COINIT_MULTITHREADED);
 
     if (FAILED(hr)) {
-        DebugLog::ShowErrorMessageWindow("COM Initialize Failed.");
+        DebugLog::ShowErrorMessageWindow(u8"COM Initialize Failed.");
         return hr;
     }
 
@@ -65,7 +65,7 @@ HRESULT WindowApp::Init()
     };
 
     if (!RegisterClassEx(&wc)) {
-        DebugLog::ShowErrorMessageWindow("WNDCLASSEX Initialize Failed.");
+        DebugLog::ShowErrorMessageWindow(u8"WNDCLASSEX Initialize Failed.");
         return hr;
     }
 
@@ -89,7 +89,7 @@ HRESULT WindowApp::Init()
     );
 
     if (!Window::g_hWnd) {
-        DebugLog::ShowErrorMessageWindow("Window Create Failed.");
+        DebugLog::ShowErrorMessageWindow(u8"Window Create Failed.");
         return E_FAIL;
     }
 

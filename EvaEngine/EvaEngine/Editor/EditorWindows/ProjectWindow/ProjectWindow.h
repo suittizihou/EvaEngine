@@ -8,7 +8,7 @@ namespace EvaEngine {
 		namespace Internal {
 			class ProjectWindow : public EditorWindow<ProjectWindow> {
 			public:
-				ProjectWindow(const std::string& windowPath) :
+				ProjectWindow(const std::u8string& windowPath) :
 					EditorWindow<ProjectWindow>(windowPath) {}
 				~ProjectWindow() = default;
 

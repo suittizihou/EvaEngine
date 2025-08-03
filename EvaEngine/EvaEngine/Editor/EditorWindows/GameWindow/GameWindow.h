@@ -11,7 +11,7 @@ namespace EvaEngine
 		{
 			class GameWindow : public EditorWindow<GameWindow> {
 			public:
-				GameWindow(const std::string& windowPath) : 
+				GameWindow(const std::u8string& windowPath) : 
 					EditorWindow<GameWindow>(windowPath) {};
 				~GameWindow() = default;
 

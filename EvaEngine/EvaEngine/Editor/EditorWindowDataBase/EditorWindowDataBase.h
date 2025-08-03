@@ -15,10 +15,10 @@ namespace EvaEngine {
 			class EditorWindowData {
 			public:
 				// パス(階層ごと)
-				std::string windowPath;
+				std::u8string windowPath;
 
 				bool AddChildWindow(
-					const std::vector<std::string> paths,
+					const std::vector<std::u8string> paths,
 					const int pathIndex,
 					const std::shared_ptr<EditorWindowBase> window) {
 
@@ -60,14 +60,14 @@ namespace EvaEngine {
 				~EditorWindowDataBase() = default;
 
 				template<class T>
-				void CreateEditorWindow(const std::string& windowPath) {
+				void CreateEditorWindow(const std::u8string& windowPath) {
 					static_assert(std::is_base_of<Editor::EditorWindowBase, T>::value == true, "The argument does not inherit from EditorWindowBase.");
 
 					std::shared_ptr<Editor::EditorWindowBase> window = std::make_shared<T>(windowPath);
-					std::vector<std::string> paths = StringAssist::Split(window->GetWindowPath(), "/");
+					std::vector<std::u8string> paths = StringAssist::Split(window->GetWindowPath(), u8"/");
 
 					if (paths.size() <= 1) {
-						DebugLog::LogError("Ignoring menu item Window because it is in no submenu!");
+						DebugLog::LogError(u8"Ignoring menu item Window because it is in no submenu!");
 						return;
 					}
 
@@ -91,9 +91,9 @@ namespace EvaEngine {
 				}
 
 				template<>
-				void CreateEditorWindow<EditorBaseWindow>(const std::string& windowPath) {
+				void CreateEditorWindow<EditorBaseWindow>(const std::u8string& windowPath) {
 					std::shared_ptr<Editor::EditorWindow<EditorBaseWindow>> window = std::make_shared<EditorBaseWindow>(windowPath, this);
-					std::vector<std::string> paths = StringAssist::Split(window->GetWindowPath(), "/");
+					std::vector<std::u8string> paths = StringAssist::Split(window->GetWindowPath(), u8"/");
 
 					// 既に登録済みであれば返す
 					if (m_EditorWindows[0]->editorWindows.size() == 1) return;
@@ -106,11 +106,11 @@ namespace EvaEngine {
 				std::vector<std::shared_ptr<EditorWindowData>> GetEditorWindows();
 
 			private:
-				bool CheckEquals(const std::vector<std::string>& lhs, const std::vector<std::string>& rhs);
+				bool CheckEquals(const std::vector<std::u8string>& lhs, const std::vector<std::u8string>& rhs);
 				void DrawWindow(const std::shared_ptr<EditorWindowData> editorWindowData) const;
 
 			private:
-				std::vector<std::string> m_ParentPaths{ "", "File", "Window", "Help" };
+				std::vector<std::u8string> m_ParentPaths{ u8"", u8"File", u8"Window", u8"Help" };
 				std::vector<std::shared_ptr<EditorWindowData>> m_EditorWindows{};
 			};
 		}

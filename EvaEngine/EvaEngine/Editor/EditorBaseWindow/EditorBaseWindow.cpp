@@ -7,7 +7,7 @@
 using namespace EvaEngine::Editor;
 using namespace EvaEngine::Editor::Internal;
 
-EditorBaseWindow::EditorBaseWindow(const std::string& windowPath, EditorWindowDataBase* editorWindowDataBase) :
+EditorBaseWindow::EditorBaseWindow(const std::u8string& windowPath, EditorWindowDataBase* editorWindowDataBase) :
 	EditorWindow(windowPath, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking),
 	p_EditorWindowDataBase{ editorWindowDataBase }
 {
@@ -24,7 +24,7 @@ void EditorBaseWindow::Begin() {
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-	ImGui::Begin(GetWindowName().c_str(), nullptr, windowFlags);
+	ImGui::Begin(reinterpret_cast<const char*>(GetWindowName().c_str()), nullptr, windowFlags);
 	ImGui::PopStyleVar();
 	ImGui::PopStyleVar(2);
 }
@@ -40,7 +40,7 @@ void EditorBaseWindow::OnGUI() {
 		for (auto windowData : p_EditorWindowDataBase->GetEditorWindows()) {
 			if (windowData->windowPath.size() == 0) continue;
 
-			if (ImGui::BeginMenu(windowData->windowPath.c_str())) {
+			if (ImGui::BeginMenu(reinterpret_cast<const char*>(windowData->windowPath.c_str()))) {
 					Scanning(windowData);
 				ImGui::EndMenu();
 			}
@@ -96,13 +96,13 @@ void EditorBaseWindow::Scanning(const std::weak_ptr<EditorWindowData>& editorWin
 	
 	for (auto editorWindow : editorWindows.lock()->childDatas) {
 		if (editorWindow->childDatas.size() >= 1) {
-			if (ImGui::BeginMenu(editorWindow->windowPath.c_str())) {
+			if (ImGui::BeginMenu(reinterpret_cast<const char*>(editorWindow->windowPath.c_str()))) {
 				Scanning(editorWindow);
 				ImGui::EndMenu();
 			}
 		}
 		else if (editorWindow->windowPath.size() >= 1) {
-			if (ImGui::MenuItem(editorWindow->windowPath.c_str())) {
+			if (ImGui::MenuItem(reinterpret_cast<const char*>(editorWindow->windowPath.c_str()))) {
 				for (auto window : editorWindow->editorWindows) {
 					window->isOpen = true;
 				}

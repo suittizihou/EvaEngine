@@ -33,7 +33,7 @@ void EvaEngine::Scene::OnGUI()
 }
 #endif
 
-std::weak_ptr<GameObject> Scene::Find(const std::string& name)
+std::weak_ptr<GameObject> Scene::Find(const std::u8string& name)
 {
     return GameObjectManager::Instance().Find(m_SceneName, name);
 }
@@ -48,7 +48,7 @@ std::vector<std::weak_ptr<GameObject>> Scene::FindGameObjectsWithTag(const std::
     return GameObjectManager::Instance().FindGameObjectsWithTag(m_SceneName, tag);
 }
 
-std::string EvaEngine::Scene::GetSceneName() const
+std::u8string EvaEngine::Scene::GetSceneName() const
 {
     return m_SceneName;
 }
@@ -58,7 +58,7 @@ UINT EvaEngine::Scene::GetSceneID() const
     return m_SceneID;
 }
 
-std::weak_ptr<GameObject> Scene::Instantiate(const std::string& tag, const std::string& name)
+std::weak_ptr<GameObject> Scene::Instantiate(const std::string& tag, const std::u8string& name)
 {
     return GameObjectManager::Instance().Instantiate(m_SceneName, tag, name);
 }

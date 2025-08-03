@@ -9,7 +9,7 @@ namespace EvaEngine {
 		namespace Internal {
 			class HierarchyWindow : public EditorWindow<HierarchyWindow> {
 			public:
-				HierarchyWindow(const std::string& path) : 
+				HierarchyWindow(const std::u8string& path) :
 					EditorWindow<HierarchyWindow>(path) {}
 				~HierarchyWindow() = default;
 

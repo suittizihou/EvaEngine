@@ -11,7 +11,7 @@ namespace EvaEngine {
 
 			class EditorBaseWindow : public EditorWindow<EditorBaseWindow> {
 			public:
-				EditorBaseWindow(const std::string& windowPath, EditorWindowDataBase* editorWindowDataBase);
+				EditorBaseWindow(const std::u8string& windowPath, EditorWindowDataBase* editorWindowDataBase);
 				~EditorBaseWindow() = default;
 
 				void Begin() override;

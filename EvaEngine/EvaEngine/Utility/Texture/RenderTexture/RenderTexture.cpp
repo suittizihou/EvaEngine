@@ -73,7 +73,7 @@ void EvaEngine::RenderTexture::CreateTex2D(const DXGI_FORMAT& format)
 	ID3D11Texture2D* texture{ nullptr };
 	HRESULT hr = DirectX11App::g_Device->CreateTexture2D(&textureDesc, nullptr, &texture);
 	if (FAILED(hr)) {
-		DebugLog::LogError("Failed : CreateTexture2D in RenderTexture");
+		DebugLog::LogError(u8"Failed : CreateTexture2D in RenderTexture");
 		return;
 	}
 	
@@ -89,7 +89,7 @@ void EvaEngine::RenderTexture::CreateRenderTargetView(const DXGI_FORMAT& format)
 
 	HRESULT hr = DirectX11App::g_Device->CreateRenderTargetView(m_Texture , &rtvDesc, &m_RenderTargetView);
 	if (FAILED(hr)) {
-		DebugLog::LogError("Failed : CreateRenderTargetView in RenderTexture");
+		DebugLog::LogError(u8"Failed : CreateRenderTargetView in RenderTexture");
 		return;
 	}
 }
@@ -104,7 +104,7 @@ void EvaEngine::RenderTexture::CreateShaderResourceView(const DXGI_FORMAT& forma
 
 	HRESULT hr = DirectX11App::g_Device->CreateShaderResourceView(m_Texture, &srvDesc, &m_ShaderResourceView);
 	if (FAILED(hr)) {
-		DebugLog::LogError("Failed : CreateShaderResourceView in RenderTexture");
+		DebugLog::LogError(u8"Failed : CreateShaderResourceView in RenderTexture");
 		return;
 	}
 }
@@ -130,7 +130,7 @@ void EvaEngine::RenderTexture::CreateDepthStencilView()
 
 	HRESULT hr = DirectX11App::g_Device->CreateTexture2D(&textureDesc, NULL, &depthStencil);
 	if (FAILED(hr)) {
-		DebugLog::LogError("Failed : CreateTexture2D in RenderTexture");
+		DebugLog::LogError(u8"Failed : CreateTexture2D in RenderTexture");
 		return;
 	}
 
@@ -142,7 +142,7 @@ void EvaEngine::RenderTexture::CreateDepthStencilView()
 
 	hr = DirectX11App::g_Device->CreateDepthStencilView(depthStencil, &dsvDesc, &m_DepthStencilView);
 	if (FAILED(hr)) {
-		DebugLog::LogError("Failed : CreateDepthStencilView in RenderTexture");
+		DebugLog::LogError(u8"Failed : CreateDepthStencilView in RenderTexture");
 		depthStencil->Release();
 		depthStencil = nullptr;
 		return;
@@ -165,7 +165,7 @@ void EvaEngine::RenderTexture::CreateSamplerState() {
 
 	HRESULT hr = DirectX11App::g_Device->CreateSamplerState(&smpDesc, &m_SamplerState);
 	if (FAILED(hr)) {
-		DebugLog::LogError("Failed : CreateSamplerState in RenderTexture");
+		DebugLog::LogError(u8"Failed : CreateSamplerState in RenderTexture");
 		return;
 	}
 }

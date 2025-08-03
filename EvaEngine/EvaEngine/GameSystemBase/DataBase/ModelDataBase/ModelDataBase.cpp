@@ -7,12 +7,11 @@ using namespace EvaEngine::Internal;
 
 void ModelDataBase::LoadModelData(const std::shared_ptr<EvaEngine::ModelData>& model, GUID* guid)
 {
-    std::string name = model->GetFileName();
-    if (GUIDUtility::Create(guid, "ModelDataBaseにてモデルデータのGUID生成に失敗しました。") == false) return;
+    if (GUIDUtility::Create(guid, u8"ModelDataBaseにてモデルデータのGUID生成に失敗しました。") == false) return;
     m_Models[*guid] = model;
 }
 
-void ModelDataBase::LoadModelData(const std::string& fileName, GUID* guid)
+void ModelDataBase::LoadModelData(const std::u8string& fileName, GUID* guid)
 {
     LoadModelData(ModelLoader::Load(fileName), guid);
 }

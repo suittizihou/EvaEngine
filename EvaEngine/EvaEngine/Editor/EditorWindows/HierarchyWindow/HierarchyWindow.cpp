@@ -11,7 +11,7 @@ using namespace EvaEngine::Editor::Internal;
 
 void EvaEngine::Editor::Internal::HierarchyWindow::OnGUI()
 {
-	if (ImGui::TreeNodeEx(SceneManager::GetCurrentSceneName().c_str(), ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_SpanAvailWidth)) {
+	if (ImGui::TreeNodeEx(reinterpret_cast<const char*>(SceneManager::GetCurrentSceneName().data()), ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_SpanAvailWidth)) {
 		std::vector<std::weak_ptr<GameObject>> gameObjects;
 		GameObjectManager::Instance().GetGameObjectDataBase(SceneManager::GetCurrentSceneName()).lock()->GetAllGameObject(&gameObjects);
 
@@ -35,7 +35,7 @@ void EvaEngine::Editor::Internal::HierarchyWindow::Scanning(const std::shared_pt
 
 		ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen | ImGuiTreeNodeFlags_SpanAvailWidth;
 
-		ImGui::TreeNodeEx((void*)(intptr_t)m_ItemNum, flags, gameObject->GetName().c_str());
+		ImGui::TreeNodeEx((void*)(intptr_t)m_ItemNum, flags, reinterpret_cast<const char*>(gameObject->GetName().data()));
 
 		if (ImGui::IsItemClicked()) {
 			Selection::SetActiveObject(gameObject);
@@ -47,7 +47,7 @@ void EvaEngine::Editor::Internal::HierarchyWindow::Scanning(const std::shared_pt
 	bool nodeOpen = ImGui::TreeNodeEx(
 		(void*)(intptr_t)m_ItemNum,
 		ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanAvailWidth,
-		gameObject->GetName().c_str());
+		reinterpret_cast<const char*>(gameObject->GetName().data()));
 
 	if (ImGui::IsItemClicked())
 	{

@@ -13,14 +13,14 @@ HRESULT MainApp::Init()
 	// ウィンドウの初期化
 	HRESULT hr = WindowApp::Init();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("Window initialize failed.");
+		DebugLog::ShowErrorMessageWindow(u8"Window initialize failed.");
 		return hr;
 	}
 
 	// DirectX11の初期化
 	hr = DirectX11App::Init();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("DirectX initialize failed.");
+		DebugLog::ShowErrorMessageWindow(u8"DirectX initialize failed.");
 		return hr;
 	}
 
@@ -30,7 +30,7 @@ HRESULT MainApp::Init()
 	// エンジンの初期化
 	hr = EvaEngineApp::Init();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("EvaEngine initialize failed.");
+		DebugLog::ShowErrorMessageWindow(u8"EvaEngine initialize failed.");
 		return hr;
 	}
 
@@ -51,7 +51,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance
 
 	// EvaEngineの初期化
 	if (FAILED(MainApp::Init())) {
-		EvaEngine::DebugLog::ShowErrorMessageWindow("EvaEngine initialize failed.");
+		EvaEngine::DebugLog::ShowErrorMessageWindow(u8"EvaEngine initialize failed.");
 		return -1;
 	}
 

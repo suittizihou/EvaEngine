@@ -5,7 +5,7 @@
 
 #pragma comment(lib, "Rpcrt4.lib")
 
-bool EvaEngine::GUIDUtility::Create(GUID* dest, const std::string& errorMessage)
+bool EvaEngine::GUIDUtility::Create(GUID* dest, const std::u8string& errorMessage)
 {
 	*dest = GUID_NULL;
 	if (S_OK != ::CoCreateGuid(dest)) {

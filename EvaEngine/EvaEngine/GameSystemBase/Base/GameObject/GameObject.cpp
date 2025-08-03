@@ -14,7 +14,7 @@ const GUID& GameObject::GetObjectID() const
     return m_GUID;
 }
 
-std::string GameObject::GetName() const
+std::u8string GameObject::GetName() const
 {
     return m_Name;
 }
@@ -29,7 +29,7 @@ std::weak_ptr<Transform> GameObject::GetTransform()
     return m_Transform;
 }
 
-std::weak_ptr<GameObject> GameObject::Find(const std::string& name)
+std::weak_ptr<GameObject> GameObject::Find(const std::u8string& name)
 {
     return EvaEngine::Internal::GameObjectManager::Instance().Find(GetSceneName(), name);
 }

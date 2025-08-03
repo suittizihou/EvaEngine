@@ -8,6 +8,6 @@
 namespace EvaEngine {
 	class TextureLoader {
 	public:
-		static bool LoadImage(const std::string& fileName, ID3D11Resource** texture, ID3D11ShaderResourceView** textureView);
+		static bool LoadImage(const std::u8string& fileName, ID3D11Resource** texture, ID3D11ShaderResourceView** textureView);
 	};
 }

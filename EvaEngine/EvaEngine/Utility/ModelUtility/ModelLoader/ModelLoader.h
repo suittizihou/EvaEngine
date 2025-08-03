@@ -15,6 +15,6 @@ namespace EvaEngine {
 		~ModelLoader() = default;
 
 	public:
-		static std::shared_ptr<ModelData> Load(const std::string& fileName);
+		static std::shared_ptr<ModelData> Load(const std::u8string& fileName);
 	};
 }

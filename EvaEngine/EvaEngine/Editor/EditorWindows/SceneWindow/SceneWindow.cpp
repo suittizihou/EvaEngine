@@ -16,7 +16,7 @@
 using namespace EvaEngine::Editor;
 using namespace EvaEngine::Editor::Internal;
 
-SceneWindow::SceneWindow(const std::string& windowPath) :
+SceneWindow::SceneWindow(const std::u8string& windowPath) :
 	EditorWindow(windowPath, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoNav)
 {
 

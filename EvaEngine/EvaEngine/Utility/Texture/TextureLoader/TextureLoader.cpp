@@ -9,7 +9,7 @@
 using namespace DirectX;
 using namespace EvaEngine::Internal;
 
-bool EvaEngine::TextureLoader::LoadImage(const std::string& fileName, ID3D11Resource** texture, ID3D11ShaderResourceView** textureView)
+bool EvaEngine::TextureLoader::LoadImage(const std::u8string& fileName, ID3D11Resource** texture, ID3D11ShaderResourceView** textureView)
 {
 	std::wstring w_FileName{};
 	StringAssist::ToWString(fileName, w_FileName);
@@ -21,7 +21,7 @@ bool EvaEngine::TextureLoader::LoadImage(const std::string& fileName, ID3D11Reso
 				textureView);
 	
 	if (FAILED(hr)) {
-		DebugLog::LogError("TextureLoaderにて " + fileName + " の読み込みに失敗しました。");
+		DebugLog::LogError(u8"TextureLoaderにて " + fileName + u8" の読み込みに失敗しました。");
 		return false;
 	}
 	

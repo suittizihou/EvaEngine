@@ -26,10 +26,10 @@ namespace EvaEngine {
 		}
 
 		// モデルデータベースをシーンに追加
-		void AddModelDataBase(const std::string& sceneName);
+		void AddModelDataBase(const std::u8string& sceneName);
 
 		// モデルを追加
-		void LoadModel(const std::string& fileName, GUID* guid);
+		void LoadModel(const std::u8string& fileName, GUID* guid);
 		void LoadModel(const std::shared_ptr<ModelData>& model, GUID* guid);
 		// モデルデータを取得
 		std::weak_ptr<ModelData> GetModel(const GUID& guid);
@@ -38,6 +38,6 @@ namespace EvaEngine {
 		void DeleteAllModel();
 
 	private:
-		std::unordered_map<std::string, std::shared_ptr<Internal::ModelDataBase>> m_ModelDatas;
+		std::unordered_map<std::u8string, std::shared_ptr<Internal::ModelDataBase>> m_ModelDatas;
 	};
 }

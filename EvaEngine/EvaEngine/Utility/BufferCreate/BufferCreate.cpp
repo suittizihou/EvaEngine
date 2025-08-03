@@ -20,7 +20,7 @@ ID3D11Buffer* BufferCreate::CreateVertexBuffer(const std::vector<VertexData>& ve
 
 	ID3D11Buffer* buffer{ nullptr };
 	if (FAILED(DirectX11App::g_Device->CreateBuffer(&bufferDesc, &subResourceData, &buffer))) {
-		DebugLog::LogError("Vertex Buffer Create Failed.");
+		DebugLog::LogError(u8"Vertex Buffer Create Failed.");
 		return nullptr;
 	}
 
@@ -56,7 +56,7 @@ ID3D11Buffer* BufferCreate::CreateIndexBuffer(const std::vector<UINT>& indices, 
 
     ID3D11Buffer* buffer{ nullptr };
     if (FAILED(DirectX11App::g_Device->CreateBuffer(&bufferDesc, &subResourceData, &buffer))) {
-        DebugLog::LogError("Index Buffer Create Failed.");
+        DebugLog::LogError(u8"Index Buffer Create Failed.");
         return nullptr;
     }
     
@@ -85,7 +85,7 @@ ID3D11Buffer* BufferCreate::CreateConstantBuffer()
 
     ID3D11Buffer* buffer{ nullptr };
     if (FAILED(DirectX11App::g_Device->CreateBuffer(&bufferDesc, nullptr, &buffer))) {
-        DebugLog::ShowErrorMessageWindow("Constant Buffer Create Failed.");
+        DebugLog::ShowErrorMessageWindow(u8"Constant Buffer Create Failed.");
         return nullptr;
     }
 

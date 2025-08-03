@@ -25,7 +25,7 @@ HRESULT EvaEngineApp::Init()
 	// 描画マネージャーの初期化
 	hr = DrawManager::Init();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("DrawManagerの初期化に失敗しました。");
+		DebugLog::ShowErrorMessageWindow(u8"DrawManagerの初期化に失敗しました。");
 		return hr;
 	}
 
@@ -33,7 +33,7 @@ HRESULT EvaEngineApp::Init()
 	// Editorの初期化
 	hr = EditorApp::Init();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("Editorの初期化に失敗しました。");
+		DebugLog::ShowErrorMessageWindow(u8"Editorの初期化に失敗しました。");
 		return hr;
 	}
 #endif
@@ -41,7 +41,7 @@ HRESULT EvaEngineApp::Init()
 	// シーンの初期化
 	hr = SceneDataBase::Instance().SceneChange();
 	if (FAILED(hr)) {
-		DebugLog::ShowErrorMessageWindow("シーンの初期化に失敗しました。");
+		DebugLog::ShowErrorMessageWindow(u8"シーンの初期化に失敗しました。");
 		return hr;
 	}
 
@@ -68,7 +68,7 @@ void EvaEngineApp::Draw(ID3D11DeviceContext* command)
 #if _DEBUG
 void EvaEngine::Internal::EvaEngineApp::UpdateEditor()
 {
-	ComponentManager::Instance().Update("Editor");
+	ComponentManager::Instance().Update(u8"Editor");
 }
 
 void EvaEngineApp::DrawEditor()
@@ -89,7 +89,7 @@ void EvaEngineApp::FrameEnd()
 	DrawManager::DrawEnd();	// SwapChain->Present
 
 	if (FAILED(SceneDataBase::Instance().SceneChange())) {
-		DebugLog::LogError("シーンの初期化に失敗しました。");
+		DebugLog::LogError(u8"シーンの初期化に失敗しました。");
 	}
 }
 
