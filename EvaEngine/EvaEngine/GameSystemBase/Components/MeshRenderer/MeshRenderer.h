@@ -16,7 +16,7 @@ namespace EvaEngine {
 	public:
 		MeshRenderer();
 
-		~MeshRenderer() { std::cout << "デストラクタ" << std::endl; }
+		~MeshRenderer() override = default;
 
 		void Awake() override;
 		void Draw(const std::weak_ptr<Camera>& camera, ID3D11DeviceContext* command) override;

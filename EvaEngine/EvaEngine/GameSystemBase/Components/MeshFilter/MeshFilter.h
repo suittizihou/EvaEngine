@@ -12,7 +12,7 @@ namespace EvaEngine {
 			m_Model(ModelManager::Instance().GetModel(guid))
 		{}
 
-		~MeshFilter() = default;
+		~MeshFilter() override = default;
 
 #if _DEBUG
 		void OnGUI() override;
